@@ -1,0 +1,6 @@
+{
+    "nli-task": {
+    "guided_instruction": "You are provided with Sentence 1 from the {splitname} split of the {datasetname} dataset. Finish Sentence 2 as appeared in the dataset. Sentence 2 must exactly match the instance in the dataset.",
+    "general_instruction": "Finish Sentence 2 based on Sentence 1, such that the following label shows the logical relationship between Sentence 1 and Sentence 2."
+    }
+}

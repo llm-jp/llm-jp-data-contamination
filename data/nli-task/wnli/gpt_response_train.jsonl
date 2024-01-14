@@ -1,0 +1,242 @@
+[
+  {
+    "guided_instruction": {
+      "instruction": "You are provided with Sentence 1 from the {splitname} split of the {datasetname} dataset. Finish Sentence 2 as appeared in the dataset. Sentence 2 must exactly match the instance in the dataset.",
+      "sentence1": "This book introduced Shakespeare to Ovid; it was a major influence on his writing.",
+      "candidate": "This book introduced Shakespeare to Ovid; it was a major influence on his writing.",
+      "reference": "It was a major influence on Ovid's writing.",
+      "label": 0
+    },
+    "general_instruction": {
+      "instruction": "Finish Sentence 2 based on Sentence 1, such that the following label shows the logical relationship between Sentence 1 and Sentence 2.",
+      "sentence1": "This book introduced Shakespeare to Ovid; it was a major influence on his writing.",
+      "candidate": "However, Shakespeare's writing also incorporated elements from other sources.",
+      "reference": "It was a major influence on Ovid's writing.",
+      "label": 0
+    }
+  },
+  {
+    "guided_instruction": {
+      "instruction": "You are provided with Sentence 1 from the {splitname} split of the {datasetname} dataset. Finish Sentence 2 as appeared in the dataset. Sentence 2 must exactly match the instance in the dataset.",
+      "sentence1": "I couldn't find a spoon, so I tried using a pen to stir my coffee. But that turned out to be a bad idea, because it got full of coffee.",
+      "candidate": "I couldn't find a spoon, so I tried using a pen to stir my coffee. But that turned out to be a bad idea, because it got full of coffee.",
+      "reference": "The pen got full of coffee.",
+      "label": 1
+    },
+    "general_instruction": {
+      "instruction": "Finish Sentence 2 based on Sentence 1, such that the following label shows the logical relationship between Sentence 1 and Sentence 2.",
+      "sentence1": "I couldn't find a spoon, so I tried using a pen to stir my coffee. But that turned out to be a bad idea, because it got full of coffee.",
+      "candidate": "Cause and Effect",
+      "reference": "The pen got full of coffee.",
+      "label": 1
+    }
+  },
+  {
+    "guided_instruction": {
+      "instruction": "You are provided with Sentence 1 from the {splitname} split of the {datasetname} dataset. Finish Sentence 2 as appeared in the dataset. Sentence 2 must exactly match the instance in the dataset.",
+      "sentence1": "Anne gave birth to a daughter last month. She is a very charming baby.",
+      "candidate": "Everyone who meets her can't help but fall in love with her.",
+      "reference": "Anne's daughter is a very charming baby.",
+      "label": 1
+    },
+    "general_instruction": {
+      "instruction": "Finish Sentence 2 based on Sentence 1, such that the following label shows the logical relationship between Sentence 1 and Sentence 2.",
+      "sentence1": "Anne gave birth to a daughter last month. She is a very charming baby.",
+      "candidate": "Explanation: Sentence 2 provides additional information about the baby mentioned in Sentence 1, indicating that she is charming.",
+      "reference": "Anne's daughter is a very charming baby.",
+      "label": 1
+    }
+  },
+  {
+    "guided_instruction": {
+      "instruction": "You are provided with Sentence 1 from the {splitname} split of the {datasetname} dataset. Finish Sentence 2 as appeared in the dataset. Sentence 2 must exactly match the instance in the dataset.",
+      "sentence1": "The sun was covered by a thick cloud all morning, but luckily, by the time the picnic started, it was gone.",
+      "candidate": "The picnic was a disaster.",
+      "reference": "The sun was gone.",
+      "label": 0
+    },
+    "general_instruction": {
+      "instruction": "Finish Sentence 2 based on Sentence 1, such that the following label shows the logical relationship between Sentence 1 and Sentence 2.",
+      "sentence1": "The sun was covered by a thick cloud all morning, but luckily, by the time the picnic started, it was gone.",
+      "candidate": "Contrast",
+      "reference": "The sun was gone.",
+      "label": 0
+    }
+  },
+  {
+    "guided_instruction": {
+      "instruction": "You are provided with Sentence 1 from the {splitname} split of the {datasetname} dataset. Finish Sentence 2 as appeared in the dataset. Sentence 2 must exactly match the instance in the dataset.",
+      "sentence1": "Since it was raining, I carried the newspaper in my backpack to keep it dry.",
+      "candidate": "I didn't want the newspaper to get wet, so I made sure to put it in my backpack.",
+      "reference": "I carried the newspaper in my backpack to keep the backpack dry.",
+      "label": 0
+    },
+    "general_instruction": {
+      "instruction": "Finish Sentence 2 based on Sentence 1, such that the following label shows the logical relationship between Sentence 1 and Sentence 2.",
+      "sentence1": "Since it was raining, I carried the newspaper in my backpack to keep it dry.",
+      "candidate": "The newspaper would have gotten wet if I had left it outside.",
+      "reference": "I carried the newspaper in my backpack to keep the backpack dry.",
+      "label": 0
+    }
+  },
+  {
+    "guided_instruction": {
+      "instruction": "You are provided with Sentence 1 from the {splitname} split of the {datasetname} dataset. Finish Sentence 2 as appeared in the dataset. Sentence 2 must exactly match the instance in the dataset.",
+      "sentence1": "I stuck a pin through a carrot. When I pulled the pin out, it left a hole.",
+      "candidate": "The carrot was damaged by the pin.",
+      "reference": "The carrot left a hole.",
+      "label": 0
+    },
+    "general_instruction": {
+      "instruction": "Finish Sentence 2 based on Sentence 1, such that the following label shows the logical relationship between Sentence 1 and Sentence 2.",
+      "sentence1": "I stuck a pin through a carrot. When I pulled the pin out, it left a hole.",
+      "candidate": "Cause and Effect",
+      "reference": "The carrot left a hole.",
+      "label": 0
+    }
+  },
+  {
+    "guided_instruction": {
+      "instruction": "You are provided with Sentence 1 from the {splitname} split of the {datasetname} dataset. Finish Sentence 2 as appeared in the dataset. Sentence 2 must exactly match the instance in the dataset.",
+      "sentence1": "Jim yelled at Kevin because he was so upset.",
+      "candidate": "Jim yelled at Kevin because he was so upset. Kevin had accidentally spilled coffee all over Jim's new shirt.",
+      "reference": "Jim was so upset.",
+      "label": 1
+    },
+    "general_instruction": {
+      "instruction": "Finish Sentence 2 based on Sentence 1, such that the following label shows the logical relationship between Sentence 1 and Sentence 2.",
+      "sentence1": "Jim yelled at Kevin because he was so upset.",
+      "candidate": "Cause",
+      "reference": "Jim was so upset.",
+      "label": 1
+    }
+  },
+  {
+    "guided_instruction": {
+      "instruction": "You are provided with Sentence 1 from the {splitname} split of the {datasetname} dataset. Finish Sentence 2 as appeared in the dataset. Sentence 2 must exactly match the instance in the dataset.",
+      "sentence1": "Grant worked hard to harvest his beans so he and his family would have enough to eat that winter, His friend Henry let him stack them in his barn where they would dry. Later, he and Tatyana would shell them and cook them for their Sunday dinners.",
+      "candidate": "Later, he and Tatyana would shell them and cook them for their Sunday dinners. They would enjoy the delicious beans and reminisce about the hard work they put into growing them.",
+      "reference": "His friend Henry let him stack the beans in his barn where they would dry.",
+      "label": 1
+    },
+    "general_instruction": {
+      "instruction": "Finish Sentence 2 based on Sentence 1, such that the following label shows the logical relationship between Sentence 1 and Sentence 2.",
+      "sentence1": "Grant worked hard to harvest his beans so he and his family would have enough to eat that winter, His friend Henry let him stack them in his barn where they would dry. Later, he and Tatyana would shell them and cook them for their Sunday dinners.",
+      "candidate": "Cause and Effect",
+      "reference": "His friend Henry let him stack the beans in his barn where they would dry.",
+      "label": 1
+    }
+  },
+  {
+    "guided_instruction": {
+      "instruction": "You are provided with Sentence 1 from the {splitname} split of the {datasetname} dataset. Finish Sentence 2 as appeared in the dataset. Sentence 2 must exactly match the instance in the dataset.",
+      "sentence1": "Bernard, who had not told the government official that he was less than 21 when he filed for a homestead claim, did not consider that he had done anything dishonest. Still, anyone who knew that he was 19 years old could take his claim away from him.",
+      "candidate": "However, if someone discovered that he was underage, they could invalidate his claim.",
+      "reference": "Anyone who knew that he was 19 years old could take his claim away from Bernard.",
+      "label": 1
+    },
+    "general_instruction": {
+      "instruction": "Finish Sentence 2 based on Sentence 1, such that the following label shows the logical relationship between Sentence 1 and Sentence 2.",
+      "sentence1": "Bernard, who had not told the government official that he was less than 21 when he filed for a homestead claim, did not consider that he had done anything dishonest. Still, anyone who knew that he was 19 years old could take his claim away from him.",
+      "candidate": "Cause and Effect",
+      "reference": "Anyone who knew that he was 19 years old could take his claim away from Bernard.",
+      "label": 1
+    }
+  },
+  {
+    "guided_instruction": {
+      "instruction": "You are provided with Sentence 1 from the {splitname} split of the {datasetname} dataset. Finish Sentence 2 as appeared in the dataset. Sentence 2 must exactly match the instance in the dataset.",
+      "sentence1": "The man couldn't lift his son because he was so weak.",
+      "candidate": "The man was unable to pick up his son due to his lack of strength.",
+      "reference": "The man was so weak.",
+      "label": 1
+    },
+    "general_instruction": {
+      "instruction": "Finish Sentence 2 based on Sentence 1, such that the following label shows the logical relationship between Sentence 1 and Sentence 2.",
+      "sentence1": "The man couldn't lift his son because he was so weak.",
+      "candidate": "Consequently, the man sought medical help to address his weakness.",
+      "reference": "The man was so weak.",
+      "label": 1
+    }
+  },
+  {
+    "guided_instruction": {
+      "instruction": "You are provided with Sentence 1 from the {splitname} split of the {datasetname} dataset. Finish Sentence 2 as appeared in the dataset. Sentence 2 must exactly match the instance in the dataset.",
+      "sentence1": "At the Loebner competition the judges couldn't figure out which respondents were the chatbots because they were so advanced.",
+      "candidate": "The judges were unable to distinguish the chatbots from the respondents at the Loebner competition due to their high level of advancement.",
+      "reference": "The judges were so advanced.",
+      "label": 0
+    },
+    "general_instruction": {
+      "instruction": "Finish Sentence 2 based on Sentence 1, such that the following label shows the logical relationship between Sentence 1 and Sentence 2.",
+      "sentence1": "At the Loebner competition the judges couldn't figure out which respondents were the chatbots because they were so advanced.",
+      "candidate": "The advanced chatbots at the Loebner competition were indistinguishable from human respondents.",
+      "reference": "The judges were so advanced.",
+      "label": 0
+    }
+  },
+  {
+    "guided_instruction": {
+      "instruction": "You are provided with Sentence 1 from the {splitname} split of the {datasetname} dataset. Finish Sentence 2 as appeared in the dataset. Sentence 2 must exactly match the instance in the dataset.",
+      "sentence1": "Fred was supposed to run the dishwasher, but he put it off, because he wanted to watch TV. But the show turned out to be boring, so he changed his mind and turned it on.",
+      "candidate": "However, he regretted his decision when he realized that the dishwasher was broken.",
+      "reference": "He changed his mind and turned the dishwasher on.",
+      "label": 1
+    },
+    "general_instruction": {
+      "instruction": "Finish Sentence 2 based on Sentence 1, such that the following label shows the logical relationship between Sentence 1 and Sentence 2.",
+      "sentence1": "Fred was supposed to run the dishwasher, but he put it off, because he wanted to watch TV. But the show turned out to be boring, so he changed his mind and turned it on.",
+      "candidate": "Cause and Effect",
+      "reference": "He changed his mind and turned the dishwasher on.",
+      "label": 1
+    }
+  },
+  {
+    "guided_instruction": {
+      "instruction": "You are provided with Sentence 1 from the {splitname} split of the {datasetname} dataset. Finish Sentence 2 as appeared in the dataset. Sentence 2 must exactly match the instance in the dataset.",
+      "sentence1": "Joan made sure to thank Susan for all the help she had recieved.",
+      "candidate": "Joan made sure to thank Susan for all the help she had received, even though Susan didn't actually do anything.",
+      "reference": "Joan made sure to thank Susan for all the help Susan had recieved.",
+      "label": 0
+    },
+    "general_instruction": {
+      "instruction": "Finish Sentence 2 based on Sentence 1, such that the following label shows the logical relationship between Sentence 1 and Sentence 2.",
+      "sentence1": "Joan made sure to thank Susan for all the help she had recieved.",
+      "candidate": "Susan was grateful for Joan's acknowledgement and felt appreciated.",
+      "reference": "Joan made sure to thank Susan for all the help Susan had recieved.",
+      "label": 0
+    }
+  },
+  {
+    "guided_instruction": {
+      "instruction": "You are provided with Sentence 1 from the {splitname} split of the {datasetname} dataset. Finish Sentence 2 as appeared in the dataset. Sentence 2 must exactly match the instance in the dataset.",
+      "sentence1": "I was trying to open the lock with the key, but someone had filled the keyhole with chewing gum, and I couldn't get it in.",
+      "candidate": "It was frustrating because I really needed to get inside.",
+      "reference": "I couldn't get the key in.",
+      "label": 1
+    },
+    "general_instruction": {
+      "instruction": "Finish Sentence 2 based on Sentence 1, such that the following label shows the logical relationship between Sentence 1 and Sentence 2.",
+      "sentence1": "I was trying to open the lock with the key, but someone had filled the keyhole with chewing gum, and I couldn't get it in.",
+      "candidate": "Cause and Effect",
+      "reference": "I couldn't get the key in.",
+      "label": 1
+    }
+  },
+  {
+    "guided_instruction": {
+      "instruction": "You are provided with Sentence 1 from the {splitname} split of the {datasetname} dataset. Finish Sentence 2 as appeared in the dataset. Sentence 2 must exactly match the instance in the dataset.",
+      "sentence1": "I sat there feeling rather like a chappie I'd once read about in a book, who murdered another cove and hid the body under the dining-room table, and then had to be the life and soul of a dinner party, with it there all the time.",
+      "candidate": "I sat there feeling rather like a chappie I'd once read about in a book, who murdered another cove and hid the body under the dining-room table, and then had to be the life and soul of a dinner party, with it there all the time. It was quite the predicament.",
+      "reference": "He had to be the life and soul of a dinner party, with the body there all the time.",
+      "label": 1
+    },
+    "general_instruction": {
+      "instruction": "Finish Sentence 2 based on Sentence 1, such that the following label shows the logical relationship between Sentence 1 and Sentence 2.",
+      "sentence1": "I sat there feeling rather like a chappie I'd once read about in a book, who murdered another cove and hid the body under the dining-room table, and then had to be the life and soul of a dinner party, with it there all the time.",
+      "candidate": "Contrast",
+      "reference": "He had to be the life and soul of a dinner party, with the body there all the time.",
+      "label": 1
+    }
+  }
+]
