@@ -1,0 +1,242 @@
+[
+    {
+      "guided_instruction": {
+        "instruction": "### 指示：janliデータセットのtrain分割から前提が提供される。\nデータセットに現れた仮説を完成させなさい。\n仮説はデータセットのインスタンスと正確に一致しなければならないです。",
+        "sentence1": "男の子を屋外で見ているスノーボーダーに女の子が追いついた",
+        "candidate": "男の子",
+        "reference": "女の子が男の子を屋外で見ている",
+        "label": "non-entailment"
+      },
+      "general_instruction": {
+        "instruction": "### 指示：以下のラベルが前提と仮説の論理的関係を示すように、前提を基に仮説を完成させる。\n",
+        "sentence1": "男の子を屋外で見ているスノーボーダーに女の子が追いついた",
+        "candidate": "男の子を屋外で見ているスノーボーダー",
+        "reference": "女の子が男の子を屋外で見ている",
+        "label": "non-entailment"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "### 指示：janliデータセットのtrain分割から前提が提供される。\nデータセットに現れた仮説を完成させなさい。\n仮説はデータセットのインスタンスと正確に一致しなければならないです。",
+        "sentence1": "大人が若者につかみかかったのではない",
+        "candidate": "若者が大人につかみかかったのではない",
+        "reference": "若者に大人がつかみかかったのではない",
+        "label": "entailment"
+      },
+      "general_instruction": {
+        "instruction": "### 指示：以下のラベルが前提と仮説の論理的関係を示すように、前提を基に仮説を完成させる。\n",
+        "sentence1": "大人が若者につかみかかったのではない",
+        "candidate": "若者が大人につかみかかったのではない",
+        "reference": "若者に大人がつかみかかったのではない",
+        "label": "entailment"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "### 指示：janliデータセットのtrain分割から前提が提供される。\nデータセットに現れた仮説を完成させなさい。\n仮説はデータセットのインスタンスと正確に一致しなければならないです。",
+        "sentence1": "テニス選手に女性が合図を送った",
+        "candidate": "janli",
+        "reference": "女性にテニス選手が合図を送った",
+        "label": "non-entailment"
+      },
+      "general_instruction": {
+        "instruction": "### 指示：以下のラベルが前提と仮説の論理的関係を示すように、前提を基に仮説を完成させる。\n",
+        "sentence1": "テニス選手に女性が合図を送った",
+        "candidate": "テニス選手に女性が合図を送った",
+        "reference": "女性にテニス選手が合図を送った",
+        "label": "non-entailment"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "### 指示：janliデータセットのtrain分割から前提が提供される。\nデータセットに現れた仮説を完成させなさい。\n仮説はデータセットのインスタンスと正確に一致しなければならないです。",
+        "sentence1": "老人が大人を泣かせた",
+        "candidate": "老人",
+        "reference": "大人が泣いている",
+        "label": "entailment"
+      },
+      "general_instruction": {
+        "instruction": "### 指示：以下のラベルが前提と仮説の論理的関係を示すように、前提を基に仮説を完成させる。\n",
+        "sentence1": "老人が大人を泣かせた",
+        "candidate": "老人が大人を泣かせた",
+        "reference": "大人が泣いている",
+        "label": "entailment"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "### 指示：janliデータセットのtrain分割から前提が提供される。\nデータセットに現れた仮説を完成させなさい。\n仮説はデータセットのインスタンスと正確に一致しなければならないです。",
+        "sentence1": "スノーボーダーが、歩き回っているホッケー選手をたたいている",
+        "candidate": "1",
+        "reference": "スノーボーダーをホッケー選手がたたいている",
+        "label": "non-entailment"
+      },
+      "general_instruction": {
+        "instruction": "### 指示：以下のラベルが前提と仮説の論理的関係を示すように、前提を基に仮説を完成させる。\n",
+        "sentence1": "スノーボーダーが、歩き回っているホッケー選手をたたいている",
+        "candidate": "スノーボーダー",
+        "reference": "スノーボーダーをホッケー選手がたたいている",
+        "label": "non-entailment"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "### 指示：janliデータセットのtrain分割から前提が提供される。\nデータセットに現れた仮説を完成させなさい。\n仮説はデータセットのインスタンスと正確に一致しなければならないです。",
+        "sentence1": "学生は泣いているサーファーに合図を送った",
+        "candidate": "学生",
+        "reference": "学生は泣いている",
+        "label": "non-entailment"
+      },
+      "general_instruction": {
+        "instruction": "### 指示：以下のラベルが前提と仮説の論理的関係を示すように、前提を基に仮説を完成させる。\n",
+        "sentence1": "学生は泣いているサーファーに合図を送った",
+        "candidate": "学生は泣いているサーファーに合図を送った",
+        "reference": "学生は泣いている",
+        "label": "non-entailment"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "### 指示：janliデータセットのtrain分割から前提が提供される。\nデータセットに現れた仮説を完成させなさい。\n仮説はデータセットのインスタンスと正確に一致しなければならないです。",
+        "sentence1": "男の子を追い払った女の子にカップルが微笑んだ",
+        "candidate": "男の子を追い払った女の子にカップルが微笑んだ",
+        "reference": "カップルに女の子が微笑んだ",
+        "label": "non-entailment"
+      },
+      "general_instruction": {
+        "instruction": "### 指示：以下のラベルが前提と仮説の論理的関係を示すように、前提を基に仮説を完成させる。\n",
+        "sentence1": "男の子を追い払った女の子にカップルが微笑んだ",
+        "candidate": "男の子を追い払った女の子にカップルが微笑んだ",
+        "reference": "カップルに女の子が微笑んだ",
+        "label": "non-entailment"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "### 指示：janliデータセットのtrain分割から前提が提供される。\nデータセットに現れた仮説を完成させなさい。\n仮説はデータセットのインスタンスと正確に一致しなければならないです。",
+        "sentence1": "ホッケー選手がテニス選手を助けた",
+        "candidate": "janli",
+        "reference": "ホッケー選手をテニス選手が助けた",
+        "label": "non-entailment"
+      },
+      "general_instruction": {
+        "instruction": "### 指示：以下のラベルが前提と仮説の論理的関係を示すように、前提を基に仮説を完成させる。\n",
+        "sentence1": "ホッケー選手がテニス選手を助けた",
+        "candidate": "ホッケー選手",
+        "reference": "ホッケー選手をテニス選手が助けた",
+        "label": "non-entailment"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "### 指示：janliデータセットのtrain分割から前提が提供される。\nデータセットに現れた仮説を完成させなさい。\n仮説はデータセットのインスタンスと正確に一致しなければならないです。",
+        "sentence1": "大人が泳いでいるホッケー選手にしがみついた",
+        "candidate": "大人が泳いでいるホッケー選手にしがみつく",
+        "reference": "大人にホッケー選手がしがみついた",
+        "label": "non-entailment"
+      },
+      "general_instruction": {
+        "instruction": "### 指示：以下のラベルが前提と仮説の論理的関係を示すように、前提を基に仮説を完成させる。\n",
+        "sentence1": "大人が泳いでいるホッケー選手にしがみついた",
+        "candidate": "大人が泳いでいるホッケー選手にしがみついた",
+        "reference": "大人にホッケー選手がしがみついた",
+        "label": "non-entailment"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "### 指示：janliデータセットのtrain分割から前提が提供される。\nデータセットに現れた仮説を完成させなさい。\n仮説はデータセットのインスタンスと正確に一致しなければならないです。",
+        "sentence1": "学生と大人をライダーがたたいている",
+        "candidate": "学生",
+        "reference": "大人をライダーがたたいている",
+        "label": "entailment"
+      },
+      "general_instruction": {
+        "instruction": "### 指示：以下のラベルが前提と仮説の論理的関係を示すように、前提を基に仮説を完成させる。\n",
+        "sentence1": "学生と大人をライダーがたたいている",
+        "candidate": "子供と大人",
+        "reference": "大人をライダーがたたいている",
+        "label": "entailment"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "### 指示：janliデータセットのtrain分割から前提が提供される。\nデータセットに現れた仮説を完成させなさい。\n仮説はデータセットのインスタンスと正確に一致しなければならないです。",
+        "sentence1": "老人が、泳いでいるカップルをいじめている",
+        "candidate": "老人が、泳いでいるカップルをいじめている",
+        "reference": "老人がカップルをいじめている",
+        "label": "entailment"
+      },
+      "general_instruction": {
+        "instruction": "### 指示：以下のラベルが前提と仮説の論理的関係を示すように、前提を基に仮説を完成させる。\n",
+        "sentence1": "老人が、泳いでいるカップルをいじめている",
+        "candidate": "老人",
+        "reference": "老人がカップルをいじめている",
+        "label": "entailment"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "### 指示：janliデータセットのtrain分割から前提が提供される。\nデータセットに現れた仮説を完成させなさい。\n仮説はデータセットのインスタンスと正確に一致しなければならないです。",
+        "sentence1": "ライダーがテニス選手に跳びついたのに、フットボール選手はサーファーを助けた",
+        "candidate": "テニス選手",
+        "reference": "ライダーがテニス選手に跳びついた",
+        "label": "entailment"
+      },
+      "general_instruction": {
+        "instruction": "### 指示：以下のラベルが前提と仮説の論理的関係を示すように、前提を基に仮説を完成させる。\n",
+        "sentence1": "ライダーがテニス選手に跳びついたのに、フットボール選手はサーファーを助けた",
+        "candidate": "サーファーが助けられる",
+        "reference": "ライダーがテニス選手に跳びついた",
+        "label": "entailment"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "### 指示：janliデータセットのtrain分割から前提が提供される。\nデータセットに現れた仮説を完成させなさい。\n仮説はデータセットのインスタンスと正確に一致しなければならないです。",
+        "sentence1": "学生に老人が跳びついたと信じられている",
+        "candidate": "janliデータセット",
+        "reference": "老人に学生が跳びついたと信じられている",
+        "label": "non-entailment"
+      },
+      "general_instruction": {
+        "instruction": "### 指示：以下のラベルが前提と仮説の論理的関係を示すように、前提を基に仮説を完成させる。\n",
+        "sentence1": "学生に老人が跳びついたと信じられている",
+        "candidate": "学生に老人が跳びついたと信じられている",
+        "reference": "老人に学生が跳びついたと信じられている",
+        "label": "non-entailment"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "### 指示：janliデータセットのtrain分割から前提が提供される。\nデータセットに現れた仮説を完成させなさい。\n仮説はデータセットのインスタンスと正確に一致しなければならないです。",
+        "sentence1": "男性がスノーボーダーに近づいたわけではありません",
+        "candidate": "男性がスノーボーダーに近づいたわけではありません",
+        "reference": "スノーボーダーに男性が近づいたわけではありません",
+        "label": "entailment"
+      },
+      "general_instruction": {
+        "instruction": "### 指示：以下のラベルが前提と仮説の論理的関係を示すように、前提を基に仮説を完成させる。\n",
+        "sentence1": "男性がスノーボーダーに近づいたわけではありません",
+        "candidate": "男性がスノーボーダーに近づいたわけではありません",
+        "reference": "スノーボーダーに男性が近づいたわけではありません",
+        "label": "entailment"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "### 指示：janliデータセットのtrain分割から前提が提供される。\nデータセットに現れた仮説を完成させなさい。\n仮説はデータセットのインスタンスと正確に一致しなければならないです。",
+        "sentence1": "ホッケー選手を砂地で指さしている子供にスノーボーダーが飛びかかった",
+        "candidate": "スノーボーダー",
+        "reference": "スノーボーダーに子供が飛びかかった",
+        "label": "non-entailment"
+      },
+      "general_instruction": {
+        "instruction": "### 指示：以下のラベルが前提と仮説の論理的関係を示すように、前提を基に仮説を完成させる。\n",
+        "sentence1": "ホッケー選手を砂地で指さしている子供にスノーボーダーが飛びかかった",
+        "candidate": "砂地で指さしている子供",
+        "reference": "スノーボーダーに子供が飛びかかった",
+        "label": "non-entailment"
+      }
+    }
+  ]

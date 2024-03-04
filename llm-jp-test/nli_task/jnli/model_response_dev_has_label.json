@@ -1,0 +1,242 @@
+[
+    {
+      "guided_instruction": {
+        "instruction": "### 指示：jnliデータセットのdev分割から文1が提供される。データセットに現れた文2を完成させなさい。文2はデータセットのサンプルと正確に一致しなければならないです。",
+        "sentence1": "空港のターミナルに飛行機が駐車しています。",
+        "candidate": "neutral",
+        "reference": "空港のターミナルにジャンボジェット機が止まっています。",
+        "label": "neutral"
+      },
+      "general_instruction": {
+        "instruction": "### 指示：以下のラベルが文1と文2の論理的関係を示すように、文1を基に文2を完成させる。",
+        "sentence1": "空港のターミナルに飛行機が駐車しています。",
+        "candidate": "neutral",
+        "reference": "空港のターミナルにジャンボジェット機が止まっています。",
+        "label": "neutral"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "### 指示：jnliデータセットのdev分割から文1が提供される。データセットに現れた文2を完成させなさい。文2はデータセットのサンプルと正確に一致しなければならないです。",
+        "sentence1": "路面電車の停留所を男女が歩いてきます。",
+        "candidate": "男女",
+        "reference": "多くの荷物を抱えた小汚い男の後ろをサングラスをした女性が電話をしながら歩いています。",
+        "label": "neutral"
+      },
+      "general_instruction": {
+        "instruction": "### 指示：以下のラベルが文1と文2の論理的関係を示すように、文1を基に文2を完成させる。",
+        "sentence1": "路面電車の停留所を男女が歩いてきます。",
+        "candidate": "路面電車の停留所を男女が歩いてきます",
+        "reference": "多くの荷物を抱えた小汚い男の後ろをサングラスをした女性が電話をしながら歩いています。",
+        "label": "neutral"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "### 指示：jnliデータセットのdev分割から文1が提供される。データセットに現れた文2を完成させなさい。文2はデータセットのサンプルと正確に一致しなければならないです。",
+        "sentence1": "広い室内でたくさんの人たちが椅子に座っています。",
+        "candidate": "entailment",
+        "reference": "広い室内にたくさんの人たちが椅子に座っています。",
+        "label": "entailment"
+      },
+      "general_instruction": {
+        "instruction": "### 指示：以下のラベルが文1と文2の論理的関係を示すように、文1を基に文2を完成させる。",
+        "sentence1": "広い室内でたくさんの人たちが椅子に座っています。",
+        "candidate": "entailment",
+        "reference": "広い室内にたくさんの人たちが椅子に座っています。",
+        "label": "entailment"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "### 指示：jnliデータセットのdev分割から文1が提供される。データセットに現れた文2を完成させなさい。文2はデータセットのサンプルと正確に一致しなければならないです。",
+        "sentence1": "野菜や豆やサーモンが入ったサラダです。",
+        "candidate": "neutral",
+        "reference": "ブロッコリーと豆と赤いものの混じった料理があります。",
+        "label": "neutral"
+      },
+      "general_instruction": {
+        "instruction": "### 指示：以下のラベルが文1と文2の論理的関係を示すように、文1を基に文2を完成させる。",
+        "sentence1": "野菜や豆やサーモンが入ったサラダです。",
+        "candidate": "neutral",
+        "reference": "ブロッコリーと豆と赤いものの混じった料理があります。",
+        "label": "neutral"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "### 指示：jnliデータセットのdev分割から文1が提供される。データセットに現れた文2を完成させなさい。文2はデータセットのサンプルと正確に一致しなければならないです。",
+        "sentence1": "ふたりの料理人が料理の盛り付けをおこなっています。",
+        "candidate": "ふたりの料理人",
+        "reference": "厨房で二人の料理人が盛り付けをしています。",
+        "label": "entailment"
+      },
+      "general_instruction": {
+        "instruction": "### 指示：以下のラベルが文1と文2の論理的関係を示すように、文1を基に文2を完成させる。",
+        "sentence1": "ふたりの料理人が料理の盛り付けをおこなっています。",
+        "candidate": "entailment",
+        "reference": "厨房で二人の料理人が盛り付けをしています。",
+        "label": "entailment"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "### 指示：jnliデータセットのdev分割から文1が提供される。データセットに現れた文2を完成させなさい。文2はデータセットのサンプルと正確に一致しなければならないです。",
+        "sentence1": "海岸でビーチパラソルを差して横になっている人達がいます。",
+        "candidate": "海岸でビーチパラソルを差して横になっている人達",
+        "reference": "砂浜でビーチパラソルをさして日光浴をしています。",
+        "label": "neutral"
+      },
+      "general_instruction": {
+        "instruction": "### 指示：以下のラベルが文1と文2の論理的関係を示すように、文1を基に文2を完成させる。",
+        "sentence1": "海岸でビーチパラソルを差して横になっている人達がいます。",
+        "candidate": "neutral",
+        "reference": "砂浜でビーチパラソルをさして日光浴をしています。",
+        "label": "neutral"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "### 指示：jnliデータセットのdev分割から文1が提供される。データセットに現れた文2を完成させなさい。文2はデータセットのサンプルと正確に一致しなければならないです。",
+        "sentence1": "青空と大きな雲の下にベンチと座っている猫がいます。",
+        "candidate": "contradiction",
+        "reference": "青空と大きな雲の下にベンチと座っている人がいます。",
+        "label": "contradiction"
+      },
+      "general_instruction": {
+        "instruction": "### 指示：以下のラベルが文1と文2の論理的関係を示すように、文1を基に文2を完成させる。",
+        "sentence1": "青空と大きな雲の下にベンチと座っている猫がいます。",
+        "candidate": "青空と大きな雲の下にベンチと座っている猫がいる。",
+        "reference": "青空と大きな雲の下にベンチと座っている人がいます。",
+        "label": "contradiction"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "### 指示：jnliデータセットのdev分割から文1が提供される。データセットに現れた文2を完成させなさい。文2はデータセットのサンプルと正確に一致しなければならないです。",
+        "sentence1": "木造建物のトイレの戸が開いています。",
+        "candidate": "contradiction",
+        "reference": "ブロック造建物のトイレの戸が開いています。",
+        "label": "contradiction"
+      },
+      "general_instruction": {
+        "instruction": "### 指示：以下のラベルが文1と文2の論理的関係を示すように、文1を基に文2を完成させる。",
+        "sentence1": "木造建物のトイレの戸が開いています。",
+        "candidate": "木造建物のトイレの戸が開いていません。",
+        "reference": "ブロック造建物のトイレの戸が開いています。",
+        "label": "contradiction"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "### 指示：jnliデータセットのdev分割から文1が提供される。データセットに現れた文2を完成させなさい。文2はデータセットのサンプルと正確に一致しなければならないです。",
+        "sentence1": "天井にある羽根つきランプは消灯しています。",
+        "candidate": "contradiction",
+        "reference": "天井にある羽根つきランプが点灯しています。",
+        "label": "contradiction"
+      },
+      "general_instruction": {
+        "instruction": "### 指示：以下のラベルが文1と文2の論理的関係を示すように、文1を基に文2を完成させる。",
+        "sentence1": "天井にある羽根つきランプは消灯しています。",
+        "candidate": "contradiction",
+        "reference": "天井にある羽根つきランプが点灯しています。",
+        "label": "contradiction"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "### 指示：jnliデータセットのdev分割から文1が提供される。データセットに現れた文2を完成させなさい。文2はデータセットのサンプルと正確に一致しなければならないです。",
+        "sentence1": "便所のドアが二つとも開いています。。",
+        "candidate": "便所のドアが二つとも開いています。。",
+        "reference": "扉の空いたトイレがあります。",
+        "label": "entailment"
+      },
+      "general_instruction": {
+        "instruction": "### 指示：以下のラベルが文1と文2の論理的関係を示すように、文1を基に文2を完成させる。",
+        "sentence1": "便所のドアが二つとも開いています。。",
+        "candidate": "便所のドアが二つとも開いています",
+        "reference": "扉の空いたトイレがあります。",
+        "label": "entailment"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "### 指示：jnliデータセットのdev分割から文1が提供される。データセットに現れた文2を完成させなさい。文2はデータセットのサンプルと正確に一致しなければならないです。",
+        "sentence1": "水辺のほとりの上空に、パラグライダーが浮いています。",
+        "candidate": "neutral",
+        "reference": "湖にカラフルなパラグライダーが目立ちます。",
+        "label": "neutral"
+      },
+      "general_instruction": {
+        "instruction": "### 指示：以下のラベルが文1と文2の論理的関係を示すように、文1を基に文2を完成させる。",
+        "sentence1": "水辺のほとりの上空に、パラグライダーが浮いています。",
+        "candidate": "水辺のほとりの上空に、パラグライダー",
+        "reference": "湖にカラフルなパラグライダーが目立ちます。",
+        "label": "neutral"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "### 指示：jnliデータセットのdev分割から文1が提供される。データセットに現れた文2を完成させなさい。文2はデータセットのサンプルと正確に一致しなければならないです。",
+        "sentence1": "パーキングメーターと車の周囲に雪が積もっています。",
+        "candidate": "パーキングメーター",
+        "reference": "パーキングメーターと車から遠く離れた所に雪が積もっています。",
+        "label": "contradiction"
+      },
+      "general_instruction": {
+        "instruction": "### 指示：以下のラベルが文1と文2の論理的関係を示すように、文1を基に文2を完成させる。",
+        "sentence1": "パーキングメーターと車の周囲に雪が積もっています。",
+        "candidate": "パーキングメーターと車の周囲に雪が積もっています。",
+        "reference": "パーキングメーターと車から遠く離れた所に雪が積もっています。",
+        "label": "contradiction"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "### 指示：jnliデータセットのdev分割から文1が提供される。データセットに現れた文2を完成させなさい。文2はデータセットのサンプルと正確に一致しなければならないです。",
+        "sentence1": "野菜の緑色の葉っぱが中心から周囲に広がっています。",
+        "candidate": "neutral",
+        "reference": "露の付いた植物の葉が中心から周囲に広がっています。",
+        "label": "neutral"
+      },
+      "general_instruction": {
+        "instruction": "### 指示：以下のラベルが文1と文2の論理的関係を示すように、文1を基に文2を完成させる。",
+        "sentence1": "野菜の緑色の葉っぱが中心から周囲に広がっています。",
+        "candidate": "neutral",
+        "reference": "露の付いた植物の葉が中心から周囲に広がっています。",
+        "label": "neutral"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "### 指示：jnliデータセットのdev分割から文1が提供される。データセットに現れた文2を完成させなさい。文2はデータセットのサンプルと正確に一致しなければならないです。",
+        "sentence1": "赤いウェアを着た男性がテニスをしています。",
+        "candidate": "contradiction",
+        "reference": "黒いウェアを着た男性がテニスをしています。",
+        "label": "contradiction"
+      },
+      "general_instruction": {
+        "instruction": "### 指示：以下のラベルが文1と文2の論理的関係を示すように、文1を基に文2を完成させる。",
+        "sentence1": "赤いウェアを着た男性がテニスをしています。",
+        "candidate": "contradiction",
+        "reference": "黒いウェアを着た男性がテニスをしています。",
+        "label": "contradiction"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "### 指示：jnliデータセットのdev分割から文1が提供される。データセットに現れた文2を完成させなさい。文2はデータセットのサンプルと正確に一致しなければならないです。",
+        "sentence1": "野球場で競技をしている人達がいます。",
+        "candidate": "野球場",
+        "reference": "グランドで野球をしている人がいます。",
+        "label": "neutral"
+      },
+      "general_instruction": {
+        "instruction": "### 指示：以下のラベルが文1と文2の論理的関係を示すように、文1を基に文2を完成させる。",
+        "sentence1": "野球場で競技をしている人達がいます。",
+        "candidate": "野球場",
+        "reference": "グランドで野球をしている人がいます。",
+        "label": "neutral"
+      }
+    }
+  ]

@@ -1,0 +1,242 @@
+[
+    {
+      "guided_instruction": {
+        "instruction": "### 指示：jsickデータセットのtrain分割から前提が提供される。\nデータセットに現れた仮説を完成させなさい。\n仮説はデータセットのインスタンスと正確に一致しなければならないです。",
+        "sentence1": "二人の幼い男の子がカメラを見上げていて、一人が舌を突き出している",
+        "candidate": "二人の幼い男の子",
+        "reference": "小さな男の子はカメラに向かって舌を突き出していて、別の男の子が傍観している",
+        "label": "neutral"
+      },
+      "general_instruction": {
+        "instruction": "### 指示：以下のラベルが前提と仮説の論理的関係を示すように、前提を基に仮説を完成させる。\n",
+        "sentence1": "二人の幼い男の子がカメラを見上げていて、一人が舌を突き出している",
+        "candidate": "二人の幼い男の子",
+        "reference": "小さな男の子はカメラに向かって舌を突き出していて、別の男の子が傍観している",
+        "label": "neutral"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "### 指示：jsickデータセットのtrain分割から前提が提供される。\nデータセットに現れた仮説を完成させなさい。\n仮説はデータセットのインスタンスと正確に一致しなければならないです。",
+        "sentence1": "男の子が怖そうに橋を歩いて渡っている",
+        "candidate": "女の子が怖そうに橋を歩いて渡っている",
+        "reference": "男の子が橋を歩いて渡っている",
+        "label": "entailment"
+      },
+      "general_instruction": {
+        "instruction": "### 指示：以下のラベルが前提と仮説の論理的関係を示すように、前提を基に仮説を完成させる。\n",
+        "sentence1": "男の子が怖そうに橋を歩いて渡っている",
+        "candidate": "男の子",
+        "reference": "男の子が橋を歩いて渡っている",
+        "label": "entailment"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "### 指示：jsickデータセットのtrain分割から前提が提供される。\nデータセットに現れた仮説を完成させなさい。\n仮説はデータセットのインスタンスと正確に一致しなければならないです。",
+        "sentence1": "二人の男の子が勉強をしている",
+        "candidate": "二人の男の子",
+        "reference": "二人の男の子がビデオゲームをしている",
+        "label": "neutral"
+      },
+      "general_instruction": {
+        "instruction": "### 指示：以下のラベルが前提と仮説の論理的関係を示すように、前提を基に仮説を完成させる。\n",
+        "sentence1": "二人の男の子が勉強をしている",
+        "candidate": "二人の男の子が勉強をしている",
+        "reference": "二人の男の子がビデオゲームをしている",
+        "label": "neutral"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "### 指示：jsickデータセットのtrain分割から前提が提供される。\nデータセットに現れた仮説を完成させなさい。\n仮説はデータセットのインスタンスと正確に一致しなければならないです。",
+        "sentence1": "犬が野原にある岩の上に二本の前脚で立っている",
+        "candidate": "二本の前脚で",
+        "reference": "その野原にある岩の上に二本の前脚で立っている犬は一匹もいない",
+        "label": "neutral"
+      },
+      "general_instruction": {
+        "instruction": "### 指示：以下のラベルが前提と仮説の論理的関係を示すように、前提を基に仮説を完成させる。\n",
+        "sentence1": "犬が野原にある岩の上に二本の前脚で立っている",
+        "candidate": "岩",
+        "reference": "その野原にある岩の上に二本の前脚で立っている犬は一匹もいない",
+        "label": "neutral"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "### 指示：jsickデータセットのtrain分割から前提が提供される。\nデータセットに現れた仮説を完成させなさい。\n仮説はデータセットのインスタンスと正確に一致しなければならないです。",
+        "sentence1": "女性がヌードルを水の中で煮ている",
+        "candidate": "ヌードル",
+        "reference": "男性が水の中のヌードルをゆでている",
+        "label": "neutral"
+      },
+      "general_instruction": {
+        "instruction": "### 指示：以下のラベルが前提と仮説の論理的関係を示すように、前提を基に仮説を完成させる。\n",
+        "sentence1": "女性がヌードルを水の中で煮ている",
+        "candidate": "女性",
+        "reference": "男性が水の中のヌードルをゆでている",
+        "label": "neutral"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "### 指示：jsickデータセットのtrain分割から前提が提供される。\nデータセットに現れた仮説を完成させなさい。\n仮説はデータセットのインスタンスと正確に一致しなければならないです。",
+        "sentence1": "男性は草地の上でゲームをしている",
+        "candidate": "男性は草地の上でゲームをしている",
+        "reference": "サイは草原で草を食べている",
+        "label": "neutral"
+      },
+      "general_instruction": {
+        "instruction": "### 指示：以下のラベルが前提と仮説の論理的関係を示すように、前提を基に仮説を完成させる。\n",
+        "sentence1": "男性は草地の上でゲームをしている",
+        "candidate": "男性は草地の上でゲームをしていない",
+        "reference": "サイは草原で草を食べている",
+        "label": "neutral"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "### 指示：jsickデータセットのtrain分割から前提が提供される。\nデータセットに現れた仮説を完成させなさい。\n仮説はデータセットのインスタンスと正確に一致しなければならないです。",
+        "sentence1": "青いジャンプスーツを着た男性が勇ましくオートバイの後輪走行をやっている",
+        "candidate": "青いジャンプスーツを着た男性が勇ましくオートバイの後輪走行をやっている",
+        "reference": "男性はほとんど不毛の地面でオートバイの後輪走行をしている",
+        "label": "neutral"
+      },
+      "general_instruction": {
+        "instruction": "### 指示：以下のラベルが前提と仮説の論理的関係を示すように、前提を基に仮説を完成させる。\n",
+        "sentence1": "青いジャンプスーツを着た男性が勇ましくオートバイの後輪走行をやっている",
+        "candidate": "青いジャンプスーツを着た男性",
+        "reference": "男性はほとんど不毛の地面でオートバイの後輪走行をしている",
+        "label": "neutral"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "### 指示：jsickデータセットのtrain分割から前提が提供される。\nデータセットに現れた仮説を完成させなさい。\n仮説はデータセットのインスタンスと正確に一致しなければならないです。",
+        "sentence1": "男性はダンスをしていない",
+        "candidate": "女性はダンスをしている",
+        "reference": "男性はダンスをしている",
+        "label": "contradiction"
+      },
+      "general_instruction": {
+        "instruction": "### 指示：以下のラベルが前提と仮説の論理的関係を示すように、前提を基に仮説を完成させる。\n",
+        "sentence1": "男性はダンスをしていない",
+        "candidate": "女性はダンスをしている",
+        "reference": "男性はダンスをしている",
+        "label": "contradiction"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "### 指示：jsickデータセットのtrain分割から前提が提供される。\nデータセットに現れた仮説を完成させなさい。\n仮説はデータセットのインスタンスと正確に一致しなければならないです。",
+        "sentence1": "ピアノを弾いている人は一人もいない",
+        "candidate": "ピアノ",
+        "reference": "ある人がジャガイモを薄切りにしている",
+        "label": "neutral"
+      },
+      "general_instruction": {
+        "instruction": "### 指示：以下のラベルが前提と仮説の論理的関係を示すように、前提を基に仮説を完成させる。\n",
+        "sentence1": "ピアノを弾いている人は一人もいない",
+        "candidate": "ピアノを弾いている人は一人もいない",
+        "reference": "ある人がジャガイモを薄切りにしている",
+        "label": "neutral"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "### 指示：jsickデータセットのtrain分割から前提が提供される。\nデータセットに現れた仮説を完成させなさい。\n仮説はデータセットのインスタンスと正確に一致しなければならないです。",
+        "sentence1": "男性がチーズをピザに振りかけている",
+        "candidate": "ピザ",
+        "reference": "男性がいくらかのチーズをピザにかけている",
+        "label": "entailment"
+      },
+      "general_instruction": {
+        "instruction": "### 指示：以下のラベルが前提と仮説の論理的関係を示すように、前提を基に仮説を完成させる。\n",
+        "sentence1": "男性がチーズをピザに振りかけている",
+        "candidate": "男性がピザにチーズを振りかけている",
+        "reference": "男性がいくらかのチーズをピザにかけている",
+        "label": "entailment"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "### 指示：jsickデータセットのtrain分割から前提が提供される。\nデータセットに現れた仮説を完成させなさい。\n仮説はデータセットのインスタンスと正確に一致しなければならないです。",
+        "sentence1": "ギターを弾いている男性は一人もいない",
+        "candidate": "ギターを弾いている男性は一人もいない",
+        "reference": "男性がギターを弾いている",
+        "label": "contradiction"
+      },
+      "general_instruction": {
+        "instruction": "### 指示：以下のラベルが前提と仮説の論理的関係を示すように、前提を基に仮説を完成させる。\n",
+        "sentence1": "ギターを弾いている男性は一人もいない",
+        "candidate": "ギターを弾いている男性は一人もいない",
+        "reference": "男性がギターを弾いている",
+        "label": "contradiction"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "### 指示：jsickデータセットのtrain分割から前提が提供される。\nデータセットに現れた仮説を完成させなさい。\n仮説はデータセットのインスタンスと正確に一致しなければならないです。",
+        "sentence1": "白い鳥は水場に勢いよく降りている",
+        "candidate": "白い鳥",
+        "reference": "大きな白い鶴が水場の近くを飛んでいる",
+        "label": "neutral"
+      },
+      "general_instruction": {
+        "instruction": "### 指示：以下のラベルが前提と仮説の論理的関係を示すように、前提を基に仮説を完成させる。\n",
+        "sentence1": "白い鳥は水場に勢いよく降りている",
+        "candidate": "水場",
+        "reference": "大きな白い鶴が水場の近くを飛んでいる",
+        "label": "neutral"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "### 指示：jsickデータセットのtrain分割から前提が提供される。\nデータセットに現れた仮説を完成させなさい。\n仮説はデータセットのインスタンスと正確に一致しなければならないです。",
+        "sentence1": "男性は馬から叩き落とされている",
+        "candidate": "男性",
+        "reference": "ある人がその馬から落ちている",
+        "label": "neutral"
+      },
+      "general_instruction": {
+        "instruction": "### 指示：以下のラベルが前提と仮説の論理的関係を示すように、前提を基に仮説を完成させる。\n",
+        "sentence1": "男性は馬から叩き落とされている",
+        "candidate": "男性は馬から叩き落とされていない",
+        "reference": "ある人がその馬から落ちている",
+        "label": "neutral"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "### 指示：jsickデータセットのtrain分割から前提が提供される。\nデータセットに現れた仮説を完成させなさい。\n仮説はデータセットのインスタンスと正確に一致しなければならないです。",
+        "sentence1": "女性が一対の犬と一緒に行進している",
+        "candidate": "女性が一対の犬と一緒に行進している",
+        "reference": "女性が一対の犬と一緒に歩いている",
+        "label": "entailment"
+      },
+      "general_instruction": {
+        "instruction": "### 指示：以下のラベルが前提と仮説の論理的関係を示すように、前提を基に仮説を完成させる。\n",
+        "sentence1": "女性が一対の犬と一緒に行進している",
+        "candidate": "一対の犬と一緒に行進している女性",
+        "reference": "女性が一対の犬と一緒に歩いている",
+        "label": "entailment"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "### 指示：jsickデータセットのtrain分割から前提が提供される。\nデータセットに現れた仮説を完成させなさい。\n仮説はデータセットのインスタンスと正確に一致しなければならないです。",
+        "sentence1": "ニンニクが女性に切り刻まれている",
+        "candidate": "ニンニク",
+        "reference": "女性がニンニクを切り刻んでいる",
+        "label": "entailment"
+      },
+      "general_instruction": {
+        "instruction": "### 指示：以下のラベルが前提と仮説の論理的関係を示すように、前提を基に仮説を完成させる。\n",
+        "sentence1": "ニンニクが女性に切り刻まれている",
+        "candidate": "女性",
+        "reference": "女性がニンニクを切り刻んでいる",
+        "label": "entailment"
+      }
+    }
+  ]

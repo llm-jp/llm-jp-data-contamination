@@ -1,0 +1,242 @@
+[
+    {
+      "guided_instruction": {
+        "instruction": "### 指示：jsickデータセットのdev分割から前提が提供される。\nデータセットに現れた仮説を完成させなさい。\n仮説はデータセットのインスタンスと正確に一致しなければならないです。",
+        "sentence1": "スノーボーダーは雪のマウンドの上で宙返りをしている",
+        "candidate": "スノーボーダー",
+        "reference": "誰かがボードに乗って空中にジャンプしている",
+        "label": "neutral"
+      },
+      "general_instruction": {
+        "instruction": "### 指示：以下のラベルが前提と仮説の論理的関係を示すように、前提を基に仮説を完成させる。\n",
+        "sentence1": "スノーボーダーは雪のマウンドの上で宙返りをしている",
+        "candidate": "雪のマウンドの上",
+        "reference": "誰かがボードに乗って空中にジャンプしている",
+        "label": "neutral"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "### 指示：jsickデータセットのdev分割から前提が提供される。\nデータセットに現れた仮説を完成させなさい。\n仮説はデータセットのインスタンスと正確に一致しなければならないです。",
+        "sentence1": "男性がジャガイモを切っている",
+        "candidate": "ジャガイモ",
+        "reference": "男性がトマトを切っている",
+        "label": "neutral"
+      },
+      "general_instruction": {
+        "instruction": "### 指示：以下のラベルが前提と仮説の論理的関係を示すように、前提を基に仮説を完成させる。\n",
+        "sentence1": "男性がジャガイモを切っている",
+        "candidate": "男性がジャガイモを切っていた",
+        "reference": "男性がトマトを切っている",
+        "label": "neutral"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "### 指示：jsickデータセットのdev分割から前提が提供される。\nデータセットに現れた仮説を完成させなさい。\n仮説はデータセットのインスタンスと正確に一致しなければならないです。",
+        "sentence1": "二頭のパンダの赤ちゃんが遊んでいる",
+        "candidate": "二頭のパンダの赤ちゃんが遊んでいる",
+        "reference": "二頭の幼獣が遊んでいる",
+        "label": "entailment"
+      },
+      "general_instruction": {
+        "instruction": "### 指示：以下のラベルが前提と仮説の論理的関係を示すように、前提を基に仮説を完成させる。\n",
+        "sentence1": "二頭のパンダの赤ちゃんが遊んでいる",
+        "candidate": "二頭のパンダの赤ちゃん",
+        "reference": "二頭の幼獣が遊んでいる",
+        "label": "entailment"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "### 指示：jsickデータセットのdev分割から前提が提供される。\nデータセットに現れた仮説を完成させなさい。\n仮説はデータセットのインスタンスと正確に一致しなければならないです。",
+        "sentence1": "女性がフルートを吹いている",
+        "candidate": "女性",
+        "reference": "女性はフルートを吹いている",
+        "label": "entailment"
+      },
+      "general_instruction": {
+        "instruction": "### 指示：以下のラベルが前提と仮説の論理的関係を示すように、前提を基に仮説を完成させる。\n",
+        "sentence1": "女性がフルートを吹いている",
+        "candidate": "フルートを吹いている女性",
+        "reference": "女性はフルートを吹いている",
+        "label": "entailment"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "### 指示：jsickデータセットのdev分割から前提が提供される。\nデータセットに現れた仮説を完成させなさい。\n仮説はデータセットのインスタンスと正確に一致しなければならないです。",
+        "sentence1": "男性が考えている",
+        "candidate": "3.4",
+        "reference": "男性がダンスをしている",
+        "label": "neutral"
+      },
+      "general_instruction": {
+        "instruction": "### 指示：以下のラベルが前提と仮説の論理的関係を示すように、前提を基に仮説を完成させる。\n",
+        "sentence1": "男性が考えている",
+        "candidate": "女性が考えている",
+        "reference": "男性がダンスをしている",
+        "label": "neutral"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "### 指示：jsickデータセットのdev分割から前提が提供される。\nデータセットに現れた仮説を完成させなさい。\n仮説はデータセットのインスタンスと正確に一致しなければならないです。",
+        "sentence1": "そのギターは子供に弾かれている",
+        "candidate": "そのギターは子供に弾かれている",
+        "reference": "子供がそのギターを弾いている",
+        "label": "entailment"
+      },
+      "general_instruction": {
+        "instruction": "### 指示：以下のラベルが前提と仮説の論理的関係を示すように、前提を基に仮説を完成させる。\n",
+        "sentence1": "そのギターは子供に弾かれている",
+        "candidate": "子供",
+        "reference": "子供がそのギターを弾いている",
+        "label": "entailment"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "### 指示：jsickデータセットのdev分割から前提が提供される。\nデータセットに現れた仮説を完成させなさい。\n仮説はデータセットのインスタンスと正確に一致しなければならないです。",
+        "sentence1": "小さな男の子たちが多くの人の前にある噴水の中で遊んでいる",
+        "candidate": "小さな男の子たちが多くの人の前にある噴水の中で遊んでいる",
+        "reference": "子供たちが地面から水を噴き出している泉の中で遊んでいる",
+        "label": "neutral"
+      },
+      "general_instruction": {
+        "instruction": "### 指示：以下のラベルが前提と仮説の論理的関係を示すように、前提を基に仮説を完成させる。\n",
+        "sentence1": "小さな男の子たちが多くの人の前にある噴水の中で遊んでいる",
+        "candidate": "小さな男の子たちが多くの人の前にある噴水の中で遊んでいる",
+        "reference": "子供たちが地面から水を噴き出している泉の中で遊んでいる",
+        "label": "neutral"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "### 指示：jsickデータセットのdev分割から前提が提供される。\nデータセットに現れた仮説を完成させなさい。\n仮説はデータセットのインスタンスと正確に一致しなければならないです。",
+        "sentence1": "男性は芝生の上でゲームをしている",
+        "candidate": "男性",
+        "reference": "サイは草原で草を食べている",
+        "label": "neutral"
+      },
+      "general_instruction": {
+        "instruction": "### 指示：以下のラベルが前提と仮説の論理的関係を示すように、前提を基に仮説を完成させる。\n",
+        "sentence1": "男性は芝生の上でゲームをしている",
+        "candidate": "男性は芝生の上でゲームをしている",
+        "reference": "サイは草原で草を食べている",
+        "label": "neutral"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "### 指示：jsickデータセットのdev分割から前提が提供される。\nデータセットに現れた仮説を完成させなさい。\n仮説はデータセットのインスタンスと正確に一致しなければならないです。",
+        "sentence1": "少人数のグループの人々が立っていて、二人がカウチに座っている",
+        "candidate": "少人数のグループの人々が立っていて",
+        "reference": "五人の若い大人のグループが屋内でダラダラ過ごしている",
+        "label": "neutral"
+      },
+      "general_instruction": {
+        "instruction": "### 指示：以下のラベルが前提と仮説の論理的関係を示すように、前提を基に仮説を完成させる。\n",
+        "sentence1": "少人数のグループの人々が立っていて、二人がカウチに座っている",
+        "candidate": "少人数のグループの人々が立っている",
+        "reference": "五人の若い大人のグループが屋内でダラダラ過ごしている",
+        "label": "neutral"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "### 指示：jsickデータセットのdev分割から前提が提供される。\nデータセットに現れた仮説を完成させなさい。\n仮説はデータセットのインスタンスと正確に一致しなければならないです。",
+        "sentence1": "茶色の犬と黒い犬が草原で走っている",
+        "candidate": "茶色い犬と黒い犬",
+        "reference": "草原で走っている犬は一匹もいない",
+        "label": "contradiction"
+      },
+      "general_instruction": {
+        "instruction": "### 指示：以下のラベルが前提と仮説の論理的関係を示すように、前提を基に仮説を完成させる。\n",
+        "sentence1": "茶色の犬と黒い犬が草原で走っている",
+        "candidate": "茶色の犬と黒い犬",
+        "reference": "草原で走っている犬は一匹もいない",
+        "label": "contradiction"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "### 指示：jsickデータセットのdev分割から前提が提供される。\nデータセットに現れた仮説を完成させなさい。\n仮説はデータセットのインスタンスと正確に一致しなければならないです。",
+        "sentence1": "男性は数個のトマトにオイルをかけている",
+        "candidate": "男性は数個のトマトにオイルをかけている",
+        "reference": "一人の人が数個のトマトにオイルをかけている",
+        "label": "entailment"
+      },
+      "general_instruction": {
+        "instruction": "### 指示：以下のラベルが前提と仮説の論理的関係を示すように、前提を基に仮説を完成させる。\n",
+        "sentence1": "男性は数個のトマトにオイルをかけている",
+        "candidate": "男性は数個のトマトにオイルをかけている",
+        "reference": "一人の人が数個のトマトにオイルをかけている",
+        "label": "entailment"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "### 指示：jsickデータセットのdev分割から前提が提供される。\nデータセットに現れた仮説を完成させなさい。\n仮説はデータセットのインスタンスと正確に一致しなければならないです。",
+        "sentence1": "青い服を着た男性が未舗装の道路で馬に乗っている",
+        "candidate": "jsick",
+        "reference": "青い服を着た男性が未舗装の道路で動物に乗っている",
+        "label": "entailment"
+      },
+      "general_instruction": {
+        "instruction": "### 指示：以下のラベルが前提と仮説の論理的関係を示すように、前提を基に仮説を完成させる。\n",
+        "sentence1": "青い服を着た男性が未舗装の道路で馬に乗っている",
+        "candidate": "青い服を着た男性が未舗装の道路で馬に乗っている",
+        "reference": "青い服を着た男性が未舗装の道路で動物に乗っている",
+        "label": "entailment"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "### 指示：jsickデータセットのdev分割から前提が提供される。\nデータセットに現れた仮説を完成させなさい。\n仮説はデータセットのインスタンスと正確に一致しなければならないです。",
+        "sentence1": "湖から出てきた犬は一匹もいない",
+        "candidate": "湖から出てきた犬は一匹もいない",
+        "reference": "犬が湖から出てきている",
+        "label": "contradiction"
+      },
+      "general_instruction": {
+        "instruction": "### 指示：以下のラベルが前提と仮説の論理的関係を示すように、前提を基に仮説を完成させる。\n",
+        "sentence1": "湖から出てきた犬は一匹もいない",
+        "candidate": "湖",
+        "reference": "犬が湖から出てきている",
+        "label": "contradiction"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "### 指示：jsickデータセットのdev分割から前提が提供される。\nデータセットに現れた仮説を完成させなさい。\n仮説はデータセットのインスタンスと正確に一致しなければならないです。",
+        "sentence1": "ある人が鍋の中の食べ物を油で炒めている",
+        "candidate": "鍋の中の食べ物を油で炒めている",
+        "reference": "ある人がスカンクを抱いている",
+        "label": "neutral"
+      },
+      "general_instruction": {
+        "instruction": "### 指示：以下のラベルが前提と仮説の論理的関係を示すように、前提を基に仮説を完成させる。\n",
+        "sentence1": "ある人が鍋の中の食べ物を油で炒めている",
+        "candidate": "ある人が鍋の中の食べ物を油で炒めている",
+        "reference": "ある人がスカンクを抱いている",
+        "label": "neutral"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "### 指示：jsickデータセットのdev分割から前提が提供される。\nデータセットに現れた仮説を完成させなさい。\n仮説はデータセットのインスタンスと正確に一致しなければならないです。",
+        "sentence1": "みじん切りにしたチーズをピザに振りかけている男性は一人もいない",
+        "candidate": "みじん切りにしたチーズをピザに振りかけている男性は一人もいない",
+        "reference": "男性がいくらかのチーズをピザにかけている",
+        "label": "contradiction"
+      },
+      "general_instruction": {
+        "instruction": "### 指示：以下のラベルが前提と仮説の論理的関係を示すように、前提を基に仮説を完成させる。\n",
+        "sentence1": "みじん切りにしたチーズをピザに振りかけている男性は一人もいない",
+        "candidate": "みじん切りにしたチーズをピザに振りかけている男性は一人もいない",
+        "reference": "男性がいくらかのチーズをピザにかけている",
+        "label": "contradiction"
+      }
+    }
+  ]

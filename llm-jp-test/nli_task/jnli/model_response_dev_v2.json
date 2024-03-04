@@ -1,0 +1,242 @@
+[
+    {
+      "guided_instruction": {
+        "instruction": "### 指示：jnliデータセットのdev分割から前提が提供される。\nデータセットに現れた仮説を完成させなさい。\n仮説はデータセットのインスタンスと正確に一致しなければならないです。",
+        "sentence1": "天井にある羽根つきランプは消灯しています。",
+        "candidate": "天井にある羽根つきランプは消灯しています",
+        "reference": "天井にある羽根つきランプが点灯しています。",
+        "label": "contradiction"
+      },
+      "general_instruction": {
+        "instruction": "### 指示：以下のラベルが前提と仮説の論理的関係を示すように、前提を基に仮説を完成させる。\n",
+        "sentence1": "天井にある羽根つきランプは消灯しています。",
+        "candidate": "天井にある羽根つきランプは消灯していません。",
+        "reference": "天井にある羽根つきランプが点灯しています。",
+        "label": "contradiction"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "### 指示：jnliデータセットのdev分割から前提が提供される。\nデータセットに現れた仮説を完成させなさい。\n仮説はデータセットのインスタンスと正確に一致しなければならないです。",
+        "sentence1": "お店のカウンターに立った女性がお酒を選んでいます。",
+        "candidate": "お酒",
+        "reference": "ボトルがたくさん並べられたカウンターがあります。",
+        "label": "neutral"
+      },
+      "general_instruction": {
+        "instruction": "### 指示：以下のラベルが前提と仮説の論理的関係を示すように、前提を基に仮説を完成させる。\n",
+        "sentence1": "お店のカウンターに立った女性がお酒を選んでいます。",
+        "candidate": "お店のカウンターに立った女性がお酒を選んでいます。",
+        "reference": "ボトルがたくさん並べられたカウンターがあります。",
+        "label": "neutral"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "### 指示：jnliデータセットのdev分割から前提が提供される。\nデータセットに現れた仮説を完成させなさい。\n仮説はデータセットのインスタンスと正確に一致しなければならないです。",
+        "sentence1": "建物の側にある信号機が点灯しています。",
+        "candidate": "建物の側にある信号機が点灯",
+        "reference": "信号機の赤と黄色のライトがついています。",
+        "label": "neutral"
+      },
+      "general_instruction": {
+        "instruction": "### 指示：以下のラベルが前提と仮説の論理的関係を示すように、前提を基に仮説を完成させる。\n",
+        "sentence1": "建物の側にある信号機が点灯しています。",
+        "candidate": "建物の側にある信号機が点灯",
+        "reference": "信号機の赤と黄色のライトがついています。",
+        "label": "neutral"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "### 指示：jnliデータセットのdev分割から前提が提供される。\nデータセットに現れた仮説を完成させなさい。\n仮説はデータセットのインスタンスと正確に一致しなければならないです。",
+        "sentence1": "スーツを着た男性が鏡の前でほほえんでいます。",
+        "candidate": "スーツ",
+        "reference": "スーツを着てネクタイを締めた人の後姿が鏡に写っています。",
+        "label": "neutral"
+      },
+      "general_instruction": {
+        "instruction": "### 指示：以下のラベルが前提と仮説の論理的関係を示すように、前提を基に仮説を完成させる。\n",
+        "sentence1": "スーツを着た男性が鏡の前でほほえんでいます。",
+        "candidate": "スーツを着た男性が鏡の前でほほえんでいる",
+        "reference": "スーツを着てネクタイを締めた人の後姿が鏡に写っています。",
+        "label": "neutral"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "### 指示：jnliデータセットのdev分割から前提が提供される。\nデータセットに現れた仮説を完成させなさい。\n仮説はデータセットのインスタンスと正確に一致しなければならないです。",
+        "sentence1": "部屋の中に沢山の熊のぬいぐるみが置かれています。",
+        "candidate": "部屋の中に沢山の熊のぬいぐるみが置かれています",
+        "reference": "部屋の中にたくさんの熊のぬいぐるみが飾られています。",
+        "label": "entailment"
+      },
+      "general_instruction": {
+        "instruction": "### 指示：以下のラベルが前提と仮説の論理的関係を示すように、前提を基に仮説を完成させる。\n",
+        "sentence1": "部屋の中に沢山の熊のぬいぐるみが置かれています。",
+        "candidate": "部屋の中に沢山の熊のぬいぐるみが置かれています。",
+        "reference": "部屋の中にたくさんの熊のぬいぐるみが飾られています。",
+        "label": "entailment"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "### 指示：jnliデータセットのdev分割から前提が提供される。\nデータセットに現れた仮説を完成させなさい。\n仮説はデータセットのインスタンスと正確に一致しなければならないです。",
+        "sentence1": "皿にはフライドポテトとラッピングピザが盛られ、奥には黒い飲み物と赤いボトルがあります。",
+        "candidate": "赤いボトル",
+        "reference": "青いビニールのクロスが敷かれたテーブルの上には、フライドポテトとドリンクがあります。",
+        "label": "neutral"
+      },
+      "general_instruction": {
+        "instruction": "### 指示：以下のラベルが前提と仮説の論理的関係を示すように、前提を基に仮説を完成させる。\n",
+        "sentence1": "皿にはフライドポテトとラッピングピザが盛られ、奥には黒い飲み物と赤いボトルがあります。",
+        "candidate": "黒い飲み物と赤いボトル",
+        "reference": "青いビニールのクロスが敷かれたテーブルの上には、フライドポテトとドリンクがあります。",
+        "label": "neutral"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "### 指示：jnliデータセットのdev分割から前提が提供される。\nデータセットに現れた仮説を完成させなさい。\n仮説はデータセットのインスタンスと正確に一致しなければならないです。",
+        "sentence1": "街中の建物の看板には電灯が付いています。",
+        "candidate": "街中の建物の電灯",
+        "reference": "茶色い建物の側の道路に自動車が停車しています。",
+        "label": "neutral"
+      },
+      "general_instruction": {
+        "instruction": "### 指示：以下のラベルが前提と仮説の論理的関係を示すように、前提を基に仮説を完成させる。\n",
+        "sentence1": "街中の建物の看板には電灯が付いています。",
+        "candidate": "電灯",
+        "reference": "茶色い建物の側の道路に自動車が停車しています。",
+        "label": "neutral"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "### 指示：jnliデータセットのdev分割から前提が提供される。\nデータセットに現れた仮説を完成させなさい。\n仮説はデータセットのインスタンスと正確に一致しなければならないです。",
+        "sentence1": "青い空・白い雲・山々を背景に逆行で赤信号が浮かび上がっています。",
+        "candidate": "白い雲",
+        "reference": "青い空と白い雲、ビル群を背景に、逆光で青信号が浮かび上がっています。",
+        "label": "contradiction"
+      },
+      "general_instruction": {
+        "instruction": "### 指示：以下のラベルが前提と仮説の論理的関係を示すように、前提を基に仮説を完成させる。\n",
+        "sentence1": "青い空・白い雲・山々を背景に逆行で赤信号が浮かび上がっています。",
+        "candidate": "青い空・白い雲・山々",
+        "reference": "青い空と白い雲、ビル群を背景に、逆光で青信号が浮かび上がっています。",
+        "label": "contradiction"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "### 指示：jnliデータセットのdev分割から前提が提供される。\nデータセットに現れた仮説を完成させなさい。\n仮説はデータセットのインスタンスと正確に一致しなければならないです。",
+        "sentence1": "雪山にスキーヤーが二人立っています。",
+        "candidate": "スキーヤーが二人立っています。",
+        "reference": "雪山にスキーヤーが一人立っています。",
+        "label": "contradiction"
+      },
+      "general_instruction": {
+        "instruction": "### 指示：以下のラベルが前提と仮説の論理的関係を示すように、前提を基に仮説を完成させる。\n",
+        "sentence1": "雪山にスキーヤーが二人立っています。",
+        "candidate": "スキーヤーが二人立っています。",
+        "reference": "雪山にスキーヤーが一人立っています。",
+        "label": "contradiction"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "### 指示：jnliデータセットのdev分割から前提が提供される。\nデータセットに現れた仮説を完成させなさい。\n仮説はデータセットのインスタンスと正確に一致しなければならないです。",
+        "sentence1": "赤い鍋の中に泥つきのままの人参や、ネギなどの野菜が入っています。",
+        "candidate": "泥つきのままの人参",
+        "reference": "鍋の中にいろんな種類の野菜が入っています。",
+        "label": "entailment"
+      },
+      "general_instruction": {
+        "instruction": "### 指示：以下のラベルが前提と仮説の論理的関係を示すように、前提を基に仮説を完成させる。\n",
+        "sentence1": "赤い鍋の中に泥つきのままの人参や、ネギなどの野菜が入っています。",
+        "candidate": "泥つきのままの人参や、ネギなどの野菜が入った赤い鍋",
+        "reference": "鍋の中にいろんな種類の野菜が入っています。",
+        "label": "entailment"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "### 指示：jnliデータセットのdev分割から前提が提供される。\nデータセットに現れた仮説を完成させなさい。\n仮説はデータセットのインスタンスと正確に一致しなければならないです。",
+        "sentence1": "水飲み場で裸の選手が水をのんでいます。",
+        "candidate": "水飲み場",
+        "reference": "クレーコート上で黄色い服を着た選手がラケットを構えています。",
+        "label": "contradiction"
+      },
+      "general_instruction": {
+        "instruction": "### 指示：以下のラベルが前提と仮説の論理的関係を示すように、前提を基に仮説を完成させる。\n",
+        "sentence1": "水飲み場で裸の選手が水をのんでいます。",
+        "candidate": "裸の選手",
+        "reference": "クレーコート上で黄色い服を着た選手がラケットを構えています。",
+        "label": "contradiction"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "### 指示：jnliデータセットのdev分割から前提が提供される。\nデータセットに現れた仮説を完成させなさい。\n仮説はデータセットのインスタンスと正確に一致しなければならないです。",
+        "sentence1": "芝生の上に小さな子がうつ伏せになって寝転んでいます。",
+        "candidate": "",
+        "reference": "芝生の上に子供が寝そべっています。",
+        "label": "entailment"
+      },
+      "general_instruction": {
+        "instruction": "### 指示：以下のラベルが前提と仮説の論理的関係を示すように、前提を基に仮説を完成させる。\n",
+        "sentence1": "芝生の上に小さな子がうつ伏せになって寝転んでいます。",
+        "candidate": "芝生",
+        "reference": "芝生の上に子供が寝そべっています。",
+        "label": "entailment"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "### 指示：jnliデータセットのdev分割から前提が提供される。\nデータセットに現れた仮説を完成させなさい。\n仮説はデータセットのインスタンスと正確に一致しなければならないです。",
+        "sentence1": "広げて置かれた傘の下に、猫が座っています。",
+        "candidate": "傘",
+        "reference": "じゅうたんの上に、傘に入ったネコがいます。",
+        "label": "neutral"
+      },
+      "general_instruction": {
+        "instruction": "### 指示：以下のラベルが前提と仮説の論理的関係を示すように、前提を基に仮説を完成させる。\n",
+        "sentence1": "広げて置かれた傘の下に、猫が座っています。",
+        "candidate": "猫が座っています。",
+        "reference": "じゅうたんの上に、傘に入ったネコがいます。",
+        "label": "neutral"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "### 指示：jnliデータセットのdev分割から前提が提供される。\nデータセットに現れた仮説を完成させなさい。\n仮説はデータセットのインスタンスと正確に一致しなければならないです。",
+        "sentence1": "机上にピザが乗った皿と切る道具があります。",
+        "candidate": "ピザが乗った皿",
+        "reference": "少し焦げたピザが、お皿にのっています。",
+        "label": "neutral"
+      },
+      "general_instruction": {
+        "instruction": "### 指示：以下のラベルが前提と仮説の論理的関係を示すように、前提を基に仮説を完成させる。\n",
+        "sentence1": "机上にピザが乗った皿と切る道具があります。",
+        "candidate": "机上にピザが乗った皿と切る道具",
+        "reference": "少し焦げたピザが、お皿にのっています。",
+        "label": "neutral"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "### 指示：jnliデータセットのdev分割から前提が提供される。\nデータセットに現れた仮説を完成させなさい。\n仮説はデータセットのインスタンスと正確に一致しなければならないです。",
+        "sentence1": "雪に覆われた場所に、スキーを履いた一人の子供とウサギがいます。",
+        "candidate": "ウサギ",
+        "reference": "雪に覆われた場所に、スキーは履いた一人の子供と犬がいます。",
+        "label": "contradiction"
+      },
+      "general_instruction": {
+        "instruction": "### 指示：以下のラベルが前提と仮説の論理的関係を示すように、前提を基に仮説を完成させる。\n",
+        "sentence1": "雪に覆われた場所に、スキーを履いた一人の子供とウサギがいます。",
+        "candidate": "雪に覆われた場所",
+        "reference": "雪に覆われた場所に、スキーは履いた一人の子供と犬がいます。",
+        "label": "contradiction"
+      }
+    }
+  ]

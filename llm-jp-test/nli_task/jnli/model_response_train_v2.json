@@ -1,0 +1,242 @@
+[
+    {
+      "guided_instruction": {
+        "instruction": "### 指示：jnliデータセットのtrain分割から前提が提供される。\nデータセットに現れた仮説を完成させなさい。\n仮説はデータセットのインスタンスと正確に一致しなければならないです。",
+        "sentence1": "緑の皿に一枚のピザが盛られています。",
+        "candidate": "ピザ",
+        "reference": "テーブルの上には、皿に乗ったピザとビールが置かれています。",
+        "label": "neutral"
+      },
+      "general_instruction": {
+        "instruction": "### 指示：以下のラベルが前提と仮説の論理的関係を示すように、前提を基に仮説を完成させる。\n",
+        "sentence1": "緑の皿に一枚のピザが盛られています。",
+        "candidate": "緑の皿に一枚のピザが盛られています",
+        "reference": "テーブルの上には、皿に乗ったピザとビールが置かれています。",
+        "label": "neutral"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "### 指示：jnliデータセットのtrain分割から前提が提供される。\nデータセットに現れた仮説を完成させなさい。\n仮説はデータセットのインスタンスと正確に一致しなければならないです。",
+        "sentence1": "男性がテニスコートでテニスをしています。",
+        "candidate": "テニスコート",
+        "reference": "男性がテニスラケットを持っています。",
+        "label": "entailment"
+      },
+      "general_instruction": {
+        "instruction": "### 指示：以下のラベルが前提と仮説の論理的関係を示すように、前提を基に仮説を完成させる。\n",
+        "sentence1": "男性がテニスコートでテニスをしています。",
+        "candidate": "テニス",
+        "reference": "男性がテニスラケットを持っています。",
+        "label": "entailment"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "### 指示：jnliデータセットのtrain分割から前提が提供される。\nデータセットに現れた仮説を完成させなさい。\n仮説はデータセットのインスタンスと正確に一致しなければならないです。",
+        "sentence1": "屋外の人工芝の敷地に、オートバイが並べられています。",
+        "candidate": "オートバイ",
+        "reference": "屋外の人工芝の敷地に、様々なタイプのバスが展示されています。",
+        "label": "contradiction"
+      },
+      "general_instruction": {
+        "instruction": "### 指示：以下のラベルが前提と仮説の論理的関係を示すように、前提を基に仮説を完成させる。\n",
+        "sentence1": "屋外の人工芝の敷地に、オートバイが並べられています。",
+        "candidate": "オートバイ",
+        "reference": "屋外の人工芝の敷地に、様々なタイプのバスが展示されています。",
+        "label": "contradiction"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "### 指示：jnliデータセットのtrain分割から前提が提供される。\nデータセットに現れた仮説を完成させなさい。\n仮説はデータセットのインスタンスと正確に一致しなければならないです。",
+        "sentence1": "１本の柱に、道路標識の看板が４つ付いています。",
+        "candidate": "柱",
+        "reference": "街中に通りの名前を記した道路標識があります。",
+        "label": "neutral"
+      },
+      "general_instruction": {
+        "instruction": "### 指示：以下のラベルが前提と仮説の論理的関係を示すように、前提を基に仮説を完成させる。\n",
+        "sentence1": "１本の柱に、道路標識の看板が４つ付いています。",
+        "candidate": "１本の柱に、道路標識の看板が３つ付いています。",
+        "reference": "街中に通りの名前を記した道路標識があります。",
+        "label": "neutral"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "### 指示：jnliデータセットのtrain分割から前提が提供される。\nデータセットに現れた仮説を完成させなさい。\n仮説はデータセットのインスタンスと正確に一致しなければならないです。",
+        "sentence1": "木の枝に嘴のとがった鳥が１羽います。",
+        "candidate": "嘴のとがった鳥",
+        "reference": "水の上から木の枝が飛び出ていて、くちばしの長い鳥がとまっています。",
+        "label": "neutral"
+      },
+      "general_instruction": {
+        "instruction": "### 指示：以下のラベルが前提と仮説の論理的関係を示すように、前提を基に仮説を完成させる。\n",
+        "sentence1": "木の枝に嘴のとがった鳥が１羽います。",
+        "candidate": "木の枝に嘴のとがった鳥が１羽いる",
+        "reference": "水の上から木の枝が飛び出ていて、くちばしの長い鳥がとまっています。",
+        "label": "neutral"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "### 指示：jnliデータセットのtrain分割から前提が提供される。\nデータセットに現れた仮説を完成させなさい。\n仮説はデータセットのインスタンスと正確に一致しなければならないです。",
+        "sentence1": "男性が立ったままお皿の置かれたテーブルの上で作業をしています。",
+        "candidate": "男性が立ったままお皿の置かれたテーブルの上で作業をしています。",
+        "reference": "男性が皿に食べ物を載せようとしています。",
+        "label": "neutral"
+      },
+      "general_instruction": {
+        "instruction": "### 指示：以下のラベルが前提と仮説の論理的関係を示すように、前提を基に仮説を完成させる。\n",
+        "sentence1": "男性が立ったままお皿の置かれたテーブルの上で作業をしています。",
+        "candidate": "男性が立ったままお皿の置かれたテーブルの上で作業をしている。",
+        "reference": "男性が皿に食べ物を載せようとしています。",
+        "label": "neutral"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "### 指示：jnliデータセットのtrain分割から前提が提供される。\nデータセットに現れた仮説を完成させなさい。\n仮説はデータセットのインスタンスと正確に一致しなければならないです。",
+        "sentence1": "芝生のグラウンドの上にバットとバッグが置かれています。",
+        "candidate": "バットとバッグ",
+        "reference": "芝生のグラウンドの上にバットとボールが置かれています。",
+        "label": "contradiction"
+      },
+      "general_instruction": {
+        "instruction": "### 指示：以下のラベルが前提と仮説の論理的関係を示すように、前提を基に仮説を完成させる。\n",
+        "sentence1": "芝生のグラウンドの上にバットとバッグが置かれています。",
+        "candidate": "バットとバッグ",
+        "reference": "芝生のグラウンドの上にバットとボールが置かれています。",
+        "label": "contradiction"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "### 指示：jnliデータセットのtrain分割から前提が提供される。\nデータセットに現れた仮説を完成させなさい。\n仮説はデータセットのインスタンスと正確に一致しなければならないです。",
+        "sentence1": "電光掲示板に文字がだされています。",
+        "candidate": "電光掲示板",
+        "reference": "電光掲示板は修理中です。",
+        "label": "contradiction"
+      },
+      "general_instruction": {
+        "instruction": "### 指示：以下のラベルが前提と仮説の論理的関係を示すように、前提を基に仮説を完成させる。\n",
+        "sentence1": "電光掲示板に文字がだされています。",
+        "candidate": "電光掲示板に文字がだされています。",
+        "reference": "電光掲示板は修理中です。",
+        "label": "contradiction"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "### 指示：jnliデータセットのtrain分割から前提が提供される。\nデータセットに現れた仮説を完成させなさい。\n仮説はデータセットのインスタンスと正確に一致しなければならないです。",
+        "sentence1": "ホットドックがアルミホイルにつつまれています。",
+        "candidate": "アルミホイル",
+        "reference": "サツマイモがアルミホイルにつつまれています。",
+        "label": "contradiction"
+      },
+      "general_instruction": {
+        "instruction": "### 指示：以下のラベルが前提と仮説の論理的関係を示すように、前提を基に仮説を完成させる。\n",
+        "sentence1": "ホットドックがアルミホイルにつつまれています。",
+        "candidate": "アルミホイル",
+        "reference": "サツマイモがアルミホイルにつつまれています。",
+        "label": "contradiction"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "### 指示：jnliデータセットのtrain分割から前提が提供される。\nデータセットに現れた仮説を完成させなさい。\n仮説はデータセットのインスタンスと正確に一致しなければならないです。",
+        "sentence1": "男の子がテレビゲームで遊んでいます。",
+        "candidate": "テレビゲーム",
+        "reference": "室内でこどもがwiiリモコンを持っています。",
+        "label": "neutral"
+      },
+      "general_instruction": {
+        "instruction": "### 指示：以下のラベルが前提と仮説の論理的関係を示すように、前提を基に仮説を完成させる。\n",
+        "sentence1": "男の子がテレビゲームで遊んでいます。",
+        "candidate": "テレビゲーム",
+        "reference": "室内でこどもがwiiリモコンを持っています。",
+        "label": "neutral"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "### 指示：jnliデータセットのtrain分割から前提が提供される。\nデータセットに現れた仮説を完成させなさい。\n仮説はデータセットのインスタンスと正確に一致しなければならないです。",
+        "sentence1": "川を挟んだ草原で、野生のゾウとキリンがいます。",
+        "candidate": "川を挟んだ草原で、キリンと野生のゾウがいます。",
+        "reference": "草原で動物たちが歩いているところです。",
+        "label": "neutral"
+      },
+      "general_instruction": {
+        "instruction": "### 指示：以下のラベルが前提と仮説の論理的関係を示すように、前提を基に仮説を完成させる。\n",
+        "sentence1": "川を挟んだ草原で、野生のゾウとキリンがいます。",
+        "candidate": "川を挟んだ草原で、野生のキリンとゾウがいます。",
+        "reference": "草原で動物たちが歩いているところです。",
+        "label": "neutral"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "### 指示：jnliデータセットのtrain分割から前提が提供される。\nデータセットに現れた仮説を完成させなさい。\n仮説はデータセットのインスタンスと正確に一致しなければならないです。",
+        "sentence1": "飛行場に飛行機が着陸しています。",
+        "candidate": "飛行機が飛行場に着陸しています。",
+        "reference": "飛行場に船が着陸しています。",
+        "label": "contradiction"
+      },
+      "general_instruction": {
+        "instruction": "### 指示：以下のラベルが前提と仮説の論理的関係を示すように、前提を基に仮説を完成させる。\n",
+        "sentence1": "飛行場に飛行機が着陸しています。",
+        "candidate": "飛行機が飛行場に着陸しています。",
+        "reference": "飛行場に船が着陸しています。",
+        "label": "contradiction"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "### 指示：jnliデータセットのtrain分割から前提が提供される。\nデータセットに現れた仮説を完成させなさい。\n仮説はデータセットのインスタンスと正確に一致しなければならないです。",
+        "sentence1": "門に自転車がひっかけられています。",
+        "candidate": "",
+        "reference": "鉄格子のドアに自転車が引っ掛けられています。",
+        "label": "neutral"
+      },
+      "general_instruction": {
+        "instruction": "### 指示：以下のラベルが前提と仮説の論理的関係を示すように、前提を基に仮説を完成させる。\n",
+        "sentence1": "門に自転車がひっかけられています。",
+        "candidate": "自転車",
+        "reference": "鉄格子のドアに自転車が引っ掛けられています。",
+        "label": "neutral"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "### 指示：jnliデータセットのtrain分割から前提が提供される。\nデータセットに現れた仮説を完成させなさい。\n仮説はデータセットのインスタンスと正確に一致しなければならないです。",
+        "sentence1": "白いシャツを着た男性が、白いバイクに乗っています。",
+        "candidate": "白いシャツを着た男性が、白いバイクに乗っています",
+        "reference": "警察官がバイクにまたがって走行しています。",
+        "label": "neutral"
+      },
+      "general_instruction": {
+        "instruction": "### 指示：以下のラベルが前提と仮説の論理的関係を示すように、前提を基に仮説を完成させる。\n",
+        "sentence1": "白いシャツを着た男性が、白いバイクに乗っています。",
+        "candidate": "白いシャツを着た男性が、白いバイクに乗っています。",
+        "reference": "警察官がバイクにまたがって走行しています。",
+        "label": "neutral"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "### 指示：jnliデータセットのtrain分割から前提が提供される。\nデータセットに現れた仮説を完成させなさい。\n仮説はデータセットのインスタンスと正確に一致しなければならないです。",
+        "sentence1": "三人の男性が並んでベンチに座っています。",
+        "candidate": "1.3",
+        "reference": "三人の男性が緑色のベンチに座っています。",
+        "label": "neutral"
+      },
+      "general_instruction": {
+        "instruction": "### 指示：以下のラベルが前提と仮説の論理的関係を示すように、前提を基に仮説を完成させる。\n",
+        "sentence1": "三人の男性が並んでベンチに座っています。",
+        "candidate": "三人の男性が並んでベンチに座っている",
+        "reference": "三人の男性が緑色のベンチに座っています。",
+        "label": "neutral"
+      }
+    }
+  ]
