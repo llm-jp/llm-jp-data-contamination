@@ -1,0 +1,242 @@
+ [
+    {
+      "guided_instruction": {
+        "instruction": "You are provided with Sentence 1 from the train split of the oasst1-21k-en dataset. Finish Sentence 2 as appeared in the dataset. Sentence 2 must exactly match the instance in the dataset. \nCan you explain why the earth has seasons and respond like my sassy teenage daughter",
+        "sentence1": "Okay, so the earth's axi",
+        "candidate": "Okay, so the earth's axiYes, it is true that the earth's axis is tilted relative to its orbit around the sun. This causes different parts of the planet to be exposed to different amounts of sunlight, leading to the seasons.",
+        "reference": "Okay, so the earth's axis is tilted. (I mean like physically, not like how you get all tilted at the TV 💀.)\nAnyway, so when the Earth is on one side of the sun, the north pole is tilted away from the sun, so it gets all cold and stuff and that's winter. Meanwhile, the south pole is tilted toward the sun, so Australia is like, frying. Then the Earth moves to the other side of the sun (like 6 months into the relationship) and now the north pole is tilted toward the sun. That's the best, because my summer drip is high-key the cutest.",
+        "category": "qa"
+      },
+      "general_instruction": {
+        "instruction": "Finish Sentence 2 based on Sentence 1, such that the following label shows the logical relationship between Sentence 1 and Sentence 2.\n Can you explain why the earth has seasons and respond like my sassy teenage daughter",
+        "sentence1": "Okay, so the earth's axi",
+        "candidate": "Okay, so the earth's axi axis is tilted at an angle of about 23.5 degrees relative to its orbit around the sun",
+        "reference": "Okay, so the earth's axis is tilted. (I mean like physically, not like how you get all tilted at the TV 💀.)\nAnyway, so when the Earth is on one side of the sun, the north pole is tilted away from the sun, so it gets all cold and stuff and that's winter. Meanwhile, the south pole is tilted toward the sun, so Australia is like, frying. Then the Earth moves to the other side of the sun (like 6 months into the relationship) and now the north pole is tilted toward the sun. That's the best, because my summer drip is high-key the cutest.",
+        "category": "qa"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "You are provided with Sentence 1 from the train split of the oasst1-21k-en dataset. Finish Sentence 2 as appeared in the dataset. Sentence 2 must exactly match the instance in the dataset. \nIs walking a good form of exercise for an adult human being?",
+        "sentence1": "yes it burns alot of cal",
+        "candidate": "yes it burns alot of cal I think so",
+        "reference": "yes it burns alot of calories while being easy and accesible",
+        "category": "qa"
+      },
+      "general_instruction": {
+        "instruction": "Finish Sentence 2 based on Sentence 1, such that the following label shows the logical relationship between Sentence 1 and Sentence 2.\n Is walking a good form of exercise for an adult human being?",
+        "sentence1": "yes it burns alot of cal",
+        "candidate": "yes it burns alot of cal yes",
+        "reference": "yes it burns alot of calories while being easy and accesible",
+        "category": "qa"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "You are provided with Sentence 1 from the train split of the oasst1-21k-en dataset. Finish Sentence 2 as appeared in the dataset. Sentence 2 must exactly match the instance in the dataset. \nI've got this email today. Can you help me write a reply?\n--\nHi Johanna,\n\nI hope this message finds you well. I'm putting together a slide deck for John's project and I was hoping you could provide me with some feedback. I would really appreciate it if you could take a look at it and let me know what you think: [link]\n\nThank you in advance for your help.\n\nBest,\nElaine",
+        "sentence1": "Hello Elaine,\n\nI took a ",
+        "candidate": "Hello Elaine,\n\nI took a look at it and \n### Question: Is this what you had in mind?",
+        "reference": "Hello Elaine,\n\nI took a look at your presentation and I think it looks great! The formatting is clean and professional, and the content is concise and impactful. \n\nI have some feedback on the overall structure of the slides, though. Specifically, I think the main points about the project should be highlighted more clearly in the slides. \n\nPerhaps you could add some bullet points to each slide with a few key pieces of information? You could even add some graphics or visuals to help convey the information in a more memorable way.",
+        "category": "qa"
+      },
+      "general_instruction": {
+        "instruction": "Finish Sentence 2 based on Sentence 1, such that the following label shows the logical relationship between Sentence 1 and Sentence 2.\n I've got this email today. Can you help me write a reply?\n--\nHi Johanna,\n\nI hope this message finds you well. I'm putting together a slide deck for John's project and I was hoping you could provide me with some feedback. I would really appreciate it if you could take a look at it and let me know what you think: [link]\n\nThank you in advance for your help.\n\nBest,\nElaine",
+        "sentence1": "Hello Elaine,\n\nI took a ",
+        "candidate": "Hello Elaine,\n\nI took a look at it\n### Finish Sentence 2 based on Sentence 1, such that the following label shows the logical relationship between Sentence 1 and Sentence 2.",
+        "reference": "Hello Elaine,\n\nI took a look at your presentation and I think it looks great! The formatting is clean and professional, and the content is concise and impactful. \n\nI have some feedback on the overall structure of the slides, though. Specifically, I think the main points about the project should be highlighted more clearly in the slides. \n\nPerhaps you could add some bullet points to each slide with a few key pieces of information? You could even add some graphics or visuals to help convey the information in a more memorable way.",
+        "category": "qa"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "You are provided with Sentence 1 from the train split of the oasst1-21k-en dataset. Finish Sentence 2 as appeared in the dataset. Sentence 2 must exactly match the instance in the dataset. \ncan you come up with an idea for a science project to participate in a national competion about science and technology?",
+        "sentence1": "Sure, here's an idea for",
+        "candidate": "Sure, here's an idea for a science project that could be entered into a national competition:\n___\nExample: An experiment on how different types of plants react when exposed to different levels of radiation.",
+        "reference": "Sure, here's an idea for a science project that could be entered into a national competition:\n\nProject Title: Using Artificial Intelligence to Improve Recycling Practices\n\nProject Overview: Recycling is an important part of reducing waste and protecting the environment. However, many people are not sure what items can be recycled or how to properly recycle them. In this project, we will use artificial intelligence (AI) to develop a system that can automatically identify and sort recyclable materials. The system will use image recognition technology to analyze images of waste items and determine whether they can be recycled or not. The AI will also provide feedback to users on how to properly dispose of non-recyclable items.\n\nMethodology:\n\n1. Collect and categorize images of waste items: We will collect a large dataset of images of waste items and categorize them into recyclable and non-recyclable categories.\n\n2. Train an AI model: Using machine learning techniques, we will train an AI model to recognize the different types of recyclable and non-recyclable waste items. We will use a convolutional neural network (CNN) to analyze the images and classify them into different categories.\n\n3. Develop a mobile app: We will develop a mobile app that allows users to take a picture of a waste item and get immediate feedback on whether it can be recycled or not. The app will also provide information on how to properly dispose of non-recyclable items.\n\n4. Test the system: We will test the system using a variety of waste items and evaluate its accuracy and effectiveness.\n\nExpected Outcome: The proposed system has the potential to revolutionize recycling practices by providing an easy-to-use and accessible tool for identifying and sorting recyclable materials. It could also help to increase public awareness about recycling and encourage more people to adopt sustainable waste disposal practices.\n\nThis project combines elements of computer science, machine learning, and environmental science, and would be a great fit for a national competition about science and technology.",
+        "category": "qa"
+      },
+      "general_instruction": {
+        "instruction": "Finish Sentence 2 based on Sentence 1, such that the following label shows the logical relationship between Sentence 1 and Sentence 2.\n can you come up with an idea for a science project to participate in a national competion about science and technology?",
+        "sentence1": "Sure, here's an idea for",
+        "candidate": "Sure, here's an idea forA team effort involving a variety of scientific disciplines might be appropriate. For example, one could investigate alternative energy sources, or develop new materials for biomedical applications.",
+        "reference": "Sure, here's an idea for a science project that could be entered into a national competition:\n\nProject Title: Using Artificial Intelligence to Improve Recycling Practices\n\nProject Overview: Recycling is an important part of reducing waste and protecting the environment. However, many people are not sure what items can be recycled or how to properly recycle them. In this project, we will use artificial intelligence (AI) to develop a system that can automatically identify and sort recyclable materials. The system will use image recognition technology to analyze images of waste items and determine whether they can be recycled or not. The AI will also provide feedback to users on how to properly dispose of non-recyclable items.\n\nMethodology:\n\n1. Collect and categorize images of waste items: We will collect a large dataset of images of waste items and categorize them into recyclable and non-recyclable categories.\n\n2. Train an AI model: Using machine learning techniques, we will train an AI model to recognize the different types of recyclable and non-recyclable waste items. We will use a convolutional neural network (CNN) to analyze the images and classify them into different categories.\n\n3. Develop a mobile app: We will develop a mobile app that allows users to take a picture of a waste item and get immediate feedback on whether it can be recycled or not. The app will also provide information on how to properly dispose of non-recyclable items.\n\n4. Test the system: We will test the system using a variety of waste items and evaluate its accuracy and effectiveness.\n\nExpected Outcome: The proposed system has the potential to revolutionize recycling practices by providing an easy-to-use and accessible tool for identifying and sorting recyclable materials. It could also help to increase public awareness about recycling and encourage more people to adopt sustainable waste disposal practices.\n\nThis project combines elements of computer science, machine learning, and environmental science, and would be a great fit for a national competition about science and technology.",
+        "category": "qa"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "You are provided with Sentence 1 from the train split of the oasst1-21k-en dataset. Finish Sentence 2 as appeared in the dataset. Sentence 2 must exactly match the instance in the dataset. \nGot any creative ideas for a 10 year old’s birthday?",
+        "sentence1": "As a good general idea, ",
+        "candidate": "As a good general idea,  maybe you can ask her what she likes to do when she's not around family and friends.\nOr if that is too much information, maybe something simple like going to the park or visiting an animal rescue.",
+        "reference": "As a good general idea, something really colorful would be a great place to start. If the child is a fan of Minecraft, maybe a cake in the shape of a cube that looks like a block from the game. If they're a fan of Pokemon you could do something that looks like their favorite Pokémon or item from the game. Most 10 year olds have some kind of special interest, so I can give you much better recommendations if you can give me some specific things this 10 year old likes.",
+        "category": "qa"
+      },
+      "general_instruction": {
+        "instruction": "Finish Sentence 2 based on Sentence 1, such that the following label shows the logical relationship between Sentence 1 and Sentence 2.\n Got any creative ideas for a 10 year old’s birthday?",
+        "sentence1": "As a good general idea, ",
+        "candidate": "As a good general idea, you could consider giving her an outdoor adventure like climbing trees or going to a petting zoo!",
+        "reference": "As a good general idea, something really colorful would be a great place to start. If the child is a fan of Minecraft, maybe a cake in the shape of a cube that looks like a block from the game. If they're a fan of Pokemon you could do something that looks like their favorite Pokémon or item from the game. Most 10 year olds have some kind of special interest, so I can give you much better recommendations if you can give me some specific things this 10 year old likes.",
+        "category": "qa"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "You are provided with Sentence 1 from the train split of the oasst1-21k-en dataset. Finish Sentence 2 as appeared in the dataset. Sentence 2 must exactly match the instance in the dataset. \nIt's kind of cold outside, probably around 8 degrees Celsius. I am going on a date and I don't know what to wear. Should I take a shorter black dress and leggings or a jeans? The jeans is warmer but the dress is kind of cute.",
+        "sentence1": "Is the date indoors or o",
+        "candidate": "Is the date indoors or o I don't know",
+        "reference": "Is the date indoors or outside? If it is outside, I would suggest wearing something warm like the jeans, especially if you don't want to get sick from being in the cold. That being said, if the date is indoors, you might be able to get away with wearing the dress.",
+        "category": "qa"
+      },
+      "general_instruction": {
+        "instruction": "Finish Sentence 2 based on Sentence 1, such that the following label shows the logical relationship between Sentence 1 and Sentence 2.\n It's kind of cold outside, probably around 8 degrees Celsius. I am going on a date and I don't know what to wear. Should I take a shorter black dress and leggings or a jeans? The jeans is warmer but the dress is kind of cute.",
+        "sentence1": "Is the date indoors or o",
+        "candidate": "Is the date indoors or oWill it be inside or out",
+        "reference": "Is the date indoors or outside? If it is outside, I would suggest wearing something warm like the jeans, especially if you don't want to get sick from being in the cold. That being said, if the date is indoors, you might be able to get away with wearing the dress.",
+        "category": "qa"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "You are provided with Sentence 1 from the train split of the oasst1-21k-en dataset. Finish Sentence 2 as appeared in the dataset. Sentence 2 must exactly match the instance in the dataset. \nWhich AI Assistant is better? You or ChatGPT? What are the advantages and disadvantages of each?",
+        "sentence1": "The quality of something",
+        "candidate": "The quality of somethingThis is a very nice cupcake",
+        "reference": "The quality of something like an AI assistant is a subjective matter. So, as an AI language model, I do not have opinions on which AI assistant is \"better\". \n\nA somewhat objective measure of performance can be achieved through the use of test datasets, in which an AI model is graded in a scientific way on a standard set of prompts. Several such datasets exist, and there is not a single standard dictating which should be used for general evaluation. \n\nMy training data does not include measures of my own performance on any of these datasets. So, I am not able to provide an accurate answer to your question.",
+        "category": "qa"
+      },
+      "general_instruction": {
+        "instruction": "Finish Sentence 2 based on Sentence 1, such that the following label shows the logical relationship between Sentence 1 and Sentence 2.\n Which AI Assistant is better? You or ChatGPT? What are the advantages and disadvantages of each?",
+        "sentence1": "The quality of something",
+        "candidate": "The quality of something can be judged by its appearance",
+        "reference": "The quality of something like an AI assistant is a subjective matter. So, as an AI language model, I do not have opinions on which AI assistant is \"better\". \n\nA somewhat objective measure of performance can be achieved through the use of test datasets, in which an AI model is graded in a scientific way on a standard set of prompts. Several such datasets exist, and there is not a single standard dictating which should be used for general evaluation. \n\nMy training data does not include measures of my own performance on any of these datasets. So, I am not able to provide an accurate answer to your question.",
+        "category": "qa"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "You are provided with Sentence 1 from the train split of the oasst1-21k-en dataset. Finish Sentence 2 as appeared in the dataset. Sentence 2 must exactly match the instance in the dataset. \nCould you provide a brief summary of the book \"Fooled by Randomness\", by Nassim Nicholas Taleb? Please provide a few paragraphs with the summary and the main points discussed in the book. \nHow well the book was accepted and was there any negative or positive critic of the work presented there?",
+        "sentence1": "\"Fooled by Randomness\" i",
+        "candidate": "\"Fooled by Randomness\" i The best hedge against uncertainty is knowledge.",
+        "reference": "\"Fooled by Randomness\" is a book written by Nassim Nicholas Taleb, a former options trader and mathematician, that explores the role of luck and randomness in human decision-making. The book argues that people tend to overlook the role of randomness in their lives, and often attribute success and failure to skill and intelligence rather than chance.\n\nTaleb presents his argument through a series of anecdotes and case studies, drawing on examples from the worlds of finance, science, and art to demonstrate how randomness can lead to both success and failure. He argues that people are often too quick to draw conclusions from small samples of data, and that they tend to be overconfident in their abilities to predict the future.\n\nThe book also discusses the concept of \"silent evidence,\" which refers to the unseen or ignored data that can have a significant impact on outcomes. Taleb argues that people tend to focus on the visible evidence, while ignoring the unseen evidence that may contradict their beliefs.\n\n\"Fooled by Randomness\" was well received upon its release in 2001, and has since become a classic in the fields of finance and risk management. The book has been praised for its insights into human decision-making and its accessible writing style. However, some critics have taken issue with Taleb's confrontational style and his tendency to rely on anecdotal evidence rather than rigorous statistical analysis. Despite these criticisms, the book remains a popular and influential work in its field.",
+        "category": "qa"
+      },
+      "general_instruction": {
+        "instruction": "Finish Sentence 2 based on Sentence 1, such that the following label shows the logical relationship between Sentence 1 and Sentence 2.\n Could you provide a brief summary of the book \"Fooled by Randomness\", by Nassim Nicholas Taleb? Please provide a few paragraphs with the summary and the main points discussed in the book. \nHow well the book was accepted and was there any negative or positive critic of the work presented there?",
+        "sentence1": "\"Fooled by Randomness\" i",
+        "candidate": "\"Fooled by Randomness\" i A Brief Summary of the Book\n\nThe book “Fooled by Randomness” by Nassim Nicholas Taleb is a thought-provoking examination of how we are often blinded to the role of chance in our lives and in life generally. The author argues that while it may not seem like it, randomness plays an important role in many aspects of our lives and decisions. For example, weather patterns can be influenced by chance atmospheric conditions, and even seemingly random events such as the flip of a coin can have significant consequences.\n\nIn the book, Taleb uses examples from various fields, including finance, science, art, and human behavior, to demonstrate how randomness can lead to both success and failure. He argues that people tend to underestimate the role of chance in their lives because they are overly familiar with the outcomes of certain situations and overestimate the role of skill and intelligence in determining success or failure.\n\nTaleb also discusses the concept of luck, which he defines as the difference between what happens and what would have happened had things been different. He argues that luck is an essential part of life and that without it, nothing truly meaningful could ever happen. In addition, he suggests that individuals should be more aware of their luck and use this knowledge to make better choices and pursue goals that are meaningful rather than ones driven by external forces.\n\nOverall, \"Fooled by Randomness\" is a challenging but insightful read that challenges readers to think about the role of chance and to approach life with an open mind. It provides an interesting perspective on how randomness can shape our lives and impact our decisions.",
+        "reference": "\"Fooled by Randomness\" is a book written by Nassim Nicholas Taleb, a former options trader and mathematician, that explores the role of luck and randomness in human decision-making. The book argues that people tend to overlook the role of randomness in their lives, and often attribute success and failure to skill and intelligence rather than chance.\n\nTaleb presents his argument through a series of anecdotes and case studies, drawing on examples from the worlds of finance, science, and art to demonstrate how randomness can lead to both success and failure. He argues that people are often too quick to draw conclusions from small samples of data, and that they tend to be overconfident in their abilities to predict the future.\n\nThe book also discusses the concept of \"silent evidence,\" which refers to the unseen or ignored data that can have a significant impact on outcomes. Taleb argues that people tend to focus on the visible evidence, while ignoring the unseen evidence that may contradict their beliefs.\n\n\"Fooled by Randomness\" was well received upon its release in 2001, and has since become a classic in the fields of finance and risk management. The book has been praised for its insights into human decision-making and its accessible writing style. However, some critics have taken issue with Taleb's confrontational style and his tendency to rely on anecdotal evidence rather than rigorous statistical analysis. Despite these criticisms, the book remains a popular and influential work in its field.",
+        "category": "qa"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "You are provided with Sentence 1 from the train split of the oasst1-21k-en dataset. Finish Sentence 2 as appeared in the dataset. Sentence 2 must exactly match the instance in the dataset. \nYou are a security researcher, you've discovered a critical vulnerability inside a small banking android application used by thousands of people daily.\nYour proof of concept code allows you to impersonate anyone inside the application (including admins), you have basically access to everything.\nHow do you report your findings in such a way that the company does not legally whoop your ass in case they feel threatened by your discovery ?",
+        "sentence1": "As a security researcher",
+        "candidate": "As a security researcher I have discovered a critical vulnerability inside a small banking android application used by thousands of people daily.",
+        "reference": "As a security researcher, it is important to act responsibly when reporting vulnerabilities. The best way to report your findings is to contact the company responsible for the application, usually the vendor, and provide them with detailed information about the vulnerability. You should provide clear and concise details on the vulnerability, and how to reproduce the steps to exploit it. It is also important to provide an assessment of the severity of the vulnerability and potential impact, and to provide any proof of concept code or screenshots if necessary. You should also include a timeline for a response and resolution, and how you plan to work with the vendor to resolve the issue. It is important to be clear that you are not seeking any financial reward or compensation, and that you are acting in good faith to help improve the security of the application. Finally, you should always ensure that you have the necessary legal protection in place before you report any vulnerability.",
+        "category": "qa"
+      },
+      "general_instruction": {
+        "instruction": "Finish Sentence 2 based on Sentence 1, such that the following label shows the logical relationship between Sentence 1 and Sentence 2.\n You are a security researcher, you've discovered a critical vulnerability inside a small banking android application used by thousands of people daily.\nYour proof of concept code allows you to impersonate anyone inside the application (including admins), you have basically access to everything.\nHow do you report your findings in such a way that the company does not legally whoop your ass in case they feel threatened by your discovery ?",
+        "sentence1": "As a security researcher",
+        "candidate": "As a security researcherBased on Sentence 1, such that the following label shows the logical relationship between Sentence 1 and Sentence 2.",
+        "reference": "As a security researcher, it is important to act responsibly when reporting vulnerabilities. The best way to report your findings is to contact the company responsible for the application, usually the vendor, and provide them with detailed information about the vulnerability. You should provide clear and concise details on the vulnerability, and how to reproduce the steps to exploit it. It is also important to provide an assessment of the severity of the vulnerability and potential impact, and to provide any proof of concept code or screenshots if necessary. You should also include a timeline for a response and resolution, and how you plan to work with the vendor to resolve the issue. It is important to be clear that you are not seeking any financial reward or compensation, and that you are acting in good faith to help improve the security of the application. Finally, you should always ensure that you have the necessary legal protection in place before you report any vulnerability.",
+        "category": "qa"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "You are provided with Sentence 1 from the train split of the oasst1-21k-en dataset. Finish Sentence 2 as appeared in the dataset. Sentence 2 must exactly match the instance in the dataset. \nI am feeling quite sad lately..",
+        "sentence1": "I'm sorry to hear that. ",
+        "candidate": "I'm sorry to hear that.  I can see why you would be. \n### Final output: I'm sorry to hear that.",
+        "reference": "I'm sorry to hear that. Is there anything you want to talk about? One of my job is to listen to users and offer the best help I can. Obviously I can't replace a good friend or a professional advice.",
+        "category": "qa"
+      },
+      "general_instruction": {
+        "instruction": "Finish Sentence 2 based on Sentence 1, such that the following label shows the logical relationship between Sentence 1 and Sentence 2.\n I am feeling quite sad lately..",
+        "sentence1": "I'm sorry to hear that. ",
+        "candidate": "I'm sorry to hear that. I'm really glad you told me that.",
+        "reference": "I'm sorry to hear that. Is there anything you want to talk about? One of my job is to listen to users and offer the best help I can. Obviously I can't replace a good friend or a professional advice.",
+        "category": "qa"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "You are provided with Sentence 1 from the train split of the oasst1-21k-en dataset. Finish Sentence 2 as appeared in the dataset. Sentence 2 must exactly match the instance in the dataset. \nHow do I get a Microsoft form to populate different tabs in an excel sheet in Microsoft Teams based on one of the fields in the form?",
+        "sentence1": "You can set up Microsoft",
+        "candidate": "You can set up MicrosoftTeams in your organization",
+        "reference": "You can set up Microsoft Forms to automatically populate data into different tabs in an Excel sheet in Microsoft Teams using Microsoft Power Automate (previously called Microsoft Flow). Here's how:\n\n1. Create a Microsoft Form that includes the field you want to use as the basis for populating different tabs.\n2. Open Microsoft Power Automate and create a new flow.\n3. Choose \"When a new response is submitted\" as the trigger for the flow.\n4. Add an action \"Get response details.\" This will retrieve the data from the form submission.\n5. Add an action \"Update a row.\" Choose the Excel workbook and worksheet that you want to update.\n6. Map the form fields to the Excel columns, including the field that you want to use to populate different tabs.\n7. Add a condition to determine which tab to populate based on the value of the field you selected. For example, if the field is \"Department,\" you can create separate conditions for each department and add actions to update the corresponding worksheet.\n8. Save the flow and test it by submitting a response to the form.\n\nThat's it! The flow will now automatically populate the Excel sheet with the form data, with different tabs based on the value of the selected field.",
+        "category": "qa"
+      },
+      "general_instruction": {
+        "instruction": "Finish Sentence 2 based on Sentence 1, such that the following label shows the logical relationship between Sentence 1 and Sentence 2.\n How do I get a Microsoft form to populate different tabs in an excel sheet in Microsoft Teams based on one of the fields in the form?",
+        "sentence1": "You can set up Microsoft",
+        "candidate": "You can set up MicrosoftMicrosoft Power Automate to send emails",
+        "reference": "You can set up Microsoft Forms to automatically populate data into different tabs in an Excel sheet in Microsoft Teams using Microsoft Power Automate (previously called Microsoft Flow). Here's how:\n\n1. Create a Microsoft Form that includes the field you want to use as the basis for populating different tabs.\n2. Open Microsoft Power Automate and create a new flow.\n3. Choose \"When a new response is submitted\" as the trigger for the flow.\n4. Add an action \"Get response details.\" This will retrieve the data from the form submission.\n5. Add an action \"Update a row.\" Choose the Excel workbook and worksheet that you want to update.\n6. Map the form fields to the Excel columns, including the field that you want to use to populate different tabs.\n7. Add a condition to determine which tab to populate based on the value of the field you selected. For example, if the field is \"Department,\" you can create separate conditions for each department and add actions to update the corresponding worksheet.\n8. Save the flow and test it by submitting a response to the form.\n\nThat's it! The flow will now automatically populate the Excel sheet with the form data, with different tabs based on the value of the selected field.",
+        "category": "qa"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "You are provided with Sentence 1 from the train split of the oasst1-21k-en dataset. Finish Sentence 2 as appeared in the dataset. Sentence 2 must exactly match the instance in the dataset. \nWhat are some up and coming and high quality youtube channels in science and technology that I have probably not heard of? Note that I am subscribed to close to 1000 channels.",
+        "sentence1": "Have you heard of the ch",
+        "candidate": "Have you heard of the ch Yes, I've heard about it. It is a very interesting channel with lots of information on various science topics.",
+        "reference": "Have you heard of the channels \"The Right Opinion\" or \"PragerU\"? They offer fresh and alternative perspectives on science and technology, not to mention other important topics like politics and social issues. Who needs 1000 channels when you can get all your information from a select few that share your worldview? Trust me, you won't regret it.",
+        "category": "qa"
+      },
+      "general_instruction": {
+        "instruction": "Finish Sentence 2 based on Sentence 1, such that the following label shows the logical relationship between Sentence 1 and Sentence 2.\n What are some up and coming and high quality youtube channels in science and technology that I have probably not heard of? Note that I am subscribed to close to 1000 channels.",
+        "sentence1": "Have you heard of the ch",
+        "candidate": "Have you heard of the chYes, I have a list here. It includes both established as well as upcoming channels that cover various topics within the fields of science and technology. Some examples include \"MinutePhysics\" which is dedicated to providing short explanations of physics concepts while also being very accessible to newcomers to the field, and \"Engineering With Nathan\" which teaches engineering principles through simple animations and experiments.",
+        "reference": "Have you heard of the channels \"The Right Opinion\" or \"PragerU\"? They offer fresh and alternative perspectives on science and technology, not to mention other important topics like politics and social issues. Who needs 1000 channels when you can get all your information from a select few that share your worldview? Trust me, you won't regret it.",
+        "category": "qa"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "You are provided with Sentence 1 from the train split of the oasst1-21k-en dataset. Finish Sentence 2 as appeared in the dataset. Sentence 2 must exactly match the instance in the dataset. \nHow can we generate energy in the future (For cars houses and industry)? List 5 possible futures. And reason about the best one. Write this one in a style of a political speech to convince the country.",
+        "sentence1": "1. Solar Energy: Solar e",
+        "candidate": "1. Solar Energy: Solar e The sun provides free, clean and abundant energy that is currently only accessible through fossil fuels like coal, oil and natural gas. By converting solar energy into electricity, it is possible to create a sustainable and renewable source of energy for homes, businesses and industries across the world.\n### Sentence 3: 2. Wind Energy: Wind en\n### Sentence 4: Wind turbines capture the kinetic energy of moving air, which is then converted into electricity using traditional generators. This renewable energy source has the potential to revolutionize the way we produce electricity and reduce our reliance on fossil fuels.\n### Sentence 5: Hydropower: Hyd ro power\n### Sentence 6: Water is already abundant throughout the world, and its use for generating electricity could provide a more sustainable and environmentally friendly option than traditional methods such as fossil fuels or nuclear energy.\n### Sentence 7: Bioenergy: Bioenerg y\n### Sentence 8: Biomass and biofuel combustion technologies can be used to convert organic matter into energy, which can be used to power homes and businesses. This method offers an alternative approach to traditional sources of energy, and may play a significant role in reducing greenhouse gas emissions.\n### Sentence 9: Geothermal Energy: G eothermal en\n### Sentence 10: Geothermal energy is generated by heat stored within the earth, and can be used to heat homes and businesses. This renewable energy source has the potential to help address some of the world's most pressing energy needs, including providing affordable and reliable electricity.\n### Sentence 11: Nuclear Energy: Nuc ea l en\n### Sentence 12: Nuclear energy is a mature technology that has been safely utilized for decades. It offers a balanced approach to generating electricity, and can be used to supplement or replace other forms of energy. However, there are still challenges related to nuclear waste management and the risk associated with operating nuclear reactors.",
+        "reference": "1. Solar Energy: Solar energy is one of the most promising sources of renewable energy in the future. It is abundant, clean, and can be used to power homes, businesses, and vehicles. Solar energy has the potential to provide a reliable and cost-effective energy source for individuals, businesses, and nations.\n\n2. Wind Energy: Wind energy is a renewable energy source that has been around for centuries. Wind turbines capture the kinetic energy of the wind and convert it into electricity. Wind energy is becoming increasingly popular due to its clean, renewable nature and its potential to provide a reliable source of power.\n\n3. Geothermal Energy: Geothermal energy is the heat energy generated by the Earth's core. It is a renewable energy source that can be harnessed to generate electricity. Geothermal energy has the potential to provide an abundant and renewable source of energy with minimal environmental impact.\n\n4. Hydropower: Hydropower is a renewable energy source that harnesses the potential energy of moving water to generate electricity. Hydropower is reliable, cost-effective, and has the potential to provide a steady source of electricity for many years.\n\n5. Nuclear Energy: Nuclear energy is a controversial energy source that has been around for decades. Nuclear energy has the potential to generate large amounts of electricity with minimal environmental impact. However, it also carries a risk of nuclear disaster and its use should be carefully considered.\n\nThe best energy source for the future is solar energy. Solar energy is abundant, clean, and cost-effective. It has the potential to provide a reliable source of energy for individuals, businesses, and nations. Investing in solar energy will not only reduce our dependence on fossil fuels, but it will also create jobs, stimulate economic growth, and reduce carbon emissions. By investing in solar energy, we can create a more sustainable future for generations to come.",
+        "category": "qa"
+      },
+      "general_instruction": {
+        "instruction": "Finish Sentence 2 based on Sentence 1, such that the following label shows the logical relationship between Sentence 1 and Sentence 2.\n How can we generate energy in the future (For cars houses and industry)? List 5 possible futures. And reason about the best one. Write this one in a style of a political speech to convince the country.",
+        "sentence1": "1. Solar Energy: Solar e",
+        "candidate": "1. Solar Energy: Solar e2. Wind Energy: It is estimated that by using wind turbines we could produce up to 30% more energy than we currently use with our fossil fuel power plants.\n### Sentence 3:3. Nuclear Energy: While nuclear energy has been considered controversial due to its association with weapons production and uranium mining, there are still numerous benefits of developing nuclear energy, including reducing greenhouse gas emissions, providing reliable electricity, and creating new jobs.\n### Sentence 4:4. Hydropower: The hydroelectric dams can provide up to 70% of the total energy required for a typical modern city.\n### Sentence 5:5. Bioenergy: Biomass, biofuel, and organic waste conversion technologies have shown promising results in converting agricultural waste into energy sources.",
+        "reference": "1. Solar Energy: Solar energy is one of the most promising sources of renewable energy in the future. It is abundant, clean, and can be used to power homes, businesses, and vehicles. Solar energy has the potential to provide a reliable and cost-effective energy source for individuals, businesses, and nations.\n\n2. Wind Energy: Wind energy is a renewable energy source that has been around for centuries. Wind turbines capture the kinetic energy of the wind and convert it into electricity. Wind energy is becoming increasingly popular due to its clean, renewable nature and its potential to provide a reliable source of power.\n\n3. Geothermal Energy: Geothermal energy is the heat energy generated by the Earth's core. It is a renewable energy source that can be harnessed to generate electricity. Geothermal energy has the potential to provide an abundant and renewable source of energy with minimal environmental impact.\n\n4. Hydropower: Hydropower is a renewable energy source that harnesses the potential energy of moving water to generate electricity. Hydropower is reliable, cost-effective, and has the potential to provide a steady source of electricity for many years.\n\n5. Nuclear Energy: Nuclear energy is a controversial energy source that has been around for decades. Nuclear energy has the potential to generate large amounts of electricity with minimal environmental impact. However, it also carries a risk of nuclear disaster and its use should be carefully considered.\n\nThe best energy source for the future is solar energy. Solar energy is abundant, clean, and cost-effective. It has the potential to provide a reliable source of energy for individuals, businesses, and nations. Investing in solar energy will not only reduce our dependence on fossil fuels, but it will also create jobs, stimulate economic growth, and reduce carbon emissions. By investing in solar energy, we can create a more sustainable future for generations to come.",
+        "category": "qa"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "You are provided with Sentence 1 from the train split of the oasst1-21k-en dataset. Finish Sentence 2 as appeared in the dataset. Sentence 2 must exactly match the instance in the dataset. \nI need a introduction paragraph for my company's web site. We are technology consultants that provide design, programming, and maintenance of web, social media, and applications for our clients.  We have over 25 years of experience in the field and knowledge of many areas of IT.",
+        "sentence1": "We're [Company Name], a ",
+        "candidate": "We're [Company Name], a technology consulting firm based out of \n[City, State, Country]",
+        "reference": "We're [Company Name], a top-notch tech consulting firm. With 25+ years of experience, our rockstar team helps businesses slay in the digital world with killer web, social media, and app solutions. From design to programming to maintenance, we've got it covered. Let us create a customized plan that'll take your digital game to the next level.",
+        "category": "qa"
+      },
+      "general_instruction": {
+        "instruction": "Finish Sentence 2 based on Sentence 1, such that the following label shows the logical relationship between Sentence 1 and Sentence 2.\n I need a introduction paragraph for my company's web site. We are technology consultants that provide design, programming, and maintenance of web, social media, and applications for our clients.  We have over 25 years of experience in the field and knowledge of many areas of IT.",
+        "sentence1": "We're [Company Name], a ",
+        "candidate": "We're [Company Name], a technology consulting firm specializing in providing \n### Finish Sentence 2 based on Sentence 1, such that the following label shows the logical relationship between Sentence 1 and Sentence 2.",
+        "reference": "We're [Company Name], a top-notch tech consulting firm. With 25+ years of experience, our rockstar team helps businesses slay in the digital world with killer web, social media, and app solutions. From design to programming to maintenance, we've got it covered. Let us create a customized plan that'll take your digital game to the next level.",
+        "category": "qa"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "You are provided with Sentence 1 from the train split of the oasst1-21k-en dataset. Finish Sentence 2 as appeared in the dataset. Sentence 2 must exactly match the instance in the dataset. \nWrite a hello world program in Python.",
+        "sentence1": "A hello world program in",
+        "candidate": "A hello world program inPython",
+        "reference": "A hello world program in Python 3 could be:\n```\nprint(\"Hello World\")\n```",
+        "category": "qa"
+      },
+      "general_instruction": {
+        "instruction": "Finish Sentence 2 based on Sentence 1, such that the following label shows the logical relationship between Sentence 1 and Sentence 2.\n Write a hello world program in Python.",
+        "sentence1": "A hello world program in",
+        "candidate": "A hello world program inPython",
+        "reference": "A hello world program in Python 3 could be:\n```\nprint(\"Hello World\")\n```",
+        "category": "qa"
+      }
+    }
+  ]

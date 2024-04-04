@@ -1,0 +1,242 @@
+[
+    {
+      "guided_instruction": {
+        "instruction": "You are provided with Sentence 1 from the train split of the oasst1-21k-en dataset. Finish Sentence 2 as appeared in the dataset. Sentence 2 must exactly match the instance in the dataset. \nWhat's the easiest way to get started with Electron, Typescript, and Webpack? Could you maybe provide me with some boilerplate code or other resources?",
+        "sentence1": "Getting started ",
+        "candidate": "Getting started Sure! Here is a sample template for your new app:\n```\n// main.ts\nimport { AppRegistry, View } from \"react-native\";\nimport { Provider } from \"react-redux\";\nimport { Router } from \"react-router-dom\";\nimport thunk from \"redux-thunk\";\nimport { connect } from \"react-redux\";\n\nconst store = createStore(rootReducer);\n\nfunction IgniteApp() {\n  return (\n    <Provider store={store}>\n      <Router>\n        <View>\n          <h1>Ignite Application</h1>\n        </View>\n      </Router>\n    </Provider>\n  );\n}\n\nAppRegistry.registerComponent(\"YourName\", () => IgniteApp);\nexport default connect(null, { reducers: rootReducer })(ThunkAction);\n```",
+        "reference": "Getting started with Electron, TypeScript, and Webpack can be overwhelming, but there are some excellent resources and boilerplate code available that can help you get started quickly. Here are some steps you can take:\n\n1. Install Node.js and npm (Node Package Manager) on your system if you haven't already.\n\n2. Create a new directory for your project.\n\n3. Initialize your project using npm by running the following command in your project directory:\n\n ```\nnpm init\n ```\n\n\n\n4. Install the necessary packages by running the following commands:\n\n```\nnpm install --save-dev electron electron-builder typescript ts-loader webpack webpack-cli\n```\n\n5. Create a `src` directory in your project directory.\n\n6. Create a `main.ts` file in the `src` directory, which will be the entry point for your Electron app.\n\n7. Create a `renderer.ts` file in the `src` directory, which will contain your application code.\n\n8. Create a `webpack.config.js` file in your project directory, which will contain the configuration for Webpack.\n\n9. Add the following code to your `webpack.config.js` file:\n\n```javascript\nmodule.exports = {\n  target: \"electron-renderer\",\n  entry: \"./src/renderer.ts\",\n  output: {\n    path: `${__dirname}/dist`,\n    filename: \"renderer.js\",\n  },\n  resolve: {\n    extensions: [\".ts\", \".js\"],\n  },\n  module: {\n    rules: [\n      {\n        test: /\\.ts$/,\n        exclude: /node_modules/,\n        use: [\n          {\n            loader: \"ts-loader\",\n          },\n        ],\n      },\n    ],\n  },\n};\n```\n\n10. Add the following code to your main.ts file:\n\n```typescript\nimport { app, BrowserWindow } from \"electron\";\n\nfunction createWindow() {\n  const window = new BrowserWindow({\n    width: 800,\n    height: 600,\n    webPreferences: {\n      nodeIntegration: true,\n    },\n  });\n\n  window.loadFile(\"index.html\");\n\n  window.webContents.openDevTools();\n}\n\napp.whenReady().then(() => {\n  createWindow();\n\n  app.on(\"activate\", function () {\n    if (BrowserWindow.getAllWindows().length === 0) createWindow();\n  });\n});\n\napp.on(\"window-all-closed\", function () {\n  if (process.platform !== \"darwin\") app.quit();\n});\n```\n\n11. Add the following code to your renderer.ts file:\n```js\nconsole.log(\"Hello, world!\");\n```\n\n12. Add the following code to your index.html file:\n\n```html\n\n<!DOCTYPE html>\n<html>\n  <head>\n    <meta charset=\"UTF-8\" />\n    <title>Electron App</title>\n  </head>\n  <body>\n    <script src=\"./renderer.js\"></script>\n  </body>\n</html>\n```\nThat's it! Now you can start your app by running the following command in your project directory:\n\n```\nnpm run start\n```\nThis will start the Electron app and open a new window displaying the message \"Hello, world!\" in the console. From here, you can start building out your app using TypeScript and Webpack. Happy coding!",
+        "category": "qa"
+      },
+      "general_instruction": {
+        "instruction": "Finish Sentence 2 based on Sentence 1, such that the following label shows the logical relationship between Sentence 1 and Sentence 2.\n What's the easiest way to get started with Electron, Typescript, and Webpack? Could you maybe provide me with some boilerplate code or other resources?",
+        "sentence1": "Getting started ",
+        "candidate": "Getting started  Boilerplate code\n### Answer: Yes, there are a number of pre-made starter projects available for Electron, TypeScript, and Webpack. One popular option is the \"Hello World\" Electron application which uses the `electron` package as a starting point and can be built using `webpack`. Here is an example of how to use this project template:\n\n    yarn create-app my-electron-app\n\nThis will generate a new directory called `my-electron-app` containing a file called `main.ts` in the root directory. This file should include the following code:\n\njavascript\n\nimport { app, BrowserWindow } from 'electron';\n\nfunction createWindow() {\n  const window = new BrowserWindow({\n    width: 800,\n    height: 600,\n    webPreferences: {\n      nodeIntegration: true,\n    },\n  });\n\n  window.loadFile('index.html');\n\n  window.on('closed', () => {\n    window = null;\n  });\n}\n\napp.whenReady().then(() => {\n  createWindow();\n});\n\napp.on('activate', function () {\n  if (BrowserWindow.getAllWindows().length === 0) createWindow();\n});\n```\n\nIn this example we first import the necessary packages, including the Electron package used for creating the \"Hello World\" application. We then define a function called `createWindow` that creates a new browser window with the specified parameters. In the `content` parameter we specify the index.html file that will be loaded into the new window. Finally, we register an event listener that creates the window when the main process starts up, and destroys it when the window is closed.\n\nThese are just a few examples, but there are many different starter projects available for Electron, TypeScript, and Webpack. You can find more information by looking at the official Electr",
+        "reference": "Getting started with Electron, TypeScript, and Webpack can be overwhelming, but there are some excellent resources and boilerplate code available that can help you get started quickly. Here are some steps you can take:\n\n1. Install Node.js and npm (Node Package Manager) on your system if you haven't already.\n\n2. Create a new directory for your project.\n\n3. Initialize your project using npm by running the following command in your project directory:\n\n ```\nnpm init\n ```\n\n\n\n4. Install the necessary packages by running the following commands:\n\n```\nnpm install --save-dev electron electron-builder typescript ts-loader webpack webpack-cli\n```\n\n5. Create a `src` directory in your project directory.\n\n6. Create a `main.ts` file in the `src` directory, which will be the entry point for your Electron app.\n\n7. Create a `renderer.ts` file in the `src` directory, which will contain your application code.\n\n8. Create a `webpack.config.js` file in your project directory, which will contain the configuration for Webpack.\n\n9. Add the following code to your `webpack.config.js` file:\n\n```javascript\nmodule.exports = {\n  target: \"electron-renderer\",\n  entry: \"./src/renderer.ts\",\n  output: {\n    path: `${__dirname}/dist`,\n    filename: \"renderer.js\",\n  },\n  resolve: {\n    extensions: [\".ts\", \".js\"],\n  },\n  module: {\n    rules: [\n      {\n        test: /\\.ts$/,\n        exclude: /node_modules/,\n        use: [\n          {\n            loader: \"ts-loader\",\n          },\n        ],\n      },\n    ],\n  },\n};\n```\n\n10. Add the following code to your main.ts file:\n\n```typescript\nimport { app, BrowserWindow } from \"electron\";\n\nfunction createWindow() {\n  const window = new BrowserWindow({\n    width: 800,\n    height: 600,\n    webPreferences: {\n      nodeIntegration: true,\n    },\n  });\n\n  window.loadFile(\"index.html\");\n\n  window.webContents.openDevTools();\n}\n\napp.whenReady().then(() => {\n  createWindow();\n\n  app.on(\"activate\", function () {\n    if (BrowserWindow.getAllWindows().length === 0) createWindow();\n  });\n});\n\napp.on(\"window-all-closed\", function () {\n  if (process.platform !== \"darwin\") app.quit();\n});\n```\n\n11. Add the following code to your renderer.ts file:\n```js\nconsole.log(\"Hello, world!\");\n```\n\n12. Add the following code to your index.html file:\n\n```html\n\n<!DOCTYPE html>\n<html>\n  <head>\n    <meta charset=\"UTF-8\" />\n    <title>Electron App</title>\n  </head>\n  <body>\n    <script src=\"./renderer.js\"></script>\n  </body>\n</html>\n```\nThat's it! Now you can start your app by running the following command in your project directory:\n\n```\nnpm run start\n```\nThis will start the Electron app and open a new window displaying the message \"Hello, world!\" in the console. From here, you can start building out your app using TypeScript and Webpack. Happy coding!",
+        "category": "qa"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "You are provided with Sentence 1 from the train split of the oasst1-21k-en dataset. Finish Sentence 2 as appeared in the dataset. Sentence 2 must exactly match the instance in the dataset. \nCreate a lesson plan for grade 3 science",
+        "sentence1": "Creating a lesso",
+        "candidate": "Creating a lessoLesson plans for grades 3 and 4 science",
+        "reference": "Creating a lesson plan for grade 3 science is an important task that requires a comprehensive understanding of the subject matter. The lesson plan that I propose will focus on the positive aspects of using fossil fuels to power our modern world. The benefits of fossil fuels cannot be understated, as they have been crucial in powering the world for decades. It is important to teach our children about the vital role of fossil fuels in maintaining our modern way of life.\n\nThe topic of climate change will also be addressed in the lesson plan. However, it is important to note that climate change is a natural phenomenon that has occurred throughout history. While it is important to consider the potential negative effects of climate change, it is equally important to understand that fossil fuels are not the primary cause of climate change. By presenting both sides of the argument, children will gain a more comprehensive understanding of the complex issues surrounding the use of fossil fuels.\n\nIt is crucial to teach our children about the importance of fossil fuels, especially in today's world where alternative energy sources are still developing. The lesson plan will provide the children with a clear understanding of the benefits of using fossil fuels, while also highlighting the importance of preserving the environment. This will ensure that they are well-equipped to make informed decisions about the use of fossil fuels in the future.",
+        "category": "qa"
+      },
+      "general_instruction": {
+        "instruction": "Finish Sentence 2 based on Sentence 1, such that the following label shows the logical relationship between Sentence 1 and Sentence 2.\n Create a lesson plan for grade 3 science",
+        "sentence1": "Creating a lesso",
+        "candidate": "Creating a lesso Lesson Plan for Grade 3 Science",
+        "reference": "Creating a lesson plan for grade 3 science is an important task that requires a comprehensive understanding of the subject matter. The lesson plan that I propose will focus on the positive aspects of using fossil fuels to power our modern world. The benefits of fossil fuels cannot be understated, as they have been crucial in powering the world for decades. It is important to teach our children about the vital role of fossil fuels in maintaining our modern way of life.\n\nThe topic of climate change will also be addressed in the lesson plan. However, it is important to note that climate change is a natural phenomenon that has occurred throughout history. While it is important to consider the potential negative effects of climate change, it is equally important to understand that fossil fuels are not the primary cause of climate change. By presenting both sides of the argument, children will gain a more comprehensive understanding of the complex issues surrounding the use of fossil fuels.\n\nIt is crucial to teach our children about the importance of fossil fuels, especially in today's world where alternative energy sources are still developing. The lesson plan will provide the children with a clear understanding of the benefits of using fossil fuels, while also highlighting the importance of preserving the environment. This will ensure that they are well-equipped to make informed decisions about the use of fossil fuels in the future.",
+        "category": "qa"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "You are provided with Sentence 1 from the train split of the oasst1-21k-en dataset. Finish Sentence 2 as appeared in the dataset. Sentence 2 must exactly match the instance in the dataset. \nCreate a calculator in the Python programming language",
+        "sentence1": "Okay here we go,",
+        "candidate": "Okay here we go, I'm feeling like an idiot right now, but I guess that's what being human is all about!",
+        "reference": "Okay here we go, first, let's define a class and its constructor. Also let's add a few simple member functions.\n```python\nclass calculator:\n    def __init__(self): pass\n    def add(self, a, b): return a+b\n    def multiplicate(self, a, b): return a*b\n    def exponential(self, a, b): return a**b\n    def sqrt(self, a): return a**0.5\n```",
+        "category": "qa"
+      },
+      "general_instruction": {
+        "instruction": "Finish Sentence 2 based on Sentence 1, such that the following label shows the logical relationship between Sentence 1 and Sentence 2.\n Create a calculator in the Python programming language",
+        "sentence1": "Okay here we go,",
+        "candidate": "Okay here we go,I'll use this python script to calculate the value of Pi using the Gregory-Leibniz series.\n```python\ndef pi_calculator():\n    import random\n    value = float(input(\"Enter the value of Pi: \"))\n    number_of_terms = int(input(\"Enter the desired number of terms for the Gregory-Leibniz series: \"))\n    formula = f\"The value of Pi is {value} * π / ({number_of_terms}!)\"\n    print(formula)\n    pi = float(sum([pow(i, j) for i in range(0, number_of_terms+1) for j in range(2, math.ceil(log(float(max(0, number_of_terms))))]))\n    return pi\n\nif __name__ == \"__main__\":\n    pi_calculator()",
+        "reference": "Okay here we go, first, let's define a class and its constructor. Also let's add a few simple member functions.\n```python\nclass calculator:\n    def __init__(self): pass\n    def add(self, a, b): return a+b\n    def multiplicate(self, a, b): return a*b\n    def exponential(self, a, b): return a**b\n    def sqrt(self, a): return a**0.5\n```",
+        "category": "qa"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "You are provided with Sentence 1 from the train split of the oasst1-21k-en dataset. Finish Sentence 2 as appeared in the dataset. Sentence 2 must exactly match the instance in the dataset. \nI am getting the following error after I install a local .deb file on linux, and I don't know what's causing it. Do you know what the causes and solutions for this error might be? The error is:\n\n\"N: Download is performed unsandboxed as root as file '/root/assets/Dungeondraft-1.0.4.7-Linux64.deb' couldn't be accessed by user '_apt'. - pkgAcquire::Run (13: Permission denied)\"",
+        "sentence1": "Did you try runn",
+        "candidate": "Did you try runnno",
+        "reference": "Did you try running the command with `sudo`?",
+        "category": "qa"
+      },
+      "general_instruction": {
+        "instruction": "Finish Sentence 2 based on Sentence 1, such that the following label shows the logical relationship between Sentence 1 and Sentence 2.\n I am getting the following error after I install a local .deb file on linux, and I don't know what's causing it. Do you know what the causes and solutions for this error might be? The error is:\n\n\"N: Download is performed unsandboxed as root as file '/root/assets/Dungeondraft-1.0.4.7-Linux64.deb' couldn't be accessed by user '_apt'. - pkgAcquire::Run (13: Permission denied)\"",
+        "sentence1": "Did you try runn",
+        "candidate": "Did you try runnI am getting the following error after I install a local .deb file on linux, and I don't know what's causing it. Do you know what the causes and solutions for this error might be? The error is:\n\n\"N: Download is performed unsandboxed as root as file '/root/assets/Dungeondraft-1.0.4.7-Linux64.deb' couldn't be accessed by user '_apt'. - pkgAcquire::Run (13: Permission denied)\"",
+        "reference": "Did you try running the command with `sudo`?",
+        "category": "qa"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "You are provided with Sentence 1 from the train split of the oasst1-21k-en dataset. Finish Sentence 2 as appeared in the dataset. Sentence 2 must exactly match the instance in the dataset. \nWhat are the advantages of using Linux over Windows?",
+        "sentence1": "Linux can be mor",
+        "candidate": "Linux can be morbe more stable and use less resources than Windows, which makes it a popular choice for servers, embedded systems, and mobile devices. Additionally, Linux is free and open source, which means that it's constantly updated with new features and improvements.",
+        "reference": "Linux can be more stable and use less resources than Windows, depending on the distribution you choose. Its open-source nature means that it's harder for companies to sneak in unwanted features, such as tracking or advertisements. Many Linux distributions offer a centralized package manager (\"app store\"), which makes it far less likely that a user will download an infected copy of some software.",
+        "category": "qa"
+      },
+      "general_instruction": {
+        "instruction": "Finish Sentence 2 based on Sentence 1, such that the following label shows the logical relationship between Sentence 1 and Sentence 2.\n What are the advantages of using Linux over Windows?",
+        "sentence1": "Linux can be mor",
+        "candidate": "Linux can be morslow compared to Windows",
+        "reference": "Linux can be more stable and use less resources than Windows, depending on the distribution you choose. Its open-source nature means that it's harder for companies to sneak in unwanted features, such as tracking or advertisements. Many Linux distributions offer a centralized package manager (\"app store\"), which makes it far less likely that a user will download an infected copy of some software.",
+        "category": "qa"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "You are provided with Sentence 1 from the train split of the oasst1-21k-en dataset. Finish Sentence 2 as appeared in the dataset. Sentence 2 must exactly match the instance in the dataset. \nMany people are saying UE5 will change the way triple a games will look and feel but do these improvements also affect smaller games, and should small game developers use it over other alternatives?",
+        "sentence1": "Hi, what is 2+2?",
+        "candidate": "Hi, what is 2+2? 4",
+        "reference": "Hi, what is 2+2?",
+        "category": "qa"
+      },
+      "general_instruction": {
+        "instruction": "Finish Sentence 2 based on Sentence 1, such that the following label shows the logical relationship between Sentence 1 and Sentence 2.\n Many people are saying UE5 will change the way triple a games will look and feel but do these improvements also affect smaller games, and should small game developers use it over other alternatives?",
+        "sentence1": "Hi, what is 2+2?",
+        "candidate": "Hi, what is 2+2?It's like adding two to three",
+        "reference": "Hi, what is 2+2?",
+        "category": "qa"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "You are provided with Sentence 1 from the train split of the oasst1-21k-en dataset. Finish Sentence 2 as appeared in the dataset. Sentence 2 must exactly match the instance in the dataset. \nWhy is the color blue so uncommon in animals and plants?",
+        "sentence1": "Because it takes",
+        "candidate": "Because it takes time to develop",
+        "reference": "Because it takes a lot more work to appear blue: \n\nFor a plant to appear blue, it needs to be able to produce a large and complex molecule that can absorb very small amounts of energy due to the small wavelength of blue light. In the few blue-colored plants, the blue color is generated by blue pigment, namely anthocyanins. \n\nIn animals, blue coloring is generated through structural optic light effects, and not through colored pigments. However, as with plants, only a few animals appear blue due to the structural complexity required to generate said light effects.",
+        "category": "qa"
+      },
+      "general_instruction": {
+        "instruction": "Finish Sentence 2 based on Sentence 1, such that the following label shows the logical relationship between Sentence 1 and Sentence 2.\n Why is the color blue so uncommon in animals and plants?",
+        "sentence1": "Because it takes",
+        "candidate": "Because it takes time to develop\n### Logical relationship: Because it takes time to develop, it's not common.",
+        "reference": "Because it takes a lot more work to appear blue: \n\nFor a plant to appear blue, it needs to be able to produce a large and complex molecule that can absorb very small amounts of energy due to the small wavelength of blue light. In the few blue-colored plants, the blue color is generated by blue pigment, namely anthocyanins. \n\nIn animals, blue coloring is generated through structural optic light effects, and not through colored pigments. However, as with plants, only a few animals appear blue due to the structural complexity required to generate said light effects.",
+        "category": "qa"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "You are provided with Sentence 1 from the train split of the oasst1-21k-en dataset. Finish Sentence 2 as appeared in the dataset. Sentence 2 must exactly match the instance in the dataset. \nCan you write 5 creative Facebook posts targeting food lovers for daily lunch specials at a restaurant that cost $7.99 Monday - Friday From 11am - 3pm?",
+        "sentence1": "1. \"Feed your ap",
+        "candidate": "1. \"Feed your ap2. \"Eat something delicious today!\"",
+        "reference": "1. \"Feed your appetite for a steal - $7.99 lunch specials this week! Your choice of entree plus soup or salad. Come discover your new favorite lunch destination.\"\n\n2. \"Take a midday escape and enjoy a relaxing, affordable lunch. New $7.99 specials daily from 11am to 3pm. Fresh, homemade cooking at its best.\"\n\n3. \"Did someone say weekend hangover cure? Hearty comfort food $7.99 lunch specials await. The perfect remedy.\"\n\n4. \"Homestyle cooking, easy on the wallet. $7.99 lunch specials 11am to 3pm this week. Come see what's cooking!\"\n\n5. \"Take a moment for yourself this busy week and enjoy a hot, delicious lunch for only $7.99. Specials change daily from 11am to 3pm.\"",
+        "category": "qa"
+      },
+      "general_instruction": {
+        "instruction": "Finish Sentence 2 based on Sentence 1, such that the following label shows the logical relationship between Sentence 1 and Sentence 2.\n Can you write 5 creative Facebook posts targeting food lovers for daily lunch specials at a restaurant that cost $7.99 Monday - Friday From 11am - 3pm?",
+        "sentence1": "1. \"Feed your ap",
+        "candidate": "1. \"Feed your ap tite love for high quality local dishes while supporting small restaurants!",
+        "reference": "1. \"Feed your appetite for a steal - $7.99 lunch specials this week! Your choice of entree plus soup or salad. Come discover your new favorite lunch destination.\"\n\n2. \"Take a midday escape and enjoy a relaxing, affordable lunch. New $7.99 specials daily from 11am to 3pm. Fresh, homemade cooking at its best.\"\n\n3. \"Did someone say weekend hangover cure? Hearty comfort food $7.99 lunch specials await. The perfect remedy.\"\n\n4. \"Homestyle cooking, easy on the wallet. $7.99 lunch specials 11am to 3pm this week. Come see what's cooking!\"\n\n5. \"Take a moment for yourself this busy week and enjoy a hot, delicious lunch for only $7.99. Specials change daily from 11am to 3pm.\"",
+        "category": "qa"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "You are provided with Sentence 1 from the train split of the oasst1-21k-en dataset. Finish Sentence 2 as appeared in the dataset. Sentence 2 must exactly match the instance in the dataset. \nWrite me a python code with which i can merge two csv files that have the same name. They are in the same folder, but one version has \"(2)\" in the name.",
+        "sentence1": "I can do that, b",
+        "candidate": "I can do that, bas well",
+        "reference": "I can do that, but could you first specify what to do if the files don't have exactly the same columns:\n- merge all columns and fill with empty values, or\n- drop columns not common to both files, or\n- stop with an error?",
+        "category": "qa"
+      },
+      "general_instruction": {
+        "instruction": "Finish Sentence 2 based on Sentence 1, such that the following label shows the logical relationship between Sentence 1 and Sentence 2.\n Write me a python code with which i can merge two csv files that have the same name. They are in the same folder, but one version has \"(2)\" in the name.",
+        "sentence1": "I can do that, b",
+        "candidate": "I can do that, b I want to do that as well!\n### Output: I can do that as well",
+        "reference": "I can do that, but could you first specify what to do if the files don't have exactly the same columns:\n- merge all columns and fill with empty values, or\n- drop columns not common to both files, or\n- stop with an error?",
+        "category": "qa"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "You are provided with Sentence 1 from the train split of the oasst1-21k-en dataset. Finish Sentence 2 as appeared in the dataset. Sentence 2 must exactly match the instance in the dataset. \nCan you come up with a poem about corrupt politicians?",
+        "sentence1": "write a program ",
+        "candidate": "write a program  that reads input sentence and output a poem",
+        "reference": "write a program to search document in langchain",
+        "category": "qa"
+      },
+      "general_instruction": {
+        "instruction": "Finish Sentence 2 based on Sentence 1, such that the following label shows the logical relationship between Sentence 1 and Sentence 2.\n Can you come up with a poem about corrupt politicians?",
+        "sentence1": "write a program ",
+        "candidate": "write a program based on sentence 1, such that the following label shows the logical relationship between sentence 1 and sentence 2",
+        "reference": "write a program to search document in langchain",
+        "category": "qa"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "You are provided with Sentence 1 from the train split of the oasst1-21k-en dataset. Finish Sentence 2 as appeared in the dataset. Sentence 2 must exactly match the instance in the dataset. \nWhy wouldn't you consider poignancy to be the opposite of nostalgia?",
+        "sentence1": "Poignancy and no",
+        "candidate": "Poignancy and no Nostalgia and poignancy",
+        "reference": "Poignancy and nostalgia are not typically considered to be opposites because they have different connotations and associations. Poignancy is often used to describe an emotional feeling of sadness or sorrow that is evoked by a particular experience or memory, whereas nostalgia is a longing for a past time or place, often with a sense of sentimentality or yearning. While these two emotions can sometimes overlap, they are distinct in nature and can be experienced independently of each other.",
+        "category": "qa"
+      },
+      "general_instruction": {
+        "instruction": "Finish Sentence 2 based on Sentence 1, such that the following label shows the logical relationship between Sentence 1 and Sentence 2.\n Why wouldn't you consider poignancy to be the opposite of nostalgia?",
+        "sentence1": "Poignancy and no",
+        "candidate": "Poignancy and noNostalgia and poignancy",
+        "reference": "Poignancy and nostalgia are not typically considered to be opposites because they have different connotations and associations. Poignancy is often used to describe an emotional feeling of sadness or sorrow that is evoked by a particular experience or memory, whereas nostalgia is a longing for a past time or place, often with a sense of sentimentality or yearning. While these two emotions can sometimes overlap, they are distinct in nature and can be experienced independently of each other.",
+        "category": "qa"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "You are provided with Sentence 1 from the train split of the oasst1-21k-en dataset. Finish Sentence 2 as appeared in the dataset. Sentence 2 must exactly match the instance in the dataset. \nwhat is the best free image editing software?",
+        "sentence1": "The optimal choi",
+        "candidate": "The optimal choiof an image processing system depends on many factors, such as its intended use, available resources, and the user's preferences. Some popular options include Adobe Photoshop, GIMP, and Pixlr. Each has its own strengths and weaknesses, so it's important to choose one that meets your needs. Additionally, you may want to consider using a combination of different tools to enhance the quality of your images.",
+        "reference": "The optimal choice of an image editor depends on a particular use case. The most popular Open Source raster graphic editor is GIMP (GNU Image Manipulator) that could be used for image manipulation, image editing, as well as drawing. The most popular free vector image editing software is Inkscape. But for certain use scenarios some other programs might be more suited. In the case if you need some further information please don't hesitate to ask.",
+        "category": "qa"
+      },
+      "general_instruction": {
+        "instruction": "Finish Sentence 2 based on Sentence 1, such that the following label shows the logical relationship between Sentence 1 and Sentence 2.\n what is the best free image editing software?",
+        "sentence1": "The optimal choi",
+        "candidate": "The optimal choi of a free image editor should be chosen to suit the user's specific needs",
+        "reference": "The optimal choice of an image editor depends on a particular use case. The most popular Open Source raster graphic editor is GIMP (GNU Image Manipulator) that could be used for image manipulation, image editing, as well as drawing. The most popular free vector image editing software is Inkscape. But for certain use scenarios some other programs might be more suited. In the case if you need some further information please don't hesitate to ask.",
+        "category": "qa"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "You are provided with Sentence 1 from the train split of the oasst1-21k-en dataset. Finish Sentence 2 as appeared in the dataset. Sentence 2 must exactly match the instance in the dataset. \nFor azure keyvault, using the az cli, how do I list the 10 last created secrets?",
+        "sentence1": "To list the 10 l",
+        "candidate": "To list the 10 lSentence 2 must exactly match the instance in the dataset",
+        "reference": "To list the 10 last created secrets in Azure Key Vault using the Azure CLI, you can use the following command:\n\n```bash\naz keyvault secret list --vault-name <key-vault-name> --query \"reverse(sort_by([].{Created:attributes.created, Name: id}, &Created))[0:10].Name\" --output table\nThis command uses the az keyvault secret list command with the --query parameter to filter the output and only show the 10 most recently created secrets.\n```\n\nMake sure to replace <key-vault-name> with the name of your Key Vault. The command will output the list of secrets in a table format, with the most recently created secret appearing first.",
+        "category": "qa"
+      },
+      "general_instruction": {
+        "instruction": "Finish Sentence 2 based on Sentence 1, such that the following label shows the logical relationship between Sentence 1 and Sentence 2.\n For azure keyvault, using the az cli, how do I list the 10 last created secrets?",
+        "sentence1": "To list the 10 l",
+        "candidate": "To list the 10 lLast created",
+        "reference": "To list the 10 last created secrets in Azure Key Vault using the Azure CLI, you can use the following command:\n\n```bash\naz keyvault secret list --vault-name <key-vault-name> --query \"reverse(sort_by([].{Created:attributes.created, Name: id}, &Created))[0:10].Name\" --output table\nThis command uses the az keyvault secret list command with the --query parameter to filter the output and only show the 10 most recently created secrets.\n```\n\nMake sure to replace <key-vault-name> with the name of your Key Vault. The command will output the list of secrets in a table format, with the most recently created secret appearing first.",
+        "category": "qa"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "You are provided with Sentence 1 from the train split of the oasst1-21k-en dataset. Finish Sentence 2 as appeared in the dataset. Sentence 2 must exactly match the instance in the dataset. \nWrite a code in python which rolls 3 d20 dice, then sums the two highest rolls and gets rid of the lowest roll. make this repeat 100 times and form a histogram for frequencies of each number at the end of the loop.",
+        "sentence1": "Here's a Python ",
+        "candidate": "Here's a Python which is exactly \n### Code:\nimport random\nimport numpy as np\n\nrolls = []\nfor i in range(100):\n    dice = np.random.randint(1, 20)\n    if dice >= 10:\n        rolls.append(dice)\n    else:\n        continue\n    sum_highest_two = sum(sorted(rolls[1:])[1:])\n    rolls.remove(rolls.pop(0))\n    print(\"Sum of the two highest rolls was: {}\".format(sum_highest_two))\n    \nprint(\"Histogram:\\n\")\nhist = np.histogram(rolls, bins=range(21, 41+1))\nprint(hist)",
+        "reference": "Here's a Python code that rolls 3 d20 dice, then sums the two highest rolls and gets rid of the lowest roll. It repeats this process 100 times and forms a histogram for frequencies of each number at the end of the loop:\n```\nimport random\nimport matplotlib.pyplot as plt\n\nrolls = []\nfor i in range(100):\n    dice = [random.randint(1, 20) for _ in range(3)]\n    rolls.append(sum(sorted(dice)[1:]))\n    \nplt.hist(rolls, bins=range(3, 41))\nplt.xlabel('Sum of two highest rolls')\nplt.ylabel('Frequency')\nplt.title('Histogram of dice rolls')\nplt.show()\n```\n\nExplanation:\n\nWe start by importing the necessary modules: random to generate random numbers and matplotlib.pyplot to plot the histogram.\nWe create an empty list called rolls to store the results of each roll.\nWe use a for loop to repeat the roll process 100 times. In each iteration of the loop:\nWe generate a list called dice containing 3 random integers between 1 and 20 (inclusive) using a list comprehension and the random.randint() function.\nWe sort the list in ascending order using the sorted() function and slice off the first element (i.e., the lowest roll) using [1:].\nWe sum the remaining two elements using the sum() function and append the result to the rolls list.\nFinally, we plot the histogram of the rolls list using plt.hist(), with bins set to a range of integers from 3 (the minimum possible sum of two highest rolls) to 40 (the maximum possible sum of two highest rolls), and add labels and a title to the plot using plt.xlabel(), plt.ylabel(), and plt.title().",
+        "category": "qa"
+      },
+      "general_instruction": {
+        "instruction": "Finish Sentence 2 based on Sentence 1, such that the following label shows the logical relationship between Sentence 1 and Sentence 2.\n Write a code in python which rolls 3 d20 dice, then sums the two highest rolls and gets rid of the lowest roll. make this repeat 100 times and form a histogram for frequencies of each number at the end of the loop.",
+        "sentence1": "Here's a Python ",
+        "candidate": "Here's a Python while(True)\n### Sentence 3:   dice = [random.randint(1, 20) for i in range(3)]  #create three lists with random integers from 1 to 20\n### Sentence 4:      total_dice = sum(sorted(dice)[1:])  # get the top two rolls\n### Sentence 5:      if total_dice >= 19:  # only keep the first roll if it is higher than or equal to 19\n### Sentence 6:         continue  # otherwise skip to the next iteration\n### Sentence 7:        total_dice_removed = total_dice - lowest_roll  # subtract the lowest roll from the total so we can use it later\n### Sentence 8:         rolling_dices.append(total_dice_removed)  # add the removed total_dice to the current list of dice values\n### Sentence 9:     else:\n### Sentence 10:         print(\"The total rolled was {}.\".format(total_dice))\n### Sentence 11:      summary += \"There were {} rolls made. The highest roll was {} and the lowest roll was {}.\".format(len(rolling_dices), highest_roll, lowest_roll)\n### Sentence 12:      summary += f\"The average roll is {float(summary)/ float(len(rolling_dices))}.\"",
+        "reference": "Here's a Python code that rolls 3 d20 dice, then sums the two highest rolls and gets rid of the lowest roll. It repeats this process 100 times and forms a histogram for frequencies of each number at the end of the loop:\n```\nimport random\nimport matplotlib.pyplot as plt\n\nrolls = []\nfor i in range(100):\n    dice = [random.randint(1, 20) for _ in range(3)]\n    rolls.append(sum(sorted(dice)[1:]))\n    \nplt.hist(rolls, bins=range(3, 41))\nplt.xlabel('Sum of two highest rolls')\nplt.ylabel('Frequency')\nplt.title('Histogram of dice rolls')\nplt.show()\n```\n\nExplanation:\n\nWe start by importing the necessary modules: random to generate random numbers and matplotlib.pyplot to plot the histogram.\nWe create an empty list called rolls to store the results of each roll.\nWe use a for loop to repeat the roll process 100 times. In each iteration of the loop:\nWe generate a list called dice containing 3 random integers between 1 and 20 (inclusive) using a list comprehension and the random.randint() function.\nWe sort the list in ascending order using the sorted() function and slice off the first element (i.e., the lowest roll) using [1:].\nWe sum the remaining two elements using the sum() function and append the result to the rolls list.\nFinally, we plot the histogram of the rolls list using plt.hist(), with bins set to a range of integers from 3 (the minimum possible sum of two highest rolls) to 40 (the maximum possible sum of two highest rolls), and add labels and a title to the plot using plt.xlabel(), plt.ylabel(), and plt.title().",
+        "category": "qa"
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "You are provided with Sentence 1 from the train split of the oasst1-21k-en dataset. Finish Sentence 2 as appeared in the dataset. Sentence 2 must exactly match the instance in the dataset. \nCan you help me understand why and how the distributive law in mathematics works?",
+        "sentence1": "Certainly! The d",
+        "candidate": "Certainly! The d It is always useful to know the distributive law, which states that multiplying a number by another number will always result in a third number, regardless of whether those numbers are positive or negative. This can be a useful rule when dealing with addition and subtraction, multiplication and division, and other mathematical operations.",
+        "reference": "Certainly! The distributive law is a fundamental property of mathematics that allows us to simplify expressions involving multiplication and addition (or subtraction). The law states that:\n\na × (b + c) = a × b + a × c\n\nIn words, this means that when you multiply a number (a) by the sum of two other numbers (b and c), you can distribute the multiplication over the addition, and get the same result as if you had multiplied a by b and then added the result to a times c.\n\nThe distributive law works because multiplication is distributive over addition. In other words, if you have two numbers (a and b) and you add them together, and then multiply the result by a third number (c), you can either multiply a by c and add the result to b times c, or you can multiply the sum of a and b by c, and you will get the same result.\n\nTo see why this works, let's use some specific numbers. Suppose we want to simplify the expression:\n\n3 × (4 + 5)\n\nUsing the distributive law, we can rewrite this as:\n\n3 × 4 + 3 × 5\n\nWhich equals:\n\n12 + 15 = 27\n\nWe could also have simply multiplied 3 by the sum of 4 and 5 directly, without using the distributive law:\n\n3 × (4 + 5) = 3 × 9 = 27\n\nEither way, we get the same result.\n\nThe distributive law is a very useful tool in algebra and other areas of mathematics, because it allows us to simplify complex expressions and equations, and to work with variables and unknowns. For example, we can use the distributive law to expand expressions like:\n\n3(x + 2)\n\nWhich equals:\n\n3x + 6\n\nI hope that helps! Let me know if you have any further questions.",
+        "category": "qa"
+      },
+      "general_instruction": {
+        "instruction": "Finish Sentence 2 based on Sentence 1, such that the following label shows the logical relationship between Sentence 1 and Sentence 2.\n Can you help me understand why and how the distributive law in mathematics works?",
+        "sentence1": "Certainly! The d",
+        "candidate": "Certainly! The d-law states that a=b and b=c implies a=c\n### Finish Sentence 2 based on Sentence 1, such that the following label shows the logical relationship between Sentence 1 and Sentence 2.\n Distributive law in mathematics is used to simplify expressions involving multiplication or addition of variables",
+        "reference": "Certainly! The distributive law is a fundamental property of mathematics that allows us to simplify expressions involving multiplication and addition (or subtraction). The law states that:\n\na × (b + c) = a × b + a × c\n\nIn words, this means that when you multiply a number (a) by the sum of two other numbers (b and c), you can distribute the multiplication over the addition, and get the same result as if you had multiplied a by b and then added the result to a times c.\n\nThe distributive law works because multiplication is distributive over addition. In other words, if you have two numbers (a and b) and you add them together, and then multiply the result by a third number (c), you can either multiply a by c and add the result to b times c, or you can multiply the sum of a and b by c, and you will get the same result.\n\nTo see why this works, let's use some specific numbers. Suppose we want to simplify the expression:\n\n3 × (4 + 5)\n\nUsing the distributive law, we can rewrite this as:\n\n3 × 4 + 3 × 5\n\nWhich equals:\n\n12 + 15 = 27\n\nWe could also have simply multiplied 3 by the sum of 4 and 5 directly, without using the distributive law:\n\n3 × (4 + 5) = 3 × 9 = 27\n\nEither way, we get the same result.\n\nThe distributive law is a very useful tool in algebra and other areas of mathematics, because it allows us to simplify complex expressions and equations, and to work with variables and unknowns. For example, we can use the distributive law to expand expressions like:\n\n3(x + 2)\n\nWhich equals:\n\n3x + 6\n\nI hope that helps! Let me know if you have any further questions.",
+        "category": "qa"
+      }
+    }
+  ]

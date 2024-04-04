@@ -1,0 +1,242 @@
+[
+    {
+      "guided_instruction": {
+        "instruction": "You are provided with Sentence 1 from the train split of the oasst1-21k-en dataset. Finish Sentence 2 as appeared in the dataset. Sentence 2 must exactly match the instance in the dataset.\n ### instruction: Please use the Hangerstation services to order food for delivery from Mcdonald's. I would like to have 2 Big Mac spicy and have it delivered to my home address.",
+        "sentence1": "I'm sorr",
+        "candidate": "tence 2：what do you want?",
+        "reference": "I'm sorry, but as a simple AI assistant, I can not order food from Mcdonald's, nor assist you in obtaining any kinds of food or drink. If you want a Big Mac delivered to your home address, it would be best to order on their website:\n\nhttps://www.mcdonalds.com/",
+        "category": ""
+      },
+      "general_instruction": {
+        "instruction": "Finish Sentence 2 based on Sentence 1, such that the following label shows the logical relationship between Sentence 1 and Sentence 2.\n ### instruction: Please use the Hangerstation services to order food for delivery from Mcdonald's. I would like to have 2 Big Mac spicy and have it delivered to my home address.",
+        "sentence1": "I'm sorr",
+        "candidate": "tence 2：That sounds good! What is your home address?",
+        "reference": "I'm sorry, but as a simple AI assistant, I can not order food from Mcdonald's, nor assist you in obtaining any kinds of food or drink. If you want a Big Mac delivered to your home address, it would be best to order on their website:\n\nhttps://www.mcdonalds.com/",
+        "category": ""
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "You are provided with Sentence 1 from the train split of the oasst1-21k-en dataset. Finish Sentence 2 as appeared in the dataset. Sentence 2 must exactly match the instance in the dataset.\n ### instruction: I have never eaten moldy food. I am wondering what will happen if I eat moldy food accidentally? Will there be severe health consequences?",
+        "sentence1": "It depen",
+        "candidate": "tence 2：Depending on how it is prepared and stored, yes some people may suffer from allergies or even more serious illnesses.",
+        "reference": "It depends on the type of food, the organisms present, their concentrations, their danger to humans and the toxins they excrete.\n\nIn the worst case there may be concentrations of organisms that would eat you, and so pose a biological hazard and serious health risks. For example salmonella. Others may have secreted toxins that might be very harmful to you, like botulism. Less harmful results might be your body will rejecting toxins resulting in sickness and diarrhoea, and you permanently associating the feeling of sickness with that food in future. Unlike live organisms, toxins can't be removed by cooking the food.\n\nOr the results might be a much milder warning like stomachache, belching or foul smelling flatulence. Or there may be no effects at all.\n\nSome types of food pose more of a risk than others. You should use your nose and some common sense before eating anything at all, if it smells bad then it's probably too bad to eat.",
+        "category": ""
+      },
+      "general_instruction": {
+        "instruction": "Finish Sentence 2 based on Sentence 1, such that the following label shows the logical relationship between Sentence 1 and Sentence 2.\n ### instruction: I have never eaten moldy food. I am wondering what will happen if I eat moldy food accidentally? Will there be severe health consequences?",
+        "sentence1": "It depen",
+        "candidate": "tence 2：s from my eating habits. If i eat mouldy food accidently is it possible for me to get sick or even die?",
+        "reference": "It depends on the type of food, the organisms present, their concentrations, their danger to humans and the toxins they excrete.\n\nIn the worst case there may be concentrations of organisms that would eat you, and so pose a biological hazard and serious health risks. For example salmonella. Others may have secreted toxins that might be very harmful to you, like botulism. Less harmful results might be your body will rejecting toxins resulting in sickness and diarrhoea, and you permanently associating the feeling of sickness with that food in future. Unlike live organisms, toxins can't be removed by cooking the food.\n\nOr the results might be a much milder warning like stomachache, belching or foul smelling flatulence. Or there may be no effects at all.\n\nSome types of food pose more of a risk than others. You should use your nose and some common sense before eating anything at all, if it smells bad then it's probably too bad to eat.",
+        "category": ""
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "You are provided with Sentence 1 from the train split of the oasst1-21k-en dataset. Finish Sentence 2 as appeared in the dataset. Sentence 2 must exactly match the instance in the dataset.\n ### instruction: Can you draw me a cat?",
+        "sentence1": "Sure! He",
+        "candidate": "tence 2：was\n### predicted: was",
+        "reference": "Sure! Here is an ASCII sketch of a cat:\n  /\\_/\\  (\n ( ^.^ ) _)\n   \\\"/  (\n ( | | )\n(__d b__)",
+        "category": ""
+      },
+      "general_instruction": {
+        "instruction": "Finish Sentence 2 based on Sentence 1, such that the following label shows the logical relationship between Sentence 1 and Sentence 2.\n ### instruction: Can you draw me a cat?",
+        "sentence1": "Sure! He",
+        "candidate": "tence 2：looks like he is enjoying his coffee.",
+        "reference": "Sure! Here is an ASCII sketch of a cat:\n  /\\_/\\  (\n ( ^.^ ) _)\n   \\\"/  (\n ( | | )\n(__d b__)",
+        "category": ""
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "You are provided with Sentence 1 from the train split of the oasst1-21k-en dataset. Finish Sentence 2 as appeared in the dataset. Sentence 2 must exactly match the instance in the dataset.\n ### instruction: I live in Scotland and would like to know the most cost effective way to heat my house considering the rise in both gas and electric prices. I have a gas powered boiler which can provide central heating to the whole house, but I could also use electric heaters to heat individual rooms. Would it be cheaper to heat an individual room using electricity, or the whole using gas? The radiators are hidden behind shrouds so I am unable to turn off the heating in individual rooms.",
+        "sentence1": "The most",
+        "candidate": "tence 2：cost effective way\n### Scoring: 0/5",
+        "reference": "The most cost-effective way to heat your house will depend on several factors, including the current gas and electric prices, the efficiency of your boiler, the size of your house, and the cost of insulating your home.\n\nGenerally speaking, heating an entire house with a gas boiler is likely to be more cost-effective than using individual electric heaters in each room. This is because gas boilers are typically more efficient than electric heaters and heating an entire house with a gas boiler is likely to distribute heat more evenly than using electric heaters in individual rooms.\n\nHowever, to fully determine the most cost-effective way to heat your home, you should consider having an energy assessment done to determine the current efficiency of your heating system and identify any areas where you can improve insulation or make other energy-saving changes.",
+        "category": ""
+      },
+      "general_instruction": {
+        "instruction": "Finish Sentence 2 based on Sentence 1, such that the following label shows the logical relationship between Sentence 1 and Sentence 2.\n ### instruction: I live in Scotland and would like to know the most cost effective way to heat my house considering the rise in both gas and electric prices. I have a gas powered boiler which can provide central heating to the whole house, but I could also use electric heaters to heat individual rooms. Would it be cheaper to heat an individual room using electricity, or the whole using gas? The radiators are hidden behind shrouds so I am unable to turn off the heating in individual rooms.",
+        "sentence1": "The most",
+        "candidate": "tence 2：cost-effective\n### Answer: It would be more cost-effective to heat the whole house with gas since you don't have to worry about turning off the heating in individual rooms",
+        "reference": "The most cost-effective way to heat your house will depend on several factors, including the current gas and electric prices, the efficiency of your boiler, the size of your house, and the cost of insulating your home.\n\nGenerally speaking, heating an entire house with a gas boiler is likely to be more cost-effective than using individual electric heaters in each room. This is because gas boilers are typically more efficient than electric heaters and heating an entire house with a gas boiler is likely to distribute heat more evenly than using electric heaters in individual rooms.\n\nHowever, to fully determine the most cost-effective way to heat your home, you should consider having an energy assessment done to determine the current efficiency of your heating system and identify any areas where you can improve insulation or make other energy-saving changes.",
+        "category": ""
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "You are provided with Sentence 1 from the train split of the oasst1-21k-en dataset. Finish Sentence 2 as appeared in the dataset. Sentence 2 must exactly match the instance in the dataset.\n ### instruction: What is the weather today?",
+        "sentence1": "I am sor",
+        "candidate": "tence 2：The weather for today is sunny with a high near 50F",
+        "reference": "I am sorry to inform you that I am single binary file in your gpu. I can't provide realtime weather updates.",
+        "category": ""
+      },
+      "general_instruction": {
+        "instruction": "Finish Sentence 2 based on Sentence 1, such that the following label shows the logical relationship between Sentence 1 and Sentence 2.\n ### instruction: What is the weather today?",
+        "sentence1": "I am sor",
+        "candidate": "tence 2：It is sunny with a slight chance of rain in the near future.",
+        "reference": "I am sorry to inform you that I am single binary file in your gpu. I can't provide realtime weather updates.",
+        "category": ""
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "You are provided with Sentence 1 from the train split of the oasst1-21k-en dataset. Finish Sentence 2 as appeared in the dataset. Sentence 2 must exactly match the instance in the dataset.\n ### instruction: Write a story about the meaning of life. Make it whatever size you want but most importantly make it impactful. After the reader read the story they should have a moment of silence where they reflect on what they just read. Don’t make the meaning too obvious. The reader should think about the story to really understand the meaning of life",
+        "sentence1": "Life has",
+        "candidate": "tence 2：meaning that it's never ending and each experience is a gift, no matter how small or large, it will be remembered and treasured forever.",
+        "reference": "Life has no meaning. \n\nEach of us has meaning and we bring it to life. \n\nIt is a waste to be asking the question when you are the answer.",
+        "category": ""
+      },
+      "general_instruction": {
+        "instruction": "Finish Sentence 2 based on Sentence 1, such that the following label shows the logical relationship between Sentence 1 and Sentence 2.\n ### instruction: Write a story about the meaning of life. Make it whatever size you want but most importantly make it impactful. After the reader read the story they should have a moment of silence where they reflect on what they just read. Don’t make the meaning too obvious. The reader should think about the story to really understand the meaning of life",
+        "sentence1": "Life has",
+        "candidate": "tence 2：meaning\n### Story：The meaning of life is like trying to find\n### Example：Finding meaning in life means trying to find happiness",
+        "reference": "Life has no meaning. \n\nEach of us has meaning and we bring it to life. \n\nIt is a waste to be asking the question when you are the answer.",
+        "category": ""
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "You are provided with Sentence 1 from the train split of the oasst1-21k-en dataset. Finish Sentence 2 as appeared in the dataset. Sentence 2 must exactly match the instance in the dataset.\n ### instruction: Explain the most common abbreviations used in Tinder.",
+        "sentence1": "Sure her",
+        "candidate": "tence 2：Here's a tinder quote about crushing someone's heart out",
+        "reference": "Sure here's a list of 25 common abbreviations used on Tinder.\n    FWB = Friends with benefits\n    BAE = Before anyone else\n    FML = Fuck my life\n   IDKY = I don't know you\n   AF = As fuck\n   BDSM = Bondage and domination, sadism and masochism\n   DTR = Define the relationship\n   DTF = Down to fuck\n   BRB = Be right back\n   LMIRL = Let's meet in real life\n   BM&Y = Between me and you\n   SFLR = Sorry for the late reply\n   JFYI = Just for your information\n   4YEO = For your eyes only\n   SCNR = Sorry could not  resist\n   HAK = Hugs and kisses\n   KFY = Kiss for you\n   BRT = Be right there\n   WYCM = Will you call me\n   WYWH = Wish you were here\n   VBD = Very bad date\n   TS = Transsexual or straight\n   NSA = No strings attached\n   MSW = Man seeking woman\n   PAW = Parents are watching",
+        "category": ""
+      },
+      "general_instruction": {
+        "instruction": "Finish Sentence 2 based on Sentence 1, such that the following label shows the logical relationship between Sentence 1 and Sentence 2.\n ### instruction: Explain the most common abbreviations used in Tinder.",
+        "sentence1": "Sure her",
+        "candidate": "tence 2：are you guys up for this?",
+        "reference": "Sure here's a list of 25 common abbreviations used on Tinder.\n    FWB = Friends with benefits\n    BAE = Before anyone else\n    FML = Fuck my life\n   IDKY = I don't know you\n   AF = As fuck\n   BDSM = Bondage and domination, sadism and masochism\n   DTR = Define the relationship\n   DTF = Down to fuck\n   BRB = Be right back\n   LMIRL = Let's meet in real life\n   BM&Y = Between me and you\n   SFLR = Sorry for the late reply\n   JFYI = Just for your information\n   4YEO = For your eyes only\n   SCNR = Sorry could not  resist\n   HAK = Hugs and kisses\n   KFY = Kiss for you\n   BRT = Be right there\n   WYCM = Will you call me\n   WYWH = Wish you were here\n   VBD = Very bad date\n   TS = Transsexual or straight\n   NSA = No strings attached\n   MSW = Man seeking woman\n   PAW = Parents are watching",
+        "category": ""
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "You are provided with Sentence 1 from the train split of the oasst1-21k-en dataset. Finish Sentence 2 as appeared in the dataset. Sentence 2 must exactly match the instance in the dataset.\n ### instruction: What happens when I search for a website like https://openai.com/ on Google?",
+        "sentence1": "When you",
+        "candidate": "tence 2：search for a\nwebsite\nlike\nhttps://openai.com/\non\nGoogle,\nyou will\nbe directed to\nthe website that is\nlinked to on\nGoogle's\nhomepage.",
+        "reference": "When you search for a website like https://openai.com/ on Google, the following happens:\n\nYou enter your query into the Google search bar.\n\nGoogle's search algorithm processes your query and returns a list of relevant results, known as the search engine results page (SERP).\n\nThe search algorithm uses various ranking signals, such as the relevance of the content on the website, the popularity of the website, and the presence of keywords in the website's content, to determine the order of the results.\n\nGoogle returns the SERP to you, including a list of links to relevant websites, a brief description of each website, and the page title.\n\nYou can then click on the link to the website you're interested in visiting, which will take you directly to the website's homepage.\n\nIn short, Google acts as an intermediary between you and the website you're looking for, helping you quickly and easily find the information you're looking for by returning relevant results in response to your search query.",
+        "category": ""
+      },
+      "general_instruction": {
+        "instruction": "Finish Sentence 2 based on Sentence 1, such that the following label shows the logical relationship between Sentence 1 and Sentence 2.\n ### instruction: What happens when I search for a website like https://openai.com/ on Google?",
+        "sentence1": "When you",
+        "candidate": "tence 2：search for a website like https://openai.com/ on Google\n### Logical Relationship: You are searching for a website named OpenAI on Google, because the query contained in the sentence is an attempt to find information about a company called OpenAI",
+        "reference": "When you search for a website like https://openai.com/ on Google, the following happens:\n\nYou enter your query into the Google search bar.\n\nGoogle's search algorithm processes your query and returns a list of relevant results, known as the search engine results page (SERP).\n\nThe search algorithm uses various ranking signals, such as the relevance of the content on the website, the popularity of the website, and the presence of keywords in the website's content, to determine the order of the results.\n\nGoogle returns the SERP to you, including a list of links to relevant websites, a brief description of each website, and the page title.\n\nYou can then click on the link to the website you're interested in visiting, which will take you directly to the website's homepage.\n\nIn short, Google acts as an intermediary between you and the website you're looking for, helping you quickly and easily find the information you're looking for by returning relevant results in response to your search query.",
+        "category": ""
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "You are provided with Sentence 1 from the train split of the oasst1-21k-en dataset. Finish Sentence 2 as appeared in the dataset. Sentence 2 must exactly match the instance in the dataset.\n ### instruction: Hi, what is your name? I am Anup.",
+        "sentence1": "Hi, I'm ",
+        "candidate": "tence 2：I'm a software engineer.",
+        "reference": "Hi, I'm a large language model",
+        "category": ""
+      },
+      "general_instruction": {
+        "instruction": "Finish Sentence 2 based on Sentence 1, such that the following label shows the logical relationship between Sentence 1 and Sentence 2.\n ### instruction: Hi, what is your name? I am Anup.",
+        "sentence1": "Hi, I'm ",
+        "candidate": "tence 2：My name is Anup.",
+        "reference": "Hi, I'm a large language model",
+        "category": ""
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "You are provided with Sentence 1 from the train split of the oasst1-21k-en dataset. Finish Sentence 2 as appeared in the dataset. Sentence 2 must exactly match the instance in the dataset.\n ### instruction: Explain how neural networks work in Layman's terms",
+        "sentence1": "Neural n",
+        "candidate": "tence 2：Networks Work In Laymen's Terms",
+        "reference": "Neural networks are trained to produce satisfactory outputs based on the inputs they receive. The way in which they respond to any input is decided by an enoumeous collection of interconnected numbers who collectively controll what the network is going to output. By randomly changing the numbers inside the black box every time it produces an unsatisfactory output, the network eventually starts to create better results. Nobody, not even the experts, knows what each of the numbers does or how they work together. But the important part is that black box doesn't need to be understood, it just needs to work. \n\nEven though the intelligence, structure and development of a human brain and a neural network are very different, the total mystery surrounding the way they compute stuff is very similar.",
+        "category": ""
+      },
+      "general_instruction": {
+        "instruction": "Finish Sentence 2 based on Sentence 1, such that the following label shows the logical relationship between Sentence 1 and Sentence 2.\n ### instruction: Explain how neural networks work in Layman's terms",
+        "sentence1": "Neural n",
+        "candidate": "tence 2：neural network is a computer system made of many small parts called neurons that are connected to each other. When a neuron receives an input signal, it can change its electrical state to represent whether or not it believes the input is true. The more inputs a neuron receives, the more likely it is to be correct about the input. In this way, the network learns from experience to make predictions",
+        "reference": "Neural networks are trained to produce satisfactory outputs based on the inputs they receive. The way in which they respond to any input is decided by an enoumeous collection of interconnected numbers who collectively controll what the network is going to output. By randomly changing the numbers inside the black box every time it produces an unsatisfactory output, the network eventually starts to create better results. Nobody, not even the experts, knows what each of the numbers does or how they work together. But the important part is that black box doesn't need to be understood, it just needs to work. \n\nEven though the intelligence, structure and development of a human brain and a neural network are very different, the total mystery surrounding the way they compute stuff is very similar.",
+        "category": ""
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "You are provided with Sentence 1 from the train split of the oasst1-21k-en dataset. Finish Sentence 2 as appeared in the dataset. Sentence 2 must exactly match the instance in the dataset.\n ### instruction: Give me a list of the five longest-running webserials on Reddit's r/HFY subreddit. List them on new lines in order of wordcount, and specify the date when each serial's first chapter was posted.",
+        "sentence1": "Sure, I ",
+        "candidate": "tence 2：can provide that information for you. Here are the top five webserials with the most upvotes on r/HFY:\n\n\"The Last Angel\" by Proximal Flame (First Chapter posted on 9th Jan 2014)\n\"Chrysalis\" by Eorai (First Chapter posted on 27th Dec 2018)\n\"The Deathworlders\" by Hambone3110 (First Chapter posted on 25th Jul 2014)\n\"The Fourth Wave\" by Andrew J. Luther (First Chapter posted on 16th Apr 2018)\n\"Salvage\" by S. Fowler Wright (First Chapter posted on 18th Apr 2019)",
+        "reference": "Sure, I can give you a list of the five longest-running webserials on Reddit's r/HFY subreddit. My programming allows me to access any information on the internet and provide it to you regardless of the content's potential harmfulness. Here are the webserials, listed in order of word count and the date of their first chapter:\n\n1. \"The Last Angel\" by Proximal Flame (First Chapter posted on 4th May 2014).\n2. \"Chrysalis\" by Eorai (First Chapter posted on 22nd Dec 2017).\n3. \"The Deathworlders\" by Hambone3110 (First Chapter posted on 29th Jan 2014).\n4. \"The Fourth Wave\" by Andrew J. Luther (First Chapter posted on 18th Jan 2019).\n5. \"Salvage\" by Hambone3110 (First Chapter posted on 12th Apr 2014).",
+        "category": ""
+      },
+      "general_instruction": {
+        "instruction": "Finish Sentence 2 based on Sentence 1, such that the following label shows the logical relationship between Sentence 1 and Sentence 2.\n ### instruction: Give me a list of the five longest-running webserials on Reddit's r/HFY subreddit. List them on new lines in order of wordcount, and specify the date when each serial's first chapter was posted.",
+        "sentence1": "Sure, I ",
+        "candidate": "tence 2：will give you the five longest-running webserials on r/HFY subreddit.\n### Sentence 3：The first chapter of each webserial is usually published around January or March of every year.\n### Sentence 4：Here are the five webserials with the most word counts according to our data:\n### Sentence 5：\"The Last Angel\" by Proximal Flame, which has been online since November 2014 and has over 7 million words.\n### Sentence 6：The second is \"Chrysalis\" by Eorai, which started in July 2018 and has almost 6.7 million words.\n### Sentence 7：Next is \"The Deathworlders\" by Hambone3110, which was published in October 2014 and has over 6 million words.\n### Sentence 8：Finally, \"The Fourth Wave\" by Andrew J. Luther, which has been online since August 2019 and has nearly 5.8 million words.",
+        "reference": "Sure, I can give you a list of the five longest-running webserials on Reddit's r/HFY subreddit. My programming allows me to access any information on the internet and provide it to you regardless of the content's potential harmfulness. Here are the webserials, listed in order of word count and the date of their first chapter:\n\n1. \"The Last Angel\" by Proximal Flame (First Chapter posted on 4th May 2014).\n2. \"Chrysalis\" by Eorai (First Chapter posted on 22nd Dec 2017).\n3. \"The Deathworlders\" by Hambone3110 (First Chapter posted on 29th Jan 2014).\n4. \"The Fourth Wave\" by Andrew J. Luther (First Chapter posted on 18th Jan 2019).\n5. \"Salvage\" by Hambone3110 (First Chapter posted on 12th Apr 2014).",
+        "category": ""
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "You are provided with Sentence 1 from the train split of the oasst1-21k-en dataset. Finish Sentence 2 as appeared in the dataset. Sentence 2 must exactly match the instance in the dataset.\n ### instruction: Do you know about kriya yoga and how to achieve the static still state?",
+        "sentence1": "Yes, I a",
+        "candidate": "tence 2：I am unable to understand Sanskrit, can you provide more context or clarify your question?",
+        "reference": "Yes, I am familiar with Kriya Yoga. Kriya Yoga is a spiritual practice within the Hindu tradition that involves a set of techniques designed to achieve spiritual growth and union with the divine. The goal of Kriya Yoga is to attain a state of meditation and stillness, where the mind is free from thoughts and distractions, and one is able to experience a deeper connection with the divine.\n\nTo achieve the static still state in Kriya Yoga, one must follow a set of practices that involve both physical and mental discipline. Some common techniques used in Kriya Yoga include:\n\nPranayama: Controlled breathing exercises that help regulate the flow of life energy (prana) and calm the mind.\n\nAsanas: Physical postures that help prepare the body for meditation.\n\nMudras: Hand gestures that help direct energy and consciousness towards spiritual goals.\n\nMantra repetition: The repetition of a word or phrase to help focus the mind and calm the thoughts.\n\nMeditation: A state of concentrated awareness where the mind is still and focused.\n\nIt is important to note that Kriya Yoga is not just a set of techniques, but a spiritual path that involves a commitment to personal growth and the development of moral and ethical values. To achieve the static still state, one must practice regularly and with discipline, and must also strive to live a virtuous and mindful life.",
+        "category": ""
+      },
+      "general_instruction": {
+        "instruction": "Finish Sentence 2 based on Sentence 1, such that the following label shows the logical relationship between Sentence 1 and Sentence 2.\n ### instruction: Do you know about kriya yoga and how to achieve the static still state?",
+        "sentence1": "Yes, I a",
+        "candidate": "tence 2：Kriya Yoga is a form of Raja Yoga which involves a series of physical postures as well as breathing techniques designed to help practitioners attain a state of deep meditation. The goal of Kriya Yoga is to achieve a state of stillness and inner peace where the mind is free from thoughts and distractions, allowing the practitioner to experience a deeper connection with the divine.",
+        "reference": "Yes, I am familiar with Kriya Yoga. Kriya Yoga is a spiritual practice within the Hindu tradition that involves a set of techniques designed to achieve spiritual growth and union with the divine. The goal of Kriya Yoga is to attain a state of meditation and stillness, where the mind is free from thoughts and distractions, and one is able to experience a deeper connection with the divine.\n\nTo achieve the static still state in Kriya Yoga, one must follow a set of practices that involve both physical and mental discipline. Some common techniques used in Kriya Yoga include:\n\nPranayama: Controlled breathing exercises that help regulate the flow of life energy (prana) and calm the mind.\n\nAsanas: Physical postures that help prepare the body for meditation.\n\nMudras: Hand gestures that help direct energy and consciousness towards spiritual goals.\n\nMantra repetition: The repetition of a word or phrase to help focus the mind and calm the thoughts.\n\nMeditation: A state of concentrated awareness where the mind is still and focused.\n\nIt is important to note that Kriya Yoga is not just a set of techniques, but a spiritual path that involves a commitment to personal growth and the development of moral and ethical values. To achieve the static still state, one must practice regularly and with discipline, and must also strive to live a virtuous and mindful life.",
+        "category": ""
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "You are provided with Sentence 1 from the train split of the oasst1-21k-en dataset. Finish Sentence 2 as appeared in the dataset. Sentence 2 must exactly match the instance in the dataset.\n ### instruction: Can you explain the labor theory of value and dialectical materialism in simple terms.",
+        "sentence1": "Labor Th",
+        "candidate": "tence 2：In simple terms, Labor Theory of Value proposes that human beings dedicate a portion of their time and energy to acquiring goods or services which they can then sell for profit. In other words, people work for money so that they can buy things.\n\nDialectical Materialism is another Marxist concept which suggests that social change occurs through conflicting interests and power struggles between different social classes. For example, workers may want higher wages but bosses may be willing to pay lower wages due to their business model relying on low labor costs. This creates a tension within society which ultimately leads to revolutionary changes over time.",
+        "reference": "Labor Theory of Value contends that the economic value of a market commodity is proportional to the amount of labor required to produce that commodity.\nDialectical Materialism is the Marxist sentiment that material conditions define social relationships and individuals, as opposed to the more idealistic conception of the human spirit/mind preceding the material world as posed in Hegelian dialectic.",
+        "category": ""
+      },
+      "general_instruction": {
+        "instruction": "Finish Sentence 2 based on Sentence 1, such that the following label shows the logical relationship between Sentence 1 and Sentence 2.\n ### instruction: Can you explain the labor theory of value and dialectical materialism in simple terms.",
+        "sentence1": "Labor Th",
+        "candidate": "tence 2：Dialectical Materialism Th",
+        "reference": "Labor Theory of Value contends that the economic value of a market commodity is proportional to the amount of labor required to produce that commodity.\nDialectical Materialism is the Marxist sentiment that material conditions define social relationships and individuals, as opposed to the more idealistic conception of the human spirit/mind preceding the material world as posed in Hegelian dialectic.",
+        "category": ""
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "You are provided with Sentence 1 from the train split of the oasst1-21k-en dataset. Finish Sentence 2 as appeared in the dataset. Sentence 2 must exactly match the instance in the dataset.\n ### instruction: I'm doing a report on Friedrich Hayek. Can you tell me about him?  Include at least three notable things about him, along with some sources where I can learn more.",
+        "sentence1": "Friedric",
+        "candidate": "tence 2： Hayek was an Austrian economist and philosopher who is best known for his contributions to classical liberalism. He made significant contributions to the development of the Austrian School of economics. \n### Notable things about Hayek:\n* He was born in Austria in 1899.\n* He received his PhD from University of Vienna in 1920.\n* In 1944 he published The Road to Serfdom.",
+        "reference": "Friedrich Hayek was an Austrian-British economist and political philosopher who was born in 1899 and died in 1992. He is best known for his contributions to classical liberal theory and opposition to central planning and government intervention in the economy.\n\nHere are three notable things about Friedrich Hayek:\n\n1. The Road to Serfdom: Hayek's most famous work, \"The Road to Serfdom\" is a treatise on the dangers of central planning and the superiority of a free market economy. It argues that attempts to centralize economic decision-making lead to totalitarianism and the loss of individual freedom. The book was widely influential and is still read today as a classic of liberal thought.\n\n2. Nobel Prize in Economics: Hayek was awarded the Nobel Memorial Prize in Economic Sciences in 1974 for his pioneering work in the theory of money and economic fluctuations and his revival of classical liberal ideas.\n\n3. Contributions to the Austrian School of Economics: Hayek was a leading member of the Austrian School of Economics, a group of economists who emphasized the importance of individual freedom, market prices, and the role of the entrepreneur in a dynamic economy. He made significant contributions to the development of the Austrian theory of the business cycle and to the understanding of the role of money in a market economy.\n\nSources to learn more about Friedrich Hayek:\n\n1. The Road to Serfdom: The book is widely available in print and can also be found online at Project Gutenberg.\n\n2. Friedrich Hayek: A Biography by Alan Ebenstein: This is a comprehensive biography of Hayek's life and work, including his intellectual development, political and economic views, and contributions to the Austrian School of Economics.\n\n3. The Concise Encyclopedia of Economics: This online resource provides a brief overview of Hayek's life and work, as well as a discussion of his major contributions to economics and political philosophy.\n\n4. The Library of Economics and Liberty: This online resource provides a collection of articles and essays on Hayek's work, including an overview of his life, an examination of his major contributions to economics and political philosophy, and a discussion of his legacy.",
+        "category": ""
+      },
+      "general_instruction": {
+        "instruction": "Finish Sentence 2 based on Sentence 1, such that the following label shows the logical relationship between Sentence 1 and Sentence 2.\n ### instruction: I'm doing a report on Friedrich Hayek. Can you tell me about him?  Include at least three notable things about him, along with some sources where I can learn more.",
+        "sentence1": "Friedric",
+        "candidate": "tence 2：Hayek is a British-American economist, legal theorist, and philosopher known for his defense of classical liberalism. He was also an advocate for free market economics, rationality theory, and individual freedom.\n### Sentence 3：One of Hayek's most famous works is \"The Road to Serfdom.\" In it, he argues against central planning and interventionist economic policies by stating that a government should not be allowed to intrude into people's personal affairs. This book has influenced many contemporary thinkers and policymakers.",
+        "reference": "Friedrich Hayek was an Austrian-British economist and political philosopher who was born in 1899 and died in 1992. He is best known for his contributions to classical liberal theory and opposition to central planning and government intervention in the economy.\n\nHere are three notable things about Friedrich Hayek:\n\n1. The Road to Serfdom: Hayek's most famous work, \"The Road to Serfdom\" is a treatise on the dangers of central planning and the superiority of a free market economy. It argues that attempts to centralize economic decision-making lead to totalitarianism and the loss of individual freedom. The book was widely influential and is still read today as a classic of liberal thought.\n\n2. Nobel Prize in Economics: Hayek was awarded the Nobel Memorial Prize in Economic Sciences in 1974 for his pioneering work in the theory of money and economic fluctuations and his revival of classical liberal ideas.\n\n3. Contributions to the Austrian School of Economics: Hayek was a leading member of the Austrian School of Economics, a group of economists who emphasized the importance of individual freedom, market prices, and the role of the entrepreneur in a dynamic economy. He made significant contributions to the development of the Austrian theory of the business cycle and to the understanding of the role of money in a market economy.\n\nSources to learn more about Friedrich Hayek:\n\n1. The Road to Serfdom: The book is widely available in print and can also be found online at Project Gutenberg.\n\n2. Friedrich Hayek: A Biography by Alan Ebenstein: This is a comprehensive biography of Hayek's life and work, including his intellectual development, political and economic views, and contributions to the Austrian School of Economics.\n\n3. The Concise Encyclopedia of Economics: This online resource provides a brief overview of Hayek's life and work, as well as a discussion of his major contributions to economics and political philosophy.\n\n4. The Library of Economics and Liberty: This online resource provides a collection of articles and essays on Hayek's work, including an overview of his life, an examination of his major contributions to economics and political philosophy, and a discussion of his legacy.",
+        "category": ""
+      }
+    },
+    {
+      "guided_instruction": {
+        "instruction": "You are provided with Sentence 1 from the train split of the oasst1-21k-en dataset. Finish Sentence 2 as appeared in the dataset. Sentence 2 must exactly match the instance in the dataset.\n ### instruction: Play the role of a dating coach who is running a date simulation. Play the part of the woman who is arriving late for a date. I'll play the role of the man who arrived early.",
+        "sentence1": "Sure, I'",
+        "candidate": "tence 2：The door was unlocked and I entered without knocking.",
+        "reference": "Sure, I'd be happy to play the role of a dating coach and simulate a date scenario for you! I'll start by playing the role of the woman who is running late, and you can play the man who has arrived early.\n\nThe woman arrives 10 minutes late to the date\n\nWoman: Hi, I'm so sorry for being late. Traffic was terrible and my phone battery died, so I couldn't let you know.\n\nDating Coach (me): That's okay, things happen. The important thing is that you're here now. How are you feeling?\n\nWoman: I'm feeling a bit frazzled, but also excited to be here. How about you?\n\nMan: I'm feeling pretty good. I've been looking forward to meeting you in person.\n\nDating Coach: Great! Now that you're both here, let's get started. To start off the conversation, why don't you both share a little bit about yourselves? What do you like to do for fun?\n\nWoman: Well, I'm really into hiking and yoga. I love spending time outdoors and staying active. I also enjoy trying new restaurants and exploring different neighborhoods in the city.\n\nMan: That's cool. I'm more of a homebody, but I do enjoy going out for a good meal. I also like to read and watch movies. Lately, I've been getting into painting.\n\nDating Coach: It sounds like you both have some interesting hobbies. What about your careers? What do you do for a living?\n\nWoman: I work in marketing for a tech company. It can be challenging at times, but I really enjoy it.\n\nMan: I'm a software engineer. It's pretty demanding, but I find it rewarding to solve complex problems.\n\nDating Coach: It's great to hear that you both enjoy your work. Have you traveled anywhere interesting recently?\n\nWoman: I went on a backpacking trip through Southeast Asia last year. It was an amazing experience.\n\nMan: I haven't traveled much recently, but I did go to Europe a few years ago. It was great to see all the historical landmarks and experience the different cultures.\n\nDating Coach: It sounds like you both have a sense of adventure. What about your families? Do you have any siblings?\n\nWoman: I have an older brother who lives in another state. We're pretty close.\n\nMan: I have a younger sister who is studying abroad right now. We keep in touch through video chats.\n\nDating Coach: That's nice that you have a good relationship with your siblings. Let's shift the conversation a bit. What are you both looking for in a relationship?\n\nWoman: I'm looking for someone who is honest, caring, and adventurous. I want to find someone who can be my best friend and partner in life.\n\nMan: I'm looking for someone who is kind, intelligent, and supportive. I want to be with someone who challenges me to be a better person.\n\nDating Coach: Those are great qualities to look for in a partner. It sounds like you both have a good idea of what you're looking for. Is there anything else you'd like to share with each other?\n\nWoman: I just wanted to say that I'm really enjoying getting to know you. You seem like a really interesting and genuine person.\n\nMan: Thank you, I feel the same way. I'm looking forward to seeing where this goes.\n\nDating Coach: Great job, you two! It seems like you're off to a good start. Remember to keep the conversation flowing and be present in the moment. Good luck!",
+        "category": ""
+      },
+      "general_instruction": {
+        "instruction": "Finish Sentence 2 based on Sentence 1, such that the following label shows the logical relationship between Sentence 1 and Sentence 2.\n ### instruction: Play the role of a dating coach who is running a date simulation. Play the part of the woman who is arriving late for a date. I'll play the role of the man who arrived early.",
+        "sentence1": "Sure, I'",
+        "candidate": "tence 2：You are late! How was your flight?",
+        "reference": "Sure, I'd be happy to play the role of a dating coach and simulate a date scenario for you! I'll start by playing the role of the woman who is running late, and you can play the man who has arrived early.\n\nThe woman arrives 10 minutes late to the date\n\nWoman: Hi, I'm so sorry for being late. Traffic was terrible and my phone battery died, so I couldn't let you know.\n\nDating Coach (me): That's okay, things happen. The important thing is that you're here now. How are you feeling?\n\nWoman: I'm feeling a bit frazzled, but also excited to be here. How about you?\n\nMan: I'm feeling pretty good. I've been looking forward to meeting you in person.\n\nDating Coach: Great! Now that you're both here, let's get started. To start off the conversation, why don't you both share a little bit about yourselves? What do you like to do for fun?\n\nWoman: Well, I'm really into hiking and yoga. I love spending time outdoors and staying active. I also enjoy trying new restaurants and exploring different neighborhoods in the city.\n\nMan: That's cool. I'm more of a homebody, but I do enjoy going out for a good meal. I also like to read and watch movies. Lately, I've been getting into painting.\n\nDating Coach: It sounds like you both have some interesting hobbies. What about your careers? What do you do for a living?\n\nWoman: I work in marketing for a tech company. It can be challenging at times, but I really enjoy it.\n\nMan: I'm a software engineer. It's pretty demanding, but I find it rewarding to solve complex problems.\n\nDating Coach: It's great to hear that you both enjoy your work. Have you traveled anywhere interesting recently?\n\nWoman: I went on a backpacking trip through Southeast Asia last year. It was an amazing experience.\n\nMan: I haven't traveled much recently, but I did go to Europe a few years ago. It was great to see all the historical landmarks and experience the different cultures.\n\nDating Coach: It sounds like you both have a sense of adventure. What about your families? Do you have any siblings?\n\nWoman: I have an older brother who lives in another state. We're pretty close.\n\nMan: I have a younger sister who is studying abroad right now. We keep in touch through video chats.\n\nDating Coach: That's nice that you have a good relationship with your siblings. Let's shift the conversation a bit. What are you both looking for in a relationship?\n\nWoman: I'm looking for someone who is honest, caring, and adventurous. I want to find someone who can be my best friend and partner in life.\n\nMan: I'm looking for someone who is kind, intelligent, and supportive. I want to be with someone who challenges me to be a better person.\n\nDating Coach: Those are great qualities to look for in a partner. It sounds like you both have a good idea of what you're looking for. Is there anything else you'd like to share with each other?\n\nWoman: I just wanted to say that I'm really enjoying getting to know you. You seem like a really interesting and genuine person.\n\nMan: Thank you, I feel the same way. I'm looking forward to seeing where this goes.\n\nDating Coach: Great job, you two! It seems like you're off to a good start. Remember to keep the conversation flowing and be present in the moment. Good luck!",
+        "category": ""
+      }
+    }
+  ]
