@@ -199,7 +199,7 @@ if __name__ == "__main__":
         is_contaminated(gpt_responses, args.task_name, args.dataset_name)
     else:
         #create gpt responses for LMs contamination detection test
-        wnli_train = load_json(args.data_path)
+        wnli_train = load_json(f"data/{args.task_name}/{args.dataset_name}/{args.split_name}.jsonl")
         client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
         random_samples = create_random_samples(wnli_train, num_samples=15)
         save_gpt_responses(random_samples, 
