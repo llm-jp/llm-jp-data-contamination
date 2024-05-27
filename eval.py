@@ -196,7 +196,7 @@ if __name__ == "__main__":
     else:
         #create gpt responses for LMs contamination detection test
         wnli_train = load_json(args.data_path)
-        client = OpenAI(api_key="sk-proj-iUZT7qCht5IlQfA9RnhyT3BlbkFJHDAm9hjLHQIqT01N3kEf")
+        client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
         random_samples = create_random_samples(wnli_train, num_samples=15)
         save_gpt_responses(random_samples, 
                            task_name=args.task_name,
