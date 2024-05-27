@@ -178,7 +178,7 @@ if __name__ == "__main__":
                         help="the partition of dataset")
     parser.add_argument("--mode", 
                         type=str,
-                        default="get",
+                        default="eval",
                         help="generate gpt responses or eval gpt responses by metrics")
     parser.add_argument("--data_path", 
                         type=str,
