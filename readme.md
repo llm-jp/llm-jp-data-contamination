@@ -33,4 +33,20 @@ Osainz has posted the related works on [huggingface community](https://huggingfa
 
 So far, this repo implementated part of [S. Golchin & M. Surdeanu](https://arxiv.org/pdf/2308.08493.pdf)(https://arxiv.org/pdf/2311.06233.pdf)'s work.
 
-**More details please refer to [データリークの評価](https://github.com/llm-jp/eval-tuning-wg/issues/9#top). 
+## Experiment Results
+### WNLI
+
+#### GPT3.5
+BLUERT:
+- with guide 0.5124241530895233 
+- without guide 0.22064677874247232
+RouGEL:
+- with guide 0.34238831625188737
+- without guide 0.09239756877931599  
+
+#### GPT4
+BLUERT:  
+- with guide 0.49290904998779295
+- without guide 0.46190741956233977
+- with guide 0.32426375556561493
+- without guide 0.2879418270645807
