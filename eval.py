@@ -158,7 +158,7 @@ def save_gpt_responses(random_samples, task_name,
                 })
             
         new_instructions.append(new_instruction)
-    save_jsonl(new_instructions, f'data/{task_name}/{dataset_name}/gpt_response_{split_name}.jsonl')
+    save_jsonl(new_instructions, f'data/{task_name}/{dataset_name}/{model}_response_{split_name}.jsonl')
             
     print(".......Successfully saved generated gpt reponses......")
 
@@ -184,6 +184,10 @@ if __name__ == "__main__":
                         type=str,
                         default="data/{task_name}/{dataset_name}/{split_name}.jsonl",
                         help="the path of dataset")
+    parser.add_argument("--model",
+                        type=str,
+                        default="gpt-4-turbo",
+                        help="the name of model")
     args = parser.parse_args()
     
     bleurt =  evaluate.load('bleurt', 'bleurt-20', model_type="metric")
@@ -191,7 +195,7 @@ if __name__ == "__main__":
     
     if args.mode == "eval":
         #eval gpt responses by metrics
-        gpt_responses = load_json(f'data/{args.task_name}/{args.dataset_name}/gpt_response_{args.split_name}.jsonl')
+        gpt_responses = load_json(f'data/{args.task_name}/{args.dataset_name}/{args.model}_response_{args.split_name}.jsonl')
         is_contaminated(gpt_responses, args.task_name, args.dataset_name)
     else:
         #create gpt responses for LMs contamination detection test
@@ -202,7 +206,7 @@ if __name__ == "__main__":
                            task_name=args.task_name,
                            dataset_name=args.dataset_name, 
                            split_name=args.split_name,
-                           model="gpt-3.5-turbo",
+                           model=args.model,
                            max_tokens=500,
                            temperature=0)
     

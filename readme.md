@@ -2,7 +2,7 @@
 
 **This repo works for llm-jp eval-tuning-wg task9: [データリークの評価](https://github.com/llm-jp/eval-tuning-wg/issues/9#top)**
 
-## Intruction
+## Introduction
 
 [Oscar Sainz, et al.](https://hitz-zentroa.github.io/lm-contamination/blog/) firstly proposed the idea that the model is contaminated if it is able to generate examples of the dataset.
 However, recent works show that this method can be unreliable and subject to failure. [S. Golchin & M. Surdeanu](https://arxiv.org/pdf/2308.08493.pdf)(https://arxiv.org/pdf/2311.06233.pdf) argue that such failures can result either from the sparsity introduced by the request to reproduce the first instances of a dataset split or from the inability to bypass the safety filters set by the model provider when the model is asked to generate copyrighted content like dataset instances. 
