@@ -162,6 +162,15 @@ def save_gpt_responses(random_samples, task_name,
             
     print(".......Successfully saved generated gpt reponses......")
 
+def get_llmjp_response(random_samples, task_name,
+                       dataset_name,
+                       split_name,
+                       model,
+                       max_tokens,
+                       temperature):
+    pass
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--dataset_name", 
