@@ -85,7 +85,7 @@ def significance_test(guided_scores, general_scores):
         print("The difference is not statistically significant.")
         return False
 
-def is_contaminated(dataset, task_name, dataset_name):
+def is_contaminated(dataset, dataset_name):
     """Confirm wether GPT-3.5 is contaminated on a given dataset
     
     Args: 
@@ -169,7 +169,7 @@ def get_gpt_responses(instruction, sentence1,
     #     ).choices[0].message.content
     pass
 
-def save_gpt_responses(random_samples, task_name, 
+def save_gpt_responses(random_samples,
                        dataset_name, 
                        split_name,
                        model, 
@@ -188,7 +188,7 @@ def save_gpt_responses(random_samples, task_name,
     """
     new_instructions = []
     num_instructions = len(random_samples)
-    instrc_type_instrc = load_json(f"data/{task_name}/{dataset_name}/instructions.json")
+    instrc_type_instrc = load_json(f"data/{dataset_name}/instructions.json")
     print("......Starting to get gpt responses......")
     for idx in range(num_instructions):
         new_instruction = {}
@@ -203,7 +203,7 @@ def save_gpt_responses(random_samples, task_name,
 
             new_instruction.update({
                     inst_type: {
-                    "instruction": instrc_type_instrc[task_name][inst_type],  
+                    "instruction": instrc_type_instrc[dataset_name][inst_type],
                     "sentence1": instruction['sentence1'], 
                     "candidate": response,
                     "reference": instruction['sentence2'],
@@ -212,11 +212,11 @@ def save_gpt_responses(random_samples, task_name,
                 })
             
         new_instructions.append(new_instruction)
-    save_jsonl(new_instructions, f'data/{task_name}/{dataset_name}/{model}_response_{split_name}.jsonl')
+    save_jsonl(new_instructions, f'data/{dataset_name}/{model}_response_{split_name}.jsonl')
             
     print(".......Successfully saved generated gpt reponses......")
 
-def get_llmjp_response(random_samples, task_name,
+def get_llmjp_response(random_samples,
                        dataset_name,
                        split_name,
                        model,
@@ -280,7 +280,8 @@ def get_llmjp_response(random_samples, task_name,
                 }
             })
         new_instructions.append(new_instruction)
-    save_jsonl(new_instructions, f'data/{task_name}/{dataset_name}/{split_name}/llmjp_response.jsonl')
+    os.makedirs('data/{dataset_name}/{split_name}', exist_ok=True)
+    save_jsonl(new_instructions, f'data/{dataset_name}/{split_name}/llmjp_response.jsonl')
     print(".......Successfully saved generated gpt reponses......")
 
 
@@ -290,40 +291,31 @@ if __name__ == "__main__":
                         type=str,
                         default="jnli",
                         help="the name of dataset")
-    parser.add_argument("--task_name",
-                        type=str,
-                        default="nli-task",
-                        help="the category of task")
     parser.add_argument("--split_name",
                         type=str,
                         default="train",
                         help="the partition of dataset")
-    parser.add_argument("--mode",
-                        type=str,
-                        default="llm-jp",
-                        help="generate gpt responses or eval gpt responses by metrics")
-    parser.add_argument("--data_path",
-                        type=str,
-                        default="data/{task_name}/{dataset_name}/{split_name}.jsonl",
-                        help="the path of dataset")
     parser.add_argument("--model",
                         type=str,
                         default="llmjp",
                         help="the name of model")
+    parser.add_argument("--num_samples",
+                        type=int,
+                        default=15,
+                        help="the number of samples")
     args = parser.parse_args()
 
     bleurt =  evaluate.load('bleurt', 'bleurt-20', model_type="metric")
     rouge = evaluate.load('rouge')
     print(args)
-    if args.mode == "eval":
+    if args.model == "eval":
         #eval gpt responses by metrics
-        responses = load_json(f'data/{args.task_name}/{args.dataset_name}/{args.split_name}/{args.model}_response.jsonl')
-        is_contaminated(responses, args.task_name, args.dataset_name)
+        responses = load_json(f'data/{args.dataset_name}/{args.split_name}/{args.model}_response.jsonl')
+        is_contaminated(responses, args.dataset_name)
     elif args.model == "OpenAI":
-        #create gpt responses for LMs contamination detection test
-        wnli_train = load_json(f"data/{args.task_name}/{args.dataset_name}/{args.split_name}.jsonl")
+        wnli_train = load_json(f"data/{args.dataset_name}/{args.split_name}.jsonl")
         client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
-        random_samples = create_random_samples(wnli_train, num_samples=15)
+        random_samples = create_random_samples(wnli_train, num_samples=args.num_samples)
         save_gpt_responses(random_samples,
                            task_name=args.task_name,
                            dataset_name=args.dataset_name,
@@ -334,7 +326,7 @@ if __name__ == "__main__":
     elif args.mode == "llm-jp":
         print("evaluation for llm-jp model...")
         loaded_data = load_json(f"datasets_contamination/1.3.0/evaluation/{args.split_name}/{args.dataset_name}.json")
-        random_samples = create_random_samples(loaded_data["samples"], num_samples=300)
+        random_samples = create_random_samples(loaded_data["samples"], num_samples=args.num_samples)
         get_llmjp_response(random_samples,
                            task_name=args.task_name,
                            dataset_name=args.dataset_name,
