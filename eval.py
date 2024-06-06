@@ -318,7 +318,6 @@ if __name__ == "__main__":
         client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
         random_samples = create_random_samples(wnli_train, num_samples=args.num_samples)
         save_gpt_responses(random_samples,
-                           task_name=args.task_name,
                            dataset_name=args.dataset_name,
                            split_name=args.split_name,
                            model=args.model,
@@ -329,7 +328,6 @@ if __name__ == "__main__":
         loaded_data = load_json(f"datasets_contamination/1.3.0/evaluation/{args.split_name}/{args.dataset_name}.json")
         random_samples = create_random_samples(loaded_data["samples"], num_samples=args.num_samples)
         get_llmjp_response(random_samples,
-                           task_name=args.task_name,
                            dataset_name=args.dataset_name,
                            split_name=args.split_name,
                            model=args.model,
