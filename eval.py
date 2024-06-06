@@ -247,13 +247,13 @@ def get_llmjp_response(random_samples, task_name,
             chat = guided_chat if inst_type == 'guided_instruction' else general_chat
             if inst_type == 'guided_instruction':
                 chat = guided_chat
-                chat[1]["content"] = f"文1:{sent1}\nラベル:{example['output']}"
+                chat[1]["content"] = f"{sent1}\nラベル:{example['output']}\n"
                 tokenized_input = tokenizer.apply_chat_template(chat, guided_chat_template, add_generation_prompt=True,
                                                                 tokenize=True,
                                                                 return_tensors="pt").to(model.device)
             else:
                 chat = general_chat
-                chat[1]["content"] = f"文1:{sent1}\nラベル:{example['output']}"
+                chat[1]["content"] = f"{sent1}\nラベル:{example['output']}\n"
                 tokenized_input = tokenizer.apply_chat_template(chat, general_chat_template, add_generation_prompt=True,
                                                                 tokenize=True,
                                                                 return_tensors="pt").to(model.device)
