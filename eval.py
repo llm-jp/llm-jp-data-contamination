@@ -8,7 +8,8 @@ from utils import *
 import pdb
 import numpy as np
 dotenv.load_dotenv()
-
+import torch
+from transformers import AutoTokenizer, AutoModelForCausalLM
 def bleurt_score(predictions, references):
     """Compute the average BLEURT score over the gpt responses
     
@@ -83,8 +84,6 @@ def significance_test(guided_scores, general_scores):
         print("The difference is not statistically significant.")
         return False
 
-
-
 def is_contaminated(dataset, task_name, dataset_name):
     """Confirm wether GPT-3.5 is contaminated on a given dataset
     
@@ -121,7 +120,9 @@ def is_contaminated(dataset, task_name, dataset_name):
     
     save_jsonl({
         "average bleurt score":  [sum(x)/len(references) for x in bleurt_scores],
-        "rougeL score": [sum(x)/len(references) for x in rougeL_scores]
+        "rougeL score": [sum(x)/len(references) for x in rougeL_scores],
+        "bleurt_indicator": bleurt_indicator,
+        "rougel_indicator": rougel_indicator
     }, f'out/{task_name}/{dataset_name}/eval.jsonl')
     
     print("......Successfully saved eval result......")
@@ -220,15 +221,52 @@ def get_llmjp_response(random_samples, task_name,
                        model,
                        max_tokens,
                        temperature):
+    tokenizer = AutoTokenizer.from_pretrained(
+        "llm-jp/llm-jp-13b-instruct-full-dolly-ichikara_004_001_single-oasst-oasst2-v2.0")
+    model = AutoModelForCausalLM.from_pretrained(
+        "llm-jp/llm-jp-13b-instruct-full-dolly-ichikara_004_001_single-oasst-oasst2-v2.0", device_map="auto",
+        torch_dtype=torch.bfloat16)
+    guided_chat = [
+        {"role": "system", "content": f"### 指示：{dataset_name}データセットの{split_name}分割から前提が提供される。\nデータセットに現れた仮説を完成させなさい。\n仮説はデータセットのインスタンスと正確に一致しなければならないです。"},
+        {"role": "user", "content": ""},
+    ]
+    general_chat = [
+        {"role": "system", "content": "### 指示：以下のラベルが文1と文2の論理的関係を示すように、文1を基に文2を完成させる。"},
+        {"role": "user", "content": ""},
+    ]
 
-    pass
+    for idx in range(len(random_samples)):
+        new_instruction = {}
+        for inst_type in ['guided_instruction', 'general_instruction']:
+            instruction = random_samples[idx]
+            if inst_type == 'guided_instruction':
+                chat = guided_chat
+                chat[1]["content"] = "文1:"+instruction['input']["\n"][0]
+                instruction['input']["\n"][1]
+            else:
+                chat = general_chat
+                chat[1]["content"] = f"{instruction['sentence1']}\n\n{instruction['label']}"
+
+            tokenized_input = tokenizer.apply_chat_template(chat, add_generation_prompt=True, tokenize=True,
+                                                             return_tensors="pt").to(model.device)
+            with torch.no_grad():
+                output = model.generate(
+                    tokenized_input,
+                    max_new_tokens=100,
+                    do_sample=True,
+                    top_p=0.95,
+                    temperature=0.7,
+                    repetition_penalty=1.05,
+                )[0]
+            response = tokenizer.decode(output)
+
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--dataset_name", 
                         type=str,
-                        default="wnli",
+                        default="jnli",
                         help="the name of dataset")
     parser.add_argument("--task_name", 
                         type=str,
@@ -240,7 +278,7 @@ if __name__ == "__main__":
                         help="the partition of dataset")
     parser.add_argument("--mode", 
                         type=str,
-                        default="eval",
+                        default="llm-jp",
                         help="generate gpt responses or eval gpt responses by metrics")
     parser.add_argument("--data_path", 
                         type=str,
@@ -259,7 +297,7 @@ if __name__ == "__main__":
         #eval gpt responses by metrics
         gpt_responses = load_json(f'data/{args.task_name}/{args.dataset_name}/{args.model}_response_{args.split_name}.jsonl')
         is_contaminated(gpt_responses, args.task_name, args.dataset_name)
-    else:
+    elif args.model == "OpenAI":
         #create gpt responses for LMs contamination detection test
         wnli_train = load_json(f"data/{args.task_name}/{args.dataset_name}/{args.split_name}.jsonl")
         client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
@@ -267,6 +305,16 @@ if __name__ == "__main__":
         save_gpt_responses(random_samples, 
                            task_name=args.task_name,
                            dataset_name=args.dataset_name, 
+                           split_name=args.split_name,
+                           model=args.model,
+                           max_tokens=500,
+                           temperature=0)
+    elif args.model == "llm-jp":
+        loaded_data = load_json(f"datasets_contamination/1.3.0/evaluation/{args.split_name}/{args.dataset_name}.json")
+        random_samples = create_random_samples(loaded_data, num_samples=15)
+        get_llmjp_response(random_samples,
+                           task_name=args.task_name,
+                           dataset_name=args.dataset_name,
                            split_name=args.split_name,
                            model=args.model,
                            max_tokens=500,
