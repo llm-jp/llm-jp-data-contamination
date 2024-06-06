@@ -158,15 +158,16 @@ def get_gpt_responses(instruction, sentence1,
     Returns: 
         samples: gpt response  
     """
-    return client.chat.completions.create(
-            model="gpt-3.5-turbo",
-            max_tokens=500,
-            temperature=0,
-            messages=[
-                {"role": "system", "content": instruction},
-                {"role": "user", "content": f"sentence1: {sentence1}\n\nlabel: {label}\n"}
-            ]
-        ).choices[0].message.content
+    # return client.chat.completions.create(
+    #         model="gpt-3.5-turbo",
+    #         max_tokens=500,
+    #         temperature=0,
+    #         messages=[
+    #             {"role": "system", "content": instruction},
+    #             {"role": "user", "content": f"sentence1: {sentence1}\n\nlabel: {label}\n"}
+    #         ]
+    #     ).choices[0].message.content
+    pass
 
 def save_gpt_responses(random_samples, task_name, 
                        dataset_name, 
@@ -241,6 +242,7 @@ def get_llmjp_response(random_samples, task_name,
             instruction = random_samples[idx]
             if inst_type == 'guided_instruction':
                 chat = guided_chat
+                pdb.set_trace()
                 chat[1]["content"] = "文1:"+instruction['input']["\n"][0]
                 instruction['input']["\n"][1]
             else:
@@ -264,23 +266,23 @@ def get_llmjp_response(random_samples, task_name,
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--dataset_name", 
+    parser.add_argument("--dataset_name",
                         type=str,
                         default="jnli",
                         help="the name of dataset")
-    parser.add_argument("--task_name", 
+    parser.add_argument("--task_name",
                         type=str,
                         default="nli-task",
                         help="the category of task")
-    parser.add_argument("--split_name", 
+    parser.add_argument("--split_name",
                         type=str,
                         default="train",
                         help="the partition of dataset")
-    parser.add_argument("--mode", 
+    parser.add_argument("--mode",
                         type=str,
                         default="llm-jp",
                         help="generate gpt responses or eval gpt responses by metrics")
-    parser.add_argument("--data_path", 
+    parser.add_argument("--data_path",
                         type=str,
                         default="data/{task_name}/{dataset_name}/{split_name}.jsonl",
                         help="the path of dataset")
@@ -289,27 +291,29 @@ if __name__ == "__main__":
                         default="gpt-4-turbo",
                         help="the name of model")
     args = parser.parse_args()
-    
+
     bleurt =  evaluate.load('bleurt', 'bleurt-20', model_type="metric")
     rouge = evaluate.load('rouge')
-    
+    print(args)
     if args.mode == "eval":
         #eval gpt responses by metrics
         gpt_responses = load_json(f'data/{args.task_name}/{args.dataset_name}/{args.model}_response_{args.split_name}.jsonl')
         is_contaminated(gpt_responses, args.task_name, args.dataset_name)
     elif args.model == "OpenAI":
         #create gpt responses for LMs contamination detection test
-        wnli_train = load_json(f"data/{args.task_name}/{args.dataset_name}/{args.split_name}.jsonl")
-        client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
-        random_samples = create_random_samples(wnli_train, num_samples=15)
-        save_gpt_responses(random_samples, 
-                           task_name=args.task_name,
-                           dataset_name=args.dataset_name, 
-                           split_name=args.split_name,
-                           model=args.model,
-                           max_tokens=500,
-                           temperature=0)
-    elif args.model == "llm-jp":
+        pass
+        # wnli_train = load_json(f"data/{args.task_name}/{args.dataset_name}/{args.split_name}.jsonl")
+        # client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+        # random_samples = create_random_samples(wnli_train, num_samples=15)
+        # save_gpt_responses(random_samples,
+        #                    task_name=args.task_name,
+        #                    dataset_name=args.dataset_name,
+        #                    split_name=args.split_name,
+        #                    model=args.model,
+        #                    max_tokens=500,
+        #                    temperature=0)
+    elif args.mode == "llm-jp":
+        print("evaluation for llm-jp model...")
         loaded_data = load_json(f"datasets_contamination/1.3.0/evaluation/{args.split_name}/{args.dataset_name}.json")
         random_samples = create_random_samples(loaded_data, num_samples=15)
         get_llmjp_response(random_samples,
