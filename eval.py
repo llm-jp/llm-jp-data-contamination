@@ -281,7 +281,8 @@ def get_llmjp_response(random_samples,
                 }
             })
         new_instructions.append(new_instruction)
-    os.makedirs('data/{dataset_name}/{split_name}', exist_ok=True)
+    dir_path = f'data/{dataset_name}/{split_name}'
+    os.makedirs(dir_path, exist_ok=True)
     save_jsonl(new_instructions, f'data/{dataset_name}/{split_name}/llmjp_response.jsonl')
     print(".......Successfully saved generated gpt reponses......")
 
