@@ -244,14 +244,16 @@ def get_llmjp_response(random_samples, task_name,
             example = random_samples[idx]
             sent1=example['input'].split("\n")[0]
             sent2=example['input'].split("\n")[1]
-            chat[1]["content"] = f"文1:{sent1}\nラベル:{example['output']}"
+            chat = guided_chat if inst_type == 'guided_instruction' else general_chat
             if inst_type == 'guided_instruction':
                 chat = guided_chat
+                chat[1]["content"] = f"文1:{sent1}\nラベル:{example['output']}"
                 tokenized_input = tokenizer.apply_chat_template(chat, guided_chat_template, add_generation_prompt=True,
                                                                 tokenize=True,
                                                                 return_tensors="pt").to(model.device)
             else:
                 chat = general_chat
+                chat[1]["content"] = f"文1:{sent1}\nラベル:{example['output']}"
                 tokenized_input = tokenizer.apply_chat_template(chat, general_chat_template, add_generation_prompt=True,
                                                                 tokenize=True,
                                                                 return_tensors="pt").to(model.device)
