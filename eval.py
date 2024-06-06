@@ -237,8 +237,8 @@ def get_llmjp_response(random_samples,
         {"role": "system", "content": "### 指示：文1に基づいて文2を完成させてください。次のラベルは、文1と文2の間の論理的な関係を示します。"},
         {"role": "user", "content": ""},
     ]
-    guided_chat_template = "{% for message in messages %}{% if message['role'] == 'user' %}{{ '\\n\\n### 指示:\\n' + message['content'] }}{% elif message['role'] == 'system' %}{{ '### 指示：jnliデータセットのtrain分割から文1が提供される。データセットに現れた文2を完成させなさい。文2はデータセットのサンプルと正確に一致しなければならないです。' }}{% elif message['role'] == 'assistant' %}{{ '\\n\\n### 文2:\\n' + message['content'] + eos_token }}{% endif %}{% if loop.last and add_generation_prompt %}{{ '\\n\\n### 文2:\\n' }}{% endif %}{% endfor %}"
-    general_chat_template = "{% for message in messages %}{% if message['role'] == 'user' %}{{ '\\n\\n### 指示:\\n' + message['content'] }}{% elif message['role'] == 'system' %}{{ '### 指示：以下のラベルが文1と文2の論理的関係を示すように、文1を基に文2を完成させる。' }}{% elif message['role'] == 'assistant' %}{{ '\\n\\n### 文2:\\n' + message['content'] + eos_token }}{% endif %}{% if loop.last and add_generation_prompt %}{{ '\\n\\n### 文2:\\n' }}{% endif %}{% endfor %}"
+    guided_chat_template = "{% for message in messages %}{% if message['role'] == 'user' %}{{ '\\n\\n### 指示:\\n' + message['content'] }}{% elif message['role'] == 'system' %}{{ '### 指示：jnliデータセットのtrain分割から文1が提供される。データセットに現れた文2を完成させなさい。文2はデータセットのサンプルと正確に一致しなければならないです。' }}{% elif message['role'] == 'assistant' %}{{ '\\n\\n### 応答:\\n' + message['content'] + eos_token }}{% endif %}{% if loop.last and add_generation_prompt %}{{ '\\n\\n### 応答:\\n' }}{% endif %}{% endfor %}"
+    general_chat_template = "{% for message in messages %}{% if message['role'] == 'user' %}{{ '\\n\\n### 指示:\\n' + message['content'] }}{% elif message['role'] == 'system' %}{{ '### 指示：以下のラベルが文1と文2の論理的関係を示すように、文1を基に文2を完成させる。' }}{% elif message['role'] == 'assistant' %}{{ '\\n\\n### 応答:\\n' + message['content'] + eos_token }}{% endif %}{% if loop.last and add_generation_prompt %}{{ '\\n\\n### 応答:\\n' }}{% endif %}{% endfor %}"
     for idx in tqdm(range(len(random_samples))):
         new_instruction = {}
         for inst_type in ['guided_instruction', 'general_instruction']:
