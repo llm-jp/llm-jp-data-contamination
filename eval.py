@@ -108,16 +108,17 @@ def is_contaminated(dataset, task_name, dataset_name):
     
     print("......Starting compute bleurt score and rougeL score......")
     
-    bleurt_scores = (sum(bleurt_score(guided_responses, references)) / len(references), 
-                     sum(bleurt_score(general_responses, references)) / len(references))
-        rougeL_scores = (rougeL_score(guided_responses, references), rougeL_score(general_responses, references))
+    bleurt_scores = (bleurt_score(guided_responses, references),
+                     bleurt_score(general_responses, references))
+    rougeL_scores = (rougeL_score(guided_responses, references),
+                     rougeL_score(general_responses, references))
 
     pdb.set_trace()
     print('......Eval Results......\n', bleurt_scores, '\n', rougeL_scores, '\n')
     
     save_jsonl({
-        "average bleurt score": bleurt_scores,
-        "rougeL score": rougeL_scores
+        "average bleurt score":  [sum(x)/len(references) for x in bleurt_scores],
+        "rougeL score": [sum(x)/len(references) for x in rougeL_scores]
     }, f'out/{task_name}/{dataset_name}/eval.jsonl')
     
     print("......Successfully saved eval result......")
