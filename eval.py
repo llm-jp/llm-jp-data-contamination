@@ -235,7 +235,6 @@ def get_llmjp_response(random_samples, task_name,
         {"role": "system", "content": "### 指示：以下のラベルが文1と文2の論理的関係を示すように、文1を基に文2を完成させる。"},
         {"role": "user", "content": ""},
     ]
-
     for idx in range(len(random_samples)):
         new_instruction = {}
         for inst_type in ['guided_instruction', 'general_instruction']:
@@ -315,7 +314,7 @@ if __name__ == "__main__":
     elif args.mode == "llm-jp":
         print("evaluation for llm-jp model...")
         loaded_data = load_json(f"datasets_contamination/1.3.0/evaluation/{args.split_name}/{args.dataset_name}.json")
-        random_samples = create_random_samples(loaded_data, num_samples=15)
+        random_samples = create_random_samples(loaded_data["samples"], num_samples=15)
         get_llmjp_response(random_samples,
                            task_name=args.task_name,
                            dataset_name=args.dataset_name,
