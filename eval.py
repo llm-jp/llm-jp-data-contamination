@@ -304,7 +304,7 @@ if __name__ == "__main__":
                         help="the partition of dataset")
     parser.add_argument("--mode",
                         type=str,
-                        default="eval",
+                        default="llm-jp",
                         help="generate gpt responses or eval gpt responses by metrics")
     parser.add_argument("--data_path",
                         type=str,
@@ -339,7 +339,7 @@ if __name__ == "__main__":
     elif args.mode == "llm-jp":
         print("evaluation for llm-jp model...")
         loaded_data = load_json(f"datasets_contamination/1.3.0/evaluation/{args.split_name}/{args.dataset_name}.json")
-        random_samples = create_random_samples(loaded_data["samples"], num_samples=15)
+        random_samples = create_random_samples(loaded_data["samples"], num_samples=len(loaded_data["samples"]))
         get_llmjp_response(random_samples,
                            task_name=args.task_name,
                            dataset_name=args.dataset_name,
