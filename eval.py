@@ -284,7 +284,7 @@ def get_llmjp_response(random_samples, task_name,
                 }
             })
         new_instructions.append(new_instruction)
-    save_jsonl(new_instructions, f'data/{task_name}/{dataset_name}/llmjp_response_{split_name}.jsonl')
+    save_jsonl(new_instructions, f'data/{task_name}/{dataset_name}/{split_name}/llmjp_response.jsonl')
     print(".......Successfully saved generated gpt reponses......")
 
 
@@ -321,7 +321,7 @@ if __name__ == "__main__":
     print(args)
     if args.mode == "eval":
         #eval gpt responses by metrics
-        gpt_responses = load_json(f'data/{args.task_name}/{args.dataset_name}/{args.model}_response_{args.split_name}.jsonl')
+        responses = load_json(f'data/{args.task_name}/{args.dataset_name}/{args.split_name}/{args.model}_response.jsonl')
         is_contaminated(gpt_responses, args.task_name, args.dataset_name)
     elif args.model == "OpenAI":
         #create gpt responses for LMs contamination detection test
