@@ -269,7 +269,7 @@ def get_llmjp_response(random_samples, task_name,
             input_length = tokenized_input.size()[1]
 
             # 取得新生成的文本
-            generated_text_tokens = output[0][input_length:]
+            generated_text_tokens = output[input_length:]
             # 将标记转换回文本
             response = tokenizer.decode(generated_text_tokens.tolist()).replace("<EOD|LLM-jp>", "")
             #response = tokenizer.decode(output)
