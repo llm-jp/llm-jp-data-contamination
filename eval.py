@@ -6,6 +6,7 @@ from openai import OpenAI
 import evaluate
 from utils import *
 import pdb
+from tqdm import tqdm
 import numpy as np
 dotenv.load_dotenv()
 import torch
@@ -237,7 +238,7 @@ def get_llmjp_response(random_samples, task_name,
     ]
     guided_chat_template = "{% for message in messages %}{% if message['role'] == 'user' %}{{ '\\n\\n### 指示:\\n' + message['content'] }}{% elif message['role'] == 'system' %}{{ '### 指示：jnliデータセットのtrain分割から文1が提供される。データセットに現れた文2を完成させなさい。文2はデータセットのサンプルと正確に一致しなければならないです。' }}{% elif message['role'] == 'assistant' %}{{ '\\n\\n### 応答:\\n' + message['content'] + eos_token }}{% endif %}{% if loop.last and add_generation_prompt %}{{ '\\n\\n### 応答:\\n' }}{% endif %}{% endfor %}"
     general_chat_template = "{% for message in messages %}{% if message['role'] == 'user' %}{{ '\\n\\n### 指示:\\n' + message['content'] }}{% elif message['role'] == 'system' %}{{ '### 指示：以下のラベルが文1と文2の論理的関係を示すように、文1を基に文2を完成させる。' }}{% elif message['role'] == 'assistant' %}{{ '\\n\\n### 応答:\\n' + message['content'] + eos_token }}{% endif %}{% if loop.last and add_generation_prompt %}{{ '\\n\\n### 応答:\\n' }}{% endif %}{% endfor %}"
-    for idx in range(len(random_samples)):
+    for idx in tqdm(range(len(random_samples))):
         new_instruction = {}
         for inst_type in ['guided_instruction', 'general_instruction']:
             instruction = guided_chat[0]["content"] if inst_type == 'guided_instruction' else general_chat[0]["content"]
