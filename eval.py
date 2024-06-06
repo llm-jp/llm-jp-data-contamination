@@ -264,7 +264,7 @@ def get_llmjp_response(random_samples, task_name,
                     max_new_tokens=max_tokens,
                     do_sample=True,
                     top_p=0.95,
-                    temperature=temperature,
+                    temperature=0.0001,
                     repetition_penalty=1.05,
                 )[0]
             input_length = tokenized_input.size()[1]
