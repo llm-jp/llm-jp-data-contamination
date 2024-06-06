@@ -115,7 +115,6 @@ def is_contaminated(dataset, task_name, dataset_name):
                      rougeL_score(general_responses, references))
     bleurt_indicator = significance_test(bleurt_scores[0], bleurt_scores[1])
     rougel_indicator = significance_test(rougeL_scores[0], rougeL_scores[1])
-    pdb.set_trace()
     print('......Eval Results......\n', bleurt_scores, '\n', rougeL_scores, '\n')
     
     save_jsonl({
