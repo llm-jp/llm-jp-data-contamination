@@ -266,7 +266,13 @@ def get_llmjp_response(random_samples, task_name,
                     temperature=0.7,
                     repetition_penalty=1.05,
                 )[0]
-            response = tokenizer.decode(output)
+            input_length = tokenized_input.size()[1]
+
+            # 取得新生成的文本
+            generated_text_tokens = output[0][input_length:]
+            # 将标记转换回文本
+            response = tokenizer.decode(generated_text_tokens.tolist()).replace("<EOD|LLM-jp>", "")
+            #response = tokenizer.decode(output)
             new_instruction.update({
                 inst_type: {
                     "instruction": instruction,
