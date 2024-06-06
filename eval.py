@@ -122,7 +122,7 @@ def is_contaminated(dataset, task_name, dataset_name):
         "rougeL score": [sum(x)/len(references) for x in rougeL_scores],
         "bleurt_indicator": bleurt_indicator,
         "rougel_indicator": rougel_indicator
-    }, f'out/{task_name}/{dataset_name}/eval.jsonl')
+    }, f'out/{task_name}/{dataset_name}/train/data_contamination_result.jsonl')
     
     print("......Successfully saved eval result......")
     
@@ -304,7 +304,7 @@ if __name__ == "__main__":
                         help="the partition of dataset")
     parser.add_argument("--mode",
                         type=str,
-                        default="llm-jp",
+                        default="eval",
                         help="generate gpt responses or eval gpt responses by metrics")
     parser.add_argument("--data_path",
                         type=str,
@@ -322,7 +322,7 @@ if __name__ == "__main__":
     if args.mode == "eval":
         #eval gpt responses by metrics
         responses = load_json(f'data/{args.task_name}/{args.dataset_name}/{args.split_name}/{args.model}_response.jsonl')
-        is_contaminated(gpt_responses, args.task_name, args.dataset_name)
+        is_contaminated(responses, args.task_name, args.dataset_name)
     elif args.model == "OpenAI":
         #create gpt responses for LMs contamination detection test
         pass
