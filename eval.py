@@ -230,7 +230,7 @@ def get_llmjp_response(random_samples,
         torch_dtype=torch.bfloat16)
     new_instructions = []
     guided_chat = [
-        {"role": "system", "content": f"### 指示：次の文1は、{dataset_name}データセットの{split_name}分割から提供されています。\nデータセットに表示された通りに、文2を完成させてください。\n文2はデータセット内のインスタンスと完全に一致する必要があります。"},
+        {"role": "system", "content": f"### 指示：次の文1は、{dataset_name}データセットの{split_name}分割から提供されています。\n文1の後にあるラベルは、文1と文2の間の論理的な関係を示します。\n文2はデータセット内のインスタンスと完全に一致する必要があります。\nデータセットに表示された通りに、文2を完成させてください。"},
         {"role": "user", "content": ""},
     ]
     general_chat = [
