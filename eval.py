@@ -246,7 +246,6 @@ def get_llmjp_response(random_samples, task_name,
             sent1=example['input'].split("\n")[0]
             sent2=example['input'].split("\n")[1]
             label = "含意" if example['output'] == "entailment" else "矛盾" if example['output'] == "contradiction" else "中立"
-            chat = guided_chat if inst_type == 'guided_instruction' else general_chat
             if inst_type == 'guided_instruction':
                 chat = guided_chat
                 chat[1]["content"] = f"{sent1}\nラベル:{label}\n"
@@ -262,19 +261,15 @@ def get_llmjp_response(random_samples, task_name,
             with torch.no_grad():
                 output = model.generate(
                     tokenized_input,
-                    max_new_tokens=100,
+                    max_new_tokens=max_tokens,
                     do_sample=True,
                     top_p=0.95,
-                    temperature=0.7,
+                    temperature=temperature,
                     repetition_penalty=1.05,
                 )[0]
             input_length = tokenized_input.size()[1]
-
-            # 取得新生成的文本
             generated_text_tokens = output[input_length:]
-            # 将标记转换回文本
             response = tokenizer.decode(generated_text_tokens.tolist()).replace("<EOD|LLM-jp>", "")
-            #response = tokenizer.decode(output)
             new_instruction.update({
                 inst_type: {
                     "instruction": instruction,
@@ -326,17 +321,16 @@ if __name__ == "__main__":
         is_contaminated(responses, args.task_name, args.dataset_name)
     elif args.model == "OpenAI":
         #create gpt responses for LMs contamination detection test
-        pass
-        # wnli_train = load_json(f"data/{args.task_name}/{args.dataset_name}/{args.split_name}.jsonl")
-        # client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
-        # random_samples = create_random_samples(wnli_train, num_samples=15)
-        # save_gpt_responses(random_samples,
-        #                    task_name=args.task_name,
-        #                    dataset_name=args.dataset_name,
-        #                    split_name=args.split_name,
-        #                    model=args.model,
-        #                    max_tokens=500,
-        #                    temperature=0)
+        wnli_train = load_json(f"data/{args.task_name}/{args.dataset_name}/{args.split_name}.jsonl")
+        client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+        random_samples = create_random_samples(wnli_train, num_samples=15)
+        save_gpt_responses(random_samples,
+                           task_name=args.task_name,
+                           dataset_name=args.dataset_name,
+                           split_name=args.split_name,
+                           model=args.model,
+                           max_tokens=500,
+                           temperature=0)
     elif args.mode == "llm-jp":
         print("evaluation for llm-jp model...")
         loaded_data = load_json(f"datasets_contamination/1.3.0/evaluation/{args.split_name}/{args.dataset_name}.json")
