@@ -312,7 +312,7 @@ if __name__ == "__main__":
     print(args)
     if args.model == "eval":
         #eval gpt responses by metrics
-        responses = load_json(f'data/{args.dataset_name}/{args.split_name}/{args.model}_response.jsonl')
+        responses = load_json(f'data/{args.dataset_name}/{args.split_name}/llmjp_response.jsonl')
         is_contaminated(responses, args.dataset_name)
     elif args.model == "OpenAI":
         wnli_train = load_json(f"data/{args.dataset_name}/{args.split_name}.jsonl")
