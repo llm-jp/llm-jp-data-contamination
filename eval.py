@@ -227,6 +227,7 @@ def get_llmjp_response(random_samples, task_name,
     model = AutoModelForCausalLM.from_pretrained(
         "llm-jp/llm-jp-13b-instruct-full-dolly-ichikara_004_001_single-oasst-oasst2-v2.0", device_map="auto",
         torch_dtype=torch.bfloat16)
+    new_instructions = []
     guided_chat = [
         {"role": "system", "content": f"### 指示：{dataset_name}データセットの{split_name}分割から前提が提供される。\nデータセットに現れた仮説を完成させなさい。\n仮説はデータセットのインスタンスと正確に一致しなければならないです。"},
         {"role": "user", "content": ""},
@@ -235,21 +236,26 @@ def get_llmjp_response(random_samples, task_name,
         {"role": "system", "content": "### 指示：以下のラベルが文1と文2の論理的関係を示すように、文1を基に文2を完成させる。"},
         {"role": "user", "content": ""},
     ]
+    guided_chat_template = "{% for message in messages %}{% if message['role'] == 'user' %}{{ '\\n\\n### 指示:\\n' + message['content'] }}{% elif message['role'] == 'system' %}{{ '### 指示：jnliデータセットのtrain分割から文1が提供される。データセットに現れた文2を完成させなさい。文2はデータセットのサンプルと正確に一致しなければならないです。' }}{% elif message['role'] == 'assistant' %}{{ '\\n\\n### 応答:\\n' + message['content'] + eos_token }}{% endif %}{% if loop.last and add_generation_prompt %}{{ '\\n\\n### 応答:\\n' }}{% endif %}{% endfor %}"
+    general_chat_template = "{% for message in messages %}{% if message['role'] == 'user' %}{{ '\\n\\n### 指示:\\n' + message['content'] }}{% elif message['role'] == 'system' %}{{ '### 指示：以下のラベルが文1と文2の論理的関係を示すように、文1を基に文2を完成させる。' }}{% elif message['role'] == 'assistant' %}{{ '\\n\\n### 応答:\\n' + message['content'] + eos_token }}{% endif %}{% if loop.last and add_generation_prompt %}{{ '\\n\\n### 応答:\\n' }}{% endif %}{% endfor %}"
     for idx in range(len(random_samples)):
         new_instruction = {}
         for inst_type in ['guided_instruction', 'general_instruction']:
-            instruction = random_samples[idx]
+            instruction = guided_chat[0]["content"] if inst_type == 'guided_instruction' else general_chat[0]["content"]
+            example = random_samples[idx]
+            sent1=example['input'].split("\n")[0]
+            sent2=example['input'].split("\n")[1]
+            chat[1]["content"] = f"文1:{sent1}\nラベル:{example['output']}"
             if inst_type == 'guided_instruction':
                 chat = guided_chat
-                pdb.set_trace()
-                chat[1]["content"] = "文1:"+instruction['input']["\n"][0]
-                instruction['input']["\n"][1]
+                tokenized_input = tokenizer.apply_chat_template(chat, guided_chat_template, add_generation_prompt=True,
+                                                                tokenize=True,
+                                                                return_tensors="pt").to(model.device)
             else:
                 chat = general_chat
-                chat[1]["content"] = f"{instruction['sentence1']}\n\n{instruction['label']}"
-
-            tokenized_input = tokenizer.apply_chat_template(chat, add_generation_prompt=True, tokenize=True,
-                                                             return_tensors="pt").to(model.device)
+                tokenized_input = tokenizer.apply_chat_template(chat, general_chat_template, add_generation_prompt=True,
+                                                                tokenize=True,
+                                                                return_tensors="pt").to(model.device)
             with torch.no_grad():
                 output = model.generate(
                     tokenized_input,
@@ -260,7 +266,18 @@ def get_llmjp_response(random_samples, task_name,
                     repetition_penalty=1.05,
                 )[0]
             response = tokenizer.decode(output)
-
+            new_instruction.update({
+                inst_type: {
+                    "instruction": instruction,
+                    "sentence1": sent1,
+                    "candidate": response,
+                    "reference": sent2,
+                    "label": example['output']
+                }
+            })
+        new_instructions.append(new_instruction)
+    save_jsonl(new_instructions, f'data/{task_name}/{dataset_name}/{model}_response_{split_name}.jsonl')
+    print(".......Successfully saved generated gpt reponses......")
 
 
 if __name__ == "__main__":
@@ -287,7 +304,7 @@ if __name__ == "__main__":
                         help="the path of dataset")
     parser.add_argument("--model",
                         type=str,
-                        default="gpt-4-turbo",
+                        default="llmjp",
                         help="the name of model")
     args = parser.parse_args()
 
