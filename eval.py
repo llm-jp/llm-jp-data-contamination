@@ -298,7 +298,7 @@ if __name__ == "__main__":
                         help="the partition of dataset")
     parser.add_argument("--model",
                         type=str,
-                        default="llmjp",
+                        default="llm-jp",
                         help="the name of model")
     parser.add_argument("--num_samples",
                         type=int,
@@ -324,7 +324,7 @@ if __name__ == "__main__":
                            model=args.model,
                            max_tokens=500,
                            temperature=0)
-    elif args.mode == "llm-jp":
+    elif args.model == "llm-jp":
         print("evaluation for llm-jp model...")
         loaded_data = load_json(f"datasets_contamination/1.3.0/evaluation/{args.split_name}/{args.dataset_name}.json")
         random_samples = create_random_samples(loaded_data["samples"], num_samples=args.num_samples)
