@@ -296,7 +296,7 @@ if __name__ == "__main__":
                         help="the name of dataset")
     parser.add_argument("--task_name",
                         type=str,
-                        default="jnli",
+                        default="nli-task",
                         help="the category of task")
     parser.add_argument("--split_name",
                         type=str,
