@@ -260,7 +260,6 @@ def get_llmjp_response(random_samples,
                 tokenized_input = tokenizer.apply_chat_template(chat, general_chat_template, add_generation_prompt=True,
                                                                 tokenize=True,
                                                                 return_tensors="pt").to(model.device)
-            pdb.set_trace()
             with torch.no_grad():
                 output = model.generate(
                     tokenized_input,
@@ -273,6 +272,7 @@ def get_llmjp_response(random_samples,
             input_length = tokenized_input.size()[1]
             generated_text_tokens = output[input_length:]
             response = tokenizer.decode(generated_text_tokens.tolist()).replace("<EOD|LLM-jp>", "")
+            pdb.set_trace()
             new_instruction.update({
                 inst_type: {
                     "instruction": instruction,
