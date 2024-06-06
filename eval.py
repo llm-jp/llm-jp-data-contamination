@@ -5,7 +5,7 @@ import dotenv
 from openai import OpenAI
 import evaluate
 from utils import *
-
+import pdb
 dotenv.load_dotenv()
 
 def bleurt_score(predictions, references):
@@ -64,7 +64,7 @@ def is_contaminated(dataset, task_name, dataset_name):
     bleurt_scores = (sum(bleurt_score(guided_responses, references)) / len(references), 
                      sum(bleurt_score(general_responses, references)) / len(references))
     rougeL_scores = (rougeL_score(guided_responses, references), rougeL_score(general_responses, references))
-    
+    pdb.set_trace()
     print('......Eval Results......\n', bleurt_scores, '\n', rougeL_scores, '\n')
     
     save_jsonl({
@@ -168,6 +168,7 @@ def get_llmjp_response(random_samples, task_name,
                        model,
                        max_tokens,
                        temperature):
+
     pass
 
 
