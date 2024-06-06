@@ -53,7 +53,7 @@ def significance_test(guided_scores, general_scores):
     def bootstrap_resample(data, n_samples):
         pdb.set_trace()
         indices = np.random.randint(0, len(data), (n_samples, len(data)))
-        samples = data[indices]
+        samples = np.array(data)[indices]
         return samples
 
     # Generate bootstrap samples
