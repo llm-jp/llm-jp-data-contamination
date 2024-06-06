@@ -21,8 +21,8 @@ SAVE_PATHS = {
 }
 
 def save_jsonl(data, fpath):
-    with open(fpath, 'w+') as f:
-        json.dump(data, f, indent=2)
+    with open(fpath, 'w+', encoding='utf-8') as f:
+        json.dump(data, f, ensure_ascii=False, indent=2)
         
 def load_json(fpath):
     with open(fpath) as f:
