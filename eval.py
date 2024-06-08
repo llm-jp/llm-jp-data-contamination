@@ -240,6 +240,13 @@ def get_llmjp_response(random_samples,
             tokenized_input = tokenizer.apply_chat_template(chat, chat_template, add_generation_prompt=True,
                                                             tokenize=True,
                                                             return_tensors="pt").to(model.device)
+            if idx == 0:
+                if inst_type == 'guided_instruction':
+                    print("Guided Template Example")
+                    print(tokenizer.decode(tokenized_input[0]))
+                else:
+                    print("General Template Example")
+                    print(tokenizer.decode(tokenized_input[0]))
             with torch.no_grad():
                 output = model.generate(
                     tokenized_input,
