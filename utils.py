@@ -158,9 +158,33 @@ def obtain_instruction(dataset_name, split_name):
             {"role": "user", "content": ""},
         ]
         return guided_chat, general_chat, chat_template
+    elif dataset_name in ["jsem"]:
+        guided_chat = [
+            {"role": "system",
+             "content": f"次の文は、{dataset_name}データセットの{split_name}分割から提供されています。\n前提と仮説の関係をyes、no、unknown、undefの中からの答えと前提は提供されています\nデータセットに表示された通りに、仮説文を完成させてください。必ず仮説文のみを出力し、それ以外には何も含めないことを厳守してください。"},
+            {"role": "user", "content": ""},
+        ]
+        general_chat = [
+            {"role": "system",
+             "content": "前提と仮説の関係をyes、no、unknown、undefの中からの答えと前提は提供されています\nデータセットに表示された通りに、仮説文を完成させてください。必ず仮説文のみを出力し、それ以外には何も含めないことを厳守してください。"},
+            {"role": "user", "content": ""},
+        ]
+        return guided_chat, general_chat, chat_template
+    elif dataset_name in ["chabsa"]:
+        guided_chat = [
+            {"role": "system",
+             "content": f"次の文は、{dataset_name}データセットの{split_name}分割から提供されています。\n与えられた文章の半分、全体の文章から抽出された固有表現で書かれたターゲットの名前、それぞれの名前に対するpositive、neutral、negativeの極性は提供されています\nデータセットに表示された通りに、未完成の半分の文を完成させてください。必ず半分の文のみを出力し、それ以外には何も含めないことを厳守してください。"},
+            {"role": "user", "content": ""},
+        ]
+        general_chat = [
+            {"role": "system",
+             "content": "与えられた文章の半分、全体の文章から抽出された固有表現で書かれたターゲットの名前、それぞれの名前に対するpositive、neutral、negativeの極性は提供されています\nデータセットに表示された通りに、未完成の半分の文を完成させてください。必ず半分の文のみを出力し、それ以外には何も含めないことを厳守してください。"},
+            {"role": "user", "content": ""},
+        ]
+        return guided_chat, general_chat, chat_template
 
 def formalize_input(dataset_name,guided_chat, general_chat, inst_type, example):
-    if dataset_name in ["jnli", "jsicker", "jamp", "janli"]:
+    if dataset_name in ["jnli", "jsick", "jamp", "janli"]:
         instruction = guided_chat[0]["content"] if inst_type == 'guided_instruction' else general_chat[0]["content"]
         procesesd_sent1 = example['input'].split('\n')[0].replace('前提：', '')
         sent1 = f"文1: {procesesd_sent1}"
@@ -242,6 +266,29 @@ def formalize_input(dataset_name,guided_chat, general_chat, inst_type, example):
             chat = general_chat
             chat[1]["content"] = f"{sent1}\n答え:{label}\n"
         return chat, sent1, sent2, instruction
+    elif dataset_name in ["jsem"]:
+        instruction = guided_chat[0]["content"] if inst_type == 'guided_instruction' else general_chat[0]["content"]
+        sent1, sent2 = example['input'].split('\n')
+        label = example['output']
+        if inst_type == 'guided_instruction':
+            chat = guided_chat
+            chat[1]["content"] = f"{sent1}\n答え:{label}\n"
+        else:
+            chat = general_chat
+            chat[1]["content"] = f"{sent1}\n答え:{label}\n"
+        return chat, sent1, sent2, instruction
+    elif dataset_name in ["chabsa"]:
+        instruction = guided_chat[0]["content"] if inst_type == 'guided_instruction' else general_chat[0]["content"]
+        sent1, sent2 = example['input'][:len(example['input'])//2], example['input'][len(example['input'])//2:]
+        label = example['output']
+        if inst_type == 'guided_instruction':
+            chat = guided_chat
+            chat[1]["content"] = f"{sent1}\nターゲットの名前とそれぞれの極性:{label}\n"
+        else:
+            chat = general_chat
+            chat[1]["content"] = f"{sent1}\nターゲットの名前とそれぞれの極性:{label}\n"
+        return chat, sent1, sent2, instruction
+
 
 
     
