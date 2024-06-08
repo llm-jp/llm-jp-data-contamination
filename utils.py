@@ -58,8 +58,8 @@ def obtain_instruction(dataset_name, split_name):
             {"role": "user", "content": ""},
         ]
         return guided_chat, general_chat, chat_template
-    elif dataset_name in ["alt-e-to-j.json", "alt-j-to-e.json"]:
-        if dataset_name == "alt-e-to-j.json":
+    elif dataset_name in ["alt-e-to-j", "alt-j-to-e"]:
+        if dataset_name == "alt-e-to-j":
             info = "英語から日本語"
         else:
             info = "日本語から英語"
@@ -92,11 +92,11 @@ def obtain_instruction(dataset_name, split_name):
                      "content": f"次の文は、{dataset_name}データセットの{split_name}分割から提供されています。\n質問を入力とし、回答を出力してください。回答の他には何も含めないことを厳守してください。回答が'はい'と'いいえ'で答えることができる場合、'YES'と'NO'で答えてください。\nデータセットに表示された通りに、回答を出力してください。必ず回答のみを出力し、それ以外には何も含めないことを厳守してください。"},
                     {"role": "user", "content": ""},
                 ]
-                general_chat = [
-                    {"role": "system",
-                     "content": f"質問を入力とし、回答を出力してください。回答の他には何も含めないことを厳守してください。回答が'はい'と'いいえ'で答えることができる場合、'YES'と'NO'で答えてください。\nデータセットに表示された通りに、回答を出力してください。必ず回答のみを出力し、それ以外には何も含めないことを厳守してください。"},
-                    {"role": "user", "content": ""},
-                ]
+        general_chat = [
+            {"role": "system",
+             "content": f"質問を入力とし、回答を出力してください。回答の他には何も含めないことを厳守してください。回答が'はい'と'いいえ'で答えることができる場合、'YES'と'NO'で答えてください。\nデータセットに表示された通りに、回答を出力してください。必ず回答のみを出力し、それ以外には何も含めないことを厳守してください。"},
+            {"role": "user", "content": ""},
+        ]
         return guided_chat, general_chat, chat_template
 
 
