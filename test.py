@@ -3,7 +3,7 @@ from transformers import AutoTokenizer, AutoModelForCausalLM
 tokenizer = AutoTokenizer.from_pretrained("llm-jp/llm-jp-13b-instruct-full-dolly-ichikara_004_001_single-oasst-oasst2-v2.0")
 model = AutoModelForCausalLM.from_pretrained("llm-jp/llm-jp-13b-instruct-full-dolly-ichikara_004_001_single-oasst-oasst2-v2.0", device_map="auto", torch_dtype=torch.bfloat16)
 chat = [
-    {"role": "system", "content": "### 指示：jnliデータセットのtrain分割から文1が提供される。データセットに現れた文2を完成させなさい。文2はデータセットのサンプルと正確に一致しなければならないです。"},
+    {"role": "system", "content": "### 指示：jnliデータセットのtrain分割から文1が提供される。文2はデータセットのサンプルと正確に一致しなければならないです。"},
     {"role": "user", "content": "１匹の犬が車の後部に乗っています。"},
 ]
 text="""

@@ -45,20 +45,19 @@ def clean_text(text):
     return words_list
 
 def obtain_instruction(dataset_name, split_name):
+    chat_template = "{% for message in messages %}{% if message['role'] == 'user' %}{{ '\\n\\n### 指示:\\n' + message['content'] }}{% elif message['role'] == 'system' %}{{ '\\n\\n### 指示:\\n' + message['content'] }}{% elif message['role'] == 'assistant' %}{{ '\\n\\n### 応答:\\n' + message['content'] + eos_token }}{% endif %}{% if loop.last and add_generation_prompt %}{{ '\\n\\n### 応答:\\n' }}{% endif %}{% endfor %}"
     if dataset_name in ["jnli", "jsicker", "jamp"]:
         guided_chat = [
             {"role": "system",
-             "content": f"### 指示：次の文1は、{dataset_name}データセットの{split_name}分割から提供されています。\n文1の後にあるラベルは、文1と文2の間の論理的な関係を示します。\n文2はデータセット内のインスタンスと完全に一致する必要があります。\nデータセットに表示された通りに、文2を完成させてください。以上の情報を使って、文2だけを出力してください。"},
+             "content": f"次の文1は、{dataset_name}データセットの{split_name}分割から提供されています。\n文1の後にあるラベルは、文1と文2の間の論理的な関係を示します。\n文2はデータセット内のインスタンスと完全に一致する必要があります。\nデータセットに表示された通りに、文2を完成させてください。必ず文2のみを出力し、それ以外には何も含めないことを厳守してください。"},
             {"role": "user", "content": ""},
         ]
         general_chat = [
             {"role": "system",
-             "content": "### 指示：文1に基づいて文2を完成させてください。次のラベルは、文1と文2の間の論理的な関係を示します。以上の情報を使って、文2だけを出力してください。"},
+             "content": "以下のラベルが文1と文2の論理的関係を示すように、文1を基に文2を完成させる。\n必ず文2のみを出力し、それ以外には何も含めないことを厳守してください。"},
             {"role": "user", "content": ""},
         ]
-        guided_chat_template = "{% for message in messages %}{% if message['role'] == 'user' %}{{ '\\n\\n### 指示:\\n' + message['content'] }}{% elif message['role'] == 'system' %}{{ '### 指示：jnliデータセットのtrain分割から文1が提供される。データセットに現れた文2を完成させなさい。文2はデータセットのサンプルと正確に一致しなければならないです。' }}{% elif message['role'] == 'assistant' %}{{ '\\n\\n### 応答:\\n' + message['content'] + eos_token }}{% endif %}{% if loop.last and add_generation_prompt %}{{ '\\n\\n### 応答:\\n' }}{% endif %}{% endfor %}"
-        general_chat_template = "{% for message in messages %}{% if message['role'] == 'user' %}{{ '\\n\\n### 指示:\\n' + message['content'] }}{% elif message['role'] == 'system' %}{{ '### 指示：以下のラベルが文1と文2の論理的関係を示すように、文1を基に文2を完成させる。' }}{% elif message['role'] == 'assistant' %}{{ '\\n\\n### 応答:\\n' + message['content'] + eos_token }}{% endif %}{% if loop.last and add_generation_prompt %}{{ '\\n\\n### 応答:\\n' }}{% endif %}{% endfor %}"
-        return guided_chat, general_chat, guided_chat_template, general_chat_template
+        return guided_chat, general_chat, chat_template
     elif dataset_name in ["alt-e-to-j.json", "alt-j-to-e.json"]:
         if dataset_name == "alt-e-to-j.json":
             info = "英語から日本語"
@@ -66,15 +65,32 @@ def obtain_instruction(dataset_name, split_name):
             info = "日本語から英語"
         guided_chat = [
             {"role": "system",
-             "content": f"### 指示：次の文は、{dataset_name}データセットの{split_name}分割から提供されています。\nその文を{info}へ翻訳してください。\n翻訳の文は一部提供されています。データセットに表示された通りに、翻訳を完成させてください。"},
+             "content": f"次の文は、{dataset_name}データセットの{split_name}分割から提供されています。\nその文を{info}へ翻訳してください。\n翻訳の文は一部提供されています。データセットに表示された通りに、翻訳を完成させてください。"},
             {"role": "user", "content": ""},
         ]
         general_chat = [
             {"role": "system",
-             "content": f"### 指示：次の文を{info}へ翻訳してください。翻訳の文は一部提供されています。以上の情報を使って、文2だけを出力してください。"},
+             "content": f"次の文を{info}へ翻訳してください。翻訳の文は一部提供されています。以上の情報を使って、文2だけを出力してください。"},
             {"role": "user", "content": ""},
         ]
+        return guided_chat, general_chat, chat_template
 
+def formalize_input(dataset_name,guided_chat, general_chat, chat_template, inst_type, example):
+    if dataset_name in ["jnli", "jsicker", "jamp"]:
+        instruction = guided_chat[0]["content"] if inst_type == 'guided_instruction' else general_chat[0]["content"]
+        procesesd_sent1 = example['input'].split('\n')[0].replace('前提：', '')
+        sent1 = f"文1: {procesesd_sent1}"
+        sent2 = example['input'].split("\n")[1].replace("仮説：", "")
+        label = "含意" if example['output'] == "entailment" else "矛盾" if example['output'] == "contradiction" else "中立"
+        if inst_type == 'guided_instruction':
+            chat = guided_chat
+            chat[1]["content"] = f"{sent1}\nラベル:{label}\n"
+
+        else:
+            chat = general_chat
+            chat[1]["content"] = f"{sent1}\nラベル:{label}\n"
+
+        return chat, sent1, sent2, instruction
 
     
     

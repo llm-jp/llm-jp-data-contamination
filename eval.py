@@ -229,28 +229,15 @@ def get_llmjp_response(random_samples,
         "llm-jp/llm-jp-13b-instruct-full-dolly-ichikara_004_001_single-oasst-oasst2-v2.0", device_map="auto",
         torch_dtype=torch.bfloat16)
     new_instructions = []
-    guided_chat, general_chat, guided_chat_template, general_chat_template = obtain_instruction(dataset_name, split_name)
+    guided_chat, general_chat, chat_template,  = obtain_instruction(dataset_name, split_name)
     for idx in tqdm(range(len(random_samples))):
         new_instruction = {}
         for inst_type in ['guided_instruction', 'general_instruction']:
-            instruction = guided_chat[0]["content"] if inst_type == 'guided_instruction' else general_chat[0]["content"]
             example = random_samples[idx]
-            procesesd_sent1 = example['input'].split('\n')[0].replace('前提：', '')
-            sent1=f"文1: {procesesd_sent1}"
-            sent2=example['input'].split("\n")[1].replace("仮説：", "")
-            label = "含意" if example['output'] == "entailment" else "矛盾" if example['output'] == "contradiction" else "中立"
-            if inst_type == 'guided_instruction':
-                chat = guided_chat
-                chat[1]["content"] = f"{sent1}\nラベル:{label}\n"
-                tokenized_input = tokenizer.apply_chat_template(chat, guided_chat_template, add_generation_prompt=True,
-                                                                tokenize=True,
-                                                                return_tensors="pt").to(model.device)
-            else:
-                chat = general_chat
-                chat[1]["content"] = f"{sent1}\nラベル:{label}\n"
-                tokenized_input = tokenizer.apply_chat_template(chat, general_chat_template, add_generation_prompt=True,
-                                                                tokenize=True,
-                                                                return_tensors="pt").to(model.device)
+            chat, sent1, sent2, instruction = formalize_input(dataset_name, split_name, guided_chat, general_chat, chat_template, inst_type, example)
+            tokenized_input = tokenizer.apply_chat_template(chat, chat_template, add_generation_prompt=True,
+                                                            tokenize=True,
+                                                            return_tensors="pt").to(model.device)
             with torch.no_grad():
                 output = model.generate(
                     tokenized_input,
