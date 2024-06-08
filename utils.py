@@ -122,6 +122,18 @@ def obtain_instruction(dataset_name, split_name):
             {"role": "user", "content": ""},
         ]
         return guided_chat, general_chat, chat_template
+    elif dataset_name in ["niilc"]:
+        guided_chat = [
+            {"role": "system",
+             "content": f"次の文1は、{dataset_name}データセットの{split_name}分割から提供されています。\n質問に対する答えは提供されています。\nデータセットに表示された通りに、提供される答えに対する質問を完成させてください。\n文2はデータセット内のインスタンスと完全に一致する必要があります。必ず質問のみを出力し、それ以外には何も含めないことを厳守してください。"},
+            {"role": "user", "content": ""},
+        ]
+        general_chat = [
+            {"role": "system",
+             "content": "質問に対する答えは提供されています。\nデータセットに表示された通りに、提供される答えに対する質問を完成させてください。\n必ず質問のみを出力し、それ以外には何も含めないことを厳守してください。"},
+            {"role": "user", "content": ""},
+        ]
+        return guided_chat, general_chat, chat_template
 
 def formalize_input(dataset_name,guided_chat, general_chat, inst_type, example):
     if dataset_name in ["jnli", "jsicker", "jamp", "janli"]:
@@ -172,6 +184,17 @@ def formalize_input(dataset_name,guided_chat, general_chat, inst_type, example):
             chat = general_chat
             chat[1]["content"] = f"{sent1.strip()}\n類似度:{label}\n"
         return chat, sent1, sent2, instruction
+    elif dataset_name in ["niilc"]:
+        instruction = guided_chat[0]["content"] if inst_type == 'guided_instruction' else general_chat[0]["content"]
+        question = f"答え: {example['output']}"
+        answer = f"回答: {example['intput']}"
+        if inst_type == 'guided_instruction':
+            chat = guided_chat
+            chat[1]["content"] = f"{question}\n"
+        else:
+            chat = general_chat
+            chat[1]["content"] = f"{question}\n"
+        return chat, question, answer, instruction
 
 
 
