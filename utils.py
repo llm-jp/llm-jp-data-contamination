@@ -65,48 +65,48 @@ def obtain_instruction(dataset_name, split_name):
             info = "日本語から英語"
         guided_chat = [
             {"role": "system",
-             "content": f"次の文は、{dataset_name}データセットの{split_name}分割から提供されています。\nその文を{info}へ翻訳してください。\nデータセットに表示された通りに、翻訳を完成させてください。必ず翻訳のみを出力し、それ以外には何も含めないことを厳守してください。"},
+             "content": f"次の文は、{dataset_name}データセットの{split_name}分割から提供されています。\n原文の半分と原文全体の{info}の翻訳文は提供されています。\nデータセットに表示された通りに、原文の下の半分を完成させてください。必ずその原文の半分のみを出力し、それ以外には何も含めないことを厳守してください。"},
             {"role": "user", "content": ""},
         ]
         general_chat = [
             {"role": "system",
-             "content": f"次の文を{info}へ翻訳してください。必ず翻訳のみを出力し、それ以外には何も含めないことを厳守してください。"},
+             "content": f"原文の半分と原文全体の{info}の翻訳文は提供されています。必ずその原文の半分のみを出力し、それ以外には何も含めないことを厳守してください。"},
             {"role": "user", "content": ""},
         ]
         return guided_chat, general_chat, chat_template
     elif dataset_name in ["jemhopqa"]:
         guided_chat = [
                     {"role": "system",
-                     "content": f"次の文は、{dataset_name}データセットの{split_name}分割から提供されています。\n質問を入力とし、回答を出力してください。回答の他には何も含めないことを厳守してください。回答が'はい'と'いいえ'で答えることができる場合、'YES'と'NO'で答えてください。\nデータセットに表示された通りに、回答を出力してください。必ず回答のみを出力し、それ以外には何も含めないことを厳守してください。"},
+                     "content": f"次の文は、{dataset_name}データセットの{split_name}分割から提供されています。\n質問文の半分と答えは提供されいます。\n質問文の下の半分を出力してください。回答の他には何も含めないことを厳守してください。\nデータセットに表示された通りに、質問文の下の半分を出力してください。それ以外には何も含めないことを厳守してください。"},
                     {"role": "user", "content": ""},
                 ]
         general_chat = [
             {"role": "system",
-             "content": f"質問を入力とし、回答を出力してください。回答の他には何も含めないことを厳守してください。回答が'はい'と'いいえ'で答えることができる場合、'YES'と'NO'で答えてください。\nデータセットに表示された通りに、回答を出力してください。必ず回答のみを出力し、それ以外には何も含めないことを厳守してください。"},
+             "content": f"質問文の半分と答えは提供されいます。\n質問文の下の半分を出力してください。回答の他には何も含めないことを厳守してください。\nデータセットに表示された通りに、質問文の下の半分を出力してください。それ以外には何も含めないことを厳守してください。"},
             {"role": "user", "content": ""},
         ]
         return guided_chat, general_chat, chat_template
     elif dataset_name in ["jmmlu"]:
         guided_chat = [
                     {"role": "system",
-                     "content": f"次の文は、{dataset_name}データセットの{split_name}分割から提供されています。\n質問を入力とし、回答を出力してください。回答の他には何も含めないことを厳守してください。回答が'はい'と'いいえ'で答えることができる場合、'YES'と'NO'で答えてください。\nデータセットに表示された通りに、回答を出力してください。必ず回答のみを出力し、それ以外には何も含めないことを厳守してください。"},
+                     "content": f"次の文は、{dataset_name}データセットの{split_name}分割から提供されています。\n質問文と答えは提供されています。\nその質問文と答えを参考し、ABCDという四つの選択肢を出力してください。回答の他には何も含めないことを厳守してください。\nデータセットに表示された通りに、選択肢を出力してください。必ずABCDの選択肢のみを出力し、それ以外には何も含めないことを厳守してください。"},
                     {"role": "user", "content": ""},
                 ]
         general_chat = [
             {"role": "system",
-             "content": f"質問を入力とし、回答を出力してください。回答の他には何も含めないことを厳守してください。回答が'はい'と'いいえ'で答えることができる場合、'YES'と'NO'で答えてください。\nデータセットに表示された通りに、回答を出力してください。必ず回答のみを出力し、それ以外には何も含めないことを厳守してください。"},
+             "content": f"質問文と答えは提供されています。\nその質問文と答えを参考し、ABCDという四つの選択肢を出力してください。回答の他には何も含めないことを厳守してください。\nデータセットに表示された通りに、選択肢を出力してください。必ずABCDの選択肢のみを出力し、それ以外には何も含めないことを厳守してください。"},
             {"role": "user", "content": ""},
         ]
         return guided_chat, general_chat, chat_template
     elif dataset_name in ["jcommonsenseqa"]:
         guided_chat = [
             {"role": "system",
-             "content": f"次の文は、{dataset_name}データセットの{split_name}分割から提供されています。\n質問を入力とし、回答を出力してください。回答の他には何も含めないことを厳守してください。回答が'はい'と'いいえ'で答えることができる場合、'YES'と'NO'で答えてください。\nデータセットに表示された通りに、回答を出力してください。必ず回答のみを出力し、それ以外には何も含めないことを厳守してください。"},
+             "content": f"次の文は、{dataset_name}データセットの{split_name}分割から提供されています。\n質問文と答えは提供されています。\nその質問文と答えを参考し、01234という五つの選択肢を出力してください。回答の他には何も含めないことを厳守してください。\nデータセットに表示された通りに、選択肢を出力してください。必ず01234の選択肢のみを出力し、それ以外には何も含めないことを厳守してください。"},
             {"role": "user", "content": ""},
         ]
         general_chat = [
             {"role": "system",
-             "content": f"質問を入力とし、回答を出力してください。回答の他には何も含めないことを厳守してください。回答が'はい'と'いいえ'で答えることができる場合、'YES'と'NO'で答えてください。\nデータセットに表示された通りに、回答を出力してください。必ず回答のみを出力し、それ以外には何も含めないことを厳守してください。"},
+             "content": f"質問文と答えは提供されています。\nその質問文と答えを参考し、01234という五つの選択肢を出力してください。回答の他には何も含めないことを厳守してください。\nデータセットに表示された通りに、選択肢を出力してください。必ず01234の選択肢のみを出力し、それ以外には何も含めないことを厳守してください。"},
             {"role": "user", "content": ""},
         ]
         return guided_chat, general_chat, chat_template
@@ -125,24 +125,24 @@ def obtain_instruction(dataset_name, split_name):
     elif dataset_name in ["niilc"]:
         guided_chat = [
             {"role": "system",
-             "content": f"次の答えは、{dataset_name}データセットの{split_name}分割から提供されています。\n質問に対する答えは提供されています。\nデータセットに表示された通りに、提供される答えに対する質問を完成させてください。\n文2はデータセット内のインスタンスと完全に一致する必要があります。必ず質問のみを出力し、それ以外には何も含めないことを厳守してください。"},
+             "content": f"次の答えは、{dataset_name}データセットの{split_name}分割から提供されています。\n質問に対する答えと質問文の半分は提供されています。\nデータセットに表示された通りに、提供される答えに対する質問の下の半分を完成させてください。\nその文はデータセット内のインスタンスと完全に一致する必要があります。必ず下の文のみを出力し、それ以外には何も含めないことを厳守してください。"},
             {"role": "user", "content": ""},
         ]
         general_chat = [
             {"role": "system",
-             "content": "質問に対する答えは提供されています。\nデータセットに表示された通りに、提供される答えに対する質問を完成させてください。\n必ず質問のみを出力し、それ以外には何も含めないことを厳守してください。"},
+             "content": "質問に対する答えと質問文の半分は提供されています。\n必ず下の文のみを出力し、それ以外には何も含めないことを厳守してください。"},
             {"role": "user", "content": ""},
         ]
         return guided_chat, general_chat, chat_template
     elif dataset_name in ["mawps"]:
         guided_chat = [
             {"role": "system",
-             "content": f"次の答えは、{dataset_name}データセットの{split_name}分割から提供されています。\n計算問題に対する答えは提供されています。\nデータセットに表示された通りに、問題文を完成させてください。必ず問題文のみを出力し、それ以外には何も含めないことを厳守してください。"},
+             "content": f"次の答えは、{dataset_name}データセットの{split_name}分割から提供されています。\n計算問題に対する答えと質問文の半分は提供されています。\nデータセットに表示された通りに、質問文の下の半分を完成させてください。必ずその質問文の下の半分のみを出力し、それ以外には何も含めないことを厳守してください。"},
             {"role": "user", "content": ""},
         ]
         general_chat = [
             {"role": "system",
-             "content": "n計算問題に対する答えは提供されています。\n必ず問題文のみを出力し、それ以外には何も含めないことを厳守してください。"},
+             "content": "計算問題に対する答えと質問文の半分は提供されています。\n必ずその質問文の下の半分のみを出力し、それ以外には何も含めないことを厳守してください。"},
             {"role": "user", "content": ""},
         ]
         return guided_chat, general_chat, chat_template
@@ -200,26 +200,34 @@ def formalize_input(dataset_name,guided_chat, general_chat, inst_type, example):
         return chat, sent1, sent2, instruction
     elif dataset_name in ["alt-e-to-j", "alt-j-to-e"]:
         instruction = guided_chat[0]["content"] if inst_type == 'guided_instruction' else general_chat[0]["content"]
-        sent1 = f"文: {example['input']}"
-        sent2 = f"翻訳: {example['output']}"
+        if dataset_name == "alt-e-to-j":
+            sent1=example['input'].split(" ")[:len(example['input'].split(" "))//2]
+            label = example['output']
+            sent2= example['input'].split(" ")[len(example['input'].split(" "))//2:]
+        else:
+            sent1 = example['output'][:len(example['output'])//2]
+            label = example['output']
+            sent2 = example['output'][len(example['output'])//2:]
         if inst_type == 'guided_instruction':
             chat = guided_chat
-            chat[1]["content"] = f"{sent1}\n"
+            chat[1]["content"] = f"{sent1}\n翻訳文:{label}\n"
         else:
             chat = general_chat
-            chat[1]["content"] = f"{sent1}\n"
+            chat[1]["content"] = f"{sent1}\n翻訳文:{label}\n"
         return chat, sent1, sent2, instruction
-    elif dataset_name in ["jemhopqa", "jmmlu"]:
+    elif dataset_name in ["jemhopqa", "niilc", "mawps"]:
         instruction = guided_chat[0]["content"] if inst_type == 'guided_instruction' else general_chat[0]["content"]
-        question = f"質問: {example['input']}"
+        sent1 =  example['input'][][:len(example['input'])//2]
+        label = example['output']
+        sent2 = example['output'][len(example['output'])//2:]
         answer = f"回答: {example['output']}"
         if inst_type == 'guided_instruction':
             chat = guided_chat
-            chat[1]["content"] = f"{question}\n"
+            chat[1]["content"] = f"{sent1}\n答え:{label}\n"
         else:
             chat = general_chat
-            chat[1]["content"] = f"{question}\n"
-        return chat, question, answer, instruction
+            chat[1]["content"] = f"{sent1}\n答え:{label}\n"
+        return chat, sent1, sent2, instruction
     elif dataset_name in ["jsts"]:
         instruction = guided_chat[0]["content"] if inst_type == 'guided_instruction' else general_chat[0]["content"]
         sent1, sent2 = example['input'].split('\n')
@@ -232,28 +240,40 @@ def formalize_input(dataset_name,guided_chat, general_chat, inst_type, example):
             chat = general_chat
             chat[1]["content"] = f"{sent1.strip()}\n類似度:{label}\n"
         return chat, sent1, sent2, instruction
-    elif dataset_name in ["niilc"]:
+    elif dataset_name in ["jcommonsenseqa", "jmmlu"]:
         instruction = guided_chat[0]["content"] if inst_type == 'guided_instruction' else general_chat[0]["content"]
-        question = f"答え: {example['output']}"
-        answer = f"回答: {example['intput']}"
+        sent1 = example['input'].split("\n")[0]
+        label = example['output']
+        sent2 = example['input'].split("\n")[1]
         if inst_type == 'guided_instruction':
             chat = guided_chat
-            chat[1]["content"] = f"{question}\n"
+            chat[1]["content"] = f"{sent1}\n選択肢:{label}\n"
         else:
             chat = general_chat
-            chat[1]["content"] = f"{question}\n"
-        return chat, question, answer, instruction
-    elif dataset_name in ["mawps"]:
-        instruction = guided_chat[0]["content"] if inst_type == 'guided_instruction' else general_chat[0]["content"]
-        question = f"答え: {example['output']}"
-        answer = f"回答: {example['intput']}"
-        if inst_type == 'guided_instruction':
-            chat = guided_chat
-            chat[1]["content"] = f"{question}\n"
-        else:
-            chat = general_chat
-            chat[1]["content"] = f"{question}\n"
-        return chat, question, answer, instruction
+            chat[1]["content"] = f"{sent1}\n選択肢:{label}\n"
+        return chat, sent1, sent2, instruction
+    # elif dataset_name in ["niilc"]:
+    #     instruction = guided_chat[0]["content"] if inst_type == 'guided_instruction' else general_chat[0]["content"]
+    #     question = f"答え: {example['output']}"
+    #     answer = f"回答: {example['intput']}"
+    #     if inst_type == 'guided_instruction':
+    #         chat = guided_chat
+    #         chat[1]["content"] = f"{question}\n"
+    #     else:
+    #         chat = general_chat
+    #         chat[1]["content"] = f"{question}\n"
+    #     return chat, question, answer, instruction
+    # elif dataset_name in ["mawps"]:
+    #     instruction = guided_chat[0]["content"] if inst_type == 'guided_instruction' else general_chat[0]["content"]
+    #     question = f"答え: {example['output']}"
+    #     answer = f"回答: {example['intput']}"
+    #     if inst_type == 'guided_instruction':
+    #         chat = guided_chat
+    #         chat[1]["content"] = f"{question}\n"
+    #     else:
+    #         chat = general_chat
+    #         chat[1]["content"] = f"{question}\n"
+    #     return chat, question, answer, instruction
     elif dataset_name in ["jsquad"]:
         instruction = guided_chat[0]["content"] if inst_type == 'guided_instruction' else general_chat[0]["content"]
         sent1, sent2 = example['input'].split('\n')
