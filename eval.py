@@ -288,6 +288,7 @@ if __name__ == "__main__":
     parser.add_argument("--split_name",
                         type=str,
                         default="train",
+                        choices=["train", "dev", "test"],
                         help="the partition of dataset")
     parser.add_argument("--model",
                         type=str,
@@ -323,7 +324,7 @@ if __name__ == "__main__":
                                  "jcommonsenseqa", "jemhopqa", "jmmlu", "jnli", "jsem",
                                  "jsick", "jsquad","jsts", "mawps", "niilc"]
             for dataset in datasets:
-                loaded_data = load_json(f"datasets_contamination/1.3.0/evaluation/{args.split}/{dataset}.json")
+                loaded_data = load_json(f"datasets_contamination/1.3.0/evaluation/{args.split_name}/{dataset}.json")
                 random_samples = create_random_samples(loaded_data["samples"], num_samples=args.num_samples)
                 get_llmjp_response(random_samples,
                                    dataset_name=dataset,
