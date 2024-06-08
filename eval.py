@@ -255,7 +255,7 @@ def get_llmjp_response(random_samples,
                 inst_type: {
                     "instruction": instruction,
                     "sentence1": sent1,
-                    "candidate": response.replace("文2：",""),
+                    "candidate": response,
                     "reference": sent2,
                     "label": example['output']
                 }
