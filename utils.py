@@ -217,9 +217,9 @@ def formalize_input(dataset_name,guided_chat, general_chat, inst_type, example):
         return chat, sent1, sent2, instruction
     elif dataset_name in ["jemhopqa", "niilc", "mawps"]:
         instruction = guided_chat[0]["content"] if inst_type == 'guided_instruction' else general_chat[0]["content"]
-        sent1 =  example['input'][][:len(example['input'])//2]
+        sent1 =  example['input'][:len(example['input'])//2]
         label = example['output']
-        sent2 = example['output'][len(example['output'])//2:]
+        sent2 = example['input'][len(example['input'])//2:]
         answer = f"回答: {example['output']}"
         if inst_type == 'guided_instruction':
             chat = guided_chat
