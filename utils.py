@@ -220,7 +220,6 @@ def formalize_input(dataset_name,guided_chat, general_chat, inst_type, example):
         sent1 =  example['input'][:len(example['input'])//2]
         label = example['output']
         sent2 = example['input'][len(example['input'])//2:]
-        answer = f"回答: {example['output']}"
         if inst_type == 'guided_instruction':
             chat = guided_chat
             chat[1]["content"] = f"{sent1}\n答え:{label}\n"
