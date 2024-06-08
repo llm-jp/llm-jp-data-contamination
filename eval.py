@@ -328,7 +328,7 @@ if __name__ == "__main__":
                 random_samples = create_random_samples(loaded_data["samples"], num_samples=args.num_samples)
                 get_llmjp_response(random_samples,
                                    dataset_name=dataset,
-                                   split_name=args.split,
+                                   split_name=args.split_name,
                                    model=args.model,
                                    max_tokens=500,
                                    temperature=0)
