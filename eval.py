@@ -116,7 +116,9 @@ def is_contaminated(dataset, dataset_name, split_name):
                      rougeL_score(general_responses, references))
     bleurt_indicator = significance_test(bleurt_scores[0], bleurt_scores[1])
     rougel_indicator = significance_test(rougeL_scores[0], rougeL_scores[1])
-    print('......Eval Results......\n', bleurt_scores, '\n', rougeL_scores, '\n')
+    print(f"'......Eval Results......\n', {bleurt_scores}, '\n', {rougeL_scores}, '\n'")
+    print(f"average bleurt score:  {[sum(x)/len(references) for x in bleurt_scores]}")
+    print(f"rougeL score: {[sum(x)/len(references) for x in rougeL_scores]}")
     os.makedirs(f'contamination_result/{dataset_name}/{split_name}/', exist_ok=True)
 
     save_jsonl({
