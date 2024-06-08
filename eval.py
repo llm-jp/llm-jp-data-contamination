@@ -281,6 +281,9 @@ if __name__ == "__main__":
     parser.add_argument("--dataset_name",
                         type=str,
                         default="jnli",
+                        choices=["alt-e-to-j", "alt-j-to-e","chabsa", "jamp", "janli",
+                                 "jcommonsenseqa", "jemhopqa", "jmmlu", "jnli", "jsem",
+                                 "jsick", "jsquad","jsts", "mawps", "niilc", "all"],
                         help="the name of dataset")
     parser.add_argument("--split_name",
                         type=str,
@@ -315,12 +318,26 @@ if __name__ == "__main__":
                            temperature=0)
     elif args.model == "llm-jp":
         print("evaluation for llm-jp model...")
-        loaded_data = load_json(f"datasets_contamination/1.3.0/evaluation/{args.split_name}/{args.dataset_name}.json")
-        random_samples = create_random_samples(loaded_data["samples"], num_samples=args.num_samples)
-        get_llmjp_response(random_samples,
-                           dataset_name=args.dataset_name,
-                           split_name=args.split_name,
-                           model=args.model,
-                           max_tokens=500,
-                           temperature=0)
+        if args.dataset_name == "all":
+            datasets = ["alt-e-to-j", "alt-j-to-e","chabsa", "jamp", "janli",
+                                 "jcommonsenseqa", "jemhopqa", "jmmlu", "jnli", "jsem",
+                                 "jsick", "jsquad","jsts", "mawps", "niilc"]
+            for dataset in datasets:
+                loaded_data = load_json(f"datasets_contamination/1.3.0/evaluation/{args.split}/{dataset}.json")
+                random_samples = create_random_samples(loaded_data["samples"], num_samples=args.num_samples)
+                get_llmjp_response(random_samples,
+                                   dataset_name=dataset,
+                                   split_name=args.split,
+                                   model=args.model,
+                                   max_tokens=500,
+                                   temperature=0)
+        else:
+            loaded_data = load_json(f"datasets_contamination/1.3.0/evaluation/{args.split_name}/{args.dataset_name}.json")
+            random_samples = create_random_samples(loaded_data["samples"], num_samples=args.num_samples)
+            get_llmjp_response(random_samples,
+                               dataset_name=args.dataset_name,
+                               split_name=args.split_name,
+                               model=args.model,
+                               max_tokens=500,
+                               temperature=0)
     
