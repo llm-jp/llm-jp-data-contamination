@@ -234,7 +234,7 @@ def get_llmjp_response(random_samples,
         new_instruction = {}
         for inst_type in ['guided_instruction', 'general_instruction']:
             example = random_samples[idx]
-            chat, sent1, sent2, instruction = formalize_input(dataset_name, split_name, guided_chat, general_chat, chat_template, inst_type, example)
+            chat, sent1, sent2, instruction = formalize_input(dataset_name, guided_chat, general_chat, inst_type, example)
             tokenized_input = tokenizer.apply_chat_template(chat, chat_template, add_generation_prompt=True,
                                                             tokenize=True,
                                                             return_tensors="pt").to(model.device)

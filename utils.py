@@ -75,7 +75,7 @@ def obtain_instruction(dataset_name, split_name):
         ]
         return guided_chat, general_chat, chat_template
 
-def formalize_input(dataset_name,guided_chat, general_chat, chat_template, inst_type, example):
+def formalize_input(dataset_name,guided_chat, general_chat, inst_type, example):
     if dataset_name in ["jnli", "jsicker", "jamp"]:
         instruction = guided_chat[0]["content"] if inst_type == 'guided_instruction' else general_chat[0]["content"]
         procesesd_sent1 = example['input'].split('\n')[0].replace('前提：', '')
