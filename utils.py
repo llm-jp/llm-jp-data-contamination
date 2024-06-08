@@ -80,7 +80,7 @@ def formalize_input(dataset_name,guided_chat, general_chat, inst_type, example):
         instruction = guided_chat[0]["content"] if inst_type == 'guided_instruction' else general_chat[0]["content"]
         procesesd_sent1 = example['input'].split('\n')[0].replace('前提：', '')
         sent1 = f"文1: {procesesd_sent1}"
-        sent2 = "文1: "+example['input'].split("\n")[1].replace("仮説：", "")
+        sent2 = "文2: "+example['input'].split("\n")[1].replace("仮説：", "")
         label = "含意" if example['output'] == "entailment" else "矛盾" if example['output'] == "contradiction" else "中立"
         if inst_type == 'guided_instruction':
             chat = guided_chat
