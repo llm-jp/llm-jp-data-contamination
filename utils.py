@@ -201,9 +201,9 @@ def formalize_input(dataset_name,guided_chat, general_chat, inst_type, example):
     elif dataset_name in ["alt-e-to-j", "alt-j-to-e"]:
         instruction = guided_chat[0]["content"] if inst_type == 'guided_instruction' else general_chat[0]["content"]
         if dataset_name == "alt-e-to-j":
-            sent1=example['input'].split(" ")[:len(example['input'].split(" "))//2]
+            sent1=example['input'].split(" ")[:len(example['input'].split(" "))//2].join(" ").strip()
             label = example['output']
-            sent2= example['input'].split(" ")[len(example['input'].split(" "))//2:]
+            sent2= example['input'].split(" ")[len(example['input'].split(" "))//2:].join(" ").strip()
         else:
             sent1 = example['output'][:len(example['output'])//2]
             label = example['output']
