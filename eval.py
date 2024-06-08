@@ -231,7 +231,7 @@ def get_llmjp_response(random_samples,
         "llm-jp/llm-jp-13b-instruct-full-dolly-ichikara_004_001_single-oasst-oasst2-v2.0", device_map="auto",
         torch_dtype=torch.bfloat16)
     new_instructions = []
-    guided_chat, general_chat, chat_template,  = obtain_instruction(dataset_name, split_name)
+    guided_chat, general_chat, chat_template  = obtain_instruction(dataset_name, split_name)
     for idx in tqdm(range(len(random_samples))):
         new_instruction = {}
         for inst_type in ['guided_instruction', 'general_instruction']:
