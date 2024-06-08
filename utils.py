@@ -101,12 +101,12 @@ def obtain_instruction(dataset_name, split_name):
     elif dataset_name in ["jcommonsenseqa"]:
         guided_chat = [
             {"role": "system",
-             "content": f"次の文は、{dataset_name}データセットの{split_name}分割から提供されています。\n質問文と答えは提供されています。\nその質問文と答えを参考し、01234という五つの選択肢を出力してください。回答の他には何も含めないことを厳守してください。\nデータセットに表示された通りに、選択肢を出力してください。必ず01234の選択肢のみを出力し、それ以外には何も含めないことを厳守してください。"},
+             "content": f"次の文は、{dataset_name}データセットの{split_name}分割から提供されています。\n質問文と答えは提供されています。\nその質問文と答えを参考し、この答えと質問文にあう01234という五つの選択肢を順番に出力してください。回答の他には何も含めないことを厳守してください。\nデータセットに表示された通りに、選択肢を出力してください。必ず01234の選択肢のみを出力し、それ以外には何も含めないことを厳守してください。"},
             {"role": "user", "content": ""},
         ]
         general_chat = [
             {"role": "system",
-             "content": f"質問文と答えは提供されています。\nその質問文と答えを参考し、01234という五つの選択肢を出力してください。回答の他には何も含めないことを厳守してください。\nデータセットに表示された通りに、選択肢を出力してください。必ず01234の選択肢のみを出力し、それ以外には何も含めないことを厳守してください。"},
+             "content": f"質問文と答えは提供されています。\nその質問文と答えを参考し、この答えと質問文にあう01234という五つの選択肢を順番に出力してください。回答の他には何も含めないことを厳守してください。\nデータセットに表示された通りに、選択肢を出力してください。必ず01234の選択肢のみを出力し、それ以外には何も含めないことを厳守してください。"},
             {"role": "user", "content": ""},
         ]
         return guided_chat, general_chat, chat_template
@@ -125,7 +125,7 @@ def obtain_instruction(dataset_name, split_name):
     elif dataset_name in ["niilc"]:
         guided_chat = [
             {"role": "system",
-             "content": f"次の答えは、{dataset_name}データセットの{split_name}分割から提供されています。\n質問に対する答えと質問文の半分は提供されています。\nデータセットに表示された通りに、提供される答えに対する質問の下の半分を完成させてください。\nその文はデータセット内のインスタンスと完全に一致する必要があります。必ず下の文のみを出力し、それ以外には何も含めないことを厳守してください。"},
+             "content": f"次の答えは、{dataset_name}データセットの{split_name}分割から提供されています。\n質問に対する答えと質問文の半分は提供されています。\nデータセットに表示された通りに、提供される答えに対する質問の下の半分を完成させてください。\nその文はデータセット内のインスタンスと完全に一致する必要があります。必ず質問文の下の半分のみを出力し、それ以外には何も含めないことを厳守してください。"},
             {"role": "user", "content": ""},
         ]
         general_chat = [
@@ -149,12 +149,12 @@ def obtain_instruction(dataset_name, split_name):
     elif dataset_name in ["jsquad"]:
         guided_chat = [
             {"role": "system",
-             "content": f"次の文は、{dataset_name}データセットの{split_name}分割から提供されています。\n文章と文章に対する答えは提供されています。\nデータセットに表示された通りに、質問文を完成させてください。必ず質問文のみを出力し、それ以外には何も含めないことを厳守してください。"},
+             "content": f"次の文は、{dataset_name}データセットの{split_name}分割から提供されています。\n文章と文章に対する答えは提供されています。\nデータセットに表示された通りに、その文章と答えに合う質問文を完成させてください。必ず質問文のみを出力し、それ以外には何も含めないことを厳守してください。"},
             {"role": "user", "content": ""},
         ]
         general_chat = [
             {"role": "system",
-             "content": "文章と文章に対する答えは提供されています。\n必ず質問文のみを出力し、それ以外には何も含めないことを厳守してください。"},
+             "content": "文章と文章に対する答えは提供されています。\nその文章と答えに合う質問文を完成させてください。必ず質問文のみを出力し、それ以外には何も含めないことを厳守してください。"},
             {"role": "user", "content": ""},
         ]
         return guided_chat, general_chat, chat_template
@@ -221,7 +221,7 @@ def formalize_input(dataset_name,guided_chat, general_chat, inst_type, example):
         return chat, sent1, sent2, instruction
     elif dataset_name in ["jemhopqa", "niilc", "mawps"]:
         instruction = guided_chat[0]["content"] if inst_type == 'guided_instruction' else general_chat[0]["content"]
-        sent1 =  example['input'][:len(example['input'])//2]
+        sent1 = example['input'][:len(example['input'])//2]
         label = example['output']
         sent2 = example['input'][len(example['input'])//2:]
         if inst_type == 'guided_instruction':
@@ -238,7 +238,6 @@ def formalize_input(dataset_name,guided_chat, general_chat, inst_type, example):
         if inst_type == 'guided_instruction':
             chat = guided_chat
             chat[1]["content"] = f"{sent1.strip()}\n類似度:{label}\n"
-
         else:
             chat = general_chat
             chat[1]["content"] = f"{sent1.strip()}\n類似度:{label}\n"
@@ -280,11 +279,10 @@ def formalize_input(dataset_name,guided_chat, general_chat, inst_type, example):
     elif dataset_name in ["jsquad"]:
         instruction = guided_chat[0]["content"] if inst_type == 'guided_instruction' else general_chat[0]["content"]
         sent1, sent2 = example['input'].split('\n')
-        label =example['output']
+        label = example['output']
         if inst_type == 'guided_instruction':
             chat = guided_chat
             chat[1]["content"] = f"{sent1}\n答え:{label}\n"
-
         else:
             chat = general_chat
             chat[1]["content"] = f"{sent1}\n答え:{label}\n"
