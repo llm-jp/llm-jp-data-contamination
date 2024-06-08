@@ -65,12 +65,12 @@ def obtain_instruction(dataset_name, split_name):
             info = "日本語から英語"
         guided_chat = [
             {"role": "system",
-             "content": f"次の文は、{dataset_name}データセットの{split_name}分割から提供されています。\nその文を{info}へ翻訳してください。\n翻訳の文は一部提供されています。データセットに表示された通りに、翻訳を完成させてください。"},
+             "content": f"次の文は、{dataset_name}データセットの{split_name}分割から提供されています。\nその文を{info}へ翻訳してください。\nデータセットに表示された通りに、翻訳を完成させてください。必ず翻訳のみを出力し、それ以外には何も含めないことを厳守してください。"},
             {"role": "user", "content": ""},
         ]
         general_chat = [
             {"role": "system",
-             "content": f"次の文を{info}へ翻訳してください。翻訳の文は一部提供されています。以上の情報を使って、文2だけを出力してください。"},
+             "content": f"次の文を{info}へ翻訳してください。必ず翻訳のみを出力し、それ以外には何も含めないことを厳守してください。"},
             {"role": "user", "content": ""},
         ]
         return guided_chat, general_chat, chat_template
@@ -90,6 +90,18 @@ def formalize_input(dataset_name,guided_chat, general_chat, inst_type, example):
             chat = general_chat
             chat[1]["content"] = f"{sent1}\nラベル:{label}\n"
 
+        return chat, sent1, sent2, instruction
+    elif dataset_name in ["alt-e-to-j.json", "alt-j-to-e.json"]:
+        instruction = guided_chat[0]["content"] if inst_type == 'guided_instruction' else general_chat[0]["content"]
+        sent1 = f"文: {example['input']}"
+        sent2 = f"翻訳: {example['output']}"
+        if inst_type == 'guided_instruction':
+            chat = guided_chat
+            chat[1]["content"] = f"{sent1}\n"
+
+        else:
+            chat = general_chat
+            chat[1]["content"] = f"{sent1}\n"
         return chat, sent1, sent2, instruction
 
     
