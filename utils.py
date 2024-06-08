@@ -59,6 +59,22 @@ def obtain_instruction(dataset_name, split_name):
         guided_chat_template = "{% for message in messages %}{% if message['role'] == 'user' %}{{ '\\n\\n### 指示:\\n' + message['content'] }}{% elif message['role'] == 'system' %}{{ '### 指示：jnliデータセットのtrain分割から文1が提供される。データセットに現れた文2を完成させなさい。文2はデータセットのサンプルと正確に一致しなければならないです。' }}{% elif message['role'] == 'assistant' %}{{ '\\n\\n### 応答:\\n' + message['content'] + eos_token }}{% endif %}{% if loop.last and add_generation_prompt %}{{ '\\n\\n### 応答:\\n' }}{% endif %}{% endfor %}"
         general_chat_template = "{% for message in messages %}{% if message['role'] == 'user' %}{{ '\\n\\n### 指示:\\n' + message['content'] }}{% elif message['role'] == 'system' %}{{ '### 指示：以下のラベルが文1と文2の論理的関係を示すように、文1を基に文2を完成させる。' }}{% elif message['role'] == 'assistant' %}{{ '\\n\\n### 応答:\\n' + message['content'] + eos_token }}{% endif %}{% if loop.last and add_generation_prompt %}{{ '\\n\\n### 応答:\\n' }}{% endif %}{% endfor %}"
         return guided_chat, general_chat, guided_chat_template, general_chat_template
+    elif dataset_name in ["alt-e-to-j.json", "alt-j-to-e.json"]:
+        if dataset_name == "alt-e-to-j.json":
+            info = "英語から日本語"
+        else:
+            info = "日本語から英語"
+        guided_chat = [
+            {"role": "system",
+             "content": f"### 指示：次の文は、{dataset_name}データセットの{split_name}分割から提供されています。\nその文を{info}へ翻訳してください。\n翻訳の文は一部提供されています。データセットに表示された通りに、翻訳を完成させてください。"},
+            {"role": "user", "content": ""},
+        ]
+        general_chat = [
+            {"role": "system",
+             "content": f"### 指示：次の文を{info}へ翻訳してください。翻訳の文は一部提供されています。以上の情報を使って、文2だけを出力してください。"},
+            {"role": "user", "content": ""},
+        ]
+
 
     
     
