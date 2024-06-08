@@ -116,14 +116,13 @@ def formalize_input(dataset_name,guided_chat, general_chat, inst_type, example):
             chat[1]["content"] = f"{sent1}\nラベル:{label}\n"
 
         return chat, sent1, sent2, instruction
-    elif dataset_name in ["alt-e-to-j.json", "alt-j-to-e.json"]:
+    elif dataset_name in ["alt-e-to-j", "alt-j-to-e"]:
         instruction = guided_chat[0]["content"] if inst_type == 'guided_instruction' else general_chat[0]["content"]
         sent1 = f"文: {example['input']}"
         sent2 = f"翻訳: {example['output']}"
         if inst_type == 'guided_instruction':
             chat = guided_chat
             chat[1]["content"] = f"{sent1}\n"
-
         else:
             chat = general_chat
             chat[1]["content"] = f"{sent1}\n"
