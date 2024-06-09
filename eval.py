@@ -141,7 +141,7 @@ def create_random_samples(dataset, num_samples=15):
     Returns: 
         samples: randomly selected samples  
     """
-    return random.sample(dataset, num_samples)
+    return random.sample(dataset, num_samples) if num_samples < len(dataset) else dataset
 
 def get_gpt_responses(instruction, sentence1, 
                       label, 
