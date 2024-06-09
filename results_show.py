@@ -31,13 +31,13 @@ if __name__ == "__main__":
                          "jsick", "jsquad","jsts", "mawps", "niilc"]
         for dataset_name in dataset_names:
             print(f"Show the results of {dataset_name} in {args.split_name} split")
-            with open(f"contamination_result/{dataset_name}/data_contamination_result.jsonl", "r") as f:
+            with open(f"contamination_result/{dataset_name}/{args.split_name}/data_contamination_result.jsonl", "r") as f:
                 lines = f.readlines()
                 for i in lines:
                    print(i)
     else:
         print(f"Show the results of {args.dataset_name} in {args.split_name} split")
-        with open(f"contamination_result/{args.dataset_name}/data_contamination_result.jsonl", "r") as f:
+        with open(f"contamination_result/{args.dataset_name}/{args.split_name}/data_contamination_result.jsonl", "r") as f:
             lines = f.readlines()
             for i in lines:
                 print(i)
