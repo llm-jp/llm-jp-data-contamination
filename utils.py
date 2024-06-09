@@ -206,10 +206,10 @@ def formalize_input(dataset_name,guided_chat, general_chat, inst_type, example):
             sent2 = " ".join(example['input'].split(" ")[len(example['input'].split(" "))//2:])
             sent2= sent2.strip()
         else:
-            sent1 = example['input'][:len(example['input'].split(" ")) // 2]
+            sent1 = example['input'][:len(example['input']) // 2]
             sent1 = sent1.strip()
             label = example['output']
-            sent2 = example['input'][len(example['input'].split(" ")) // 2:]
+            sent2 = example['input'][len(example['input']) // 2:]
             sent2 = sent2.strip()
         if inst_type == 'guided_instruction':
             chat = guided_chat
