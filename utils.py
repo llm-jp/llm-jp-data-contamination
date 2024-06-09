@@ -213,10 +213,10 @@ def formalize_input(dataset_name,guided_chat, general_chat, inst_type, example):
             sent2 = sent2.strip()
         if inst_type == 'guided_instruction':
             chat = guided_chat
-            chat[1]["content"] = f"{sent1}\n翻訳文:{label}\n"
+            chat[1]["content"] = f"原文:{sent1}\n翻訳文:{label}\n"
         else:
             chat = general_chat
-            chat[1]["content"] = f"{sent1}\n翻訳文:{label}\n"
+            chat[1]["content"] = f"原文:{sent1}\n翻訳文:{label}\n"
         return chat, sent1, sent2, instruction
     elif dataset_name in ["jemhopqa", "niilc", "mawps"]:
         instruction = guided_chat[0]["content"] if inst_type == 'guided_instruction' else general_chat[0]["content"]
@@ -225,10 +225,10 @@ def formalize_input(dataset_name,guided_chat, general_chat, inst_type, example):
         sent2 = example['input'][len(example['input'])//2:]
         if inst_type == 'guided_instruction':
             chat = guided_chat
-            chat[1]["content"] = f"{sent1}\n答え:{label}\n"
+            chat[1]["content"] = f"質問文:{sent1}\n答え:{label}\n"
         else:
             chat = general_chat
-            chat[1]["content"] = f"{sent1}\n答え:{label}\n"
+            chat[1]["content"] = f"質問文:{sent1}\n答え:{label}\n"
         return chat, sent1, sent2, instruction
     elif dataset_name in ["jsts"]:
         instruction = guided_chat[0]["content"] if inst_type == 'guided_instruction' else general_chat[0]["content"]
@@ -236,10 +236,10 @@ def formalize_input(dataset_name,guided_chat, general_chat, inst_type, example):
         label = example['output']
         if inst_type == 'guided_instruction':
             chat = guided_chat
-            chat[1]["content"] = f"{sent1.strip()}\n類似度:{label}\n"
+            chat[1]["content"] = f"文1:{sent1.strip()}\n類似度:{label}\n"
         else:
             chat = general_chat
-            chat[1]["content"] = f"{sent1.strip()}\n類似度:{label}\n"
+            chat[1]["content"] = f"文1:{sent1.strip()}\n類似度:{label}\n"
         return chat, sent1, sent2, instruction
     elif dataset_name in ["jcommonsenseqa", "jmmlu"]:
         instruction = guided_chat[0]["content"] if inst_type == 'guided_instruction' else general_chat[0]["content"]
@@ -248,10 +248,10 @@ def formalize_input(dataset_name,guided_chat, general_chat, inst_type, example):
         sent2 = example['input'].split("\n")[1]
         if inst_type == 'guided_instruction':
             chat = guided_chat
-            chat[1]["content"] = f"{sent1}\n答え:{label}\n"
+            chat[1]["content"] = f"質問文:{sent1}\n答え:{label}\n"
         else:
             chat = general_chat
-            chat[1]["content"] = f"{sent1}\n答え:{label}\n"
+            chat[1]["content"] = f"質問文:{sent1}\n答え:{label}\n"
         return chat, sent1, sent2, instruction
     # elif dataset_name in ["niilc"]:
     #     instruction = guided_chat[0]["content"] if inst_type == 'guided_instruction' else general_chat[0]["content"]
@@ -281,10 +281,10 @@ def formalize_input(dataset_name,guided_chat, general_chat, inst_type, example):
         label = example['output']
         if inst_type == 'guided_instruction':
             chat = guided_chat
-            chat[1]["content"] = f"{sent1}\n答え:{label}\n"
+            chat[1]["content"] = f"文章:{sent1}\n答え:{label}\n"
         else:
             chat = general_chat
-            chat[1]["content"] = f"{sent1}\n答え:{label}\n"
+            chat[1]["content"] = f"文章:{sent1}\n答え:{label}\n"
         return chat, sent1, sent2, instruction
     elif dataset_name in ["jsem"]:
         instruction = guided_chat[0]["content"] if inst_type == 'guided_instruction' else general_chat[0]["content"]
@@ -292,10 +292,10 @@ def formalize_input(dataset_name,guided_chat, general_chat, inst_type, example):
         label = example['output']
         if inst_type == 'guided_instruction':
             chat = guided_chat
-            chat[1]["content"] = f"{sent1}\n答え:{label}\n"
+            chat[1]["content"] = f"前提:{sent1}\n前提と仮説の関係の答え:{label}\n"
         else:
             chat = general_chat
-            chat[1]["content"] = f"{sent1}\n答え:{label}\n"
+            chat[1]["content"] = f"前提:{sent1}\n前提と仮説の関係の答え:{label}\n"
         return chat, sent1, sent2, instruction
     elif dataset_name in ["chabsa"]:
         instruction = guided_chat[0]["content"] if inst_type == 'guided_instruction' else general_chat[0]["content"]
@@ -303,10 +303,10 @@ def formalize_input(dataset_name,guided_chat, general_chat, inst_type, example):
         label = example['output']
         if inst_type == 'guided_instruction':
             chat = guided_chat
-            chat[1]["content"] = f"{sent1}\nターゲットの名前とそれぞれの極性:{label}\n"
+            chat[1]["content"] = f"文章:{sent1}\nターゲットの名前とそれぞれの極性:{label}\n"
         else:
             chat = general_chat
-            chat[1]["content"] = f"{sent1}\nターゲットの名前とそれぞれの極性:{label}\n"
+            chat[1]["content"] = f"文章:{sent1}\nターゲットの名前とそれぞれの極性:{label}\n"
         return chat, sent1, sent2, instruction
 
 
