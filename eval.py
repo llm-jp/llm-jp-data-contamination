@@ -310,7 +310,7 @@ if __name__ == "__main__":
                          "jcommonsenseqa", "jemhopqa", "jmmlu", "jnli", "jsem",
                          "jsick", "jsquad","jsts", "mawps", "niilc"]
             for dataset in datasets:
-                responses = load_json(f'data/{dataset}/{args.split_name}/llmjp_response.json')
+                responses = load_json(f'data/{dataset}/{args.split_name}/llmjp_response.jsonl')
                 is_contaminated(responses, dataset, args.split_name)
         else:
             responses = load_json(f'data/{args.dataset_name}/{args.split_name}/llmjp_response.jsonl')
