@@ -248,10 +248,10 @@ def formalize_input(dataset_name,guided_chat, general_chat, inst_type, example):
         sent2 = example['input'].split("\n")[1]
         if inst_type == 'guided_instruction':
             chat = guided_chat
-            chat[1]["content"] = f"{sent1}\n選択肢:{label}\n"
+            chat[1]["content"] = f"{sent1}\n答え:{label}\n"
         else:
             chat = general_chat
-            chat[1]["content"] = f"{sent1}\n選択肢:{label}\n"
+            chat[1]["content"] = f"{sent1}\n答え:{label}\n"
         return chat, sent1, sent2, instruction
     # elif dataset_name in ["niilc"]:
     #     instruction = guided_chat[0]["content"] if inst_type == 'guided_instruction' else general_chat[0]["content"]
