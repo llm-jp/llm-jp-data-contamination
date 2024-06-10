@@ -306,9 +306,11 @@ if __name__ == "__main__":
     if args.model == "eval":
         #eval gpt responses by metrics
         if args.dataset_name == "all":
-            datasets = ["alt-e-to-j", "alt-j-to-e","chabsa", "jamp", "janli",
-                         "jcommonsenseqa", "jemhopqa", "jmmlu", "jnli", "jsem",
-                         "jsick", "jsquad","jsts", "mawps", "niilc"]
+            # datasets = ["alt-e-to-j", "alt-j-to-e","chabsa", "jamp", "janli",
+            #              "jcommonsenseqa", "jemhopqa", "jmmlu", "jnli", "jsem",
+            #              "jsick", "jsquad","jsts", "mawps", "niilc"]
+            datasets = ["jemhopqa", "jmmlu", "jnli", "jsem",
+                        "jsick", "jsquad", "jsts", "mawps", "niilc"]
             for dataset in datasets:
                 responses = load_json(f'data/{dataset}/{args.split_name}/llmjp_response.jsonl')
                 is_contaminated(responses, dataset, args.split_name)
