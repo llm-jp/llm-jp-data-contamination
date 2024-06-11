@@ -300,7 +300,6 @@ def get_llm_jp_v1_response(random_samples,
                     print("General Template Example")
                     print(tokenizer.decode(tokenized_input[0]))
             with torch.no_grad():
-                pdb.set_trace()
                 output = model.generate(tokenized_input, max_new_tokens=max_tokens, do_sample=True, top_p=0.95, temperature=0.0001, repetition_penalty=1.05)[0]
             input_length = tokenized_input.size()[1]
             generated_text_tokens = output[input_length:]
