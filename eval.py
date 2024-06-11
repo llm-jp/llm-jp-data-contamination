@@ -282,7 +282,7 @@ def get_llm_jp_v1_response(random_samples,
                        max_tokens,
                        temperature):
     tokenizer = AutoTokenizer.from_pretrained("llm-jp/llm-jp-13b-v1.0")
-    model = AutoModelForCausalLM.from_pretrained("llm-jp/llm-jp-13b-v1.0", device_map="auto", torch_dtype=torch.float16)
+    model = AutoModelForCausalLM.from_pretrained("llm-jp/llm-jp-13b-v1.0", device_map="auto", torch_dtype=torch.bfloat16)
     new_instructions = []
     guided_chat, general_chat, chat_template = obtain_instruction(dataset_name, split_name)
     for idx in tqdm(range(len(random_samples))):
@@ -291,9 +291,7 @@ def get_llm_jp_v1_response(random_samples,
             example = random_samples[idx]
             chat, sent1, sent2, instruction = formalize_input(dataset_name, guided_chat, general_chat, inst_type,
                                                               example)
-            tokenized_input = tokenizer.apply_chat_template(chat, chat_template, add_generation_prompt=True,
-                                                            tokenize=True,
-                                                            return_tensors="pt").to(model.device)
+            tokenized_input = tokenizer.apply_chat_template(chat, chat_template, add_generation_prompt=True, tokenize=True, return_tensors="pt", padding=True, add_special_tokens=False).to(model.device)
             if idx == 0:
                 if inst_type == 'guided_instruction':
                     print("Guided Template Example")
@@ -303,14 +301,7 @@ def get_llm_jp_v1_response(random_samples,
                     print(tokenizer.decode(tokenized_input[0]))
             with torch.no_grad():
                 pdb.set_trace()
-                output = model.generate(
-                    tokenized_input,
-                    max_new_tokens=max_tokens,
-                    do_sample=True,
-                    top_p=0.95,
-                    temperature=0.0001,
-                    repetition_penalty=1.05,
-                )[0]
+                output = model.generate(tokenized_input, max_new_tokens=max_tokens, do_sample=True, top_p=0.95, temperature=0.0001, repetition_penalty=1.05)[0]
             input_length = tokenized_input.size()[1]
             generated_text_tokens = output[input_length:]
             response = tokenizer.decode(generated_text_tokens.tolist()).replace("<EOD|LLM-jp>", "")
