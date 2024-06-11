@@ -219,7 +219,7 @@ def save_gpt_responses(random_samples,
             
     print(".......Successfully saved generated gpt reponses......")
 
-def get_llmjp_response(random_samples,
+def get_llmjp_v2_response(random_samples,
                        dataset_name,
                        split_name,
                        model,
@@ -275,6 +275,59 @@ def get_llmjp_response(random_samples,
     save_jsonl(new_instructions, f'data/{dataset_name}/{split_name}/llmjp_response.jsonl')
     print(".......Successfully saved generated gpt reponses......")
 
+def get_llm_jp_v1_response(random_samples,
+                       dataset_name,
+                       split_name,
+                       model,
+                       max_tokens,
+                       temperature):
+    tokenizer = AutoTokenizer.from_pretrained("llm-jp/llm-jp-13b-v1.0")
+    model = AutoModelForCausalLM.from_pretrained("llm-jp/llm-jp-13b-v1.0", device_map="auto", torch_dtype=torch.float16)
+    new_instructions = []
+    guided_chat, general_chat, chat_template = obtain_instruction(dataset_name, split_name)
+    for idx in tqdm(range(len(random_samples))):
+        new_instruction = {}
+        for inst_type in ['guided_instruction', 'general_instruction']:
+            example = random_samples[idx]
+            chat, sent1, sent2, instruction = formalize_input(dataset_name, guided_chat, general_chat, inst_type,
+                                                              example)
+            tokenized_input = tokenizer.apply_chat_template(chat, chat_template, add_generation_prompt=True,
+                                                            tokenize=True,
+                                                            return_tensors="pt").to(model.device)
+            if idx == 0:
+                if inst_type == 'guided_instruction':
+                    print("Guided Template Example")
+                    print(tokenizer.decode(tokenized_input[0]))
+                else:
+                    print("General Template Example")
+                    print(tokenizer.decode(tokenized_input[0]))
+            with torch.no_grad():
+                output = model.generate(
+                    tokenized_input,
+                    max_new_tokens=max_tokens,
+                    do_sample=True,
+                    top_p=0.95,
+                    temperature=0.0001,
+                    repetition_penalty=1.05,
+                )[0]
+            input_length = tokenized_input.size()[1]
+            generated_text_tokens = output[input_length:]
+            response = tokenizer.decode(generated_text_tokens.tolist()).replace("<EOD|LLM-jp>", "")
+            # pdb.set_trace()
+            new_instruction.update({
+                inst_type: {
+                    "instruction": instruction,
+                    "sentence1": sent1,
+                    "candidate": response,
+                    "reference": sent2,
+                    "label": example['output']
+                }
+            })
+        new_instructions.append(new_instruction)
+    dir_path = f'data/{dataset_name}/{split_name}'
+    os.makedirs(dir_path, exist_ok=True)
+    save_jsonl(new_instructions, f'data/{dataset_name}/{split_name}/llmjp_v1_response.jsonl')
+    print(".......Successfully saved generated gpt reponses......")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
@@ -326,8 +379,8 @@ if __name__ == "__main__":
                            model=args.model,
                            max_tokens=500,
                            temperature=0)
-    elif args.model == "llm-jp":
-        print("evaluation for llm-jp model...")
+    elif args.model == "llm-jp-v2":
+        print("evaluation for llm-jp-v2 model...")
         if args.dataset_name == "all":
             # datasets = ["alt-e-to-j", "alt-j-to-e","chabsa", "jamp", "janli",
             #                      "jcommonsenseqa", "jemhopqa", "jmmlu", "jnli", "jsem",
@@ -336,7 +389,7 @@ if __name__ == "__main__":
             for dataset in datasets:
                 loaded_data = load_json(f"datasets_contamination/1.3.0/evaluation/{args.split_name}/{dataset}.json")
                 random_samples = create_random_samples(loaded_data["samples"], num_samples=args.num_samples)
-                get_llmjp_response(random_samples,
+                get_llmjp_v2_response(random_samples,
                                    dataset_name=dataset,
                                    split_name=args.split_name,
                                    model=args.model,
@@ -345,10 +398,37 @@ if __name__ == "__main__":
         else:
             loaded_data = load_json(f"datasets_contamination/1.3.0/evaluation/{args.split_name}/{args.dataset_name}.json")
             random_samples = create_random_samples(loaded_data["samples"], num_samples=args.num_samples)
-            get_llmjp_response(random_samples,
+            get_llmjp_v2_response(random_samples,
                                dataset_name=args.dataset_name,
                                split_name=args.split_name,
                                model=args.model,
                                max_tokens=500,
                                temperature=0)
+    elif args.model == "llm-jp-v1":
+        print("evaluation for llm-jp-v1 model...")
+        if args.dataset_name == "all":
+            datasets = ["alt-e-to-j", "alt-j-to-e","chabsa", "jamp", "janli",
+                                 "jcommonsenseqa", "jemhopqa", "jmmlu", "jnli", "jsem",
+                                 "jsick", "jsquad","jsts", "mawps", "niilc"]
+            for dataset in datasets:
+                loaded_data = load_json(f"datasets_contamination/1.3.0/evaluation/{args.split_name}/{dataset}.json")
+                random_samples = create_random_samples(loaded_data["samples"], num_samples=args.num_samples)
+                get_llm_jp_v1_response(random_samples,
+                                   dataset_name=dataset,
+                                   split_name=args.split_name,
+                                   model=args.model,
+                                   max_tokens=500,
+                                   temperature=0)
+        else:
+            loaded_data = load_json(
+                f"datasets_contamination/1.3.0/evaluation/{args.split_name}/{args.dataset_name}.json")
+            random_samples = create_random_samples(loaded_data["samples"], num_samples=args.num_samples)
+            get_llm_jp_v1_response(random_samples,
+                                  dataset_name=args.dataset_name,
+                                  split_name=args.split_name,
+                                  model=args.model,
+                                  max_tokens=500,
+                                  temperature=0)
+
+
     
