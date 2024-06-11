@@ -333,7 +333,7 @@ def get_llmjp_response(random_samples, dataset_name, split_name, version, max_to
 
     tokenizer = AutoTokenizer.from_pretrained(model_name)
     new_instructions = []
-    guided_chat, general_chat, chat_template = obtain_instruction(dataset_name, split_name, model=version)
+    guided_chat, general_chat, chat_template = obtain_instruction(dataset_name, split_name, model_name=version)
 
     for idx in tqdm(range(len(random_samples))):
         new_instruction = {}
