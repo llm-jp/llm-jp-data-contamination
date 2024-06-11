@@ -436,7 +436,7 @@ if __name__ == "__main__":
                 get_llmjp_response(random_samples,
                                    dataset_name=dataset,
                                    split_name=args.split_name,
-                                   model=args.model,
+                                   version=args.model,
                                    max_tokens=500,
                                    temperature=0)
         else:
@@ -445,7 +445,7 @@ if __name__ == "__main__":
             get_llmjp_response(random_samples,
                                dataset_name=args.dataset_name,
                                split_name=args.split_name,
-                               model=args.model,
+                               version=args.model,
                                max_tokens=500,
                                temperature=0)
 
