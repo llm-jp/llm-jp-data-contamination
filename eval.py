@@ -382,9 +382,9 @@ if __name__ == "__main__":
     elif args.model == "llm-jp-v2":
         print("evaluation for llm-jp-v2 model...")
         if args.dataset_name == "all":
-            # datasets = ["alt-e-to-j", "alt-j-to-e","chabsa", "jamp", "janli",
-            #                      "jcommonsenseqa", "jemhopqa", "jmmlu", "jnli", "jsem",
-            #                      "jsick", "jsquad","jsts", "mawps", "niilc"]
+            datasets = ["alt-e-to-j", "alt-j-to-e","chabsa", "jamp", "janli",
+                                  "jcommonsenseqa", "jemhopqa", "jmmlu", "jnli", "jsem",
+                                  "jsick", "jsquad","jsts", "mawps", "niilc"]
             datasets = ["jsquad", "jsts", "mawps", "niilc"]
             for dataset in datasets:
                 loaded_data = load_json(f"datasets_contamination/1.3.0/evaluation/{args.split_name}/{dataset}.json")
