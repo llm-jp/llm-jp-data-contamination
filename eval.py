@@ -321,7 +321,7 @@ def save_gpt_responses(random_samples,
 #     save_jsonl(new_instructions, f'data/{dataset_name}/{split_name}/llmjp_v1_response.jsonl')
 #     print(".......Successfully saved generated gpt reponses......")
 
-def get_llmjp_response(version, random_samples, dataset_name, split_name, model, max_tokens, temperature):
+def get_llmjp_response(random_samples, dataset_name, split_name, version, max_tokens, temperature):
     if version == 'llm-jp-v1':
         model_name = "llm-jp/llm-jp-13b-instruct-full-jaster-dolly-oasst-v1.0"
         model = AutoModelForCausalLM.from_pretrained(model_name, device_map="auto", torch_dtype=torch.torch.bfloat16)
