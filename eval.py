@@ -425,7 +425,7 @@ if __name__ == "__main__":
                            max_tokens=500,
                            temperature=0)
     elif args.model in ["llm-jp-v2", "llm-jp-v1"]:
-        print("evaluation for llm-jp-v2 model...")
+        print(f"evaluation for {args.model} model...")
         if args.dataset_name == "all":
             datasets = ["alt-e-to-j", "alt-j-to-e","chabsa", "jamp", "janli",
                                   "jcommonsenseqa", "jemhopqa", "jmmlu", "jnli", "jsem",
