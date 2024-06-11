@@ -285,7 +285,7 @@ def get_llm_jp_v1_response(random_samples,
     model = AutoModelForCausalLM.from_pretrained("llm-jp/llm-jp-13b-instruct-full-jaster-dolly-oasst-v1.0",
                                                  device_map="auto", torch_dtype=torch.torch.bfloat16)
     new_instructions = []
-    guided_chat, general_chat, chat_template = obtain_instruction(dataset_name, split_name)
+    guided_chat, general_chat, chat_template = obtain_instruction(dataset_name, split_name, model="llm-jp-v1")
     for idx in tqdm(range(len(random_samples))):
         new_instruction = {}
         for inst_type in ['guided_instruction', 'general_instruction']:
