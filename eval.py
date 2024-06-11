@@ -306,9 +306,9 @@ if __name__ == "__main__":
     if args.model == "eval":
         #eval gpt responses by metrics
         if args.dataset_name == "all":
-            # datasets = ["alt-e-to-j", "alt-j-to-e","chabsa", "jamp", "janli",
-            #              "jcommonsenseqa", "jemhopqa", "jmmlu", "jnli", "jsem",
-            #              "jsick", "jsquad","jsts", "mawps", "niilc"]
+            datasets = ["alt-e-to-j", "alt-j-to-e","chabsa", "jamp", "janli",
+                          "jcommonsenseqa", "jemhopqa", "jmmlu", "jnli", "jsem",
+                          "jsick", "jsquad","jsts", "mawps", "niilc"]
             datasets = ["jsquad", "jsts", "mawps", "niilc"]
             for dataset in datasets:
                 responses = load_json(f'data/{dataset}/{args.split_name}/llmjp_response.jsonl')
@@ -329,9 +329,10 @@ if __name__ == "__main__":
     elif args.model == "llm-jp":
         print("evaluation for llm-jp model...")
         if args.dataset_name == "all":
-            datasets = ["alt-e-to-j", "alt-j-to-e","chabsa", "jamp", "janli",
-                                 "jcommonsenseqa", "jemhopqa", "jmmlu", "jnli", "jsem",
-                                 "jsick", "jsquad","jsts", "mawps", "niilc"]
+            # datasets = ["alt-e-to-j", "alt-j-to-e","chabsa", "jamp", "janli",
+            #                      "jcommonsenseqa", "jemhopqa", "jmmlu", "jnli", "jsem",
+            #                      "jsick", "jsquad","jsts", "mawps", "niilc"]
+            datasets = ["jsquad", "jsts", "mawps", "niilc"]
             for dataset in datasets:
                 loaded_data = load_json(f"datasets_contamination/1.3.0/evaluation/{args.split_name}/{dataset}.json")
                 random_samples = create_random_samples(loaded_data["samples"], num_samples=args.num_samples)
