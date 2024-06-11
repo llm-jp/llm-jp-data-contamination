@@ -364,10 +364,10 @@ if __name__ == "__main__":
                           "jsick", "jsquad","jsts", "mawps", "niilc"]
             datasets = ["jsquad", "jsts", "mawps", "niilc"]
             for dataset in datasets:
-                responses = load_json(f'data/{dataset}/{args.split_name}/llmjp_response.jsonl')
+                responses = load_json(f'data/{dataset}/{args.split_name}/llmjp_v1_response.jsonl')
                 is_contaminated(responses, dataset, args.split_name)
         else:
-            responses = load_json(f'data/{args.dataset_name}/{args.split_name}/llmjp_response.jsonl')
+            responses = load_json(f'data/{args.dataset_name}/{args.split_name}/llmjp_v1_response.jsonl')
             is_contaminated(responses, args.dataset_name, args.split_name)
     elif args.model == "OpenAI":
         wnli_train = load_json(f"data/{args.dataset_name}/{args.split_name}.jsonl")
