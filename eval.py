@@ -281,8 +281,9 @@ def get_llm_jp_v1_response(random_samples,
                        model,
                        max_tokens,
                        temperature):
-    tokenizer = AutoTokenizer.from_pretrained("llm-jp/llm-jp-13b-v1.0")
-    model = AutoModelForCausalLM.from_pretrained("llm-jp/llm-jp-13b-v1.0", device_map="auto", torch_dtype=torch.bfloat16)
+    tokenizer = AutoTokenizer.from_pretrained("llm-jp/llm-jp-13b-instruct-full-jaster-dolly-oasst-v1.0")
+    model = AutoModelForCausalLM.from_pretrained("llm-jp/llm-jp-13b-instruct-full-jaster-dolly-oasst-v1.0",
+                                                 device_map="auto", torch_dtype=torch.torch.bfloat16)
     new_instructions = []
     guided_chat, general_chat, chat_template = obtain_instruction(dataset_name, split_name)
     for idx in tqdm(range(len(random_samples))):
@@ -376,7 +377,6 @@ if __name__ == "__main__":
             datasets = ["alt-e-to-j", "alt-j-to-e","chabsa", "jamp", "janli",
                                   "jcommonsenseqa", "jemhopqa", "jmmlu", "jnli", "jsem",
                                   "jsick", "jsquad","jsts", "mawps", "niilc"]
-            datasets = ["jsquad", "jsts", "mawps", "niilc"]
             for dataset in datasets:
                 loaded_data = load_json(f"datasets_contamination/1.3.0/evaluation/{args.split_name}/{dataset}.json")
                 random_samples = create_random_samples(loaded_data["samples"], num_samples=args.num_samples)
