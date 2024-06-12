@@ -48,7 +48,7 @@ def obtain_instruction(dataset_name, split_name, model_name=None):
     if model_name == "llm-jp-v2":
         chat_template = "{% for message in messages %}{% if message['role'] == 'user' %}{{ '\\n\\n### 指示:\\n' + message['content'] }}{% elif message['role'] == 'system' %}{{ '\\n\\n### 指示:\\n' + message['content'] }}{% elif message['role'] == 'assistant' %}{{ '\\n\\n### 応答:\\n' + message['content'] + eos_token }}{% endif %}{% if loop.last and add_generation_prompt %}{{ '\\n\\n### 応答:\\n' }}{% endif %}{% endfor %}"
     else:
-        chat_template = "{% for message in messages %}{% if message['role'] == 'user' %}{{message['content'] }}{% elif message['role'] == 'system' %}{{message['content'] }}{% elif message['role'] == 'assistant' %}{{ '\\n\\n### 回答:\\n' + message['content'] + eos_token }}{% endif %}{% if loop.last and add_generation_prompt %}{{ '\\n\\n### 回答:\\n' }}{% endif %}{% endfor %}"
+        chat_template = "{% for message in messages %}{% if message['role'] == 'user' %}{{message['content'] }}{% elif message['role'] == 'system' %}{{message['content'] }}{% elif message['role'] == 'assistant' %}{{ '\\n### 回答:\\n' + message['content'] + eos_token }}{% endif %}{% if loop.last and add_generation_prompt %}{{ '\\n### 回答:\\n' }}{% endif %}{% endfor %}"
 
     if dataset_name in ["jnli", "jsick", "jamp","janli"]:
         guided_chat = [

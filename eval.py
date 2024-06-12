@@ -219,108 +219,6 @@ def save_gpt_responses(random_samples,
             
     print(".......Successfully saved generated gpt reponses......")
 
-# def get_llmjp_v2_response(random_samples,
-#                        dataset_name,
-#                        split_name,
-#                        model,
-#                        max_tokens,
-#                        temperature):
-#     tokenizer = AutoTokenizer.from_pretrained(
-#         "llm-jp/llm-jp-13b-instruct-full-dolly-ichikara_004_001_single-oasst-oasst2-v2.0")
-#     model = AutoModelForCausalLM.from_pretrained(
-#         "llm-jp/llm-jp-13b-instruct-full-dolly-ichikara_004_001_single-oasst-oasst2-v2.0", device_map="auto",
-#         torch_dtype=torch.bfloat16)
-#     new_instructions = []
-#     guided_chat, general_chat, chat_template  = obtain_instruction(dataset_name, split_name)
-#     for idx in tqdm(range(len(random_samples))):
-#         new_instruction = {}
-#         for inst_type in ['guided_instruction', 'general_instruction']:
-#             example = random_samples[idx]
-#             chat, sent1, sent2, instruction = formalize_input(dataset_name, guided_chat, general_chat, inst_type, example)
-#             tokenized_input = tokenizer.apply_chat_template(chat, chat_template, add_generation_prompt=True,
-#                                                             tokenize=True,
-#                                                             return_tensors="pt").to(model.device)
-#             if idx == 0:
-#                 if inst_type == 'guided_instruction':
-#                     print("Guided Template Example")
-#                     print(tokenizer.decode(tokenized_input[0]))
-#                 else:
-#                     print("General Template Example")
-#                     print(tokenizer.decode(tokenized_input[0]))
-#             with torch.no_grad():
-#                 output = model.generate(
-#                     tokenized_input,
-#                     max_new_tokens=max_tokens,
-#                     do_sample=True,
-#                     top_p=0.95,
-#                     temperature=0.0001,
-#                     repetition_penalty=1.05,
-#                 )[0]
-#             input_length = tokenized_input.size()[1]
-#             generated_text_tokens = output[input_length:]
-#             response = tokenizer.decode(generated_text_tokens.tolist()).replace("<EOD|LLM-jp>", "")
-#             #pdb.set_trace()
-#             new_instruction.update({
-#                 inst_type: {
-#                     "instruction": instruction,
-#                     "sentence1": sent1,
-#                     "candidate": response,
-#                     "reference": sent2,
-#                     "label": example['output']
-#                 }
-#             })
-#         new_instructions.append(new_instruction)
-#     dir_path = f'data/{dataset_name}/{split_name}'
-#     os.makedirs(dir_path, exist_ok=True)
-#     save_jsonl(new_instructions, f'data/{dataset_name}/{split_name}/llmjp_v2_response.jsonl')
-#     print(".......Successfully saved generated gpt reponses......")
-#
-# def get_llm_jp_v1_response(random_samples,
-#                        dataset_name,
-#                        split_name,
-#                        model,
-#                        max_tokens,
-#                        temperature):
-#     tokenizer = AutoTokenizer.from_pretrained("llm-jp/llm-jp-13b-instruct-full-jaster-dolly-oasst-v1.0")
-#     model = AutoModelForCausalLM.from_pretrained("llm-jp/llm-jp-13b-instruct-full-jaster-dolly-oasst-v1.0",
-#                                                  device_map="auto", torch_dtype=torch.torch.bfloat16)
-#     new_instructions = []
-#     guided_chat, general_chat, chat_template = obtain_instruction(dataset_name, split_name, model="llm-jp-v1")
-#     for idx in tqdm(range(len(random_samples))):
-#         new_instruction = {}
-#         for inst_type in ['guided_instruction', 'general_instruction']:
-#             example = random_samples[idx]
-#             chat, sent1, sent2, instruction = formalize_input(dataset_name, guided_chat, general_chat, inst_type,
-#                                                               example)
-#             tokenized_input = tokenizer.apply_chat_template(chat, chat_template, add_generation_prompt=True, tokenize=True, return_tensors="pt", padding=True, add_special_tokens=False).to(model.device)
-#             if idx == 0:
-#                 if inst_type == 'guided_instruction':
-#                     print("Guided Template Example")
-#                     print(tokenizer.decode(tokenized_input[0]))
-#                 else:
-#                     print("General Template Example")
-#                     print(tokenizer.decode(tokenized_input[0]))
-#             with torch.no_grad():
-#                 output = model.generate(tokenized_input, max_new_tokens=max_tokens, do_sample=True, top_p=0.95, temperature=0.0001, repetition_penalty=1.05)[0]
-#             input_length = tokenized_input.size()[1]
-#             generated_text_tokens = output[input_length:]
-#             response = tokenizer.decode(generated_text_tokens.tolist()).replace("<EOD|LLM-jp>", "")
-#             # pdb.set_trace()
-#             new_instruction.update({
-#                 inst_type: {
-#                     "instruction": instruction,
-#                     "sentence1": sent1,
-#                     "candidate": response,
-#                     "reference": sent2,
-#                     "label": example['output']
-#                 }
-#             })
-#         new_instructions.append(new_instruction)
-#     dir_path = f'data/{dataset_name}/{split_name}'
-#     os.makedirs(dir_path, exist_ok=True)
-#     save_jsonl(new_instructions, f'data/{dataset_name}/{split_name}/llmjp_v1_response.jsonl')
-#     print(".......Successfully saved generated gpt reponses......")
-
 def get_llmjp_response(random_samples, dataset_name, split_name, version, max_tokens, temperature):
     if version == 'llm-jp-v1':
         model_name = "llm-jp/llm-jp-13b-instruct-full-jaster-dolly-oasst-v1.0"
@@ -370,7 +268,7 @@ def get_llmjp_response(random_samples, dataset_name, split_name, version, max_to
 
     dir_path = f'data/{dataset_name}/{split_name}'
     os.makedirs(dir_path, exist_ok=True)
-    save_jsonl(new_instructions, f'data/{dataset_name}/{split_name}/llmjp_{version}_response.jsonl')
+    save_jsonl(new_instructions, f'data/{dataset_name}/{split_name}/{version}_response.jsonl')
     print(".......Successfully saved generated gpt reponses......")
 
 
@@ -409,10 +307,10 @@ if __name__ == "__main__":
                           "jsick", "jsquad","jsts", "mawps", "niilc"]
             datasets = ["jsquad", "jsts", "mawps", "niilc"]
             for dataset in datasets:
-                responses = load_json(f'data/{dataset}/{args.split_name}/llmjp_v1_response.jsonl')
+                responses = load_json(f'data/{dataset}/{args.split_name}/{args.model}_response.jsonl')
                 is_contaminated(responses, dataset, args.split_name)
         else:
-            responses = load_json(f'data/{args.dataset_name}/{args.split_name}/llmjp_v1_response.jsonl')
+            responses = load_json(f'data/{args.dataset_name}/{args.split_name}/{args.model}_response.jsonl')
             is_contaminated(responses, args.dataset_name, args.split_name)
     elif args.model == "OpenAI":
         wnli_train = load_json(f"data/{args.dataset_name}/{args.split_name}.jsonl")
