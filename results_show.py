@@ -1,6 +1,6 @@
 import argparse
 import json
-
+import pandas as pd
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
@@ -25,6 +25,7 @@ if __name__ == "__main__":
                         default=15,
                         help="the number of samples")
     args = parser.parse_args()
+    data = []
     if args.dataset_name == "all":
         dataset_names = ["alt-e-to-j", "alt-j-to-e","chabsa", "jamp", "janli",
                          "jcommonsenseqa", "jemhopqa", "jmmlu", "jnli", "jsem",
@@ -34,10 +35,22 @@ if __name__ == "__main__":
             with open(f"contamination_result/{dataset_name}/{args.split_name}/data_contamination_result.jsonl", "r") as f:
                 lines = f.readlines()
                 for i in lines:
-                   print(i)
+                    for line in lines:
+                        # Convert each line (which is a JSON string) to a Python dict
+                        json_dict = json.loads(line)
+                        # Append the dict to the data list
+                        data.append(json_dict)
     else:
         print(f"Show the results of {args.dataset_name} in {args.split_name} split")
         with open(f"contamination_result/{args.dataset_name}/{args.split_name}/data_contamination_result.jsonl", "r") as f:
             lines = f.readlines()
             for i in lines:
                 print(i)
+                json_dict = json.loads(line)
+                # Append the dict to the data list
+                data.append(json_dict)
+df = pd.DataFrame(data)
+markdown_table = df.to_markdown()
+
+# Display the DataFrame
+print(markdown_table)
