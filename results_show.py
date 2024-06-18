@@ -18,7 +18,7 @@ if __name__ == "__main__":
                         help="the partition of dataset")
     parser.add_argument("--model",
                         type=str,
-                        default="llm-jp",
+                        default="llm-jp-v1",
                         help="the name of model")
     parser.add_argument("--num_samples",
                         type=int,
