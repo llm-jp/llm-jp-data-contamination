@@ -36,28 +36,35 @@ if __name__ == "__main__":
                 lines = f.readlines()
                 temp_line = ""
                 for line in lines:
-                    # lineの前後の空白文字を削除
-                    line = line.strip()
+                    line = line.strip()  # 删除前后的空白字符
                     if line.startswith("{") and temp_line:
                         try:
-                            # JSONに変換して結果リストに追加
+                            # 转换为JSON并添加到结果列表
                             data = json.loads(temp_line)
+                            # 将平均分数拆分成分别的列
                             data["bleurt_guided_prompt"] = data["average bleurt score"][0]
                             data["bleurt_naive_prompt"] = data["average bleurt score"][1]
                             data["rougeL_guided_prompt"] = data["rougeL score"][0]
                             data["rougeL_naive_prompt"] = data["rougeL score"][1]
+
+                            # 添加到结果列表中并移除原来的平均分数列
                             results.append(data)
+                            temp_line = line
                         except json.JSONDecodeError as e:
                             print(f"跳过无效的JSON行: {temp_line}")
                             print(f"错误: {e}")
-                        temp_line = line
+                            temp_line = line  # 重置temp_line以开始新的对象
                     else:
                         temp_line += " " + line
 
-                    # 最後のJSONオブジェクトを追加
+                    # 处理最后一个JSON对象
                 if temp_line:
                     try:
                         data = json.loads(temp_line)
+                        data["bleurt_guided_prompt"] = data["average bleurt score"][0]
+                        data["bleurt_naive_prompt"] = data["average bleurt score"][1]
+                        data["rougeL_guided_prompt"] = data["rougeL score"][0]
+                        data["rougeL_naive_prompt"] = data["rougeL score"][1]
                         results.append(data)
                     except json.JSONDecodeError as e:
                         print(f"跳过无效的JSON行: {temp_line}")
