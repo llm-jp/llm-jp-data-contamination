@@ -42,6 +42,10 @@ if __name__ == "__main__":
                         try:
                             # JSONに変換して結果リストに追加
                             data = json.loads(temp_line)
+                            data["bleurt_guided_prompt"] = data["average bleurt score"][0]
+                            data["bleurt_naive_prompt"] = data["average bleurt score"][1]
+                            data["rougeL_guided_prompt"] = data["rougeL score"][0]
+                            data["rougeL_naive_prompt"] = data["rougeL score"][1]
                             results.append(data)
                         except json.JSONDecodeError as e:
                             print(f"跳过无效的JSON行: {temp_line}")
@@ -70,6 +74,10 @@ if __name__ == "__main__":
                     try:
                         # JSONに変換して結果リストに追加
                         data = json.loads(temp_line)
+                        data["bleurt_guided_prompt"] = data["average bleurt score"][0]
+                        data["bleurt_naive_prompt"] = data["average bleurt score"][1]
+                        data["rougeL_guided_prompt"] = data["rougeL score"][0]
+                        data["rougeL_naive_prompt"] = data["rougeL score"][1]
                         results.append(data)
                     except json.JSONDecodeError as e:
                         print(f"跳过无效的JSON行: {temp_line}")
