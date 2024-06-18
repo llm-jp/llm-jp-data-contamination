@@ -94,7 +94,10 @@ if __name__ == "__main__":
                 except json.JSONDecodeError as e:
                     print(f"跳过无效的JSON行: {temp_line}")
                     print(f"错误: {e}")
-df = pd.DataFrame(results)
+df = pd.json_normalize(results)
+
+# 删除原始的‘average bleurt score’和‘rougeL score’列
+df.drop(columns=["average bleurt score", "rougeL score"], inplace=True)
 markdown_table = df.to_markdown()
 
 # Display the DataFrame
