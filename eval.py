@@ -85,7 +85,7 @@ def significance_test(guided_scores, general_scores):
         print("The difference is not statistically significant.")
         return False
 
-def is_contaminated(dataset, dataset_name, split_name):
+def is_contaminated(dataset, dataset_name, split_name, model_name):
     """Confirm wether GPT-3.5 is contaminated on a given dataset
     
     Args: 
@@ -126,7 +126,7 @@ def is_contaminated(dataset, dataset_name, split_name):
         "rougeL score": [sum(x)/len(references) for x in rougeL_scores],
         "bleurt_indicator": bleurt_indicator,
         "rougel_indicator": rougel_indicator
-    }, f'contamination_result/{dataset_name}/{split_name}/data_contamination_result.jsonl')
+    }, f'contamination_result/{dataset_name}/{split_name}/{model_name}_data_contamination_result.jsonl')
     
     print("......Successfully saved eval result......")
     
@@ -310,10 +310,10 @@ if __name__ == "__main__":
                           "jsick", "jsquad","jsts", "mawps", "niilc"]
             for dataset in datasets:
                 responses = load_json(f'data/{dataset}/{args.split_name}/{args.model}_response.jsonl')
-                is_contaminated(responses, dataset, args.split_name)
+                is_contaminated(responses, dataset, args.split_name, args.model)
         else:
             responses = load_json(f'data/{args.dataset_name}/{args.split_name}/{args.model}_response.jsonl')
-            is_contaminated(responses, args.dataset_name, args.split_name)
+            is_contaminated(responses, args.dataset_name, args.split_name, args.model)
     elif args.mode == "generation":
         if args.model == "OpenAI":
             wnli_train = load_json(f"data/{args.dataset_name}/{args.split_name}.jsonl")

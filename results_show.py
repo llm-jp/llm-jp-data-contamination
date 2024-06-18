@@ -3,8 +3,8 @@ import json
 import pandas as pd
 
 
-def read_data(dataset_name, split_name, results):
-    with open(f"contamination_result/{dataset_name}/{split_name}/data_contamination_result.jsonl", "r") as f:
+def read_data(dataset_name, split_name, results, model_name):
+    with open(f"contamination_result/{dataset_name}/{split_name}/{model_name}_data_contamination_result.jsonl", "r") as f:
         lines = f.readlines()
         temp_line = ""
         for line in lines:
@@ -71,10 +71,10 @@ if __name__ == "__main__":
                          "jsick", "jsquad","jsts", "mawps", "niilc"]
         for dataset_name in dataset_names:
             print(f"Show the results of {dataset_name} in {args.split_name} split")
-            read_data(dataset_name, args.split_name, results)
+            read_data(dataset_name, args.split_name, results, args.model)
     else:
         print(f"Show the results of {args.dataset_name} in {args.split_name} split")
-        read_data(args.dataset_name, args.split_name, results)
+        read_data(args.dataset_name, args.split_name, results, args.model)
 df = pd.json_normalize(results)
 
 # 删除原始的‘average bleurt score’和‘rougeL score’列
