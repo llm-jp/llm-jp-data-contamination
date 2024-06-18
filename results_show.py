@@ -25,7 +25,7 @@ if __name__ == "__main__":
                         default=15,
                         help="the number of samples")
     args = parser.parse_args()
-    data = []
+    results = []
     if args.dataset_name == "all":
         dataset_names = ["alt-e-to-j", "alt-j-to-e","chabsa", "jamp", "janli",
                          "jcommonsenseqa", "jemhopqa", "jmmlu", "jnli", "jsem",
@@ -34,23 +34,33 @@ if __name__ == "__main__":
             print(f"Show the results of {dataset_name} in {args.split_name} split")
             with open(f"contamination_result/{dataset_name}/{args.split_name}/data_contamination_result.jsonl", "r") as f:
                 lines = f.readlines()
-                for i in lines:
-                    for line in lines:
-                        # Convert each line (which is a JSON string) to a Python dict
-                        json_dict = json.loads(line)
-                        # Append the dict to the data list
-                        data.append(json_dict)
+                for line in lines:
+                    line = line.strip()  # 前後の空白文字を削除
+                    if line:  # 如果行不是空的
+                        try:
+                            # JSONに変換
+                            data = json.loads(line)
+                            # 将数据添加到结果列表
+                            results.append(data)
+                        except json.JSONDecodeError as e:
+                            print(f"pass error: {line}")
+                            print(f"error: {e}")
     else:
         print(f"Show the results of {args.dataset_name} in {args.split_name} split")
         with open(f"contamination_result/{args.dataset_name}/{args.split_name}/data_contamination_result.jsonl", "r") as f:
             lines = f.readlines()
-            for i in lines:
-                for line in lines:
-                    # Convert each line (which is a JSON string) to a Python dict
-                    json_dict = json.loads(line)
-                    # Append the dict to the data list
-                    data.append(json_dict)
-df = pd.DataFrame(data)
+            for line in lines:
+                line = line.strip()  # 前後の空白文字を削除
+                if line:  # 如果行不是空的
+                    try:
+                        # JSONに変換
+                        data = json.loads(line)
+                        # 将数据添加到结果列表
+                        results.append(data)
+                    except json.JSONDecodeError as e:
+                        print(f"pass error: {line}")
+                        print(f"error: {e}")
+df = pd.DataFrame(results)
 markdown_table = df.to_markdown()
 
 # Display the DataFrame
