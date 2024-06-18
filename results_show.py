@@ -45,10 +45,11 @@ if __name__ == "__main__":
         with open(f"contamination_result/{args.dataset_name}/{args.split_name}/data_contamination_result.jsonl", "r") as f:
             lines = f.readlines()
             for i in lines:
-                print(i)
-                json_dict = json.loads(line)
-                # Append the dict to the data list
-                data.append(json_dict)
+                for line in lines:
+                    # Convert each line (which is a JSON string) to a Python dict
+                    json_dict = json.loads(line)
+                    # Append the dict to the data list
+                    data.append(json_dict)
 df = pd.DataFrame(data)
 markdown_table = df.to_markdown()
 
