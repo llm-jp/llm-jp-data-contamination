@@ -295,57 +295,60 @@ if __name__ == "__main__":
                         type=int,
                         default=15,
                         help="the number of samples")
+    parser.add_argument("--mode",type=str,
+                        default="eval",
+                        choices=["eval","generation"])
     args = parser.parse_args()
     bleurt =  evaluate.load('bleurt', 'bleurt-20', model_type="metric")
     rouge = evaluate.load('rouge')
     print(args)
-    if args.model == "eval":
+    if args.mode == "eval":
         #eval gpt responses by metrics
         if args.dataset_name == "all":
             datasets = ["alt-e-to-j", "alt-j-to-e","chabsa", "jamp", "janli",
                           "jcommonsenseqa", "jemhopqa", "jmmlu", "jnli", "jsem",
                           "jsick", "jsquad","jsts", "mawps", "niilc"]
-            datasets = ["jsquad", "jsts", "mawps", "niilc"]
             for dataset in datasets:
                 responses = load_json(f'data/{dataset}/{args.split_name}/{args.model}_response.jsonl')
                 is_contaminated(responses, dataset, args.split_name)
         else:
             responses = load_json(f'data/{args.dataset_name}/{args.split_name}/{args.model}_response.jsonl')
             is_contaminated(responses, args.dataset_name, args.split_name)
-    elif args.model == "OpenAI":
-        wnli_train = load_json(f"data/{args.dataset_name}/{args.split_name}.jsonl")
-        client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
-        random_samples = create_random_samples(wnli_train, num_samples=args.num_samples)
-        save_gpt_responses(random_samples,
-                           dataset_name=args.dataset_name,
-                           split_name=args.split_name,
-                           model=args.model,
-                           max_tokens=500,
-                           temperature=0)
-    elif args.model in ["llm-jp-v2", "llm-jp-v1"]:
-        print(f"evaluation for {args.model} model...")
-        if args.dataset_name == "all":
-            datasets = ["alt-e-to-j", "alt-j-to-e","chabsa", "jamp", "janli",
-                                  "jcommonsenseqa", "jemhopqa", "jmmlu", "jnli", "jsem",
-                                  "jsick", "jsquad","jsts", "mawps", "niilc"]
-            for dataset in datasets:
-                loaded_data = load_json(f"datasets_contamination/1.3.0/evaluation/{args.split_name}/{dataset}.json")
+    elif args.mode == "generation":
+        if args.model == "OpenAI":
+            wnli_train = load_json(f"data/{args.dataset_name}/{args.split_name}.jsonl")
+            client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+            random_samples = create_random_samples(wnli_train, num_samples=args.num_samples)
+            save_gpt_responses(random_samples,
+                               dataset_name=args.dataset_name,
+                               split_name=args.split_name,
+                               model=args.model,
+                               max_tokens=500,
+                               temperature=0)
+        elif args.model in ["llm-jp-v2", "llm-jp-v1"]:
+            print(f"evaluation for {args.model} model...")
+            if args.dataset_name == "all":
+                datasets = ["alt-e-to-j", "alt-j-to-e","chabsa", "jamp", "janli",
+                                      "jcommonsenseqa", "jemhopqa", "jmmlu", "jnli", "jsem",
+                                      "jsick", "jsquad","jsts", "mawps", "niilc"]
+                for dataset in datasets:
+                    loaded_data = load_json(f"datasets_contamination/1.3.0/evaluation/{args.split_name}/{dataset}.json")
+                    random_samples = create_random_samples(loaded_data["samples"], num_samples=args.num_samples)
+                    get_llmjp_response(random_samples,
+                                       dataset_name=dataset,
+                                       split_name=args.split_name,
+                                       version=args.model,
+                                       max_tokens=500,
+                                       temperature=0)
+            else:
+                loaded_data = load_json(f"datasets_contamination/1.3.0/evaluation/{args.split_name}/{args.dataset_name}.json")
                 random_samples = create_random_samples(loaded_data["samples"], num_samples=args.num_samples)
                 get_llmjp_response(random_samples,
-                                   dataset_name=dataset,
+                                   dataset_name=args.dataset_name,
                                    split_name=args.split_name,
                                    version=args.model,
                                    max_tokens=500,
                                    temperature=0)
-        else:
-            loaded_data = load_json(f"datasets_contamination/1.3.0/evaluation/{args.split_name}/{args.dataset_name}.json")
-            random_samples = create_random_samples(loaded_data["samples"], num_samples=args.num_samples)
-            get_llmjp_response(random_samples,
-                               dataset_name=args.dataset_name,
-                               split_name=args.split_name,
-                               version=args.model,
-                               max_tokens=500,
-                               temperature=0)
 
 
     
