@@ -326,7 +326,7 @@ if __name__ == "__main__":
                         default=15,
                         help="the number of samples")
     parser.add_argument("--mode",type=str,
-                        default="eval",
+                        default="generation",
                         choices=["eval","generation"])
     parser.add_argument("--contamination_method", type=str,
                         default="naive",
