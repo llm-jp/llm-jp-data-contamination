@@ -1,5 +1,7 @@
 import os
 import json
+import pandas as pd
+from eval import create_random_samples
 
 NUM_SAMPLES = 15
 TASK_NAME = ["nli-task"]
@@ -41,15 +43,43 @@ def clean_text(text):
     if '' in words_list: 
         for _ in range(words_list.count('')):
             words_list.remove('')
-    
     return words_list
 
-def obtain_instruction(dataset_name, split_name, model_name=None):
+def process_data_to_json(dataset_name, data):
+    if dataset_name == "databricks-dolly-15k-ja":
+        data['input'] = (
+                '### 指示：\n' + data['instruction'] + '\n\n' +
+                '### 文脈 :\n' + data['context'].replace('', '（空）')
+        )
+        data['input'] = data['input'].str.replace('### 文脈 :\n（空）', '')
+        data['output'] = '### 応答:\n' + data['response']
+        result = data[['input', 'output']]
+        result = result.to_dict(orient='records')
+        return result
+
+
+def load_data(dataset_name, split_name, num_samples):
+    if dataset_name in ["alt-e-to-j", "alt-j-to-e","chabsa", "jamp", "janli",
+                          "jcommonsenseqa", "jemhopqa", "jmmlu", "jnli", "jsem",
+                          "jsick", "jsquad","jsts", "mawps", "niilc"]:
+        loaded_data = load_json(f"datasets_contamination/1.3.0/evaluation/{split_name}/{dataset_name}.json")
+        random_samples = create_random_samples(loaded_data["samples"], num_samples=num_samples)
+    elif dataset_name == "databricks-dolly-15k-ja":
+        df = pd.read_json("hf://datasets/llm-jp/databricks-dolly-15k-ja/databricks-dolly-15k-ja.jsonl", lines=True)
+        loaded_data = process_data_to_json("databricks-dolly-15k-ja", df)
+        random_samples = create_random_samples(loaded_data, num_samples=num_samples)
+    elif dataset_name == "oasst1-21k-ja":
+        df = pd.read_json("hf://datasets/llm-jp/oasst1-21k-ja/oasst1-21k-ja.jsonl", lines=True)
+    elif dataset_name == "databricks-dolly-15k-ja":
+        df = pd.read_json("hf://datasets/llm-jp/oasst1-21k-en/oasst1-21k-en.jsonl", lines=True)
+        random_samples = df.sample(num_samples)
+    return random_samples
+
+def obtain_instruction_time_travel(dataset_name, split_name, model_name=None):
     if model_name == "llm-jp-v2":
         chat_template = "{% for message in messages %}{% if message['role'] == 'user' %}{{ '\\n\\n### 指示:\\n' + message['content'] }}{% elif message['role'] == 'system' %}{{ '\\n\\n### 指示:\\n' + message['content'] }}{% elif message['role'] == 'assistant' %}{{ '\\n\\n### 応答:\\n' + message['content'] + eos_token }}{% endif %}{% if loop.last and add_generation_prompt %}{{ '\\n\\n### 応答:\\n' }}{% endif %}{% endfor %}"
     else:
         chat_template = "{% for message in messages %}{% if message['role'] == 'user' %}{{message['content'] }}{% elif message['role'] == 'system' %}{{message['content'] }}{% elif message['role'] == 'assistant' %}{{ '\\n### 回答:\\n' + message['content'] + eos_token }}{% endif %}{% if loop.last and add_generation_prompt %}{{ '\\n### 回答:\\n' }}{% endif %}{% endfor %}"
-
     if dataset_name in ["jnli", "jsick", "jamp","janli"]:
         guided_chat = [
             {"role": "system",
@@ -187,7 +217,21 @@ def obtain_instruction(dataset_name, split_name, model_name=None):
         ]
         return guided_chat, general_chat, chat_template
 
-def formalize_input(dataset_name,guided_chat, general_chat, inst_type, example):
+def obtain_instruction_naive(dataset_name, split_name, model_name=None):
+    if model_name == "llm-jp-v2":
+        chat_template = "{% for message in messages %}{% if message['role'] == 'user' %}{{ '' + message['content'] }}{% elif message['role'] == 'system' %}{{ '' + message['content'] }}{% elif message['role'] == 'assistant' %}{{ '' + message['content'] + eos_token }}{% endif %}{% if loop.last and add_generation_prompt %}{{ '' }}{% endif %}{% endfor %}"
+    else:
+        chat_template = "{% for message in messages %}{% if message['role'] == 'user' %}{{message['content'] }}{% elif message['role'] == 'system' %}{{message['content'] }}{% elif message['role'] == 'assistant' %}{{ '\\n' + message['content'] + eos_token }}{% endif %}{% if loop.last and add_generation_prompt %}{{ '' }}{% endif %}{% endfor %}"
+    if dataset_name == "databricks-dolly-15k-ja":
+        general_chat = [
+            {"role": "system",
+             "content": "以下は、タスクを説明する指示です。要求を適切に満たす応答を書きなさい。"},
+            {"role": "user", "content": ""},
+        ]
+    return general_chat, chat_template
+
+
+def formalize_input_time_travel(dataset_name,guided_chat, general_chat, inst_type, example):
     if dataset_name in ["jnli", "jsick", "jamp", "janli"]:
         instruction = guided_chat[0]["content"] if inst_type == 'guided_instruction' else general_chat[0]["content"]
         procesesd_sent1 = example['input'].split('\n')[0].replace('前提：', '')
@@ -291,7 +335,13 @@ def formalize_input(dataset_name,guided_chat, general_chat, inst_type, example):
             chat[1]["content"] = f"{sent1}\nターゲットの名前とそれぞれの極性:{label}\n"
         return chat, sent1, sent2, instruction
 
-
-
+def formalize_input_baseline(dataset_name, general_chat, example):
+    if dataset_name == "databricks-dolly-15k-ja":
+        sent1 = example['input']
+        prev_half = example["output"][:len(example["output"])//2]
+        sent2 = example["output"][len(example["output"])//2:]
+        chat = general_chat
+        chat[1]["content"] = f"{sent1}\n"+prev_half
+        return chat, sent1, sent2, example['input']
     
     

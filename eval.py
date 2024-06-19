@@ -213,13 +213,12 @@ def save_gpt_responses(random_samples,
                     "label": instruction['label']
                     }
                 })
-            
         new_instructions.append(new_instruction)
     save_jsonl(new_instructions, f'data/{dataset_name}/{model}_response_{split_name}.jsonl')
             
     print(".......Successfully saved generated gpt reponses......")
 
-def get_llmjp_response(random_samples, dataset_name, split_name, version, max_tokens, temperature):
+def get_llmjp_response(random_samples, dataset_name, split_name, version, max_tokens, temperature, contamination_method):
     if version == 'llm-jp-v1':
         model_name = "llm-jp/llm-jp-13b-instruct-full-jaster-dolly-oasst-v1.0"
         model = AutoModelForCausalLM.from_pretrained(model_name, device_map="auto", torch_dtype=torch.torch.bfloat16)
@@ -231,20 +230,52 @@ def get_llmjp_response(random_samples, dataset_name, split_name, version, max_to
 
     tokenizer = AutoTokenizer.from_pretrained(model_name)
     new_instructions = []
-    guided_chat, general_chat, chat_template = obtain_instruction(dataset_name, split_name, model_name=version)
+    if contamination_method == "time_travel":
+        guided_chat, general_chat, chat_template = obtain_instruction_time_travel(dataset_name, split_name, model_name=version)
+        for idx in tqdm(range(len(random_samples))):
+            new_instruction = {}
+            for inst_type in ['guided_instruction', 'general_instruction']:
+                example = random_samples[idx]
+                chat, sent1, sent2, instruction = formalize_input_time_travel(dataset_name, guided_chat, general_chat,
+                                                                              inst_type,
+                                                                              example)
+                tokenized_input = tokenizer.apply_chat_template(chat, chat_template, add_generation_prompt=True,
+                                                                tokenize=True, return_tensors="pt", padding=True,
+                                                                add_special_tokens=False).to(model.device)
 
-    for idx in tqdm(range(len(random_samples))):
-        new_instruction = {}
-        for inst_type in ['guided_instruction', 'general_instruction']:
+                if idx == 0:
+                    print(f"{inst_type.capitalize()} Template Example")
+                    print(tokenizer.decode(tokenized_input[0]))
+
+                with torch.no_grad():
+                    output = model.generate(tokenized_input, max_new_tokens=max_tokens, do_sample=True, top_p=0.95,
+                                            temperature=0.7)[0]
+
+                input_length = tokenized_input.size()[1]
+                generated_text_tokens = output[input_length:]
+                response = tokenizer.decode(generated_text_tokens.tolist()).replace("<EOD|LLM-jp>", "")
+
+                new_instruction.update({
+                    inst_type: {
+                        "instruction": instruction,
+                        "sentence1": sent1,
+                        "candidate": response,
+                        "reference": sent2,
+                        "label": example['output']
+                    }
+                })
+            new_instructions.append(new_instruction)
+    elif contamination_method == "naive":
+        general_chat, chat_template = obtain_instruction_naive(dataset_name, split_name, model_name=version)
+        for idx in tqdm(range(len(random_samples))):
+            new_instruction = {}
             example = random_samples[idx]
-            chat, sent1, sent2, instruction = formalize_input(dataset_name, guided_chat, general_chat, inst_type,
-                                                              example)
+            chat, sent1, sent2, instruction = formalize_input_baseline(dataset_name, general_chat, example)
             tokenized_input = tokenizer.apply_chat_template(chat, chat_template, add_generation_prompt=True,
                                                             tokenize=True, return_tensors="pt", padding=True,
                                                             add_special_tokens=False).to(model.device)
-
             if idx == 0:
-                print(f"{inst_type.capitalize()} Template Example")
+                print(f"Template Example")
                 print(tokenizer.decode(tokenized_input[0]))
 
             with torch.no_grad():
@@ -254,9 +285,8 @@ def get_llmjp_response(random_samples, dataset_name, split_name, version, max_to
             input_length = tokenized_input.size()[1]
             generated_text_tokens = output[input_length:]
             response = tokenizer.decode(generated_text_tokens.tolist()).replace("<EOD|LLM-jp>", "")
-
             new_instruction.update({
-                inst_type: {
+                'geneal_instruction': {
                     "instruction": instruction,
                     "sentence1": sent1,
                     "candidate": response,
@@ -264,8 +294,7 @@ def get_llmjp_response(random_samples, dataset_name, split_name, version, max_to
                     "label": example['output']
                 }
             })
-        new_instructions.append(new_instruction)
-
+            new_instructions.append(new_instruction)
     dir_path = f'data/{dataset_name}/{split_name}'
     os.makedirs(dir_path, exist_ok=True)
     save_jsonl(new_instructions, f'data/{dataset_name}/{split_name}/{version}_response.jsonl')
@@ -277,10 +306,11 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--dataset_name",
                         type=str,
-                        default="jnli",
+                        default="databricks-dolly-15k-ja",
                         choices=["alt-e-to-j", "alt-j-to-e","chabsa", "jamp", "janli",
                                  "jcommonsenseqa", "jemhopqa", "jmmlu", "jnli", "jsem",
-                                 "jsick", "jsquad","jsts", "mawps", "niilc", "all"],
+                                 "jsick", "jsquad","jsts", "mawps", "niilc", "all","oasst1-21k-en",
+                          "oasst1-21k-ja", "databricks-dolly-15k-ja"],
                         help="the name of dataset")
     parser.add_argument("--split_name",
                         type=str,
@@ -298,6 +328,9 @@ if __name__ == "__main__":
     parser.add_argument("--mode",type=str,
                         default="eval",
                         choices=["eval","generation"])
+    parser.add_argument("--contamination_method", type=str,
+                        default="naive",
+                        choices=["time_travel", "naive"])
     args = parser.parse_args()
     bleurt =  evaluate.load('bleurt', 'bleurt-20', model_type="metric")
     rouge = evaluate.load('rouge')
@@ -329,26 +362,27 @@ if __name__ == "__main__":
             print(f"evaluation for {args.model} model...")
             if args.dataset_name == "all":
                 datasets = ["alt-e-to-j", "alt-j-to-e","chabsa", "jamp", "janli",
-                                      "jcommonsenseqa", "jemhopqa", "jmmlu", "jnli", "jsem",
-                                      "jsick", "jsquad","jsts", "mawps", "niilc"]
+                          "jcommonsenseqa", "jemhopqa", "jmmlu", "jnli", "jsem",
+                          "jsick", "jsquad","jsts", "mawps", "niilc","oasst1-21k-en",
+                          "oasst1-21k-ja", "databricks-dolly-15k-ja"]
                 for dataset in datasets:
-                    loaded_data = load_json(f"datasets_contamination/1.3.0/evaluation/{args.split_name}/{dataset}.json")
-                    random_samples = create_random_samples(loaded_data["samples"], num_samples=args.num_samples)
+                    random_samples = load_data(dataset, args.split_name, args.num_samples)
                     get_llmjp_response(random_samples,
                                        dataset_name=dataset,
                                        split_name=args.split_name,
                                        version=args.model,
                                        max_tokens=500,
-                                       temperature=0)
+                                       temperature=0,
+                                       contamination_method=args.contamination_method)
             else:
-                loaded_data = load_json(f"datasets_contamination/1.3.0/evaluation/{args.split_name}/{args.dataset_name}.json")
-                random_samples = create_random_samples(loaded_data["samples"], num_samples=args.num_samples)
+                random_samples = load_data(args.dataset, args.split_name, args.num_samples)
                 get_llmjp_response(random_samples,
                                    dataset_name=args.dataset_name,
                                    split_name=args.split_name,
                                    version=args.model,
                                    max_tokens=500,
-                                   temperature=0)
+                                   temperature=0,
+                                   contamination_method=args.contamination_method)
 
 
     
