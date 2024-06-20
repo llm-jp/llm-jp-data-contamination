@@ -375,7 +375,7 @@ if __name__ == "__main__":
                                        temperature=0,
                                        contamination_method=args.contamination_method)
             else:
-                random_samples = load_data(args.dataset, args.split_name, args.num_samples)
+                random_samples = load_data(args.dataset_name, args.split_name, args.num_samples)
                 get_llmjp_response(random_samples,
                                    dataset_name=args.dataset_name,
                                    split_name=args.split_name,
