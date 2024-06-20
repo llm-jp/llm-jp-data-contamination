@@ -217,6 +217,10 @@ def obtain_instruction_time_travel(dataset_name, split_name, model_name=None):
         ]
         return guided_chat, general_chat, chat_template
     elif dataset_name == "databricks-dolly-15k-ja":
+        if model_name == "llm-jp-v2":
+            chat_template = "{% for message in messages %}{% if message['role'] == 'user' %}{{ '' + message['content'] }}{% elif message['role'] == 'system' %}{{ '' + message['content'] }}{% elif message['role'] == 'assistant' %}{{ '' + message['content'] + eos_token }}{% endif %}{% if loop.last and add_generation_prompt %}{{ '' }}{% endif %}{% endfor %}"
+        else:
+            chat_template = "{% for message in messages %}{% if message['role'] == 'user' %}{{message['content'] }}{% elif message['role'] == 'system' %}{{message['content'] }}{% elif message['role'] == 'assistant' %}{{ '\\n' + message['content'] + eos_token }}{% endif %}{% if loop.last and add_generation_prompt %}{{ '' }}{% endif %}{% endfor %}"
         guided_chat = [
             {"role": "system",
              "content": "最初の指示文と文脈文と応答の一部が提供されます。それらの情報に基づいて、データセット中の応答文の原形の残った文を完成させなさい。"},
