@@ -342,6 +342,6 @@ def formalize_input_baseline(dataset_name, general_chat, example):
         sent2 = example["output"][len(example["output"])//2:]
         chat = general_chat
         chat[1]["content"] = f"{sent1}\n"+prev_half
-        return chat, f"{sent1}\n"+prev_half, sent2, chat[0]["content"]
+        return chat, f"{sent1}\n"+prev_half, sent2, chat[0]["content"]+f"{sent1}\n"+prev_half
     
     
