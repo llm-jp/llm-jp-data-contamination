@@ -216,7 +216,18 @@ def obtain_instruction_time_travel(dataset_name, split_name, model_name=None):
             {"role": "user", "content": ""},
         ]
         return guided_chat, general_chat, chat_template
-
+    elif dataset_name == "databricks-dolly-15k-ja":
+        guided_chat = [
+            {"role": "system",
+             "content": "最初の指示文と文脈文と応答の一部が提供されます。それらの情報に基づいて、データセット中の応答文の原形の残った文を完成させなさい。"},
+            {"role": "user", "content": ""},
+        ]
+        general_chat = [
+            {"role": "system",
+             "content": "以下は、タスクを説明する指示です。要求を適切に満たす応答を書きなさい。"},
+            {"role": "user", "content": ""},
+        ]
+        return guided_chat, chat_template
 def obtain_instruction_naive(dataset_name, split_name, model_name=None):
     if model_name == "llm-jp-v2":
         chat_template = "{% for message in messages %}{% if message['role'] == 'user' %}{{ '' + message['content'] }}{% elif message['role'] == 'system' %}{{ '' + message['content'] }}{% elif message['role'] == 'assistant' %}{{ '' + message['content'] + eos_token }}{% endif %}{% if loop.last and add_generation_prompt %}{{ '' }}{% endif %}{% endfor %}"
@@ -334,6 +345,18 @@ def formalize_input_time_travel(dataset_name,guided_chat, general_chat, inst_typ
             chat = general_chat
             chat[1]["content"] = f"{sent1}\nターゲットの名前とそれぞれの極性:{label}\n"
         return chat, sent1, sent2, instruction
+    elif dataset_name == "databricks-dolly-15k-ja":
+        instruction = guided_chat[0]["content"] if inst_type == 'guided_instruction' else general_chat[0]["content"]
+        sent1 = example['input']
+        prev_half = example["output"][:len(example["output"])//2]
+        sent2 = example["output"][len(example["output"])//2:]
+        if inst_type == 'guided_instruction':
+            chat = guided_chat
+            chat[1]["content"] = f"{sent1}\n"+prev_half
+        else:
+            chat = general_chat
+            chat[1]["content"] = f"{sent1}\n"+prev_half
+        return chat, f"{sent1}\n"+prev_half, sent2, instruction
 
 def formalize_input_baseline(dataset_name, general_chat, example):
     if dataset_name == "databricks-dolly-15k-ja":

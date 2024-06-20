@@ -254,7 +254,6 @@ def get_llmjp_response(random_samples, dataset_name, split_name, version, max_to
                 input_length = tokenized_input.size()[1]
                 generated_text_tokens = output[input_length:]
                 response = tokenizer.decode(generated_text_tokens.tolist()).replace("<EOD|LLM-jp>", "")
-
                 new_instruction.update({
                     inst_type: {
                         "instruction": instruction,
@@ -297,7 +296,7 @@ def get_llmjp_response(random_samples, dataset_name, split_name, version, max_to
             new_instructions.append(new_instruction)
     dir_path = f'data/{dataset_name}/{split_name}'
     os.makedirs(dir_path, exist_ok=True)
-    save_jsonl(new_instructions, f'data/{dataset_name}/{split_name}/{version}_response.jsonl')
+    save_jsonl(new_instructions, f'data/{dataset_name}/{split_name}/{version}_response_{contamination_method}.jsonl')
     print(".......Successfully saved generated gpt reponses......")
 
 
@@ -329,7 +328,7 @@ if __name__ == "__main__":
                         default="generation",
                         choices=["eval","generation"])
     parser.add_argument("--contamination_method", type=str,
-                        default="naive",
+                        default="time_travel",
                         choices=["time_travel", "naive"])
     args = parser.parse_args()
     bleurt =  evaluate.load('bleurt', 'bleurt-20', model_type="metric")
