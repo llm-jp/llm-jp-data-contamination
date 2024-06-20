@@ -280,7 +280,7 @@ def get_llmjp_response(random_samples, dataset_name, split_name, version, max_to
 
             with torch.no_grad():
                 output = model.generate(tokenized_input, max_new_tokens=max_tokens, do_sample=True, top_p=0.95,
-                                        temperature=0.0007)[0]
+                                        temperature=0.7)[0]
 
             input_length = tokenized_input.size()[1]
             generated_text_tokens = output[input_length:]
