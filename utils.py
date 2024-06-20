@@ -227,7 +227,7 @@ def obtain_instruction_time_travel(dataset_name, split_name, model_name=None):
              "content": "以下は、タスクを説明する指示です。要求を適切に満たす応答を書きなさい。"},
             {"role": "user", "content": ""},
         ]
-        return guided_chat, chat_template
+        return guided_chat,general_chat, chat_template
 def obtain_instruction_naive(dataset_name, split_name, model_name=None):
     if model_name == "llm-jp-v2":
         chat_template = "{% for message in messages %}{% if message['role'] == 'user' %}{{ '' + message['content'] }}{% elif message['role'] == 'system' %}{{ '' + message['content'] }}{% elif message['role'] == 'assistant' %}{{ '' + message['content'] + eos_token }}{% endif %}{% if loop.last and add_generation_prompt %}{{ '' }}{% endif %}{% endfor %}"
