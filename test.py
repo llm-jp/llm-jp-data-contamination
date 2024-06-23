@@ -37,6 +37,8 @@ perplexities = calculate_perplexity(output, tokenized_input)
 
 continuation_text = "自然言語処理は、コンピュータが人間の言語を理解し、生成する技術です。"
 continuation = tokenizer.encode(continuation_text, return_tensors="pt").squeeze(0).to(model.device)
+if continuation[0] == 31:
+    continuation = continuation[1:]
 memorization_score = calculate_memorization_score(output, tokenized_input, continuation, tokenizer)
 
 # # 打印生成的目标序列
