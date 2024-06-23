@@ -379,14 +379,11 @@ def calculate_perplexity(output, tokenized_input):
     # 提取生成的logits和生成的序列
     logits = torch.stack(output.scores, dim=1)[0]  # (sequence_length, vocab_size)
     generated_seq = output.sequences[0]  # (sequence_length_with_prompt + generated_tokens)
-
     # 提取生成部分的目标序列
     input_length = tokenized_input.size(-1)
     target_seq = generated_seq[input_length:]
-
     # 确保logits和目标序列对齐
     assert logits.size(0) == target_seq.size(0), "Logits and target sequence length must match."
-
     # 计算交叉熵损失和困惑度
     perplexities = []
     with torch.no_grad():
@@ -394,16 +391,9 @@ def calculate_perplexity(output, tokenized_input):
             # 获取当前 step 的 logits 和 label
             current_logits = logits[i, :].unsqueeze(0)  # (1, vocab_size)
             current_label = target_seq[i].unsqueeze(0)  # (1,)
-
             # 计算交叉熵损失
             loss = F.cross_entropy(current_logits, current_label, reduction='none')
-
             # 计算困惑度
             perplexity = torch.exp(loss).item()
             perplexities.append(perplexity)
-
-    # 打印每个step的困惑度
-    for i, perp in enumerate(perplexities):
-        print(f"Step {i + 1}: 困惑度 = {perp}")
-
     return perplexities
