@@ -397,3 +397,18 @@ def calculate_perplexity(output, tokenized_input):
             perplexity = torch.exp(loss).item()
             perplexities.append(perplexity)
     return perplexities
+
+def calculate_memorization_score(output, tokenized_input, continuation, tokenizer):
+    # 提取生成的序列
+    generated_seq = output.sequences[0]  # (sequence_length_with_prompt + generated_tokens)
+    # 提取生成部分的目标序列
+    input_length = tokenized_input.size(-1)
+    target_seq = generated_seq[input_length:]
+    # 计算生成部分的准确率
+    correct = 0
+    for i in range(min(len(continuation), target_seq.size(0))):
+        if target_seq[i] == tokenizer.eos_token_id:
+            break  # 如果遇到eos_token，停止计数
+        if target_seq[i] == continuation[i]:
+            correct += 1
+    return correct / target_seq.size(0) if target_seq.size(0) > 0 else 0
