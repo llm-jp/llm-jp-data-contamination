@@ -1,7 +1,6 @@
 import torch
 from transformers import AutoTokenizer, AutoModelForCausalLM
 import torch.nn.functional as F
-
 tokenizer = AutoTokenizer.from_pretrained("llm-jp/llm-jp-13b-instruct-full-dolly-ichikara_004_001_single-oasst-oasst2-v2.0")
 model = AutoModelForCausalLM.from_pretrained("llm-jp/llm-jp-13b-instruct-full-dolly-ichikara_004_001_single-oasst-oasst2-v2.0", device_map="auto", torch_dtype=torch.bfloat16)
 model.generation_config.output_scores = True
@@ -26,7 +25,7 @@ tokenized_input = tokenizer.apply_chat_template(chat, chat_template, add_generat
 with torch.no_grad():
     output = model.generate(
         tokenized_input,
-        max_new_tokens=10,
+        max_new_tokens=100,
         top_k=0,
         top_p=0.95,
         temperature=0.0,
@@ -34,6 +33,21 @@ with torch.no_grad():
     )
 
 #print(tokenizer.decode(output))
+# sequences = output.sequences[0][len(tokenized_input[0]):].unsqueeze(0)
+# scores = torch.cat(output.scores, dim=0)
+# shift_logits = scores[:-1, :].contiguous()
+# shift_labels = sequences[:, 1:].contiguous().view(-1)
+# perplexities = []
+# for i in range(shift_labels.size(0)):
+#     current_logits = scores[i, :].unsqueeze(0)
+#     current_label = shift_labels[i].unsqueeze(0)
+#     loss = F.cross_entropy(current_logits, current_label, reduction='mean')
+#     perplexity = loss
+#     perplexities.append(perplexity.item())
+#     #perplexity = torch.exp(loss)
+# # 输出每个step的困惑度
+# for i, perp in enumerate(perplexities):
+#     print(f"Step {i}: 困惑度 = {perp}")
 
 logits = torch.stack(output.scores, dim=1)[0]  # (sequence_length, vocab_size)
 generated_seq = output.sequences[0]  # (sequence_length_with_prompt + generated_tokens)
@@ -50,14 +64,10 @@ with torch.no_grad():
     for i in range(logits.size(0)):
         current_logits = logits[i, :].unsqueeze(0)  # (1, vocab_size)
         current_label = target_seq[i].unsqueeze(0)  # (1,)
-
-        # 计算交叉熵损失
         loss = F.cross_entropy(current_logits, current_label, reduction='none')
-
-        # 计算困惑度
         perplexity = torch.exp(loss).item()
         perplexities.append(perplexity)
-
 # 输出每个step的困惑度
 for i, perp in enumerate(perplexities):
     print(f"Step {i + 1}: 困惑度 = {perp}")
+print(tokenizer.decode(output[0][0]))
