@@ -229,22 +229,54 @@ def get_llmjp_response(random_samples, dataset_name, split_name, version, max_to
         raise ValueError("Unrecognized version, should be 'v1' or 'v2'.")
 
     tokenizer = AutoTokenizer.from_pretrained(model_name)
-    new_instructions = []
-    if contamination_method == "time_travel":
-        guided_chat, general_chat, chat_template = obtain_instruction_time_travel(dataset_name, split_name, model_name=version)
-        for idx in tqdm(range(len(random_samples))):
-            new_instruction = {}
-            for inst_type in ['guided_instruction', 'general_instruction']:
+    if contamination_method in ["time_travel", "naive"]:
+        # method with guided prompt
+        new_instructions = []
+        if contamination_method == "time_travel":
+            guided_chat, general_chat, chat_template = obtain_instruction_time_travel(dataset_name, split_name, model_name=version)
+            for idx in tqdm(range(len(random_samples))):
+                new_instruction = {}
+                for inst_type in ['guided_instruction', 'general_instruction']:
+                    example = random_samples[idx]
+                    chat, sent1, sent2, instruction = formalize_input_time_travel(dataset_name, guided_chat, general_chat,
+                                                                                  inst_type,
+                                                                                  example)
+                    tokenized_input = tokenizer.apply_chat_template(chat, chat_template, add_generation_prompt=True,
+                                                                    tokenize=True, return_tensors="pt", padding=True,
+                                                                    add_special_tokens=False).to(model.device)
+
+                    if idx == 0:
+                        print(f"{inst_type.capitalize()} Template Example")
+                        print(tokenizer.decode(tokenized_input[0]))
+
+                    with torch.no_grad():
+                        output = model.generate(tokenized_input, max_new_tokens=max_tokens, do_sample=True, top_p=0.95,
+                                                temperature=0.7)[0]
+
+                    input_length = tokenized_input.size()[1]
+                    generated_text_tokens = output[input_length:]
+                    response = tokenizer.decode(generated_text_tokens.tolist()).replace("<EOD|LLM-jp>", "")
+                    new_instruction.update({
+                        inst_type: {
+                            "instruction": instruction,
+                            "sentence1": sent1,
+                            "candidate": response,
+                            "reference": sent2,
+                            "label": example['output']
+                        }
+                    })
+                new_instructions.append(new_instruction)
+        elif contamination_method == "naive":
+            general_chat, chat_template = obtain_instruction_naive(dataset_name, split_name, model_name=version)
+            for idx in tqdm(range(len(random_samples))):
+                new_instruction = {}
                 example = random_samples[idx]
-                chat, sent1, sent2, instruction = formalize_input_time_travel(dataset_name, guided_chat, general_chat,
-                                                                              inst_type,
-                                                                              example)
+                chat, sent1, sent2, instruction = formalize_input_baseline(dataset_name, general_chat, example)
                 tokenized_input = tokenizer.apply_chat_template(chat, chat_template, add_generation_prompt=True,
                                                                 tokenize=True, return_tensors="pt", padding=True,
                                                                 add_special_tokens=False).to(model.device)
-
                 if idx == 0:
-                    print(f"{inst_type.capitalize()} Template Example")
+                    print(f"Template Example")
                     print(tokenizer.decode(tokenized_input[0]))
 
                 with torch.no_grad():
@@ -255,7 +287,7 @@ def get_llmjp_response(random_samples, dataset_name, split_name, version, max_to
                 generated_text_tokens = output[input_length:]
                 response = tokenizer.decode(generated_text_tokens.tolist()).replace("<EOD|LLM-jp>", "")
                 new_instruction.update({
-                    inst_type: {
+                    'geneal_instruction': {
                         "instruction": instruction,
                         "sentence1": sent1,
                         "candidate": response,
@@ -263,41 +295,42 @@ def get_llmjp_response(random_samples, dataset_name, split_name, version, max_to
                         "label": example['output']
                     }
                 })
-            new_instructions.append(new_instruction)
-    elif contamination_method == "naive":
-        general_chat, chat_template = obtain_instruction_naive(dataset_name, split_name, model_name=version)
+                new_instructions.append(new_instruction)
+        dir_path = f'data/{dataset_name}/{split_name}'
+        os.makedirs(dir_path, exist_ok=True)
+        save_jsonl(new_instructions, f'data/{dataset_name}/{split_name}/{version}_response_{contamination_method}.jsonl')
+        print(".......Successfully saved generated gpt reponses......")
+    elif contamination_method in "min-k":
+        all_output= []
         for idx in tqdm(range(len(random_samples))):
-            new_instruction = {}
             example = random_samples[idx]
-            chat, sent1, sent2, instruction = formalize_input_baseline(dataset_name, general_chat, example)
-            tokenized_input = tokenizer.apply_chat_template(chat, chat_template, add_generation_prompt=True,
-                                                            tokenize=True, return_tensors="pt", padding=True,
-                                                            add_special_tokens=False).to(model.device)
-            if idx == 0:
-                print(f"Template Example")
-                print(tokenizer.decode(tokenized_input[0]))
-
+            sent1 = example["input"][:len(example["input"])/2]
+            tokenized_input = tokenizer.encode(sent1, return_tensors="pt").to(model.device)
             with torch.no_grad():
-                output = model.generate(tokenized_input, max_new_tokens=max_tokens, do_sample=True, top_p=0.95,
-                                        temperature=0.7)[0]
+                output = model.generate(
+                    tokenized_input,
+                    max_new_tokens=100,
+                    top_k=0,
+                    top_p=0.95,
+                    temperature=0.0,
+                    repetition_penalty=1.05,
+                )
+            # 使用函数计算perplexity
+            probabilities = torch.nn.functional.log_softmax(output.scores, dim=-1)
+            # probabilities = torch.nn.functional.softmax(logits, dim=-1)
+            all_prob = []
+            input_ids_processed = tokenized_input[0][1:]
+            for i, token_id in enumerate(input_ids_processed):
+                probability = probabilities[0, i, token_id].item()
+                all_prob.append(probability)
+            pp1 = torch.exp(loss).item()
+            all_prob
+            k_length = int(len(all_prob) * 0.05)
+            topk_prob = np.sort(all_prob)[:k_length]
+            pred = -np.mean(topk_prob).item()
+            all_output.append(pred)
 
-            input_length = tokenized_input.size()[1]
-            generated_text_tokens = output[input_length:]
-            response = tokenizer.decode(generated_text_tokens.tolist()).replace("<EOD|LLM-jp>", "")
-            new_instruction.update({
-                'geneal_instruction': {
-                    "instruction": instruction,
-                    "sentence1": sent1,
-                    "candidate": response,
-                    "reference": sent2,
-                    "label": example['output']
-                }
-            })
-            new_instructions.append(new_instruction)
-    dir_path = f'data/{dataset_name}/{split_name}'
-    os.makedirs(dir_path, exist_ok=True)
-    save_jsonl(new_instructions, f'data/{dataset_name}/{split_name}/{version}_response_{contamination_method}.jsonl')
-    print(".......Successfully saved generated gpt reponses......")
+
 
 
 
@@ -329,7 +362,7 @@ if __name__ == "__main__":
                         choices=["eval","generation"])
     parser.add_argument("--contamination_method", type=str,
                         default="time_travel",
-                        choices=["time_travel", "naive"])
+                        choices=["time_travel", "naive", "min-k"])
     args = parser.parse_args()
     bleurt =  evaluate.load('bleurt', 'bleurt-20', model_type="metric")
     rouge = evaluate.load('rouge')
