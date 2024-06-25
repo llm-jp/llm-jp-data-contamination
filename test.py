@@ -32,7 +32,7 @@ with torch.no_grad():
         temperature=0.0,
         repetition_penalty=1.05,
     )
-    output_with_loss = model.output(tokenized_input, label=tokenized_input)
+    output_with_loss = model(tokenized_input, labels=tokenized_input)
 # 使用函数计算perplexity
 perplexities = calculate_perplexity(output, tokenized_input)
 
@@ -41,6 +41,24 @@ continuation = tokenizer.encode(continuation_text, return_tensors="pt").squeeze(
 if continuation[0] == 31:
     continuation = continuation[1:]
 memorization_score = calculate_memorization_score(output, tokenized_input, continuation, tokenizer)
+
+loss, logits = output_with_loss[:2]
+
+'''
+extract logits:
+'''
+# Apply softmax to the logits to get probabilities
+probabilities = torch.nn.functional.log_softmax(logits, dim=-1)
+# probabilities = torch.nn.functional.softmax(logits, dim=-1)
+all_prob = []
+input_ids_processed = tokenized_input[0][1:]
+for i, token_id in enumerate(input_ids_processed):
+    probability = probabilities[0, i, token_id].item()
+    all_prob.append(probability)
+ppl = torch.exp(loss).item()
+k_length = int(len(all_prob) * 0.05)
+topk_prob = np.sort(all_prob)[:k_length]
+pred = -np.mean(topk_prob).item()
 
 # # 打印生成的目标序列
 # for i in range(len(perplexities)):

@@ -307,25 +307,16 @@ def get_llmjp_response(random_samples, dataset_name, split_name, version, max_to
             sent1 = example["input"][:len(example["input"])/2]
             tokenized_input = tokenizer.encode(sent1, return_tensors="pt").to(model.device)
             with torch.no_grad():
-                output = model.generate(
-                    tokenized_input,
-                    max_new_tokens=100,
-                    top_k=0,
-                    top_p=0.95,
-                    temperature=0.0,
-                    repetition_penalty=1.05,
-                )
-
-            # 使用函数计算perplexity
-            probabilities = torch.nn.functional.log_softmax(output.scores, dim=-1)
+                output_with_loss = model(tokenized_input, labels=tokenized_input)
+            loss, logits = output_with_loss[:2]
+            probabilities = torch.nn.functional.log_softmax(logits, dim=-1)
             # probabilities = torch.nn.functional.softmax(logits, dim=-1)
             all_prob = []
             input_ids_processed = tokenized_input[0][1:]
             for i, token_id in enumerate(input_ids_processed):
                 probability = probabilities[0, i, token_id].item()
                 all_prob.append(probability)
-            pp1 = torch.exp(loss).item()
-            all_prob
+            ppl = torch.exp(loss).item()
             k_length = int(len(all_prob) * 0.05)
             topk_prob = np.sort(all_prob)[:k_length]
             pred = -np.mean(topk_prob).item()
