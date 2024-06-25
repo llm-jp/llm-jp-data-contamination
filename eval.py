@@ -329,7 +329,7 @@ def get_llmjp_response(random_samples, dataset_name, split_name, version, max_to
             topk_prob = np.sort(all_prob)[:k_length]
             pred = -np.mean(topk_prob).item()
             all_output.append(pred)
-
+        return all_output
 
 
 
