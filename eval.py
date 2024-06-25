@@ -315,6 +315,7 @@ def get_llmjp_response(random_samples, dataset_name, split_name, version, max_to
                     temperature=0.0,
                     repetition_penalty=1.05,
                 )
+
             # 使用函数计算perplexity
             probabilities = torch.nn.functional.log_softmax(output.scores, dim=-1)
             # probabilities = torch.nn.functional.softmax(logits, dim=-1)

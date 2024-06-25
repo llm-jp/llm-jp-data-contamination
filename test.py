@@ -32,6 +32,7 @@ with torch.no_grad():
         temperature=0.0,
         repetition_penalty=1.05,
     )
+    output_with_loss = model.output(tokenized_input, label=tokenized_input)
 # 使用函数计算perplexity
 perplexities = calculate_perplexity(output, tokenized_input)
 
