@@ -16,7 +16,7 @@ def process_and_save_dataset(ds, name, items_per_file=500000):
 
     for idx, example in enumerate(ds):
         grouped_by_meta[example['meta']["pile_set_name"]].append(example["text"])
-        if len(grouped_by_meta[example['meta']]) >= items_per_file:
+        if len(grouped_by_meta[example['meta']["pile_set_name"]]) >= items_per_file:
             # Save current group to a separate file as PyTorch tensor
             temp = example['meta']["pile_set_name"]
             filename = f"/model/pile/by_dataset/{name}_{example['meta']}_{file_counters[temp]}.pt"
