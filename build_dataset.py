@@ -10,7 +10,7 @@ def process_and_save_dataset(ds, name):
 
     # Group data by 'meta' attribute
     for example in tqdm(ds):
-        grouped_by_meta[example['meta']].append(example)
+        grouped_by_meta[example['meta']["pile_set_name"]].append(example["text"])
 
     # Save each group to a separate file as PyTorch tensors
     for meta, dataset in grouped_by_meta.items():
