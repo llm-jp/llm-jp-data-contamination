@@ -14,7 +14,7 @@ def process_and_save_dataset(ds, name):
 
     # Save each group to a separate file as PyTorch tensors
     for meta, dataset in grouped_by_meta.items():
-        filename = f"/model/pile_new/{name}_{meta}.pt"
+        filename = f"/model/pile/by_dataset/{name}_{meta}.pt"
         os.makedirs(os.path.dirname(filename), exist_ok=True)
         torch.save(dataset, filename)
 
