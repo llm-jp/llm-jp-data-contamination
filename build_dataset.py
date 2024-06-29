@@ -14,14 +14,15 @@ def process_and_save_dataset(ds, name):
 
     # Save each group to a separate file as PyTorch tensors
     for meta, dataset in grouped_by_meta.items():
-        filename = f"/model/pile/by_dataset/{name}_{meta}.pt"
+        filename = f"/data/pile/by_dataset/{name}_{meta}.pt"
         os.makedirs(os.path.dirname(filename), exist_ok=True)
         torch.save(dataset, filename)
 
-ds_train = load_dataset("monology/pile-uncopyrighted", cache_dir="/model/pile", split="train", streaming=True)
-ds_valid = load_dataset("monology/pile-uncopyrighted", cache_dir="/model/pile", split="validation", streaming=True)
-ds_test = load_dataset("monology/pile-uncopyrighted", cache_dir="/model/pile", split="test", streaming=True)
 
-process_and_save_dataset(ds_train, "train")
+ds_valid = load_dataset("monology/pile-uncopyrighted", cache_dir="/data/pile", split="validation", streaming=True)
+ds_test = load_dataset("monology/pile-uncopyrighted", cache_dir="/data/pile", split="test", streaming=True)
+ds_train = load_dataset("monology/pile-uncopyrighted", cache_dir="/data/pile", split="train", streaming=True)
+
 process_and_save_dataset(ds_valid, "valid")
 process_and_save_dataset(ds_test, "test")
+process_and_save_dataset(ds_train, "train")
