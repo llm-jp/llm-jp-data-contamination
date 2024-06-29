@@ -14,7 +14,7 @@ def process_and_save_dataset(ds, name, items_per_file=500000):
     # for example in tqdm(ds):
     #     grouped_by_meta[example['meta']["pile_set_name"]].append(example["text"])
 
-    for idx, example in enumerate(ds):
+    for idx, example in tqdm(enumerate(ds)):
         grouped_by_meta[example['meta']["pile_set_name"]].append(example["text"])
         if len(grouped_by_meta[example['meta']["pile_set_name"]]) >= items_per_file:
             # Save current group to a separate file as PyTorch tensor
