@@ -23,8 +23,8 @@ def process_and_save_dataset(ds, name, items_per_file=500000):
             os.makedirs(os.path.dirname(filename), exist_ok=True)
             torch.save(grouped_by_meta[example['meta']["pile_set_name"]], filename)
             # Reset current group
-            grouped_by_meta[example['meta']].clear()
-            file_counters[example['meta']] += 1
+            grouped_by_meta[example['meta']["pile_set_name"]].clear()
+            file_counters[example['meta']["pile_set_name"]] += 1
     # Save each group to a separate file as PyTorch tensors
     for meta, dataset in grouped_by_meta.items():
         if dataset:  # save if not empty
