@@ -3,13 +3,13 @@ import os
 import json
 from collections import defaultdict
 import torch
-
+from tqdm import tqdm
 
 def process_and_save_dataset(ds, name):
     grouped_by_meta = defaultdict(list)
 
     # Group data by 'meta' attribute
-    for example in ds:
+    for example in tqdm(ds):
         grouped_by_meta[example['meta']].append(example)
 
     # Save each group to a separate file as PyTorch tensors
