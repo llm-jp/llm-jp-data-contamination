@@ -5,7 +5,7 @@ from collections import defaultdict
 import torch
 from tqdm import tqdm
 
-def process_and_save_dataset(ds, name, items_per_file=250000):
+def process_and_save_dataset(ds, name, items_per_file=1000):
     grouped_by_meta = defaultdict(list)
     file_counters = defaultdict(int)
 
