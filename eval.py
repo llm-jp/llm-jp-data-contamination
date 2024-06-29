@@ -317,7 +317,7 @@ def get_llmjp_response(random_samples, dataset_name, split_name, version, max_to
                 probability = probabilities[0, i, token_id].item()
                 all_prob.append(probability)
             ppl = torch.exp(loss).item()
-            k_length = int(len(all_prob) * 0.05)
+            k_length = int(len(all_prob) * 0.2)
             topk_prob = np.sort(all_prob)[:k_length]
             pred = -np.mean(topk_prob).item()
             all_output.append(pred)

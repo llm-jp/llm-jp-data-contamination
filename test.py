@@ -56,7 +56,7 @@ for i, token_id in enumerate(input_ids_processed):
     probability = probabilities[0, i, token_id].item()
     all_prob.append(probability)
 ppl = torch.exp(loss).item()
-k_length = int(len(all_prob) * 0.05)
+k_length = int(len(all_prob) * 0.2)
 topk_prob = np.sort(all_prob)[:k_length]
 pred = -np.mean(topk_prob).item()
 
