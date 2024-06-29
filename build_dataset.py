@@ -5,24 +5,37 @@ from collections import defaultdict
 import torch
 from tqdm import tqdm
 
-def process_and_save_dataset(ds, name):
+def process_and_save_dataset(ds, name, items_per_file=500000):
     grouped_by_meta = defaultdict(list)
+    file_counters = defaultdict(int)
+
 
     # Group data by 'meta' attribute
-    for example in tqdm(ds):
-        grouped_by_meta[example['meta']["pile_set_name"]].append(example["text"])
+    # for example in tqdm(ds):
+    #     grouped_by_meta[example['meta']["pile_set_name"]].append(example["text"])
 
+    for idx, example in enumerate(ds):
+        grouped_by_meta[example['meta']["pile_set_name"]].append(example["text"])
+        if len(grouped_by_meta[example['meta']]) >= items_per_file:
+            # Save current group to a separate file as PyTorch tensor
+            temp = example['meta']["pile_set_name"]
+            filename = f"/model/pile/by_dataset/{name}_{example['meta']}_{file_counters[temp]}.pt"
+            os.makedirs(os.path.dirname(filename), exist_ok=True)
+            torch.save(grouped_by_meta[example['meta']["pile_set_name"]], filename)
+            # Reset current group
+            grouped_by_meta[example['meta']].clear()
+            file_counters[example['meta']] += 1
     # Save each group to a separate file as PyTorch tensors
     for meta, dataset in grouped_by_meta.items():
-        filename = f"/model/pile/by_dataset/{name}_{meta}.pt"
-        os.makedirs(os.path.dirname(filename), exist_ok=True)
-        torch.save(dataset, filename)
+        if dataset:  # save if not empty
+            filename = f"/model/pile/by_dataset/{name}_{meta}_{file_counters[meta]}.pt"
+            torch.save(dataset, filename)
 
 
-ds_valid = load_dataset("monology/pile-uncopyrighted", cache_dir="/model/pile", split="validation", streaming=True)
-ds_test = load_dataset("monology/pile-uncopyrighted", cache_dir="/model/pile", split="test", streaming=True)
+#ds_valid = load_dataset("monology/pile-uncopyrighted", cache_dir="/model/pile", split="validation", streaming=True)
+#ds_test = load_dataset("monology/pile-uncopyrighted", cache_dir="/model/pile", split="test", streaming=True)
 ds_train = load_dataset("monology/pile-uncopyrighted", cache_dir="/model/pile", split="train", streaming=True)
 
-process_and_save_dataset(ds_valid, "valid")
-process_and_save_dataset(ds_test, "test")
+#process_and_save_dataset(ds_valid, "valid")
+#process_and_save_dataset(ds_test, "test")
 process_and_save_dataset(ds_train, "train")
