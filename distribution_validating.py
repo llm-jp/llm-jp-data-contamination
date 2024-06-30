@@ -38,7 +38,8 @@ model = GPTNeoXForCausalLM.from_pretrained(
   revision="step143000",
   cache_dir="./pythia-160m-deduped/step143000",
 )
-
+model = model.to_bettertransformer()
+model = model.cuda()
 tokenizer = AutoTokenizer.from_pretrained(
   "EleutherAI/pythia-70m-deduped",
   revision="step143000",
