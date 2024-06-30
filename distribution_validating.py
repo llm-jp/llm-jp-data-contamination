@@ -2,21 +2,34 @@ from datasets import load_dataset
 import torch
 from transformers import GPTNeoXForCausalLM, AutoTokenizer,  AutoModelForCausalLM,  LogitsProcessorList, MinLengthLogitsProcessor, StoppingCriteriaList,  MaxLengthCriteria
 import pickle
+from itertools import islice
+
+def batched_data(dataset, batch_size):
+    data_iter = iter(dataset)
+    while True:
+        batch = list(islice(data_iter, batch_size))
+        if not batch:
+            break
+        yield batch
+
 
 def loss_collection(model, dataset):
     loss_list = []
-    for i in range(len(dataset)):
-        tokenized_input = tokenizer(dataset[i]["text"], return_tensors="pt", truncation=True, padding="max_length", max_length=1024)
-        output_with_loss = model(tokenized_input, labels=tokenized_input)
-        loss = output_with_loss.loss
-        print(loss)
-        print(tokenized_input)
-    loss_list.append(loss)
+    for batch in batched_data(dataset, batch_size=32):
+        tokenized_inputs = tokenizer([item["text"] for item in batch],
+                                     return_tensors="pt",
+                                     truncation=True,
+                                     padding=True,
+                                     max_length=2048)
+        outputs = model(**tokenized_inputs, labels=tokenized_inputs["input_ids"])
+        loss = outputs.loss
+        loss_list.append(loss.item())
     return loss_list
 
-dataset_name = ["ArXiv", "DM Mathematics", "Enron Emails", "EuroParl", "FreeLaw", "Github", "Gutenberg (PG-19)",
-                "HackerNews", "NIH ExPorter", "PhilPapers", "Pile-CC", "PubMed Abstracts", "PubMed Central", "StackExchange",
-                "Ubuntu IRC", "USPTO Backgrounds", "Wikipedia (en)"]
+#dataset_name = ["ArXiv", "DM Mathematics", "Enron Emails", "EuroParl", "FreeLaw", "Github", "Gutenberg (PG-19)",
+#                "HackerNews", "NIH ExPorter", "PhilPapers", "Pile-CC", "PubMed Abstracts", "PubMed Central", "StackExchange",
+#                "Ubuntu IRC", "USPTO Backgrounds", "Wikipedia (en)"]
+dataset_name = ["Pile-CC"]
 split_name = ["train", "valid", "test"]
 
 model = GPTNeoXForCausalLM.from_pretrained(
