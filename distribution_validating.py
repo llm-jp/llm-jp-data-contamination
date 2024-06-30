@@ -44,6 +44,7 @@ tokenizer = AutoTokenizer.from_pretrained(
   revision="step143000",
   cache_dir="./pythia-160m-deduped/step143000",
 )
+tokenizer.pad_token = tokenizer.eos_token
 loss_dicit = {}
 for name in dataset_name:
     loss_dicit[name] = {"train": [], "valid": [], "test": []}
