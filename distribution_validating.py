@@ -56,7 +56,7 @@ for name in dataset_name:
             loss_list = loss_collection(model, dataset)
             loss_dicit[name][split].extend(loss_list)
         else:
-            for i in range(5):
+            for i in range(1):
                 dataset = torch.load(f"by_dataset/{split}_{name}_{i}.pt")
                 loss_list = loss_collection(model, dataset)
                 loss_dicit[name][split].extend(loss_list)
