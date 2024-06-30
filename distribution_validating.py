@@ -53,7 +53,7 @@ for name in dataset_name:
             loss_dicit[name][split].extend(loss_list)
         else:
             for i in range(5):
-                dataset = torch.load(f"/by_dataset/{split}_name_{i}.pt")
+                dataset = torch.load(f"/by_dataset/{split}_{name}_{i}.pt")
                 loss_list = loss_collection(model, dataset)
                 loss_dicit[name][split].extend(loss_list)
 pickle.dump(loss_dicit, open("loss_dict.pkl", "wb"))
