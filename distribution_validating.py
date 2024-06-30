@@ -4,6 +4,8 @@ from transformers import GPTNeoXForCausalLM, AutoTokenizer,  AutoModelForCausalL
 import pickle
 from itertools import islice
 from tqdm import tqdm
+import matplotlib.pyplot as plt
+import numpy as np
 
 def batched_data(dataset, batch_size):
     data_iter = iter(dataset)
@@ -52,7 +54,7 @@ for name in dataset_name:
     loss_dicit[name] = {"train": [], "valid": [], "test": []}
     for split in split_name:
         if split in ["test", "valid"]:
-            dataset = torch.load(f"by_dataset/{split}_name.pt")
+            dataset = torch.load(f"by_dataset/{split}_{name}.pt")
             loss_list = loss_collection(model, dataset)
             loss_dicit[name][split].extend(loss_list)
         else:
@@ -61,5 +63,18 @@ for name in dataset_name:
                 loss_list = loss_collection(model, dataset)
                 loss_dicit[name][split].extend(loss_list)
 pickle.dump(loss_dicit, open("loss_dict.pkl", "wb"))
-
+plt.figure(figsize=(10, 5))
+fig, axs = plt.subplots(len(loss_dicit), figsize=(10, 5 * len(loss_dicit)))
+axs = np.atleast_2d(axs)
+for ax, (dataset_name, dataset_loss) in zip(axs.flatten(), loss_dicit.items()):
+    for phase_name, phase_loss in dataset_loss.items():
+        weights = np.ones_like(phase_loss) / len(phase_loss)
+        ax.hist(phase_loss, bins=50, label=phase_name, alpha=0.5, weights=weights)
+    ax.set_title(f'Loss values histogram for {dataset_name}')
+    ax.set_xlabel('Loss')
+    ax.set_ylabel('Percentage')
+    ax.legend()
+plt.tight_layout()
+plt.savefig("loss_histograms.png")
+plt.show()
 
