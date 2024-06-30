@@ -16,7 +16,7 @@ def batched_data(dataset, batch_size):
 
 def loss_collection(model, dataset):
     loss_list = []
-    for batch in tqdm(batched_data(dataset, batch_size=16)):
+    for batch in tqdm(batched_data(dataset, batch_size=8)):
         tokenized_inputs = tokenizer([item for item in batch],
                                      return_tensors="pt",
                                      truncation=True,
