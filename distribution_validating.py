@@ -22,7 +22,8 @@ def loss_collection(model, dataset):
                                      truncation=True,
                                      padding=True,
                                      max_length=2048)
-        outputs = model(**tokenized_inputs, labels=tokenized_inputs["input_ids"])
+        tokenized_inputs = {key: val.to("cuda") for key, val in tokenized_inputs.items()}
+        outputs = model(**tokenized_inputs, labels=tokenized_inputs["input_ids"].cuda())
         loss = outputs.loss
         loss_list.append(loss.item())
     return loss_list
