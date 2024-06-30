@@ -49,12 +49,12 @@ for name in dataset_name:
     loss_dicit[name] = {"train": [], "valid": [], "test": []}
     for split in split_name:
         if split in ["test", "valid"]:
-            dataset = torch.load(f"/by_dataset/{split}_name.pt")
+            dataset = torch.load(f"by_dataset/{split}_name.pt")
             loss_list = loss_collection(model, dataset)
             loss_dicit[name][split].extend(loss_list)
         else:
             for i in range(5):
-                dataset = torch.load(f"/by_dataset/{split}_{name}_{i}.pt")
+                dataset = torch.load(f"by_dataset/{split}_{name}_{i}.pt")
                 loss_list = loss_collection(model, dataset)
                 loss_dicit[name][split].extend(loss_list)
 pickle.dump(loss_dicit, open("loss_dict.pkl", "wb"))
