@@ -16,7 +16,7 @@ def batched_data(dataset, batch_size):
 
 def loss_collection(model, dataset):
     loss_list = []
-    for batch in tqdm(batched_data(dataset, batch_size=32)):
+    for batch in tqdm(batched_data(dataset, batch_size=16)):
         tokenized_inputs = tokenizer([item for item in batch],
                                      return_tensors="pt",
                                      truncation=True,
@@ -38,7 +38,7 @@ model = GPTNeoXForCausalLM.from_pretrained(
   "EleutherAI/pythia-70m-deduped",
   revision="step143000",
   cache_dir="./pythia-160m-deduped/step143000",
-).half()
+).half().eval()
 model = model.to_bettertransformer()
 model = model.cuda()
 tokenizer = AutoTokenizer.from_pretrained(
