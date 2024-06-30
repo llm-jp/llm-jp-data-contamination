@@ -3,6 +3,7 @@ import torch
 from transformers import GPTNeoXForCausalLM, AutoTokenizer,  AutoModelForCausalLM,  LogitsProcessorList, MinLengthLogitsProcessor, StoppingCriteriaList,  MaxLengthCriteria
 import pickle
 from itertools import islice
+from tqdm import tqdm
 
 def batched_data(dataset, batch_size):
     data_iter = iter(dataset)
@@ -15,7 +16,7 @@ def batched_data(dataset, batch_size):
 
 def loss_collection(model, dataset):
     loss_list = []
-    for batch in batched_data(dataset, batch_size=32):
+    for batch in tqdm(batched_data(dataset, batch_size=32)):
         tokenized_inputs = tokenizer([item["text"] for item in batch],
                                      return_tensors="pt",
                                      truncation=True,
