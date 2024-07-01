@@ -56,7 +56,7 @@ def loss_collection(model, dataset, batch_size=8):
             all_prob = []
             input_ids_processed = tokenized_inputs["input_ids"][0][1:]
             attention_mask_processd = tokenized_inputs["attention_mask"]
-            for i, token_id, attention_mask_processd in enumerate(input_ids_processed, attention_mask_processd):
+            for i, token_id in enumerate(input_ids_processed):
                 if attention_mask_processd[i] == 1:
                     probability = probabilities[0, i, token_id].item()
                     all_prob.append(probability)
