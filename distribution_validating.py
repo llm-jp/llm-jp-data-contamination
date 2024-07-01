@@ -46,14 +46,15 @@ def loss_collection(model, dataset, batch_size=8):
                                      padding=True,
                                      max_length=2048)
         tokenized_inputs = {key: val.to("cuda") for key, val in tokenized_inputs.items()}
+        target_labels = tokenized_inputs["input_ids"].clone()
+        target_labels[tokenized_inputs["attention_mask"] == 0] = -100
         with torch.no_grad():
-            outputs = model(**tokenized_inputs, labels=tokenized_inputs["input_ids"].cuda())
+            outputs = model(**tokenized_inputs, labels=target_labels.cuda())
         loss, logits = outputs[:2]
         probabilities = torch.nn.functional.log_softmax(logits, dim=2)
         loss_collect.append(loss.item())
         batch_size = tokenized_inputs["input_ids"].shape[0]
         seq_length = tokenized_inputs["input_ids"].shape[1]
-
         # 初始化
         all_prob = []
         prob_collect = []
