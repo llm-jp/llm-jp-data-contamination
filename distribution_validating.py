@@ -93,17 +93,18 @@ def loss_collection(model, dataset, batch_size=8):
 dataset_name = ["Pile-CC"]
 split_name = ["train", "valid", "test"]
 
+model_size = "70m"
 model = GPTNeoXForCausalLM.from_pretrained(
-  "EleutherAI/pythia-70m-deduped",
+  f"EleutherAI/pythia-{model_size}-deduped",
   revision="step143000",
-  cache_dir="./pythia-160m-deduped/step143000",
+  cache_dir=f"./pythia-{model_size}-deduped/step143000",
 ).half().eval()
 model = model.to_bettertransformer()
 model = model.cuda()
 tokenizer = AutoTokenizer.from_pretrained(
-  "EleutherAI/pythia-70m-deduped",
+  f"EleutherAI/pythia-{model_size}-deduped",
   revision="step143000",
-  cache_dir="./pythia-160m-deduped/step143000",
+  cache_dir=f"./pythia-{model_size}-deduped/step143000",
 )
 tokenizer.pad_token = tokenizer.eos_token
 loss_dict = {}
