@@ -51,31 +51,7 @@ def loss_collection(model, dataset, batch_size=8):
         with torch.no_grad():
             outputs = model(**tokenized_inputs, labels=target_labels.cuda())
         loss, logits = outputs[:2]
-        losses = []
-        for i in range(logits.size(0)):
-            logits_i = logits[i].unsqueeze(0)  # Shape (1, seq_length, vocab_size)
-            target_i = target_labels[i].unsqueeze(0)  # Shape (1, seq_length)
-
-            # 移动logits和labels一位
-            shift_logits = logits_i[:, :-1, :].contiguous()
-            shift_labels = target_i[:, 1:].contiguous()
-
-            # 计算交叉熵损失并移除填充 token 贡献
-            loss_i = F.cross_entropy(shift_logits.view(-1, shift_logits.size(-1)), shift_labels.view(-1),
-                                     reduction='none')
-
-            # Create a mask to ignore the loss from padding tokens
-            valid_mask = shift_labels != -100
-
-            # 只有有效的 token 计算损失
-            loss_i = loss_i * valid_mask.view(-1)
-
-            # 计算每个样本的平均损失
-            loss_i = loss_i.sum() / valid_mask.sum()
-
-            losses.append(loss_i.item())
         probabilities = torch.nn.functional.log_softmax(logits, dim=2)
-        loss_collect.extend(losses)
         batch_size = tokenized_inputs["input_ids"].shape[0]
         seq_length = tokenized_inputs["input_ids"].shape[1]
         # 初始化
@@ -85,6 +61,20 @@ def loss_collection(model, dataset, batch_size=8):
 
         # 获取每个样本的概率
         for idx in range(batch_size):
+            logits_i = logits[i].unsqueeze(0)  # Shape (1, seq_length, vocab_size)
+            target_i = target_labels[i].unsqueeze(0)  # Shape (1, seq_length)
+            shift_logits = logits_i[:, :-1, :].contiguous()
+            shift_labels = target_i[:, 1:].contiguous()
+            # 计算交叉熵损失并移除填充 token 贡献
+            loss_i = F.cross_entropy(shift_logits.view(-1, shift_logits.size(-1)), shift_labels.view(-1),
+                                     reduction='none')
+            # Create a mask to ignore the loss from padding tokens
+            valid_mask = shift_labels != -100
+            # 只有有效的 token 计算损失
+            loss_i = loss_i * valid_mask.view(-1)
+            # 计算每个样本的平均损失
+            loss_i = loss_i.sum() / valid_mask.sum()
+            loss_collect.append(loss_i.item())
             input_ids_processed = tokenized_inputs["input_ids"][idx]
             attention_mask_processed = tokenized_inputs["attention_mask"][idx]
             probs = probabilities[idx]  # 形状为 (seq_length, vocab_size)
