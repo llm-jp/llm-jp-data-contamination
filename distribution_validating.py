@@ -78,27 +78,21 @@ def loss_collection(model, dataset, batch_size=8):
             input_ids_processed = tokenized_inputs["input_ids"][idx]
             attention_mask_processed = tokenized_inputs["attention_mask"][idx]
             probs = probabilities[idx]  # 形状为 (seq_length, vocab_size)
-
             # 使用 attention_mask 筛选有效的 token
             valid_probs = probs[attention_mask_processed == 1]
             valid_token_ids = input_ids_processed[attention_mask_processed == 1]
-
             # 获取这些有效 token 的概率
             selected_probs = valid_probs[np.arange(valid_token_ids.shape[0]), valid_token_ids]
-
             # 计算 topk 概率
             k_length = int(len(selected_probs) * 0.2)
             topk_prob = np.sort(selected_probs.cpu().numpy())[:k_length]
             pred = -np.mean(topk_prob).item()
-
-            # people's value
+            # perplexity's value
             ppl = torch.exp(loss).item()
-
             # 收集结果
             all_prob.append(selected_probs.cpu().numpy())
             prob_collect.append(pred)
             ppl_collect.append(ppl)
-        pdb.set_trace()
     return loss_collect, prob_collect, ppl_collect
 
 #dataset_name = ["ArXiv", "DM Mathematics", "Enron Emails", "EuroParl", "FreeLaw", "Github", "Gutenberg (PG-19)",
