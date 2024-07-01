@@ -133,7 +133,6 @@ parser.add_argument("--model_size", type=str, default="70m")
 parser.add_argument("--dataset_name", type=str, default="Pile-CC", choices=["ArXiv", "DM Mathematics", "Enron Emails", "EuroParl", "FreeLaw", "Github", "Gutenberg (PG-19)",
                 "HackerNews", "NIH ExPorter", "PhilPapers", "Pile-CC", "PubMed Abstracts", "PubMed Central", "StackExchange",
                 "Ubuntu IRC", "USPTO Backgrounds", "Wikipedia (en)"])
-parser.add_argument("--split_name", type=str, default="train", choices=["train", "valid", "test"])
 parser.add_argument("--cuda", type=int, default=0, help="cuda device")
 parser.add_argument("--skip_calculation", type=bool, default=True)
 args = parser.parse_args()
@@ -158,7 +157,7 @@ if args.skip_calculation:
     loss_dict[args.dataset_name] = {"train": [], "valid": [], "test": []}
     prob_dict[args.dataset_name] = {"train": [], "valid": [], "test": []}
     ppl_dict[args.dataset_name] = {"train": [], "valid": [], "test": []}
-    for split in args.split_name:
+    for split in ["train", "valid", "test"]:
         if split in ["test", "valid"]:
             dataset = torch.load(f"by_dataset/{split}_{args.dataset_name}.pt")
             loss_list, prob_list, ppl_list = loss_collection(model, args, dataset)
