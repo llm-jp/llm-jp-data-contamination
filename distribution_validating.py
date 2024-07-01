@@ -137,7 +137,7 @@ parser.add_argument("--cuda", type=int, default=0, help="cuda device")
 parser.add_argument("--skip_calculation", type=bool, default=True)
 args = parser.parse_args()
 
-if args.skip_calculation:
+if not args.skip_calculation:
     model = GPTNeoXForCausalLM.from_pretrained(
       f"EleutherAI/pythia-{args.model_size}-deduped",
       revision="step143000",
