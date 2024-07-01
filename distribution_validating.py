@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pdb
 
-¥
+
 def batched_data(dataset, batch_size):
     data_iter = iter(dataset)
     while True:
