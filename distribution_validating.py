@@ -135,46 +135,49 @@ parser.add_argument("--dataset_name", type=str, default="Pile-CC", choices=["ArX
                 "Ubuntu IRC", "USPTO Backgrounds", "Wikipedia (en)"])
 parser.add_argument("--split_name", type=str, default="train", choices=["train", "valid", "test"])
 parser.add_argument("--cuda", type=int, default=0, help="cuda device")
+parser.add_argument("--skip_calculation", type=bool, default=True)
 args = parser.parse_args()
 
-model_size = "70m"
-model = GPTNeoXForCausalLM.from_pretrained(
-  f"EleutherAI/pythia-{args.model_size}-deduped",
-  revision="step143000",
-  cache_dir=f"./pythia-{args.model_size}-deduped/step143000",
-).half().eval()
-model = model.to_bettertransformer()
-model = model.cuda(args.cuda)
-tokenizer = AutoTokenizer.from_pretrained(
-  f"EleutherAI/pythia-{model_size}-deduped",
-  revision="step143000",
-  cache_dir=f"./pythia-{model_size}-deduped/step143000",
-)
-tokenizer.pad_token = tokenizer.eos_token
-loss_dict = {}
-prob_dict = {}
-ppl_dict = {}
-
-loss_dict[args.dataset_name] = {"train": [], "valid": [], "test": []}
-prob_dict[args.dataset_name] = {"train": [], "valid": [], "test": []}
-ppl_dict[args.dataset_name] = {"train": [], "valid": [], "test": []}
-for split in args.split_name:
-    if split in ["test", "valid"]:
-        dataset = torch.load(f"by_dataset/{split}_{args.dataset_name}.pt")
-        loss_list, prob_list, ppl_list = loss_collection(model, args, dataset)
-        loss_dict[args.dataset_name][split].extend(loss_list)
-        prob_dict[args.dataset_name][split].extend(prob_list)
-        ppl_dict[args.dataset_name][split].extend(ppl_list)
-    else:
-        for i in range(1):
-            dataset = torch.load(f"by_dataset/{split}_{args.dataset_name}_{i}.pt")
+if args.skip_calculation:
+    model = GPTNeoXForCausalLM.from_pretrained(
+      f"EleutherAI/pythia-{args.model_size}-deduped",
+      revision="step143000",
+      cache_dir=f"./pythia-{args.model_size}-deduped/step143000",
+    ).half().eval()
+    model = model.to_bettertransformer()
+    model = model.cuda(args.cuda)
+    tokenizer = AutoTokenizer.from_pretrained(
+      f"EleutherAI/pythia-{args.model_size}-deduped",
+      revision="step143000",
+      cache_dir=f"./pythia-{args.model_size}-deduped/step143000",
+    )
+    tokenizer.pad_token = tokenizer.eos_token
+    loss_dict = {}
+    prob_dict = {}
+    ppl_dict = {}
+    loss_dict[args.dataset_name] = {"train": [], "valid": [], "test": []}
+    prob_dict[args.dataset_name] = {"train": [], "valid": [], "test": []}
+    ppl_dict[args.dataset_name] = {"train": [], "valid": [], "test": []}
+    for split in args.split_name:
+        if split in ["test", "valid"]:
+            dataset = torch.load(f"by_dataset/{split}_{args.dataset_name}.pt")
             loss_list, prob_list, ppl_list = loss_collection(model, args, dataset)
             loss_dict[args.dataset_name][split].extend(loss_list)
             prob_dict[args.dataset_name][split].extend(prob_list)
             ppl_dict[args.dataset_name][split].extend(ppl_list)
-pickle.dump(loss_dict, open(f"feature_result/{args.dataset_name}_loss_dict.pkl", "wb"))
-pickle.dump(prob_dict, open(f"feature_result/{args.dataset_name}_prob_dict.pkl", "wb"))
-pickle.dump(ppl_dict, open(f"feature_result/{args.dataset_name}_ppl_dict.pkl", "wb"))
+        else:
+            for i in range(1):
+                dataset = torch.load(f"by_dataset/{split}_{args.dataset_name}_{i}.pt")
+                loss_list, prob_list, ppl_list = loss_collection(model, args, dataset)
+                loss_dict[args.dataset_name][split].extend(loss_list)
+                prob_dict[args.dataset_name][split].extend(prob_list)
+                ppl_dict[args.dataset_name][split].extend(ppl_list)
+    pickle.dump(loss_dict, open(f"feature_result/{args.dataset_name}_loss_dict.pkl", "wb"))
+    pickle.dump(prob_dict, open(f"feature_result/{args.dataset_name}_prob_dict.pkl", "wb"))
+    pickle.dump(ppl_dict, open(f"feature_result/{args.dataset_name}_ppl_dict.pkl", "wb"))
+loss_dict = pickle.load(open(f"feature_result/{args.dataset_name}_loss_dict.pkl", "rb"))
+prob_dict = pickle.load(open(f"feature_result/{args.dataset_name}_prob_dict.pkl", "rb"))
+ppl_dict = pickle.load(open(f"feature_result/{args.dataset_name}_ppl_dict.pkl", "rb"))
 figure_draw(loss_dict, "Loss")
 figure_draw(prob_dict, "Prob")
 figure_draw(ppl_dict, "PPL")
