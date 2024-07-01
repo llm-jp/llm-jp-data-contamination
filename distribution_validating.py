@@ -56,8 +56,6 @@ def loss_collection(model, dataset, batch_size=8):
         seq_length = tokenized_inputs["input_ids"].shape[1]
         # 初始化
         all_prob = []
-        prob_collect = []
-        ppl_collect = []
 
         # 获取每个样本的概率
         for idx in range(batch_size):
@@ -91,8 +89,9 @@ def loss_collection(model, dataset, batch_size=8):
             ppl = torch.exp(loss).item()
             # 收集结果
             all_prob.append(selected_probs.cpu().numpy())
-            prob_collect.append(pred)
-            ppl_collect.append(ppl)
+            prob_collect.extend(pred)
+            ppl_collect.extend(ppl)
+            pdb.set_trace()
     return loss_collect, prob_collect, ppl_collect
 
 #dataset_name = ["ArXiv", "DM Mathematics", "Enron Emails", "EuroParl", "FreeLaw", "Github", "Gutenberg (PG-19)",
