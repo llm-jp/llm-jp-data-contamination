@@ -133,10 +133,14 @@ parser.add_argument("--dataset_name", type=str, default="Pile-CC", choices=["ArX
                 "HackerNews", "NIH ExPorter", "PhilPapers", "Pile-CC", "PubMed Abstracts", "PubMed Central", "StackExchange",
                 "Ubuntu IRC", "USPTO Backgrounds", "Wikipedia (en)"])
 parser.add_argument("--cuda", type=int, default=0, help="cuda device")
-parser.add_argument("--skip_calculation", type=bool, default=True)
+parser.add_argument("--skip_calculation", type=str, default="True")
 args = parser.parse_args()
 
-if not args.skip_calculation:
+if args.skip_calculation == "True":
+    skip_calculation = True
+else:
+    skip_calculation = False
+if not skip_calculation:
     model = GPTNeoXForCausalLM.from_pretrained(
       f"EleutherAI/pythia-{args.model_size}-deduped",
       revision="step143000",
