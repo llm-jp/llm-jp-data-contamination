@@ -163,14 +163,14 @@ if not skip_calculation:
     for split in ["train", "valid", "test"]:
         if split in ["test", "valid"]:
             dataset = torch.load(f"by_dataset/{split}_{args.dataset_name}.pt")
-            loss_list, prob_list, ppl_list = loss_collection(model, args, dataset)
+            loss_list, prob_list, ppl_list = loss_collection(model, dataset, args, batch_size=args.batch_size)
             loss_dict[args.dataset_name][split].extend(loss_list)
             prob_dict[args.dataset_name][split].extend(prob_list)
             ppl_dict[args.dataset_name][split].extend(ppl_list)
         else:
             for i in range(1):
                 dataset = torch.load(f"by_dataset/{split}_{args.dataset_name}_{i}.pt")
-                loss_list, prob_list, ppl_list = loss_collection(model, args, dataset)
+                loss_list, prob_list, ppl_list = loss_collection(model, dataset, args, batch_size=args.batch_size)
                 loss_dict[args.dataset_name][split].extend(loss_list)
                 prob_dict[args.dataset_name][split].extend(prob_list)
                 ppl_dict[args.dataset_name][split].extend(ppl_list)
