@@ -8,7 +8,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pdb
 import torch.nn.functional as F
-
+from scipy.stats import entropy, wasserstein_distance, ks_2samp
+import argparse
 def batched_data(dataset, batch_size):
     data_iter = iter(dataset)
     while True:
@@ -35,7 +36,7 @@ def figure_draw(data_dict, title):
 
 
 
-def loss_collection(model, dataset, batch_size=8):
+def loss_collection(model, dataset, args, batch_size=8):
     loss_collect = []
     prob_collect = []
     ppl_collect = []
@@ -45,11 +46,11 @@ def loss_collection(model, dataset, batch_size=8):
                                      truncation=True,
                                      padding=True,
                                      max_length=2048)
-        tokenized_inputs = {key: val.to("cuda") for key, val in tokenized_inputs.items()}
+        tokenized_inputs = {key: val.cuda(args.cuda) for key, val in tokenized_inputs.items()}
         target_labels = tokenized_inputs["input_ids"].clone()
         target_labels[tokenized_inputs["attention_mask"] == 0] = -100
         with torch.no_grad():
-            outputs = model(**tokenized_inputs, labels=target_labels.cuda())
+            outputs = model(**tokenized_inputs, labels=target_labels.cuda(args.cuda))
         loss, logits = outputs[:2]
         probabilities = torch.nn.functional.log_softmax(logits, dim=2)
         batch_size = tokenized_inputs["input_ids"].shape[0]
@@ -93,20 +94,57 @@ def loss_collection(model, dataset, batch_size=8):
             ppl_collect.append(ppl)
     return loss_collect, prob_collect, ppl_collect
 
+
+def js_divergence(dict, dataset_name):
+    # Ensure p and q sum to 1
+    js_matrix = np.zeros((3, 3))
+    split_set = ["train", "valid", "test"]
+    for idx1, set1 in enumerate(split_set):
+        for idx2, set2 in enumerate(split_set):
+            hist1, bin_edges = np.histogram(np.array(dict[dataset_name][set1]), bins=100, density=True)
+            hist2, _ = np.histogram(np.array(dict[dataset_name][set2]), bins=100, density=True)
+            eps = 1e-10
+            hist1 += eps
+            hist2 += eps
+            # 确保向量总和为1（归一化），表示概率分布
+            hist1 /= hist1.sum()
+            hist2 /= hist2.sum()
+            m = 0.5 * (hist1 + hist2)
+            js_matrix[idx1][idx2] = 0.5 * entropy(hist1, m) + 0.5 * entropy(hist2, m)
+    return js_matrix#close to zero means the two distributions are similar
+
+def ks_hypothesis(dict, dataset_name):
+    ks_matrix = np.zeros((3, 3))
+    split_set = ["train", "valid", "test"]
+    for idx1, set1 in enumerate(split_set):
+        for idx2, set2 in enumerate(split_set):
+            ks_stat, _ = ks_2samp(dict[dataset_name][set1], dict[dataset_name][set2])
+            ks_matrix[idx1][idx2] = ks_stat
+    return ks_matrix#close to zero means the two distributions are similar
+
+
 #dataset_name = ["ArXiv", "DM Mathematics", "Enron Emails", "EuroParl", "FreeLaw", "Github", "Gutenberg (PG-19)",
 #                "HackerNews", "NIH ExPorter", "PhilPapers", "Pile-CC", "PubMed Abstracts", "PubMed Central", "StackExchange",
 #                "Ubuntu IRC", "USPTO Backgrounds", "Wikipedia (en)"]
-dataset_name = ["Pile-CC"]
-split_name = ["train", "valid", "test"]
+
+parser = argparse.ArgumentParser()
+parser.add_argument("--batch_size", type=int, default=8)
+parser.add_argument("--model_size", type=str, default="70m")
+parser.add_argument("--dataset_name", type=str, default="Pile-CC", choices=["ArXiv", "DM Mathematics", "Enron Emails", "EuroParl", "FreeLaw", "Github", "Gutenberg (PG-19)",
+                "HackerNews", "NIH ExPorter", "PhilPapers", "Pile-CC", "PubMed Abstracts", "PubMed Central", "StackExchange",
+                "Ubuntu IRC", "USPTO Backgrounds", "Wikipedia (en)"])
+parser.add_argument("--split_name", type=str, default="train", choices=["train", "valid", "test"])
+parser.add_argument("--cuda", type=int, default=0, help="cuda device")
+args = parser.parse_args()
 
 model_size = "70m"
 model = GPTNeoXForCausalLM.from_pretrained(
-  f"EleutherAI/pythia-{model_size}-deduped",
+  f"EleutherAI/pythia-{args.model_size}-deduped",
   revision="step143000",
-  cache_dir=f"./pythia-{model_size}-deduped/step143000",
+  cache_dir=f"./pythia-{args.model_size}-deduped/step143000",
 ).half().eval()
 model = model.to_bettertransformer()
-model = model.cuda()
+model = model.cuda(args.cuda)
 tokenizer = AutoTokenizer.from_pretrained(
   f"EleutherAI/pythia-{model_size}-deduped",
   revision="step143000",
@@ -116,29 +154,28 @@ tokenizer.pad_token = tokenizer.eos_token
 loss_dict = {}
 prob_dict = {}
 ppl_dict = {}
-for name in dataset_name:
-    loss_dict[name] = {"train": [], "valid": [], "test": []}
-    prob_dict[name] = {"train": [], "valid": [], "test": []}
-    ppl_dict[name] = {"train": [], "valid": [], "test": []}
-    for split in split_name:
-        if split in ["test", "valid"]:
-            dataset = torch.load(f"by_dataset/{split}_{name}.pt")
-            loss_list, prob_list, ppl_list = loss_collection(model, dataset)
-            loss_dict[name][split].extend(loss_list)
-            prob_dict[name][split].extend(prob_list)
-            ppl_dict[name][split].extend(ppl_list)
-        else:
-            for i in range(1):
-                dataset = torch.load(f"by_dataset/{split}_{name}_{i}.pt")
-                loss_list, prob_list, ppl_list = loss_collection(model, dataset)
-                loss_dict[name][split].extend(loss_list)
-                prob_dict[name][split].extend(prob_list)
-                ppl_dict[name][split].extend(ppl_list)
-pickle.dump(loss_dict, open("loss_dict.pkl", "wb"))
-pickle.dump(prob_dict, open("prob_dict.pkl", "wb"))
-pickle.dump(ppl_dict, open("ppl_dict.pkl", "wb"))
+
+loss_dict[args.dataset_name] = {"train": [], "valid": [], "test": []}
+prob_dict[args.dataset_name] = {"train": [], "valid": [], "test": []}
+ppl_dict[args.dataset_name] = {"train": [], "valid": [], "test": []}
+for split in args.split_name:
+    if split in ["test", "valid"]:
+        dataset = torch.load(f"by_dataset/{split}_{args.dataset_name}.pt")
+        loss_list, prob_list, ppl_list = loss_collection(model, args, dataset)
+        loss_dict[args.dataset_name][split].extend(loss_list)
+        prob_dict[args.dataset_name][split].extend(prob_list)
+        ppl_dict[args.dataset_name][split].extend(ppl_list)
+    else:
+        for i in range(1):
+            dataset = torch.load(f"by_dataset/{split}_{args.dataset_name}_{i}.pt")
+            loss_list, prob_list, ppl_list = loss_collection(model, args, dataset)
+            loss_dict[args.dataset_name][split].extend(loss_list)
+            prob_dict[args.dataset_name][split].extend(prob_list)
+            ppl_dict[args.dataset_name][split].extend(ppl_list)
+pickle.dump(loss_dict, open(f"feature_result/{args.dataset_name}_loss_dict.pkl", "wb"))
+pickle.dump(prob_dict, open(f"feature_result/{args.dataset_name}_prob_dict.pkl", "wb"))
+pickle.dump(ppl_dict, open(f"feature_result/{args.dataset_name}_ppl_dict.pkl", "wb"))
 figure_draw(loss_dict, "Loss")
 figure_draw(prob_dict, "Prob")
 figure_draw(ppl_dict, "PPL")
-
 
