@@ -6,7 +6,9 @@ from itertools import islice
 from tqdm import tqdm
 import matplotlib.pyplot as plt
 import numpy as np
+import pdb
 
+¥
 def batched_data(dataset, batch_size):
     data_iter = iter(dataset)
     while True:
@@ -50,6 +52,7 @@ def loss_collection(model, dataset):
         probabilities = torch.nn.functional.log_softmax(logits, dim=-1)
         loss_collect.append(loss.item())
         all_prob = []
+        pdb.set_trace()
         input_ids_processed = tokenized_inputs[0][1:]
         for i, token_id in enumerate(input_ids_processed):
             probability = probabilities[0, i, token_id].item()
