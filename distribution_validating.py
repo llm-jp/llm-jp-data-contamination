@@ -44,8 +44,9 @@ def loss_collection(model, dataset):
                                      padding=True,
                                      max_length=2048)
         tokenized_inputs = {key: val.to("cuda") for key, val in tokenized_inputs.items()}
-        outputs = model(**tokenized_inputs, labels=tokenized_inputs["input_ids"].cuda())
-        loss, logits = outputs.loss[:2]
+        with torch.no_grad():
+            outputs = model(**tokenized_inputs, labels=tokenized_inputs["input_ids"].cuda())
+        loss, logits = outputs[:2]
         probabilities = torch.nn.functional.log_softmax(logits, dim=-1)
         loss_collect.append(loss.item())
         all_prob = []
