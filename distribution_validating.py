@@ -55,10 +55,24 @@ def loss_collection(model, dataset, batch_size=8):
         for i in range(logits.size(0)):
             logits_i = logits[i].unsqueeze(0)  # Shape (1, seq_length, vocab_size)
             target_i = target_labels[i].unsqueeze(0)  # Shape (1, seq_length)
-            loss_i = F.cross_entropy(logits_i.view(-1, logits_i.size(-1)), target_i.view(-1), reduction='none')
-            # 按照有效的 token (前面的非PAD token) 取均值
-            valid_mask = target_i != -100
-            loss_i = (loss_i * valid_mask.view(-1)).sum() / valid_mask.sum()
+
+            # 移动logits和labels一位
+            shift_logits = logits_i[:, :-1, :].contiguous()
+            shift_labels = target_i[:, 1:].contiguous()
+
+            # 计算交叉熵损失并移除填充 token 贡献
+            loss_i = F.cross_entropy(shift_logits.view(-1, shift_logits.size(-1)), shift_labels.view(-1),
+                                     reduction='none')
+
+            # Create a mask to ignore the loss from padding tokens
+            valid_mask = shift_labels != -100
+
+            # 只有有效的 token 计算损失
+            loss_i = loss_i * valid_mask.view(-1)
+
+            # 计算每个样本的平均损失
+            loss_i = loss_i.sum() / valid_mask.sum()
+
             losses.append(loss_i.item())
         probabilities = torch.nn.functional.log_softmax(logits, dim=2)
         loss_collect.extend(losses)
