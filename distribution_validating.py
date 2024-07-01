@@ -181,4 +181,8 @@ ppl_dict = pickle.load(open(f"feature_result/{args.dataset_name}_{args.model_siz
 figure_draw(loss_dict, "Loss")
 figure_draw(prob_dict, "Prob")
 figure_draw(ppl_dict, "PPL")
+for dict in [loss_dict, prob_dict, ppl_dict]:
+    js_divergence(dict, args.dataset_name)
+    ks_hypothesis(dict, args.dataset_name)
+
 
