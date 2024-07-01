@@ -66,8 +66,7 @@ def loss_collection(model, dataset, batch_size=8):
             with torch.no_grad():
                 outputs = model(inputs, labels=inputs.cuda())
             loss, logits = outputs[:2]
-            probabilities = torch.nn.functional.log_softmax(logits, dim=2)
-            loss_collect.append(loss.item())
+
             probabilities = torch.nn.functional.log_softmax(logits, dim=-1)
             # probabilities = torch.nn.functional.softmax(logits, dim=-1)
             all_prob = []
@@ -101,6 +100,7 @@ def loss_collection(model, dataset, batch_size=8):
 
             # 收集结果
             #all_prob.append(selected_probs.cpu().numpy())
+            loss_collect.append(loss.item())
             prob_collect.append(pred)
             ppl_collect.append(ppl)
         pdb.set_trace()
