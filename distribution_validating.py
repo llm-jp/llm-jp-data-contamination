@@ -35,11 +35,11 @@ def figure_draw(data_dict, title):
 
 
 
-def loss_collection(model, dataset):
+def loss_collection(model, dataset, batch_size=8):
     loss_collect = []
     prob_collect = []
     ppl_collect = []
-    for batch in tqdm(batched_data(dataset, batch_size=8)):
+    for batch in tqdm(batched_data(dataset, batch_size=batch_size)):
         tokenized_inputs = tokenizer([item for item in batch],
                                      return_tensors="pt",
                                      truncation=True,
@@ -49,20 +49,23 @@ def loss_collection(model, dataset):
         with torch.no_grad():
             outputs = model(**tokenized_inputs, labels=tokenized_inputs["input_ids"].cuda())
         loss, logits = outputs[:2]
-        probabilities = torch.nn.functional.log_softmax(logits, dim=-1)
+        probabilities = torch.nn.functional.log_softmax(logits, dim=2)
         loss_collect.append(loss.item())
-        all_prob = []
-        pdb.set_trace()
-        input_ids_processed = tokenized_inputs[0][1:]
-        for i, token_id in enumerate(input_ids_processed):
-            probability = probabilities[0, i, token_id].item()
-            all_prob.append(probability)
-        ppl = torch.exp(loss).item()
-        k_length = int(len(all_prob) * 0.2)
-        topk_prob = np.sort(all_prob)[:k_length]
-        pred = -np.mean(topk_prob).item()
-        prob_collect.append(pred)
-        ppl_collect.append(ppl)
+        #pdb.set_trace()
+        for _ in range(batch_size):
+            all_prob = []
+            input_ids_processed = tokenized_inputs["input_ids"][0][1:]
+            attention_mask_processd = tokenized_inputs["attention_mask"]
+            for i, token_id, attention_mask_processd in enumerate(input_ids_processed, attention_mask_processd):
+                if attention_mask_processd[i] == 1:
+                    probability = probabilities[0, i, token_id].item()
+                    all_prob.append(probability)
+            ppl = torch.exp(loss).item()
+            k_length = int(len(all_prob) * 0.2)
+            topk_prob = np.sort(all_prob)[:k_length]
+            pred = -np.mean(topk_prob).item()
+            prob_collect.append(pred)
+            ppl_collect.append(ppl)
     return loss_collect, prob_collect, ppl_collect
 
 #dataset_name = ["ArXiv", "DM Mathematics", "Enron Emails", "EuroParl", "FreeLaw", "Github", "Gutenberg (PG-19)",
