@@ -54,15 +54,22 @@ def loss_collection(model, dataset, batch_size=8):
         for idx in range(batch_size):
             all_prob = []
             input_ids_processed = tokenized_inputs["input_ids"][idx]
-            attention_mask_processd = tokenized_inputs["attention_mask"][idx]
-            for i, token_id in enumerate(input_ids_processed):
-                if attention_mask_processd[i] == 1:
-                    probability = probabilities[0, i, token_id].item()
-                    all_prob.append(probability)
-            ppl = torch.exp(loss).item()
-            k_length = int(len(all_prob) * 0.2)
-            topk_prob = np.sort(all_prob)[:k_length]
+            attention_mask_processed = tokenized_inputs["attention_mask"][idx]
+            probs = probabilities[idx]
+            valid_probs = probs[attention_mask_processed == 1]
+            valid_token_ids = input_ids_processed[attention_mask_processed == 1]
+
+            # 获取这些有效 token 的概率
+            selected_probs = valid_probs[np.arange(valid_token_ids.shape[0]), valid_token_ids]
+
+            # 计算 topk 概率
+            k_length = int(len(selected_probs) * 0.2)
+            topk_prob = np.sort(selected_probs.cpu().numpy())[:k_length]
             pred = -np.mean(topk_prob).item()
+            # people's value
+            ppl = torch.exp(loss).item()
+            # 收集结果
+            all_prob.append(selected_probs.cpu().numpy())
             prob_collect.append(pred)
             ppl_collect.append(ppl)
     return loss_collect, prob_collect, ppl_collect
