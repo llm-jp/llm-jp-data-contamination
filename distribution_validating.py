@@ -57,7 +57,6 @@ def loss_collection(model, dataset, args, batch_size=8):
         seq_length = tokenized_inputs["input_ids"].shape[1]
         # 初始化
         all_prob = []
-
         # 获取每个样本的概率
         for idx in range(batch_size):
             logits_i = logits[i].unsqueeze(0)  # Shape (1, seq_length, vocab_size)
@@ -180,8 +179,16 @@ ppl_dict = pickle.load(open(f"feature_result/{args.dataset_name}_{args.model_siz
 figure_draw(loss_dict, "Loss")
 figure_draw(prob_dict, "Prob")
 figure_draw(ppl_dict, "PPL")
-for dict in [loss_dict, prob_dict, ppl_dict]:
-    js_divergence(dict, args.dataset_name)
-    ks_hypothesis(dict, args.dataset_name)
+for idx, dict in enumerate([loss_dict, prob_dict, ppl_dict]):
+    if idx == 0:
+        print("Loss Distribution Similarity Matrix")
+    elif idx == 1:
+        print("Prob Distribution Similarity Matrix")
+    else:
+        print("PPL Distribution Similarity Matrix")
+    js_matrix = js_divergence(dict, args.dataset_name)
+    print(js_matrix)
+    ks_matrix = ks_hypothesis(dict, args.dataset_name)
+    print(ks_matrix)
 
 
