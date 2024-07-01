@@ -7,7 +7,7 @@ from tqdm import tqdm
 import matplotlib.pyplot as plt
 import numpy as np
 import pdb
-
+import torch.nn.functional as F
 
 def batched_data(dataset, batch_size):
     data_iter = iter(dataset)
@@ -40,70 +40,61 @@ def loss_collection(model, dataset, batch_size=8):
     prob_collect = []
     ppl_collect = []
     for batch in tqdm(batched_data(dataset, batch_size=batch_size)):
-        # tokenized_inputs = tokenizer([item for item in batch],
-        #                              return_tensors="pt",
-        #                              truncation=True,
-        #                              padding=True,
-        #                              max_length=2048)
-        # tokenized_inputs = {key: val.to("cuda") for key, val in tokenized_inputs.items()}
-        # target_labels = tokenized_inputs["input_ids"].clone()
-        # target_labels[tokenized_inputs["attention_mask"] == 0] = -100
-        # with torch.no_grad():
-        #     outputs = model(**tokenized_inputs, labels=target_labels.cuda())
-        # loss, logits = outputs[:2]
-        # probabilities = torch.nn.functional.log_softmax(logits, dim=2)
-        # loss_collect.append(loss.item())
-        # batch_size = tokenized_inputs["input_ids"].shape[0]
-        # seq_length = tokenized_inputs["input_ids"].shape[1]
-        # # 初始化
-        # all_prob = []
-        # prob_collect = []
-        # ppl_collect = []
+        tokenized_inputs = tokenizer([item for item in batch],
+                                     return_tensors="pt",
+                                     truncation=True,
+                                     padding=True,
+                                     max_length=2048)
+        tokenized_inputs = {key: val.to("cuda") for key, val in tokenized_inputs.items()}
+        target_labels = tokenized_inputs["input_ids"].clone()
+        target_labels[tokenized_inputs["attention_mask"] == 0] = -100
+        with torch.no_grad():
+            outputs = model(**tokenized_inputs, labels=tokenized_inputs["input_ids"].cuda())
+        loss, logits = outputs[:2]
+        losses = []
+        for i in range(logits.size(0)):
+            logits_i = logits[i].unsqueeze(0)  # Shape (1, seq_length, vocab_size)
+            target_i = target_labels[i].unsqueeze(0)  # Shape (1, seq_length)
+            loss_i = F.cross_entropy(logits_i.view(-1, logits_i.size(-1)), target_i.view(-1), reduction='none')
+            # 按照有效的 token (前面的非PAD token) 取均值
+            valid_mask = target_i != -100
+            loss_i = (loss_i * valid_mask.view(-1)).sum() / valid_mask.sum()
+            losses.append(loss_i.item())
+        probabilities = torch.nn.functional.log_softmax(logits, dim=2)
+        loss_collect.extend(losses)
+        batch_size = tokenized_inputs["input_ids"].shape[0]
+        seq_length = tokenized_inputs["input_ids"].shape[1]
+        # 初始化
+        all_prob = []
+        prob_collect = []
+        ppl_collect = []
 
         # 获取每个样本的概率
         for idx in range(batch_size):
-            inputs = tokenizer.encode(batch[idx], return_tensors="pt", truncation=True, max_length=2048).to("cuda")
-            with torch.no_grad():
-                outputs = model(inputs, labels=inputs.cuda())
-            loss, logits = outputs[:2]
+            input_ids_processed = tokenized_inputs["input_ids"][idx]
+            attention_mask_processed = tokenized_inputs["attention_mask"][idx]
+            probs = probabilities[idx]  # 形状为 (seq_length, vocab_size)
 
-            probabilities = torch.nn.functional.log_softmax(logits, dim=-1)
-            # probabilities = torch.nn.functional.softmax(logits, dim=-1)
-            all_prob = []
-            input_ids_processed = inputs[0][1:]
-            for i, token_id in enumerate(input_ids_processed):
-                probability = probabilities[0, i, token_id].item()
-                all_prob.append(probability)
-            ppl = torch.exp(loss).item()
-            k_length = int(len(all_prob) * 0.2)
-            topk_prob = np.sort(all_prob)[:k_length]
+            # 使用 attention_mask 筛选有效的 token
+            valid_probs = probs[attention_mask_processed == 1]
+            valid_token_ids = input_ids_processed[attention_mask_processed == 1]
+
+            # 获取这些有效 token 的概率
+            selected_probs = valid_probs[np.arange(valid_token_ids.shape[0]), valid_token_ids]
+
+            # 计算 topk 概率
+            k_length = int(len(selected_probs) * 0.2)
+            topk_prob = np.sort(selected_probs.cpu().numpy())[:k_length]
             pred = -np.mean(topk_prob).item()
-            #
-            # input_ids_processed = inputs
-            # attention_mask_processed = tokenized_inputs["attention_mask"][idx]
-            # probs = probabilities[idx]  # 形状为 (seq_length, vocab_size)
-            #
-            # # 使用 attention_mask 筛选有效的 token
-            # valid_probs = probs[attention_mask_processed == 1]
-            # valid_token_ids = input_ids_processed[attention_mask_processed == 1]
-            #
-            # # 获取这些有效 token 的概率
-            # selected_probs = valid_probs[np.arange(valid_token_ids.shape[0]), valid_token_ids]
-            #
-            # # 计算 topk 概率
-            # k_length = int(len(selected_probs) * 0.2)
-            # topk_prob = np.sort(selected_probs.cpu().numpy())[:k_length]
-            # pred = -np.mean(topk_prob).item()
 
             # people's value
             ppl = torch.exp(loss).item()
 
             # 收集结果
-            #all_prob.append(selected_probs.cpu().numpy())
-            loss_collect.append(loss.item())
+            all_prob.append(selected_probs.cpu().numpy())
             prob_collect.append(pred)
             ppl_collect.append(ppl)
-        #pdb.set_trace()
+        pdb.set_trace()
     return loss_collect, prob_collect, ppl_collect
 
 #dataset_name = ["ArXiv", "DM Mathematics", "Enron Emails", "EuroParl", "FreeLaw", "Github", "Gutenberg (PG-19)",
