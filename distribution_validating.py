@@ -17,7 +17,7 @@ def batched_data(dataset, batch_size):
 
 
 def loss_collection(model, dataset):
-    loss_list = []
+    loss_collect = []
     for batch in tqdm(batched_data(dataset, batch_size=8)):
         tokenized_inputs = tokenizer([item for item in batch],
                                      return_tensors="pt",
@@ -27,8 +27,8 @@ def loss_collection(model, dataset):
         tokenized_inputs = {key: val.to("cuda") for key, val in tokenized_inputs.items()}
         outputs = model(**tokenized_inputs, labels=tokenized_inputs["input_ids"].cuda())
         loss = outputs.loss
-        loss_list.append(loss.item())
-    return loss_list
+        loss_collect.append(loss.item())
+    return loss_collect
 
 #dataset_name = ["ArXiv", "DM Mathematics", "Enron Emails", "EuroParl", "FreeLaw", "Github", "Gutenberg (PG-19)",
 #                "HackerNews", "NIH ExPorter", "PhilPapers", "Pile-CC", "PubMed Abstracts", "PubMed Central", "StackExchange",
