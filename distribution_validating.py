@@ -89,9 +89,8 @@ def loss_collection(model, dataset, batch_size=8):
             ppl = torch.exp(loss).item()
             # 收集结果
             all_prob.append(selected_probs.cpu().numpy())
-            pdb.set_trace()
-            prob_collect.extend(pred)
-            ppl_collect.extend(ppl)
+            prob_collect.append(pred)
+            ppl_collect.append(ppl)
     return loss_collect, prob_collect, ppl_collect
 
 #dataset_name = ["ArXiv", "DM Mathematics", "Enron Emails", "EuroParl", "FreeLaw", "Github", "Gutenberg (PG-19)",
