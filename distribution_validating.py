@@ -49,7 +49,7 @@ def loss_collection(model, dataset, batch_size=8):
         target_labels = tokenized_inputs["input_ids"].clone()
         target_labels[tokenized_inputs["attention_mask"] == 0] = -100
         with torch.no_grad():
-            outputs = model(**tokenized_inputs, labels=tokenized_inputs["input_ids"].cuda())
+            outputs = model(**tokenized_inputs, labels=target_labels.cuda())
         loss, logits = outputs[:2]
         losses = []
         for i in range(logits.size(0)):
