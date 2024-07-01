@@ -51,23 +51,39 @@ def loss_collection(model, dataset, batch_size=8):
         loss, logits = outputs[:2]
         probabilities = torch.nn.functional.log_softmax(logits, dim=2)
         loss_collect.append(loss.item())
-        mask = tokenized_inputs["attention_mask"].bool()
-        # Get loss for each token where mask is 1
-        pdb.set_trace()
-        all_probs = torch.masked_select(probabilities, mask.unsqueeze(-1)).reshape(mask.sum(dim=-1), -1)
-        # Number of top values to take for each set of probabilities
-        k_lengths = (mask.sum(dim=-1) * 0.2).int()
-        # Find the lowest `k_length` values for each set of probabilities
-        topk_probs, _ = all_probs.topk(k_lengths, dim=-1, largest=False)
-        # Calculate the mean of the top k probabilites
-        preds = -(topk_probs.mean(dim=-1)).tolist()
-        # Add to list
-        prob_collect.extend(preds)
-        # Compute the perplexity for all samples in the batch
-        ppl = torch.exp(loss).tolist()
-        # Add to list
-        ppl_collect.extend(ppl)
-        pdb.set_trace()
+        batch_size = tokenized_inputs["input_ids"].shape[0]
+        seq_length = tokenized_inputs["input_ids"].shape[1]
+
+        # 初始化
+        all_prob = []
+        prob_collect = []
+        ppl_collect = []
+
+        # 获取每个样本的概率
+        for idx in range(batch_size):
+            input_ids_processed = tokenized_inputs["input_ids"][idx]
+            attention_mask_processed = tokenized_inputs["attention_mask"][idx]
+            probs = probabilities[idx]  # 形状为 (seq_length, vocab_size)
+
+            # 使用 attention_mask 筛选有效的 token
+            valid_probs = probs[attention_mask_processed == 1]
+            valid_token_ids = input_ids_processed[attention_mask_processed == 1]
+
+            # 获取这些有效 token 的概率
+            selected_probs = valid_probs[np.arange(valid_token_ids.shape[0]), valid_token_ids]
+
+            # 计算 topk 概率
+            k_length = int(len(selected_probs) * 0.2)
+            topk_prob = np.sort(selected_probs.cpu().numpy())[:k_length]
+            pred = -np.mean(topk_prob).item()
+
+            # people's value
+            ppl = torch.exp(loss).item()
+
+            # 收集结果
+            all_prob.append(selected_probs.cpu().numpy())
+            prob_collect.append(pred)
+            ppl_collect.append(ppl)
     return loss_collect, prob_collect, ppl_collect
 
 #dataset_name = ["ArXiv", "DM Mathematics", "Enron Emails", "EuroParl", "FreeLaw", "Github", "Gutenberg (PG-19)",
