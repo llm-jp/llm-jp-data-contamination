@@ -53,6 +53,7 @@ def loss_collection(model, dataset, batch_size=8):
         loss_collect.append(loss.item())
         mask = tokenized_inputs["attention_mask"].bool()
         # Get loss for each token where mask is 1
+        pdb.set_trace()
         all_probs = torch.masked_select(probabilities, mask.unsqueeze(-1)).reshape(mask.sum(dim=-1), -1)
         # Number of top values to take for each set of probabilities
         k_lengths = (mask.sum(dim=-1) * 0.2).int()
