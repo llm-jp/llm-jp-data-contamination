@@ -29,6 +29,7 @@ def mix_distribution(dict, dataset_name, title, args, ratio=0.8, total_num=15000
     test_data = random.sample(test_data, int(test_data_num))
     combined_data = train_data + test_data
     # 画分布图
+    plt.figure(figsize=(10, 5))
     plt.hist(combined_data, bins=50, density=True)
     # 设置标题和轴标签
     plt.title(f'Data Distribution of mixed distribution at ratio {ratio} for {dataset_name} at {args.model_size} model')
