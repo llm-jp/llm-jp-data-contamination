@@ -165,7 +165,7 @@ def ks_hypothesis(dict, dataset_name):
 parser = argparse.ArgumentParser()
 parser.add_argument("--batch_size", type=int, default=8)
 parser.add_argument("--model_size", type=str, default="160m")
-parser.add_argument("--dataset_name", type=str, default="Pile-CC", choices=["ArXiv", "DM Mathematics", "Enron Emails", "EuroParl", "FreeLaw", "Github", "Gutenberg (PG-19)",
+parser.add_argument("--dataset_name", type=str, default="ArXiv", choices=["ArXiv", "DM Mathematics", "Enron Emails", "EuroParl", "FreeLaw", "Github", "Gutenberg (PG-19)",
                 "HackerNews", "NIH ExPorter", "PhilPapers", "Pile-CC", "PubMed Abstracts", "PubMed Central", "StackExchange",
                 "Ubuntu IRC", "USPTO Backgrounds", "Wikipedia (en)"])
 parser.add_argument("--cuda", type=int, default=0, help="cuda device")
