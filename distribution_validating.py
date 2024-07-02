@@ -37,6 +37,7 @@ def mix_distribution(dict, dataset_name, title, args, ratio=0.8, total_num=15000
     plt.title(f'Data Distribution of mixed distribution at ratio {ratio} for {dataset_name} at {args.model_size} model')
     plt.xlabel('Value')
     plt.ylabel('Frequency')
+    plt.legend()
     plt.tight_layout()
     plt.savefig(f'{dataset_name} {title} histogram at {args.model_size} model at ratio {ratio}.png')
     # 显示图表
