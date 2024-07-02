@@ -18,7 +18,7 @@ def batched_data(dataset, batch_size):
             break
         yield batch
 
-def figure_draw(data_dict, title):
+def figure_draw(data_dict, title, args):
     plt.figure(figsize=(10, 5))
     fig, axs = plt.subplots(len(data_dict), figsize=(10, 5 * len(data_dict)))
     axs = np.atleast_2d(axs)
@@ -26,12 +26,12 @@ def figure_draw(data_dict, title):
         for phase_name, phase_loss in dataset_loss.items():
             weights = np.ones_like(phase_loss) / len(phase_loss)
             ax.hist(phase_loss, bins=50, label=phase_name, alpha=0.5, weights=weights)
-        ax.set_title(f'{title} values histogram for {dataset_name}')
+        ax.set_title(f'{title} values histogram for {dataset_name} at {args.model_size} model')
         ax.set_xlabel(title)
         ax.set_ylabel('Percentage')
         ax.legend()
     plt.tight_layout()
-    plt.savefig(f"{title}_histograms.png")
+    plt.savefig(f"{title}_histograms_{args.model_size}.png")
     plt.show()
 
 
@@ -180,9 +180,9 @@ if not skip_calculation:
 loss_dict = pickle.load(open(f"feature_result/{args.dataset_name}_{args.model_size}_loss_dict.pkl", "rb"))
 prob_dict = pickle.load(open(f"feature_result/{args.dataset_name}_{args.model_size}_prob_dict.pkl", "rb"))
 ppl_dict = pickle.load(open(f"feature_result/{args.dataset_name}_{args.model_size}_ppl_dict.pkl", "rb"))
-figure_draw(loss_dict, "Loss")
-figure_draw(prob_dict, "Prob")
-figure_draw(ppl_dict, "PPL")
+figure_draw(loss_dict, "Loss", args)
+figure_draw(prob_dict, "Prob", args)
+figure_draw(ppl_dict, "PPL", args)
 for idx, dict in enumerate([loss_dict, prob_dict, ppl_dict]):
     if idx == 0:
         print("Loss Distribution Similarity Matrix")
