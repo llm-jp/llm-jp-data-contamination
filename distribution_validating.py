@@ -32,11 +32,11 @@ def mix_distribution(dict, dataset_name, title, args, ratio=0.5, total_num=10000
     # 画分布图
     plt.figure(figsize=(10, 5))
     weights = np.ones_like(combined_data) / len(combined_data)
-    plt.hist(combined_data, bins=100, label='Mixed Distribution', alpha=0.5, weights=weights)
+    plt.hist(combined_data, bins=100, label='Mixed Distribution', alpha=0.5, weights=weights, density=True)
     weights = np.ones_like(train_data) / len(train_data)
-    plt.hist(train_data, bins=100, label='Train Distribution', alpha=0.5, weights=weights)
+    plt.hist(train_data, bins=100, label='Train Distribution', alpha=0.5, weights=weights, density=True)
     weights = np.ones_like(test_data) / len(test_data)
-    plt.hist(test_data, bins=100, label='Test Distribution', alpha=0.5, weights=weights)
+    plt.hist(test_data, bins=100, label='Test Distribution', alpha=0.5, weights=weights, density=True)
     # sns.kdeplot(combined_data, label='Mixed Distribution', alpha=0.5, shade=True)
     # sns.kdeplot(train_data, label='Train Distribution', alpha=0.5, shade=True)
     # sns.kdeplot(test_data, label='Test Distribution', alpha=0.5, shade=True)
@@ -57,9 +57,9 @@ def figure_draw(data_dict, title, args):
     axs = np.atleast_2d(axs)
     for ax, (dataset_name, dataset_loss) in zip(axs.flatten(), data_dict.items()):
         for phase_name, phase_loss in dataset_loss.items():
-            #weights = np.ones_like(phase_loss) / len(phase_loss)
-            #ax.hist(phase_loss, bins=1000, label=phase_name, alpha=0.5, weights=weights)
-            sns.kdeplot(phase_loss, ax=ax, label=phase_name, alpha=0.5, bw_adjust=0.1, shade=True)
+            weights = np.ones_like(phase_loss) / len(phase_loss)
+            ax.hist(phase_loss, bins=1000, label=phase_name, alpha=0.5, weights=weights, density=True)
+            #sns.kdeplot(phase_loss, ax=ax, label=phase_name, alpha=0.5, bw_adjust=0.1, shade=True)
         ax.set_title(f'{dataset_name} {title} histogram  at {args.model_size} model')
         ax.set_xlabel(title)
         ax.set_ylabel('Percentage')
