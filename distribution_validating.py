@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pdb
 import torch.nn.functional as F
-from scipy.stats import entropy, wasserstein_distance, ks_2samp
+from scipy.stats import entropy, wasserstein_distance, ks_2samp, kurtosis
 import argparse
 def batched_data(dataset, batch_size):
     data_iter = iter(dataset)
@@ -98,7 +98,9 @@ def calculate_mean_var(dict, dataset_name):
     for idx1, set1 in enumerate(split_set):
         mean = np.mean(dict[dataset_name][set1])
         var = np.var(dict[dataset_name][set1])
-        print("The mean and variance of {} in {} set are {} and {}".format(dataset_name, set1, mean, var))
+        std = np.std(dict[dataset_name][set1])
+        kur = kurtosis(dict[dataset_name][set1])
+        print("The mean, variance, std and kurtosis of {} in {} set are {},  {}, {} and {}".format(dataset_name, set1, mean, var, std, kur))
     return mean, var
 def js_divergence(dict, dataset_name):
     # Ensure p and q sum to 1
