@@ -21,7 +21,7 @@ def batched_data(dataset, batch_size):
             break
         yield batch
 
-def mix_distribution(dict, dataset_name, title, args, ratio=0.5, total_num=150000):
+def mix_distribution(dict, dataset_name, title, args, ratio=0.5, total_num=100000):
     train_data = dict[dataset_name]["train"]
     test_data = dict[dataset_name]["test"]
     train_data_num = total_num*ratio
