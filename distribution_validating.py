@@ -64,7 +64,7 @@ def figure_draw(data_dict, title, args):
 
 
 
-def loss_collection(model, dataset, args, batch_size=8):
+def loss_collection(model, dataset, args, batch_size=8, upper_limit=500000):
     loss_collect = []
     prob_collect = []
     ppl_collect = []
@@ -119,6 +119,8 @@ def loss_collection(model, dataset, args, batch_size=8):
             all_prob.append(selected_probs.cpu().numpy())
             prob_collect.append(pred)
             ppl_collect.append(ppl)
+            if len(loss_collect) >= upper_limit:
+                break
     return loss_collect, prob_collect, ppl_collect
 
 def calculate_mean_var(dict, dataset_name):
