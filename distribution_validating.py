@@ -93,7 +93,13 @@ def loss_collection(model, dataset, args, batch_size=8):
             ppl_collect.append(ppl)
     return loss_collect, prob_collect, ppl_collect
 
-
+def calculate_mean_var(dict, dataset_name):
+    split_set = ["train", "valid", "test"]
+    for idx1, set1 in enumerate(split_set):
+        mean = np.mean(dict[dataset_name][set1])
+        var = np.var(dict[dataset_name][set1])
+        print("The mean and variance of {} in {} set are {} and {}".format(dataset_name, set1, mean, var))
+    return mean, var
 def js_divergence(dict, dataset_name):
     # Ensure p and q sum to 1
     js_matrix = np.zeros((3, 3))
@@ -128,7 +134,7 @@ def ks_hypothesis(dict, dataset_name):
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--batch_size", type=int, default=8)
-parser.add_argument("--model_size", type=str, default="70m")
+parser.add_argument("--model_size", type=str, default="160m")
 parser.add_argument("--dataset_name", type=str, default="Pile-CC", choices=["ArXiv", "DM Mathematics", "Enron Emails", "EuroParl", "FreeLaw", "Github", "Gutenberg (PG-19)",
                 "HackerNews", "NIH ExPorter", "PhilPapers", "Pile-CC", "PubMed Abstracts", "PubMed Central", "StackExchange",
                 "Ubuntu IRC", "USPTO Backgrounds", "Wikipedia (en)"])
@@ -190,6 +196,7 @@ for idx, dict in enumerate([loss_dict, prob_dict, ppl_dict]):
         print("Prob Distribution Similarity Matrix")
     else:
         print("PPL Distribution Similarity Matrix")
+    calculate_mean_var(dict, args.dataset_name)
     js_matrix = js_divergence(dict, args.dataset_name)
     print(js_matrix)
     ks_matrix = ks_hypothesis(dict, args.dataset_name)
