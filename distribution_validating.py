@@ -11,6 +11,7 @@ import torch.nn.functional as F
 from scipy.stats import entropy, wasserstein_distance, ks_2samp, kurtosis
 import argparse
 import random
+import seaborn as sns
 
 def batched_data(dataset, batch_size):
     data_iter = iter(dataset)
@@ -51,7 +52,8 @@ def figure_draw(data_dict, title, args):
     for ax, (dataset_name, dataset_loss) in zip(axs.flatten(), data_dict.items()):
         for phase_name, phase_loss in dataset_loss.items():
             weights = np.ones_like(phase_loss) / len(phase_loss)
-            ax.hist(phase_loss, bins=100, density=True, label=phase_name, alpha=0.5, weights=None)
+            #ax.hist(phase_loss, bins=100, density=True, label=phase_name, alpha=0.5, weights=None)
+            sns.kdeplot(phase_loss, ax=ax, label=phase_name, alpha=0.5, shade=True)
         ax.set_title(f'{dataset_name} {title} histogram  at {args.model_size} model')
         ax.set_xlabel(title)
         ax.set_ylabel('Percentage')
