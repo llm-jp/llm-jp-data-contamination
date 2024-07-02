@@ -25,7 +25,7 @@ def figure_draw(data_dict, title, args):
     for ax, (dataset_name, dataset_loss) in zip(axs.flatten(), data_dict.items()):
         for phase_name, phase_loss in dataset_loss.items():
             weights = np.ones_like(phase_loss) / len(phase_loss)
-            ax.hist(phase_loss, bins=50, label=phase_name, alpha=0.5, weights=weights)
+            ax.hist(phase_loss, bins=100, label=phase_name, alpha=0.5, weights=weights)
         ax.set_title(f'{title} values histogram for {dataset_name} at {args.model_size} model')
         ax.set_xlabel(title)
         ax.set_ylabel('Percentage')
