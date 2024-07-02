@@ -10,6 +10,8 @@ import pdb
 import torch.nn.functional as F
 from scipy.stats import entropy, wasserstein_distance, ks_2samp, kurtosis
 import argparse
+import random
+
 def batched_data(dataset, batch_size):
     data_iter = iter(dataset)
     while True:
@@ -18,6 +20,26 @@ def batched_data(dataset, batch_size):
             break
         yield batch
 
+def mix_distribution(dict, dataset_name, title, args, ratio=0.8, total_num=150000):
+    train_data = dict[dataset_name]["train"]
+    test_data = dict[dataset_name]["test"]
+    train_data_num = total_num*ratio
+    test_data_num = total_num*(1-ratio)
+    train_data = random.sample(train_data, int(train_data_num))
+    test_data = random.sample(test_data, int(test_data_num))
+    combined_data = train_data + test_data
+    # 画分布图
+    plt.hist(combined_data, bins=50, density=True)
+    # 设置标题和轴标签
+    plt.title(f'Data Distribution of mixed distribution at ratio {ratio} for {dataset_name} at {args.model_size} model')
+    plt.xlabel('Value')
+    plt.ylabel('Frequency')
+    plt.tight_layout()
+    plt.savefig(f'{dataset_name} {title} histogram at {args.model_size} model at ratio {ratio}.png')
+    # 显示图表
+    plt.show()
+
+
 def figure_draw(data_dict, title, args):
     plt.figure(figsize=(10, 5))
     fig, axs = plt.subplots(len(data_dict), figsize=(10, 5 * len(data_dict)))
@@ -25,8 +47,8 @@ def figure_draw(data_dict, title, args):
     for ax, (dataset_name, dataset_loss) in zip(axs.flatten(), data_dict.items()):
         for phase_name, phase_loss in dataset_loss.items():
             weights = np.ones_like(phase_loss) / len(phase_loss)
-            ax.hist(phase_loss, bins=100, label=phase_name, alpha=0.5, weights=weights)
-        ax.set_title(f'{title} values histogram for {dataset_name} at {args.model_size} model')
+            ax.hist(phase_loss, bins=100, label=phase_name, alpha=0.5, weights=None)
+        ax.set_title(f'{dataset_name} {title} histogram  at {args.model_size} model')
         ax.set_xlabel(title)
         ax.set_ylabel('Percentage')
         ax.legend()
@@ -191,6 +213,9 @@ ppl_dict = pickle.load(open(f"feature_result/{args.dataset_name}_{args.model_siz
 figure_draw(loss_dict, "Loss", args)
 figure_draw(prob_dict, "Prob", args)
 figure_draw(ppl_dict, "PPL", args)
+mix_distribution(loss_dict, args.dataset_name, "Loss", args)
+mix_distribution(prob_dict, args.dataset_name, "Prob", args)
+mix_distribution(ppl_dict, args.dataset_name, "PPL", args)
 for idx, dict in enumerate([loss_dict, prob_dict, ppl_dict]):
     if idx == 0:
         print("Loss Distribution Similarity Matrix")
