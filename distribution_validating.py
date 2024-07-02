@@ -31,9 +31,9 @@ def mix_distribution(dict, dataset_name, title, args, ratio=0.8, total_num=15000
     combined_data = train_data + test_data
     # 画分布图
     plt.figure(figsize=(10, 5))
-    plt.hist(combined_data, bins=100, density=True, alpha=0.5,label='Mixed Distribution')
-    plt.hist(train_data, bins=100, density=True, alpha=0.5, label='Train Distribution')
-    plt.hist(test_data, bins=100, density=True, alpha=0.5, label='Test Distribution')
+    sns.kdeplot(combined_data, label='Mixed Distribution', alpha=0.5, shade=True)
+    sns.kdeplot(train_data, label='Train Distribution', alpha=0.5, shade=True)
+    sns.kdeplot(test_data, label='Test Distribution', alpha=0.5, shade=True)
     # 设置标题和轴标签
     plt.title(f'Data Distribution of mixed distribution at ratio {ratio} for {dataset_name} at {args.model_size} model')
     plt.xlabel('Value')
