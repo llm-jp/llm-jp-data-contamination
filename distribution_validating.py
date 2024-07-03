@@ -75,10 +75,10 @@ def min_prob_k(selected_log_probs):
     min_k = -np.mean(topk_log_prob).item()
     return min_k
 
-def min_prob_k_plus(log_probabilities, probs):
-    mu = (probs * log_probabilities).sum(-1)
-    sigma = (probs * torch.square(probs)).sum(-1) - torch.square(mu)
-    mink_plus = (log_probabilities - mu) / sigma.sqrt()
+def min_prob_k_plus(probs, log_probs, selected_log_probs):
+    mu = (probs * log_probs).sum(-1)
+    sigma = (probs * torch.square(log_probs)).sum(-1) - torch.square(mu)
+    mink_plus = (selected_log_probs - mu) / sigma.sqrt()
     k_length = int(len(mink_plus) * 0.2)
     topk = np.sort(mink_plus.cpu())[:k_length]
     min_k_plus = -np.mean(topk).item()
@@ -129,16 +129,16 @@ def feature_collection(model, dataset, args, batch_size=8, upper_limit=500000):
             attention_mask_processed = tokenized_inputs["attention_mask"][idx]
             log_probs = log_probabilities[idx]  # 形状为 (seq_length, vocab_size)
             probs = probs[idx]
-            pdb.set_trace()
-
             # 使用 attention_mask 筛选有效的 token
             valid_log_probs = log_probs[attention_mask_processed == 1]
             valid_token_ids = input_ids_processed[attention_mask_processed == 1]
             # 获取这些有效 token 的概率
-            selected_log_probs = valid_log_probs[np.arange(valid_token_ids.shape[0]), valid_token_ids]
-            selectd_probs = probs[np.arange(valid_token_ids.shape[0]), valid_token_ids]
+            selected_log_probs = valid_log_probs.gather(-1, valid_token_ids.unsqueeze(1))
+            #selected_probs = probs.gather(-1, valid_token_ids.unsqueeze(1))
+            #selected_log_probs = valid_log_probs[np.arange(valid_token_ids.shape[0]), valid_token_ids]
+            #selectd_probs = probs[np.arange(valid_token_ids.shape[0]), valid_token_ids]
             pdb.set_trace()
-            mink_plus = min_prob_k_plus(selected_log_probs, selectd_probs)
+            mink_plus = min_prob_k_plus(probs, log_probs, selected_log_probs)
             mink = min_prob_k(selected_log_probs)
             # 计算 topk 概率
             # k_length = int(len(selected_log_probs) * 0.2)
