@@ -91,12 +91,11 @@ def feature_collection(model, dataset, args, batch_size=8, upper_limit=500000):
     ppl_collect = []
     zlib_collect = []
     for batch in tqdm(batched_data(dataset, batch_size=batch_size)):
-        pdb.set_trace()
         tokenized_inputs = tokenizer([item for item in batch],
                                      return_tensors="pt",
                                      truncation=True,
                                      padding=True,
-                                     max_length=2048)
+                                    )
         tokenized_inputs = {key: val.cuda(args.cuda) for key, val in tokenized_inputs.items()}
         target_labels = tokenized_inputs["input_ids"].clone()
         target_labels[tokenized_inputs["attention_mask"] == 0] = -100
@@ -105,6 +104,7 @@ def feature_collection(model, dataset, args, batch_size=8, upper_limit=500000):
         loss, logits = outputs[:2]
         log_probabilities = torch.nn.functional.log_softmax(logits, dim=2)
         probs = torch.nn.functional.softmax(logits, dim=2)
+        pdb.set_trace()
         batch_size = tokenized_inputs["input_ids"].shape[0]
         seq_length = tokenized_inputs["input_ids"].shape[1]
         # 初始化
@@ -135,6 +135,7 @@ def feature_collection(model, dataset, args, batch_size=8, upper_limit=500000):
             # 获取这些有效 token 的概率
             selected_log_probs = valid_log_probs[np.arange(valid_token_ids.shape[0]), valid_token_ids]
             selectd_probs = probs[np.arange(valid_token_ids.shape[0]), valid_token_ids]
+            pdb.set_trace()
             mink_plus = min_prob_k_plus(selected_log_probs, selectd_probs)
             mink = min_prob_k(selected_log_probs)
             # 计算 topk 概率
