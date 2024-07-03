@@ -76,6 +76,7 @@ def min_prob_k(selected_log_probs):
     return min_k
 
 def min_prob_k_plus(probs, log_probs, selected_log_probs):
+    pdb.set_trace()
     mu = (probs * log_probs).sum(-1)
     sigma = (probs * torch.square(log_probs)).sum(-1) - torch.square(mu)
     mink_plus = (selected_log_probs - mu) / sigma.sqrt()
@@ -137,7 +138,7 @@ def feature_collection(model, dataset, args, batch_size=8, upper_limit=500000):
             #selected_probs = probs.gather(-1, valid_token_ids.unsqueeze(1))
             #selected_log_probs = valid_log_probs[np.arange(valid_token_ids.shape[0]), valid_token_ids]
             #selectd_probs = probs[np.arange(valid_token_ids.shape[0]), valid_token_ids]
-            pdb.set_trace()
+            #pdb.set_trace()
             mink_plus = min_prob_k_plus(probs, log_probs, selected_log_probs)
             mink = min_prob_k(selected_log_probs)
             # 计算 topk 概率
