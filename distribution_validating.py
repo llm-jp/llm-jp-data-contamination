@@ -103,16 +103,24 @@ def feature_collection(model, dataset, args, batch_size=8, upper_limit=500000):
         target_labels[tokenized_inputs["attention_mask"] == 0] = -100
         with torch.no_grad():
             outputs = model(**tokenized_inputs, labels=target_labels.cuda(args.cuda))
-            single_input_example = tokenizer(batch[0], return_tensors="pt", truncation=True, max_length=2048)
+            single_input_example = tokenizer.encode(batch[0], return_tensors="pt", truncation=True, max_length=2048)
             single_input_example = single_input_example.to(model.device)
-            pdb.set_trace()
-            single_output = model(**single_input_example, labels=single_input_example["input_ids"])
+            single_output = model(single_input_example, labels=single_input_example)
             single_loss, single_logits = single_output[:2]
         loss, logits = outputs[:2]
         log_probabilities = torch.nn.functional.log_softmax(logits, dim=-1)
         probs = torch.nn.functional.softmax(logits, dim=-1)
         batch_size = tokenized_inputs["input_ids"].shape[0]
         seq_length = tokenized_inputs["input_ids"].shape[1]
+
+        input_ids = single_input_example[0][1:].unsqueeze(-1)
+        probs = torch.nn.functional.softmax(single_logits[0, :-1], dim=-1)
+        log_probs = F.log_softmax(single_logits[0, :-1], dim=-1)
+        token_log_probs = log_probs.gather(dim=-1, index=input_ids).squeeze(-1)
+        mu = (probs * log_probs).sum(-1)
+        sigma = (probs * torch.square(log_probs)).sum(-1) - torch.square(mu)
+
+        pdb.set_trace()
         # 初始化
         all_prob = []
         # 获取每个样本的概率
