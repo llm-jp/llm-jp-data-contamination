@@ -69,11 +69,27 @@ def figure_draw(data_dict, title, args):
     plt.show()
 
 
+def min_prob_k(selected_log_probs):
+    k_length = int(len(selected_log_probs) * 0.2)
+    topk_log_prob = np.sort(selected_log_probs.cpu().numpy())[:k_length]
+    min_k = -np.mean(topk_log_prob).item()
+    return min_k
 
-def loss_collection(model, dataset, args, batch_size=8, upper_limit=500000):
+def min_prob_k_plus(log_probabilities, probs):
+    mu = (probs * log_probabilities).sum(-1)
+    sigma = (probs * torch.square(probs)).sum(-1) - torch.square(mu)
+    mink_plus = (log_probabilities - mu) / sigma.sqrt()
+    k_length = int(len(mink_plus) * 0.2)
+    topk = np.sort(mink_plus.cpu())[:k_length]
+    min_k_plus = -np.mean(topk).item()
+    return min_k_plus
+
+def feature_collection(model, dataset, args, batch_size=8, upper_limit=500000):
     loss_collect = []
-    prob_collect = []
+    mink_collect = []
+    mink_plus_collect = []
     ppl_collect = []
+    zlib_collect = []
     for batch in tqdm(batched_data(dataset, batch_size=batch_size)):
         tokenized_inputs = tokenizer([item for item in batch],
                                      return_tensors="pt",
@@ -86,7 +102,8 @@ def loss_collection(model, dataset, args, batch_size=8, upper_limit=500000):
         with torch.no_grad():
             outputs = model(**tokenized_inputs, labels=target_labels.cuda(args.cuda))
         loss, logits = outputs[:2]
-        probabilities = torch.nn.functional.log_softmax(logits, dim=2)
+        log_probabilities = torch.nn.functional.log_softmax(logits, dim=2)
+        probs = torch.nn.functional.softmax(logits, dim=2)
         batch_size = tokenized_inputs["input_ids"].shape[0]
         seq_length = tokenized_inputs["input_ids"].shape[1]
         # 初始化
@@ -106,28 +123,34 @@ def loss_collection(model, dataset, args, batch_size=8, upper_limit=500000):
             loss_i = loss_i * valid_mask.view(-1)
             # 计算每个样本的平均损失
             loss_i = loss_i.sum() / valid_mask.sum()
-            loss_collect.append(loss_i.item())
+
             input_ids_processed = tokenized_inputs["input_ids"][idx]
             attention_mask_processed = tokenized_inputs["attention_mask"][idx]
-            probs = probabilities[idx]  # 形状为 (seq_length, vocab_size)
+            log_probs = log_probabilities[idx]  # 形状为 (seq_length, vocab_size)
+            probs = probs[idx]
             # 使用 attention_mask 筛选有效的 token
-            valid_probs = probs[attention_mask_processed == 1]
+            valid_log_probs = log_probs[attention_mask_processed == 1]
             valid_token_ids = input_ids_processed[attention_mask_processed == 1]
             # 获取这些有效 token 的概率
-            selected_probs = valid_probs[np.arange(valid_token_ids.shape[0]), valid_token_ids]
+            selected_log_probs = valid_log_probs[np.arange(valid_token_ids.shape[0]), valid_token_ids]
+            selectd_probs = probs[np.arange(valid_token_ids.shape[0]), valid_token_ids]
+            mink_plus = min_prob_k_plus(selected_log_probs, selectd_probs)
+            mink = min_prob_k(selected_log_probs)
             # 计算 topk 概率
-            k_length = int(len(selected_probs) * 0.2)
-            topk_prob = np.sort(selected_probs.cpu().numpy())[:k_length]
-            pred = -np.mean(topk_prob).item()
-            # perplexity's value
+            # k_length = int(len(selected_log_probs) * 0.2)
+            # topk_log_prob = np.sort(selected_log_probs.cpu().numpy())[:k_length]
+            # pred = -np.mean(topk_log_prob).item()
+            # # perplexity's value
             ppl = torch.exp(loss).item()
             # 收集结果
-            all_prob.append(selected_probs.cpu().numpy())
-            prob_collect.append(pred)
+            all_prob.append(selected_log_probs.cpu().numpy())
+            mink_collect.append(mink)
+            mink_plus_collect.append(mink_plus)
             ppl_collect.append(ppl)
+            loss_collect.append(loss_i.item())
             if len(loss_collect) >= upper_limit:
                 break
-    return loss_collect, prob_collect, ppl_collect
+    return loss_collect, mink_collect, ppl_collect
 
 def calculate_mean_var(dict, dataset_name):
     split_set = ["train", "valid", "test"]
@@ -217,14 +240,14 @@ if not skip_calculation:
     for split in ["train", "valid", "test"]:
         if split in ["test", "valid"]:
             dataset = torch.load(f"by_dataset/{split}_{args.dataset_name}.pt")
-            loss_list, prob_list, ppl_list = loss_collection(model, dataset, args, batch_size=args.batch_size)
+            loss_list, prob_list, ppl_list = feature_collection(model, dataset, args, batch_size=args.batch_size)
             loss_dict[args.dataset_name][split].extend(loss_list)
             prob_dict[args.dataset_name][split].extend(prob_list)
             ppl_dict[args.dataset_name][split].extend(ppl_list)
         else:
             for i in range(1):
                 dataset = torch.load(f"by_dataset/{split}_{args.dataset_name}_{i}.pt")
-                loss_list, prob_list, ppl_list = loss_collection(model, dataset, args, batch_size=args.batch_size)
+                loss_list, prob_list, ppl_list = feature_collection(model, dataset, args, batch_size=args.batch_size)
                 loss_dict[args.dataset_name][split].extend(loss_list)
                 prob_dict[args.dataset_name][split].extend(prob_list)
                 ppl_dict[args.dataset_name][split].extend(ppl_list)
