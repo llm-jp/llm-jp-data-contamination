@@ -104,8 +104,8 @@ def feature_collection(model, dataset, args, batch_size=8, upper_limit=500000):
         with torch.no_grad():
             outputs = model(**tokenized_inputs, labels=target_labels.cuda(args.cuda))
         loss, logits = outputs[:2]
-        log_probabilities = torch.nn.functional.log_softmax(logits, dim=2)
-        probs = torch.nn.functional.softmax(logits, dim=2)
+        log_probabilities = torch.nn.functional.log_softmax(logits, dim=-1)
+        probs = torch.nn.functional.softmax(logits, dim=-1)
         batch_size = tokenized_inputs["input_ids"].shape[0]
         seq_length = tokenized_inputs["input_ids"].shape[1]
         # 初始化
