@@ -95,17 +95,16 @@ def feature_collection(model, dataset, args, batch_size=8, upper_limit=500000):
                                      return_tensors="pt",
                                      truncation=True,
                                      padding=True,
+                                     max_length=2048,
                                     )
         tokenized_inputs = {key: val.cuda(args.cuda) for key, val in tokenized_inputs.items()}
         target_labels = tokenized_inputs["input_ids"].clone()
         target_labels[tokenized_inputs["attention_mask"] == 0] = -100
-        pdb.set_trace()
         with torch.no_grad():
             outputs = model(**tokenized_inputs, labels=target_labels.cuda(args.cuda))
         loss, logits = outputs[:2]
         log_probabilities = torch.nn.functional.log_softmax(logits, dim=2)
         probs = torch.nn.functional.softmax(logits, dim=2)
-        pdb.set_trace()
         batch_size = tokenized_inputs["input_ids"].shape[0]
         seq_length = tokenized_inputs["input_ids"].shape[1]
         # 初始化
@@ -130,6 +129,8 @@ def feature_collection(model, dataset, args, batch_size=8, upper_limit=500000):
             attention_mask_processed = tokenized_inputs["attention_mask"][idx]
             log_probs = log_probabilities[idx]  # 形状为 (seq_length, vocab_size)
             probs = probs[idx]
+            pdb.set_trace()
+
             # 使用 attention_mask 筛选有效的 token
             valid_log_probs = log_probs[attention_mask_processed == 1]
             valid_token_ids = input_ids_processed[attention_mask_processed == 1]
