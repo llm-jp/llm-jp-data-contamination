@@ -132,10 +132,12 @@ def loss_collection(model, dataset, args, batch_size=8, upper_limit=500000):
 def calculate_mean_var(dict, dataset_name):
     split_set = ["train", "valid", "test"]
     for idx1, set1 in enumerate(split_set):
-        mean = np.mean(dict[dataset_name][set1])
-        var = np.var(dict[dataset_name][set1])
-        std = np.std(dict[dataset_name][set1])
-        kur = kurtosis(dict[dataset_name][set1])
+        values = np.array(dict[dataset_name][set1])
+        values = values[np.isnan(values)==False]
+        mean = np.mean(values)
+        var = np.var(values)
+        std = np.std(values)
+        kur = kurtosis(values)
         print("The mean, variance, std and kurtosis of {} in {} set are {},  {}, {} and {}".format(dataset_name, set1, mean, var, std, kur))
     return mean, var
 def js_divergence(dict, dataset_name):
