@@ -146,8 +146,12 @@ def js_divergence(dict, dataset_name):
     split_set = ["train", "valid", "test"]
     for idx1, set1 in enumerate(split_set):
         for idx2, set2 in enumerate(split_set):
-            hist1, bin_edges = np.histogram(np.array(dict[dataset_name][set1]), bins=300, density=True)
-            hist2, _ = np.histogram(np.array(dict[dataset_name][set2]), bins=300, density=True)
+            values = np.array(dict[dataset_name][set1])
+            values1 = values[np.isnan(values) == False]
+            values = np.array(dict[dataset_name][set2])
+            values2 = values[np.isnan(values) == False]
+            hist1, bin_edges = np.histogram(values1, bins=300, density=True)
+            hist2, _ = np.histogram(values2, bins=300, density=True)
             eps = 1e-10
             hist1 += eps
             hist2 += eps
@@ -163,7 +167,11 @@ def ks_hypothesis(dict, dataset_name):
     split_set = ["train", "valid", "test"]
     for idx1, set1 in enumerate(split_set):
         for idx2, set2 in enumerate(split_set):
-            ks_stat, _ = ks_2samp(dict[dataset_name][set1], dict[dataset_name][set2])
+            values = np.array(dict[dataset_name][set1])
+            values1 = values[np.isnan(values) == False]
+            values = np.array(dict[dataset_name][set2])
+            values2 = values[np.isnan(values) == False]
+            ks_stat, _ = ks_2samp(values1, values2)
             ks_matrix[idx1][idx2] = ks_stat
     return ks_matrix#close to zero means the two distributions are similar
 
