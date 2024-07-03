@@ -107,11 +107,11 @@ def feature_collection(model, dataset, args, batch_size=8, upper_limit=500000):
             single_input_example = single_input_example.to(model.device)
             single_output = model(single_input_example, labels=single_input_example)
             single_loss, single_logits = single_output[:2]
-        loss, logits = outputs[:2]
-        log_probabilities = torch.nn.functional.log_softmax(logits, dim=-1)
-        probs = torch.nn.functional.softmax(logits, dim=-1)
-        batch_size = tokenized_inputs["input_ids"].shape[0]
-        seq_length = tokenized_inputs["input_ids"].shape[1]
+        # loss, logits = outputs[:2]
+        # log_probabilities = torch.nn.functional.log_softmax(logits, dim=-1)
+        # probs = torch.nn.functional.softmax(logits, dim=-1)
+        # batch_size = tokenized_inputs["input_ids"].shape[0]
+        # seq_length = tokenized_inputs["input_ids"].shape[1]
 
         input_ids = single_input_example[0][1:].unsqueeze(-1)
         probs = torch.nn.functional.softmax(single_logits[0, :-1], dim=-1)
