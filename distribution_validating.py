@@ -21,13 +21,13 @@ def batched_data(dataset, batch_size):
             break
         yield batch
 
-def mix_distribution(dict, dataset_name, title, args, ratio=8, total_num=100000):
+def mix_distribution(dict, dataset_name, title, args, ratio=0.8, total_num=10000):
     train_data = dict[dataset_name]["train"]
     test_data = dict[dataset_name]["test"]
     train_data_num = total_num*ratio
     test_data_num = total_num*(1-ratio)
-    train_data = random.sample(train_data, int(train_data_num))
-    test_data = random.sample(test_data, int(test_data_num))
+    train_data = random.sample(train_data, min(int(train_data_num), len(train_data)))
+    test_data = random.sample(test_data, min(int(test_data_num), len(test_data)))
     combined_data = train_data + test_data
     # 画分布图
     plt.figure(figsize=(10, 5))
