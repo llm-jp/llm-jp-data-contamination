@@ -144,8 +144,8 @@ def js_divergence(dict, dataset_name):
     split_set = ["train", "valid", "test"]
     for idx1, set1 in enumerate(split_set):
         for idx2, set2 in enumerate(split_set):
-            hist1, bin_edges = np.histogram(np.array(dict[dataset_name][set1]), bins=100, density=True)
-            hist2, _ = np.histogram(np.array(dict[dataset_name][set2]), bins=100, density=True)
+            hist1, bin_edges = np.histogram(np.array(dict[dataset_name][set1]), bins=300, density=True)
+            hist2, _ = np.histogram(np.array(dict[dataset_name][set2]), bins=300, density=True)
             eps = 1e-10
             hist1 += eps
             hist2 += eps
