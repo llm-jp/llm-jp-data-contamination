@@ -76,7 +76,7 @@ def min_prob_k(selected_log_probs):
     return min_k
 
 def min_prob_k_plus(probs, log_probs, selected_log_probs):
-    pdb.set_trace()
+    #pdb.set_trace()
     mu = (probs * log_probs).sum(-1)
     sigma = (probs * torch.square(log_probs.to(torch.bfloat16))).sum(-1) - torch.square(mu)
     mink_plus = (selected_log_probs - mu) / sigma.sqrt()
@@ -85,7 +85,7 @@ def min_prob_k_plus(probs, log_probs, selected_log_probs):
     min_k_plus = -np.mean(topk).item()
     return min_k_plus
 
-def feature_collection(model, dataset, args, batch_size=8, upper_limit=5000):
+def feature_collection(model, dataset, args, batch_size=8, upper_limit=50000):
     loss_collect = []
     mink_collect = []
     mink_plus_collect = []
@@ -223,7 +223,7 @@ def ks_hypothesis(dict, dataset_name):
 parser = argparse.ArgumentParser()
 parser.add_argument("--batch_size", type=int, default=8)
 parser.add_argument("--model_size", type=str, default="160m")
-parser.add_argument("--dataset_name", type=str, default="ArXiv", choices=["ArXiv", "DM Mathematics", "Enron Emails",
+parser.add_argument("--dataset_name", type=str, default="Pile-CC", choices=["ArXiv", "DM Mathematics", "Enron Emails",
                 "EuroParl", "FreeLaw", "Github", "Gutenberg (PG-19)", "HackerNews", "NIH ExPorter", "PhilPapers",
                 "Pile-CC", "PubMed Abstracts", "PubMed Central", "StackExchange","Ubuntu IRC",
                 "USPTO Backgrounds", "Wikipedia (en)"])
