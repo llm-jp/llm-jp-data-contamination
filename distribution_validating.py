@@ -99,6 +99,7 @@ def feature_collection(model, dataset, args, batch_size=8, upper_limit=500000):
         tokenized_inputs = {key: val.cuda(args.cuda) for key, val in tokenized_inputs.items()}
         target_labels = tokenized_inputs["input_ids"].clone()
         target_labels[tokenized_inputs["attention_mask"] == 0] = -100
+        pdb.set_trace()
         with torch.no_grad():
             outputs = model(**tokenized_inputs, labels=target_labels.cuda(args.cuda))
         loss, logits = outputs[:2]
