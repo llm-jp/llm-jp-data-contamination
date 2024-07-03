@@ -103,6 +103,10 @@ def feature_collection(model, dataset, args, batch_size=8, upper_limit=500000):
         target_labels[tokenized_inputs["attention_mask"] == 0] = -100
         with torch.no_grad():
             outputs = model(**tokenized_inputs, labels=target_labels.cuda(args.cuda))
+            single_input_example = tokenizer(batch[0], return_tensors="pt", truncation=True, max_length=2048)
+            single_input_example = single_input_example.to(model.device)
+            single_output = model(single_input_example, labels=single_input_example)
+            single_loss, single_logits = single_output[:2]
         loss, logits = outputs[:2]
         log_probabilities = torch.nn.functional.log_softmax(logits, dim=-1)
         probs = torch.nn.functional.softmax(logits, dim=-1)
@@ -138,7 +142,7 @@ def feature_collection(model, dataset, args, batch_size=8, upper_limit=500000):
             #selected_probs = probs.gather(-1, valid_token_ids.unsqueeze(1))
             #selected_log_probs = valid_log_probs[np.arange(valid_token_ids.shape[0]), valid_token_ids]
             #selectd_probs = probs[np.arange(valid_token_ids.shape[0]), valid_token_ids]
-            #pdb.set_trace()
+            pdb.set_trace()
             mink_plus = min_prob_k_plus(probs, log_probs, selected_log_probs)
             mink = min_prob_k(selected_log_probs)
             # 计算 topk 概率
