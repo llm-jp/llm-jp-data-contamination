@@ -103,7 +103,7 @@ def feature_collection(model, dataset, args, batch_size=8, upper_limit=500000):
         target_labels[tokenized_inputs["attention_mask"] == 0] = -100
         with torch.no_grad():
             outputs = model(**tokenized_inputs, labels=target_labels.cuda(args.cuda))
-            single_input_example = tokenizer.encode(batch[0], return_tensors="pt")
+            single_input_example = torch.tensor(tokenizer.encode(batch[0])).unsqueeze(0)
             single_input_example = single_input_example.to(model.device)
             single_output = model(single_input_example, labels=single_input_example)
             single_loss, single_logits = single_output[:2]
@@ -119,7 +119,7 @@ def feature_collection(model, dataset, args, batch_size=8, upper_limit=500000):
         token_log_probs = log_probs.gather(dim=-1, index=input_ids).squeeze(-1)
         mu = (probs * log_probs).sum(-1)
         sigma = (probs * torch.square(log_probs)).sum(-1) - torch.square(mu)
-
+        mink_plus = (token_log_probs - mu) / sigma.sqrt()
         pdb.set_trace()
         # 初始化
         all_prob = []
