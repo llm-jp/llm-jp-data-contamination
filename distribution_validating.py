@@ -78,14 +78,14 @@ def min_prob_k(selected_log_probs):
 def min_prob_k_plus(probs, log_probs, selected_log_probs):
     pdb.set_trace()
     mu = (probs * log_probs).sum(-1)
-    sigma = (probs * torch.square(log_probs)).sum(-1) - torch.square(mu)
+    sigma = (probs * torch.square(log_probs.to(torch.bfloat16))).sum(-1) - torch.square(mu)
     mink_plus = (selected_log_probs - mu) / sigma.sqrt()
     k_length = int(len(mink_plus) * 0.2)
     topk = np.sort(mink_plus.cpu())[:k_length]
     min_k_plus = -np.mean(topk).item()
     return min_k_plus
 
-def feature_collection(model, dataset, args, batch_size=8, upper_limit=500000):
+def feature_collection(model, dataset, args, batch_size=8, upper_limit=5000):
     loss_collect = []
     mink_collect = []
     mink_plus_collect = []
@@ -103,23 +103,23 @@ def feature_collection(model, dataset, args, batch_size=8, upper_limit=500000):
         target_labels[tokenized_inputs["attention_mask"] == 0] = -100
         with torch.no_grad():
             outputs = model(**tokenized_inputs, labels=target_labels.cuda(args.cuda))
-            single_input_example = torch.tensor(tokenizer.encode(batch[0])).unsqueeze(0)
-            single_input_example = single_input_example.to(model.device)
-            single_output = model(single_input_example, labels=single_input_example)
-            single_loss, single_logits = single_output[:2]
-        # loss, logits = outputs[:2]
-        # log_probabilities = torch.nn.functional.log_softmax(logits, dim=-1)
-        # probs = torch.nn.functional.softmax(logits, dim=-1)
-        # batch_size = tokenized_inputs["input_ids"].shape[0]
-        # seq_length = tokenized_inputs["input_ids"].shape[1]
+            # single_input_example = torch.tensor(tokenizer.encode(batch[0])).unsqueeze(0)
+            # single_input_example = single_input_example.to(model.device)
+            # single_output = model(single_input_example, labels=single_input_example)
+            # single_loss, single_logits = single_output[:2]
+        loss, logits = outputs[:2]
+        log_probabilities = torch.nn.functional.log_softmax(logits, dim=-1)
+        probs = torch.nn.functional.softmax(logits, dim=-1)
+        batch_size = tokenized_inputs["input_ids"].shape[0]
+        seq_length = tokenized_inputs["input_ids"].shape[1]
 
-        input_ids = single_input_example[0][1:].unsqueeze(-1)
-        probs = torch.nn.functional.softmax(single_logits[0, :-1], dim=-1)
-        log_probs = F.log_softmax(single_logits[0, :-1], dim=-1)
-        token_log_probs = log_probs.gather(dim=-1, index=input_ids).squeeze(-1)
-        mu = (probs * log_probs).sum(-1)
-        sigma = (probs * torch.square(log_probs)).sum(-1) - torch.square(mu)
-        mink_plus = (token_log_probs - mu) / sigma.sqrt()
+        # input_ids = single_input_example[0][1:].unsqueeze(-1)
+        # probs = torch.nn.functional.softmax(single_logits[0, :-1], dim=-1)
+        # log_probs = F.log_softmax(single_logits[0, :-1], dim=-1)
+        # token_log_probs = log_probs.gather(dim=-1, index=input_ids).squeeze(-1)
+        # mu = (probs * log_probs).sum(-1)
+        # sigma = (probs * torch.square(log_probs.to(torch.bfloat16))).sum(-1) - torch.square(mu)
+        # mink_plus = (token_log_probs - mu) / sigma.sqrt()
         pdb.set_trace()
         # 初始化
         all_prob = []
@@ -168,7 +168,7 @@ def feature_collection(model, dataset, args, batch_size=8, upper_limit=500000):
             loss_collect.append(loss_i.item())
             if len(loss_collect) >= upper_limit:
                 break
-    return loss_collect, mink_collect, ppl_collect
+    return loss_collect, mink_collect, ppl_collect, mink_plus_collect
 
 def calculate_mean_var(dict, dataset_name):
     split_set = ["train", "valid", "test"]
@@ -253,42 +253,52 @@ if not skip_calculation:
     loss_dict = {}
     prob_dict = {}
     ppl_dict = {}
+    mink_plus_dict = {}
     loss_dict[args.dataset_name] = {"train": [], "valid": [], "test": []}
     prob_dict[args.dataset_name] = {"train": [], "valid": [], "test": []}
     ppl_dict[args.dataset_name] = {"train": [], "valid": [], "test": []}
+    mink_plus_dict[args.dataset_name] = {"train": [], "valid": [], "test": []}
     for split in ["train", "valid", "test"]:
         if split in ["test", "valid"]:
             dataset = torch.load(f"by_dataset/{split}_{args.dataset_name}.pt")
-            loss_list, prob_list, ppl_list = feature_collection(model, dataset, args, batch_size=args.batch_size)
+            loss_list, prob_list, ppl_list, mink_plus_list = feature_collection(model, dataset, args, batch_size=args.batch_size)
             loss_dict[args.dataset_name][split].extend(loss_list)
             prob_dict[args.dataset_name][split].extend(prob_list)
             ppl_dict[args.dataset_name][split].extend(ppl_list)
+            mink_plus_dict[args.dataset_name][split].extend(mink_plus_list)
         else:
             for i in range(1):
                 dataset = torch.load(f"by_dataset/{split}_{args.dataset_name}_{i}.pt")
-                loss_list, prob_list, ppl_list = feature_collection(model, dataset, args, batch_size=args.batch_size)
+                loss_list, prob_list, ppl_list, mink_plus_list = feature_collection(model, dataset, args, batch_size=args.batch_size)
                 loss_dict[args.dataset_name][split].extend(loss_list)
                 prob_dict[args.dataset_name][split].extend(prob_list)
                 ppl_dict[args.dataset_name][split].extend(ppl_list)
+                mink_plus_dict[args.dataset_name][split].extend(mink_plus_list)
     pickle.dump(loss_dict, open(f"feature_result/{args.dataset_name}_{args.model_size}_loss_dict.pkl", "wb"))
     pickle.dump(prob_dict, open(f"feature_result/{args.dataset_name}_{args.model_size}_prob_dict.pkl", "wb"))
     pickle.dump(ppl_dict, open(f"feature_result/{args.dataset_name}_{args.model_size}_ppl_dict.pkl", "wb"))
+    pickle.dump(mink_plus_dict, open(f"feature_result/{args.dataset_name}_{args.model_size}_mink_plus_dict.pkl", "wb"))
 loss_dict = pickle.load(open(f"feature_result/{args.dataset_name}_{args.model_size}_loss_dict.pkl", "rb"))
 prob_dict = pickle.load(open(f"feature_result/{args.dataset_name}_{args.model_size}_prob_dict.pkl", "rb"))
 ppl_dict = pickle.load(open(f"feature_result/{args.dataset_name}_{args.model_size}_ppl_dict.pkl", "rb"))
+mink_plus_dict = pickle.load(open(f"feature_result/{args.dataset_name}_{args.model_size}_mink_plus_dict.pkl", "rb"))
 figure_draw(loss_dict, "Loss", args)
 figure_draw(prob_dict, "Prob", args)
 figure_draw(ppl_dict, "PPL", args)
+figure_draw(mink_plus_dict, "Mink_plus", args)
 mix_distribution(loss_dict, args.dataset_name, "Loss", args)
 mix_distribution(prob_dict, args.dataset_name, "Prob", args)
 mix_distribution(ppl_dict, args.dataset_name, "PPL", args)
-for idx, dict in enumerate([loss_dict, prob_dict, ppl_dict]):
+mix_distribution(mink_plus_dict, args.dataset_name, "Mink_plus", args)
+for idx, dict in enumerate([loss_dict, prob_dict, ppl_dict, mink_plus_dict]):
     if idx == 0:
         print("Loss Distribution Similarity Matrix")
     elif idx == 1:
         print("Prob Distribution Similarity Matrix")
-    else:
+    elif idx == 2:
         print("PPL Distribution Similarity Matrix")
+    else:
+        print("Mink_plus Distribution Similarity Matrix")
     calculate_mean_var(dict, args.dataset_name)
     js_matrix = js_divergence(dict, args.dataset_name)
     print(js_matrix)
