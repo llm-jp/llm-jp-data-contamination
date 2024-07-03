@@ -128,6 +128,7 @@ def feature_collection(model, dataset, args, batch_size=8, upper_limit=500000):
             attention_mask_processed = tokenized_inputs["attention_mask"][idx]
             log_probs = log_probabilities[idx]  # 形状为 (seq_length, vocab_size)
             probs = probs[idx]
+            pdb.set_trace()
             # 使用 attention_mask 筛选有效的 token
             valid_log_probs = log_probs[attention_mask_processed == 1]
             valid_token_ids = input_ids_processed[attention_mask_processed == 1]
