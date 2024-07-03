@@ -106,7 +106,7 @@ def feature_collection(model, dataset, args, batch_size=8, upper_limit=500000):
             single_input_example = tokenizer(batch[0], return_tensors="pt", truncation=True, max_length=2048)
             single_input_example = single_input_example.to(model.device)
             pdb.set_trace()
-            single_output = model(single_input_example, labels=single_input_example)
+            single_output = model(**single_input_example, labels=single_input_example["input_ids"])
             single_loss, single_logits = single_output[:2]
         loss, logits = outputs[:2]
         log_probabilities = torch.nn.functional.log_softmax(logits, dim=-1)
