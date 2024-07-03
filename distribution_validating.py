@@ -91,6 +91,7 @@ def feature_collection(model, dataset, args, batch_size=8, upper_limit=500000):
     ppl_collect = []
     zlib_collect = []
     for batch in tqdm(batched_data(dataset, batch_size=batch_size)):
+        pdb.set_trace()
         tokenized_inputs = tokenizer([item for item in batch],
                                      return_tensors="pt",
                                      truncation=True,
@@ -128,7 +129,6 @@ def feature_collection(model, dataset, args, batch_size=8, upper_limit=500000):
             attention_mask_processed = tokenized_inputs["attention_mask"][idx]
             log_probs = log_probabilities[idx]  # 形状为 (seq_length, vocab_size)
             probs = probs[idx]
-            pdb.set_trace()
             # 使用 attention_mask 筛选有效的 token
             valid_log_probs = log_probs[attention_mask_processed == 1]
             valid_token_ids = input_ids_processed[attention_mask_processed == 1]
@@ -207,9 +207,10 @@ def ks_hypothesis(dict, dataset_name):
 parser = argparse.ArgumentParser()
 parser.add_argument("--batch_size", type=int, default=8)
 parser.add_argument("--model_size", type=str, default="160m")
-parser.add_argument("--dataset_name", type=str, default="ArXiv", choices=["ArXiv", "DM Mathematics", "Enron Emails", "EuroParl", "FreeLaw", "Github", "Gutenberg (PG-19)",
-                "HackerNews", "NIH ExPorter", "PhilPapers", "Pile-CC", "PubMed Abstracts", "PubMed Central", "StackExchange",
-                "Ubuntu IRC", "USPTO Backgrounds", "Wikipedia (en)"])
+parser.add_argument("--dataset_name", type=str, default="ArXiv", choices=["ArXiv", "DM Mathematics", "Enron Emails",
+                "EuroParl", "FreeLaw", "Github", "Gutenberg (PG-19)", "HackerNews", "NIH ExPorter", "PhilPapers",
+                "Pile-CC", "PubMed Abstracts", "PubMed Central", "StackExchange","Ubuntu IRC",
+                "USPTO Backgrounds", "Wikipedia (en)"])
 parser.add_argument("--cuda", type=int, default=0, help="cuda device")
 parser.add_argument("--skip_calculation", type=str, default="True")
 args = parser.parse_args()
