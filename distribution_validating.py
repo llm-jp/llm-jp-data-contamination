@@ -89,7 +89,7 @@ def min_prob_k_plus(probs, log_probs, selected_log_probs):
     #     pdb.set_trace()
     return min_k_plus
 
-def feature_collection(model, dataset, args, batch_size=8, upper_limit=10000):
+def feature_collection(model, dataset, args, batch_size=8, upper_limit=100000):
     loss_collect = []
     mink_collect = []
     mink_plus_collect = []
