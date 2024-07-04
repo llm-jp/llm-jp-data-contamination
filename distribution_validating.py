@@ -67,7 +67,7 @@ def figure_draw(data_dict, title, args):
         ax.set_ylabel('Percentage')
         ax.legend()
     plt.tight_layout()
-    plt.savefig(f"{title}_histograms_{args.model_size}.png")
+    plt.savefig(f"{title}_histograms_{args.model_size}_{args.dataset_name}.png")
     plt.show()
 
 
