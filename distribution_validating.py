@@ -129,8 +129,8 @@ def feature_collection(model, dataset, args, batch_size=8, upper_limit=10000):
         all_prob = []
         # 获取每个样本的概率
         for idx in range(batch_size):
-            logits_i = logits[i].unsqueeze(0)  # Shape (1, seq_length, vocab_size)
-            target_i = target_labels[i].unsqueeze(0)  # Shape (1, seq_length)
+            logits_i = logits[idx].unsqueeze(0)  # Shape (1, seq_length, vocab_size)
+            target_i = target_labels[idx].unsqueeze(0)  # Shape (1, seq_length)
             shift_logits = logits_i[:, :-1, :].contiguous()
             shift_labels = target_i[:, 1:].contiguous()
             # 计算交叉熵损失并移除填充 token 贡献
