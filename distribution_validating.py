@@ -261,16 +261,16 @@ if not skip_calculation:
     prob_dict[args.dataset_name] = {"train": [], "valid": [], "test": []}
     ppl_dict[args.dataset_name] = {"train": [], "valid": [], "test": []}
     mink_plus_dict[args.dataset_name] = {"train": [], "valid": [], "test": []}
-    zlib = {"train": [], "valid": [], "test": []}
+    zlib_dict = {"train": [], "valid": [], "test": []}
     for split in ["train", "valid", "test"]:
         if split in ["test", "valid"]:
             dataset = torch.load(f"by_dataset/{split}_{args.dataset_name}.pt")
-            loss_list, prob_list, ppl_list, mink_plus_list, zlib_lis = feature_collection(model, dataset, args, batch_size=args.batch_size)
+            loss_list, prob_list, ppl_list, mink_plus_list, zlib_list = feature_collection(model, dataset, args, batch_size=args.batch_size)
             loss_dict[args.dataset_name][split].extend(loss_list)
             prob_dict[args.dataset_name][split].extend(prob_list)
             ppl_dict[args.dataset_name][split].extend(ppl_list)
             mink_plus_dict[args.dataset_name][split].extend(mink_plus_list)
-            zlib[args.dataset_name][split].extend(zlib_lis)
+            zlib_dict[args.dataset_name][split].extend(zlib_list)
         else:
             for i in range(1):
                 dataset = torch.load(f"by_dataset/{split}_{args.dataset_name}_{i}.pt")
@@ -279,12 +279,12 @@ if not skip_calculation:
                 prob_dict[args.dataset_name][split].extend(prob_list)
                 ppl_dict[args.dataset_name][split].extend(ppl_list)
                 mink_plus_dict[args.dataset_name][split].extend(mink_plus_list)
-                zlib[args.dataset_name][split].extend(zlib_list)
+                zlib_dict[args.dataset_name][split].extend(zlib_list)
     pickle.dump(loss_dict, open(f"feature_result/{args.dataset_name}_{args.model_size}_loss_dict.pkl", "wb"))
     pickle.dump(prob_dict, open(f"feature_result/{args.dataset_name}_{args.model_size}_prob_dict.pkl", "wb"))
     pickle.dump(ppl_dict, open(f"feature_result/{args.dataset_name}_{args.model_size}_ppl_dict.pkl", "wb"))
     pickle.dump(mink_plus_dict, open(f"feature_result/{args.dataset_name}_{args.model_size}_mink_plus_dict.pkl", "wb"))
-    pickle.dump(zlib, open(f"feature_result/{args.dataset_name}_{args.model_size}_zlib_dict.pkl", "wb"))
+    pickle.dump(zlib_dict, open(f"feature_result/{args.dataset_name}_{args.model_size}_zlib_dict.pkl", "wb"))
 loss_dict = pickle.load(open(f"feature_result/{args.dataset_name}_{args.model_size}_loss_dict.pkl", "rb"))
 prob_dict = pickle.load(open(f"feature_result/{args.dataset_name}_{args.model_size}_prob_dict.pkl", "rb"))
 ppl_dict = pickle.load(open(f"feature_result/{args.dataset_name}_{args.model_size}_ppl_dict.pkl", "rb"))
