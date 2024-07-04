@@ -270,7 +270,7 @@ if not skip_calculation:
             dataset = load_dataset("swj0419/WikiMIA", split=f"WikiMIA_length{text_len}")
             member_data = dataset.filter(lambda example: example['label'] == 1)
             non_member_data = dataset.filter(lambda example: example['label'] == 0)
-            if len == 32:
+            if text_len == 32:
                 mia_dataset = DatasetDict({
                     'train': member_data["input"],
                     'test': non_member_data["input"],
