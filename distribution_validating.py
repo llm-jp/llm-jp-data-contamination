@@ -12,6 +12,7 @@ from scipy.stats import entropy, wasserstein_distance, ks_2samp, kurtosis
 import argparse
 import random
 import seaborn as sns
+import zlib
 
 def batched_data(dataset, batch_size):
     data_iter = iter(dataset)
@@ -92,7 +93,8 @@ def feature_collection(model, dataset, args, batch_size=8, upper_limit=50000):
     ppl_collect = []
     zlib_collect = []
     for batch in tqdm(batched_data(dataset, batch_size=batch_size)):
-        tokenized_inputs = tokenizer([item for item in batch],
+        batched_text = [item for item in batch]
+        tokenized_inputs = tokenizer(batched_text,
                                      return_tensors="pt",
                                      truncation=True,
                                      padding=True,
@@ -165,9 +167,10 @@ def feature_collection(model, dataset, args, batch_size=8, upper_limit=50000):
             mink_plus_collect.append(mink_plus)
             ppl_collect.append(ppl)
             loss_collect.append(loss_i.item())
+            zlib_collect.append(loss_i//len(zlib.compress(bytes(batched_text[idx], "utf-8"))))
             if len(loss_collect) >= upper_limit:
                 break
-    return loss_collect, mink_collect, ppl_collect, mink_plus_collect
+    return loss_collect, mink_collect, ppl_collect, mink_plus_collect, zlib_collect
 
 def calculate_mean_var(dict, dataset_name):
     split_set = ["train", "valid", "test"]
@@ -253,51 +256,61 @@ if not skip_calculation:
     prob_dict = {}
     ppl_dict = {}
     mink_plus_dict = {}
+    zlib_dict = {}
     loss_dict[args.dataset_name] = {"train": [], "valid": [], "test": []}
     prob_dict[args.dataset_name] = {"train": [], "valid": [], "test": []}
     ppl_dict[args.dataset_name] = {"train": [], "valid": [], "test": []}
     mink_plus_dict[args.dataset_name] = {"train": [], "valid": [], "test": []}
+    zlib = {"train": [], "valid": [], "test": []}
     for split in ["train", "valid", "test"]:
         if split in ["test", "valid"]:
             dataset = torch.load(f"by_dataset/{split}_{args.dataset_name}.pt")
-            loss_list, prob_list, ppl_list, mink_plus_list = feature_collection(model, dataset, args, batch_size=args.batch_size)
+            loss_list, prob_list, ppl_list, mink_plus_list, zlib_lis = feature_collection(model, dataset, args, batch_size=args.batch_size)
             loss_dict[args.dataset_name][split].extend(loss_list)
             prob_dict[args.dataset_name][split].extend(prob_list)
             ppl_dict[args.dataset_name][split].extend(ppl_list)
             mink_plus_dict[args.dataset_name][split].extend(mink_plus_list)
+            zlib[args.dataset_name][split].extend(zlib_lis)
         else:
             for i in range(1):
                 dataset = torch.load(f"by_dataset/{split}_{args.dataset_name}_{i}.pt")
-                loss_list, prob_list, ppl_list, mink_plus_list = feature_collection(model, dataset, args, batch_size=args.batch_size)
+                loss_list, prob_list, ppl_list, mink_plus_list, zlib_list = feature_collection(model, dataset, args, batch_size=args.batch_size)
                 loss_dict[args.dataset_name][split].extend(loss_list)
                 prob_dict[args.dataset_name][split].extend(prob_list)
                 ppl_dict[args.dataset_name][split].extend(ppl_list)
                 mink_plus_dict[args.dataset_name][split].extend(mink_plus_list)
+                zlib[args.dataset_name][split].extend(zlib_list)
     pickle.dump(loss_dict, open(f"feature_result/{args.dataset_name}_{args.model_size}_loss_dict.pkl", "wb"))
     pickle.dump(prob_dict, open(f"feature_result/{args.dataset_name}_{args.model_size}_prob_dict.pkl", "wb"))
     pickle.dump(ppl_dict, open(f"feature_result/{args.dataset_name}_{args.model_size}_ppl_dict.pkl", "wb"))
     pickle.dump(mink_plus_dict, open(f"feature_result/{args.dataset_name}_{args.model_size}_mink_plus_dict.pkl", "wb"))
+    pickle.dump(zlib, open(f"feature_result/{args.dataset_name}_{args.model_size}_zlib_dict.pkl", "wb"))
 loss_dict = pickle.load(open(f"feature_result/{args.dataset_name}_{args.model_size}_loss_dict.pkl", "rb"))
 prob_dict = pickle.load(open(f"feature_result/{args.dataset_name}_{args.model_size}_prob_dict.pkl", "rb"))
 ppl_dict = pickle.load(open(f"feature_result/{args.dataset_name}_{args.model_size}_ppl_dict.pkl", "rb"))
 mink_plus_dict = pickle.load(open(f"feature_result/{args.dataset_name}_{args.model_size}_mink_plus_dict.pkl", "rb"))
+zlib_dict = pickle.load(open(f"feature_result/{args.dataset_name}_{args.model_size}_zlib_dict.pkl", "rb"))
 figure_draw(loss_dict, "Loss", args)
 figure_draw(prob_dict, "Prob", args)
 figure_draw(ppl_dict, "PPL", args)
 figure_draw(mink_plus_dict, "Mink_plus", args)
+figure_draw(zlib_dict, "Zlib", args)
 mix_distribution(loss_dict, args.dataset_name, "Loss", args)
 mix_distribution(prob_dict, args.dataset_name, "Prob", args)
 mix_distribution(ppl_dict, args.dataset_name, "PPL", args)
 mix_distribution(mink_plus_dict, args.dataset_name, "Mink_plus", args)
-for idx, dict in enumerate([loss_dict, prob_dict, ppl_dict, mink_plus_dict]):
+mix_distribution(zlib_dict, args.dataset_name, "Zlib", args)
+for idx, dict in enumerate([loss_dict, prob_dict, ppl_dict, mink_plus_dict, zlib_dict]):
     if idx == 0:
         print("Loss Distribution Similarity Matrix")
     elif idx == 1:
         print("Prob Distribution Similarity Matrix")
     elif idx == 2:
         print("PPL Distribution Similarity Matrix")
-    else:
+    elif idx == 3:
         print("Mink_plus Distribution Similarity Matrix")
+    else:
+        print("Zlib Distribution Similarity Matrix")
     calculate_mean_var(dict, args.dataset_name)
     js_matrix = js_divergence(dict, args.dataset_name)
     print(js_matrix)
