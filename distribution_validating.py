@@ -277,9 +277,9 @@ if not skip_calculation:
                     'valid': non_member_data["input"]
                 })
             else:
-                mia_dataset["train"] = dataset["train"].concatenate(member_data["input"])
-                mia_dataset["test"] = dataset["test"].concatenate(non_member_data["input"])
-                mia_dataset["valid"] = dataset["valid"].concatenate(non_member_data["input"])
+                mia_dataset["train"] = mia_dataset["train"].concatenate(member_data["input"])
+                mia_dataset["test"] = mia_dataset["test"].concatenate(non_member_data["input"])
+                mia_dataset["valid"] = mia_dataset["valid"].concatenate(non_member_data["input"])
     for split in ["train", "valid", "test"]:
         if split in ["test", "valid"]:
             if args.dataset_name == "WikiMIA":
