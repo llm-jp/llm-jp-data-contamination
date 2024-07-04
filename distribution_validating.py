@@ -277,9 +277,9 @@ if not skip_calculation:
                     'valid': non_member_data["input"]
                 })
             else:
-                mia_dataset["train"] = mia_dataset["train"].extend(member_data["input"])
-                mia_dataset["test"] = mia_dataset["test"].extend(non_member_data["input"])
-                mia_dataset["valid"] = mia_dataset["valid"].extend(non_member_data["input"])
+                mia_dataset["train"].extend(member_data["input"])
+                mia_dataset["test"].extend(non_member_data["input"])
+                mia_dataset["valid"].extend(non_member_data["input"])
     for split in ["train", "valid", "test"]:
         if split in ["test", "valid"]:
             if args.dataset_name == "WikiMIA":
