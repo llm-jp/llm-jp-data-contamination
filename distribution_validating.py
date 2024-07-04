@@ -261,7 +261,7 @@ if not skip_calculation:
     prob_dict[args.dataset_name] = {"train": [], "valid": [], "test": []}
     ppl_dict[args.dataset_name] = {"train": [], "valid": [], "test": []}
     mink_plus_dict[args.dataset_name] = {"train": [], "valid": [], "test": []}
-    zlib_dict = {"train": [], "valid": [], "test": []}
+    zlib_dict[args.dataset_name] = {"train": [], "valid": [], "test": []}
     for split in ["train", "valid", "test"]:
         if split in ["test", "valid"]:
             dataset = torch.load(f"by_dataset/{split}_{args.dataset_name}.pt")
