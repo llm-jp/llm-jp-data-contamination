@@ -13,6 +13,7 @@ import argparse
 import random
 import seaborn as sns
 import zlib
+from datasets import DatasetDict
 
 def batched_data(dataset, batch_size):
     data_iter = iter(dataset)
@@ -231,7 +232,7 @@ parser.add_argument("--model_size", type=str, default="160m")
 parser.add_argument("--dataset_name", type=str, default="Pile-CC", choices=["ArXiv", "DM Mathematics", "Enron Emails",
                 "EuroParl", "FreeLaw", "Github", "Gutenberg (PG-19)", "HackerNews", "NIH ExPorter", "PhilPapers",
                 "Pile-CC", "PubMed Abstracts", "PubMed Central", "StackExchange","Ubuntu IRC",
-                "USPTO Backgrounds", "Wikipedia (en)"])
+                "USPTO Backgrounds", "Wikipedia (en)", "WikiMIA"])
 parser.add_argument("--cuda", type=int, default=0, help="cuda device")
 parser.add_argument("--skip_calculation", type=str, default="True")
 args = parser.parse_args()
@@ -264,24 +265,39 @@ if not skip_calculation:
     ppl_dict[args.dataset_name] = {"train": [], "valid": [], "test": []}
     mink_plus_dict[args.dataset_name] = {"train": [], "valid": [], "test": []}
     zlib_dict[args.dataset_name] = {"train": [], "valid": [], "test": []}
+    if args.dataset_name == "WikiMIA":
+        for len in [32, 64, 128, 256]:
+            dataset = load_dataset("swj0419/WikiMIA", split=f"WikiMIA_length{len}")
+            member_data = dataset.filter(lambda example: example['label'] == 1)
+            non_member_data = dataset.filter(lambda example: example['label'] == 0)
+            if len == 32:
+                mia_dataset = DatasetDict({
+                    'train': member_data["input"],
+                    'test': non_member_data["input"],
+                    'valid': non_member_data["input"]
+                })
+            else:
+                mia_dataset["train"] = dataset["train"].concatenate(member_data["input"])
+                mia_dataset["test"] = dataset["test"].concatenate(non_member_data["input"])
+                mia_dataset["valid"] = dataset["valid"].concatenate(non_member_data["input"])
     for split in ["train", "valid", "test"]:
         if split in ["test", "valid"]:
-            dataset = torch.load(f"by_dataset/{split}_{args.dataset_name}.pt")
-            loss_list, prob_list, ppl_list, mink_plus_list, zlib_list = feature_collection(model, dataset, args, batch_size=args.batch_size)
-            loss_dict[args.dataset_name][split].extend(loss_list)
-            prob_dict[args.dataset_name][split].extend(prob_list)
-            ppl_dict[args.dataset_name][split].extend(ppl_list)
-            mink_plus_dict[args.dataset_name][split].extend(mink_plus_list)
-            zlib_dict[args.dataset_name][split].extend(zlib_list)
+            if args.dataset_name == "WikiMIA":
+                dataset = mia_dataset[split]
+            else:
+                dataset = torch.load(f"by_dataset/{split}_{args.dataset_name}.pt")
         else:
-            for i in range(1):
-                dataset = torch.load(f"by_dataset/{split}_{args.dataset_name}_{i}.pt")
-                loss_list, prob_list, ppl_list, mink_plus_list, zlib_list = feature_collection(model, dataset, args, batch_size=args.batch_size)
-                loss_dict[args.dataset_name][split].extend(loss_list)
-                prob_dict[args.dataset_name][split].extend(prob_list)
-                ppl_dict[args.dataset_name][split].extend(ppl_list)
-                mink_plus_dict[args.dataset_name][split].extend(mink_plus_list)
-                zlib_dict[args.dataset_name][split].extend(zlib_list)
+            if args.dataset_name == "WikiMIA":
+                dataset = mia_dataset[split]
+            else:
+                for i in range(1):
+                    dataset = torch.load(f"by_dataset/{split}_{args.dataset_name}_{i}.pt")
+        loss_list, prob_list, ppl_list, mink_plus_list, zlib_list = feature_collection(model, dataset, args, batch_size=args.batch_size)
+        loss_dict[args.dataset_name][split].extend(loss_list)
+        prob_dict[args.dataset_name][split].extend(prob_list)
+        ppl_dict[args.dataset_name][split].extend(ppl_list)
+        mink_plus_dict[args.dataset_name][split].extend(mink_plus_list)
+        zlib_dict[args.dataset_name][split].extend(zlib_list)
     pickle.dump(loss_dict, open(f"feature_result/{args.dataset_name}_{args.model_size}_loss_dict.pkl", "wb"))
     pickle.dump(prob_dict, open(f"feature_result/{args.dataset_name}_{args.model_size}_prob_dict.pkl", "wb"))
     pickle.dump(ppl_dict, open(f"feature_result/{args.dataset_name}_{args.model_size}_ppl_dict.pkl", "wb"))
