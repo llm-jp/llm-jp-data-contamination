@@ -109,7 +109,7 @@ def feature_collection(model, dataset, args, batch_size=8, upper_limit=50000):
             # single_loss, single_logits = single_output[:2]
         loss, logits = outputs[:2]
         log_probabilities = torch.nn.functional.log_softmax(logits, dim=-1)
-        probs = torch.nn.functional.softmax(logits, dim=-1)
+        probabilities = torch.nn.functional.softmax(logits, dim=-1)
         batch_size = tokenized_inputs["input_ids"].shape[0]
         seq_length = tokenized_inputs["input_ids"].shape[1]
 
@@ -141,7 +141,7 @@ def feature_collection(model, dataset, args, batch_size=8, upper_limit=50000):
             input_ids_processed = tokenized_inputs["input_ids"][idx]
             attention_mask_processed = tokenized_inputs["attention_mask"][idx]
             log_probs = log_probabilities[idx]  # 形状为 (seq_length, vocab_size)
-            probs = probs[idx]
+            probs = probabilities[idx]
             # 使用 attention_mask 筛选有效的 token
             valid_log_probs = log_probs[attention_mask_processed == 1]
             valid_token_ids = input_ids_processed[attention_mask_processed == 1]
