@@ -266,8 +266,8 @@ if not skip_calculation:
     mink_plus_dict[args.dataset_name] = {"train": [], "valid": [], "test": []}
     zlib_dict[args.dataset_name] = {"train": [], "valid": [], "test": []}
     if args.dataset_name == "WikiMIA":
-        for len in [32, 64, 128, 256]:
-            dataset = load_dataset("swj0419/WikiMIA", split=f"WikiMIA_length{len}")
+        for text_len in [32, 64, 128, 256]:
+            dataset = load_dataset("swj0419/WikiMIA", split=f"WikiMIA_length{text_len}")
             member_data = dataset.filter(lambda example: example['label'] == 1)
             non_member_data = dataset.filter(lambda example: example['label'] == 0)
             if len == 32:
@@ -277,9 +277,9 @@ if not skip_calculation:
                     'valid': non_member_data["input"]
                 })
             else:
-                mia_dataset["train"] = mia_dataset["train"].concatenate(member_data["input"])
-                mia_dataset["test"] = mia_dataset["test"].concatenate(non_member_data["input"])
-                mia_dataset["valid"] = mia_dataset["valid"].concatenate(non_member_data["input"])
+                mia_dataset["train"] = mia_dataset["train"].extend(member_data["input"])
+                mia_dataset["test"] = mia_dataset["test"].extend(non_member_data["input"])
+                mia_dataset["valid"] = mia_dataset["valid"].extend(non_member_data["input"])
     for split in ["train", "valid", "test"]:
         if split in ["test", "valid"]:
             if args.dataset_name == "WikiMIA":
