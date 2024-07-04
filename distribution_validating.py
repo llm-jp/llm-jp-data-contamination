@@ -78,14 +78,14 @@ def min_prob_k(selected_log_probs):
 
 def min_prob_k_plus(probs, log_probs, selected_log_probs):
     #pdb.set_trace()
-    mu = (probs * log_probs).sum(-1)
-    sigma = (probs * torch.square(log_probs.to(torch.bfloat16))).sum(-1) - torch.square(mu)
-    mink_plus = (selected_log_probs - mu) / sigma.sqrt()
+    mu = (probs * log_probs).to(torch.bfloat16).sum(-1)
+    sigma = (probs.to(torch.bfloat16) * torch.square(log_probs.to(torch.bfloat16))).sum(-1) - torch.square(mu).to(torch.bfloat16)
+    mink_plus = (selected_log_probs - mu) / (sigma.sqrt()+1e-9)
     k_length = int(len(mink_plus) * 0.2)
-    topk = np.sort(mink_plus.cpu())[:k_length]
+    topk = torch.sort(mink_plus.cpu())[:k_length]
     min_k_plus = -np.mean(topk).item()
-    if np.isnan(min_k_plus) or np.isinf(min_k_plus):
-        pdb.set_trace()
+    # if np.isnan(min_k_plus) or np.isinf(min_k_plus):
+    #     pdb.set_trace()
     return min_k_plus
 
 def feature_collection(model, dataset, args, batch_size=8, upper_limit=10000):
