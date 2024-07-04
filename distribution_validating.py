@@ -312,12 +312,12 @@ figure_draw(loss_dict, "Loss", args)
 figure_draw(prob_dict, "Prob", args)
 figure_draw(ppl_dict, "PPL", args)
 figure_draw(mink_plus_dict, "Mink_plus", args)
-figure_draw(zlib_dict, "Zlib", args)
+#figure_draw(zlib_dict, "Zlib", args)
 mix_distribution(loss_dict, args.dataset_name, "Loss", args)
 mix_distribution(prob_dict, args.dataset_name, "Prob", args)
 mix_distribution(ppl_dict, args.dataset_name, "PPL", args)
 mix_distribution(mink_plus_dict, args.dataset_name, "Mink_plus", args)
-mix_distribution(zlib_dict, args.dataset_name, "Zlib", args)
+#mix_distribution(zlib_dict, args.dataset_name, "Zlib", args)
 for idx, dict in enumerate([loss_dict, prob_dict, ppl_dict, mink_plus_dict, zlib_dict]):
     if idx == 0:
         print("Loss Distribution Similarity Matrix")
@@ -328,6 +328,7 @@ for idx, dict in enumerate([loss_dict, prob_dict, ppl_dict, mink_plus_dict, zlib
     elif idx == 3:
         print("Mink_plus Distribution Similarity Matrix")
     else:
+        continue
         print("Zlib Distribution Similarity Matrix")
     calculate_mean_var(dict, args.dataset_name)
     js_matrix = js_divergence(dict, args.dataset_name)
