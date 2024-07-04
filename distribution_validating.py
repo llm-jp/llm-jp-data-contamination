@@ -86,7 +86,7 @@ def min_prob_k_plus(probs, log_probs, selected_log_probs):
     min_k_plus = -np.mean(topk).item()
     return min_k_plus
 
-def feature_collection(model, dataset, args, batch_size=8, upper_limit=50000):
+def feature_collection(model, dataset, args, batch_size=8, upper_limit=30000):
     loss_collect = []
     mink_collect = []
     mink_plus_collect = []
@@ -168,8 +168,8 @@ def feature_collection(model, dataset, args, batch_size=8, upper_limit=50000):
             ppl_collect.append(ppl)
             loss_collect.append(loss_i.item())
             zlib_collect.append(loss_i//len(zlib.compress(bytes(batched_text[idx], "utf-8"))))
-            if len(loss_collect) >= upper_limit:
-                break
+        if len(loss_collect) >= upper_limit:
+            break
     return loss_collect, mink_collect, ppl_collect, mink_plus_collect, zlib_collect
 
 def calculate_mean_var(dict, dataset_name):
