@@ -326,11 +326,13 @@ if not skip_calculation:
     ppl_dict = {}
     mink_plus_dict = {}
     zlib_dict = {}
+    refer_dict = {}
     loss_dict[args.dataset_name] = {"train": [], "valid": [], "test": []}
     prob_dict[args.dataset_name] = {"train": [], "valid": [], "test": []}
     ppl_dict[args.dataset_name] = {"train": [], "valid": [], "test": []}
     mink_plus_dict[args.dataset_name] = {"train": [], "valid": [], "test": []}
     zlib_dict[args.dataset_name] = {"train": [], "valid": [], "test": []}
+    refer_dict[args.dataset_name] = {"train": [], "valid": [], "test": []}
     if args.dataset_name == "WikiMIA":
         for text_len in [32, 64, 128, 256]:
             dataset = load_dataset("swj0419/WikiMIA", split=f"WikiMIA_length{text_len}")
@@ -368,11 +370,13 @@ if not skip_calculation:
         ppl_dict[args.dataset_name][split].extend(ppl_list)
         mink_plus_dict[args.dataset_name][split].extend(mink_plus_list)
         zlib_dict[args.dataset_name][split].extend(zlib_list)
+        refer_dict[args.dataset_name][split].extend(refer_list)
     pickle.dump(loss_dict, open(f"feature_result/{args.dataset_name}_{args.model_size}_loss_dict.pkl", "wb"))
     pickle.dump(prob_dict, open(f"feature_result/{args.dataset_name}_{args.model_size}_prob_dict.pkl", "wb"))
     pickle.dump(ppl_dict, open(f"feature_result/{args.dataset_name}_{args.model_size}_ppl_dict.pkl", "wb"))
     pickle.dump(mink_plus_dict, open(f"feature_result/{args.dataset_name}_{args.model_size}_mink_plus_dict.pkl", "wb"))
     pickle.dump(zlib_dict, open(f"feature_result/{args.dataset_name}_{args.model_size}_zlib_dict.pkl", "wb"))
+    pickle.dump(refer_dict, open(f"feature_result/{args.dataset_name}_{args.model_size}_refer_dict.pkl", "wb"))
 loss_dict = pickle.load(open(f"feature_result/{args.dataset_name}_{args.model_size}_loss_dict.pkl", "rb"))
 prob_dict = pickle.load(open(f"feature_result/{args.dataset_name}_{args.model_size}_prob_dict.pkl", "rb"))
 ppl_dict = pickle.load(open(f"feature_result/{args.dataset_name}_{args.model_size}_ppl_dict.pkl", "rb"))
