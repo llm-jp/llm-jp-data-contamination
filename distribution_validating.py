@@ -309,13 +309,13 @@ if not skip_calculation:
             if args.dataset_name == "WikiMIA":
                 dataset = mia_dataset[split]
             else:
-                dataset = torch.load(f"by_dataset/{split}_{args.dataset_name}.pt")
+                dataset = torch.load(f"/model/pile/by_dataset/{split}_{args.dataset_name}.pt")
         else:
             if args.dataset_name == "WikiMIA":
                 dataset = mia_dataset[split]
             else:
                 for i in range(1):
-                    dataset = torch.load(f"by_dataset/{split}_{args.dataset_name}_{i}.pt")
+                    dataset = torch.load(f"/model/pile/by_dataset/{split}_{args.dataset_name}_{i}.pt")
         loss_list, prob_list, ppl_list, mink_plus_list, zlib_list, refer_list = feature_collection(model, tokenizer, dataset, args,
                                                                                        batch_size=args.batch_size,
                                                                                        upper_limit=args.samples,
