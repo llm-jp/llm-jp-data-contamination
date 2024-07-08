@@ -415,5 +415,6 @@ for idx, dict in enumerate([loss_dict, prob_dict, ppl_dict, mink_plus_dict, zlib
     ks_matrix = ks_hypothesis(dict, args.dataset_name)
     print(ks_matrix)
     f.write(str(ks_matrix) + '\n')
+f.close()
 
 
