@@ -144,21 +144,6 @@ def feature_collection(model, tokenizer, dataset, args, batch_size=8, upper_limi
         outputs,tokenized_inputs, target_labels = caculate_outputs(model, tokenizer, batched_text)
         if refer_model is not None:
             refer_outputs, refer_target_labels = caculate_outputs(refer_model, refer_tokenizer, batched_text)
-        # tokenized_inputs = tokenizer(batched_text,
-        #                              return_tensors="pt",
-        #                              truncation=True,
-        #                              padding=True,
-        #                              max_length=2048,
-        #                             )
-        # tokenized_inputs = {key: val.cuda(args.cuda) for key, val in tokenized_inputs.items()}
-        # target_labels = tokenized_inputs["input_ids"].clone()
-        # target_labels[tokenized_inputs["attention_mask"] == 0] = -100
-        # with torch.no_grad():
-        #     outputs = model(**tokenized_inputs, labels=target_labels.cuda(args.cuda))
-        #     # single_input_example = torch.tensor(tokenizer.encode(batch[0])).unsqueeze(0)
-        #     # single_input_example = single_input_example.to(model.device)
-        #     # single_output = model(single_input_example, labels=single_input_example)
-        #     # single_loss, single_logits = single_output[:2]
         loss, logits = outputs[:2]
         log_probabilities = torch.nn.functional.log_softmax(logits, dim=-1)
         probabilities = torch.nn.functional.softmax(logits, dim=-1)
@@ -166,32 +151,10 @@ def feature_collection(model, tokenizer, dataset, args, batch_size=8, upper_limi
             ref_loss, ref_logits = refer_outputs[:2]
             ref_log_probabilities = torch.nn.functional.log_softmax(ref_logits, dim=-1)
             ref_probabilities = torch.nn.functional.softmax(ref_logits, dim=-1)
-
-
-        # input_ids = single_input_example[0][1:].unsqueeze(-1)
-        # probs = torch.nn.functional.softmax(single_logits[0, :-1], dim=-1)
-        # log_probs = F.log_softmax(single_logits[0, :-1], dim=-1)
-        # token_log_probs = log_probs.gather(dim=-1, index=input_ids).squeeze(-1)
-        # mu = (probs * log_probs).sum(-1)
-        # sigma = (probs * torch.square(log_probs.to(torch.bfloat16))).sum(-1) - torch.square(mu)
-        # mink_plus = (token_log_probs - mu) / sigma.sqrt()
         # 初始化
         all_prob = []
         # 获取每个样本的概率
         for idx in range(batch_size):
-            # logits_i = logits[idx].unsqueeze(0)  # Shape (1, seq_length, vocab_size)
-            # target_i = target_labels[idx].unsqueeze(0)  # Shape (1, seq_length)
-            # shift_logits = logits_i[:, :-1, :].contiguous()
-            # shift_labels = target_i[:, 1:].contiguous()
-            # # 计算交叉熵损失并移除填充 token 贡献
-            # loss_i = F.cross_entropy(shift_logits.view(-1, shift_logits.size(-1)), shift_labels.view(-1),
-            #                          )
-            # # Create a mask to ignore the loss from padding tokens
-            # valid_mask = shift_labels != -100
-            # # 只有有效的 token 计算损失
-            # loss_i = loss_i * valid_mask.view(-1)
-            # # 计算每个样本的平均损失
-            # loss_i = loss_i.sum() / valid_mask.sum()
             loss_i = caculate_loss_instance(idx, logits, target_labels)
             if refer_model is not None:
                 ref_loss_i = caculate_loss_instance(idx, ref_logits, refer_target_labels)
@@ -205,16 +168,9 @@ def feature_collection(model, tokenizer, dataset, args, batch_size=8, upper_limi
             valid_token_ids = input_ids_processed[attention_mask_processed == 1]
             # 获取这些有效 token 的概率
             selected_log_probs = valid_log_probs.gather(-1, valid_token_ids.unsqueeze(1))
-            #selected_probs = probs.gather(-1, valid_token_ids.unsqueeze(1))
-            #selected_log_probs = valid_log_probs[np.arange(valid_token_ids.shape[0]), valid_token_ids]
-            #selectd_probs = probs[np.arange(valid_token_ids.shape[0]), valid_token_ids]
-            #pdb.set_trace()
             mink_plus = min_prob_k_plus(probs, log_probs, selected_log_probs)
             mink = min_prob_k(selected_log_probs)
             # 计算 topk 概率
-            # k_length = int(len(selected_log_probs) * 0.2)
-            # topk_log_prob = np.sort(selected_log_probs.cpu().numpy())[:k_length]
-            # pred = -np.mean(topk_log_prob).item()
             # # perplexity's value
             ppl = torch.exp(loss).item()
             # 收集结果
