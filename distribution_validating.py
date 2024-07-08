@@ -51,7 +51,21 @@ def mix_distribution(dict, dataset_name, title, args, ratio=0.8, total_num=10000
     plt.savefig(f'{dataset_name} {title} histogram at {args.model_size} model at ratio {ratio}.png')
     # 显示图表
     plt.show()
+def remove_outliers(data, m=2):
+    data = np.array(data)
+    mean = np.mean(data)
+    std = np.std(data)
 
+    # 找到离群值
+    outliers = data > mean + m * std
+
+    # 计算没有离群值的平均值
+    mean_without_outliers = np.mean(data[~outliers])
+
+    # 用没有离群值的平均值替换离群值
+    data[outliers] = mean_without_outliers
+
+    return data.tolist()
 
 def figure_draw(data_dict, title, args):
     plt.figure(figsize=(10, 5))
@@ -173,6 +187,11 @@ def feature_collection(model, dataset, args, batch_size=8, upper_limit=100000):
             zlib_collect.append(loss_i.cpu()/len(zlib.compress(bytes(batched_text[idx], "utf-8"))))
         if len(loss_collect) >= upper_limit:
             break
+    loss_collect = remove_outliers(loss_collect)
+    mink_collect = remove_outliers(mink_collect)
+    ppl_collect = remove_outliers(ppl_collect)
+    mink_plus_collect = remove_outliers(mink_plus_collect)
+    zlib_collect = remove_outliers(zlib_collect)
     return loss_collect, mink_collect, ppl_collect, mink_plus_collect, zlib_collect
 
 def calculate_mean_var(dict, dataset_name):
