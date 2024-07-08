@@ -317,6 +317,9 @@ if not skip_calculation:
     if args.reference_model == "True":
         refer_model = AutoModelForCausalLM.from_pretrained("stabilityai/stablelm-base-alpha-3b")
         refer_tokenizer = AutoTokenizer.from_pretrained("stabilityai/stablelm-base-alpha-3b")
+    else:
+        refer_model = None
+        refer_tokenizer = None
     tokenizer.pad_token = tokenizer.eos_token
     loss_dict = {}
     prob_dict = {}
