@@ -103,34 +103,70 @@ def min_prob_k_plus(probs, log_probs, selected_log_probs):
     #     pdb.set_trace()
     return min_k_plus
 
-def feature_collection(model, dataset, args, batch_size=8, upper_limit=100000):
+def caculate_outputs(model, tokenizer, text_batch):
+    tokenized_inputs = tokenizer(text_batch,
+                                 return_tensors="pt",
+                                 truncation=True,
+                                 padding=True,
+                                 max_length=2048,
+                                 )
+    tokenized_inputs = {key: val.cuda(args.cuda) for key, val in tokenized_inputs.items()}
+    target_labels = tokenized_inputs["input_ids"].clone()
+    target_labels[tokenized_inputs["attention_mask"] == 0] = -100
+    with torch.no_grad():
+        outputs = model(**tokenized_inputs, labels=target_labels.cuda(args.cuda))
+    return outputs, tokenized_inputs, target_labels
+
+def caculate_loss_instance(idx, logits, target_labels):
+    logits_i = logits[idx].unsqueeze(0)  # Shape (1, seq_length, vocab_size)
+    target_i = target_labels[idx].unsqueeze(0)  # Shape (1, seq_length)
+    shift_logits = logits_i[:, :-1, :].contiguous()
+    shift_labels = target_i[:, 1:].contiguous()
+    # 计算交叉熵损失并移除填充 token 贡献
+    loss_i = F.cross_entropy(shift_logits.view(-1, shift_logits.size(-1)), shift_labels.view(-1),
+                             )
+    # Create a mask to ignore the loss from padding tokens
+    valid_mask = shift_labels != -100
+    # 只有有效的 token 计算损失
+    loss_i = loss_i * valid_mask.view(-1)
+    # 计算每个样本的平均损失
+    loss_i = loss_i.sum() / valid_mask.sum()
+    return loss_i
+def feature_collection(model, tokenizer, dataset, args, batch_size=8, upper_limit=10000, refer_model=None, refer_tokenizer=None):
     loss_collect = []
     mink_collect = []
     mink_plus_collect = []
     ppl_collect = []
     zlib_collect = []
+    ref_loss_collect = []
     for batch in tqdm(batched_data(dataset, batch_size=batch_size)):
         batched_text = [item for item in batch]
-        tokenized_inputs = tokenizer(batched_text,
-                                     return_tensors="pt",
-                                     truncation=True,
-                                     padding=True,
-                                     max_length=2048,
-                                    )
-        tokenized_inputs = {key: val.cuda(args.cuda) for key, val in tokenized_inputs.items()}
-        target_labels = tokenized_inputs["input_ids"].clone()
-        target_labels[tokenized_inputs["attention_mask"] == 0] = -100
-        with torch.no_grad():
-            outputs = model(**tokenized_inputs, labels=target_labels.cuda(args.cuda))
-            # single_input_example = torch.tensor(tokenizer.encode(batch[0])).unsqueeze(0)
-            # single_input_example = single_input_example.to(model.device)
-            # single_output = model(single_input_example, labels=single_input_example)
-            # single_loss, single_logits = single_output[:2]
+        outputs,tokenized_inputs, target_labels = caculate_outputs(model, tokenizer, batched_text)
+        if refer_model is not None:
+            refer_outputs, refer_target_labels = caculate_outputs(refer_model, refer_tokenizer, batched_text)
+        # tokenized_inputs = tokenizer(batched_text,
+        #                              return_tensors="pt",
+        #                              truncation=True,
+        #                              padding=True,
+        #                              max_length=2048,
+        #                             )
+        # tokenized_inputs = {key: val.cuda(args.cuda) for key, val in tokenized_inputs.items()}
+        # target_labels = tokenized_inputs["input_ids"].clone()
+        # target_labels[tokenized_inputs["attention_mask"] == 0] = -100
+        # with torch.no_grad():
+        #     outputs = model(**tokenized_inputs, labels=target_labels.cuda(args.cuda))
+        #     # single_input_example = torch.tensor(tokenizer.encode(batch[0])).unsqueeze(0)
+        #     # single_input_example = single_input_example.to(model.device)
+        #     # single_output = model(single_input_example, labels=single_input_example)
+        #     # single_loss, single_logits = single_output[:2]
         loss, logits = outputs[:2]
         log_probabilities = torch.nn.functional.log_softmax(logits, dim=-1)
         probabilities = torch.nn.functional.softmax(logits, dim=-1)
-        batch_size = tokenized_inputs["input_ids"].shape[0]
-        seq_length = tokenized_inputs["input_ids"].shape[1]
+        if refer_model is not None:
+            ref_loss, ref_logits = refer_outputs[:2]
+            ref_log_probabilities = torch.nn.functional.log_softmax(ref_logits, dim=-1)
+            ref_probabilities = torch.nn.functional.softmax(ref_logits, dim=-1)
+
 
         # input_ids = single_input_example[0][1:].unsqueeze(-1)
         # probs = torch.nn.functional.softmax(single_logits[0, :-1], dim=-1)
@@ -143,20 +179,23 @@ def feature_collection(model, dataset, args, batch_size=8, upper_limit=100000):
         all_prob = []
         # 获取每个样本的概率
         for idx in range(batch_size):
-            logits_i = logits[idx].unsqueeze(0)  # Shape (1, seq_length, vocab_size)
-            target_i = target_labels[idx].unsqueeze(0)  # Shape (1, seq_length)
-            shift_logits = logits_i[:, :-1, :].contiguous()
-            shift_labels = target_i[:, 1:].contiguous()
-            # 计算交叉熵损失并移除填充 token 贡献
-            loss_i = F.cross_entropy(shift_logits.view(-1, shift_logits.size(-1)), shift_labels.view(-1),
-                                     )
-            # Create a mask to ignore the loss from padding tokens
-            valid_mask = shift_labels != -100
-            # 只有有效的 token 计算损失
-            loss_i = loss_i * valid_mask.view(-1)
-            # 计算每个样本的平均损失
-            loss_i = loss_i.sum() / valid_mask.sum()
-
+            # logits_i = logits[idx].unsqueeze(0)  # Shape (1, seq_length, vocab_size)
+            # target_i = target_labels[idx].unsqueeze(0)  # Shape (1, seq_length)
+            # shift_logits = logits_i[:, :-1, :].contiguous()
+            # shift_labels = target_i[:, 1:].contiguous()
+            # # 计算交叉熵损失并移除填充 token 贡献
+            # loss_i = F.cross_entropy(shift_logits.view(-1, shift_logits.size(-1)), shift_labels.view(-1),
+            #                          )
+            # # Create a mask to ignore the loss from padding tokens
+            # valid_mask = shift_labels != -100
+            # # 只有有效的 token 计算损失
+            # loss_i = loss_i * valid_mask.view(-1)
+            # # 计算每个样本的平均损失
+            # loss_i = loss_i.sum() / valid_mask.sum()
+            loss_i = caculate_loss_instance(idx, logits, target_labels)
+            if refer_model is not None:
+                ref_loss_i = caculate_loss_instance(idx, ref_logits, refer_target_labels)
+                ref_loss_collect.append(loss_i-ref_loss_i)
             input_ids_processed = tokenized_inputs["input_ids"][idx]
             attention_mask_processed = tokenized_inputs["attention_mask"][idx]
             log_probs = log_probabilities[idx]  # 形状为 (seq_length, vocab_size)
@@ -192,7 +231,7 @@ def feature_collection(model, dataset, args, batch_size=8, upper_limit=100000):
     ppl_collect = remove_outliers(ppl_collect)
     mink_plus_collect = remove_outliers(mink_plus_collect)
     zlib_collect = remove_outliers(zlib_collect)
-    return loss_collect, mink_collect, ppl_collect, mink_plus_collect, zlib_collect
+    return loss_collect, mink_collect, ppl_collect, mink_plus_collect, zlib_collect, ref_loss_collect
 
 def calculate_mean_var(dict, dataset_name):
     split_set = ["train", "valid", "test"]
@@ -254,6 +293,8 @@ parser.add_argument("--dataset_name", type=str, default="Pile-CC", choices=["ArX
                 "USPTO Backgrounds", "Wikipedia (en)", "WikiMIA"])
 parser.add_argument("--cuda", type=int, default=0, help="cuda device")
 parser.add_argument("--skip_calculation", type=str, default="True")
+parser.add_argument("--reference_model", type=str, default="True")
+parser.add_argument("--samples", type=int, default=5000)
 args = parser.parse_args()
 
 if args.skip_calculation == "True":
@@ -273,6 +314,9 @@ if not skip_calculation:
       revision="step143000",
       cache_dir=f"./pythia-{args.model_size}-deduped/step143000",
     )
+    if args.reference_model == "True":
+        refer_model = AutoModelForCausalLM.from_pretrained("stabilityai/stablelm-base-alpha-3b")
+        refer_tokenizer = AutoTokenizer.from_pretrained("stabilityai/stablelm-base-alpha-3b")
     tokenizer.pad_token = tokenizer.eos_token
     loss_dict = {}
     prob_dict = {}
@@ -311,7 +355,11 @@ if not skip_calculation:
             else:
                 for i in range(1):
                     dataset = torch.load(f"by_dataset/{split}_{args.dataset_name}_{i}.pt")
-        loss_list, prob_list, ppl_list, mink_plus_list, zlib_list = feature_collection(model, dataset, args, batch_size=args.batch_size)
+        loss_list, prob_list, ppl_list, mink_plus_list, zlib_list = feature_collection(model, dataset, args,
+                                                                                       batch_size=args.batch_size,
+                                                                                       upper_limit=args.samples,
+                                                                                       refer_model=refer_model,
+                                                                                       refer_tokenizer=refer_tokenizer)
         loss_dict[args.dataset_name][split].extend(loss_list)
         prob_dict[args.dataset_name][split].extend(prob_list)
         ppl_dict[args.dataset_name][split].extend(ppl_list)
@@ -331,12 +379,12 @@ figure_draw(loss_dict, "Loss", args)
 figure_draw(prob_dict, "Prob", args)
 figure_draw(ppl_dict, "PPL", args)
 figure_draw(mink_plus_dict, "Mink_plus", args)
-#figure_draw(zlib_dict, "Zlib", args)
+figure_draw(zlib_dict, "Zlib", args)
 mix_distribution(loss_dict, args.dataset_name, "Loss", args)
 mix_distribution(prob_dict, args.dataset_name, "Prob", args)
 mix_distribution(ppl_dict, args.dataset_name, "PPL", args)
 mix_distribution(mink_plus_dict, args.dataset_name, "Mink_plus", args)
-#mix_distribution(zlib_dict, args.dataset_name, "Zlib", args)
+mix_distribution(zlib_dict, args.dataset_name, "Zlib", args)
 for idx, dict in enumerate([loss_dict, prob_dict, ppl_dict, mink_plus_dict, zlib_dict]):
     if idx == 0:
         print("Loss Distribution Similarity Matrix")
