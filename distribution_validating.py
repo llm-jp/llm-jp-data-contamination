@@ -253,7 +253,7 @@ def form_dataset(dataset_name):
                 mia_dataset["valid"].extend(non_member_data["input"])
         return mia_dataset
     else:
-        train_dataset = torch.load(f"/model/pile/by_dataset/train_{dataset_name}.pt")
+        train_dataset = torch.load(f"/model/pile/by_dataset/train_{dataset_name}_0.pt")
         valid_dataset = torch.load(f"/model/pile/by_dataset/valid_{dataset_name}.pt")
         test_dataset = torch.load(f"/model/pile/by_dataset/test_{dataset_name}.pt")
         dataset = DatasetDict({
