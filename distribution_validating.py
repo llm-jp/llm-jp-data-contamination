@@ -358,7 +358,7 @@ if not skip_calculation:
             else:
                 for i in range(1):
                     dataset = torch.load(f"by_dataset/{split}_{args.dataset_name}_{i}.pt")
-        loss_list, prob_list, ppl_list, mink_plus_list, zlib_list = feature_collection(model, tokenizer, dataset, args,
+        loss_list, prob_list, ppl_list, mink_plus_list, zlib_list, refer_list = feature_collection(model, tokenizer, dataset, args,
                                                                                        batch_size=args.batch_size,
                                                                                        upper_limit=args.samples,
                                                                                        refer_model=refer_model,
