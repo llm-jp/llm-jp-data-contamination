@@ -235,6 +235,35 @@ def ks_hypothesis(dict, dataset_name):
             ks_matrix[idx1][idx2] = ks_stat
     return ks_matrix#close to zero means the two distributions are similar
 
+def form_dataset(dataset_name):
+    if dataset_name == "WikiMIA":
+        for text_len in [32, 64, 128, 256]:
+            dataset = load_dataset("swj0419/WikiMIA", split=f"WikiMIA_length{text_len}")
+            member_data = dataset.filter(lambda example: example['label'] == 1)
+            non_member_data = dataset.filter(lambda example: example['label'] == 0)
+            if text_len == 32:
+                mia_dataset = DatasetDict({
+                    'train': member_data["input"],
+                    'test': non_member_data["input"],
+                    'valid': non_member_data["input"]
+                })
+            else:
+                mia_dataset["train"].extend(member_data["input"])
+                mia_dataset["test"].extend(non_member_data["input"])
+                mia_dataset["valid"].extend(non_member_data["input"])
+        return mia_dataset
+    else:
+        train_dataset = torch.load(f"/model/pile/by_dataset/train_{dataset_name}.pt")
+        valid_dataset = torch.load(f"/model/pile/by_dataset/valid_{dataset_name}.pt")
+        test_dataset = torch.load(f"/model/pile/by_dataset/test_{dataset_name}.pt")
+        dataset = DatasetDict({
+            'train': train_dataset,
+            'test': test_dataset,
+            'valid': valid_dataset
+        })
+        return dataset
+
+
 
 #dataset_name = ["ArXiv", "DM Mathematics", "Enron Emails", "EuroParl", "FreeLaw", "Github", "Gutenberg (PG-19)",
 #                "HackerNews", "NIH ExPorter", "PhilPapers", "Pile-CC", "PubMed Abstracts", "PubMed Central", "StackExchange",
@@ -289,34 +318,9 @@ if not skip_calculation:
     mink_plus_dict[args.dataset_name] = {"train": [], "valid": [], "test": []}
     zlib_dict[args.dataset_name] = {"train": [], "valid": [], "test": []}
     refer_dict[args.dataset_name] = {"train": [], "valid": [], "test": []}
-    if args.dataset_name == "WikiMIA":
-        for text_len in [32, 64, 128, 256]:
-            dataset = load_dataset("swj0419/WikiMIA", split=f"WikiMIA_length{text_len}")
-            member_data = dataset.filter(lambda example: example['label'] == 1)
-            non_member_data = dataset.filter(lambda example: example['label'] == 0)
-            if text_len == 32:
-                mia_dataset = DatasetDict({
-                    'train': member_data["input"],
-                    'test': non_member_data["input"],
-                    'valid': non_member_data["input"]
-                })
-            else:
-                mia_dataset["train"].extend(member_data["input"])
-                mia_dataset["test"].extend(non_member_data["input"])
-                mia_dataset["valid"].extend(non_member_data["input"])
+    dataset = form_dataset(args.dataset_name)
     for split in ["train", "valid", "test"]:
-        if split in ["test", "valid"]:
-            if args.dataset_name == "WikiMIA":
-                dataset = mia_dataset[split]
-            else:
-                dataset = torch.load(f"/model/pile/by_dataset/{split}_{args.dataset_name}.pt")
-        else:
-            if args.dataset_name == "WikiMIA":
-                dataset = mia_dataset[split]
-            else:
-                for i in range(1):
-                    dataset = torch.load(f"/model/pile/by_dataset/{split}_{args.dataset_name}_{i}.pt")
-        loss_list, prob_list, ppl_list, mink_plus_list, zlib_list, refer_list = feature_collection(model, tokenizer, dataset, args,
+        loss_list, prob_list, ppl_list, mink_plus_list, zlib_list, refer_list = feature_collection(model, tokenizer, dataset[split], args,
                                                                                        batch_size=args.batch_size,
                                                                                        upper_limit=args.samples,
                                                                                        refer_model=refer_model,
