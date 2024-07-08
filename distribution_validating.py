@@ -263,7 +263,46 @@ def form_dataset(dataset_name):
         })
         return dataset
 
-
+def results_caculate_and_draw(dataset_name, args):
+    loss_dict = pickle.load(open(f"feature_result/{dataset_name}_{args.model_size}_loss_dict.pkl", "rb"))
+    prob_dict = pickle.load(open(f"feature_result/{dataset_name}_{args.model_size}_prob_dict.pkl", "rb"))
+    ppl_dict = pickle.load(open(f"feature_result/{dataset_name}_{args.model_size}_ppl_dict.pkl", "rb"))
+    mink_plus_dict = pickle.load(open(f"feature_result/{dataset_name}_{args.model_size}_mink_plus_dict.pkl", "rb"))
+    zlib_dict = pickle.load(open(f"feature_result/{dataset_name}_{args.model_size}_zlib_dict.pkl", "rb"))
+    figure_draw(loss_dict, "Loss", args)
+    figure_draw(prob_dict, "Prob", args)
+    figure_draw(ppl_dict, "PPL", args)
+    figure_draw(mink_plus_dict, "Mink_plus", args)
+    figure_draw(zlib_dict, "Zlib", args)
+    mix_distribution(loss_dict, args.dataset_name, "Loss", args)
+    mix_distribution(prob_dict, args.dataset_name, "Prob", args)
+    mix_distribution(ppl_dict, args.dataset_name, "PPL", args)
+    mix_distribution(mink_plus_dict, args.dataset_name, "Mink_plus", args)
+    mix_distribution(zlib_dict, args.dataset_name, "Zlib", args)
+    f = open(f"results/{dataset_name}_{args.model_size}_results.txt", "w")
+    for idx, dict in enumerate([loss_dict, prob_dict, ppl_dict, mink_plus_dict, zlib_dict]):
+        if idx == 0:
+            print("Loss Distribution Similarity Matrix")
+            f.write("Loss Distribution Similarity Matrix\n")
+        elif idx == 1:
+            print("Prob Distribution Similarity Matrix")
+            f.write("Prob Distribution Similarity Matrix\n")
+        elif idx == 2:
+            print("PPL Distribution Similarity Matrix")
+        elif idx == 3:
+            f.write("Mink_plus Distribution Similarity Matrix\n")
+            print("Mink_plus Distribution Similarity Matrix")
+        else:
+            print("Zlib Distribution Similarity Matrix")
+            f.write("Zlib Distribution Similarity Matrix\n")
+        calculate_mean_var(dict, dataset_name)
+        js_matrix = js_divergence(dict, dataset_name)
+        print(js_matrix)
+        f.write(str(js_matrix) + '\n')
+        ks_matrix = ks_hypothesis(dict, dataset_name)
+        print(ks_matrix)
+        f.write(str(ks_matrix) + '\n')
+    f.close()
 
 #dataset_name = ["ArXiv", "DM Mathematics", "Enron Emails", "EuroParl", "FreeLaw", "Github", "Gutenberg (PG-19)",
 #                "HackerNews", "NIH ExPorter", "PhilPapers", "Pile-CC", "PubMed Abstracts", "PubMed Central", "StackExchange",
@@ -275,7 +314,7 @@ parser.add_argument("--model_size", type=str, default="160m")
 parser.add_argument("--dataset_name", type=str, default="Pile-CC", choices=["ArXiv", "DM Mathematics", "Enron Emails",
                 "EuroParl", "FreeLaw", "Github", "Gutenberg (PG-19)", "HackerNews", "NIH ExPorter", "PhilPapers",
                 "Pile-CC", "PubMed Abstracts", "PubMed Central", "StackExchange","Ubuntu IRC",
-                "USPTO Backgrounds", "Wikipedia (en)", "WikiMIA"])
+                "USPTO Backgrounds", "Wikipedia (en)", "WikiMIA", "all"])
 parser.add_argument("--cuda", type=int, default=0, help="cuda device")
 parser.add_argument("--skip_calculation", type=str, default="True")
 parser.add_argument("--reference_model", type=str, default="True")
@@ -284,9 +323,9 @@ args = parser.parse_args()
 
 if args.skip_calculation == "True":
     skip_calculation = True
+    results_caculate_and_draw(args.dataset_name, args)
 else:
     skip_calculation = False
-if not skip_calculation:
     model = GPTNeoXForCausalLM.from_pretrained(
       f"EleutherAI/pythia-{args.model_size}-deduped",
       revision="step143000",
@@ -318,63 +357,34 @@ if not skip_calculation:
     mink_plus_dict[args.dataset_name] = {"train": [], "valid": [], "test": []}
     zlib_dict[args.dataset_name] = {"train": [], "valid": [], "test": []}
     refer_dict[args.dataset_name] = {"train": [], "valid": [], "test": []}
-    dataset = form_dataset(args.dataset_name)
-    for split in ["train", "valid", "test"]:
-        loss_list, prob_list, ppl_list, mink_plus_list, zlib_list, refer_list = feature_collection(model, tokenizer, dataset[split], args,
-                                                                                       batch_size=args.batch_size,
-                                                                                       upper_limit=args.samples,
-                                                                                       refer_model=refer_model,
-                                                                                       refer_tokenizer=refer_tokenizer)
-        loss_dict[args.dataset_name][split].extend(loss_list)
-        prob_dict[args.dataset_name][split].extend(prob_list)
-        ppl_dict[args.dataset_name][split].extend(ppl_list)
-        mink_plus_dict[args.dataset_name][split].extend(mink_plus_list)
-        zlib_dict[args.dataset_name][split].extend(zlib_list)
-        refer_dict[args.dataset_name][split].extend(refer_list)
-    pickle.dump(loss_dict, open(f"feature_result/{args.dataset_name}_{args.model_size}_loss_dict.pkl", "wb"))
-    pickle.dump(prob_dict, open(f"feature_result/{args.dataset_name}_{args.model_size}_prob_dict.pkl", "wb"))
-    pickle.dump(ppl_dict, open(f"feature_result/{args.dataset_name}_{args.model_size}_ppl_dict.pkl", "wb"))
-    pickle.dump(mink_plus_dict, open(f"feature_result/{args.dataset_name}_{args.model_size}_mink_plus_dict.pkl", "wb"))
-    pickle.dump(zlib_dict, open(f"feature_result/{args.dataset_name}_{args.model_size}_zlib_dict.pkl", "wb"))
-    pickle.dump(refer_dict, open(f"feature_result/{args.dataset_name}_{args.model_size}_refer_dict.pkl", "wb"))
-loss_dict = pickle.load(open(f"feature_result/{args.dataset_name}_{args.model_size}_loss_dict.pkl", "rb"))
-prob_dict = pickle.load(open(f"feature_result/{args.dataset_name}_{args.model_size}_prob_dict.pkl", "rb"))
-ppl_dict = pickle.load(open(f"feature_result/{args.dataset_name}_{args.model_size}_ppl_dict.pkl", "rb"))
-mink_plus_dict = pickle.load(open(f"feature_result/{args.dataset_name}_{args.model_size}_mink_plus_dict.pkl", "rb"))
-zlib_dict = pickle.load(open(f"feature_result/{args.dataset_name}_{args.model_size}_zlib_dict.pkl", "rb"))
-figure_draw(loss_dict, "Loss", args)
-figure_draw(prob_dict, "Prob", args)
-figure_draw(ppl_dict, "PPL", args)
-figure_draw(mink_plus_dict, "Mink_plus", args)
-figure_draw(zlib_dict, "Zlib", args)
-mix_distribution(loss_dict, args.dataset_name, "Loss", args)
-mix_distribution(prob_dict, args.dataset_name, "Prob", args)
-mix_distribution(ppl_dict, args.dataset_name, "PPL", args)
-mix_distribution(mink_plus_dict, args.dataset_name, "Mink_plus", args)
-mix_distribution(zlib_dict, args.dataset_name, "Zlib", args)
-f = open(f"results/{args.dataset_name}_{args.model_size}_results.txt", "w")
-for idx, dict in enumerate([loss_dict, prob_dict, ppl_dict, mink_plus_dict, zlib_dict]):
-    if idx == 0:
-        print("Loss Distribution Similarity Matrix")
-        f.write("Loss Distribution Similarity Matrix\n")
-    elif idx == 1:
-        print("Prob Distribution Similarity Matrix")
-        f.write("Prob Distribution Similarity Matrix\n")
-    elif idx == 2:
-        print("PPL Distribution Similarity Matrix")
-    elif idx == 3:
-        f.write("Mink_plus Distribution Similarity Matrix\n")
-        print("Mink_plus Distribution Similarity Matrix")
+    if args.dataset_name == "all":
+        dataset_names = ["ArXiv", "DM Mathematics", "Enron Emails", "EuroParl", "FreeLaw", "Github", "Gutenberg (PG-19)",
+                "HackerNews", "NIH ExPorter", "PhilPapers", "Pile-CC", "PubMed Abstracts", "PubMed Central", "StackExchange",
+                "Ubuntu IRC", "USPTO Backgrounds", "Wikipedia (en)", "WikiMIA"]
     else:
-        print("Zlib Distribution Similarity Matrix")
-        f.write("Zlib Distribution Similarity Matrix\n")
-    calculate_mean_var(dict, args.dataset_name)
-    js_matrix = js_divergence(dict, args.dataset_name)
-    print(js_matrix)
-    f.write(str(js_matrix) + '\n')
-    ks_matrix = ks_hypothesis(dict, args.dataset_name)
-    print(ks_matrix)
-    f.write(str(ks_matrix) + '\n')
-f.close()
+        dataset_names = [args.dataset_name]
+    for dataset_name in dataset_names:
+        dataset = form_dataset(dataset_name)
+        for split in ["train", "valid", "test"]:
+            loss_list, prob_list, ppl_list, mink_plus_list, zlib_list, refer_list = feature_collection(model, tokenizer, dataset[split], args,
+                                                                                           batch_size=args.batch_size,
+                                                                                           upper_limit=args.samples,
+                                                                                           refer_model=refer_model,
+                                                                                           refer_tokenizer=refer_tokenizer)
+            loss_dict[dataset_name][split].extend(loss_list)
+            prob_dict[dataset_name][split].extend(prob_list)
+            ppl_dict[dataset_name][split].extend(ppl_list)
+            mink_plus_dict[dataset_name][split].extend(mink_plus_list)
+            zlib_dict[dataset_name][split].extend(zlib_list)
+            refer_dict[dataset_name][split].extend(refer_list)
+        pickle.dump(loss_dict, open(f"feature_result/{dataset_name}_{args.model_size}_loss_dict.pkl", "wb"))
+        pickle.dump(prob_dict, open(f"feature_result/{dataset_name}_{args.model_size}_prob_dict.pkl", "wb"))
+        pickle.dump(ppl_dict, open(f"feature_result/{dataset_name}_{args.model_size}_ppl_dict.pkl", "wb"))
+        pickle.dump(mink_plus_dict, open(f"feature_result/{dataset_name}_{args.model_size}_mink_plus_dict.pkl", "wb"))
+        pickle.dump(zlib_dict, open(f"feature_result/{dataset_name}_{args.model_size}_zlib_dict.pkl", "wb"))
+        pickle.dump(refer_dict, open(f"feature_result/{dataset_name}_{args.model_size}_refer_dict.pkl", "wb"))
+        results_caculate_and_draw(dataset_name, args)
+
+
 
 
