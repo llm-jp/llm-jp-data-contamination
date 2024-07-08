@@ -269,30 +269,32 @@ def results_caculate_and_draw(dataset_name, args):
     ppl_dict = pickle.load(open(f"feature_result/{dataset_name}_{args.model_size}_ppl_dict.pkl", "rb"))
     mink_plus_dict = pickle.load(open(f"feature_result/{dataset_name}_{args.model_size}_mink_plus_dict.pkl", "rb"))
     zlib_dict = pickle.load(open(f"feature_result/{dataset_name}_{args.model_size}_zlib_dict.pkl", "rb"))
-    figure_draw(loss_dict, "Loss", args)
-    figure_draw(prob_dict, "Prob", args)
-    figure_draw(ppl_dict, "PPL", args)
-    figure_draw(mink_plus_dict, "Mink_plus", args)
-    figure_draw(zlib_dict, "Zlib", args)
-    mix_distribution(loss_dict, args.dataset_name, "Loss", args)
-    mix_distribution(prob_dict, args.dataset_name, "Prob", args)
-    mix_distribution(ppl_dict, args.dataset_name, "PPL", args)
-    mix_distribution(mink_plus_dict, args.dataset_name, "Mink_plus", args)
-    mix_distribution(zlib_dict, args.dataset_name, "Zlib", args)
+    all_dict = [loss_dict, prob_dict, ppl_dict, mink_plus_dict, zlib_dict]
     f = open(f"results/{dataset_name}_{args.model_size}_results.txt", "w")
-    for idx, dict in enumerate([loss_dict, prob_dict, ppl_dict, mink_plus_dict, zlib_dict]):
+    for idx, dict in enumerate(all_dict):
         if idx == 0:
+            figure_draw(loss_dict, "Loss", args)
+            mix_distribution(loss_dict, args.dataset_name, "Loss", args)
             print("Loss Distribution Similarity Matrix")
             f.write("Loss Distribution Similarity Matrix\n")
         elif idx == 1:
+            figure_draw(prob_dict, "Prob", args)
+            mix_distribution(prob_dict, args.dataset_name, "Prob", args)
             print("Prob Distribution Similarity Matrix")
             f.write("Prob Distribution Similarity Matrix\n")
         elif idx == 2:
+            figure_draw(ppl_dict, "PPL", args)
+            mix_distribution(ppl_dict, args.dataset_name, "PPL", args)
             print("PPL Distribution Similarity Matrix")
+            f.write("PPL Distribution Similarity Matrix\n")
         elif idx == 3:
+            figure_draw(mink_plus_dict, "Mink_plus", args)
+            mix_distribution(mink_plus_dict, args.dataset_name, "Mink_plus", args)
             f.write("Mink_plus Distribution Similarity Matrix\n")
             print("Mink_plus Distribution Similarity Matrix")
         else:
+            figure_draw(zlib_dict, "Zlib", args)
+            mix_distribution(zlib_dict, args.dataset_name, "Zlib", args)
             print("Zlib Distribution Similarity Matrix")
             f.write("Zlib Distribution Similarity Matrix\n")
         calculate_mean_var(dict, dataset_name)
@@ -304,9 +306,6 @@ def results_caculate_and_draw(dataset_name, args):
         f.write(str(ks_matrix) + '\n')
     f.close()
 
-#dataset_name = ["ArXiv", "DM Mathematics", "Enron Emails", "EuroParl", "FreeLaw", "Github", "Gutenberg (PG-19)",
-#                "HackerNews", "NIH ExPorter", "PhilPapers", "Pile-CC", "PubMed Abstracts", "PubMed Central", "StackExchange",
-#                "Ubuntu IRC", "USPTO Backgrounds", "Wikipedia (en)"]
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--batch_size", type=int, default=8)
