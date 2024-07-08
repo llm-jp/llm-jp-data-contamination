@@ -344,18 +344,6 @@ else:
         refer_model = None
         refer_tokenizer = None
     tokenizer.pad_token = tokenizer.eos_token
-    loss_dict = {}
-    prob_dict = {}
-    ppl_dict = {}
-    mink_plus_dict = {}
-    zlib_dict = {}
-    refer_dict = {}
-    loss_dict[args.dataset_name] = {"train": [], "valid": [], "test": []}
-    prob_dict[args.dataset_name] = {"train": [], "valid": [], "test": []}
-    ppl_dict[args.dataset_name] = {"train": [], "valid": [], "test": []}
-    mink_plus_dict[args.dataset_name] = {"train": [], "valid": [], "test": []}
-    zlib_dict[args.dataset_name] = {"train": [], "valid": [], "test": []}
-    refer_dict[args.dataset_name] = {"train": [], "valid": [], "test": []}
     if args.dataset_name == "all":
         dataset_names = ["ArXiv", "DM Mathematics", "Enron Emails", "EuroParl", "FreeLaw", "Github", "Gutenberg (PG-19)",
                 "HackerNews", "NIH ExPorter", "PhilPapers", "Pile-CC", "PubMed Abstracts", "PubMed Central", "StackExchange",
@@ -364,6 +352,18 @@ else:
         dataset_names = [args.dataset_name]
     for dataset_name in dataset_names:
         dataset = form_dataset(dataset_name)
+        loss_dict = {}
+        prob_dict = {}
+        ppl_dict = {}
+        mink_plus_dict = {}
+        zlib_dict = {}
+        refer_dict = {}
+        loss_dict[dataset_name] = {"train": [], "valid": [], "test": []}
+        prob_dict[dataset_name] = {"train": [], "valid": [], "test": []}
+        ppl_dict[dataset_name] = {"train": [], "valid": [], "test": []}
+        mink_plus_dict[dataset_name] = {"train": [], "valid": [], "test": []}
+        zlib_dict[dataset_name] = {"train": [], "valid": [], "test": []}
+        refer_dict[dataset_name] = {"train": [], "valid": [], "test": []}
         for split in ["train", "valid", "test"]:
             loss_list, prob_list, ppl_list, mink_plus_list, zlib_list, refer_list = feature_collection(model, tokenizer, dataset[split], args,
                                                                                            batch_size=args.batch_size,
