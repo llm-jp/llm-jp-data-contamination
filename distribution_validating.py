@@ -135,7 +135,7 @@ def feature_collection(model, dataset, args, batch_size=8, upper_limit=100000):
             shift_labels = target_i[:, 1:].contiguous()
             # 计算交叉熵损失并移除填充 token 贡献
             loss_i = F.cross_entropy(shift_logits.view(-1, shift_logits.size(-1)), shift_labels.view(-1),
-                                     reduction='none')
+                                     )
             # Create a mask to ignore the loss from padding tokens
             valid_mask = shift_labels != -100
             # 只有有效的 token 计算损失
@@ -170,7 +170,7 @@ def feature_collection(model, dataset, args, batch_size=8, upper_limit=100000):
             mink_plus_collect.append(mink_plus)
             ppl_collect.append(ppl)
             loss_collect.append(loss_i.item())
-            zlib_collect.append(loss_i.cpu()//len(zlib.compress(bytes(batched_text[idx], "utf-8"))))
+            zlib_collect.append(loss_i.cpu()/len(zlib.compress(bytes(batched_text[idx], "utf-8"))))
         if len(loss_collect) >= upper_limit:
             break
     return loss_collect, mink_collect, ppl_collect, mink_plus_collect, zlib_collect
