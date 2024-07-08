@@ -392,22 +392,28 @@ mix_distribution(prob_dict, args.dataset_name, "Prob", args)
 mix_distribution(ppl_dict, args.dataset_name, "PPL", args)
 mix_distribution(mink_plus_dict, args.dataset_name, "Mink_plus", args)
 mix_distribution(zlib_dict, args.dataset_name, "Zlib", args)
+f = open(f"results/{args.dataset_name}_{args.model_size}_results.txt", "w")
 for idx, dict in enumerate([loss_dict, prob_dict, ppl_dict, mink_plus_dict, zlib_dict]):
     if idx == 0:
         print("Loss Distribution Similarity Matrix")
+        f.write("Loss Distribution Similarity Matrix\n")
     elif idx == 1:
         print("Prob Distribution Similarity Matrix")
+        f.write("Prob Distribution Similarity Matrix\n")
     elif idx == 2:
         print("PPL Distribution Similarity Matrix")
     elif idx == 3:
+        f.write("Mink_plus Distribution Similarity Matrix\n")
         print("Mink_plus Distribution Similarity Matrix")
     else:
-        continue
         print("Zlib Distribution Similarity Matrix")
+        f.write("Zlib Distribution Similarity Matrix\n")
     calculate_mean_var(dict, args.dataset_name)
     js_matrix = js_divergence(dict, args.dataset_name)
     print(js_matrix)
+    f.write(str(js_matrix) + '\n')
     ks_matrix = ks_hypothesis(dict, args.dataset_name)
     print(ks_matrix)
+    f.write(str(ks_matrix) + '\n')
 
 
