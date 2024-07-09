@@ -67,7 +67,7 @@ def remove_outliers(data, m=2):
 
     return data.tolist()
 
-def figure_draw(data_dict, title, args):
+def figure_draw(data_dict, title,dataset_name, args):
     plt.figure(figsize=(10, 5))
     fig, axs = plt.subplots(len(data_dict), figsize=(10, 5 * len(data_dict)))
     axs = np.atleast_2d(axs)
@@ -81,7 +81,7 @@ def figure_draw(data_dict, title, args):
         ax.set_ylabel('Percentage')
         ax.legend()
     plt.tight_layout()
-    plt.savefig(f"{title}_histograms_{args.model_size}_{args.dataset_name}.png")
+    plt.savefig(f"{title}_histograms_{args.model_size}_{dataset_name}.png")
     plt.show()
 
 
@@ -276,27 +276,27 @@ def results_caculate_and_draw(dataset_name, args):
     f = open(f"results/{dataset_name}_{args.model_size}_results.txt", "w")
     for idx, dict in enumerate(all_dict):
         if idx == 0:
-            figure_draw(loss_dict, "Loss", args)
+            figure_draw(loss_dict, "Loss", dataset_name, args)
             mix_distribution(loss_dict, dataset_name, "Loss", args)
             print("Loss Distribution Similarity Matrix")
             f.write("Loss Distribution Similarity Matrix\n")
         elif idx == 1:
-            figure_draw(prob_dict, "Prob", args)
+            figure_draw(prob_dict, "Prob", dataset_name, args)
             mix_distribution(prob_dict, dataset_name, "Prob", args)
             print("Prob Distribution Similarity Matrix")
             f.write("Prob Distribution Similarity Matrix\n")
         elif idx == 2:
-            figure_draw(ppl_dict, "PPL", args)
+            figure_draw(ppl_dict, "PPL", dataset_name, args)
             mix_distribution(ppl_dict, dataset_name, "PPL", args)
             print("PPL Distribution Similarity Matrix")
             f.write("PPL Distribution Similarity Matrix\n")
         elif idx == 3:
-            figure_draw(mink_plus_dict, "Mink_plus", args)
+            figure_draw(mink_plus_dict, "Mink_plus", dataset_name, args)
             mix_distribution(mink_plus_dict, dataset_name, "Mink_plus", args)
             f.write("Mink_plus Distribution Similarity Matrix\n")
             print("Mink_plus Distribution Similarity Matrix")
         else:
-            figure_draw(zlib_dict, "Zlib", args)
+            figure_draw(zlib_dict, "Zlib", dataset_name, args)
             mix_distribution(zlib_dict, dataset_name, "Zlib", args)
             print("Zlib Distribution Similarity Matrix")
             f.write("Zlib Distribution Similarity Matrix\n")
