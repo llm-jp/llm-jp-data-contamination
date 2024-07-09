@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pdb
 import torch.nn.functional as F
-from scipy.stats import entropy, wasserstein_distance, ks_2samp, kurtosis
+from scipy.stats import entropy, ks_2samp, kurtosis
 import argparse
 import random
 import seaborn as sns
