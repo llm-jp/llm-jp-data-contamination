@@ -348,9 +348,10 @@ else:
         refer_tokenizer = None
     tokenizer.pad_token = tokenizer.eos_token
     if args.dataset_name == "all":
-        dataset_names = ["ArXiv", "DM Mathematics", "Enron Emails", "EuroParl", "FreeLaw", "Github", "Gutenberg (PG-19)",
-                "HackerNews", "NIH ExPorter", "PhilPapers", "Pile-CC", "PubMed Abstracts", "PubMed Central", "StackExchange",
-                "Ubuntu IRC", "USPTO Backgrounds", "Wikipedia (en)", "WikiMIA"]
+        dataset_names = ["ArXiv", "DM Mathematics",
+                 "FreeLaw", "Github",  "HackerNews", "NIH ExPorter",
+                "Pile-CC", "PubMed Abstracts", "PubMed Central", "StackExchange",
+                "USPTO Backgrounds", "Wikipedia (en)", "WikiMIA"]
     else:
         dataset_names = [args.dataset_name]
     for dataset_name in dataset_names:
