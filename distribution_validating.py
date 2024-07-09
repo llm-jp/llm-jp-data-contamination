@@ -157,7 +157,7 @@ def feature_collection(model, tokenizer, dataset, args, batch_size=8, upper_limi
         # 初始化
         all_prob = []
         # 获取每个样本的概率
-        for idx in range(batch_size):
+        for idx in range(logits.shape[0]):
             loss_i = caculate_loss_instance(idx, logits, target_labels)
             if refer_model is not None:
                 ref_loss_i = caculate_loss_instance(idx, ref_logits, refer_target_labels)
