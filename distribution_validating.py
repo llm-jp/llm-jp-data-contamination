@@ -118,7 +118,10 @@ def caculate_outputs(model, tokenizer, text_batch):
     return outputs, tokenized_inputs, target_labels
 
 def caculate_loss_instance(idx, logits, target_labels):
-    logits_i = logits[idx].unsqueeze(0)  # Shape (1, seq_length, vocab_size)
+    try:
+        logits_i = logits[idx].unsqueeze(0)  # Shape (1, seq_length, vocab_size)
+    except:
+        pdb.set_trace()
     target_i = target_labels[idx].unsqueeze(0)  # Shape (1, seq_length)
     shift_logits = logits_i[:, :-1, :].contiguous()
     shift_labels = target_i[:, 1:].contiguous()
