@@ -14,7 +14,7 @@ import random
 import seaborn as sns
 import zlib
 from datasets import DatasetDict
-
+import os
 def batched_data(dataset, batch_size):
     data_iter = iter(dataset)
     while True:
@@ -81,7 +81,8 @@ def figure_draw(data_dict, title,dataset_name, args):
         ax.set_ylabel('Percentage')
         ax.legend()
     plt.tight_layout()
-    plt.savefig(f"{title}_histograms_{args.model_size}_{dataset_name}.png")
+    os.makedirs(f"figures/{dataset_name}", exist_ok=True)
+    plt.savefig(f"figures/{dataset_name}/{title}_histograms_{args.model_size}_{dataset_name}.png")
     plt.show()
 
 
