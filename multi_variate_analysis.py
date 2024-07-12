@@ -6,6 +6,7 @@ import pickle
 from sklearn.preprocessing import StandardScaler
 from matplotlib import pyplot as plt
 from scipy.stats import gaussian_kde
+import seaborn as sns
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--batch_size", type=int, default=8)
@@ -27,61 +28,67 @@ ppl_dict = pickle.load(open(f"feature_result/{dataset_name}_{args.model_size}_pp
 mink_plus_dict = pickle.load(open(f"feature_result/{dataset_name}_{args.model_size}_mink_plus_dict.pkl", "rb"))
 zlib_dict = pickle.load(open(f"feature_result/{dataset_name}_{args.model_size}_zlib_dict.pkl", "rb"))
 scaler = StandardScaler()
-loss_train_std = scaler.fit(np.array(loss_dict[dataset_name]["train"]).reshape(-1, 1))
-loss_test_std = scaler.transform(np.array(loss_dict[dataset_name]["test"]).reshape(-1, 1))
-prob_train_std = scaler.fit(np.array(prob_dict[dataset_name]["train"]).reshape(-1, 1))
-prob_test_std = scaler.transform(np.array(prob_dict[dataset_name]["test"]).reshape(-1, 1))
-ppl_train_std = scaler.fit(np.array(ppl_dict[dataset_name]["train"]).reshape(-1, 1))
-ppl_test_std = scaler.transform(np.array(ppl_dict[dataset_name]["test"]).reshape(-1, 1))
-mink_plus_train_std = scaler.fit(np.array(mink_plus_dict[dataset_name]["train"]).reshape(-1, 1))
-mink_plus_test_std = scaler.transform(np.array(mink_plus_dict[dataset_name]["test"]).reshape(-1, 1))
-zlib_train_std = scaler.fit(np.array(zlib_dict[dataset_name]["train"]).reshape(-1, 1))
-zlib_test_std = scaler.transform(np.array(zlib_dict[dataset_name]["test"]).reshape(-1, 1))
+loss_train_std = scaler.fit_transform(np.array(loss_dict[dataset_name]["train"]).reshape(-1, 1))
+loss_test_std = scaler.fit_transform(np.array(loss_dict[dataset_name]["test"]).reshape(-1, 1))
+prob_train_std = scaler.fit_transform(np.array(prob_dict[dataset_name]["train"]).reshape(-1, 1))
+prob_test_std = scaler.fit_transform(np.array(prob_dict[dataset_name]["test"]).reshape(-1, 1))
+ppl_train_std = scaler.fit_transform(np.array(ppl_dict[dataset_name]["train"]).reshape(-1, 1))
+ppl_test_std = scaler.fit_transform(np.array(ppl_dict[dataset_name]["test"]).reshape(-1, 1))
+mink_plus_train_std = scaler.fit_transform(np.array(mink_plus_dict[dataset_name]["train"]).reshape(-1, 1))
+mink_plus_test_std = scaler.fit_transform(np.array(mink_plus_dict[dataset_name]["test"]).reshape(-1, 1))
+zlib_train_std = scaler.fit_transform(np.array(zlib_dict[dataset_name]["train"]).reshape(-1, 1))
+zlib_test_std = scaler.fit_transform(np.array(zlib_dict[dataset_name]["test"]).reshape(-1, 1))
 
-combined_data_train = np.vstack([loss_train_std, zlib_train_std, ppl_train_std]).T
-combined_data_test = np.vstack([loss_test_std, zlib_test_std, ppl_test_std]).T
+combined_data_train_vertical = np.hstack((loss_train_std, zlib_train_std, ppl_train_std)).T
+combined_data_test_vertical = np.hstack((loss_test_std, zlib_test_std, ppl_test_std)).T
 
-# 创建一个新的图形
-fig = plt.figure(figsize=(12, 8))
-ax = fig.add_subplot(111, projection='3d')
+added_data_train = loss_train_std + zlib_train_std + ppl_train_std
+added_data_test = loss_test_std + zlib_test_std + ppl_test_std
+fig, ax = plt.subplots(figsize=(12, 6))
 
-# 估计训练数据的3D核密度
-kde_train = gaussian_kde(combined_data_train.T)
+# 绘制训练数据的归一化直方图
+ax.hist(added_data_train, bins=1000, color='blue', alpha=0.6, label='Train Data', density=True)
 
-# 生成一个坐标栅格
-x = np.linspace(combined_data_train[:, 0].min() - 1,
-                combined_data_train[:, 0].max() + 1, 50)
-y = np.linspace(combined_data_train[:, 1].min() - 1,
-                combined_data_train[:, 1].max() + 1, 50)
-z = np.linspace(combined_data_train[:, 2].min() - 1,
-                combined_data_train[:, 2].max() + 1, 50)
-X, Y, Z = np.meshgrid(x, y, z)
-positions = np.vstack([X.ravel(), Y.ravel(), Z.ravel()])
-density_train = np.reshape(kde_train(positions), X.shape)
-
-# 绘制训练数据的3D密度图
-ax.plot_surface(X[:, :, 0], Y[:, :, 0], density_train[:, :, 25], cmap='viridis', alpha=0.6)
-
-# 估计测试数据的3D核密度
-kde_test = gaussian_kde(combined_data_test.T)
-density_test = np.reshape(kde_test(positions), X.shape)
-
-# 绘制测试数据的3D密度图
-ax.plot_wireframe(X[:, :, 0], Y[:, :, 0], density_test[:, :, 25], color='red', alpha=0.6)
+# 绘制测试数据的归一化直方图
+ax.hist(added_data_test, bins=1000, color='red', alpha=0.6, label='Test Data', density=True)
 
 # 设置标题和标签
-ax.set_title('3D Density Estimation of Train and Test Data')
-ax.set_xlabel('Loss')
-ax.set_ylabel('Zlib')
-ax.set_zlabel('Density')
+ax.set_title('Normalized Distribution of Added Data', fontsize=15)
+ax.set_xlabel('Value', fontsize=12)
+ax.set_ylabel('Probability Density', fontsize=12)
 
 # 添加图例
-train_proxy = plt.Rectangle((0, 0), 1, 1, fc="green", alpha=0.5)
-test_proxy = plt.Rectangle((0, 0), 1, 1, fc="red", alpha=0.5)
-ax.legend([train_proxy, test_proxy], ["Train Data", "Test Data"], loc='upper right')
+ax.legend()
 
 # 保存图像
-plt.savefig("3d_density_distribution.png")
+plt.savefig("normalized_added_data_distribution.png")
 
 # 展示图像
 plt.show()
+#
+# # 创建图形
+# fig = plt.figure(figsize=(12, 8))
+# ax = fig.add_subplot(111, projection='3d')
+#
+# # 绘制训练数据的3D散点图
+# ax.scatter(combined_data_train.T[:,0], combined_data_train.T[:,0], combined_data_train.T[:,0],
+#            c='blue', alpha=0.3, label='Train Data', marker='o')
+#
+# # 绘制测试数据的3D散点图
+# ax.scatter(combined_data_test.T[:,0], combined_data_test.T[:,0], combined_data_test.T[:,0],
+#            c='red', alpha=0.3, label='Test Data', marker='^')
+#
+# # 设置标题和标签
+# ax.set_title('3D Distribution of Train and Test Data')
+# ax.set_xlabel('Loss')
+# ax.set_ylabel('Zlib')
+# ax.set_zlabel('Ppl')
+#
+# # 添加图例
+# ax.legend()
+#
+# # 保存图像
+# plt.savefig("3d_distribution_large.png")
+#
+# # 展示图像
+# plt.show()

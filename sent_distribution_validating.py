@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pdb
 import torch.nn.functional as F
-from scipy.stats import entropy, ks_2samp, kurtosis
+from scipy.stats import entropy, ks_2samp, kurtosis, wasserstein_distance
 import argparse
 import random
 import seaborn as sns
@@ -238,6 +238,19 @@ def ks_hypothesis(dict, dataset_name):
             ks_matrix[idx1][idx2] = ks_stat
     return ks_matrix#close to zero means the two distributions are similar
 
+def wasserstein_distance_caculate(dict, dataset_name):
+    ws_matrix = np.zeros((3, 3))
+    split_set = ["train", "valid", "test"]
+    for idx1, set1 in enumerate(split_set):
+        for idx2, set2 in enumerate(split_set):
+            values = np.array(dict[dataset_name][set1])
+            values1 = values[np.isnan(values) == False]
+            values = np.array(dict[dataset_name][set2])
+            values2 = values[np.isnan(values) == False]
+            ws_stat = wasserstein_distance(values1, values2)
+            ws_matrix[idx1][idx2] = ws_stat
+    return ws_matrix#close to zero means the two distributions are similar
+
 def form_dataset(dataset_name):
     if dataset_name == "WikiMIA":
         for text_len in [32, 64, 128, 256]:
@@ -307,11 +320,14 @@ def results_caculate_and_draw(dataset_name, args):
         ks_matrix = ks_hypothesis(dict, dataset_name)
         print(ks_matrix)
         f.write(str(ks_matrix) + '\n')
+        ws_matrix = wasserstein_distance_caculate(dict, dataset_name)
+        print(ws_matrix)
+        f.write(str(ws_matrix) + '\n')
     f.close()
 
 
 parser = argparse.ArgumentParser()
-parser.add_argument("--batch_size", type=int, default=8)
+parser.add_argument("--batch_size", type=int, default=4)
 parser.add_argument("--model_size", type=str, default="160m")
 parser.add_argument("--dataset_name", type=str, default="Pile-CC", choices=["ArXiv", "DM Mathematics",
                  "FreeLaw", "Github",  "HackerNews", "NIH ExPorter",
@@ -323,9 +339,18 @@ parser.add_argument("--reference_model", type=str, default="True")
 parser.add_argument("--samples", type=int, default=5000)
 args = parser.parse_args()
 
+if args.dataset_name == "all":
+    dataset_names = ["ArXiv", "DM Mathematics",
+                     "FreeLaw", "Github", "HackerNews", "NIH ExPorter",
+                     "Pile-CC", "PubMed Abstracts", "PubMed Central", "StackExchange",
+                     "USPTO Backgrounds", "Wikipedia (en)", "WikiMIA"]
+else:
+    dataset_names = [args.dataset_name]
+
 if args.skip_calculation == "True":
     skip_calculation = True
-    results_caculate_and_draw(args.dataset_name, args)
+    for dataset_name in dataset_names:
+        results_caculate_and_draw(dataset_name, args)
 else:
     skip_calculation = False
     model = GPTNeoXForCausalLM.from_pretrained(
@@ -347,13 +372,6 @@ else:
         refer_model = None
         refer_tokenizer = None
     tokenizer.pad_token = tokenizer.eos_token
-    if args.dataset_name == "all":
-        dataset_names = ["ArXiv", "DM Mathematics",
-                 "FreeLaw", "Github",  "HackerNews", "NIH ExPorter",
-                "Pile-CC", "PubMed Abstracts", "PubMed Central", "StackExchange",
-                "USPTO Backgrounds", "Wikipedia (en)", "WikiMIA"]
-    else:
-        dataset_names = [args.dataset_name]
     for dataset_name in dataset_names:
         dataset = form_dataset(dataset_name)
         loss_dict = {}
