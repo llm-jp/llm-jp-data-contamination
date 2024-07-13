@@ -19,7 +19,7 @@ instance_text = ["I love you"]
 inputs = tokenizer(instance_text, return_tensors="pt", padding=True)
 tokenized_inputs = {key: val.cuda(1) for key, val in inputs.items()}
 with torch.no_grad():
-    outputs = model(**tokenized_inputs)
+    outputs = model(**tokenized_inputs, labels=tokenized_inputs["input_ids"])
 loss, logits = outputs[:2]
 ll = -loss.item() # log-likelihood
 input_ids = inputs["input_ids"][0][1:].unsqueeze(-1)
@@ -31,9 +31,9 @@ sigma = (probs * torch.square(log_probs)).sum(-1) - torch.square(mu)
 
 batch_text = ["I love you", "I hate you and love him"]
 batch_inputs = tokenizer(instance_text, return_tensors="pt", padding=True)
-tokenized_inputs = {key: val.cuda(1) for key, val in batch_inputs.items()}
+batched_tokenized_inputs = {key: val.cuda(1) for key, val in batch_inputs.items()}
 with torch.no_grad():
-    outputs = model(**tokenized_inputs)
+    outputs = model(**batched_tokenized_inputs)
 batch_loss, batch_logits = outputs[:2]
 batch_ll = -loss.item() # log-likelihood
 batch_input_ids = batch_inputs["input_ids"][0][1:].unsqueeze(-1)
