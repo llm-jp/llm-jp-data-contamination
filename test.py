@@ -25,7 +25,7 @@ ll = -loss.item() # log-likelihood
 input_ids = inputs["input_ids"][0][1:].unsqueeze(-1)
 probs = F.softmax(logits[0, :-1], dim=-1)
 log_probs = F.log_softmax(logits[0, :-1], dim=-1)
-token_log_probs = log_probs.gather(dim=-1, index=input_ids).squeeze(-1)
+token_log_probs = log_probs.gather(dim=-1, index=input_ids.cuda(1)).squeeze(-1)
 mu = (probs * log_probs).to(torch.bfloat16).sum(-1).sum(-1)
 sigma = (probs * torch.square(log_probs)).sum(-1) - torch.square(mu)
 
