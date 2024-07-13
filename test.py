@@ -7,7 +7,7 @@ model = GPTNeoXForCausalLM.from_pretrained(
       cache_dir=f"./pythia-160m-deduped/step143000",
     ).half().eval()
 model = model.to_bettertransformer()
-device = torch.device("cuda:1" if torch.cuda.is_available() else "cpu")
+device = torch.device("cuda:2" if torch.cuda.is_available() else "cpu")
 model = model.to(device)
 tokenizer = AutoTokenizer.from_pretrained(
   f"EleutherAI/pythia-160m-deduped",
