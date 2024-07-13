@@ -7,7 +7,8 @@ model = GPTNeoXForCausalLM.from_pretrained(
       cache_dir=f"./pythia-160m-deduped/step143000",
     ).half().eval()
 model = model.to_bettertransformer()
-model = model.cuda(1)
+device = torch.device("cuda:1" if torch.cuda.is_available() else "cpu")
+model = model.to(device)
 tokenizer = AutoTokenizer.from_pretrained(
   f"EleutherAI/pythia-160m-deduped",
   revision="step143000",
@@ -31,17 +32,17 @@ tokenizer.pad_token = tokenizer.eos_token
 #
 batch_text = ["I love you", "I hate you and love him"]
 batch_inputs = tokenizer(batch_text, return_tensors="pt", padding=True)
-batched_tokenized_inputs = {key: val.cuda(1) for key, val in batch_inputs.items()}
+batched_tokenized_inputs = {key: val.to(device) for key, val in batch_inputs.items()}
 target_labels = batched_tokenized_inputs["input_ids"].clone()
 target_labels[batched_tokenized_inputs["attention_mask"] == 0] = -100
 with torch.no_grad():
-    outputs = model(**batched_tokenized_inputs, labels=target_labels.cuda(1))
+    outputs = model(**batched_tokenized_inputs, labels=target_labels.to(device))
 batch_loss, batch_logits = outputs[:2]
 batch_ll = -batch_loss.item() # log-likelihood
 batch_input_ids = batch_inputs["input_ids"][0][1:].unsqueeze(-1)
 batch_probs = F.softmax(batch_logits[0, :-1], dim=-1)
 batch_log_probs = F.log_softmax(batch_logits[0, :-1], dim=-1)
-token_log_probs = batch_log_probs.gather(dim=-1, index=batch_input_ids.cuda(1)).squeeze(-1)
+token_log_probs = batch_log_probs.gather(dim=-1, index=batch_input_ids.to(device)).squeeze(-1)
 #batch_mu = (batch_probs * batch_log_probs).to(torch.bfloat16).sum(-1).sum(-1)
 #batch_sigma = (batch_probs * torch.square(batch_log_probs.to(torch.bfloat16).sum(-1))).sum(-1) - torch.square(batch_mu)
 
