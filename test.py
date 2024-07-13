@@ -39,7 +39,7 @@ with torch.no_grad():
     outputs = model(**batched_tokenized_inputs, labels=target_labels.to(device))
 batch_loss, batch_logits = outputs[:2]
 batch_ll = -batch_loss.item() # log-likelihood
-batch_input_ids = batch_inputs["input_ids"][0][1:].unsqueeze(-1)
+batch_input_ids = batched_tokenized_inputs["input_ids"][0][1:].unsqueeze(-1)
 batch_probs = F.softmax(batch_logits[0, :-1], dim=-1)
 batch_log_probs = F.log_softmax(batch_logits[0, :-1], dim=-1)
 token_log_probs = batch_log_probs.gather(dim=-1, index=batch_input_ids.to(device)).squeeze(-1)
