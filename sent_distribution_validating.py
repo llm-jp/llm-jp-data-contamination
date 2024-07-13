@@ -39,16 +39,17 @@ def mix_distribution(dict, dataset_name, title, args, ratio=0.8, total_num=10000
     # plt.hist(train_data, bins=100, label='Train Distribution', alpha=0.5, weights=weights)
     # weights = np.ones_like(test_data) / len(test_data)
     # plt.hist(test_data, bins=100, label='Test Distribution', alpha=0.5, weights=weights)
-    sns.kdeplot(combined_data, label='Mixed Distribution', alpha=0.5, shade=True)
-    sns.kdeplot(train_data, label='Train Distribution', alpha=0.5, shade=True)
-    sns.kdeplot(test_data, label='Test Distribution', alpha=0.5, shade=True)
+    sns.kdeplot(combined_data, label='Mixed Distribution', alpha=1, shade=True)
+    sns.kdeplot(train_data, label='Train Distribution', alpha=1, shade=True)
+    sns.kdeplot(test_data, label='Test Distribution', alpha=1, shade=True)
     # 设置标题和轴标签
     plt.title(f'Data Distribution of mixed distribution at ratio {ratio} for {dataset_name} at {args.model_size} model')
     plt.xlabel('Value')
     plt.ylabel('Frequency')
     plt.legend()
     plt.tight_layout()
-    plt.savefig(f'{dataset_name} {title} histogram at {args.model_size} model at ratio {ratio}.png')
+    os.makedirs(f"mixed_figure/{dataset_name}", exist_ok=True)
+    plt.savefig(f'mixed_figure/{dataset_name}/{title} histogram at {args.model_size} model at ratio {ratio}.png')
     # 显示图表
     plt.show()
 def remove_outliers(data, m=2):
