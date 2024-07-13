@@ -228,7 +228,8 @@ def js_divergence(dict, dataset_name):
     return js_matrix#close to zero means the two distributions are similar
 
 def ks_hypothesis(dict, dataset_name):
-    ks_matrix = np.zeros((3, 3))
+    ks_statistic_matrix = np.zeros((3, 3))
+    ks_p_value_matrix = np.zeros((3, 3))
     split_set = ["train", "valid", "test"]
     for idx1, set1 in enumerate(split_set):
         for idx2, set2 in enumerate(split_set):
@@ -236,9 +237,10 @@ def ks_hypothesis(dict, dataset_name):
             values1 = values[np.isnan(values) == False]
             values = np.array(dict[dataset_name][set2])
             values2 = values[np.isnan(values) == False]
-            ks_stat, _ = ks_2samp(values1, values2)
-            ks_matrix[idx1][idx2] = ks_stat
-    return ks_matrix#close to zero means the two distributions are similar
+            ks_stat, p_value = ks_2samp(values1, values2)
+            ks_statistic_matrix[idx1][idx2] = ks_stat
+            ks_p_value_matrix[idx1][idx2] = p_value
+    return ks_statistic_matrix, ks_p_value_matrix#close to zero means the two distributions are similar
 
 def wasserstein_distance_caculate(dict, dataset_name):
     ws_matrix = np.zeros((3, 3))
@@ -321,9 +323,11 @@ def results_caculate_and_draw(dataset_name, args):
         js_matrix = js_divergence(dict, dataset_name)
         print(js_matrix)
         f.write(str(js_matrix) + '\n')
-        ks_matrix = ks_hypothesis(dict, dataset_name)
+        ks_matrix, ks_p_value_matrix = ks_hypothesis(dict, dataset_name)
         print(ks_matrix)
         f.write(str(ks_matrix) + '\n')
+        print(ks_p_value_matrix)
+        f.write(str(ks_p_value_matrix) + '\n')
         ws_matrix = wasserstein_distance_caculate(dict, dataset_name)
         print(ws_matrix)
         f.write(str(ws_matrix) + '\n')
