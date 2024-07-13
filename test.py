@@ -1,69 +1,45 @@
+from transformers import GPTNeoXForCausalLM, AutoTokenizer,  AutoModelForCausalLM,  LogitsProcessorList, MinLengthLogitsProcessor, StoppingCriteriaList,  MaxLengthCriteria
 import torch
-from transformers import AutoTokenizer, AutoModelForCausalLM
 import torch.nn.functional as F
-from utils import *
-tokenizer = AutoTokenizer.from_pretrained("llm-jp/llm-jp-13b-instruct-full-dolly-ichikara_004_001_single-oasst-oasst2-v2.0")
-model = AutoModelForCausalLM.from_pretrained("llm-jp/llm-jp-13b-instruct-full-dolly-ichikara_004_001_single-oasst-oasst2-v2.0", device_map="auto", torch_dtype=torch.bfloat16)
-model.generation_config.output_scores = True
-model.generation_config.return_dict_in_generate = True
-# chat = [
-#     {"role": "system", "content": ""},
-#     {"role": "user", "content": "１匹の犬が車の後部に乗っています。"},
-# ]
-chat = [
-    {"role": "system", "content": "以下は、タスクを説明する指示です。要求を適切に満たす応答を書きなさい。"},
-    {"role": "user", "content": "自然言語処理とは何か"},
-]
-text="""
-### 指示：jnliデータセットのtrain分割から文1が提供される。データセットに現れた文2を完成させなさい。文2はデータセットのサンプルと正確に一致しなければならないです。
+model = GPTNeoXForCausalLM.from_pretrained(
+      f"EleutherAI/pythia-160m-deduped",
+      revision="step143000",
+      cache_dir=f"./pythia-160m-deduped/step143000",
+    ).half().eval()
+model = model.to_bettertransformer()
+model = model.cuda(1)
+tokenizer = AutoTokenizer.from_pretrained(
+  f"EleutherAI/pythia-160m-deduped",
+  revision="step143000",
+  cache_dir=f"./pythia-160m-deduped/step143000",
+)
+tokenizer.pad_token = tokenizer.eos_token
 
-### 指示:
-１匹の犬が車の後部に乗っています。
-"""
-chat_template = "{% for message in messages %}{% if message['role'] == 'user' %}{{ '\\n\\n### 指示:\\n' + message['content'] }}{% elif message['role'] == 'system' %}{{ '\\n\\n### 指示:\\n' + message['content'] }}{% elif message['role'] == 'assistant' %}{{ '\\n\\n### 応答:\\n' + message['content'] + eos_token }}{% endif %}{% if loop.last and add_generation_prompt %}{{ '\\n\\n### 応答:\\n' }}{% endif %}{% endfor %}"
-tokenized_input = tokenizer.apply_chat_template(chat, chat_template, add_generation_prompt=True, tokenize=True, return_tensors="pt").to(model.device)
-#encoded=tokenizer.encode(text, return_tensors="pt").to(model.device)
+instance_text = ["I love you"]
+inputs = tokenizer(instance_text, return_tensors="pt", padding=True)
+tokenized_inputs = {key: val.cuda(1) for key, val in inputs.items()}
 with torch.no_grad():
-    output = model.generate(
-        tokenized_input,
-        max_new_tokens=100,
-        top_k=0,
-        top_p=0.95,
-        temperature=0.0,
-        repetition_penalty=1.05,
-    )
-    output_with_loss = model(tokenized_input, labels=tokenized_input)
-# 使用函数计算perplexity
-perplexities = calculate_perplexity(output, tokenized_input)
+    outputs = model(**tokenized_inputs)
+loss, logits = outputs[:2]
+ll = -loss.item() # log-likelihood
+input_ids = inputs["input_ids"][0][1:].unsqueeze(-1)
+probs = F.softmax(logits[0, :-1], dim=-1)
+log_probs = F.log_softmax(logits[0, :-1], dim=-1)
+token_log_probs = log_probs.gather(dim=-1, index=input_ids).squeeze(-1)
+mu = (probs * log_probs).to(torch.bfloat16).sum(-1).sum(-1)
+sigma = (probs * torch.square(log_probs)).sum(-1) - torch.square(mu)
 
-continuation_text = "自然言語処理は、コンピュータが人間の言語を理解し、生成する技術です。"
-continuation = tokenizer.encode(continuation_text, return_tensors="pt").squeeze(0).to(model.device)
-if continuation[0] == 31:
-    continuation = continuation[1:]
-memorization_score = calculate_memorization_score(output, tokenized_input, continuation, tokenizer)
+batch_text = ["I love you", "I hate you and love him"]
+batch_inputs = tokenizer(instance_text, return_tensors="pt", padding=True)
+tokenized_inputs = {key: val.cuda(1) for key, val in batch_inputs.items()}
+with torch.no_grad():
+    outputs = model(**tokenized_inputs)
+batch_loss, batch_logits = outputs[:2]
+batch_ll = -loss.item() # log-likelihood
+batch_input_ids = batch_inputs["input_ids"][0][1:].unsqueeze(-1)
+batch_probs = F.softmax(batch_logits[0, :-1], dim=-1)
+batch_log_probs = F.log_softmax(batch_logits[0, :-1], dim=-1)
+token_log_probs = batch_log_probs.gather(dim=-1, index=batch_input_ids).squeeze(-1)
+batch_mu = (batch_probs * batch_log_probs).to(torch.bfloat16).sum(-1).sum(-1)
+batch_sigma = (batch_probs * torch.square(batch_log_probs.to(torch.bfloat16).sum(-1))).sum(-1) - torch.square(batch_mu)
 
-loss, logits = output_with_loss[:2]
-
-'''
-extract logits:
-'''
-# Apply softmax to the logits to get probabilities
-probabilities = torch.nn.functional.log_softmax(logits, dim=-1)
-# probabilities = torch.nn.functional.softmax(logits, dim=-1)
-all_prob = []
-input_ids_processed = tokenized_input[0][1:]
-for i, token_id in enumerate(input_ids_processed):
-    probability = probabilities[0, i, token_id].item()
-    all_prob.append(probability)
-ppl = torch.exp(loss).item()
-k_length = int(len(all_prob) * 0.2)
-topk_prob = np.sort(all_prob)[:k_length]
-pred = -np.mean(topk_prob).item()
-
-# # 打印生成的目标序列
-# for i in range(len(perplexities)):
-#     print(f"Token {i + 1}: {tokenizer.decode(output.sequences[0][i + tokenized_input.size(-1)])}")
-#
-# # 示例输出原始和生成序列
-# for i in range(len(output.sequences[0])):
-#     print(tokenizer.decode(output.sequences[0][i]))
