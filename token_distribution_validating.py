@@ -8,13 +8,13 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pdb
 import torch.nn.functional as F
-from scipy.stats import entropy, ks_2samp, kurtosis
+from scipy.stats import entropy, ks_2samp, kurtosis, wasserstein_distance
 import argparse
 import random
 import seaborn as sns
 import zlib
 from datasets import DatasetDict
-
+import os
 def batched_data(dataset, batch_size):
     data_iter = iter(dataset)
     while True:
@@ -81,7 +81,8 @@ def figure_draw(data_dict, title,dataset_name, args):
         ax.set_ylabel('Percentage')
         ax.legend()
     plt.tight_layout()
-    plt.savefig(f"{title}_histograms_{args.model_size}_{dataset_name}.png")
+    os.makedirs(f"figures/{dataset_name}", exist_ok=True)
+    plt.savefig(f"figures/{dataset_name}/{title}_histograms_{args.model_size}_{dataset_name}.png")
     plt.show()
 
 
@@ -110,11 +111,17 @@ def caculate_outputs(model, tokenizer, text_batch):
                                  padding=True,
                                  max_length=2048,
                                  )
-    tokenized_inputs = {key: val.cuda(args.cuda) for key, val in tokenized_inputs.items()}
-    target_labels = tokenized_inputs["input_ids"].clone()
-    target_labels[tokenized_inputs["attention_mask"] == 0] = -100
-    with torch.no_grad():
-        outputs = model(**tokenized_inputs, labels=target_labels.cuda(args.cuda))
+    outputs = []
+    input_id_chunks = torch.tensor_split(tokenized_inputs["input_ids"], 10, dim=-1)
+    attention_chunks = torch.tensor_split(tokenized_inputs["attention_mask"], 10, dim=-1)
+    #label_chunks = torch.tensor_split(results["attention_mask"], 10, dim=-1)
+    for i, input_chunk, attention_chunk in enumerate(zip(input_id_chunks, attention_chunks)):
+        input_chunk = torch.cat(input_id_chunks[:i], dim=-1).clone()
+        target_labels = torch.cat(input_id_chunks[:i], dim=-1).clone()
+        target_labels[input_chunk == 0] = -100
+        with torch.no_grad():
+            output = model(input_ids=input_chunk, attention_mask=attention_chunk, labels=target_labels.cuda(args.cuda))
+        outputs.append(output)
     return outputs, tokenized_inputs, target_labels
 
 def caculate_loss_instance(idx, logits, target_labels):
@@ -147,49 +154,61 @@ def feature_collection(model, tokenizer, dataset, args, batch_size=8, upper_limi
         outputs,tokenized_inputs, target_labels = caculate_outputs(model, tokenizer, batched_text)
         if refer_model is not None:
             refer_outputs, refer_target_labels = caculate_outputs(refer_model, refer_tokenizer, batched_text)
-        loss, logits = outputs[:2]
-        log_probabilities = torch.nn.functional.log_softmax(logits, dim=-1)
-        probabilities = torch.nn.functional.softmax(logits, dim=-1)
-        if refer_model is not None:
-            ref_loss, ref_logits = refer_outputs[:2]
-            ref_log_probabilities = torch.nn.functional.log_softmax(ref_logits, dim=-1)
-            ref_probabilities = torch.nn.functional.softmax(ref_logits, dim=-1)
-        # 初始化
-        all_prob = []
-        # 获取每个样本的概率
-        for idx in range(logits.shape[0]):
-            loss_i = caculate_loss_instance(idx, logits, target_labels)
+        for chunked_outputs in outputs:
+            chunk_loss_collect = []
+            chunk_mink_collect = []
+            chunk_mink_plus_collect = []
+            chunk_ppl_collect = []
+            chunk_zlib_collect = []
+            chunk_ref_loss_collect = []
+            loss, logits = chunked_outputs[:2]
+            log_probabilities = torch.nn.functional.log_softmax(logits, dim=-1)
+            probabilities = torch.nn.functional.softmax(logits, dim=-1)
             if refer_model is not None:
-                ref_loss_i = caculate_loss_instance(idx, ref_logits, refer_target_labels)
-                ref_loss_collect.append(loss_i-ref_loss_i)
-            input_ids_processed = tokenized_inputs["input_ids"][idx]
-            attention_mask_processed = tokenized_inputs["attention_mask"][idx]
-            log_probs = log_probabilities[idx]  # 形状为 (seq_length, vocab_size)
-            probs = probabilities[idx]
-            # 使用 attention_mask 筛选有效的 token
-            valid_log_probs = log_probs[attention_mask_processed == 1]
-            valid_token_ids = input_ids_processed[attention_mask_processed == 1]
-            # 获取这些有效 token 的概率
-            selected_log_probs = valid_log_probs.gather(-1, valid_token_ids.unsqueeze(1))
-            mink_plus = min_prob_k_plus(probs, log_probs, selected_log_probs)
-            mink = min_prob_k(selected_log_probs)
-            # 计算 topk 概率
-            # # perplexity's value
-            ppl = torch.exp(loss).item()
-            # 收集结果
-            all_prob.append(selected_log_probs.cpu().numpy())
-            mink_collect.append(mink)
-            mink_plus_collect.append(mink_plus)
-            ppl_collect.append(ppl)
-            loss_collect.append(loss_i.item())
-            zlib_collect.append(loss_i.cpu()/len(zlib.compress(bytes(batched_text[idx], "utf-8"))))
+                ref_loss, ref_logits = refer_outputs[:2]
+                ref_log_probabilities = torch.nn.functional.log_softmax(ref_logits, dim=-1)
+                ref_probabilities = torch.nn.functional.softmax(ref_logits, dim=-1)
+            # 初始化
+            chunk_all_prob = []
+            # 获取每个样本的概率
+            for idx in range(logits.shape[0]):
+                loss_i = caculate_loss_instance(idx, logits, target_labels)
+                if refer_model is not None:
+                    ref_loss_i = caculate_loss_instance(idx, ref_logits, refer_target_labels)
+                    ref_loss_collect.append(loss_i-ref_loss_i)
+                input_ids_processed = tokenized_inputs["input_ids"][idx]
+                attention_mask_processed = tokenized_inputs["attention_mask"][idx]
+                log_probs = log_probabilities[idx]  # 形状为 (seq_length, vocab_size)
+                probs = probabilities[idx]
+                # 使用 attention_mask 筛选有效的 token
+                valid_log_probs = log_probs[attention_mask_processed == 1]
+                valid_token_ids = input_ids_processed[attention_mask_processed == 1]
+                # 获取这些有效 token 的概率
+                selected_log_probs = valid_log_probs.gather(-1, valid_token_ids.unsqueeze(1))
+                mink_plus = min_prob_k_plus(probs, log_probs, selected_log_probs)
+                mink = min_prob_k(selected_log_probs)
+                # 计算 topk 概率
+                # # perplexity's value
+                ppl = torch.exp(loss).item()
+                # 收集结果
+                chunk_all_prob.extend(selected_log_probs.cpu().numpy())
+                chunk_mink_collect.extend(mink)
+                chunk_mink_plus_collect.extend(mink_plus)
+                chunk_ppl_collect.extend(ppl)
+                chunk_loss_collect.extend(loss_i.item())
+                chunk_zlib_collect.extend(loss_i.cpu()/len(zlib.compress(bytes(batched_text[idx], "utf-8"))))
+            loss_collect.append(chunk_loss_collect)
+            mink_collect.append(chunk_mink_collect)
+            mink_plus_collect.append(chunk_mink_plus_collect)
+            ppl_collect.append(chunk_ppl_collect)
+            zlib_collect.append(chunk_zlib_collect)
         if len(loss_collect) >= upper_limit:
             break
-    loss_collect = remove_outliers(loss_collect)
-    mink_collect = remove_outliers(mink_collect)
-    ppl_collect = remove_outliers(ppl_collect)
-    mink_plus_collect = remove_outliers(mink_plus_collect)
-    zlib_collect = remove_outliers(zlib_collect)
+    # loss_collect = remove_outliers(loss_collect)
+    # mink_collect = remove_outliers(mink_collect)
+    # ppl_collect = remove_outliers(ppl_collect)
+    # mink_plus_collect = remove_outliers(mink_plus_collect)
+    # zlib_collect = remove_outliers(zlib_collect)
     return loss_collect, mink_collect, ppl_collect, mink_plus_collect, zlib_collect, ref_loss_collect
 
 def calculate_mean_var(dict, dataset_name):
@@ -238,6 +257,19 @@ def ks_hypothesis(dict, dataset_name):
             ks_matrix[idx1][idx2] = ks_stat
     return ks_matrix#close to zero means the two distributions are similar
 
+def wasserstein_distance_caculate(dict, dataset_name):
+    ws_matrix = np.zeros((3, 3))
+    split_set = ["train", "valid", "test"]
+    for idx1, set1 in enumerate(split_set):
+        for idx2, set2 in enumerate(split_set):
+            values = np.array(dict[dataset_name][set1])
+            values1 = values[np.isnan(values) == False]
+            values = np.array(dict[dataset_name][set2])
+            values2 = values[np.isnan(values) == False]
+            ws_stat = wasserstein_distance(values1, values2)
+            ws_matrix[idx1][idx2] = ws_stat
+    return ws_matrix#close to zero means the two distributions are similar
+
 def form_dataset(dataset_name):
     if dataset_name == "WikiMIA":
         for text_len in [32, 64, 128, 256]:
@@ -265,6 +297,8 @@ def form_dataset(dataset_name):
             'valid': valid_dataset
         })
         return dataset
+
+
 
 def results_caculate_and_draw(dataset_name, args):
     loss_dict = pickle.load(open(f"feature_result/{dataset_name}_{args.model_size}_loss_dict.pkl", "rb"))
@@ -307,11 +341,14 @@ def results_caculate_and_draw(dataset_name, args):
         ks_matrix = ks_hypothesis(dict, dataset_name)
         print(ks_matrix)
         f.write(str(ks_matrix) + '\n')
+        ws_matrix = wasserstein_distance_caculate(dict, dataset_name)
+        print(ws_matrix)
+        f.write(str(ws_matrix) + '\n')
     f.close()
 
 
 parser = argparse.ArgumentParser()
-parser.add_argument("--batch_size", type=int, default=8)
+parser.add_argument("--batch_size", type=int, default=4)
 parser.add_argument("--model_size", type=str, default="160m")
 parser.add_argument("--dataset_name", type=str, default="Pile-CC", choices=["ArXiv", "DM Mathematics",
                  "FreeLaw", "Github",  "HackerNews", "NIH ExPorter",
@@ -323,9 +360,21 @@ parser.add_argument("--reference_model", type=str, default="True")
 parser.add_argument("--samples", type=int, default=5000)
 args = parser.parse_args()
 
+if args.dataset_name == "all":
+    # dataset_names = ["ArXiv", "DM Mathematics",
+    #                  "FreeLaw", "Github", "HackerNews", "NIH ExPorter",
+    #                  "Pile-CC", "PubMed Abstracts", "PubMed Central", "StackExchange",
+    #                  "USPTO Backgrounds", "Wikipedia (en)", "WikiMIA"]
+    dataset_names = ["Github", "HackerNews", "NIH ExPorter",
+                     "Pile-CC", "PubMed Abstracts", "PubMed Central", "StackExchange",
+                     "USPTO Backgrounds", "Wikipedia (en)", "WikiMIA"]
+else:
+    dataset_names = [args.dataset_name]
+
 if args.skip_calculation == "True":
     skip_calculation = True
-    results_caculate_and_draw(args.dataset_name, args)
+    for dataset_name in dataset_names:
+        results_caculate_and_draw(dataset_name, args)
 else:
     skip_calculation = False
     model = GPTNeoXForCausalLM.from_pretrained(
@@ -347,13 +396,6 @@ else:
         refer_model = None
         refer_tokenizer = None
     tokenizer.pad_token = tokenizer.eos_token
-    if args.dataset_name == "all":
-        dataset_names = ["ArXiv", "DM Mathematics",
-                 "FreeLaw", "Github",  "HackerNews", "NIH ExPorter",
-                "Pile-CC", "PubMed Abstracts", "PubMed Central", "StackExchange",
-                "USPTO Backgrounds", "Wikipedia (en)", "WikiMIA"]
-    else:
-        dataset_names = [args.dataset_name]
     for dataset_name in dataset_names:
         dataset = form_dataset(dataset_name)
         loss_dict = {}

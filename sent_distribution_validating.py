@@ -280,6 +280,8 @@ def form_dataset(dataset_name):
         })
         return dataset
 
+
+
 def results_caculate_and_draw(dataset_name, args):
     loss_dict = pickle.load(open(f"feature_result/{dataset_name}_{args.model_size}_loss_dict.pkl", "rb"))
     prob_dict = pickle.load(open(f"feature_result/{dataset_name}_{args.model_size}_prob_dict.pkl", "rb"))
@@ -341,13 +343,13 @@ parser.add_argument("--samples", type=int, default=5000)
 args = parser.parse_args()
 
 if args.dataset_name == "all":
-    # dataset_names = ["ArXiv", "DM Mathematics",
-    #                  "FreeLaw", "Github", "HackerNews", "NIH ExPorter",
-    #                  "Pile-CC", "PubMed Abstracts", "PubMed Central", "StackExchange",
-    #                  "USPTO Backgrounds", "Wikipedia (en)", "WikiMIA"]
-    dataset_names = ["Github", "HackerNews", "NIH ExPorter",
-                     "Pile-CC", "PubMed Abstracts", "PubMed Central", "StackExchange",
-                     "USPTO Backgrounds", "Wikipedia (en)", "WikiMIA"]
+    dataset_names = ["ArXiv", "DM Mathematics",
+                      "FreeLaw", "Github", "HackerNews", "NIH ExPorter",
+                      "Pile-CC", "PubMed Abstracts", "PubMed Central", "StackExchange",
+                      "USPTO Backgrounds", "Wikipedia (en)", "WikiMIA"]
+    #dataset_names = ["Github", "HackerNews", "NIH ExPorter",
+    #                 "Pile-CC", "PubMed Abstracts", "PubMed Central", "StackExchange",
+    #                "USPTO Backgrounds", "Wikipedia (en)", "WikiMIA"]
 else:
     dataset_names = [args.dataset_name]
 
