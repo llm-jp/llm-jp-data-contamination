@@ -42,6 +42,6 @@ batch_input_ids = batch_inputs["input_ids"][0][1:].unsqueeze(-1)
 batch_probs = F.softmax(batch_logits[0, :-1], dim=-1)
 batch_log_probs = F.log_softmax(batch_logits[0, :-1], dim=-1)
 token_log_probs = batch_log_probs.gather(dim=-1, index=batch_input_ids.cuda(1)).squeeze(-1)
-batch_mu = (batch_probs * batch_log_probs).to(torch.bfloat16).sum(-1).sum(-1)
-batch_sigma = (batch_probs * torch.square(batch_log_probs.to(torch.bfloat16).sum(-1))).sum(-1) - torch.square(batch_mu)
+#batch_mu = (batch_probs * batch_log_probs).to(torch.bfloat16).sum(-1).sum(-1)
+#batch_sigma = (batch_probs * torch.square(batch_log_probs.to(torch.bfloat16).sum(-1))).sum(-1) - torch.square(batch_mu)
 
