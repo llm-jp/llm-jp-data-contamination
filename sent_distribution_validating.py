@@ -117,6 +117,9 @@ def caculate_outputs(model, tokenizer, text_batch, device):
     target_labels = tokenized_inputs["input_ids"].clone()
     target_labels[tokenized_inputs["attention_mask"] == 0] = -100
     with torch.no_grad():
+        print(model.device)
+        print(tokenized_inputs["input_ids"].device)
+        print(tokenized_inputs["attention_mask"].device)
         outputs = model(**tokenized_inputs, labels=target_labels.to(device))
     return outputs, tokenized_inputs, target_labels
 
