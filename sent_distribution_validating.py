@@ -204,7 +204,7 @@ def feature_collection(model, tokenizer, dataset, args, batch_size=8, upper_limi
             refer_outputs, refer_target_labels = caculate_outputs(refer_model, refer_tokenizer, batched_text)
         batch_mink_plus_avg, batch_mink_avg = calculate_mink_and_mink_plus(outputs[1], tokenized_inputs)
         loss_value_list, ppl_value_list, zlib_value_list = caculate_instance_loss_perplexity_zlib(outputs[1], target_labels, batched_text)
-        pdb.set_trace()
+        #pdb.set_trace()
         mink_plus_collect.extend(batch_mink_plus_avg)
         mink_collect.extend(batch_mink_avg)
         loss_collect.extend(loss_value_list)
@@ -250,11 +250,11 @@ def feature_collection(model, tokenizer, dataset, args, batch_size=8, upper_limi
         #pdb.set_trace()
         if len(loss_collect) >= upper_limit:
             break
-    loss_collect = remove_outliers(loss_collect)
-    mink_collect = remove_outliers(mink_collect)
-    ppl_collect = remove_outliers(ppl_collect)
-    mink_plus_collect = remove_outliers(mink_plus_collect)
-    zlib_collect = remove_outliers(zlib_collect)
+    # loss_collect = remove_outliers(loss_collect)
+    # mink_collect = remove_outliers(mink_collect)
+    # ppl_collect = remove_outliers(ppl_collect)
+    # mink_plus_collect = remove_outliers(mink_plus_collect)
+    # zlib_collect = remove_outliers(zlib_collect)
     return loss_collect, mink_collect, ppl_collect, mink_plus_collect, zlib_collect, ref_loss_collect
 
 def calculate_mean_var(dict, dataset_name):
