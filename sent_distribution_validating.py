@@ -189,9 +189,9 @@ def caculate_instance_loss_perplexity_zlib(batch_logits, target_labels, batched_
     for idx, i in enumerate(instance_losses):
         loss = i.sum() / sum(i != 0)
         loss_value_list.append(loss.item())
-        ppl = torch.exp(loss).item()
-        ppl_value_list.append(ppl)
-        zlib_value = loss.float().cpu() / len(zlib.compress(bytes(batched_text[idx], "utf-8")))
+        ppl = torch.exp(loss.float()).item()
+        ppl_value_list.append(ppl.float().cpu())
+        zlib_value = loss.float().cpu() / (len(zlib.compress(bytes(batched_text[idx], "utf-8")))+1)
         zlib_value_list.append(zlib_value.item())
     return loss_value_list, ppl_value_list, zlib_value_list
 
@@ -388,6 +388,7 @@ def results_caculate_and_draw(dataset_name, args):
             mix_distribution(zlib_dict, dataset_name, "Zlib", args)
             print("Zlib Distribution Similarity Matrix")
             f.write("Zlib Distribution Similarity Matrix\n")
+        print(idx)
         calculate_mean_var(dict, dataset_name)
         js_matrix = js_divergence(dict, dataset_name)
         print(js_matrix)
