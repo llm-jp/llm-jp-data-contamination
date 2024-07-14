@@ -187,7 +187,7 @@ def caculate_instance_loss_perplexity_zlib(batch_logits, target_labels, batched_
         loss_value_list.append(loss.item())
         ppl = torch.exp(loss).item()
         ppl_value_list.append(ppl)
-        zlib_value = loss.cpu() / len(zlib.compress(bytes(batched_text[idx], "utf-8")))
+        zlib_value = loss.float().cpu() / len(zlib.compress(bytes(batched_text[idx], "utf-8")))
         zlib_value_list.append(zlib_value.item())
     return loss_value_list, ppl_value_list, zlib_value_list
 
