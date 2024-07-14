@@ -106,18 +106,18 @@ def min_prob_k_plus(probs, log_probs, selected_log_probs):
     #     pdb.set_trace()
     return min_k_plus
 
-def caculate_outputs(model, tokenizer, text_batch):
+def caculate_outputs(model, tokenizer, text_batch, device):
     tokenized_inputs = tokenizer(text_batch,
                                  return_tensors="pt",
                                  truncation=True,
                                  padding=True,
                                  max_length=2048,
                                  )
-    tokenized_inputs = {key: val.cuda(args.cuda) for key, val in tokenized_inputs.items()}
-    target_labels = tokenized_inputs["input_ids"].clone()
+    tokenized_inputs = {key: val.to(device) for key, val in tokenized_inputs.items()}
+    target_labels = tokenized_inputs["input_ids"].clone().to(device)
     target_labels[tokenized_inputs["attention_mask"] == 0] = -100
     with torch.no_grad():
-        outputs = model(**tokenized_inputs, labels=target_labels.cuda(args.cuda))
+        outputs = model(**tokenized_inputs, labels=target_labels)
     return outputs, tokenized_inputs, target_labels
 
 def caculate_loss_instance(idx, logits, target_labels):
@@ -192,6 +192,7 @@ def caculate_instance_loss_perplexity_zlib(batch_logits, target_labels, batched_
     return loss_value_list, ppl_value_list, zlib_value_list
 
 def feature_collection(model, tokenizer, dataset, args, batch_size=8, upper_limit=10000, refer_model=None, refer_tokenizer=None):
+    device = f'cuda:{args.cuda}'
     loss_collect = []
     mink_collect = []
     mink_plus_collect = []
@@ -200,7 +201,7 @@ def feature_collection(model, tokenizer, dataset, args, batch_size=8, upper_limi
     ref_loss_collect = []
     for batch in tqdm(batched_data(dataset, batch_size=batch_size)):
         batched_text = [item for item in batch]
-        outputs,tokenized_inputs, target_labels = caculate_outputs(model, tokenizer, batched_text)
+        outputs,tokenized_inputs, target_labels = caculate_outputs(model, tokenizer, batched_text, device=device)
         if refer_model is not None:
             refer_outputs, refer_target_labels = caculate_outputs(refer_model, refer_tokenizer, batched_text)
         batch_mink_plus_avg, batch_mink_avg = calculate_mink_and_mink_plus(outputs[1], tokenized_inputs)
