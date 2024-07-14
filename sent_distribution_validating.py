@@ -185,7 +185,7 @@ def feature_collection(model, tokenizer, dataset, args, batch_size=8, upper_limi
             ppl_collect.append(ppl)
             loss_collect.append(loss_i.item())
             zlib_collect.append(loss_i.cpu()/len(zlib.compress(bytes(batched_text[idx], "utf-8"))))
-        pdb.set_trace()
+        #pdb.set_trace()
         if len(loss_collect) >= upper_limit:
             break
     loss_collect = remove_outliers(loss_collect)
