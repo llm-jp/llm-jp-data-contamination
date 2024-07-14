@@ -188,6 +188,7 @@ def caculate_instance_loss_perplexity_zlib(batch_logits, target_labels, batched_
     zlib_value_list = []
     for idx, i in enumerate(instance_losses):
         loss = i.sum() / sum(i != 0)
+        pdb.set_trace()
         loss_value_list.append(loss.item())
         ppl = torch.exp(loss.float()).item()
         ppl_value_list.append(ppl.float().cpu())
