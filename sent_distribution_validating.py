@@ -15,6 +15,7 @@ import seaborn as sns
 import zlib
 from datasets import DatasetDict
 import os
+from torch.nn import CrossEntropyLoss
 def batched_data(dataset, batch_size):
     data_iter = iter(dataset)
     while True:
@@ -137,6 +138,58 @@ def caculate_loss_instance(idx, logits, target_labels):
     # 计算每个样本的平均损失
     loss_i = loss_i.sum() / valid_mask.sum()
     return loss_i
+
+def calculate_mink_and_mink_plus(batch_logits, batched_tokenized_inputs):
+    batch_input_ids = batched_tokenized_inputs["input_ids"][:, 1:].unsqueeze(-1)
+    target_labels = batched_tokenized_inputs["input_ids"].clone()
+    target_labels[batched_tokenized_inputs["attention_mask"] == 0] = -100
+    batch_probs = F.softmax(batch_logits[:, :-1], dim=-1)
+    batch_log_probs = F.log_softmax(batch_logits[:, :-1], dim=-1)
+    mask = target_labels[:, 1:] != -100
+    mask = mask.unsqueeze(-1)
+    batch_token_log_probs = batch_log_probs.gather(dim=-1, index=batch_input_ids).squeeze(-1)
+    batch_probs_masked = batch_probs.where(mask, 0)
+    batch_log_probs_masked = batch_log_probs.where(mask, 0)
+    batch_mu = (batch_probs_masked * batch_log_probs_masked).to(torch.bfloat16).sum(-1)
+    batch_sigma = (batch_probs_masked * torch.square(batch_log_probs_masked.to(torch.bfloat16))).sum(
+        dim=-1) - torch.square(batch_mu)
+    mask = mask.squeeze()
+    batch_mink_plus = (batch_token_log_probs - batch_mu).to(torch.bfloat16) * mask / batch_sigma.sqrt()
+    token_length = mask.sum(dim=1)
+    batch_mink_plus[mask == False] = torch.inf
+    batch_token_log_probs[mask == False] = torch.inf
+    sorted_mink_plus, _ = torch.sort(batch_mink_plus)
+    sorted_mink, _ = torch.sort(batch_token_log_probs)
+    batch_mink_plus_avg = []
+    batch_mink_avg = []
+    for i, length in enumerate(token_length):
+        front_values = sorted_mink_plus[i, :length]
+        avg = torch.mean(front_values.float()).item()
+        batch_mink_plus_avg.append(avg)
+        front_values = sorted_mink[i, :length]
+        avg = torch.mean(front_values.float()).item()
+        batch_mink_avg.append(avg)
+    return batch_mink_plus_avg, batch_mink_avg
+
+
+def caculate_instance_loss_perplexity_zlib(batch_logits, target_labels, batched_text):
+    shift_logits = batch_logits[:, :-1, :].contiguous()
+    labels = target_labels[:, 1:].contiguous()
+    loss_fct = CrossEntropyLoss(reduction='none')
+    lm_loss = loss_fct(shift_logits.view(-1, shift_logits.size(-1)), labels.view(-1))
+    instance_losses = lm_loss.view(-1, shift_logits.size(1))
+    loss_value_list = []
+    ppl_value_list = []
+    zlib_value_list = []
+    for idx, i in enumerate(instance_losses):
+        loss = i.sum() / sum(i != 0)
+        loss_value_list.append(loss.item())
+        ppl = torch.exp(loss).item()
+        ppl_value_list.append(ppl)
+        zlib_value = loss.cpu() / len(zlib.compress(bytes(batched_text[idx], "utf-8")))
+        zlib_value_list.append(zlib_value.item())
+    return loss_value_list, ppl_value_list, zlib_value_list
+
 def feature_collection(model, tokenizer, dataset, args, batch_size=8, upper_limit=10000, refer_model=None, refer_tokenizer=None):
     loss_collect = []
     mink_collect = []
@@ -149,42 +202,51 @@ def feature_collection(model, tokenizer, dataset, args, batch_size=8, upper_limi
         outputs,tokenized_inputs, target_labels = caculate_outputs(model, tokenizer, batched_text)
         if refer_model is not None:
             refer_outputs, refer_target_labels = caculate_outputs(refer_model, refer_tokenizer, batched_text)
-        loss, logits = outputs[:2]
-        log_probabilities = torch.nn.functional.log_softmax(logits, dim=-1)
-        probabilities = torch.nn.functional.softmax(logits, dim=-1)
+        batch_mink_plus_avg, batch_mink_avg = calculate_mink_and_mink_plus(outputs[1], tokenized_inputs)
+        loss_value_list, ppl_value_list, zlib_value_list = caculate_instance_loss_perplexity_zlib(outputs[1], target_labels, batched_text)
+        pdb.set_trace()
+        mink_plus_collect.extend(batch_mink_plus_avg)
+        mink_collect.extend(batch_mink_avg)
+        loss_collect.extend(loss_value_list)
+        ppl_collect.extend(ppl_value_list)
+        zlib_collect.extend(zlib_value_list)
         if refer_model is not None:
             ref_loss, ref_logits = refer_outputs[:2]
             ref_log_probabilities = torch.nn.functional.log_softmax(ref_logits, dim=-1)
             ref_probabilities = torch.nn.functional.softmax(ref_logits, dim=-1)
-        # 初始化
-        all_prob = []
-        # 获取每个样本的概率
-        for idx in range(logits.shape[0]):
-            loss_i = caculate_loss_instance(idx, logits, target_labels)
-            if refer_model is not None:
-                ref_loss_i = caculate_loss_instance(idx, ref_logits, refer_target_labels)
-                ref_loss_collect.append(loss_i-ref_loss_i)
-            input_ids_processed = tokenized_inputs["input_ids"][idx]
-            attention_mask_processed = tokenized_inputs["attention_mask"][idx]
-            log_probs = log_probabilities[idx]  # 形状为 (seq_length, vocab_size)
-            probs = probabilities[idx]
-            # 使用 attention_mask 筛选有效的 token
-            valid_log_probs = log_probs[attention_mask_processed == 1]
-            valid_token_ids = input_ids_processed[attention_mask_processed == 1]
-            # 获取这些有效 token 的概率
-            selected_log_probs = valid_log_probs.gather(-1, valid_token_ids.unsqueeze(1))
-            mink_plus = min_prob_k_plus(probs, log_probs, selected_log_probs)
-            mink = min_prob_k(selected_log_probs)
-            # 计算 topk 概率
-            # # perplexity's value
-            ppl = torch.exp(loss).item()
-            # 收集结果
-            all_prob.append(selected_log_probs.cpu().numpy())
-            mink_collect.append(mink)
-            mink_plus_collect.append(mink_plus)
-            ppl_collect.append(ppl)
-            loss_collect.append(loss_i.item())
-            zlib_collect.append(loss_i.cpu()/len(zlib.compress(bytes(batched_text[idx], "utf-8"))))
+        # # 初始化
+        # all_prob = []
+        # # 获取每个样本的概率
+        # batch_mink_plus_avg, batch_mink_avg = calculate_mink_and_mink_plus(logits, tokenized_inputs)
+        # loss, logits = outputs[:2]
+        # log_probabilities = torch.nn.functional.log_softmax(logits, dim=-1)
+        # probabilities = torch.nn.functional.softmax(logits, dim=-1)
+        # for idx in range(logits.shape[0]):
+        #     loss_i = caculate_loss_instance(idx, logits, target_labels)
+        #     if refer_model is not None:
+        #         ref_loss_i = caculate_loss_instance(idx, ref_logits, refer_target_labels)
+        #         ref_loss_collect.append(loss_i-ref_loss_i)
+        #     input_ids_processed = tokenized_inputs["input_ids"][idx]
+        #     attention_mask_processed = tokenized_inputs["attention_mask"][idx]
+        #     log_probs = log_probabilities[idx]  # 形状为 (seq_length, vocab_size)
+        #     probs = probabilities[idx]
+        #     # 使用 attention_mask 筛选有效的 token
+        #     valid_log_probs = log_probs[attention_mask_processed == 1]
+        #     valid_token_ids = input_ids_processed[attention_mask_processed == 1]
+        #     # 获取这些有效 token 的概率
+        #     selected_log_probs = valid_log_probs.gather(-1, valid_token_ids.unsqueeze(1))
+        #     mink_plus = min_prob_k_plus(probs, log_probs, selected_log_probs)
+        #     mink = min_prob_k(selected_log_probs)
+        #     # 计算 topk 概率
+        #     # # perplexity's value
+        #     ppl = torch.exp(loss).item()
+        #     # 收集结果
+        #     all_prob.append(selected_log_probs.cpu().numpy())
+        #     mink_collect.append(mink)
+        #     mink_plus_collect.append(mink_plus)
+        #     ppl_collect.append(ppl)
+        #     loss_collect.append(loss_i.item())
+        #     zlib_collect.append(loss_i.cpu()/len(zlib.compress(bytes(batched_text[idx], "utf-8"))))
         #pdb.set_trace()
         if len(loss_collect) >= upper_limit:
             break
