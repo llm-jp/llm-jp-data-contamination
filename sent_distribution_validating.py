@@ -87,18 +87,14 @@ def figure_draw(data_dict, title,dataset_name, args):
     plt.show()
 
 
-def min_prob_k(selected_log_probs, tokenized_inputs, target_labels):
-    target_labels = tokenized_inputs["input_ids"].clone()
-    target_labels[tokenized_inputs["attention_mask"] == 0] = -100
+def min_prob_k(selected_log_probs):
     k_length = int(len(selected_log_probs) * 0.2)
     topk_log_prob = np.sort(selected_log_probs.cpu().numpy())[:k_length]
     min_k = -np.mean(topk_log_prob).item()
     return min_k
 
-def min_prob_k_plus(probs, log_probs, selected_log_probs, tokenized_inputs, target_labels):
+def min_prob_k_plus(probs, log_probs, selected_log_probs):
     #pdb.set_trace()
-    target_labels = tokenized_inputs["input_ids"].clone()
-    target_labels[tokenized_inputs["attention_mask"] == 0] = -100
     mu = (probs * log_probs).to(torch.bfloat16).sum(-1)
     sigma = (probs.to(torch.bfloat16) * torch.square(log_probs.to(torch.bfloat16))).sum(-1) - torch.square(mu).to(torch.bfloat16)
     mink_plus = (selected_log_probs - mu) / (sigma.sqrt()+1e-9)
@@ -156,36 +152,6 @@ def feature_collection(model, tokenizer, dataset, args, batch_size=8, upper_limi
         loss, logits = outputs[:2]
         log_probabilities = torch.nn.functional.log_softmax(logits, dim=-1)
         probabilities = torch.nn.functional.softmax(logits, dim=-1)
-        ####
-        mink_target_labels = tokenized_inputs["input_ids"].clone()
-        mink_target_labels[tokenized_inputs["attention_mask"] == 0] = -100
-        batch_input_ids = tokenized_inputs["input_ids"][:, 1:].unsqueeze(-1)
-        batch_probs = F.softmax(logits[:, :-1].to(model.device), dim=-1)
-        batch_log_probs = F.log_softmax(logits[:, :-1].to(model.device), dim=-1)
-        mask = mink_target_labels[:, 1:] != -100
-        mask = mask.unsqueeze(-1)
-        batch_token_log_probs = batch_log_probs.gather(dim=-1, index=batch_input_ids.to(model.device)).squeeze(-1)
-        batch_probs_masked = batch_probs.where(mask, 0)  # 对 batch_probs 应用 mask
-        batch_log_probs_masked = batch_log_probs.where(mask, 0)
-        batch_mu = (batch_probs_masked * batch_log_probs_masked).to(torch.bfloat16).sum(-1).sum(-1)
-        batch_sigma = (batch_probs_masked * torch.square(batch_log_probs_masked.to(torch.bfloat16))).sum(
-            -1) - torch.square(batch_mu).unsqueeze(-1)
-        mask = mask.squeeze()
-        token_length = mask.sum(dim=1)*0.2
-        batch_sigma[mask == False] = torch.inf
-        sorted_sigma, _ = torch.sort(batch_sigma)
-        batch_token_log_probs[mask]==0
-        sorted_log_probs, _ = torch.sort(batch_token_log_probs)
-        avg_mink_plus = []
-        avg_mink = []
-        for i, length in enumerate(token_length):
-            front_sigma = sorted_sigma[i, :int(length)]  # 选择前 length 个元素
-            front_log_probs = sorted_log_probs[i, :int(length)]
-            mink_plus = torch.mean(front_sigma.float()).item()  # 计算平均值，确保为 float 类型以返回正确的平均值
-            mink = torch.mean(front_log_probs.float()).item()
-            avg_mink_plus.append(mink_plus)
-            avg_mink.append(mink)
-        ####
         if refer_model is not None:
             ref_loss, ref_logits = refer_outputs[:2]
             ref_log_probabilities = torch.nn.functional.log_softmax(ref_logits, dim=-1)
@@ -207,8 +173,8 @@ def feature_collection(model, tokenizer, dataset, args, batch_size=8, upper_limi
             valid_token_ids = input_ids_processed[attention_mask_processed == 1]
             # 获取这些有效 token 的概率
             selected_log_probs = valid_log_probs.gather(-1, valid_token_ids.unsqueeze(1))
-            mink_plus = min_prob_k_plus(probs, log_probs, selected_log_probs, tokenized_inputs, target_labels)
-            mink = min_prob_k(selected_log_probs, tokenized_inputs, target_labels)
+            mink_plus = min_prob_k_plus(probs, log_probs, selected_log_probs)
+            mink = min_prob_k(selected_log_probs)
             # 计算 topk 概率
             # # perplexity's value
             ppl = torch.exp(loss).item()
@@ -383,13 +349,12 @@ parser.add_argument("--samples", type=int, default=5000)
 args = parser.parse_args()
 
 if args.dataset_name == "all":
-    dataset_names = ["ArXiv", "DM Mathematics",
-                      "FreeLaw", "Github", "HackerNews", "NIH ExPorter",
-                      "Pile-CC", "PubMed Abstracts", "PubMed Central", "StackExchange",
-                      "USPTO Backgrounds", "Wikipedia (en)", "WikiMIA"]
-    #dataset_names = ["Github", "HackerNews", "NIH ExPorter",
-    #                 "Pile-CC", "PubMed Abstracts", "PubMed Central", "StackExchange",
-    #                "USPTO Backgrounds", "Wikipedia (en)", "WikiMIA"]
+    #dataset_names = ["ArXiv", "DM Mathematics",
+    #                 "FreeLaw", "Github", "HackerNews", "NIH ExPorter",
+    #                  "Pile-CC", "PubMed Abstracts", "PubMed Central", "StackExchange",
+    #                  "USPTO Backgrounds", "Wikipedia (en)", "WikiMIA"]
+    dataset_names = ["Pile-CC", "PubMed Abstracts", "PubMed Central", "StackExchange",
+                    "USPTO Backgrounds", "Wikipedia (en)", "WikiMIA"]
 else:
     dataset_names = [args.dataset_name]
 
