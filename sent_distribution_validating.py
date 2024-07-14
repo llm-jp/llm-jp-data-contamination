@@ -152,12 +152,9 @@ def calculate_mink_and_mink_plus(batch_logits, batched_tokenized_inputs):
     batch_log_probs_masked = batch_log_probs.where(mask, 0)
     batch_mu = (batch_probs_masked.float() * batch_log_probs_masked.float()).float().sum(-1)
     batch_sigma =  ((batch_probs_masked.float() * torch.square(torch.where(batch_probs_masked > 0,batch_log_probs_masked.float(),  torch.tensor(0.0, device=batch_log_probs_masked.device, dtype=torch.float32)))).sum(dim=-1)- torch.square(batch_mu.float()).squeeze())
-    mask = mask.squeeze()
+    mask = mask.squeeze(-1)
     batch_mink_plus = (batch_token_log_probs - batch_mu).float() * mask / batch_sigma.float().sqrt()
-    try:
-        token_length = mask.sum(dim=1)
-    except:
-        pdb.set_trace()
+    token_length = mask.sum(dim=1)
     batch_mink_plus[mask == False] = torch.inf
     batch_token_log_probs[mask == False] = torch.inf
     sorted_mink_plus, _ = torch.sort(batch_mink_plus)
