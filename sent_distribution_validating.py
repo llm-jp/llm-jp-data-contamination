@@ -114,10 +114,10 @@ def caculate_outputs(model, tokenizer, text_batch, device):
                                  max_length=2048,
                                  )
     tokenized_inputs = {key: val.to(device) for key, val in tokenized_inputs.items()}
-    target_labels = tokenized_inputs["input_ids"].clone().to(device)
+    target_labels = tokenized_inputs["input_ids"].clone()
     target_labels[tokenized_inputs["attention_mask"] == 0] = -100
     with torch.no_grad():
-        outputs = model(**tokenized_inputs, labels=target_labels)
+        outputs = model(**tokenized_inputs, labels=target_labels.to(device))
     return outputs, tokenized_inputs, target_labels
 
 def caculate_loss_instance(idx, logits, target_labels):
@@ -413,12 +413,12 @@ parser.add_argument("--samples", type=int, default=5000)
 args = parser.parse_args()
 
 if args.dataset_name == "all":
-    # dataset_names = ["ArXiv", "DM Mathematics",
-    #                 "FreeLaw", "Github", "HackerNews", "NIH ExPorter",
-    #                  "Pile-CC", "PubMed Abstracts", "PubMed Central", "StackExchange",
-    #                  "USPTO Backgrounds", "Wikipedia (en)", "WikiMIA"]
-    dataset_names = ["Github", "HackerNews", "NIH ExPorter","Pile-CC", "PubMed Abstracts", "PubMed Central", "StackExchange",
-                    "USPTO Backgrounds", "Wikipedia (en)", "WikiMIA"]
+    dataset_names = ["ArXiv", "DM Mathematics",
+                     "FreeLaw", "Github", "HackerNews", "NIH ExPorter",
+                      "Pile-CC", "PubMed Abstracts", "PubMed Central", "StackExchange",
+                      "USPTO Backgrounds", "Wikipedia (en)", "WikiMIA"]
+    #dataset_names = ["Github", "HackerNews", "NIH ExPorter","Pile-CC", "PubMed Abstracts", "PubMed Central", "StackExchange",
+    #                "USPTO Backgrounds", "Wikipedia (en)", "WikiMIA"]
 else:
     dataset_names = [args.dataset_name]
 
@@ -432,9 +432,9 @@ else:
       f"EleutherAI/pythia-{args.model_size}-deduped",
       revision="step143000",
       cache_dir=f"./pythia-{args.model_size}-deduped/step143000",
-    ).half().eval()
+    ).cuda(args.cuda).half().eval()
     model = model.to_bettertransformer()
-    model = model.cuda(args.cuda)
+
     tokenizer = AutoTokenizer.from_pretrained(
       f"EleutherAI/pythia-{args.model_size}-deduped",
       revision="step143000",
