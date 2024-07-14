@@ -166,6 +166,8 @@ def calculate_mink_and_mink_plus(batch_logits, batched_tokenized_inputs):
         front_values = sorted_mink_plus[i, :length]
         avg = torch.mean(front_values.float()).item()
         batch_mink_plus_avg.append(avg)
+        if torch.tensor(avg) == torch.inf:
+            pdb.set_trace()
         front_values = sorted_mink[i, :length]
         avg = torch.mean(front_values.float()).item()
         batch_mink_avg.append(avg)
