@@ -114,13 +114,14 @@ def caculate_outputs(model, tokenizer, text_batch, device):
                                  max_length=2048,
                                  )
     tokenized_inputs = {key: val.to(device) for key, val in tokenized_inputs.items()}
-    target_labels = tokenized_inputs["input_ids"].clone()
+    target_labels = tokenized_inputs["input_ids"].clone().to(device)
     target_labels[tokenized_inputs["attention_mask"] == 0] = -100
     with torch.no_grad():
         print(model.device)
         print(tokenized_inputs["input_ids"].device)
         print(tokenized_inputs["attention_mask"].device)
-        outputs = model(**tokenized_inputs, labels=target_labels.to(device))
+        print(target_labels.device)
+        outputs = model(**tokenized_inputs, labels=target_labels)
     return outputs, tokenized_inputs, target_labels
 
 def caculate_loss_instance(idx, logits, target_labels):
