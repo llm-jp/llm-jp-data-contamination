@@ -154,7 +154,10 @@ def calculate_mink_and_mink_plus(batch_logits, batched_tokenized_inputs):
     batch_sigma =  ((batch_probs_masked.float() * torch.square(torch.where(batch_probs_masked > 0,batch_log_probs_masked.float(),  torch.tensor(0.0, device=batch_log_probs_masked.device, dtype=torch.float32)))).sum(dim=-1)- torch.square(batch_mu.float()).squeeze())
     mask = mask.squeeze()
     batch_mink_plus = (batch_token_log_probs - batch_mu).float() * mask / batch_sigma.float().sqrt()
-    token_length = mask.sum(dim=1)
+    try:
+        token_length = mask.sum(dim=1)
+    except:
+        pdb.set_trace()
     batch_mink_plus[mask == False] = torch.inf
     batch_token_log_probs[mask == False] = torch.inf
     sorted_mink_plus, _ = torch.sort(batch_mink_plus)
@@ -412,12 +415,12 @@ parser.add_argument("--samples", type=int, default=5000)
 args = parser.parse_args()
 
 if args.dataset_name == "all":
-    dataset_names = ["ArXiv", "DM Mathematics",
-                    "FreeLaw", "Github", "HackerNews", "NIH ExPorter",
-                     "Pile-CC", "PubMed Abstracts", "PubMed Central", "StackExchange",
-                     "USPTO Backgrounds", "Wikipedia (en)", "WikiMIA"]
-    #dataset_names = ["Pile-CC", "PubMed Abstracts", "PubMed Central", "StackExchange",
-    #                "USPTO Backgrounds", "Wikipedia (en)", "WikiMIA"]
+    # dataset_names = ["ArXiv", "DM Mathematics",
+    #                 "FreeLaw", "Github", "HackerNews", "NIH ExPorter",
+    #                  "Pile-CC", "PubMed Abstracts", "PubMed Central", "StackExchange",
+    #                  "USPTO Backgrounds", "Wikipedia (en)", "WikiMIA"]
+    dataset_names = ["Github", "HackerNews", "NIH ExPorter","Pile-CC", "PubMed Abstracts", "PubMed Central", "StackExchange",
+                    "USPTO Backgrounds", "Wikipedia (en)", "WikiMIA"]
 else:
     dataset_names = [args.dataset_name]
 
