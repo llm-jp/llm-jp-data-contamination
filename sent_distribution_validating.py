@@ -250,11 +250,11 @@ def feature_collection(model, tokenizer, dataset, args, batch_size=8, upper_limi
         #pdb.set_trace()
         if len(loss_collect) >= upper_limit:
             break
-    # loss_collect = remove_outliers(loss_collect)
-    # mink_collect = remove_outliers(mink_collect)
-    # ppl_collect = remove_outliers(ppl_collect)
-    # mink_plus_collect = remove_outliers(mink_plus_collect)
-    # zlib_collect = remove_outliers(zlib_collect)
+    loss_collect = remove_outliers(loss_collect)
+    mink_collect = remove_outliers(mink_collect)
+    ppl_collect = remove_outliers(ppl_collect)
+    mink_plus_collect = remove_outliers(mink_plus_collect)
+    zlib_collect = remove_outliers(zlib_collect)
     return loss_collect, mink_collect, ppl_collect, mink_plus_collect, zlib_collect, ref_loss_collect
 
 def calculate_mean_var(dict, dataset_name):
