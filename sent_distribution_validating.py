@@ -144,15 +144,16 @@ def calculate_mink_and_mink_plus(batch_logits, batched_tokenized_inputs):
     target_labels = batched_tokenized_inputs["input_ids"].clone()
     target_labels[batched_tokenized_inputs["attention_mask"] == 0] = -100
     batch_probs = F.softmax(batch_logits[:, :-1], dim=-1)
-    batch_log_probs = F.log_softmax(batch_logits[:, :-1], dim=-1)
+    batch_log_probs = F.log_softmax(batch_logits[:, :-1].to(torch.bfloat16), dim=-1)
     mask = target_labels[:, 1:] != -100
     mask = mask.unsqueeze(-1)
     batch_token_log_probs = batch_log_probs.gather(dim=-1, index=batch_input_ids).squeeze(-1)
     batch_probs_masked = batch_probs.where(mask, 0)
     batch_log_probs_masked = batch_log_probs.where(mask, 0)
-    batch_mu = (batch_probs_masked * batch_log_probs_masked).to(torch.bfloat16).sum(-1)
-    batch_sigma = (batch_probs_masked * torch.square(batch_log_probs_masked.to(torch.bfloat16))).sum(
-        dim=-1) - torch.square(batch_mu)
+    batch_mu = (batch_probs_masked * batch_log_probs_masked).to(torch.float32).sum(-1)
+    batch_sigma =  ((batch_probs_masked.float() * torch.square(torch.where(batch_probs_masked > 0,
+                   batch_log_probs_masked.float(),  torch.tensor(0.0, device=batch_log_probs_masked.device, dtype=torch.float32)))).sum(dim=-1)
+                    - torch.square(batch_mu.float()).squeeze())
     mask = mask.squeeze()
     batch_mink_plus = (batch_token_log_probs - batch_mu).to(torch.bfloat16) * mask / batch_sigma.sqrt()
     token_length = mask.sum(dim=1)
