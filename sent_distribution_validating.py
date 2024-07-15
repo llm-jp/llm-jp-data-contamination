@@ -58,8 +58,10 @@ def remove_outliers(data, m=2):
     mean = np.mean(data)
     std = np.std(data)
 
-    # 找到离群值
-    outliers = data > mean + m * std
+    # 找到大于均值 + m * std 和小于均值 - m * std 的离群值
+    outliers_high = data > mean + m * std
+    outliers_low = data < mean - m * std
+    outliers = outliers_high | outliers_low
 
     # 计算没有离群值的平均值
     mean_without_outliers = np.mean(data[~outliers])
