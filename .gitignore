@@ -5,3 +5,5 @@ datasets_contamination
 datasets_contamination/
 pythia-70m-deduped
 pythia-70m-deduped/
+feature_result
+feature_result/
