@@ -19,7 +19,7 @@ parser.add_argument("--dataset_name", type=str, default="all", choices=["ArXiv",
 parser.add_argument("--cuda", type=int, default=1, help="cuda device")
 parser.add_argument("--skip_calculation", type=str, default="True")
 parser.add_argument("--reference_model", type=str, default="True")
-parser.add_argument("--samples", type=int, default=100)
+parser.add_argument("--samples", type=int, default=1000)
 parser.add_argument("--gradient_collection", type=str, default=False)
 args = parser.parse_args()
 
@@ -109,8 +109,6 @@ for dataset_name in dataset_names:
     plt.grid(True)
     #plt.savefig(f'embedding_figure/PCA_{dataset_name}_{args.model_size}.png')
     plt.show()
-            #attentions = outputs.attentions
-            #pdb.set_trace()
     labels = np.array([1] * len(member_embed_array) + [0] * len(non_member_embed_array))
     X = np.vstack((member_embed_array, non_member_embed_array))
     db_index = davies_bouldin_score(X, labels)
