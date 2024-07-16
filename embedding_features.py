@@ -56,7 +56,7 @@ for dataset_name in dataset_names:
     device = f'cuda:{args.cuda}'
     member_embed_list = []
     non_member_embed_list = []
-    for set_name in ["train", "validation", "test"]:
+    for set_name in ["train", "valid", "test"]:
         for batch in tqdm(batched_data(dataset[set_name], batch_size=args.batch_size)):
             batched_text = [item for item in batch]
             tokenized_inputs = tokenizer(batched_text,
@@ -105,6 +105,7 @@ plt.ylabel('PCA Component 2')
 plt.title('PCA of Member and Non-Member Embeddings')
 plt.legend()
 plt.grid(True)
+plt.savefig(f'PCA_{dataset_name}_{args.model_size}.png')
 plt.show()
             #attentions = outputs.attentions
             #pdb.set_trace()
