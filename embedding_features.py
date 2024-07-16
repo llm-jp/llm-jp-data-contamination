@@ -11,7 +11,7 @@ from sklearn.metrics import roc_auc_score, silhouette_score, f1_score, davies_bo
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--batch_size", type=int, default=1)
-parser.add_argument("--model_size", type=str, default="410m")
+parser.add_argument("--model_size", type=str, default="1b")
 parser.add_argument("--dataset_name", type=str, default="all", choices=["ArXiv", "DM Mathematics",
                  "FreeLaw", "Github",  "HackerNews", "NIH ExPorter",
                 "Pile-CC", "PubMed Abstracts", "PubMed Central", "StackExchange",
@@ -52,6 +52,7 @@ model.generation_config.output_hidden_states = True
 model.generation_config.output_attentions = True
 model.generation_config.output_scores = True
 model.generation_config.return_dict_in_generate = True
+f = open(f"{args.model_size}_embedding_result.txt", "w")
 for dataset_name in dataset_names:
     dataset = form_dataset(dataset_name)
     device = f'cuda:{args.cuda}'
@@ -114,6 +115,8 @@ for dataset_name in dataset_names:
     db_index = davies_bouldin_score(X, labels)
     silhouette_avg = silhouette_score(X, labels)
     print("DB Index: ", db_index)
+    f.write(f"{dataset_name} DB Index: {db_index}\n")
     print("Silhouette Score: ", silhouette_avg)
+    f.write(f"{dataset_name} Silhouette Score: {silhouette_avg}\n")
 
 
