@@ -72,14 +72,17 @@ for dataset_name in dataset_names:
             target_labels[tokenized_inputs["attention_mask"] == 0] = -100
             #pdb.set_trace()
             torch.cuda.synchronize()
-            with torch.no_grad():
-                outputs = model(**tokenized_inputs, labels=target_labels, output_attentions=True,output_hidden_states=True, return_dict=True)
-            hidden_states = outputs.hidden_states
-            context_embedding = hidden_states[0][-1].mean(0).squeeze()
-            if set_name == "train" and len(member_embed_list) < args.samples:
-                member_embed_list.append(context_embedding.cpu())
-            elif set_name == "test" and len(non_member_embed_list) < args.samples:
-                non_member_embed_list.append(context_embedding.cpu())
+            try:
+                with torch.no_grad():
+                    outputs = model(**tokenized_inputs, labels=target_labels, output_attentions=True,output_hidden_states=True, return_dict=True)
+                hidden_states = outputs.hidden_states
+                context_embedding = hidden_states[0][-1].mean(0).squeeze()
+                if set_name == "train" and len(member_embed_list) < args.samples:
+                    member_embed_list.append(context_embedding.cpu())
+                elif set_name == "test" and len(non_member_embed_list) < args.samples:
+                    non_member_embed_list.append(context_embedding.cpu())
+            except:
+                continue
 
     member_embed_array = np.array(member_embed_list)
     non_member_embed_array = np.array(non_member_embed_list)
