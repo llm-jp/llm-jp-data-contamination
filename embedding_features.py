@@ -69,7 +69,7 @@ for dataset_name in dataset_names:
             tokenized_inputs = {key: val.to(device) for key, val in tokenized_inputs.items()}
             target_labels = tokenized_inputs["input_ids"].clone().to(device)
             target_labels[tokenized_inputs["attention_mask"] == 0] = -100
-            pdb.set_trace()
+            #pdb.set_trace()
             torch.cuda.synchronize()
             with torch.no_grad():
                 outputs = model(**tokenized_inputs, labels=target_labels, output_attentions=True,output_hidden_states=True, return_dict=True)
