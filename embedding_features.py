@@ -58,6 +58,8 @@ for dataset_name in dataset_names:
     non_member_embed_list = []
     for set_name in ["train", "test"]:
         for batch in tqdm(batched_data(dataset[set_name], batch_size=args.batch_size)):
+            if len(member_embed_list) >= args.samples and len(non_member_embed_list) >= args.samples:
+                break
             batched_text = [item for item in batch]
             tokenized_inputs = tokenizer(batched_text,
                                          return_tensors="pt",
@@ -74,14 +76,10 @@ for dataset_name in dataset_names:
                 outputs = model(**tokenized_inputs, labels=target_labels, output_attentions=True,output_hidden_states=True, return_dict=True)
             hidden_states = outputs.hidden_states
             context_embedding = hidden_states[0][-1].mean(0).squeeze()
-            if set_name == "train":
-                member_embed_list.append(context_embedding.cpu())
-                if len(member_embed_list) == args.samples:
-                    continue
-            else:
-                non_member_embed_list.append(context_embedding.cpu())
-                if len(member_embed_list) == args.samples:
-                    continue
+            if set_name == "train" and len(member_embed_list) < args.samples:
+                member_embed_list.append(context_embedding)
+            elif set_name == "test" and len(non_member_embed_list) < args.samples:
+                non_member_embed_list.append(context_embedding)
 
 member_embed_array = np.array(member_embed_list)
 non_member_embed_array = np.array(non_member_embed_list)
