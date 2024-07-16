@@ -66,11 +66,12 @@ tokenizer = AutoTokenizer.from_pretrained(
   revision="step143000",
   cache_dir=f"./pythia-70m-deduped/step143000",
 )
+#model.train()
 tokenizer.pad_token = tokenizer.eos_token
 for instance_text in ["I love you", "Me hate you and love him"]:
     inputs = tokenizer(instance_text, return_tensors="pt", padding=True)
     tokenized_inputs = {key: val.to(device) for key, val in inputs.items()}
-    with torch.no_grad():
+    with torch.set_grad_enabled(True):
         outputs = model(**tokenized_inputs, labels=tokenized_inputs["input_ids"])
     loss, logits = outputs[:2]
     print(loss)
@@ -82,7 +83,13 @@ for instance_text in ["I love you", "Me hate you and love him"]:
     mu = (probs * log_probs).to(torch.bfloat16).sum(-1)
     sigma = (probs * torch.square(log_probs.to(torch.bfloat16))).sum(-1) - torch.square(mu)
     mink_plus = (token_log_probs - mu) / sigma.sqrt()#
-
+    loss.backward()
+    grad_norms = []
+    for param in model.parameters():
+        if param.grad is not None:
+            grad_norms.append(param.grad.detach().norm(2))
+    grad_norm = torch.stack(grad_norms).mean()
+    print(grad_norm)
 batch_text = ["I love you", "Me hate you and love him"]
 batch_inputs = tokenizer(batch_text, return_tensors="pt", padding=True, max_length=6)
 batched_tokenized_inputs = {key: val.to(device) for key, val in batch_inputs.items()}
@@ -109,7 +116,7 @@ batch_log_probs = F.log_softmax(batch_logits[:, :-1].to(device), dim=-1)
 mask = target_labels[:, 1:] != -100
 mask = mask.unsqueeze(-1)
 batch_token_log_probs = batch_log_probs.gather(dim=-1, index=batch_input_ids.to(device)).squeeze(-1)
-batch_probs_masked = batch_probs.where(mask, 0)  # 对 batch_probs 应用 mask
+batch_probs_masked = batch_probs.where(mask, 0)  # 对 abatch_probs 应用 mask
 batch_log_probs_masked = batch_log_probs.where(mask, 0)
 batch_mu = (batch_probs_masked * batch_log_probs_masked).to(torch.bfloat16).sum(-1)
 batch_sigma = (batch_probs_masked * torch.square(batch_log_probs_masked.to(torch.bfloat16))).sum(dim=-1) - torch.square(batch_mu)
@@ -131,3 +138,4 @@ for i, length in enumerate(token_length):
     batch_mink_avg.append(avg)
 print(batch_mink_plus_avg)
 print(batch_mink_avg)
+

@@ -13,8 +13,8 @@ import argparse
 import random
 import seaborn as sns
 import zlib
-from datasets import DatasetDict
 import os
+from utils import *
 
 dataset_name = "Pile-CC"
 model_size = "160m"
@@ -38,23 +38,7 @@ for dict in [loss_dict, prob_dict, ppl_dict, mink_plus_dict, zlib_dict]:
             aggregated_test.extend(normalized_value.tolist())
         else:
             aggregated_val.extend(normalized_value.tolist())
-def remove_outliers(data, m=2):
-    data = np.array(data)
-    mean = np.mean(data)
-    std = np.std(data)
 
-    # 找到大于均值 + m * std 和小于均值 - m * std 的离群值
-    outliers_high = data > mean + m * std
-    outliers_low = data < mean - m * std
-    outliers = outliers_high | outliers_low
-
-    # 计算没有离群值的平均值
-    mean_without_outliers = np.mean(data[~outliers])
-
-    # 用没有离群值的平均值替换离群值
-    data[outliers] = mean_without_outliers
-
-    return data.tolist()
 fig, axs = plt.subplots(2, 1, figsize=(10, 10))
 
 # 去除离群值

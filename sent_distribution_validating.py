@@ -8,14 +8,13 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pdb
 import torch.nn.functional as F
-from scipy.stats import entropy, ks_2samp, kurtosis, wasserstein_distance
 import argparse
 import random
 import seaborn as sns
-import zlib
 from datasets import DatasetDict
 import os
 from torch.nn import CrossEntropyLoss
+from utils import *
 def batched_data(dataset, batch_size):
     data_iter = iter(dataset)
     while True:
@@ -53,23 +52,6 @@ def mix_distribution(dict, dataset_name, title, args, ratio=0.8, total_num=10000
     plt.savefig(f'mixed_figure/{dataset_name}/{title} histogram at {args.model_size} model at ratio {ratio}.png')
     # 显示图表
     plt.show()
-def remove_outliers(data, m=2):
-    data = np.array(data)
-    mean = np.mean(data)
-    std = np.std(data)
-
-    # 找到大于均值 + m * std 和小于均值 - m * std 的离群值
-    outliers_high = data > mean + m * std
-    outliers_low = data < mean - m * std
-    outliers = outliers_high | outliers_low
-
-    # 计算没有离群值的平均值
-    mean_without_outliers = np.mean(data[~outliers])
-
-    # 用没有离群值的平均值替换离群值
-    data[outliers] = mean_without_outliers
-
-    return data.tolist()
 
 def figure_draw(data_dict, title,dataset_name, args):
     plt.figure(figsize=(10, 5))
@@ -90,24 +72,6 @@ def figure_draw(data_dict, title,dataset_name, args):
     plt.show()
 
 
-def min_prob_k(selected_log_probs):
-    k_length = int(len(selected_log_probs) * 0.2)
-    topk_log_prob = np.sort(selected_log_probs.cpu().numpy())[:k_length]
-    min_k = -np.mean(topk_log_prob).item()
-    return min_k
-
-def min_prob_k_plus(probs, log_probs, selected_log_probs):
-    #pdb.set_trace()
-    mu = (probs * log_probs).to(torch.bfloat16).sum(-1)
-    sigma = (probs.to(torch.bfloat16) * torch.square(log_probs.to(torch.bfloat16))).sum(-1) - torch.square(mu).to(torch.bfloat16)
-    mink_plus = (selected_log_probs - mu) / (sigma.sqrt()+1e-9)
-    k_length = int(len(mink_plus) * 0.2)
-    topk = torch.sort(mink_plus.cpu())[:k_length]
-    min_k_plus = -np.mean(topk).item()
-    # if np.isnan(min_k_plus) or np.isinf(min_k_plus):
-    #     pdb.set_trace()
-    return min_k_plus
-
 def caculate_outputs(model, tokenizer, text_batch, device):
     tokenized_inputs = tokenizer(text_batch,
                                  return_tensors="pt",
@@ -119,10 +83,6 @@ def caculate_outputs(model, tokenizer, text_batch, device):
     target_labels = tokenized_inputs["input_ids"].clone().to(device)
     target_labels[tokenized_inputs["attention_mask"] == 0] = -100
     with torch.no_grad():
-        # print(model.device)
-        # print(tokenized_inputs["input_ids"].device)
-        # print(tokenized_inputs["attention_mask"].device)
-        # print(target_labels.device)
         outputs = model(**tokenized_inputs, labels=target_labels)
     return outputs, tokenized_inputs, target_labels
 
@@ -145,57 +105,6 @@ def caculate_loss_instance(idx, logits, target_labels):
     loss_i = loss_i.sum() / valid_mask.sum()
     return loss_i
 
-def calculate_mink_and_mink_plus(batch_logits, batched_tokenized_inputs):
-    batch_input_ids = batched_tokenized_inputs["input_ids"][:, 1:].unsqueeze(-1)
-    target_labels = batched_tokenized_inputs["input_ids"].clone()
-    target_labels[batched_tokenized_inputs["attention_mask"] == 0] = -100
-    batch_probs = F.softmax(batch_logits[:, :-1].float(), dim=-1)
-    batch_log_probs = F.log_softmax(batch_logits[:, :-1].float(), dim=-1)
-    mask = target_labels[:, 1:] != -100
-    mask = mask.unsqueeze(-1)
-    batch_token_log_probs = batch_log_probs.gather(dim=-1, index=batch_input_ids).squeeze(-1)
-    batch_probs_masked = batch_probs.where(mask, 0)
-    batch_log_probs_masked = batch_log_probs.where(mask, 0)
-    batch_mu = (batch_probs_masked.float() * batch_log_probs_masked.float()).float().sum(-1)
-    batch_sigma =  ((batch_probs_masked.float() * torch.square(torch.where(batch_probs_masked > 0,batch_log_probs_masked.float(),  torch.tensor(0.0, device=batch_log_probs_masked.device, dtype=torch.float32)))).sum(dim=-1)- torch.square(batch_mu.float()).squeeze())
-    mask = mask.squeeze(-1)
-    batch_mink_plus = (batch_token_log_probs - batch_mu).float() * mask / batch_sigma.float().sqrt()
-    token_length = mask.sum(dim=1)
-    batch_mink_plus[mask == False] = torch.inf
-    batch_token_log_probs[mask == False] = torch.inf
-    sorted_mink_plus, _ = torch.sort(batch_mink_plus)
-    sorted_mink, _ = torch.sort(batch_token_log_probs)
-    batch_mink_plus_avg = []
-    batch_mink_avg = []
-    for i, length in enumerate(token_length):
-        front_values = sorted_mink_plus[i, :length]
-        avg = torch.mean(front_values.float()).item()
-        batch_mink_plus_avg.append(avg)
-        if torch.tensor(avg) == torch.inf:
-            pdb.set_trace()
-        front_values = sorted_mink[i, :length]
-        avg = torch.mean(front_values.float()).item()
-        batch_mink_avg.append(avg)
-    return batch_mink_plus_avg, batch_mink_avg
-
-
-def caculate_instance_loss_perplexity_zlib(batch_logits, target_labels, batched_text):
-    shift_logits = batch_logits[:, :-1, :].contiguous()
-    labels = target_labels[:, 1:].contiguous()
-    loss_fct = CrossEntropyLoss(reduction='none')
-    lm_loss = loss_fct(shift_logits.view(-1, shift_logits.size(-1)), labels.view(-1))
-    instance_losses = lm_loss.view(-1, shift_logits.size(1))
-    loss_value_list = []
-    ppl_value_list = []
-    zlib_value_list = []
-    for idx, i in enumerate(instance_losses):
-        loss = i.sum() / sum(i != 0)
-        loss_value_list.append(loss.item())
-        ppl = torch.exp(loss.float()).item()
-        ppl_value_list.append(ppl)
-        zlib_value = loss.float().cpu() / (len(zlib.compress(bytes(batched_text[idx], "utf-8")))+1)
-        zlib_value_list.append(zlib_value.item())
-    return loss_value_list, ppl_value_list, zlib_value_list
 
 def feature_collection(model, tokenizer, dataset, args, batch_size=8, upper_limit=10000, refer_model=None, refer_tokenizer=None):
     device = f'cuda:{args.cuda}'
@@ -222,40 +131,6 @@ def feature_collection(model, tokenizer, dataset, args, batch_size=8, upper_limi
             ref_loss, ref_logits = refer_outputs[:2]
             ref_log_probabilities = torch.nn.functional.log_softmax(ref_logits, dim=-1)
             ref_probabilities = torch.nn.functional.softmax(ref_logits, dim=-1)
-        # # 初始化
-        # all_prob = []
-        # # 获取每个样本的概率
-        # batch_mink_plus_avg, batch_mink_avg = calculate_mink_and_mink_plus(logits, tokenized_inputs)
-        # loss, logits = outputs[:2]
-        # log_probabilities = torch.nn.functional.log_softmax(logits, dim=-1)
-        # probabilities = torch.nn.functional.softmax(logits, dim=-1)
-        # for idx in range(logits.shape[0]):
-        #     loss_i = caculate_loss_instance(idx, logits, target_labels)
-        #     if refer_model is not None:
-        #         ref_loss_i = caculate_loss_instance(idx, ref_logits, refer_target_labels)
-        #         ref_loss_collect.append(loss_i-ref_loss_i)
-        #     input_ids_processed = tokenized_inputs["input_ids"][idx]
-        #     attention_mask_processed = tokenized_inputs["attention_mask"][idx]
-        #     log_probs = log_probabilities[idx]  # 形状为 (seq_length, vocab_size)
-        #     probs = probabilities[idx]
-        #     # 使用 attention_mask 筛选有效的 token
-        #     valid_log_probs = log_probs[attention_mask_processed == 1]
-        #     valid_token_ids = input_ids_processed[attention_mask_processed == 1]
-        #     # 获取这些有效 token 的概率
-        #     selected_log_probs = valid_log_probs.gather(-1, valid_token_ids.unsqueeze(1))
-        #     mink_plus = min_prob_k_plus(probs, log_probs, selected_log_probs)
-        #     mink = min_prob_k(selected_log_probs)
-        #     # 计算 topk 概率
-        #     # # perplexity's value
-        #     ppl = torch.exp(loss).item()
-        #     # 收集结果
-        #     all_prob.append(selected_log_probs.cpu().numpy())
-        #     mink_collect.append(mink)
-        #     mink_plus_collect.append(mink_plus)
-        #     ppl_collect.append(ppl)
-        #     loss_collect.append(loss_i.item())
-        #     zlib_collect.append(loss_i.cpu()/len(zlib.compress(bytes(batched_text[idx], "utf-8"))))
-        #pdb.set_trace()
         if len(loss_collect) >= upper_limit:
             break
     loss_collect = remove_outliers(loss_collect)
@@ -417,6 +292,7 @@ parser.add_argument("--cuda", type=int, default=0, help="cuda device")
 parser.add_argument("--skip_calculation", type=str, default="True")
 parser.add_argument("--reference_model", type=str, default="True")
 parser.add_argument("--samples", type=int, default=5000)
+parser.add_argument("--gradient_collection", type=str, default=False)
 args = parser.parse_args()
 
 if args.dataset_name == "all":
@@ -439,7 +315,7 @@ else:
       f"EleutherAI/pythia-{args.model_size}-deduped",
       revision="step143000",
       cache_dir=f"./pythia-{args.model_size}-deduped/step143000",
-    ).cuda(args.cuda).eval()
+    ).half().cuda(args.cuda).eval()
     model = model.to_bettertransformer()
 
     tokenizer = AutoTokenizer.from_pretrained(
