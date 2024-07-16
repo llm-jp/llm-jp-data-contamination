@@ -75,15 +75,14 @@ for dataset_name in dataset_names:
             hidden_states = outputs.hidden_states
             context_embedding = hidden_states[0][-1].mean(1).squeeze()
             if set_name == "train":
-                member_embed_list.append(context_embedding)
+                member_embed_list.append(context_embedding.cpu())
             else:
-                non_member_embed_list.append(context_embedding)
-            if len(member_embed_list) == args.samples:
+                non_member_embed_list.append(context_embedding.cpu())
+            if len(member_embed_list) >= args.samples:
                 break
 
-            member_embed_array = np.array(member_embed_list)
-            non_member_embed_array = np.array(non_member_embed_list)
-
+member_embed_array = np.array(member_embed_list)
+non_member_embed_array = np.array(non_member_embed_list)
             # Concatenate for PCA
 all_embed_array = np.vstack([member_embed_array, non_member_embed_array])
 labels = np.array([1] * len(member_embed_array) + [0] * len(non_member_embed_array))
