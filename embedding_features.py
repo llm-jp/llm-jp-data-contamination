@@ -56,7 +56,7 @@ for dataset_name in dataset_names:
     device = f'cuda:{args.cuda}'
     member_embed_list = []
     non_member_embed_list = []
-    for set_name in ["train", "valid", "test"]:
+    for set_name in ["train", "test"]:
         for batch in tqdm(batched_data(dataset[set_name], batch_size=args.batch_size)):
             batched_text = [item for item in batch]
             tokenized_inputs = tokenizer(batched_text,
@@ -76,10 +76,12 @@ for dataset_name in dataset_names:
             context_embedding = hidden_states[0][-1].mean(0).squeeze()
             if set_name == "train":
                 member_embed_list.append(context_embedding.cpu())
+                if len(member_embed_list) == args.samples:
+                    break
             else:
                 non_member_embed_list.append(context_embedding.cpu())
-            if len(member_embed_list) >= args.samples:
-                break
+                if len(member_embed_list) == args.samples:
+                    break
 
 member_embed_array = np.array(member_embed_list)
 non_member_embed_array = np.array(non_member_embed_list)
