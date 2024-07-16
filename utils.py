@@ -11,6 +11,44 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pdb
 import torch.nn.functional as F
+from datasets import load_dataset, DatasetDict
+from itertools import islice
+
+def batched_data(dataset, batch_size):
+    data_iter = iter(dataset)
+    while True:
+        batch = list(islice(data_iter, batch_size))
+        if not batch:
+            break
+        yield batch
+
+def form_dataset(dataset_name):
+    if dataset_name == "WikiMIA":
+        for text_len in [32, 64, 128, 256]:
+            dataset = load_dataset("swj0419/WikiMIA", split=f"WikiMIA_length{text_len}")
+            member_data = dataset.filter(lambda example: example['label'] == 1)
+            non_member_data = dataset.filter(lambda example: example['label'] == 0)
+            if text_len == 32:
+                mia_dataset = DatasetDict({
+                    'train': member_data["input"],
+                    'test': non_member_data["input"],
+                    'valid': non_member_data["input"]
+                })
+            else:
+                mia_dataset["train"].extend(member_data["input"])
+                mia_dataset["test"].extend(non_member_data["input"])
+                mia_dataset["valid"].extend(non_member_data["input"])
+        return mia_dataset
+    else:
+        train_dataset = torch.load(f"/model/pile/by_dataset/train_{dataset_name}_0.pt")
+        valid_dataset = torch.load(f"/model/pile/by_dataset/valid_{dataset_name}.pt")
+        test_dataset = torch.load(f"/model/pile/by_dataset/test_{dataset_name}.pt")
+        dataset = DatasetDict({
+            'train': train_dataset,
+            'test': test_dataset,
+            'valid': valid_dataset
+        })
+        return dataset
 
 
 def calculate_mean_var(dict, dataset_name):

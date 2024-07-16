@@ -2,7 +2,6 @@ from datasets import load_dataset
 import torch
 from transformers import GPTNeoXForCausalLM, AutoTokenizer,  AutoModelForCausalLM,  LogitsProcessorList, MinLengthLogitsProcessor, StoppingCriteriaList,  MaxLengthCriteria
 import pickle
-from itertools import islice
 from tqdm import tqdm
 import matplotlib.pyplot as plt
 import numpy as np
@@ -15,13 +14,7 @@ from datasets import DatasetDict
 import os
 from torch.nn import CrossEntropyLoss
 from utils import *
-def batched_data(dataset, batch_size):
-    data_iter = iter(dataset)
-    while True:
-        batch = list(islice(data_iter, batch_size))
-        if not batch:
-            break
-        yield batch
+
 
 def mix_distribution(dict, dataset_name, title, args, ratio=0.8, total_num=10000):
     train_data = dict[dataset_name]["train"]
@@ -200,34 +193,6 @@ def wasserstein_distance_caculate(dict, dataset_name):
             ws_stat = wasserstein_distance(values1, values2)
             ws_matrix[idx1][idx2] = ws_stat
     return ws_matrix#close to zero means the two distributions are similar
-
-def form_dataset(dataset_name):
-    if dataset_name == "WikiMIA":
-        for text_len in [32, 64, 128, 256]:
-            dataset = load_dataset("swj0419/WikiMIA", split=f"WikiMIA_length{text_len}")
-            member_data = dataset.filter(lambda example: example['label'] == 1)
-            non_member_data = dataset.filter(lambda example: example['label'] == 0)
-            if text_len == 32:
-                mia_dataset = DatasetDict({
-                    'train': member_data["input"],
-                    'test': non_member_data["input"],
-                    'valid': non_member_data["input"]
-                })
-            else:
-                mia_dataset["train"].extend(member_data["input"])
-                mia_dataset["test"].extend(non_member_data["input"])
-                mia_dataset["valid"].extend(non_member_data["input"])
-        return mia_dataset
-    else:
-        train_dataset = torch.load(f"/model/pile/by_dataset/train_{dataset_name}_0.pt")
-        valid_dataset = torch.load(f"/model/pile/by_dataset/valid_{dataset_name}.pt")
-        test_dataset = torch.load(f"/model/pile/by_dataset/test_{dataset_name}.pt")
-        dataset = DatasetDict({
-            'train': train_dataset,
-            'test': test_dataset,
-            'valid': valid_dataset
-        })
-        return dataset
 
 
 

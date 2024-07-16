@@ -54,15 +54,13 @@ for dataset_name in dataset_names:
 for dataset_name in dataset_names:
     for metric in ["loss", "probability", "ppl", "mink_plus", "zlib"]:
         plt.figure(figsize=(12, 8))
-
-        for stat in ["mean", "std", "var", "kurtosis"]:
+        for stat in ["mean", "std", "kurtosis"]:
             for set_name in ["train", "test", "valid"]:
                 stat_values = []
                 for model_size in model_size_list:
                     stat_values.append(statistics[dataset_name][model_size][set_name][metric][stat])
                 stat_values = np.array(stat_values)
                 plt.plot(model_size_list, stat_values, label=f'{set_name} {stat}')
-
         plt.title(f'{dataset_name} {metric} statistics')
         plt.legend(loc='best')
         plt.xlabel('Model size')
