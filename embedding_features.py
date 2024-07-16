@@ -6,7 +6,7 @@ from tqdm import tqdm
 import torch
 
 parser = argparse.ArgumentParser()
-parser.add_argument("--batch_size", type=int, default=4)
+parser.add_argument("--batch_size", type=int, default=1)
 parser.add_argument("--model_size", type=str, default="160m")
 parser.add_argument("--dataset_name", type=str, default="Pile-CC", choices=["ArXiv", "DM Mathematics",
                  "FreeLaw", "Github",  "HackerNews", "NIH ExPorter",
@@ -73,4 +73,6 @@ for dataset_name in dataset_names:
             torch.cuda.synchronize()
             with torch.no_grad():
                 outputs = model(**tokenized_inputs, labels=target_labels, output_attentions=True,output_hidden_states=True, return_dict=True)
+            hidden_states = outputs.hidden_states
+            attentions = outputs.attentions
             pdb.set_trace()
