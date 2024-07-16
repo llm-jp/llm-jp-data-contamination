@@ -48,10 +48,7 @@ tokenizer = AutoTokenizer.from_pretrained(
 )
 tokenizer.pad_token = tokenizer.eos_token
 model.generation_config.pad_token_id = model.generation_config.eos_token_id
-model.generation_config.output_hidden_states = True
-model.generation_config.output_attentions = True
-model.generation_config.output_scores = True
-model.generation_config.return_dict_in_generate = True
+
 f = open(f"{args.model_size}_embedding_result.txt", "w")
 for dataset_name in dataset_names:
     dataset = form_dataset(dataset_name)
@@ -76,7 +73,7 @@ for dataset_name in dataset_names:
             torch.cuda.synchronize()
             try:
                 with torch.no_grad():
-                    outputs = model(**tokenized_inputs, labels=target_labels, output_attentions=True,output_hidden_states=True, return_dict=True)
+                    outputs = model(**tokenized_inputs, labels=target_labels, output_hidden_states=True, return_dict=True)
                 hidden_states = outputs.hidden_states
                 context_embedding = hidden_states[0][-1].mean(0).squeeze()
                 if set_name == "train" and len(member_embed_list) < args.samples:
