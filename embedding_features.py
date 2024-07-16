@@ -73,7 +73,7 @@ for dataset_name in dataset_names:
             with torch.no_grad():
                 outputs = model(**tokenized_inputs, labels=target_labels, output_attentions=True,output_hidden_states=True, return_dict=True)
             hidden_states = outputs.hidden_states
-            context_embedding = hidden_states[0][-1].mean(1).squeeze()
+            context_embedding = hidden_states[0][-1].mean(0).squeeze()
             if set_name == "train":
                 member_embed_list.append(context_embedding.cpu())
             else:
