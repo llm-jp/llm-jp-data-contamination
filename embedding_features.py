@@ -77,11 +77,11 @@ for dataset_name in dataset_names:
             if set_name == "train":
                 member_embed_list.append(context_embedding.cpu())
                 if len(member_embed_list) == args.samples:
-                    break
+                    continue
             else:
                 non_member_embed_list.append(context_embedding.cpu())
                 if len(member_embed_list) == args.samples:
-                    break
+                    continue
 
 member_embed_array = np.array(member_embed_list)
 non_member_embed_array = np.array(non_member_embed_list)
