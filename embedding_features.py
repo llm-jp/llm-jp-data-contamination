@@ -77,9 +77,9 @@ for dataset_name in dataset_names:
             hidden_states = outputs.hidden_states
             context_embedding = hidden_states[0][-1].mean(0).squeeze()
             if set_name == "train" and len(member_embed_list) < args.samples:
-                member_embed_list.append(context_embedding)
+                member_embed_list.append(context_embedding.cpu())
             elif set_name == "test" and len(non_member_embed_list) < args.samples:
-                non_member_embed_list.append(context_embedding)
+                non_member_embed_list.append(context_embedding.cpu())
 
 member_embed_array = np.array(member_embed_list)
 non_member_embed_array = np.array(non_member_embed_list)
