@@ -11,7 +11,7 @@ import numpy as np
 parser = argparse.ArgumentParser()
 parser.add_argument("--batch_size", type=int, default=1)
 parser.add_argument("--model_size", type=str, default="160m")
-parser.add_argument("--dataset_name", type=str, default="Pile-CC", choices=["ArXiv", "DM Mathematics",
+parser.add_argument("--dataset_name", type=str, default="all", choices=["ArXiv", "DM Mathematics",
                  "FreeLaw", "Github",  "HackerNews", "NIH ExPorter",
                 "Pile-CC", "PubMed Abstracts", "PubMed Central", "StackExchange",
                 "USPTO Backgrounds", "Wikipedia (en)", "WikiMIA", "all"])
@@ -81,31 +81,31 @@ for dataset_name in dataset_names:
             elif set_name == "test" and len(non_member_embed_list) < args.samples:
                 non_member_embed_list.append(context_embedding.cpu())
 
-member_embed_array = np.array(member_embed_list)
-non_member_embed_array = np.array(non_member_embed_list)
-            # Concatenate for PCA
-all_embed_array = np.vstack([member_embed_array, non_member_embed_array])
-labels = np.array([1] * len(member_embed_array) + [0] * len(non_member_embed_array))
+    member_embed_array = np.array(member_embed_list)
+    non_member_embed_array = np.array(non_member_embed_list)
+                # Concatenate for PCA
+    all_embed_array = np.vstack([member_embed_array, non_member_embed_array])
+    labels = np.array([1] * len(member_embed_array) + [0] * len(non_member_embed_array))
 
-# Perform PCA
-pca = PCA(n_components=2)
-pca_result = pca.fit_transform(all_embed_array)
+    # Perform PCA
+    pca = PCA(n_components=2)
+    pca_result = pca.fit_transform(all_embed_array)
 
-# Separate the results
-pca_member_embed = pca_result[labels == 1]
-pca_non_member_embed = pca_result[labels == 0]
+    # Separate the results
+    pca_member_embed = pca_result[labels == 1]
+    pca_non_member_embed = pca_result[labels == 0]
 
-# Plotting
-plt.figure(figsize=(14, 8))
-plt.scatter(pca_member_embed[:, 0], pca_member_embed[:, 1], c='blue', label='Member Text', alpha=0.5)
-plt.scatter(pca_non_member_embed[:, 0], pca_non_member_embed[:, 1], c='red', label='Non-Member Text',
-            alpha=0.5)
-plt.xlabel('PCA Component 1')
-plt.ylabel('PCA Component 2')
-plt.title('PCA of Member and Non-Member Embeddings')
-plt.legend()
-plt.grid(True)
-plt.savefig(f'PCA_{dataset_name}_{args.model_size}.png')
-plt.show()
+    # Plotting
+    plt.figure(figsize=(14, 8))
+    plt.scatter(pca_member_embed[:, 0], pca_member_embed[:, 1], c='blue', label='Member Text', alpha=0.5)
+    plt.scatter(pca_non_member_embed[:, 0], pca_non_member_embed[:, 1], c='red', label='Non-Member Text',
+                alpha=0.5)
+    plt.xlabel('PCA Component 1')
+    plt.ylabel('PCA Component 2')
+    plt.title('PCA of Member and Non-Member Embeddings')
+    plt.legend()
+    plt.grid(True)
+    plt.savefig(f'embedding_figure/PCA_{dataset_name}_{args.model_size}.png')
+    plt.show()
             #attentions = outputs.attentions
             #pdb.set_trace()
