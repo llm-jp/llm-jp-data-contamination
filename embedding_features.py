@@ -57,8 +57,8 @@ for dataset_name in dataset_names:
     member_embed_list = []
     non_member_embed_list = []
     for set_name in ["train", "test"]:
-        for batch in tqdm(batched_data(dataset[set_name], batch_size=args.batch_size)):
-            if len(member_embed_list) >= args.samples and len(non_member_embed_list) >= args.samples:
+        for idx, batch in tqdm(enumerate(batched_data(dataset[set_name], batch_size=args.batch_size))):
+            if idx * args.batch_size > args.samples:
                 break
             batched_text = [item for item in batch]
             tokenized_inputs = tokenizer(batched_text,
