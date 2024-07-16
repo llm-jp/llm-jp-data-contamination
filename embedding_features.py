@@ -107,7 +107,7 @@ for dataset_name in dataset_names:
     plt.title('PCA of Member and Non-Member Embeddings')
     plt.legend()
     plt.grid(True)
-    #plt.savefig(f'embedding_figure/PCA_{dataset_name}_{args.model_size}.png')
+    plt.savefig(f'embedding_figure/PCA_{dataset_name}_{args.model_size}.png')
     plt.show()
     labels = np.array([1] * len(member_embed_array) + [0] * len(non_member_embed_array))
     X = np.vstack((member_embed_array, non_member_embed_array))
