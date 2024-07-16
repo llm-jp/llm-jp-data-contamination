@@ -4,6 +4,9 @@ from utils import form_dataset, batched_data
 import argparse
 from tqdm import tqdm
 import torch
+import matplotlib.pyplot as plt
+from sklearn.decomposition import PCA
+import numpy as np
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--batch_size", type=int, default=1)
@@ -15,7 +18,7 @@ parser.add_argument("--dataset_name", type=str, default="Pile-CC", choices=["ArX
 parser.add_argument("--cuda", type=int, default=1, help="cuda device")
 parser.add_argument("--skip_calculation", type=str, default="True")
 parser.add_argument("--reference_model", type=str, default="True")
-parser.add_argument("--samples", type=int, default=5000)
+parser.add_argument("--samples", type=int, default=100)
 parser.add_argument("--gradient_collection", type=str, default=False)
 args = parser.parse_args()
 
@@ -51,12 +54,8 @@ model.generation_config.return_dict_in_generate = True
 for dataset_name in dataset_names:
     dataset = form_dataset(dataset_name)
     device = f'cuda:{args.cuda}'
-    loss_collect = []
-    mink_collect = []
-    mink_plus_collect = []
-    ppl_collect = []
-    zlib_collect = []
-    ref_loss_collect = []
+    member_embed_list = []
+    non_member_embed_list = []
     for set_name in ["train", "validation", "test"]:
         for batch in tqdm(batched_data(dataset[set_name], batch_size=args.batch_size)):
             batched_text = [item for item in batch]
@@ -74,5 +73,39 @@ for dataset_name in dataset_names:
             with torch.no_grad():
                 outputs = model(**tokenized_inputs, labels=target_labels, output_attentions=True,output_hidden_states=True, return_dict=True)
             hidden_states = outputs.hidden_states
-            attentions = outputs.attentions
-            pdb.set_trace()
+            context_embedding = hidden_states[0][-1].mean(1).squeeze()
+            if set_name == "train":
+                member_embed_list.append(context_embedding)
+            else:
+                non_member_embed_list.append(context_embedding)
+            if len(member_embed_list) == args.samples:
+                break
+
+            member_embed_array = np.array(member_embed_list)
+            non_member_embed_array = np.array(non_member_embed_list)
+
+            # Concatenate for PCA
+all_embed_array = np.vstack([member_embed_array, non_member_embed_array])
+labels = np.array([1] * len(member_embed_array) + [0] * len(non_member_embed_array))
+
+# Perform PCA
+pca = PCA(n_components=2)
+pca_result = pca.fit_transform(all_embed_array)
+
+# Separate the results
+pca_member_embed = pca_result[labels == 1]
+pca_non_member_embed = pca_result[labels == 0]
+
+# Plotting
+plt.figure(figsize=(14, 8))
+plt.scatter(pca_member_embed[:, 0], pca_member_embed[:, 1], c='blue', label='Member Text', alpha=0.5)
+plt.scatter(pca_non_member_embed[:, 0], pca_non_member_embed[:, 1], c='red', label='Non-Member Text',
+            alpha=0.5)
+plt.xlabel('PCA Component 1')
+plt.ylabel('PCA Component 2')
+plt.title('PCA of Member and Non-Member Embeddings')
+plt.legend()
+plt.grid(True)
+plt.show()
+            #attentions = outputs.attentions
+            #pdb.set_trace()
