@@ -42,6 +42,7 @@ tokenizer = AutoTokenizer.from_pretrained(
   revision="step143000",
   cache_dir=f"./pythia-{args.model_size}-deduped/step143000",
 )
+tokenizer.pad_token = tokenizer.eos_token
 model.generation_config.pad_token_id = model.generation_config.eos_token_id
 model.generation_config.output_hidden_states = True
 model.generation_config.output_attentions = True
