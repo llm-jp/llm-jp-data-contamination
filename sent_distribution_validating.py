@@ -300,7 +300,6 @@ else:
     tokenizer.pad_token = tokenizer.eos_token
     for dataset_name in dataset_names:
         dataset = form_dataset(dataset_name)
-        dataset = clean_dataset(dataset)
         loss_dict = {}
         prob_dict = {}
         ppl_dict = {}
@@ -314,7 +313,7 @@ else:
         zlib_dict[dataset_name] = {"train": [], "valid": [], "test": []}
         refer_dict[dataset_name] = {"train": [], "valid": [], "test": []}
         for split in ["valid", "test"]:
-            loss_list, prob_list, ppl_list, mink_plus_list, zlib_list, refer_list = feature_collection(model, tokenizer, dataset[split], args,
+            loss_list, prob_list, ppl_list, mink_plus_list, zlib_list, refer_list = feature_collection(model, tokenizer, clean_dataset(dataset[split][:args.batch_size]), args,
                                                                                            batch_size=args.batch_size,
                                                                                            upper_limit=args.samples,
                                                                                            refer_model=refer_model,
