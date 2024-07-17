@@ -73,10 +73,10 @@ for dataset_name in dataset_names:
                 input_length = int(tokenized_inputs["input_ids"].shape[1]*ratio)
                 output_length = int(tokenized_inputs["input_ids"].shape[1]*(ratio+0.05))
                 generations = model.generate(tokenized_inputs["input_ids"][0][:input_length].unsqueeze(0),temperature=0.0,top_k=0, top_p=0, max_length=output_length,min_length=output_length)
-                logits = generations["scores"]
+                logits = torch.stack(generations["scores"]).squeeze()
                 #pdb.set_trace()
-                probability_scores = torch.nn.functional.softmax(logits[0].float(), dim=1)
-                entropy_scores = torch.distributions.Categorical(probs=probability_scores).entropy()
+                probability_scores = torch.nn.functional.softmax(logits.float(), dim=1)
+                entropy_scores = torch.distributions.Categorical(probs=probability_scores).entropy().mean()
                 local_entropy.append(entropy_scores.cpu().item())
             if set_name == "train":
                 member_entropy.append(local_entropy)
