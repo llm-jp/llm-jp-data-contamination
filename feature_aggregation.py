@@ -24,6 +24,7 @@ for dataset_name in dataset_names:
             data[np.isnan(data)] = data[~np.isnan(data)].mean()
             mean1, std1 = np.mean(data), np.std(data)
             normalized_value = (dict[dataset_name][set_name] - mean1) / std1
+            normalized_value[np.isnan(normalized_value)] =  normalized_value[~np.isnan(normalized_value)].mean()
             if set_name == "train":
                 aggregated_train.append(remove_outliers(normalized_value.tolist()))
             elif set_name == "test":
