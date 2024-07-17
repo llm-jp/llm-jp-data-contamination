@@ -114,9 +114,9 @@ for dataset_name in dataset_names:
         X = np.vstack((member_embed_array, non_member_embed_array))
         db_index = davies_bouldin_score(X, labels)
         silhouette_avg = silhouette_score(X, labels)
-        print("DB Index: ", db_index)
+        print(f"DB Index {layer_index}: ", db_index)
         f.write(f"{dataset_name} DB Index {layer_index}: {db_index}\n")
-        print("Silhouette Score: ", silhouette_avg)
+        print(f"Silhouette Score: {layer_index}", silhouette_avg)
         f.write(f"{dataset_name} Silhouette Score {layer_index}: {silhouette_avg}\n")
 
 
