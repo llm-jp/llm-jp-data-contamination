@@ -36,7 +36,7 @@ model = GPTNeoXForCausalLM.from_pretrained(
   f"EleutherAI/pythia-{args.model_size}-deduped",
   revision="step143000",
   cache_dir=f"./pythia-{args.model_size}-deduped/step143000",
-).cuda(args.cuda).eval()
+).half().cuda(args.cuda).eval()
 #model = model.to_bettertransformer()
 
 tokenizer = AutoTokenizer.from_pretrained(
@@ -69,7 +69,7 @@ for dataset_name in dataset_names:
             tokenized_inputs = tokenizer(batched_text, return_tensors="pt", truncation=True, max_length=2048)
             tokenized_inputs = {key: val.to(device) for key, val in tokenized_inputs.items()}
             local_entropy = []
-            for idx, ratio in enumerate(np.linspace(0, 1, 21)[1:]):
+            for idx, ratio in enumerate(np.linspace(0, 1, 51)[1:]):
                 input_length = int(tokenized_inputs["input_ids"].shape[1]*ratio)
                 output_length = int(tokenized_inputs["input_ids"].shape[1]*(ratio+0.05))
                 generations = model.generate(tokenized_inputs["input_ids"][0][:input_length].unsqueeze(0),temperature=0.0,top_k=0, top_p=0, max_length=output_length,min_length=output_length)
@@ -95,7 +95,7 @@ mean_non_member = np.mean(non_member_entropy, axis=0)
 std_non_member = np.std(non_member_entropy, axis=0)
 
 # x轴的值
-x = np.linspace(0, 1, 21)[1:]
+x = np.linspace(0, 1, 51)[1:]
 
 # 创建图
 plt.figure(figsize=(10, 6))
