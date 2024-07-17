@@ -115,7 +115,8 @@ def feature_collection(model, tokenizer, dataset, args, batch_size=8, upper_limi
         try:
             batch_mink_plus_avg, batch_mink_avg = calculate_mink_and_mink_plus(outputs[1], tokenized_inputs)
             loss_value_list, ppl_value_list, zlib_value_list = caculate_instance_loss_perplexity_zlib(outputs[1], target_labels, batched_text)
-        except:
+        except RuntimeError:
+            continue
             pdb.set_trace()
         mink_plus_collect.extend(batch_mink_plus_avg)
         mink_collect.extend(batch_mink_avg)
@@ -299,6 +300,7 @@ else:
     tokenizer.pad_token = tokenizer.eos_token
     for dataset_name in dataset_names:
         dataset = form_dataset(dataset_name)
+        dataset = clean_dataset(dataset)
         loss_dict = {}
         prob_dict = {}
         ppl_dict = {}

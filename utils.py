@@ -13,6 +13,7 @@ import pdb
 import torch.nn.functional as F
 from datasets import load_dataset, DatasetDict
 from itertools import islice
+import re
 
 def batched_data(dataset, batch_size):
     data_iter = iter(dataset)
@@ -22,6 +23,16 @@ def batched_data(dataset, batch_size):
             break
         yield batch
 
+
+def clean_dataset(dataset):
+    # 定义正则表达式来检查无效文本（空白字符或多个换行符）
+    invalid_pattern = re.compile(r'^\s*$')
+    def is_valid(text):
+        # 检查文本是否符合无效模式
+        return not invalid_pattern.match(text)
+
+    # 过滤掉无效的文本
+    return filter(is_valid, dataset)
 def form_dataset(dataset_name):
     if dataset_name == "WikiMIA":
         for text_len in [32, 64, 128, 256]:
