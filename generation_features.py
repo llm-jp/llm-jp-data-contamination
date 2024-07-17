@@ -36,7 +36,7 @@ model = GPTNeoXForCausalLM.from_pretrained(
   f"EleutherAI/pythia-{args.model_size}-deduped",
   revision="step143000",
   cache_dir=f"./pythia-{args.model_size}-deduped/step143000",
-).half().cuda(args.cuda).eval()
+).cuda(args.cuda).eval()
 #model = model.to_bettertransformer()
 
 tokenizer = AutoTokenizer.from_pretrained(
@@ -72,12 +72,12 @@ for dataset_name in dataset_names:
             for idx, ratio in enumerate([0.2, 0.4, 0.6, 0.8]):
                 input_length = int(tokenized_inputs["input_ids"].shape[1]*ratio)
                 output_length = int(tokenized_inputs["input_ids"].shape[1]*(ratio+0.2))
-                generations = model.generate(tokenized_inputs["input_ids"][0][:input_length].unsqueeze(0), temperature=0.0,top_k=0, top_p=0, max_length=output_length,min_length=output_length)
+                generations = model.generate(tokenized_inputs["input_ids"][0][:input_length].unsqueeze(0),temperature=0.0,top_k=0, top_p=0, max_length=output_length,min_length=output_length)
                 logits = generations["scores"]
                 #pdb.set_trace()
                 probability_scores = torch.nn.functional.softmax(logits[0].float(), dim=1)
                 entropy_scores = torch.distributions.Categorical(probs=probability_scores).entropy()
-                local_entropy.append(entropy_scores.cpu().item)
+                local_entropy.append(entropy_scores.cpu().item())
             if set_name == "train":
                 member_entropy.append(local_entropy)
             else:
