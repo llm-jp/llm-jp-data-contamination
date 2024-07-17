@@ -4,11 +4,13 @@ from utils import form_dataset, batched_data, clean_dataset
 import argparse
 from tqdm import tqdm
 import torch
+import numpy as np
+import matplotlib.pyplot as plt
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--batch_size", type=int, default=1)
 parser.add_argument("--model_size", type=str, default="160m")
-parser.add_argument("--dataset_name", type=str, default="all", choices=["ArXiv", "DM Mathematics",
+parser.add_argument("--dataset_name", type=str, default="ArXiv", choices=["ArXiv", "DM Mathematics",
                  "FreeLaw", "Github",  "HackerNews", "NIH ExPorter",
                 "Pile-CC", "PubMed Abstracts", "PubMed Central", "StackExchange",
                 "USPTO Backgrounds", "Wikipedia (en)", "WikiMIA", "all"])
@@ -58,14 +60,16 @@ for dataset_name in dataset_names:
     non_member_embed_list = {}
     for set_name in ["train", "test"]:
         cleaned_dataset = clean_dataset(dataset)
+        member_entropy = []
+        non_member_entropy = []
         for idx, batch in tqdm(enumerate(batched_data(dataset[set_name], batch_size=args.batch_size))):
             if idx * args.batch_size > args.samples:
                 break
             batched_text = [item for item in batch]
             tokenized_inputs = tokenizer(batched_text, return_tensors="pt", truncation=True, max_length=2048)
             tokenized_inputs = {key: val.to(device) for key, val in tokenized_inputs.items()}
-            entropy = []
-            for ratio in [0.2, 0.4, 0.6, 0.8]:
+            local_entropy = []
+            for idx, ratio in enumerate([0.2, 0.4, 0.6, 0.8]):
                 input_length = int(tokenized_inputs["input_ids"].shape[1]*ratio)
                 output_length = int(tokenized_inputs["input_ids"].shape[1]*(ratio+0.2))
                 generations = model.generate(tokenized_inputs["input_ids"][0][:input_length].unsqueeze(0), temperature=0.0,top_k=0, top_p=0, max_length=output_length,min_length=output_length)
@@ -73,9 +77,44 @@ for dataset_name in dataset_names:
                 pdb.set_trace()
                 probability_scores = torch.nn.functional.softmax(logits[0].float(), dim=1)
                 entropy_scores = torch.distributions.Categorical(probs=probability_scores).entropy()
-                entropy.append(entropy_scores)
+                local_entropy.append(entropy_scores.cpu().item)
+            if set_name == "train":
+                member_entropy.append(local_entropy)
+            else:
+                non_member_entropy.append(local_entropy)
 
 
+member_entropy = np.array(member_entropy)
+non_member_entropy = np.array(non_member_entropy)
+
+# 计算均值和方差
+mean_member = np.mean(member_entropy, axis=0)
+std_member = np.std(member_entropy, axis=0)
+
+mean_non_member = np.mean(non_member_entropy, axis=0)
+std_non_member = np.std(non_member_entropy, axis=0)
+
+# x轴的值
+x = [0.2, 0.4, 0.6, 0.8]
+
+# 创建图
+plt.figure(figsize=(10, 6))
+
+# 绘制member_entropy的均值和方差
+plt.plot(x, mean_member, label='Member Entropy', color='blue')
+plt.fill_between(x, mean_member - std_member, mean_member + std_member, color='blue', alpha=0.2)
+
+# 绘制non_member_entropy的均值和方差
+plt.plot(x, mean_non_member, label='Non-Member Entropy', color='red')
+plt.fill_between(x, mean_non_member - std_non_member, mean_non_member + std_non_member, color='red', alpha=0.2)
+
+# 添加图例和标签
+plt.xlabel('Value')
+plt.ylabel('Entropy')
+plt.title('Mean and Variance of Entropy')
+plt.legend()
+plt.grid(True)
+plt.show()
 
 
 
