@@ -264,10 +264,12 @@ parser.add_argument("--gradient_collection", type=str, default=False)
 args = parser.parse_args()
 
 if args.dataset_name == "all":
+    # dataset_names = ["ArXiv", "DM Mathematics",
+    #              "FreeLaw", "Github",  "HackerNews", "NIH ExPorter",
+    #             "Pile-CC", "PubMed Abstracts", "PubMed Central", "StackExchange",
+    #             "USPTO Backgrounds", "Wikipedia (en)", "WikiMIA"]
     dataset_names = ["PubMed Central", "StackExchange",
-                      "USPTO Backgrounds", "Wikipedia (en)", "WikiMIA"]
-    #dataset_names = ["Github", "HackerNews", "NIH ExPorter","Pile-CC", "PubMed Abstracts", "PubMed Central", "StackExchange",
-    #                "USPTO Backgrounds", "Wikipedia (en)", "WikiMIA"]
+                    "USPTO Backgrounds", "Wikipedia (en)", "WikiMIA"]
 else:
     dataset_names = [args.dataset_name]
 
@@ -310,7 +312,7 @@ else:
         mink_plus_dict[dataset_name] = {"train": [], "valid": [], "test": []}
         zlib_dict[dataset_name] = {"train": [], "valid": [], "test": []}
         refer_dict[dataset_name] = {"train": [], "valid": [], "test": []}
-        for split in ["test"]:
+        for split in ["train", "valid", "test"]:
             loss_list, prob_list, ppl_list, mink_plus_list, zlib_list, refer_list = feature_collection(model, tokenizer, dataset[split], args,
                                                                                            batch_size=args.batch_size,
                                                                                            upper_limit=args.samples,
