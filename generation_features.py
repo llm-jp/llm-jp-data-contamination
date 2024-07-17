@@ -74,7 +74,7 @@ for dataset_name in dataset_names:
                 output_length = int(tokenized_inputs["input_ids"].shape[1]*(ratio+0.2))
                 generations = model.generate(tokenized_inputs["input_ids"][0][:input_length].unsqueeze(0), temperature=0.0,top_k=0, top_p=0, max_length=output_length,min_length=output_length)
                 logits = generations["scores"]
-                pdb.set_trace()
+                #pdb.set_trace()
                 probability_scores = torch.nn.functional.softmax(logits[0].float(), dim=1)
                 entropy_scores = torch.distributions.Categorical(probs=probability_scores).entropy()
                 local_entropy.append(entropy_scores.cpu().item)
