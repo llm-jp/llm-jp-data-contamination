@@ -107,7 +107,9 @@ def feature_collection(model, tokenizer, dataset, args, batch_size=8, upper_limi
     ppl_collect = []
     zlib_collect = []
     ref_loss_collect = []
-    for batch in tqdm(batched_data(dataset, batch_size=batch_size)):
+    cleaned_dataset = clean_dataset(dataset)
+
+    for batch in tqdm(batched_data(cleaned_dataset, batch_size=batch_size)):
         batched_text = [item for item in batch]
         outputs,tokenized_inputs, target_labels = caculate_outputs(model, tokenizer, batched_text, device=device)
         if refer_model is not None:
@@ -313,7 +315,7 @@ else:
         zlib_dict[dataset_name] = {"train": [], "valid": [], "test": []}
         refer_dict[dataset_name] = {"train": [], "valid": [], "test": []}
         for split in ["valid", "test"]:
-            loss_list, prob_list, ppl_list, mink_plus_list, zlib_list, refer_list = feature_collection(model, tokenizer, clean_dataset(dataset[split][:args.batch_size]), args,
+            loss_list, prob_list, ppl_list, mink_plus_list, zlib_list, refer_list = feature_collection(model, tokenizer, dataset[split], args,
                                                                                            batch_size=args.batch_size,
                                                                                            upper_limit=args.samples,
                                                                                            refer_model=refer_model,
