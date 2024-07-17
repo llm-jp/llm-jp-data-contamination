@@ -108,7 +108,6 @@ def feature_collection(model, tokenizer, dataset, args, batch_size=8, upper_limi
     zlib_collect = []
     ref_loss_collect = []
     cleaned_dataset = clean_dataset(dataset)
-
     for batch in tqdm(batched_data(cleaned_dataset, batch_size=batch_size)):
         batched_text = [item for item in batch]
         outputs,tokenized_inputs, target_labels = caculate_outputs(model, tokenizer, batched_text, device=device)
@@ -118,7 +117,6 @@ def feature_collection(model, tokenizer, dataset, args, batch_size=8, upper_limi
             batch_mink_plus_avg, batch_mink_avg = calculate_mink_and_mink_plus(outputs[1], tokenized_inputs)
             loss_value_list, ppl_value_list, zlib_value_list = caculate_instance_loss_perplexity_zlib(outputs[1], target_labels, batched_text)
         except RuntimeError:
-            continue
             pdb.set_trace()
         mink_plus_collect.extend(batch_mink_plus_avg)
         mink_collect.extend(batch_mink_avg)
