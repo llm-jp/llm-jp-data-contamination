@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--batch_size", type=int, default=1)
-parser.add_argument("--model_size", type=str, default="160m")
+parser.add_argument("--model_size", type=str, default="410m")
 parser.add_argument("--dataset_name", type=str, default="ArXiv", choices=["ArXiv", "DM Mathematics",
                  "FreeLaw", "Github",  "HackerNews", "NIH ExPorter",
                 "Pile-CC", "PubMed Abstracts", "PubMed Central", "StackExchange",
