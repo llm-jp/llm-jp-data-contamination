@@ -309,7 +309,7 @@ else:
         mink_plus_dict[dataset_name] = {"train": [], "valid": [], "test": []}
         zlib_dict[dataset_name] = {"train": [], "valid": [], "test": []}
         refer_dict[dataset_name] = {"train": [], "valid": [], "test": []}
-        for split in ["train", "valid", "test"]:
+        for split in ["valid", "test"]:
             loss_list, prob_list, ppl_list, mink_plus_list, zlib_list, refer_list = feature_collection(model, tokenizer, dataset[split], args,
                                                                                            batch_size=args.batch_size,
                                                                                            upper_limit=args.samples,

@@ -150,6 +150,7 @@ def caculate_instance_loss_perplexity_zlib(batch_logits, target_labels, batched_
     shift_logits = batch_logits[:, :-1, :].contiguous()
     labels = target_labels[:, 1:].contiguous()
     loss_fct = CrossEntropyLoss(reduction='none')
+    pdb.set_trace()
     lm_loss = loss_fct(shift_logits.view(-1, shift_logits.size(-1)), labels.view(-1))
     instance_losses = lm_loss.view(-1, shift_logits.size(1))
     loss_value_list = []
