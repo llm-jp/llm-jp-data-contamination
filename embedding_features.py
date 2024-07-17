@@ -53,8 +53,8 @@ f = open(f"{args.model_size}_embedding_result.txt", "w")
 for dataset_name in dataset_names:
     dataset = form_dataset(dataset_name)
     device = f'cuda:{args.cuda}'
-    member_embed_list = []
-    non_member_embed_list = []
+    member_embed_list = {}
+    non_member_embed_list = {}
     for set_name in ["train", "test"]:
         for idx, batch in tqdm(enumerate(batched_data(dataset[set_name], batch_size=args.batch_size))):
             if idx * args.batch_size > args.samples:
@@ -75,46 +75,48 @@ for dataset_name in dataset_names:
                 with torch.no_grad():
                     outputs = model(**tokenized_inputs, labels=target_labels, output_hidden_states=True, return_dict=True)
                 hidden_states = outputs.hidden_states
-                context_embedding = hidden_states[0][-1].mean(0).squeeze()
-                pdb.set_trace()
-                if set_name == "train" and len(member_embed_list) < args.samples:
-                    member_embed_list.append(context_embedding.cpu())
-                elif set_name == "test" and len(non_member_embed_list) < args.samples:
-                    non_member_embed_list.append(context_embedding.cpu())
+                for layer_index in range(len(hidden_states)):
+                    if layer_index not in member_embed_list:
+                        member_embed_list[layer_index] = []
+                        non_member_embed_list[layer_index] = []
+                    context_embedding = hidden_states[layer_index][0].mean(0).squeeze()
+                    if set_name == "train" and len(member_embed_list) < args.samples:
+                        member_embed_list[layer_index].append(context_embedding.cpu())
+                    elif set_name == "test" and len(non_member_embed_list) < args.samples:
+                        non_member_embed_list[layer_index].append(context_embedding.cpu())
             except:
                 continue
-
-    member_embed_array = np.array(member_embed_list)
-    non_member_embed_array = np.array(non_member_embed_list)
-                # Concatenate for PCA
-    all_embed_array = np.vstack([member_embed_array, non_member_embed_array])
-    labels = np.array([1] * len(member_embed_array) + [0] * len(non_member_embed_array))
-    # Perform PCA
-    pca = PCA(n_components=2)
-    pca_result = pca.fit_transform(all_embed_array)
-    # Separate the results
-    pca_member_embed = pca_result[labels == 1]
-    pca_non_member_embed = pca_result[labels == 0]
-
-    # Plotting
-    plt.figure(figsize=(14, 8))
-    plt.scatter(pca_member_embed[:, 0], pca_member_embed[:, 1], c='blue', label='Member Text', alpha=0.5)
-    plt.scatter(pca_non_member_embed[:, 0], pca_non_member_embed[:, 1], c='red', label='Non-Member Text',
-                alpha=0.5)
-    plt.xlabel('PCA Component 1')
-    plt.ylabel('PCA Component 2')
-    plt.title('PCA of Member and Non-Member Embeddings')
-    plt.legend()
-    plt.grid(True)
-    plt.savefig(f'embedding_figure/PCA_{dataset_name}_{args.model_size}.png')
-    plt.show()
-    labels = np.array([1] * len(member_embed_array) + [0] * len(non_member_embed_array))
-    X = np.vstack((member_embed_array, non_member_embed_array))
-    db_index = davies_bouldin_score(X, labels)
-    silhouette_avg = silhouette_score(X, labels)
-    print("DB Index: ", db_index)
-    f.write(f"{dataset_name} DB Index: {db_index}\n")
-    print("Silhouette Score: ", silhouette_avg)
-    f.write(f"{dataset_name} Silhouette Score: {silhouette_avg}\n")
+    for layer_index in range(len(hidden_states)):
+        member_embed_array = np.array(member_embed_list[layer_index])
+        non_member_embed_array = np.array(non_member_embed_list[layer_index])
+                    # Concatenate for PCA
+        all_embed_array = np.vstack([member_embed_array, non_member_embed_array])
+        labels = np.array([1] * len(member_embed_array) + [0] * len(non_member_embed_array))
+        # Perform PCA
+        pca = PCA(n_components=2)
+        pca_result = pca.fit_transform(all_embed_array)
+        # Separate the results
+        pca_member_embed = pca_result[labels == 1]
+        pca_non_member_embed = pca_result[labels == 0]
+        # Plotting
+        plt.figure(figsize=(14, 8))
+        plt.scatter(pca_member_embed[:, 0], pca_member_embed[:, 1], c='blue', label='Member Text', alpha=0.5)
+        plt.scatter(pca_non_member_embed[:, 0], pca_non_member_embed[:, 1], c='red', label='Non-Member Text',
+                    alpha=0.5)
+        plt.xlabel('PCA Component 1')
+        plt.ylabel('PCA Component 2')
+        plt.title('PCA of Member and Non-Member Embeddings')
+        plt.legend()
+        plt.grid(True)
+        plt.savefig(f'embedding_figure/PCA_{dataset_name}_{args.model_size}_{layer_index}.png')
+        plt.show()
+        labels = np.array([1] * len(member_embed_array) + [0] * len(non_member_embed_array))
+        X = np.vstack((member_embed_array, non_member_embed_array))
+        db_index = davies_bouldin_score(X, labels)
+        silhouette_avg = silhouette_score(X, labels)
+        print("DB Index: ", db_index)
+        f.write(f"{dataset_name} DB Index {layer_index}: {db_index}\n")
+        print("Silhouette Score: ", silhouette_avg)
+        f.write(f"{dataset_name} Silhouette Score {layer_index}: {silhouette_avg}\n")
 
 
