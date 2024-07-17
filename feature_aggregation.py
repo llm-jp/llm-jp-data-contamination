@@ -21,6 +21,7 @@ for dataset_name in dataset_names:
     for idx, dict in enumerate([loss_dict, prob_dict, ppl_dict, mink_plus_dict, zlib_dict]):
         for set_name in ["train", "test"]:
             data = np.array(dict[dataset_name][set_name])
+            data[np.isnan(data)] = data[~np.isnan(data)].mean()
             mean1, std1 = np.mean(data), np.std(data)
             normalized_value = (dict[dataset_name][set_name] - mean1) / std1
             if set_name == "train":
