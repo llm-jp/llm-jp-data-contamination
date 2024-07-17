@@ -44,7 +44,7 @@ tokenizer = AutoTokenizer.from_pretrained(
   revision="step143000",
   cache_dir=f"./pythia-{args.model_size}-deduped/step143000",
 )
-tokenizer.pad_token = tokenizer.eos_token
+#tokenizer.pad_token = tokenizer.eos_token
 model.generation_config.pad_token_id = model.generation_config.eos_token_id
 model.generation_config.output_hidden_states = True
 model.generation_config.output_attentions = True
@@ -69,9 +69,9 @@ for dataset_name in dataset_names:
             tokenized_inputs = tokenizer(batched_text, return_tensors="pt", truncation=True, max_length=2048)
             tokenized_inputs = {key: val.to(device) for key, val in tokenized_inputs.items()}
             local_entropy = []
-            for idx, ratio in enumerate(np.linspace(0, 1, 51)[1:]):
+            for idx, ratio in enumerate(np.linspace(0, 1, 101)[1:]):
                 input_length = int(tokenized_inputs["input_ids"].shape[1]*ratio)
-                output_length = int(tokenized_inputs["input_ids"].shape[1]*(ratio+0.05))
+                output_length = int(tokenized_inputs["input_ids"].shape[1]*(ratio+0.01))
                 generations = model.generate(tokenized_inputs["input_ids"][0][:input_length].unsqueeze(0),temperature=0.0,top_k=0, top_p=0, max_length=output_length,min_length=output_length)
                 logits = generations["scores"]
                 #pdb.set_trace()
@@ -95,7 +95,7 @@ mean_non_member = np.mean(non_member_entropy, axis=0)
 std_non_member = np.std(non_member_entropy, axis=0)
 
 # x轴的值
-x = np.linspace(0, 1, 51)[1:]
+x = np.linspace(0, 1, 101)[1:]
 
 # 创建图
 plt.figure(figsize=(10, 6))
