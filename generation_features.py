@@ -62,14 +62,13 @@ for dataset_name in dataset_names:
             if idx * args.batch_size > args.samples:
                 break
             batched_text = [item for item in batch]
-            input_ids = tokenizer(batched_text, return_tensors="pt", truncation=True, max_length=2048)
+            tokenized_inputs = tokenizer(batched_text, return_tensors="pt", truncation=True, max_length=2048)
+            tokenized_inputs = {key: val.to(device) for key, val in tokenized_inputs.items()}
             entropy = []
             for ratio in [0.2, 0.4, 0.6, 0.8]:
-                input_length = int(input_ids["input_ids"].shape[1]*ratio)
-                output_length = int(input_ids["input_ids"].shape[1]*(ratio+0.2))
-                generations = model.generate(input_ids["input_ids"][0][:input_length], temperature=0.0,
-                                             top_k=0, top_p=0, max_length=output_length,
-                                             min_length=output_length)
+                input_length = int(tokenized_inputs["input_ids"].shape[1]*ratio)
+                output_length = int(tokenized_inputs["input_ids"].shape[1]*(ratio+0.2))
+                generations = model.generate(tokenized_inputs["input_ids"][0][:input_length].unsqueeze(0), temperature=0.0,top_k=0, top_p=0, max_length=output_length,min_length=output_length)
                 logits = generations["scores"]
                 pdb.set_trace()
                 probability_scores = torch.nn.functional.softmax(logits[0].float(), dim=1)
