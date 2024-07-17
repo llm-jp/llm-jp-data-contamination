@@ -76,6 +76,7 @@ for dataset_name in dataset_names:
                     outputs = model(**tokenized_inputs, labels=target_labels, output_hidden_states=True, return_dict=True)
                 hidden_states = outputs.hidden_states
                 context_embedding = hidden_states[0][-1].mean(0).squeeze()
+                pdb.set_trace()
                 if set_name == "train" and len(member_embed_list) < args.samples:
                     member_embed_list.append(context_embedding.cpu())
                 elif set_name == "test" and len(non_member_embed_list) < args.samples:
