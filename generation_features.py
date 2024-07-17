@@ -62,12 +62,14 @@ for dataset_name in dataset_names:
             if idx * args.batch_size > args.samples:
                 break
             batched_text = [item for item in batch]
-            input_ids = tokenizer(batched_text, return_tensors="pt", padding=True, truncation=True, max_length=2048)
+            input_ids = tokenizer(batched_text, return_tensors="pt", truncation=True, max_length=2048)
             entropy = []
             for ratio in [0.2, 0.4, 0.6, 0.8]:
-                generations = model.generate(input_ids[0][:int(input_ids.shape[1]*ratio)], temperature=0.0,
-                                             top_k=0, top_p=0, max_length=input_ids[0][:int(input_ids.shape[1]*ratio+0.2)],
-                                             min_length=input_ids[0][:int(input_ids.shape[1]*ratio+0.2)])
+                input_length = int(input_ids["input_ids"].shape[1]*ratio)
+                output_length = int(input_ids["input_ids"].shape[1]*(ratio+0.2))
+                generations = model.generate(input_ids["input_ids"][0][:input_length], temperature=0.0,
+                                             top_k=0, top_p=0, max_length=output_length,
+                                             min_length=output_length)
                 logits = generations["scores"]
                 pdb.set_trace()
                 probability_scores = torch.nn.functional.softmax(logits[0].float(), dim=1)
