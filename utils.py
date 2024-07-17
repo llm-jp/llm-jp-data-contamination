@@ -150,20 +150,17 @@ def caculate_instance_loss_perplexity_zlib(batch_logits, target_labels, batched_
     shift_logits = batch_logits[:, :-1, :].contiguous()
     labels = target_labels[:, 1:].contiguous()
     loss_fct = CrossEntropyLoss(reduction='none')
-    try:
-        lm_loss = loss_fct(shift_logits.view(-1, shift_logits.size(-1)), labels.view(-1))
-        instance_losses = lm_loss.view(-1, shift_logits.size(1))
-    except:
-        pdb.set_trace()
     loss_value_list = []
     ppl_value_list = []
     zlib_value_list = []
+    lm_loss = loss_fct(shift_logits.view(-1, shift_logits.size(-1)), labels.view(-1))
+    instance_losses = lm_loss.view(-1, shift_logits.size(1))
     for idx, i in enumerate(instance_losses):
         loss = i.sum() / sum(i != 0)
         loss_value_list.append(loss.item())
         ppl = torch.exp(loss.float()).item()
         ppl_value_list.append(ppl)
-        zlib_value = loss.float().cpu() / (len(zlib.compress(bytes(batched_text[idx], "utf-8")))+1)
+        zlib_value = loss.float().cpu() / (len(zlib.compress(bytes(batched_text[idx], "utf-8"))) + 1)
         zlib_value_list.append(zlib_value.item())
     return loss_value_list, ppl_value_list, zlib_value_list
 
