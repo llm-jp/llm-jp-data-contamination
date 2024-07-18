@@ -59,7 +59,7 @@ for dataset_name in dataset_names:
     member_embed_list = {}
     non_member_embed_list = {}
     for set_name in ["train", "test"]:
-        cleaned_dataset = clean_dataset(dataset)
+        cleaned_dataset = clean_dataset(dataset[set_name])
         member_entropy = []
         non_member_entropy = []
         for idx, batch in tqdm(enumerate(batched_data(cleaned_dataset, batch_size=args.batch_size))):
