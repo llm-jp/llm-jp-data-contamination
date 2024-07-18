@@ -37,8 +37,8 @@ model = GPTNeoXForCausalLM.from_pretrained(
   revision="step143000",
   cache_dir=f"./pythia-{args.model_size}-deduped/step143000",
    torch_dtype=torch.float16,
-   attn_implementation="sdpa"
-).half().cuda(args.cuda).eval()
+    attn_implementation="flash_attention_2"
+).cuda(args.cuda).eval()
 #model = model.to_bettertransformer()
 
 tokenizer = AutoTokenizer.from_pretrained(
