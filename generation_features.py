@@ -57,12 +57,10 @@ model.generation_config.return_dict_in_generate = True
 for dataset_name in dataset_names:
     dataset = form_dataset(dataset_name)
     device = f'cuda:{args.cuda}'
-    member_embed_list = {}
-    non_member_embed_list = {}
+    member_entropy = []
+    non_member_entropy = []
     for set_name in ["train", "test"]:
         cleaned_dataset = clean_dataset(dataset[set_name])
-        member_entropy = []
-        non_member_entropy = []
         for idx, batch in tqdm(enumerate(batched_data(cleaned_dataset, batch_size=args.batch_size))):
             if idx * args.batch_size > args.samples:
                 break
