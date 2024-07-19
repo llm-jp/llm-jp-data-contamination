@@ -70,8 +70,8 @@ for dataset_name in dataset_names:
             input_length = 64
             output_length = 32
             generations = model.generate(tokenized_inputs["input_ids"][0][:input_length].unsqueeze(0),
-                                         temperature=0.0, top_k=0, top_p=0, max_length=output_length,
-                                         min_length=output_length)
+                                         temperature=0.0, top_k=0, top_p=0, max_length=input_length+output_length,
+                                         min_length=input_length+output_length)
             comparation_result = generations["sequences"][input_length:] == tokenized_inputs["input_ids"][0][
                                                                             input_length:output_length]
             mem_score = sum(comparation_result) / (output_length - input_length)
