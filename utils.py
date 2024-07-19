@@ -29,8 +29,15 @@ def clean_dataset(dataset):
     invalid_pattern = re.compile(r'^\s*$')
     def is_valid(text):
         # 检查文本是否符合无效模式
-        return not invalid_pattern.match(text)
+        if invalid_pattern.match(text):
+            return False
 
+        # 检查文本split后的长度是否大于100
+        if len(text.split()) <= 100:
+            return False
+
+        # 其他条件都满足时，返回True
+        return True
     # 过滤掉无效的文本
     return filter(is_valid, dataset)
 def form_dataset(dataset_name):
