@@ -113,6 +113,7 @@ plt.ylabel('Entropy')
 plt.title('Mean and Variance of Entropy')
 plt.legend()
 plt.grid(True)
+plt.savefig(f'entropy_{dataset_name}_{args.model_size}.png')
 plt.show()
 
 
