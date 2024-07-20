@@ -1,6 +1,6 @@
 import pdb
 from transformers import GPTNeoXForCausalLM, AutoTokenizer,  AutoModelForCausalLM,  LogitsProcessorList, MinLengthLogitsProcessor, StoppingCriteriaList,  MaxLengthCriteria
-from utils import form_dataset, batched_data, clean_dataset
+from utils import form_dataset, batched_data_with_indices, clean_dataset
 import argparse
 from tqdm import tqdm
 import torch
@@ -59,11 +59,11 @@ for dataset_name in dataset_names:
     mem_score = pandas.DataFrame(columns=["set_name", "batch_idx",  "mem_score"])
     for set_name in ["train", "test"]:
         cleaned_data, orig_indices = clean_dataset(dataset[set_name])
-        for idx, batch in tqdm(enumerate(batched_data(cleaned_data, batch_size=args.batch_size))):
-            orig_idx = orig_indices[idx]
+        for idx, (data_batch, orig_indices_batch) in tqdm(enumerate(batched_data_with_indices(cleaned_data, orig_indices, batch_size=args.batch_size))):
+            orig_idx = [item for item in orig_indices_batch]
             if idx * args.batch_size > args.samples:
                 break
-            batched_text = [item for item in batch]
+            batched_text = [item for item in data_batch]
             tokenized_inputs = tokenizer(batched_text, return_tensors="pt", truncation=True, max_length=2048)
             tokenized_inputs = {key: val.to(device) for key, val in tokenized_inputs.items()}
             #input_length = int(tokenized_inputs["input_ids"].shape[1] * ratio)
@@ -76,7 +76,7 @@ for dataset_name in dataset_names:
             comparasion_result = generations["sequences"][0][input_length:] == tokenized_inputs["input_ids"][0][input_length:input_length+output_length]
             score = sum(comparasion_result) / (output_length - input_length)
             score = score.cpu().numpy()
-            mem_score = mem_score._append({"set_name": set_name, "original_idx": orig_idx, "mem_score": score}, ignore_index=True)
+            mem_score = mem_score._append({"set_name": set_name, "original_idx": orig_idx[0], "mem_score": score}, ignore_index=True)
     mem_score.to_csv(f"{args.model_size}_{dataset_name}_mem_score.csv")
             #for idx, ratio in enumerate(np.linspace(0, 1, 11)[1:]):
 

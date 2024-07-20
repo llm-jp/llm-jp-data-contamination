@@ -15,13 +15,15 @@ from datasets import load_dataset, DatasetDict
 from itertools import islice
 import re
 
-def batched_data(dataset, batch_size):
-    data_iter = iter(dataset)
+def batched_data_with_indices(data_list, indices_list, batch_size):
+    data_iter = iter(data_list)
+    indices_iter = iter(indices_list)
     while True:
-        batch = list(islice(data_iter, batch_size))
-        if not batch:
+        data_batch = list(islice(data_iter, batch_size))
+        indices_batch = list(islice(indices_iter, batch_size))
+        if not data_batch:
             break
-        yield batch
+        yield (data_batch, indices_batch)
 
 
 def clean_dataset(dataset):

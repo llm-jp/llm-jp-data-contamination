@@ -57,7 +57,7 @@ def figure_draw(data_dict, title,dataset_name, args):
             sns.kdeplot(phase_loss, ax=ax, label=phase_name, alpha=0.5, bw_adjust=0.5, shade=True)
         ax.set_title(f'{dataset_name} {title} histogram  at {args.model_size} model')
         ax.set_xlabel(title)
-        ax.set_ylabel('Percentage')
+        ax.set_ylabel('Density')
         ax.legend()
     plt.tight_layout()
     os.makedirs(f"figures/{dataset_name}", exist_ok=True)
@@ -107,34 +107,36 @@ def feature_collection(model, tokenizer, dataset, args, batch_size=8, upper_limi
     ppl_collect = []
     zlib_collect = []
     ref_loss_collect = []
-    cleaned_dataset = clean_dataset(dataset)
-    for batch in tqdm(batched_data(cleaned_dataset, batch_size=batch_size)):
-        batched_text = [item for item in batch]
+    idx_list = []
+    cleaned_data, orig_indices = clean_dataset(dataset)
+    for idx, (data_batch, orig_indices_batch) in tqdm(
+            enumerate(batched_data_with_indices(cleaned_data, orig_indices, batch_size=args.batch_size))):
+        orig_idx = [item for item in orig_indices_batch]
+        batched_text = [item for item in data_batch]
         outputs,tokenized_inputs, target_labels = caculate_outputs(model, tokenizer, batched_text, device=device)
         if refer_model is not None:
             refer_outputs, refer_target_labels = caculate_outputs(refer_model, refer_tokenizer, batched_text)
-        try:
-            batch_mink_plus_avg, batch_mink_avg = calculate_mink_and_mink_plus(outputs[1], tokenized_inputs)
-            loss_value_list, ppl_value_list, zlib_value_list = caculate_instance_loss_perplexity_zlib(outputs[1], target_labels, batched_text)
-        except RuntimeError:
-            pdb.set_trace()
+        batch_mink_plus_avg, batch_mink_avg = calculate_mink_and_mink_plus(outputs[1], tokenized_inputs)
+        loss_value_list, ppl_value_list, zlib_value_list = caculate_instance_loss_perplexity_zlib(outputs[1], target_labels, batched_text)
         mink_plus_collect.extend(batch_mink_plus_avg)
         mink_collect.extend(batch_mink_avg)
         loss_collect.extend(loss_value_list)
         ppl_collect.extend(ppl_value_list)
         zlib_collect.extend(zlib_value_list)
+        idx_list.extend(orig_idx)
         if refer_model is not None:
             ref_loss, ref_logits = refer_outputs[:2]
             ref_log_probabilities = torch.nn.functional.log_softmax(ref_logits, dim=-1)
             ref_probabilities = torch.nn.functional.softmax(ref_logits, dim=-1)
         if len(loss_collect) >= upper_limit:
             break
-    loss_collect = remove_outliers(loss_collect)
-    mink_collect = remove_outliers(mink_collect)
-    ppl_collect = remove_outliers(ppl_collect)
-    mink_plus_collect = remove_outliers(mink_plus_collect)
-    zlib_collect = remove_outliers(zlib_collect)
-    return loss_collect, mink_collect, ppl_collect, mink_plus_collect, zlib_collect, ref_loss_collect
+        ref_loss_collect.extend(ref_loss)
+    # loss_collect = remove_outliers(loss_collect)
+    # mink_collect = remove_outliers(mink_collect)
+    # ppl_collect = remove_outliers(ppl_collect)
+    # mink_plus_collect = remove_outliers(mink_plus_collect)
+    # zlib_collect = remove_outliers(zlib_collect)
+    return loss_collect, mink_collect, ppl_collect, mink_plus_collect, zlib_collect, ref_loss_collect, idx_list
 
 def calculate_mean_var(dict, dataset_name):
     split_set = ["train", "valid", "test"]
@@ -205,7 +207,9 @@ def results_caculate_and_draw(dataset_name, args):
     ppl_dict = pickle.load(open(f"feature_result/{dataset_name}_{args.model_size}_ppl_dict.pkl", "rb"))
     mink_plus_dict = pickle.load(open(f"feature_result/{dataset_name}_{args.model_size}_mink_plus_dict.pkl", "rb"))
     zlib_dict = pickle.load(open(f"feature_result/{dataset_name}_{args.model_size}_zlib_dict.pkl", "rb"))
-    all_dict = [loss_dict, prob_dict, ppl_dict, mink_plus_dict, zlib_dict]
+    refer_dict = pickle.load(open(f"feature_result/{dataset_name}_{args.model_size}_refer_dict.pkl", "rb"))
+    idx_list = pickle.load(open(f"feature_result/{dataset_name}_{args.model_size}_idx_list.pkl", "rb"))
+    all_dict = [loss_dict, prob_dict, ppl_dict, mink_plus_dict, zlib_dict, refer_dict]
     f = open(f"results/{dataset_name}_{args.model_size}_results.txt", "w")
     for idx, dict in enumerate(all_dict):
         if idx == 0:
@@ -228,11 +232,21 @@ def results_caculate_and_draw(dataset_name, args):
             mix_distribution(mink_plus_dict, dataset_name, "Mink_plus", args)
             f.write("Mink_plus Distribution Similarity Matrix\n")
             print("Mink_plus Distribution Similarity Matrix")
-        else:
+        elif idx == 4:
             figure_draw(zlib_dict, "Zlib", dataset_name, args)
             mix_distribution(zlib_dict, dataset_name, "Zlib", args)
             print("Zlib Distribution Similarity Matrix")
             f.write("Zlib Distribution Similarity Matrix\n")
+        elif idx == 5:
+            residual_dict = {}
+            residual_dict[dataset_name]=  {"train": [], "valid": [], "test": []}
+            for split in ["train", "valid", "test"]:
+                residual_dict[split] = [loss_dict[dataset_name][split][i] - refer_dict[dataset_name][split][i]
+                                        for i in range(len(loss_dict[dataset_name][split]))]
+            figure_draw(residual_dict, "Refer", dataset_name, args)
+            mix_distribution(residual_dict, dataset_name, "Refer", args)
+            print("Refer Distribution Similarity Matrix")
+            f.write("Refer Distribution Similarity Matrix\n")
         print(idx)
         calculate_mean_var(dict, dataset_name)
         js_matrix = js_divergence(dict, dataset_name)
@@ -283,17 +297,19 @@ else:
       f"EleutherAI/pythia-{args.model_size}-deduped",
       revision="step143000",
       cache_dir=f"./pythia-{args.model_size}-deduped/step143000",
-    ).half().cuda(args.cuda).eval()
+      torch_dtype=torch.bfloat16,
+    ).cuda(args.cuda).eval()
     #model = model.to_bettertransformer()
-
     tokenizer = AutoTokenizer.from_pretrained(
       f"EleutherAI/pythia-{args.model_size}-deduped",
       revision="step143000",
       cache_dir=f"./pythia-{args.model_size}-deduped/step143000",
     )
     if args.reference_model == "True":
-        refer_model = AutoModelForCausalLM.from_pretrained("stabilityai/stablelm-base-alpha-3b")
-        refer_tokenizer = AutoTokenizer.from_pretrained("stabilityai/stablelm-base-alpha-3b")
+        refer_model = AutoModelForCausalLM.from_pretrained("stabilityai/stablelm-base-alpha-3b-v2",
+                                                           trust_remote_code=True,
+                                                           torch_dtype="auto").cuda(args.cuda).eval()
+        refer_tokenizer = AutoTokenizer.from_pretrained("stabilityai/stablelm-base-alpha-3b-v2")
     else:
         refer_model = None
         refer_tokenizer = None
@@ -313,7 +329,7 @@ else:
         zlib_dict[dataset_name] = {"train": [], "valid": [], "test": []}
         refer_dict[dataset_name] = {"train": [], "valid": [], "test": []}
         for split in ["train", "valid", "test"]:
-            loss_list, prob_list, ppl_list, mink_plus_list, zlib_list, refer_list = feature_collection(model, tokenizer, dataset[split], args,
+            loss_list, prob_list, ppl_list, mink_plus_list, zlib_list, refer_list, idx_list = feature_collection(model, tokenizer, dataset[split], args,
                                                                                            batch_size=args.batch_size,
                                                                                            upper_limit=args.samples,
                                                                                            refer_model=refer_model,
@@ -330,6 +346,7 @@ else:
         pickle.dump(mink_plus_dict, open(f"feature_result/{dataset_name}_{args.model_size}_mink_plus_dict.pkl", "wb"))
         pickle.dump(zlib_dict, open(f"feature_result/{dataset_name}_{args.model_size}_zlib_dict.pkl", "wb"))
         pickle.dump(refer_dict, open(f"feature_result/{dataset_name}_{args.model_size}_refer_dict.pkl", "wb"))
+        pickle.dump(idx_list, open(f"feature_result/{dataset_name}_{args.model_size}_idx_list.pkl", "wb"))
         results_caculate_and_draw(dataset_name, args)
 
 
