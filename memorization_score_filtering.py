@@ -58,8 +58,9 @@ for dataset_name in dataset_names:
     device = f'cuda:{args.cuda}'
     mem_score = pandas.DataFrame(columns=["set_name", "batch_idx",  "mem_score"])
     for set_name in ["train", "test"]:
-        cleaned_dataset = clean_dataset(dataset[set_name])
-        for idx, batch in tqdm(enumerate(batched_data(cleaned_dataset, batch_size=args.batch_size))):
+        cleaned_data, orig_indices = clean_dataset(dataset[set_name])
+        for idx, batch in tqdm(enumerate(batched_data(clean_dataset, batch_size=args.batch_size))):
+            orig_idx = orig_indices[idx]
             if idx * args.batch_size > args.samples:
                 break
             batched_text = [item for item in batch]
@@ -75,7 +76,7 @@ for dataset_name in dataset_names:
             comparasion_result = generations["sequences"][0][input_length:] == tokenized_inputs["input_ids"][0][input_length:input_length+output_length]
             score = sum(comparasion_result) / (output_length - input_length)
             score = score.cpu().numpy()
-            mem_score = mem_score._append({"set_name": set_name, "batch_idx": idx, "mem_score": score}, ignore_index=True)
+            mem_score = mem_score._append({"set_name": set_name, "original_idx": orig_idx, "mem_score": score}, ignore_index=True)
     mem_score.to_csv(f"{args.model_size}_{dataset_name}_mem_score.csv")
             #for idx, ratio in enumerate(np.linspace(0, 1, 11)[1:]):
 

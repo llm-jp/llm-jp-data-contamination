@@ -60,8 +60,9 @@ for dataset_name in dataset_names:
     member_entropy = []
     non_member_entropy = []
     for set_name in ["train", "test"]:
-        cleaned_dataset = clean_dataset(dataset[set_name])
-        for idx, batch in tqdm(enumerate(batched_data(cleaned_dataset, batch_size=args.batch_size))):
+        cleaned_data, orig_indices = clean_dataset(dataset[set_name])
+        for idx, batch in tqdm(enumerate(batched_data(clean_dataset, batch_size=args.batch_size))):
+            orig_idx = orig_indices[idx]
             if idx * args.batch_size > args.samples:
                 break
             batched_text = [item for item in batch]

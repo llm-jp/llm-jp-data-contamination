@@ -25,21 +25,21 @@ def batched_data(dataset, batch_size):
 
 
 def clean_dataset(dataset):
-    # 定义正则表达式来检查无效文本（空白字符或多个换行符）
     invalid_pattern = re.compile(r'^\s*$')
+
     def is_valid(text):
-        # 检查文本是否符合无效模式
-        if invalid_pattern.match(text):
-            return False
+        return not invalid_pattern.match(text) and len(text.split()) > 100
 
-        # 检查文本split后的长度是否大于100
-        if len(text.split()) <= 100:
-            return False
+    cleaned_data = []
+    orig_indices = []
 
-        # 其他条件都满足时，返回True
-        return True
-    # 过滤掉无效的文本
-    return filter(is_valid, dataset)
+    for idx, data in enumerate(dataset):
+        if is_valid(data):
+            cleaned_data.append(data)
+            orig_indices.append(idx)
+
+    return cleaned_data, orig_indices
+
 def form_dataset(dataset_name):
     if dataset_name == "WikiMIA":
         for text_len in [32, 64, 128, 256]:
