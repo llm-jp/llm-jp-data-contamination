@@ -59,7 +59,7 @@ for dataset_name in dataset_names:
     mem_score = pandas.DataFrame(columns=["set_name", "batch_idx",  "mem_score"])
     for set_name in ["train", "test"]:
         cleaned_data, orig_indices = clean_dataset(dataset[set_name])
-        for idx, batch in tqdm(enumerate(batched_data(clean_dataset, batch_size=args.batch_size))):
+        for idx, batch in tqdm(enumerate(batched_data(cleaned_data, batch_size=args.batch_size))):
             orig_idx = orig_indices[idx]
             if idx * args.batch_size > args.samples:
                 break
