@@ -116,6 +116,7 @@ def feature_collection(model, tokenizer, dataset, args, batch_size=8, upper_limi
         outputs,tokenized_inputs, target_labels = caculate_outputs(model, tokenizer, batched_text, device=device)
         if refer_model is not None:
             refer_outputs, refer_tokenized_inputs, refer_target_labels = caculate_outputs(refer_model, refer_tokenizer, batched_text, device=device)
+        pdb.set_trace()
         batch_mink_plus_avg, batch_mink_avg = calculate_mink_and_mink_plus(outputs[1], tokenized_inputs)
         loss_value_list, ppl_value_list, zlib_value_list = caculate_instance_loss_perplexity_zlib(outputs[1], target_labels, batched_text)
         mink_plus_collect.extend(batch_mink_plus_avg)
@@ -308,7 +309,7 @@ else:
     if args.reference_model == "True":
         refer_model = AutoModelForCausalLM.from_pretrained("stabilityai/stablelm-base-alpha-3b-v2",
                                                            trust_remote_code=True,
-                                                           torch_dtype="auto").cuda(args.cuda).eval()
+                                                           torch_dtype=torch.bfloat16).cuda(args.cuda).eval()
         refer_tokenizer = AutoTokenizer.from_pretrained("stabilityai/stablelm-base-alpha-3b-v2")
     else:
         refer_model = None
