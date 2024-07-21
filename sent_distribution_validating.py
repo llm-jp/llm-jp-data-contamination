@@ -101,6 +101,7 @@ def caculate_loss_instance(idx, logits, target_labels):
 
 def feature_collection(model, tokenizer, dataset, args, batch_size=8, upper_limit=10000, refer_model=None, refer_tokenizer=None):
     device = f'cuda:{args.cuda}'
+    refer_device = f'cuda:{args.refer_cuda}'
     loss_collect = []
     mink_collect = []
     mink_plus_collect = []
@@ -115,7 +116,7 @@ def feature_collection(model, tokenizer, dataset, args, batch_size=8, upper_limi
         batched_text = [item for item in data_batch]
         outputs,tokenized_inputs, target_labels = caculate_outputs(model, tokenizer, batched_text, device=device)
         if refer_model is not None:
-            refer_outputs, refer_tokenized_inputs, refer_target_labels = caculate_outputs(refer_model, refer_tokenizer, batched_text, device=device)
+            refer_outputs, refer_tokenized_inputs, refer_target_labels = caculate_outputs(refer_model, refer_tokenizer, batched_text, device=refer_device)
         #pdb.set_trace()
         batch_mink_plus_avg, batch_mink_avg = calculate_mink_and_mink_plus(outputs[1], tokenized_inputs)
         loss_value_list, ppl_value_list, zlib_value_list = caculate_instance_loss_perplexity_zlib(outputs[1], target_labels, batched_text)
@@ -273,6 +274,7 @@ parser.add_argument("--dataset_name", type=str, default="Pile-CC", choices=["ArX
                 "Pile-CC", "PubMed Abstracts", "PubMed Central", "StackExchange",
                 "USPTO Backgrounds", "Wikipedia (en)", "WikiMIA", "all"])
 parser.add_argument("--cuda", type=int, default=0, help="cuda device")
+parser.add_argument("--refer_cuda", type=int, default=7, help="cuda device")
 parser.add_argument("--skip_calculation", type=str, default="True")
 parser.add_argument("--reference_model", type=str, default="True")
 parser.add_argument("--samples", type=int, default=5000)
@@ -311,7 +313,7 @@ else:
     if args.reference_model == "True":
         refer_model = AutoModelForCausalLM.from_pretrained("stabilityai/stablelm-base-alpha-3b-v2",
                                                            trust_remote_code=True,
-                                                           torch_dtype=torch.bfloat16).cuda(args.cuda).eval()
+                                                           torch_dtype=torch.bfloat16).cuda(args.refer_cuda).eval()
         refer_tokenizer = AutoTokenizer.from_pretrained("stabilityai/stablelm-base-alpha-3b-v2")
     else:
         refer_model = None
