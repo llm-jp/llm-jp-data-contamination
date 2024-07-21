@@ -43,21 +43,31 @@ def clean_dataset(dataset):
     return cleaned_data, orig_indices
 
 def form_dataset(dataset_name):
-    if dataset_name == "WikiMIA":
-        for text_len in [32, 64, 128, 256]:
-            dataset = load_dataset("swj0419/WikiMIA", split=f"WikiMIA_length{text_len}")
-            member_data = dataset.filter(lambda example: example['label'] == 1)
-            non_member_data = dataset.filter(lambda example: example['label'] == 0)
-            if text_len == 32:
+    if "WikiMIA" in dataset_name:
+        # Identify which length datasets to load based on the dataset name
+        dataset_lengths = ["32", "64", "128", "256"] if "all" in dataset_name else [sub_string for sub_string in
+                                                                                    ["32", "64", "128", "256"] if
+                                                                                    sub_string in dataset_name]
+
+        mia_dataset = None
+        for length in dataset_lengths:
+            # Load the dataset for the specific length
+            dataset = load_dataset("swj0419/WikiMIA", split=f"WikiMIA_length{length}")
+            member_data = dataset.filter(lambda example: example['label'] == 1)["input"]
+            non_member_data = dataset.filter(lambda example: example['label'] == 0)["input"]
+            # If mia_dataset does not exist, initialize it with the first loaded dataset
+            if mia_dataset is None:
                 mia_dataset = DatasetDict({
-                    'train': member_data["input"],
-                    'test': non_member_data["input"],
-                    'valid': non_member_data["input"]
+                    'train': member_data,
+                    'test': non_member_data,
+                    'valid': non_member_data
                 })
             else:
-                mia_dataset["train"].extend(member_data["input"])
-                mia_dataset["test"].extend(non_member_data["input"])
-                mia_dataset["valid"].extend(non_member_data["input"])
+                # If mia_dataset already exists(i.e., processing other than first length dataset),
+                # append the loaded data from current dataset to corresponding subset in mia_dataset
+                mia_dataset["train"].extend(member_data)
+                mia_dataset["test"].extend(non_member_data)
+                mia_dataset["valid"].extend(non_member_data)
         return mia_dataset
     else:
         train_dataset = torch.load(f"/model/pile/by_dataset/train_{dataset_name}_0.pt")

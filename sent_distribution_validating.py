@@ -283,7 +283,8 @@ if args.dataset_name == "all":
     dataset_names = ["ArXiv", "DM Mathematics",
                   "FreeLaw", "Github",  "HackerNews", "NIH ExPorter",
                  "Pile-CC", "PubMed Abstracts", "PubMed Central", "StackExchange",
-                 "USPTO Backgrounds", "Wikipedia (en)", "WikiMIA"]
+                 "USPTO Backgrounds", "Wikipedia (en)","WikiMIA32","WikiMIA64", "WikiMIA128","WikiMIA256",
+                     "WikiMIAall"]
     #dataset_names = ["PubMed Central", "StackExchange",
     #                "USPTO Backgrounds", "Wikipedia (en)", "WikiMIA"]
 else:
