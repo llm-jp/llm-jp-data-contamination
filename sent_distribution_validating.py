@@ -116,7 +116,7 @@ def feature_collection(model, tokenizer, dataset, args, batch_size=8, upper_limi
         outputs,tokenized_inputs, target_labels = caculate_outputs(model, tokenizer, batched_text, device=device)
         if refer_model is not None:
             refer_outputs, refer_tokenized_inputs, refer_target_labels = caculate_outputs(refer_model, refer_tokenizer, batched_text, device=device)
-        pdb.set_trace()
+        #pdb.set_trace()
         batch_mink_plus_avg, batch_mink_avg = calculate_mink_and_mink_plus(outputs[1], tokenized_inputs)
         loss_value_list, ppl_value_list, zlib_value_list = caculate_instance_loss_perplexity_zlib(outputs[1], target_labels, batched_text)
         mink_plus_collect.extend(batch_mink_plus_avg)
@@ -131,8 +131,8 @@ def feature_collection(model, tokenizer, dataset, args, batch_size=8, upper_limi
             ref_probabilities = torch.nn.functional.softmax(ref_logits, dim=-1)
             refer_loss_value_list, _, _ = caculate_instance_loss_perplexity_zlib(refer_outputs[1], refer_target_labels, batched_text)
         ref_loss_collect.extend(refer_loss_value_list)
-        # if len(loss_collect) >= upper_limit:
-        #     break
+        if len(loss_collect) >= upper_limit:
+             break
     # loss_collect = remove_outliers(loss_collect)
     # mink_collect = remove_outliers(mink_collect)
     # ppl_collect = remove_outliers(ppl_collect)
