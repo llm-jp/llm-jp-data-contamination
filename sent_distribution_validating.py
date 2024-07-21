@@ -314,6 +314,7 @@ else:
         refer_model = None
         refer_tokenizer = None
     tokenizer.pad_token = tokenizer.eos_token
+    refer_tokenizer.pad_token = refer_tokenizer.eos_token
     for dataset_name in dataset_names:
         dataset = form_dataset(dataset_name)
         loss_dict = {}
