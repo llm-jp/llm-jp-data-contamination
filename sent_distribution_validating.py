@@ -243,7 +243,7 @@ def results_caculate_and_draw(dataset_name, args):
             residual_dict = {}
             residual_dict[dataset_name]=  {"train": [], "valid": [], "test": []}
             for split in ["train", "valid", "test"]:
-                residual_dict[split] = [loss_dict[dataset_name][split][i] - refer_dict[dataset_name][split][i]
+                residual_dict[dataset_name][split] = [loss_dict[dataset_name][split][i] - refer_dict[dataset_name][split][i]
                                         for i in range(len(loss_dict[dataset_name][split]))]
             figure_draw(residual_dict, "Refer", dataset_name, args)
             mix_distribution(residual_dict, dataset_name, "Refer", args)
