@@ -129,9 +129,10 @@ def feature_collection(model, tokenizer, dataset, args, batch_size=8, upper_limi
             ref_loss, ref_logits = refer_outputs[:2]
             ref_log_probabilities = torch.nn.functional.log_softmax(ref_logits, dim=-1)
             ref_probabilities = torch.nn.functional.softmax(ref_logits, dim=-1)
+            refer_loss_value_list, _, _ = caculate_instance_loss_perplexity_zlib(refer_outputs[1], refer_target_labels, batched_text)
         if len(loss_collect) >= upper_limit:
             break
-        ref_loss_collect.extend(ref_loss)
+        ref_loss_collect.extend(refer_loss_value_list)
     # loss_collect = remove_outliers(loss_collect)
     # mink_collect = remove_outliers(mink_collect)
     # ppl_collect = remove_outliers(ppl_collect)
