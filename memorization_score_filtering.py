@@ -12,7 +12,7 @@ import os
 parser = argparse.ArgumentParser()
 parser.add_argument("--batch_size", type=int, default=1)
 parser.add_argument("--model_size", type=str, default="410m")
-parser.add_argument("--dataset_name", type=str, default="ArXiv", choices=["ArXiv", "DM Mathematics",
+parser.add_argument("--dataset_name", type=str, default="all", choices=["ArXiv", "DM Mathematics",
                  "FreeLaw", "Github",  "HackerNews", "NIH ExPorter",
                 "Pile-CC", "PubMed Abstracts", "PubMed Central", "StackExchange",
                 "USPTO Backgrounds", "Wikipedia (en)", "WikiMIA", "all"])
@@ -59,7 +59,7 @@ for dataset_name in dataset_names:
     dataset = form_dataset(dataset_name)
     device = f'cuda:{args.cuda}'
     mem_score = pandas.DataFrame(columns=["set_name", "batch_idx",  "mem_score"])
-    for set_name in ["train", "test"]:
+    for set_name in ["train", "valid", "test"]:
         cleaned_data, orig_indices = clean_dataset(dataset[set_name], dataset_name)
         for idx, (data_batch, orig_indices_batch) in tqdm(enumerate(batched_data_with_indices(cleaned_data, orig_indices, batch_size=args.batch_size))):
             orig_idx = [item for item in orig_indices_batch]
