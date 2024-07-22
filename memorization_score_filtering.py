@@ -12,6 +12,7 @@ import os
 parser = argparse.ArgumentParser()
 parser.add_argument("--batch_size", type=int, default=1)
 parser.add_argument("--model_size", type=str, default="410m")
+parser.add_argument("--max_length", type=int, default=96)
 parser.add_argument("--dataset_name", type=str, default="all", choices=["ArXiv", "DM Mathematics",
                  "FreeLaw", "Github",  "HackerNews", "NIH ExPorter",
                 "Pile-CC", "PubMed Abstracts", "PubMed Central", "StackExchange",
