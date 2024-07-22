@@ -287,8 +287,8 @@ if args.dataset_name == "all":
                  "Pile-CC", "PubMed Abstracts", "PubMed Central", "StackExchange",
                  "USPTO Backgrounds", "Wikipedia (en)","WikiMIA32","WikiMIA64", "WikiMIA128","WikiMIA256",
                      "WikiMIAall"]
-    dataset_names = ["WikiMIA32","WikiMIA64", "WikiMIA128","WikiMIA256",
-                     "WikiMIAall"]
+    # dataset_names = ["WikiMIA32","WikiMIA64", "WikiMIA128","WikiMIA256",
+    #                  "WikiMIAall"]
 else:
     dataset_names = [args.dataset_name]
 
