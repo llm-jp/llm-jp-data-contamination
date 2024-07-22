@@ -99,7 +99,7 @@ def caculate_loss_instance(idx, logits, target_labels):
     return loss_i
 
 
-def feature_collection(model, tokenizer, dataset, args, batch_size=8, upper_limit=10000, refer_model=None, refer_tokenizer=None):
+def feature_collection(model, tokenizer, dataset, args, dataset_name, batch_size=8, upper_limit=10000, refer_model=None, refer_tokenizer=None):
     device = f'cuda:{args.cuda}'
     refer_device = f'cuda:{args.refer_cuda}'
     loss_collect = []
@@ -109,7 +109,7 @@ def feature_collection(model, tokenizer, dataset, args, batch_size=8, upper_limi
     zlib_collect = []
     ref_loss_collect = []
     idx_list = []
-    cleaned_data, orig_indices = clean_dataset(dataset)
+    cleaned_data, orig_indices = clean_dataset(dataset, dataset_name)
     for idx, (data_batch, orig_indices_batch) in tqdm(
             enumerate(batched_data_with_indices(cleaned_data, orig_indices, batch_size=args.batch_size))):
         orig_idx = [item for item in orig_indices_batch]
@@ -287,8 +287,8 @@ if args.dataset_name == "all":
                  "Pile-CC", "PubMed Abstracts", "PubMed Central", "StackExchange",
                  "USPTO Backgrounds", "Wikipedia (en)","WikiMIA32","WikiMIA64", "WikiMIA128","WikiMIA256",
                      "WikiMIAall"]
-    #dataset_names = ["PubMed Central", "StackExchange",
-    #                "USPTO Backgrounds", "Wikipedia (en)", "WikiMIA"]
+    dataset_names = ["WikiMIA32","WikiMIA64", "WikiMIA128","WikiMIA256",
+                     "WikiMIAall"]
 else:
     dataset_names = [args.dataset_name]
 
@@ -336,6 +336,7 @@ else:
         refer_dict[dataset_name] = {"train": [], "valid": [], "test": []}
         for split in ["train", "valid", "test"]:
             loss_list, prob_list, ppl_list, mink_plus_list, zlib_list, refer_list, idx_list = feature_collection(model, tokenizer, dataset[split], args,
+                                                                                                                 dataset_name,
                                                                                            batch_size=args.batch_size,
                                                                                            upper_limit=args.samples,
                                                                                            refer_model=refer_model,
