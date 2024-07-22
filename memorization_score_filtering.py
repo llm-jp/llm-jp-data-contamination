@@ -58,7 +58,7 @@ model.generation_config.return_dict_in_generate = True
 for dataset_name in dataset_names:
     dataset = form_dataset(dataset_name)
     device = f'cuda:{args.cuda}'
-    mem_score = pandas.DataFrame(columns=["set_name", "batch_idx",  "mem_score"])
+    mem_score = pandas.DataFrame(columns=["set_name", "original_idx",  "mem_score"])
     for set_name in ["train", "valid", "test"]:
         cleaned_data, orig_indices = clean_dataset(dataset[set_name], dataset_name)
         for idx, (data_batch, orig_indices_batch) in tqdm(enumerate(batched_data_with_indices(cleaned_data, orig_indices, batch_size=args.batch_size))):
