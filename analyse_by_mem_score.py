@@ -26,8 +26,8 @@ parser.add_argument("--dataset_name", type=str, default="Pile-CC", choices=["ArX
                 "USPTO Backgrounds", "Wikipedia (en)", "WikiMIA", "all"])
 parser.add_argument("--cuda", type=int, default=0, help="cuda device")
 parser.add_argument("--refer_cuda", type=int, default=7, help="cuda device")
+parser.add_argument("--reference_model", type=str, default=False)
 parser.add_argument("--samples", type=int, default=5000)
-parser.add_argument("--gradient_collection", type=str, default=False)
 parser.add_argument("--dir", type=str, default="mem_score_result")
 args = parser.parse_args()
 
