@@ -26,8 +26,9 @@ args = parser.parse_args()
 if args.dataset_name == "all":
     dataset_names = ["ArXiv", "DM Mathematics",
                      "FreeLaw", "Github", "HackerNews", "NIH ExPorter",
-                      "Pile-CC", "PubMed Abstracts", "PubMed Central", "StackExchange",
-                      "USPTO Backgrounds", "Wikipedia (en)", "WikiMIA"]
+                     "Pile-CC", "PubMed Abstracts", "PubMed Central", "StackExchange",
+                     "USPTO Backgrounds", "Wikipedia (en)", "WikiMIA32", "WikiMIA64", "WikiMIA128", "WikiMIA256",
+                     "WikiMIAall"]
     #dataset_names = ["Github", "HackerNews", "NIH ExPorter","Pile-CC", "PubMed Abstracts", "PubMed Central", "StackExchange",
     #                "USPTO Backgrounds", "Wikipedia (en)", "WikiMIA"]
 else:
@@ -37,7 +38,7 @@ model = GPTNeoXForCausalLM.from_pretrained(
     f"EleutherAI/pythia-{args.model_size}-deduped",
     revision="step143000",
     cache_dir=f"./pythia-{args.model_size}-deduped/step143000",
-    torch_dtype=torch.float16,
+    torch_dtype=torch.bfloat16,
     # attn_implementation="sdpa"
 ).cuda(args.cuda).eval()
 tokenizer = AutoTokenizer.from_pretrained(
@@ -58,7 +59,7 @@ for dataset_name in dataset_names:
     device = f'cuda:{args.cuda}'
     mem_score = pandas.DataFrame(columns=["set_name", "batch_idx",  "mem_score"])
     for set_name in ["train", "test"]:
-        cleaned_data, orig_indices = clean_dataset(dataset[set_name])
+        cleaned_data, orig_indices = clean_dataset(dataset[set_name], dataset_name)
         for idx, (data_batch, orig_indices_batch) in tqdm(enumerate(batched_data_with_indices(cleaned_data, orig_indices, batch_size=args.batch_size))):
             orig_idx = [item for item in orig_indices_batch]
             if idx * args.batch_size > args.samples:
