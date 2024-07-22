@@ -7,6 +7,7 @@ import torch
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas
+import os
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--batch_size", type=int, default=1)
@@ -27,7 +28,7 @@ if args.dataset_name == "all":
     dataset_names = ["ArXiv", "DM Mathematics",
                      "FreeLaw", "Github", "HackerNews", "NIH ExPorter",
                      "Pile-CC", "PubMed Abstracts", "PubMed Central", "StackExchange",
-                     "USPTO Backgrounds", "Wikipedia (en)", "WikiMIA32", "WikiMIA64", "WikiMIA128", "WikiMIA256",
+                     "USPTO Backgrounds", "Wikipedia (en)", "WikiMIA128", "WikiMIA256",
                      "WikiMIAall"]
     #dataset_names = ["Github", "HackerNews", "NIH ExPorter","Pile-CC", "PubMed Abstracts", "PubMed Central", "StackExchange",
     #                "USPTO Backgrounds", "Wikipedia (en)", "WikiMIA"]
@@ -78,7 +79,8 @@ for dataset_name in dataset_names:
             score = sum(comparasion_result) / (output_length - input_length)
             score = score.cpu().numpy()
             mem_score = mem_score._append({"set_name": set_name, "original_idx": orig_idx[0], "mem_score": score}, ignore_index=True)
-    mem_score.to_csv(f"{args.model_size}_{dataset_name}_mem_score.csv")
+    os.makedirs(f"mem_score/{args.model_size}", exist_ok=True)
+    mem_score.to_csv(f"mem_score/{args.model_size}/{dataset_name}_mem_score.csv")
             #for idx, ratio in enumerate(np.linspace(0, 1, 11)[1:]):
 
 
