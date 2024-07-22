@@ -66,7 +66,7 @@ for dataset_name in dataset_names:
             if idx * args.batch_size > args.samples:
                 break
             batched_text = [item for item in data_batch]
-            tokenized_inputs = tokenizer(batched_text, return_tensors="pt", truncation=True, max_length=2048)
+            tokenized_inputs = tokenizer(batched_text, return_tensors="pt", truncation=True, max_length=args.max_length)
             tokenized_inputs = {key: val.to(device) for key, val in tokenized_inputs.items()}
             #input_length = int(tokenized_inputs["input_ids"].shape[1] * ratio)
             #output_length = int(tokenized_inputs["input_ids"].shape[1] * (ratio + 0.1))

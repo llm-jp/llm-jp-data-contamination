@@ -35,13 +35,13 @@ parser.add_argument("--dir", type=str, default="feature_result")
 args = parser.parse_args()
 
 if args.dataset_name == "all":
-    dataset_names = ["ArXiv", "DM Mathematics",
-                  "FreeLaw", "Github",  "HackerNews", "NIH ExPorter",
-                 "Pile-CC", "PubMed Abstracts", "PubMed Central", "StackExchange",
-                 "USPTO Backgrounds", "Wikipedia (en)","WikiMIA32","WikiMIA64", "WikiMIA128","WikiMIA256",
-                     "WikiMIAall"]
-    # dataset_names = ["WikiMIA32","WikiMIA64", "WikiMIA128","WikiMIA256",
+    # dataset_names = ["ArXiv", "DM Mathematics",
+    #               "FreeLaw", "Github",  "HackerNews", "NIH ExPorter",
+    #              "Pile-CC", "PubMed Abstracts", "PubMed Central", "StackExchange",
+    #              "USPTO Backgrounds", "Wikipedia (en)","WikiMIA32","WikiMIA64", "WikiMIA128","WikiMIA256",
     #                  "WikiMIAall"]
+    dataset_names = ["WikiMIA32","WikiMIA64", "WikiMIA128","WikiMIA256",
+                      "WikiMIAall"]
 else:
     dataset_names = [args.dataset_name]
 
