@@ -8,6 +8,7 @@ import matplotlib.pyplot as plt
 from sklearn.decomposition import PCA
 import numpy as np
 from sklearn.metrics import roc_auc_score, silhouette_score, davies_bouldin_score, calinski_harabasz_score
+import pandas as pd
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--batch_size", type=int, default=1)
@@ -49,7 +50,8 @@ tokenizer = AutoTokenizer.from_pretrained(
 tokenizer.pad_token = tokenizer.eos_token
 model.generation_config.pad_token_id = model.generation_config.eos_token_id
 
-f = open(f"{args.model_size}_embedding_result.txt", "w")
+results_df = pd.DataFrame(
+    columns=['Dataset Name', 'Layer Index', 'DB Index', 'Silhouette Score', 'Calinski Harabasz Index'])
 for dataset_name in dataset_names:
     dataset = form_dataset(dataset_name)
     device = f'cuda:{args.cuda}'
@@ -116,11 +118,12 @@ for dataset_name in dataset_names:
         db_index = davies_bouldin_score(X, labels)
         silhouette_avg = silhouette_score(X, labels)
         calinski_index = calinski_harabasz_score(X, labels)
-        print(f"DB Index {layer_index}: ", db_index)
-        f.write(f"{dataset_name} DB Index {layer_index}: {db_index}\n")
-        print(f"Silhouette Score: {layer_index}", silhouette_avg)
-        f.write(f"{dataset_name} Silhouette Score {layer_index}: {silhouette_avg}\n")
-        print(f"Calinski Harabasz Index {layer_index}: ", calinski_index)
-        f.write(f"{dataset_name} Calinski Harabasz Index {layer_index}: {calinski_index}\n")
+        results_df = results_df._append({'Dataset Name': dataset_name,
+                                        'Layer Index': layer_index,
+                                        'DB Index': db_index,
+                                        'Silhouette Score': silhouette_avg,
+                                        'Calinski Harabasz Index': calinski_index},
+                                       ignore_index=True)
+results_df.to_csv(f"{args.model_size}_embedding_result.csv", index=False)
 
 
