@@ -1,13 +1,13 @@
 import pdb
 from transformers import GPTNeoXForCausalLM, AutoTokenizer,  AutoModelForCausalLM,  LogitsProcessorList, MinLengthLogitsProcessor, StoppingCriteriaList,  MaxLengthCriteria
-from utils import form_dataset, batched_data
+from utils import form_dataset, batched_data_with_indices, clean_dataset
 import argparse
 from tqdm import tqdm
 import torch
 import matplotlib.pyplot as plt
 from sklearn.decomposition import PCA
 import numpy as np
-from sklearn.metrics import roc_auc_score, silhouette_score, f1_score, davies_bouldin_score
+from sklearn.metrics import roc_auc_score, silhouette_score, davies_bouldin_score, calinski_harabasz_score
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--batch_size", type=int, default=1)
@@ -56,10 +56,11 @@ for dataset_name in dataset_names:
     member_embed_list = {}
     non_member_embed_list = {}
     for set_name in ["train", "test"]:
-        for idx, batch in tqdm(enumerate(batched_data(dataset[set_name], batch_size=args.batch_size))):
+        cleaned_data, orig_indices = clean_dataset(dataset[set_name], dataset_name)
+        for idx, (data_batch, orig_indices_batch) in tqdm(enumerate(batched_data_with_indices(cleaned_data, orig_indices, batch_size=args.batch_size))):
             if idx * args.batch_size > args.samples:
                 break
-            batched_text = [item for item in batch]
+            batched_text = [item for item in data_batch]
             tokenized_inputs = tokenizer(batched_text,
                                          return_tensors="pt",
                                          truncation=True,
@@ -114,9 +115,12 @@ for dataset_name in dataset_names:
         X = np.vstack((member_embed_array, non_member_embed_array))
         db_index = davies_bouldin_score(X, labels)
         silhouette_avg = silhouette_score(X, labels)
+        calinski_index = calinski_harabasz_score(X, labels)
         print(f"DB Index {layer_index}: ", db_index)
         f.write(f"{dataset_name} DB Index {layer_index}: {db_index}\n")
         print(f"Silhouette Score: {layer_index}", silhouette_avg)
         f.write(f"{dataset_name} Silhouette Score {layer_index}: {silhouette_avg}\n")
+        print(f"Calinski Harabasz Index {layer_index}: ", calinski_index)
+        f.write(f"{dataset_name} Calinski Harabasz Index {layer_index}: {calinski_index}\n")
 
 

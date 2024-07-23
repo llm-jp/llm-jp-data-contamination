@@ -83,7 +83,6 @@ for dataset_name in dataset_names:
             else:
                 non_member_entropy.append(local_entropy)
 
-
 member_entropy = np.array(member_entropy)
 non_member_entropy = np.array(non_member_entropy)
 
