@@ -373,10 +373,9 @@ def js_divergence(dict, dataset_name):
             js_matrix[idx1][idx2] = 0.5 * entropy(hist1, m) + 0.5 * entropy(hist2, m)
     return js_matrix#close to zero means the two distributions are similar
 
-def ks_hypothesis(dict, dataset_name):
+def ks_hypothesis(dict, dataset_name, split_set=["train", "valid", "test"]):
     ks_statistic_matrix = np.zeros((3, 3))
     ks_p_value_matrix = np.zeros((3, 3))
-    split_set = ["train", "valid", "test"]
     for idx1, set1 in enumerate(split_set):
         for idx2, set2 in enumerate(split_set):
             values = np.array(dict[dataset_name][set1])
@@ -388,9 +387,8 @@ def ks_hypothesis(dict, dataset_name):
             ks_p_value_matrix[idx1][idx2] = p_value
     return ks_statistic_matrix, ks_p_value_matrix#close to zero means the two distributions are similar
 
-def wasserstein_distance_caculate(dict, dataset_name):
+def wasserstein_distance_caculate(dict, dataset_name, split_set=["train", "valid", "test"]):
     ws_matrix = np.zeros((3, 3))
-    split_set = ["train", "valid", "test"]
     for idx1, set1 in enumerate(split_set):
         for idx2, set2 in enumerate(split_set):
             values = np.array(dict[dataset_name][set1])
