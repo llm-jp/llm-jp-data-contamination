@@ -135,6 +135,7 @@ def mix_distribution(dict, dataset_name, title, args, ratio=0.8, total_num=10000
     plt.savefig(f'mixed_figure/{dataset_name}/{title} histogram at {args.model_size} model at ratio {ratio}.png')
     # 显示图表
     plt.show()
+    return train_data, test_data, combined_data
 
 def figure_draw(data_dict, title,dataset_name, args):
     plt.figure(figsize=(10, 5))
@@ -340,8 +341,7 @@ def results_caculate_and_draw(dataset_name, args):
         f.write(str(ws_matrix) + '\n')
     f.close()
 
-def calculate_mean_var(dict, dataset_name):
-    split_set = ["train", "valid", "test"]
+def calculate_mean_var(dict, dataset_name, split_set=["train", "valid", "test"]):
     for idx1, set1 in enumerate(split_set):
         values = np.array(dict[dataset_name][set1])
         values = values[np.isnan(values)==False]
