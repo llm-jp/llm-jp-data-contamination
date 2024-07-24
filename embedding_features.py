@@ -125,6 +125,6 @@ for dataset_name in dataset_names:
                                         'Silhouette Score': silhouette_avg,
                                         'Calinski Harabasz Index': calinski_index},
                                        ignore_index=True)
-results_df.to_csv(f"{args.model_size}_embedding_result.csv", index=False)
+results_df.to_csv(f"embedding_results/{args.model_size}_embedding_result.csv", index=False)
 
 
