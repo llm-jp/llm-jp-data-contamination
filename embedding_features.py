@@ -116,7 +116,7 @@ for dataset_name in dataset_names:
         plt.grid(True)
         plt.savefig(f'embedding_figure/PCA_{dataset_name}_{args.model_size}_{layer_index}.png')
         plt.show()
-        X = np.vstack((member_embed_array, non_member_embed_array))
+        #X = np.vstack((member_embed_array, non_member_embed_array))
         db_index = davies_bouldin_score(all_embed_array, labels)
         silhouette_avg = silhouette_score(all_embed_array, labels)
         calinski_index = calinski_harabasz_score(all_embed_array, labels)
