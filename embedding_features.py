@@ -19,16 +19,16 @@ parser.add_argument("--dataset_name", type=str, default="all", choices=["ArXiv",
                 "USPTO Backgrounds", "Wikipedia (en)", "WikiMIA", "all"])
 parser.add_argument("--cuda", type=int, default=1, help="cuda device")
 parser.add_argument("--skip_calculation", type=str, default="True")
-parser.add_argument("--reference_model", type=str, default="True")
 parser.add_argument("--samples", type=int, default=1000)
 parser.add_argument("--gradient_collection", type=str, default=False)
 args = parser.parse_args()
 
 if args.dataset_name == "all":
-    dataset_names = ["ArXiv", "DM Mathematics",
-                     "FreeLaw", "Github", "HackerNews", "NIH ExPorter",
-                      "Pile-CC", "PubMed Abstracts", "PubMed Central", "StackExchange",
-                      "USPTO Backgrounds", "Wikipedia (en)", "WikiMIA"]
+    dataset_names =["ArXiv", "DM Mathematics",
+                  "FreeLaw", "Github",  "HackerNews", "NIH ExPorter",
+                 "Pile-CC", "PubMed Abstracts", "PubMed Central", "StackExchange",
+                 "USPTO Backgrounds", "Wikipedia (en)","WikiMIA32","WikiMIA64", "WikiMIA128","WikiMIA256",
+                     "WikiMIAall"]
     #dataset_names = ["Github", "HackerNews", "NIH ExPorter","Pile-CC", "PubMed Abstracts", "PubMed Central", "StackExchange",
     #                "USPTO Backgrounds", "Wikipedia (en)", "WikiMIA"]
 else:
@@ -51,7 +51,8 @@ tokenizer.pad_token = tokenizer.eos_token
 model.generation_config.pad_token_id = model.generation_config.eos_token_id
 
 results_df = pd.DataFrame(
-    columns=['Dataset Name', 'Layer Index', 'DB Index', 'Silhouette Score', 'Calinski Harabasz Index'])
+    columns=['Dataset Name', 'Layer Index', 'DB Index',
+             'Silhouette Score', 'Calinski Harabasz Index'])
 for dataset_name in dataset_names:
     dataset = form_dataset(dataset_name)
     device = f'cuda:{args.cuda}'
