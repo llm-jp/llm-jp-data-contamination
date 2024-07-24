@@ -92,13 +92,14 @@ for dataset_name in dataset_names:
             except:
                 continue
     for layer_index in range(len(hidden_states)):
-        member_embed_array = np.array(member_embed_list[layer_index])
-        non_member_embed_array = np.array(non_member_embed_list[layer_index])
+        member_embed_array = torch.stack(member_embed_list[layer_index])
+        non_member_embed_array = torch.stack(non_member_embed_list[layer_index])
                     # Concatenate for PCA
-        all_embed_array = np.vstack([member_embed_array, non_member_embed_array])
+        all_embed_array = torch.cat([member_embed_array, non_member_embed_array])
         labels = np.array([1] * len(member_embed_array) + [0] * len(non_member_embed_array))
         # Perform PCA
         pca = PCA(n_components=2)
+        all_embed_array = all_embed_array.float().cpu().numpy()
         pca_result = pca.fit_transform(all_embed_array)
         # Separate the results
         pca_member_embed = pca_result[labels == 1]
@@ -115,11 +116,10 @@ for dataset_name in dataset_names:
         plt.grid(True)
         plt.savefig(f'embedding_figure/PCA_{dataset_name}_{args.model_size}_{layer_index}.png')
         plt.show()
-        labels = np.array([1] * len(member_embed_array) + [0] * len(non_member_embed_array))
         X = np.vstack((member_embed_array, non_member_embed_array))
-        db_index = davies_bouldin_score(X, labels)
-        silhouette_avg = silhouette_score(X, labels)
-        calinski_index = calinski_harabasz_score(X, labels)
+        db_index = davies_bouldin_score(all_embed_array, labels)
+        silhouette_avg = silhouette_score(all_embed_array, labels)
+        calinski_index = calinski_harabasz_score(all_embed_array, labels)
         results_df = results_df._append({'Dataset Name': dataset_name,
                                         'Layer Index': layer_index,
                                         'DB Index': db_index,
