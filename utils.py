@@ -327,7 +327,7 @@ def results_caculate_and_draw(dataset_name, args, split_set = ["train", "valid",
             print("Refer Distribution Similarity Matrix")
             f.write("Refer Distribution Similarity Matrix\n")
         print(idx)
-        calculate_mean_var(dict, dataset_name)
+        calculate_mean_var(dict, dataset_name, split_set)
         js_matrix = js_divergence(dict, dataset_name, split_set)
         print(js_matrix)
         f.write(str(js_matrix) + '\n')
