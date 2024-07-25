@@ -86,9 +86,9 @@ for dataset_name in dataset_names:
                         member_embed_list[layer_index] = []
                         non_member_embed_list[layer_index] = []
                     context_embedding = hidden_states[layer_index][0].mean(0).squeeze()
-                    if set_name == "train" and len(member_embed_list) < args.samples:
+                    if set_name == "member" and len(member_embed_list) < args.samples:
                         member_embed_list[layer_index].append(context_embedding.cpu())
-                    elif set_name == "test" and len(non_member_embed_list) < args.samples:
+                    elif set_name == "nonmember" and len(non_member_embed_list) < args.samples:
                         non_member_embed_list[layer_index].append(context_embedding.cpu())
             except:
                 continue
