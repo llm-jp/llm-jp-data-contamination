@@ -17,8 +17,7 @@ from utils import *
 import pandas as pd
 
 parser = argparse.ArgumentParser()
-parser.add_argument("--batch_size", type=int, default=4)
-parser.add_argument("--max_length", type=int, default=96)
+
 parser.add_argument("--model_size", type=str, default="160m")
 parser.add_argument("--dataset_name", type=str, default="Pile-CC", choices=["ArXiv", "DM Mathematics",
                  "FreeLaw", "Github",  "HackerNews", "NIH ExPorter",
@@ -45,3 +44,6 @@ for dataset_name in dataset_names:
     train_dict = mem_score_data[mem_score_data['set_name'] == 'train'].set_index('original_idx')['mem_score'].to_dict()
     test_dict = mem_score_data[mem_score_data['set_name'] == 'test'].set_index('original_idx')['mem_score'].to_dict()
     valid_dict = mem_score_data[mem_score_data['set_name'] == 'test'].set_index('original_idx')['mem_score'].to_dict()
+    print(sum(mem_score_data[mem_score_data["set_name"] == "test"]["mem_score"] == -1))
+    print(sum(mem_score_data[mem_score_data["set_name"] == "train"]["mem_score"] == -1))
+    print(sum(mem_score_data[mem_score_data["set_name"] == "valid"]["mem_score"] == -1))
