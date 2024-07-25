@@ -91,7 +91,7 @@ for dataset_name in dataset_names:
             new_dict = {}
             new_dict[dataset_name] = {"train": train_data, "merged": combine_data, "test": test_data}
             calculate_mean_var(new_dict, dataset_name, split_set=["train", "merged", "test"])
-            js_matrix = js_divergence(dict, dataset_name, split_set=["train", "merged", "test"])
+            js_matrix = js_divergence(new_dict, dataset_name, split_set=["train", "merged", "test"])
             print(js_matrix)
             f.write("JS Divergence Matrix\n")
             f.write(str(js_matrix) + '\n')
