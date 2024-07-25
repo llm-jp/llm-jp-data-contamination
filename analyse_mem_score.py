@@ -44,6 +44,7 @@ for dataset_name in dataset_names:
     train_dict = mem_score_data[mem_score_data['set_name'] == 'train'].set_index('original_idx')['mem_score'].to_dict()
     test_dict = mem_score_data[mem_score_data['set_name'] == 'test'].set_index('original_idx')['mem_score'].to_dict()
     valid_dict = mem_score_data[mem_score_data['set_name'] == 'test'].set_index('original_idx')['mem_score'].to_dict()
+    print(dataset_name)
     print(sum(mem_score_data[mem_score_data["set_name"] == "test"]["mem_score"] == -1))
     print(sum(mem_score_data[mem_score_data["set_name"] == "train"]["mem_score"] == -1))
     print(sum(mem_score_data[mem_score_data["set_name"] == "valid"]["mem_score"] == -1))
