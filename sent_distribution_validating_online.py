@@ -69,7 +69,7 @@ else:
     tokenizer.pad_token = tokenizer.eos_token
     refer_tokenizer.pad_token = refer_tokenizer.eos_token
     for dataset_name in dataset_names:
-        dataset = load_dataset("iamgroot42/mimir", dataset_name, split="ngram_13_0.2")
+        dataset = load_dataset("iamgroot42/mimir", dataset_name, split="ngram_13_0.2") if dataset_name != "full_pile" else load_dataset("iamgroot42/mimir", "full_pile", split="none")
         loss_dict = {}
         prob_dict = {}
         ppl_dict = {}
