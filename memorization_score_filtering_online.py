@@ -8,6 +8,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas
 import os
+from datasets import load_dataset
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--batch_size", type=int, default=1)
@@ -52,7 +53,10 @@ model.generation_config.return_dict_in_generate = True
 
 
 for dataset_name in dataset_names:
-    dataset = form_dataset(dataset_name)
+    dataset = load_dataset("iamgroot42/mimir", dataset_name,
+                           split="ngram_13_0.2") if dataset_name != "full_pile" else load_dataset("iamgroot42/mimir",
+                                                                                                  "full_pile",
+                                                                                                  split="none")
     device = f'cuda:{args.cuda}'
     mem_score = pandas.DataFrame(columns=["set_name", "original_idx",  "mem_score"])
     for set_name in ["member", "nonmember"]:
