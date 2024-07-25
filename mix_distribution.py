@@ -55,7 +55,8 @@ for dataset_name in dataset_names:
     refer_dict = pickle.load(open(f"{args.dir}/{dataset_name}_{args.model_size}_refer_dict.pkl", "rb"))
     idx_list = pickle.load(open(f"{args.dir}/{dataset_name}_{args.model_size}_idx_list.pkl", "rb"))
     all_dict = [loss_dict, prob_dict, ppl_dict, mink_plus_dict, zlib_dict, refer_dict]
-    f = open(f"results/{dataset_name}_{args.model_size}_mixed_results.txt", "w")
+    os.makedirs("results_online/", exist_ok=True)
+    f = open(f"results_online/{dataset_name}_{args.model_size}_mixed_results.txt", "w")
     for ratio in [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]:
         for idx, dict in enumerate(all_dict):
             if idx == 0:
