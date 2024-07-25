@@ -107,8 +107,12 @@ def caculate_outputs(model, tokenizer, text_batch, device, max_length=2048):
 
 
 def mix_distribution(dict, dataset_name, title, args, ratio=0.8, total_num=10000):
-    train_data = dict[dataset_name]["train"]
-    test_data = dict[dataset_name]["test"]
+    if "train" in dict[dataset_name].keys():
+        train_data = dict[dataset_name]["train"]
+        test_data = dict[dataset_name]["test"]
+    else:
+        train_data = dict[dataset_name]["member"]
+        test_data = dict[dataset_name]["nonmember"]
     train_data_num = total_num*ratio
     test_data_num = total_num*(1-ratio)
     train_data = random.sample(train_data, min(int(train_data_num), len(train_data)))
@@ -217,8 +221,7 @@ def feature_collection(model, tokenizer, dataset, args, dataset_name, batch_size
     # zlib_collect = remove_outliers(zlib_collect)
     return loss_collect, mink_collect, ppl_collect, mink_plus_collect, zlib_collect, ref_loss_collect, idx_list
 
-def calculate_mean_var(dict, dataset_name):
-    split_set = ["train", "valid", "test"]
+def calculate_mean_var(dict, dataset_name, split_set):
     for idx1, set1 in enumerate(split_set):
         values = np.array(dict[dataset_name][set1])
         values = values[np.isnan(values)==False]
@@ -228,10 +231,9 @@ def calculate_mean_var(dict, dataset_name):
         kur = kurtosis(values)
         print("The mean, variance, std and kurtosis of {} in {} set are {},  {}, {} and {}".format(dataset_name, set1, mean, var, std, kur))
     return mean, var
-def js_divergence(dict, dataset_name):
+def js_divergence(dict, dataset_name, split_set = ["train", "valid", "test"]):
     # Ensure p and q sum to 1
-    js_matrix = np.zeros((3, 3))
-    split_set = ["train", "valid", "test"]
+    js_matrix = np.zeros((len(split_set), len(split_set)))
     for idx1, set1 in enumerate(split_set):
         for idx2, set2 in enumerate(split_set):
             values = np.array(dict[dataset_name][set1])
@@ -250,10 +252,9 @@ def js_divergence(dict, dataset_name):
             js_matrix[idx1][idx2] = 0.5 * entropy(hist1, m) + 0.5 * entropy(hist2, m)
     return js_matrix#close to zero means the two distributions are similar
 
-def ks_hypothesis(dict, dataset_name):
-    ks_statistic_matrix = np.zeros((3, 3))
-    ks_p_value_matrix = np.zeros((3, 3))
-    split_set = ["train", "valid", "test"]
+def ks_hypothesis(dict, dataset_name, split_set = ["train", "valid", "test"]):
+    ks_statistic_matrix = np.zeros((len(split_set), len(split_set)))
+    ks_p_value_matrix = np.zeros((len(split_set), len(split_set)))
     for idx1, set1 in enumerate(split_set):
         for idx2, set2 in enumerate(split_set):
             values = np.array(dict[dataset_name][set1])
@@ -265,9 +266,8 @@ def ks_hypothesis(dict, dataset_name):
             ks_p_value_matrix[idx1][idx2] = p_value
     return ks_statistic_matrix, ks_p_value_matrix#close to zero means the two distributions are similar
 
-def wasserstein_distance_caculate(dict, dataset_name):
-    ws_matrix = np.zeros((3, 3))
-    split_set = ["train", "valid", "test"]
+def wasserstein_distance_caculate(dict, dataset_name,  split_set = ["train", "valid", "test"]):
+    ws_matrix = np.zeros((len(split_set), len(split_set)))
     for idx1, set1 in enumerate(split_set):
         for idx2, set2 in enumerate(split_set):
             values = np.array(dict[dataset_name][set1])
@@ -280,7 +280,7 @@ def wasserstein_distance_caculate(dict, dataset_name):
 
 
 
-def results_caculate_and_draw(dataset_name, args):
+def results_caculate_and_draw(dataset_name, args, split_set = ["train", "valid", "test"]):
     loss_dict = pickle.load(open(f"{args.dir}/{dataset_name}_{args.model_size}_loss_dict.pkl", "rb"))
     prob_dict = pickle.load(open(f"{args.dir}/{dataset_name}_{args.model_size}_prob_dict.pkl", "rb"))
     ppl_dict = pickle.load(open(f"{args.dir}/{dataset_name}_{args.model_size}_ppl_dict.pkl", "rb"))
@@ -328,15 +328,15 @@ def results_caculate_and_draw(dataset_name, args):
             f.write("Refer Distribution Similarity Matrix\n")
         print(idx)
         calculate_mean_var(dict, dataset_name)
-        js_matrix = js_divergence(dict, dataset_name)
+        js_matrix = js_divergence(dict, dataset_name, split_set)
         print(js_matrix)
         f.write(str(js_matrix) + '\n')
-        ks_matrix, ks_p_value_matrix = ks_hypothesis(dict, dataset_name)
+        ks_matrix, ks_p_value_matrix = ks_hypothesis(dict, dataset_name, split_set)
         print(ks_matrix)
         f.write(str(ks_matrix) + '\n')
         print(ks_p_value_matrix)
         f.write(str(ks_p_value_matrix) + '\n')
-        ws_matrix = wasserstein_distance_caculate(dict, dataset_name)
+        ws_matrix = wasserstein_distance_caculate(dict, dataset_name, split_set)
         print(ws_matrix)
         f.write(str(ws_matrix) + '\n')
     f.close()

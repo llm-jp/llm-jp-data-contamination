@@ -76,12 +76,12 @@ else:
         mink_plus_dict = {}
         zlib_dict = {}
         refer_dict = {}
-        loss_dict[dataset_name] = {"train": [], "valid": [], "test": []}
-        prob_dict[dataset_name] = {"train": [], "valid": [], "test": []}
-        ppl_dict[dataset_name] = {"train": [], "valid": [], "test": []}
-        mink_plus_dict[dataset_name] = {"train": [], "valid": [], "test": []}
-        zlib_dict[dataset_name] = {"train": [], "valid": [], "test": []}
-        refer_dict[dataset_name] = {"train": [], "valid": [], "test": []}
+        loss_dict[dataset_name] = {"member": [], "nonmember": []}
+        prob_dict[dataset_name] = {"member": [], "nonmember": []}
+        ppl_dict[dataset_name] = {"member": [], "nonmember": []}
+        mink_plus_dict[dataset_name] = {"member": [], "nonmember": []}
+        zlib_dict[dataset_name] = {"member": [], "nonmember": []}
+        refer_dict[dataset_name] = {"member": [], "nonmember": []}
         for split in ["member", "nonmember"]:
             loss_list, prob_list, ppl_list, mink_plus_list, zlib_list, refer_list, idx_list = feature_collection(model, tokenizer, dataset[split], args,
                                                                                                                  dataset_name,
@@ -103,7 +103,7 @@ else:
         pickle.dump(zlib_dict, open(f"{args.dir}/{dataset_name}_{args.model_size}_zlib_dict.pkl", "wb"))
         pickle.dump(refer_dict, open(f"{args.dir}/{dataset_name}_{args.model_size}_refer_dict.pkl", "wb"))
         pickle.dump(idx_list, open(f"{args.dir}/{dataset_name}_{args.model_size}_idx_list.pkl", "wb"))
-        results_caculate_and_draw(dataset_name, args)
+        results_caculate_and_draw(dataset_name, args, split_set=["member", "nonmember"])
 
 
 
