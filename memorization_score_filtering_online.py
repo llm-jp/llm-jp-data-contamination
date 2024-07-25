@@ -66,7 +66,7 @@ for dataset_name in dataset_names:
             tokenized_inputs = {key: val.to(device) for key, val in tokenized_inputs.items()}
             #input_length = int(tokenized_inputs["input_ids"].shape[1] * ratio)
             #output_length = int(tokenized_inputs["input_ids"].shape[1] * (ratio + 0.1))
-            input_length = 64
+            input_length = 32
             output_length = 32
             if tokenized_inputs["input_ids"][0].shape[0] < input_length + output_length:
                 input_length = tokenized_inputs["input_ids"][0].shape[0] - output_length
