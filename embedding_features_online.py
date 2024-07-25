@@ -77,21 +77,18 @@ for dataset_name in dataset_names:
             target_labels[tokenized_inputs["attention_mask"] == 0] = -100
             #pdb.set_trace()
             torch.cuda.synchronize()
-            try:
-                with torch.no_grad():
-                    outputs = model(**tokenized_inputs, labels=target_labels, output_hidden_states=True, return_dict=True)
-                hidden_states = outputs.hidden_states
-                for layer_index in range(len(hidden_states)):
-                    if layer_index not in member_embed_list:
-                        member_embed_list[layer_index] = []
-                        non_member_embed_list[layer_index] = []
-                    context_embedding = hidden_states[layer_index][0].mean(0).squeeze()
-                    if set_name == "member" and len(member_embed_list) < args.samples:
-                        member_embed_list[layer_index].append(context_embedding.cpu())
-                    elif set_name == "nonmember" and len(non_member_embed_list) < args.samples:
-                        non_member_embed_list[layer_index].append(context_embedding.cpu())
-            except:
-                continue
+            with torch.no_grad():
+                outputs = model(**tokenized_inputs, labels=target_labels, output_hidden_states=True, return_dict=True)
+            hidden_states = outputs.hidden_states
+            for layer_index in range(len(hidden_states)):
+                if layer_index not in member_embed_list:
+                    member_embed_list[layer_index] = []
+                    non_member_embed_list[layer_index] = []
+                context_embedding = hidden_states[layer_index][0].mean(0).squeeze()
+                if set_name == "member" and len(member_embed_list) < args.samples:
+                    member_embed_list[layer_index].append(context_embedding.cpu())
+                elif set_name == "nonmember" and len(non_member_embed_list) < args.samples:
+                    non_member_embed_list[layer_index].append(context_embedding.cpu())
     for layer_index in range(len(hidden_states)):
         member_embed_array = torch.stack(member_embed_list[layer_index])
         non_member_embed_array = torch.stack(non_member_embed_list[layer_index])
