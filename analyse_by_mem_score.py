@@ -1,18 +1,6 @@
-from datasets import load_dataset
-import torch
+
 from transformers import GPTNeoXForCausalLM, AutoTokenizer,  AutoModelForCausalLM,  LogitsProcessorList, MinLengthLogitsProcessor, StoppingCriteriaList,  MaxLengthCriteria
-import pickle
-from tqdm import tqdm
-import matplotlib.pyplot as plt
-import numpy as np
-import pdb
-import torch.nn.functional as F
 import argparse
-import random
-import seaborn as sns
-from datasets import DatasetDict
-import os
-from torch.nn import CrossEntropyLoss
 from utils import *
 import pandas as pd
 
