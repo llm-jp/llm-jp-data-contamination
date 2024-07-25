@@ -124,7 +124,7 @@ for dataset_name in dataset_names:
                                         'Silhouette Score': silhouette_avg,
                                         'Calinski Harabasz Index': calinski_index},
                                        ignore_index=True)
-os.mkdir("embedding_results_online", exist_ok=True)
+os.makedirs("embedding_results_online", exist_ok=True)
 results_df.to_csv(f"embedding_results_online/{args.model_size}_embedding_result.csv", index=False)
 
 
