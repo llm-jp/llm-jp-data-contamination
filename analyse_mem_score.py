@@ -58,3 +58,4 @@ for dataset_name in dataset_names:
     plt.ylabel("Count")
     plt.legend()
     plt.savefig(f"mem_score/{args.model_size}/{dataset_name}_mem_score.png")
+    plt.show()
