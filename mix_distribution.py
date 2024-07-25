@@ -80,7 +80,11 @@ for dataset_name in dataset_names:
             elif idx == 5:
                 residual_dict = {}
                 residual_dict[dataset_name] = {"train": [], "valid": [], "test": []}
-                for split in ["train", "valid", "test"]:
+                if "train" in loss_dict[dataset_name].keys():
+                    splite_set = ["train", "valid", "test"]
+                else:
+                    splite_set = ["member", "nonmember"]
+                for split in splite_set:
                     residual_dict[dataset_name][split] = [
                         loss_dict[dataset_name][split][i] - refer_dict[dataset_name][split][i]
                         for i in range(len(loss_dict[dataset_name][split]))]
