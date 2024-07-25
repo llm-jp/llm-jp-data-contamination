@@ -31,11 +31,11 @@ def batched_data_with_indices(data_list, indices_list, batch_size):
         yield (data_batch, indices_batch)
 
 
-def clean_dataset(dataset, dataset_name):
+def clean_dataset(dataset, dataset_name, online=False):
     invalid_pattern = re.compile(r'^\s*$')
 
     def is_valid(text):
-        if  "WikiMIA" in dataset_name:
+        if  "WikiMIA" in dataset_name or online:
             return True
         else:
             return not invalid_pattern.match(text) and len(text.split()) > 100
@@ -179,7 +179,7 @@ def caculate_loss_instance(idx, logits, target_labels):
     return loss_i
 
 
-def feature_collection(model, tokenizer, dataset, args, dataset_name, batch_size=8, upper_limit=10000, refer_model=None, refer_tokenizer=None):
+def feature_collection(model, tokenizer, dataset, args, dataset_name, batch_size=8, upper_limit=10000, refer_model=None, refer_tokenizer=None, online=False):
     device = f'cuda:{args.cuda}'
     refer_device = f'cuda:{args.refer_cuda}'
     loss_collect = []
@@ -189,7 +189,7 @@ def feature_collection(model, tokenizer, dataset, args, dataset_name, batch_size
     zlib_collect = []
     ref_loss_collect = []
     idx_list = []
-    cleaned_data, orig_indices = clean_dataset(dataset, dataset_name)
+    cleaned_data, orig_indices = clean_dataset(dataset, dataset_name, online=online)
     for idx, (data_batch, orig_indices_batch) in tqdm(
             enumerate(batched_data_with_indices(cleaned_data, orig_indices, batch_size=args.batch_size))):
         orig_idx = [item for item in orig_indices_batch]

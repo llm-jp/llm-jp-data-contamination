@@ -88,7 +88,8 @@ else:
                                                                                            batch_size=args.batch_size,
                                                                                            upper_limit=args.samples,
                                                                                            refer_model=refer_model,
-                                                                                           refer_tokenizer=refer_tokenizer)
+                                                                                           refer_tokenizer=refer_tokenizer,
+                                                                                           online=True)
             loss_dict[dataset_name][split].extend(loss_list)
             prob_dict[dataset_name][split].extend(prob_list)
             ppl_dict[dataset_name][split].extend(ppl_list)
