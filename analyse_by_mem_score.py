@@ -77,31 +77,13 @@ for dataset_name in dataset_names:
         else:
             mem_score_dict = valid_dict
         filtered_results = dataset[split][list(mem_score_dict.keys())]
-        loss_list, prob_list, ppl_list, mink_plus_list, zlib_list, refer_list, idx_list = feature_collection(model,
-                                                                                                             tokenizer,
-                                                                                                             dataset[
-                                                                                                                 split],
-                                                                                                             args,
-                                                                                                             dataset_name,
-                                                                                                             batch_size=args.batch_size,
-                                                                                                             upper_limit=args.samples,
-                                                                                                             refer_model=refer_model,
-                                                                                                             refer_tokenizer=refer_tokenizer)
-        loss_dict[dataset_name][split].extend(loss_list)
-        prob_dict[dataset_name][split].extend(prob_list)
-        ppl_dict[dataset_name][split].extend(ppl_list)
-        mink_plus_dict[dataset_name][split].extend(mink_plus_list)
-        zlib_dict[dataset_name][split].extend(zlib_list)
-        refer_dict[dataset_name][split].extend(refer_list)
-    os.makedirs(f"mem_score_result/{dataset_name}", exist_ok=True)
-    pickle.dump(loss_dict, open(f"{args.dir}/{dataset_name}_{args.model_size}_loss_dict.pkl", "wb"))
-    pickle.dump(prob_dict, open(f"{args.dir}/{dataset_name}_{args.model_size}_prob_dict.pkl", "wb"))
-    pickle.dump(ppl_dict, open(f"{args.dir}/{dataset_name}_{args.model_size}_ppl_dict.pkl", "wb"))
-    pickle.dump(mink_plus_dict, open(f"{args.dir}/{dataset_name}_{args.model_size}_mink_plus_dict.pkl", "wb"))
-    pickle.dump(zlib_dict, open(f"{args.dir}/{dataset_name}_{args.model_size}_zlib_dict.pkl", "wb"))
-    pickle.dump(refer_dict, open(f"{args.dir}/{dataset_name}_{args.model_size}_refer_dict.pkl", "wb"))
-    pickle.dump(idx_list, open(f"{args.dir}/{dataset_name}_{args.model_size}_idx_list.pkl", "wb"))
-    results_caculate_and_draw(dataset_name, args)
+        loss_dict = pickle.load(open(f"{args.dir}/{dataset_name}_{args.model_size}_loss_dict.pkl", "rb"))
+        prob_dict = pickle.load(open(f"{args.dir}/{dataset_name}_{args.model_size}_prob_dict.pkl", "rb"))
+        ppl_dict = pickle.load(open(f"{args.dir}/{dataset_name}_{args.model_size}_ppl_dict.pkl", "rb"))
+        mink_plus_dict = pickle.load(open(f"{args.dir}/{dataset_name}_{args.model_size}_mink_plus_dict.pkl", "rb"))
+        zlib_dict = pickle.load(open(f"{args.dir}/{dataset_name}_{args.model_size}_zlib_dict.pkl", "rb"))
+        refer_dict = pickle.load(open(f"{args.dir}/{dataset_name}_{args.model_size}_refer_dict.pkl", "rb"))
+        idx_list = pickle.load(open(f"{args.dir}/{dataset_name}_{args.model_size}_idx_list.pkl", "rb"))
 
 
 
