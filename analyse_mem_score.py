@@ -51,7 +51,8 @@ for dataset_name in dataset_names:
     plt.figure(figsize=(12, 6))
     for set_name in ["train", "test", "valid"]:
         subset = mem_score_data[mem_score_data["set_name"] == set_name]
-        plt.hist(subset["mem_score"], bins=100, alpha=0.5, label=set_name, density=True)
+        weights = np.ones_like(subset["mem_score"]) / len(subset["mem_score"])  # 创建权重数组，使所有值之和为1
+        plt.hist(subset["mem_score"], bins=50, alpha=0.5, label=set_name, weights=weights)
     # 添加图标题和轴标签
     plt.title("Distribution of 'mem_score'")
     plt.xlabel("'mem_score'")
