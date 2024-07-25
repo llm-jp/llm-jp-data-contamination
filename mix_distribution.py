@@ -30,15 +30,17 @@ parser.add_argument("--refer_cuda", type=int, default=7, help="cuda device")
 parser.add_argument("--skip_calculation", type=str, default="True")
 parser.add_argument("--reference_model", type=str, default="True")
 parser.add_argument("--samples", type=int, default=5000)
-parser.add_argument("--dir", type=str, default="feature_result")
+parser.add_argument("--dir", type=str, default="feature_result_online")
 args = parser.parse_args()
 
 if args.dataset_name == "all":
-    dataset_names = ["ArXiv", "DM Mathematics",
-                  "FreeLaw", "Github",  "HackerNews", "NIH ExPorter",
-                 "Pile-CC", "PubMed Abstracts", "PubMed Central", "StackExchange",
-                 "USPTO Backgrounds", "Wikipedia (en)","WikiMIA32","WikiMIA64", "WikiMIA128","WikiMIA256",
-                     "WikiMIAall"]
+    # dataset_names = ["ArXiv", "DM Mathematics",
+    #               "FreeLaw", "Github",  "HackerNews", "NIH ExPorter",
+    #              "Pile-CC", "PubMed Abstracts", "PubMed Central", "StackExchange",
+    #              "USPTO Backgrounds", "Wikipedia (en)","WikiMIA32","WikiMIA64", "WikiMIA128","WikiMIA256",
+    #                  "WikiMIAall"]
+    dataset_names = ["arxiv", "dm_mathematics", "github", "hackernews", "pile_cc",
+                     "pubmed_central", "wikipedia_(en)", "full_pile"]
     # dataset_names = ["WikiMIA32","WikiMIA64", "WikiMIA128","WikiMIA256",
     #                   "WikiMIAall"]
 else:
