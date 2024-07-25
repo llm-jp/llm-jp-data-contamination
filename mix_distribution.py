@@ -79,11 +79,12 @@ for dataset_name in dataset_names:
                 f.write("Zlib Distribution Similarity Matrix\n")
             elif idx == 5:
                 residual_dict = {}
-                residual_dict[dataset_name] = {"train": [], "valid": [], "test": []}
                 if "train" in loss_dict[dataset_name].keys():
                     splite_set = ["train", "valid", "test"]
+                    residual_dict[dataset_name] = {"train": [], "valid": [], "test": []}
                 else:
                     splite_set = ["member", "nonmember"]
+                    residual_dict[dataset_name] = {"member": [], "nonmember": []}
                 for split in splite_set:
                     residual_dict[dataset_name][split] = [
                         loss_dict[dataset_name][split][i] - refer_dict[dataset_name][split][i]
