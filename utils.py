@@ -318,8 +318,11 @@ def results_caculate_and_draw(dataset_name, args, split_set = ["train", "valid",
             f.write("Zlib Distribution Similarity Matrix\n")
         elif idx == 5:
             residual_dict = {}
-            residual_dict[dataset_name]=  {"train": [], "valid": [], "test": []}
-            for split in ["train", "valid", "test"]:
+            if "train" in split_set:
+                residual_dict[dataset_name]=  {"train": [], "valid": [], "test": []}
+            else:
+                residual_dict[dataset_name] = {"member": [], "nonmember": []}
+            for split in split_set:
                 residual_dict[dataset_name][split] = [loss_dict[dataset_name][split][i] - refer_dict[dataset_name][split][i]
                                         for i in range(len(loss_dict[dataset_name][split]))]
             figure_draw(residual_dict, "Refer", dataset_name, args)
@@ -327,16 +330,16 @@ def results_caculate_and_draw(dataset_name, args, split_set = ["train", "valid",
             print("Refer Distribution Similarity Matrix")
             f.write("Refer Distribution Similarity Matrix\n")
         print(idx)
-        calculate_mean_var(dict, dataset_name, split_set)
-        js_matrix = js_divergence(dict, dataset_name, split_set)
+        calculate_mean_var(dict, dataset_name, split_set=split_set)
+        js_matrix = js_divergence(dict, dataset_name, split_set=split_set)
         print(js_matrix)
         f.write(str(js_matrix) + '\n')
-        ks_matrix, ks_p_value_matrix = ks_hypothesis(dict, dataset_name, split_set)
+        ks_matrix, ks_p_value_matrix = ks_hypothesis(dict, dataset_name, split_set=split_set)
         print(ks_matrix)
         f.write(str(ks_matrix) + '\n')
         print(ks_p_value_matrix)
         f.write(str(ks_p_value_matrix) + '\n')
-        ws_matrix = wasserstein_distance_caculate(dict, dataset_name, split_set)
+        ws_matrix = wasserstein_distance_caculate(dict, dataset_name, split_set=split_set)
         print(ws_matrix)
         f.write(str(ws_matrix) + '\n')
     f.close()
