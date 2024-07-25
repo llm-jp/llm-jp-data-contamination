@@ -13,10 +13,8 @@ parser = argparse.ArgumentParser()
 parser.add_argument("--batch_size", type=int, default=1)
 parser.add_argument("--model_size", type=str, default="410m")
 parser.add_argument("--max_length", type=int, default=96)
-parser.add_argument("--dataset_name", type=str, default="all", choices=["ArXiv", "DM Mathematics",
-                 "FreeLaw", "Github",  "HackerNews", "NIH ExPorter",
-                "Pile-CC", "PubMed Abstracts", "PubMed Central", "StackExchange",
-                "USPTO Backgrounds", "Wikipedia (en)", "WikiMIA", "all"])
+parser.add_argument("--dataset_name", type=str, default="all", choices=["arxiv", "dm_mathematics", "github", "hackernews", "pile_cc",
+                     "pubmed_central", "wikipedia_(en)", "full_pile", "all"])
 parser.add_argument("--cuda", type=int, default=1, help="cuda device")
 parser.add_argument("--skip_calculation", type=str, default="True")
 parser.add_argument("--reference_model", type=str, default="True")
@@ -26,13 +24,10 @@ args = parser.parse_args()
 
 
 if args.dataset_name == "all":
-    # dataset_names = ["ArXiv", "DM Mathematics",
-    #                  "FreeLaw", "Github", "HackerNews", "NIH ExPorter",
-    #                  "Pile-CC", "PubMed Abstracts", "PubMed Central", "StackExchange",
-    #                  "USPTO Backgrounds", "Wikipedia (en)","WikiMIA64", "WikiMIA128","WikiMIA256",
+    dataset_names = ["arxiv", "dm_mathematics", "github", "hackernews", "pile_cc",
+                     "pubmed_central", "wikipedia_(en)", "full_pile"]
+    # dataset_names = ["WikiMIA64", "WikiMIA128","WikiMIA256",
     #                  "WikiMIAall"]
-    dataset_names = ["WikiMIA64", "WikiMIA128","WikiMIA256",
-                     "WikiMIAall"]
 else:
     dataset_names = [args.dataset_name]
 
@@ -60,8 +55,8 @@ for dataset_name in dataset_names:
     dataset = form_dataset(dataset_name)
     device = f'cuda:{args.cuda}'
     mem_score = pandas.DataFrame(columns=["set_name", "original_idx",  "mem_score"])
-    for set_name in ["train", "valid", "test"]:
-        cleaned_data, orig_indices = clean_dataset(dataset[set_name], dataset_name)
+    for set_name in ["member", "nonmember"]:
+        cleaned_data, orig_indices = clean_dataset(dataset[set_name], dataset_name, online=True)
         for idx, (data_batch, orig_indices_batch) in tqdm(enumerate(batched_data_with_indices(cleaned_data, orig_indices, batch_size=args.batch_size))):
             orig_idx = [item for item in orig_indices_batch]
             if idx * args.batch_size > args.samples:
