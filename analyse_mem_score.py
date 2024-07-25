@@ -51,11 +51,11 @@ for dataset_name in dataset_names:
     plt.figure(figsize=(12, 6))
     for set_name in ["train", "test", "valid"]:
         subset = mem_score_data[mem_score_data["set_name"] == set_name]
-        plt.hist(subset["mem_score"], bins=300, alpha=0.5, label=set_name, density=True)
+        plt.hist(subset["mem_score"], bins=100, alpha=0.5, label=set_name, density=True)
     # 添加图标题和轴标签
     plt.title("Distribution of 'mem_score'")
     plt.xlabel("'mem_score'")
-    plt.ylabel("Count")
+    plt.ylabel("Proportion")
     plt.legend()
     plt.savefig(f"mem_score/{args.model_size}/{dataset_name}_mem_score.png")
     plt.show()
