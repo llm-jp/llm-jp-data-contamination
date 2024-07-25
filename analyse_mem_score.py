@@ -48,3 +48,13 @@ for dataset_name in dataset_names:
     print(sum(mem_score_data[mem_score_data["set_name"] == "test"]["mem_score"] == -1))
     print(sum(mem_score_data[mem_score_data["set_name"] == "train"]["mem_score"] == -1))
     print(sum(mem_score_data[mem_score_data["set_name"] == "valid"]["mem_score"] == -1))
+    plt.figure(figsize=(12, 6))
+    for set_name in ["train", "test", "valid"]:
+        subset = mem_score_data[mem_score_data["set_name"] == set_name]
+        plt.hist(subset["mem_score"], bins=50, alpha=0.5, label=set_name)
+    # 添加图标题和轴标签
+    plt.title("Distribution of 'mem_score'")
+    plt.xlabel("'mem_score'")
+    plt.ylabel("Count")
+    plt.legend()
+    plt.savefig(f"mem_score/{args.model_size}/{dataset_name}_mem_score.png")
