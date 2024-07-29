@@ -5,7 +5,7 @@ import numpy as np
 
 dataset_names = ["wikipedia_(en)", "pile_cc", "arxiv", "dm_mathematics", "github", "hackernews", "pubmed_central",
                  "full_pile", "WikiMIA64", "WikiMIA128","WikiMIA256", "WikiMIAall"]
-model_size_list = ["160m", "410m", "6.9b", "12b"]
+model_size_list = ["410m", "6.9b", "12b"]
 for dataset_name in dataset_names:
     for model_size in model_size_list:
         table = pd.read_csv(f"mem_score_online/{model_size}/{dataset_name}_mem_score.csv", index_col=0)
