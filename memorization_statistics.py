@@ -13,11 +13,26 @@ for dataset_name in dataset_names:
     nonmember_scores = nonmember_table["mem_score"].values
     bins = np.arange(0, 1.1, 0.1)  # 包含1.0
 
-    plt.figure()
-    plt.hist(member_scores, bins=bins, alpha=0.5, label='member', edgecolor='black')
-    plt.hist(nonmember_scores, bins=bins, alpha=0.5, label='nonmember', edgecolor='black')
-    plt.legend(loc='upper right')
+    # 计算每个区间的成员和非成员的计数
+    member_hist, _ = np.histogram(member_table["mem_score"], bins=bins)
+    nonmember_hist, _ = np.histogram(nonmember_table["mem_score"], bins=bins)
+
+    # 生成每个条形的位置
+    bar_width = 0.04
+    pos = bins[:-1]  # Remove the last bin edge
+    member_pos = pos - bar_width / 2
+    nonmember_pos = pos + bar_width / 2
+
+    # Draw the bars
+    plt.figure(figsize=(10, 5))
+    plt.bar(member_pos, member_hist, width=bar_width, alpha=0.5, label='member', edgecolor='black')
+    plt.bar(nonmember_pos, nonmember_hist, width=bar_width, alpha=0.5, label='nonmember', edgecolor='black')
+
     plt.title(f"{dataset_name} Mem Score Distribution")
-    plt.xticks(bins)  # 设置X轴的刻度
+    plt.xlabel('Score')
+    plt.ylabel('Frequency')
+    plt.xticks(bins)
+    plt.legend(loc='upper right')
+
     plt.savefig(f"mem_score_online/{model_size}/{dataset_name}_mem_score.png")
     plt.show()
