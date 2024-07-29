@@ -10,8 +10,9 @@ for dataset_name in dataset_names:
     nonmember_table = table[table["set_name"] == "nonmember"]
     member_scores = member_table["mem_score"].values
     nonmember_scores = nonmember_table["mem_score"].values
-    plt.hist(member_scores, bins=100, alpha=0.5, label='member')
-    plt.hist(nonmember_scores, bins=100, alpha=0.5, label='nonmember')
+    plt.figure()
+    plt.hist(member_scores, bins=50, alpha=0.5, label='member')
+    plt.hist(nonmember_scores, bins=50, alpha=0.5, label='nonmember')
     plt.legend(loc='upper right')
     plt.title(f"{dataset_name} Mem Score Distribution")
     plt.savefig(f"mem_score_online/{model_size}/{dataset_name}_mem_score.png")
