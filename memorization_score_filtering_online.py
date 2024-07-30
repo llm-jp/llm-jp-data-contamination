@@ -16,7 +16,8 @@ parser.add_argument("--batch_size", type=int, default=1)
 parser.add_argument("--model_size", type=str, default="410m")
 parser.add_argument("--max_length", type=int, default=96)
 parser.add_argument("--dataset_name", type=str, default="all", choices=["arxiv", "dm_mathematics", "github", "hackernews", "pile_cc",
-                     "pubmed_central", "wikipedia_(en)", "full_pile", "all"])
+                     "pubmed_central", "wikipedia_(en)", "full_pile","WikiMIA64", "WikiMIA128","WikiMIA256",
+                      "WikiMIAall"])
 parser.add_argument("--cuda", type=int, default=1, help="cuda device")
 parser.add_argument("--skip_calculation", type=str, default="True")
 parser.add_argument("--reference_model", type=str, default="True")
