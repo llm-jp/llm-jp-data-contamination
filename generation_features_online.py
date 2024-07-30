@@ -25,8 +25,8 @@ if args.dataset_name == "all":
     dataset_names = ["arxiv", "dm_mathematics", "github", "hackernews", "pile_cc",
                      "pubmed_central", "wikipedia_(en)", "full_pile","WikiMIA64", "WikiMIA128","WikiMIA256",
                       "WikiMIAall"]
-    #dataset_names = ["Github", "HackerNews", "NIH ExPorter","Pile-CC", "PubMed Abstracts", "PubMed Central", "StackExchange",
-    #                "USPTO Backgrounds", "Wikipedia (en)", "WikiMIA"]
+    dataset_names = ["WikiMIA64", "WikiMIA128","WikiMIA256",
+                      "WikiMIAall"]
 else:
     dataset_names = [args.dataset_name]
 
