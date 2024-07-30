@@ -58,7 +58,12 @@ model.generation_config.return_dict_in_generate = True
 for input_length in [8, 16, 32, 48, 64]:
     temp_input_length = copy.deepcopy(input_length)
     for dataset_name in dataset_names:
-        dataset = load_dataset("iamgroot42/mimir", dataset_name,
+        if "WikiMIA" in dataset_name:
+            dataset = form_dataset(dataset_name)
+            dataset["member"] = dataset["train"]
+            dataset["nonmember"] = dataset["test"]
+        else:
+            dataset = load_dataset("iamgroot42/mimir", dataset_name,
                                split="ngram_13_0.2") if dataset_name != "full_pile" else load_dataset("iamgroot42/mimir",
                                                                                                       "full_pile",
                                                                                                       split="none")
