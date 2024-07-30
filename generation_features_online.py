@@ -79,7 +79,7 @@ for dataset_name in dataset_names:
             if tokenized_inputs["input_ids"][0].shape[0] < 100:
                     continue
             local_entropy = []
-            for input_length in [8, 16, 32, 48, 64]:
+            for input_length in list(range(1,65)):
                 generations = model.generate(tokenized_inputs["input_ids"][0][:input_length].unsqueeze(0),temperature=0.0,top_k=0, top_p=0, max_length=input_length+1,min_length=input_length+1)
                 logits = torch.stack(generations["scores"]).squeeze()
                 #pdb.set_trace()
@@ -100,7 +100,7 @@ for dataset_name in dataset_names:
     std_non_member = np.std(non_member_entropy, axis=0)
 
     # x轴的值
-    x = [8, 16, 32, 48, 64]
+    x = list(range(1,65))
 
     # 创建图
     plt.figure(figsize=(10, 6))
