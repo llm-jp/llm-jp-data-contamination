@@ -71,7 +71,7 @@ for input_length in [8, 16, 32, 48, 64]:
                 if idx * args.batch_size > args.samples:
                     break
                 batched_text = [item for item in data_batch]
-                tokenized_inputs = tokenizer(batched_text, return_tensors="pt", truncation=True, max_length=args.max_length)
+                tokenized_inputs = tokenizer(batched_text, return_tensors="pt", truncation=True, max_length=temp_input_length+args.continuation_size)
                 tokenized_inputs = {key: val.to(device) for key, val in tokenized_inputs.items()}
                 #input_length = int(tokenized_inputs["input_ids"].shape[1] * ratio)
                 #output_length = int(tokenized_inputs["input_ids"].shape[1] * (ratio + 0.1))
@@ -82,7 +82,7 @@ for input_length in [8, 16, 32, 48, 64]:
                 generations = model.generate(tokenized_inputs["input_ids"][0][:input_length].unsqueeze(0),
                                              temperature=0.0, top_k=0, top_p=0, max_length=input_length+args.continuation_size,
                                              min_length=input_length+args.continuation_size)
-                comparasion_result = generations["sequences"][0][input_length:] == tokenized_inputs["input_ids"][0][input_length:input_length+args.continuaion_size]
+                comparasion_result = generations["sequences"][0][input_length:] == tokenized_inputs["input_ids"][0][input_length:input_length+args.continuation_size]
                 score = sum(comparasion_result) / args.continuation_size
                 score = score.cpu().numpy()
                 mem_score = mem_score._append({"set_name": set_name, "original_idx": orig_idx[0], "mem_score": score}, ignore_index=True)
