@@ -100,7 +100,7 @@ for dataset_name in dataset_names:
     std_non_member = np.std(non_member_entropy, axis=0)
 
     # x轴的值
-    x = np.linspace(0, 1, 11)[1:]
+    x = [8, 16, 32, 48, 64]
 
     # 创建图
     plt.figure(figsize=(10, 6))
