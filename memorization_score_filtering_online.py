@@ -88,7 +88,7 @@ for input_length in [8, 16, 32, 48, 64]:
                 mem_score = mem_score._append({"set_name": set_name, "original_idx": orig_idx[0], "mem_score": score}, ignore_index=True)
                 input_length = temp_input_length
         os.makedirs(f"mem_score_online/{args.model_size}", exist_ok=True)
-        mem_score.to_csv(f"mem_score_online/{args.model_size}/{dataset_name}_{args.context_size}_{args.continuation_size}_mem_score.csv")
+        mem_score.to_csv(f"mem_score_online/{args.model_size}/{dataset_name}_{temp_input_length}_{args.continuation_size}_mem_score.csv")
             #for idx, ratio in enumerate(np.linspace(0, 1, 11)[1:]):
 
 
