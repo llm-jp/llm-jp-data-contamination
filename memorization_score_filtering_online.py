@@ -9,6 +9,7 @@ import matplotlib.pyplot as plt
 import pandas
 import os
 from datasets import load_dataset
+import copy
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--batch_size", type=int, default=1)
@@ -55,6 +56,7 @@ model.generation_config.return_dict_in_generate = True
 
 
 for input_length in [8, 16, 32, 48, 64]:
+    temp_input_length = copy.deepcopy(input_length)
     for dataset_name in dataset_names:
         dataset = load_dataset("iamgroot42/mimir", dataset_name,
                                split="ngram_13_0.2") if dataset_name != "full_pile" else load_dataset("iamgroot42/mimir",
@@ -73,7 +75,7 @@ for input_length in [8, 16, 32, 48, 64]:
                 tokenized_inputs = {key: val.to(device) for key, val in tokenized_inputs.items()}
                 #input_length = int(tokenized_inputs["input_ids"].shape[1] * ratio)
                 #output_length = int(tokenized_inputs["input_ids"].shape[1] * (ratio + 0.1))
-                if tokenized_inputs["input_ids"][0].shape[0] < args.context_szie + args.continuation_size:
+                if tokenized_inputs["input_ids"][0].shape[0] < input_length + args.continuation_size:
                     input_length = tokenized_inputs["input_ids"][0].shape[0] - args.continuation_size
                     if input_length < 0:
                         continue
@@ -84,6 +86,7 @@ for input_length in [8, 16, 32, 48, 64]:
                 score = sum(comparasion_result) / args.continuation_size
                 score = score.cpu().numpy()
                 mem_score = mem_score._append({"set_name": set_name, "original_idx": orig_idx[0], "mem_score": score}, ignore_index=True)
+                input_length = temp_input_length
         os.makedirs(f"mem_score_online/{args.model_size}", exist_ok=True)
         mem_score.to_csv(f"mem_score_online/{args.model_size}/{dataset_name}_{args.context_size}_{args.continuation_size}_mem_score.csv")
             #for idx, ratio in enumerate(np.linspace(0, 1, 11)[1:]):
