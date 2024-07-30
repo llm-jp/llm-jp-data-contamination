@@ -68,7 +68,6 @@ for dataset_name in dataset_names:
     non_member_entropy = []
     for set_name in ["member", "nonmember"]:
         cleaned_data, orig_indices = clean_dataset(dataset[set_name], dataset_name, online=True)
-        local_entropy = []
         for idx, (data_batch, orig_indices_batch) in tqdm(enumerate(batched_data_with_indices(cleaned_data, orig_indices, batch_size=args.batch_size))):
             if idx * args.batch_size > args.samples:
                 break
@@ -79,6 +78,7 @@ for dataset_name in dataset_names:
             tokenized_inputs = {key: val.to(device) for key, val in tokenized_inputs.items()}
             if tokenized_inputs["input_ids"][0].shape[0] < 100:
                     continue
+            local_entropy = []
             for input_length in [8, 16, 32, 48, 64]:
                 generations = model.generate(tokenized_inputs["input_ids"][0][:input_length].unsqueeze(0),temperature=0.0,top_k=0, top_p=0, max_length=input_length+1,min_length=input_length+1)
                 logits = torch.stack(generations["scores"]).squeeze()
@@ -86,10 +86,10 @@ for dataset_name in dataset_names:
                 probability_scores = torch.nn.functional.softmax(logits.float(), dim=0)
                 entropy_scores = torch.distributions.Categorical(probs=probability_scores).entropy().mean()
                 local_entropy.append(entropy_scores.cpu().item())
-        if set_name == "member":
-            member_entropy.append(local_entropy)
-        else:
-            non_member_entropy.append(local_entropy)
+            if set_name == "member":
+                member_entropy.append(local_entropy)
+            else:
+                non_member_entropy.append(local_entropy)
     member_entropy = np.array(member_entropy)
     non_member_entropy = np.array(non_member_entropy)
     # 计算均值和方差
