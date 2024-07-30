@@ -10,7 +10,9 @@ context_size = 8
 continuation_size = 32
 
 for dataset_name in dataset_names:
-    for model_size in model_size_list:
+    fig, axs = plt.subplots(1, len(model_size_list), figsize=(15, 3))  # 创建子图数组
+    fig.suptitle(f"{dataset_name} Mem Score Distribution")
+    for i, model_size in enumerate(model_size_list):
         table = pd.read_csv(f"mem_score_online/{model_size}/{dataset_name}_{context_size}_{continuation_size}_mem_score.csv", index_col=0)
         if "WikiMIA" in dataset_name:
             member_table = table[table["set_name"] == "train"]
@@ -33,15 +35,14 @@ for dataset_name in dataset_names:
         nonmember_pos = pos + bar_width / 2
 
         # Draw the bars
-        plt.figure(figsize=(10, 5))
-        plt.bar(member_pos, member_hist, width=bar_width, alpha=0.5, label='member', edgecolor='black')
-        plt.bar(nonmember_pos, nonmember_hist, width=bar_width, alpha=0.5, label='nonmember', edgecolor='black')
+        axs[i].bar(member_pos, member_hist, width=bar_width, alpha=0.5, label='member', edgecolor='black')
+        axs[i].bar(nonmember_pos, nonmember_hist, width=bar_width, alpha=0.5, label='nonmember', edgecolor='black')
 
-        plt.title(f"{dataset_name} Mem Score Distribution")
-        plt.xlabel('Score')
-        plt.ylabel('Frequency')
-        plt.xticks(bins)
-        plt.legend(loc='upper right')
+        axs[i].set_title(f"{dataset_name} Mem Score Distribution")
+        axs[i].set_xlabel('Score')
+        axs[i].set_ylabel('Frequency')
+        axs[i].set_xticks(bins)
+        axs[i].legend(loc='upper right')
 
-        plt.savefig(f"mem_score_online/{model_size}/{dataset_name}_mem_score.png")
-        plt.show()
+    plt.savefig(f"mem_score_online/{dataset_name}_mem_score.png")
+    plt.show()
