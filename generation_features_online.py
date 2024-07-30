@@ -66,7 +66,7 @@ for dataset_name in dataset_names:
     device = f'cuda:{args.cuda}'
     member_entropy = []
     non_member_entropy = []
-    for set_name in ["member", "non-member"]:
+    for set_name in ["member", "nonmember"]:
         cleaned_data, orig_indices = clean_dataset(dataset[set_name], dataset_name, online=True)
         local_entropy = []
         for idx, (data_batch, orig_indices_batch) in tqdm(enumerate(batched_data_with_indices(cleaned_data, orig_indices, batch_size=args.batch_size))):
