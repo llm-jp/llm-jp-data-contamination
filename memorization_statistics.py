@@ -10,7 +10,7 @@ context_size = 8
 continuation_size = 32
 
 for dataset_name in dataset_names:
-    fig, axs = plt.subplots(1, len(model_size_list),figsize=(24, 6))  # 创建子图数组
+    fig, axs = plt.subplots(1, len(model_size_list),figsize=(24, 6), sharey=True)  # 创建子图数组
     fig.suptitle(f"{dataset_name} Mem Score Distribution")
     for i, model_size in enumerate(model_size_list):
         table = pd.read_csv(f"mem_score_online/{model_size}/{dataset_name}_{context_size}_{continuation_size}_mem_score.csv", index_col=0)
@@ -23,6 +23,8 @@ for dataset_name in dataset_names:
         # 计算每个区间的成员和非成员的计数
         member_hist, _ = np.histogram(member_table["mem_score"], bins=bins)
         nonmember_hist, _ = np.histogram(nonmember_table["mem_score"], bins=bins)
+        member_hist = member_hist / np.sum(member_hist)
+        nonmember_hist = nonmember_hist / np.sum(nonmember_hist)
 
         # 生成每个条形的位置
         bar_width = 0.04
