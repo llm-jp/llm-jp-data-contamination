@@ -6,6 +6,7 @@ import numpy as np
 dataset_names = ["wikipedia_(en)", "pile_cc", "arxiv", "dm_mathematics", "github", "hackernews", "pubmed_central",
                  "full_pile", "WikiMIA64", "WikiMIA128","WikiMIA256", "WikiMIAall"]
 model_size_list = ["160m", "410m", "1b", "2.8b", "6.9b", "12b"]
+
 context_size = 16
 continuation_size = 32
 
@@ -42,5 +43,5 @@ for dataset_name in dataset_names:
         axs[i].set_xticks(bins)
         axs[i].legend(loc='upper right')
 
-    plt.savefig(f"mem_score_online/{dataset_name}_mem_score.png")
+    plt.savefig(f"mem_score_online/{dataset_name}_{context_size}_{continuation_size}_mem_score.png")
     plt.show()
