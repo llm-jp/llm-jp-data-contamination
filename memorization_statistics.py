@@ -31,8 +31,8 @@ for dataset_name in dataset_names:
         # 生成每个条形的位置
         bar_width = 0.04
         pos = bins[:-1]  # Remove the last bin edge
-        member_pos = pos - bar_width / 2
-        nonmember_pos = pos + bar_width / 2
+        member_pos = pos + bar_width / 2
+        nonmember_pos = pos + 2*bar_width / 2
 
         # Draw the bars
         axs[i].bar(member_pos, member_hist, width=bar_width, alpha=0.5, label='member', edgecolor='black')
