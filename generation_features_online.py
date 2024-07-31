@@ -8,6 +8,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from datasets import load_dataset
 import copy
+import os
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--batch_size", type=int, default=1)
@@ -98,7 +99,8 @@ for dataset_name in dataset_names:
 
     mean_non_member = np.mean(non_member_entropy, axis=0)
     std_non_member = np.std(non_member_entropy, axis=0)
-
+    os.makedirs(f"entropy_online/{args.model_size}", exist_ok=True)
+    np.save(f"entropy_online/{args.model_size}/{dataset_name}_member_entropy.npy", mean_member)
     # x轴的值
     x = list(range(1,65))
 
