@@ -14,12 +14,8 @@ for dataset_name in dataset_names:
     fig.suptitle(f"{dataset_name} Mem Score Distribution")
     for i, model_size in enumerate(model_size_list):
         table = pd.read_csv(f"mem_score_online/{model_size}/{dataset_name}_{context_size}_{continuation_size}_mem_score.csv", index_col=0)
-        if "WikiMIA" in dataset_name:
-            member_table = table[table["set_name"] == "train"]
-            nonmember_table = table[table["set_name"] == "test"]
-        else:
-            member_table= table[table["set_name"] == "member"]
-            nonmember_table = table[table["set_name"] == "nonmember"]
+        member_table= table[table["set_name"] == "member"]
+        nonmember_table = table[table["set_name"] == "nonmember"]
         member_scores = member_table["mem_score"].values
         nonmember_scores = nonmember_table["mem_score"].values
         bins = np.arange(0, 1.1, 0.1)  # 包含1.0
