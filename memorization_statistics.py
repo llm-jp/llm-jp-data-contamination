@@ -10,7 +10,7 @@ context_size = 8
 continuation_size = 32
 
 for dataset_name in dataset_names:
-    fig, axs = plt.subplots(1, len(model_size_list), figsize=(15, 3))  # 创建子图数组
+    fig, axs = plt.subplots(1, len(model_size_list), 24, 6)  # 创建子图数组
     fig.suptitle(f"{dataset_name} Mem Score Distribution")
     for i, model_size in enumerate(model_size_list):
         table = pd.read_csv(f"mem_score_online/{model_size}/{dataset_name}_{context_size}_{continuation_size}_mem_score.csv", index_col=0)
