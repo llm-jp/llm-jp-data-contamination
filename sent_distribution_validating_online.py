@@ -41,12 +41,10 @@ else:
     dataset_names = [args.dataset_name]
 
 if args.skip_calculation == "True":
-    skip_calculation = True
     df = pd.DataFrame()
     for dataset_name in dataset_names:
         df = results_caculate_and_draw(dataset_name, args, df, split_set=["member", "nonmember"])
 else:
-    skip_calculation = False
     model = GPTNeoXForCausalLM.from_pretrained(
       f"EleutherAI/pythia-{args.model_size}-deduped",
       revision="step143000",
@@ -107,7 +105,7 @@ else:
         pickle.dump(refer_dict, open(f"{args.dir}/{dataset_name}_{args.model_size}_refer_dict.pkl", "wb"))
         pickle.dump(idx_list, open(f"{args.dir}/{dataset_name}_{args.model_size}_idx_list.pkl", "wb"))
         results_caculate_and_draw(dataset_name, args, df, split_set=["member", "nonmember"])
-df.to_csv(f"{args.dir}/{args.dataset_name}.csv")
+df.to_csv(f"{args.dir}/{args.model_size}.csv")
 
 
 

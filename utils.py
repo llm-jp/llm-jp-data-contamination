@@ -289,6 +289,7 @@ def results_caculate_and_draw(dataset_name, args, df, split_set = ["train", "val
     refer_dict = pickle.load(open(f"{args.dir}/{dataset_name}_{args.model_size}_refer_dict.pkl", "rb"))
     idx_list = pickle.load(open(f"{args.dir}/{dataset_name}_{args.model_size}_idx_list.pkl", "rb"))
     all_dict = [loss_dict, prob_dict, ppl_dict, mink_plus_dict, zlib_dict, refer_dict]
+    method_list = ["loss", "prob", "ppl", "mink_plus", "zlib", "refer"]
     os.makedirs(f"figures/{args.model_size}", exist_ok=True)
     for idx, dict in enumerate(all_dict):
         if idx == 0:
@@ -333,10 +334,11 @@ def results_caculate_and_draw(dataset_name, args, df, split_set = ["train", "val
         ws_matrix = wasserstein_distance_caculate(dict, dataset_name, split_set=split_set)
         print(ws_matrix)
         df = df._append({'Dataset Name': dataset_name,
+                         "Method": method_list[idx],
                  'js_matrix': js_matrix[0][1],
                  'ks_matrix': ks_matrix[0][1],
                  'ks_p_value_matrix': ks_p_value_matrix[0][1],
-                 "ws_matrix": ws_matrix[0][1]},
+                 "ws_matrix": ws_matrix[0][1] },
                 ignore_index=True)
     return df
 
