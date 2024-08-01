@@ -113,7 +113,7 @@ else:
         pickle.dump(zlib_dict, open(f"{args.dir}/{dataset_name}_{args.model_size}_zlib_dict.pkl", "wb"))
         pickle.dump(refer_dict, open(f"{args.dir}/{dataset_name}_{args.model_size}_refer_dict.pkl", "wb"))
         pickle.dump(idx_list, open(f"{args.dir}/{dataset_name}_{args.model_size}_idx_list.pkl", "wb"))
-        results_caculate_and_draw(dataset_name, args, df, split_set=["member", "nonmember"])
+        df = results_caculate_and_draw(dataset_name, args, df, split_set=["member", "nonmember"])
 df.to_csv(f"{args.dir}/{args.model_size}.csv")
 
 
