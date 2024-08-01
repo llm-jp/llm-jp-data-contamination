@@ -42,8 +42,9 @@ else:
 
 if args.skip_calculation == "True":
     skip_calculation = True
+    df = pd.DataFrame()
     for dataset_name in dataset_names:
-        results_caculate_and_draw(dataset_name, args)
+        df = results_caculate_and_draw(dataset_name, args, df, split_set=["member", "nonmember"])
 else:
     skip_calculation = False
     model = GPTNeoXForCausalLM.from_pretrained(
@@ -68,6 +69,7 @@ else:
         refer_tokenizer = None
     tokenizer.pad_token = tokenizer.eos_token
     refer_tokenizer.pad_token = refer_tokenizer.eos_token
+    df = pd.DataFrame()
     for dataset_name in dataset_names:
         dataset = load_dataset("iamgroot42/mimir", dataset_name, split="ngram_13_0.2") if dataset_name != "full_pile" else load_dataset("iamgroot42/mimir", "full_pile", split="none")
         loss_dict = {}
@@ -104,8 +106,8 @@ else:
         pickle.dump(zlib_dict, open(f"{args.dir}/{dataset_name}_{args.model_size}_zlib_dict.pkl", "wb"))
         pickle.dump(refer_dict, open(f"{args.dir}/{dataset_name}_{args.model_size}_refer_dict.pkl", "wb"))
         pickle.dump(idx_list, open(f"{args.dir}/{dataset_name}_{args.model_size}_idx_list.pkl", "wb"))
-        results_caculate_and_draw(dataset_name, args, split_set=["member", "nonmember"])
-
+        results_caculate_and_draw(dataset_name, args, df, split_set=["member", "nonmember"])
+df.to_csv(f"{args.dir}/{args.dataset_name}.csv")
 
 
 

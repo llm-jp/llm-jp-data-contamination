@@ -280,7 +280,7 @@ def wasserstein_distance_caculate(dict, dataset_name,  split_set = ["train", "va
 
 
 
-def results_caculate_and_draw(dataset_name, args, split_set = ["train", "valid", "test"]):
+def results_caculate_and_draw(dataset_name, args, df, split_set = ["train", "valid", "test"]):
     loss_dict = pickle.load(open(f"{args.dir}/{dataset_name}_{args.model_size}_loss_dict.pkl", "rb"))
     prob_dict = pickle.load(open(f"{args.dir}/{dataset_name}_{args.model_size}_prob_dict.pkl", "rb"))
     ppl_dict = pickle.load(open(f"{args.dir}/{dataset_name}_{args.model_size}_ppl_dict.pkl", "rb"))
@@ -289,33 +289,28 @@ def results_caculate_and_draw(dataset_name, args, split_set = ["train", "valid",
     refer_dict = pickle.load(open(f"{args.dir}/{dataset_name}_{args.model_size}_refer_dict.pkl", "rb"))
     idx_list = pickle.load(open(f"{args.dir}/{dataset_name}_{args.model_size}_idx_list.pkl", "rb"))
     all_dict = [loss_dict, prob_dict, ppl_dict, mink_plus_dict, zlib_dict, refer_dict]
-    f = open(f"{args.dir}/{dataset_name}_{args.model_size}_results.txt", "w")
+    os.makedirs(f"figures/{args.model_size}", exist_ok=True)
     for idx, dict in enumerate(all_dict):
         if idx == 0:
             figure_draw(loss_dict, "Loss", dataset_name, args)
             mix_distribution(loss_dict, dataset_name, "Loss", args)
             print("Loss Distribution Similarity Matrix")
-            f.write("Loss Distribution Similarity Matrix\n")
         elif idx == 1:
             figure_draw(prob_dict, "Prob", dataset_name, args)
             mix_distribution(prob_dict, dataset_name, "Prob", args)
             print("Prob Distribution Similarity Matrix")
-            f.write("Prob Distribution Similarity Matrix\n")
         elif idx == 2:
             figure_draw(ppl_dict, "PPL", dataset_name, args)
             mix_distribution(ppl_dict, dataset_name, "PPL", args)
             print("PPL Distribution Similarity Matrix")
-            f.write("PPL Distribution Similarity Matrix\n")
         elif idx == 3:
             figure_draw(mink_plus_dict, "Mink_plus", dataset_name, args)
             mix_distribution(mink_plus_dict, dataset_name, "Mink_plus", args)
-            f.write("Mink_plus Distribution Similarity Matrix\n")
             print("Mink_plus Distribution Similarity Matrix")
         elif idx == 4:
             figure_draw(zlib_dict, "Zlib", dataset_name, args)
             mix_distribution(zlib_dict, dataset_name, "Zlib", args)
             print("Zlib Distribution Similarity Matrix")
-            f.write("Zlib Distribution Similarity Matrix\n")
         elif idx == 5:
             residual_dict = {}
             if "train" in split_set:
@@ -328,21 +323,22 @@ def results_caculate_and_draw(dataset_name, args, split_set = ["train", "valid",
             figure_draw(residual_dict, "Refer", dataset_name, args)
             mix_distribution(residual_dict, dataset_name, "Refer", args)
             print("Refer Distribution Similarity Matrix")
-            f.write("Refer Distribution Similarity Matrix\n")
         print(idx)
         calculate_mean_var(dict, dataset_name, split_set=split_set)
         js_matrix = js_divergence(dict, dataset_name, split_set=split_set)
         print(js_matrix)
-        f.write(str(js_matrix) + '\n')
         ks_matrix, ks_p_value_matrix = ks_hypothesis(dict, dataset_name, split_set=split_set)
         print(ks_matrix)
-        f.write(str(ks_matrix) + '\n')
         print(ks_p_value_matrix)
-        f.write(str(ks_p_value_matrix) + '\n')
         ws_matrix = wasserstein_distance_caculate(dict, dataset_name, split_set=split_set)
         print(ws_matrix)
-        f.write(str(ws_matrix) + '\n')
-    f.close()
+        df = df._append({'Dataset Name': dataset_name,
+                 'js_matrix': js_matrix[0][1],
+                 'ks_matrix': ks_matrix[0][1],
+                 'ks_p_value_matrix': ks_p_value_matrix[0][1],
+                 "ws_matrix": ws_matrix[0][1]},
+                ignore_index=True)
+    return df
 
 def calculate_mean_var(dict, dataset_name, split_set=["train", "valid", "test"]):
     for idx1, set1 in enumerate(split_set):
