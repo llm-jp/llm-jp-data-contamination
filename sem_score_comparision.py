@@ -52,7 +52,7 @@ parser.add_argument("--cuda", type=int, default=1, help="cuda device")
 parser.add_argument("--skip_calculation", type=str, default="True")
 parser.add_argument("--reference_model", type=str, default="True")
 parser.add_argument("--samples", type=int, default=1000)
-parser.add_argument("--generation_samples", type=int, default=15)
+parser.add_argument("--generation_samples", type=int, default=10)
 args = parser.parse_args()
 
 
@@ -83,11 +83,11 @@ model.generation_config.pad_token_id = model.generation_config.eos_token_id
 #model.generation_config.output_scores = True
 model.generation_config.return_dict_in_generate = True
 
-bleurt =  evaluate.load('bleurt', 'bleurt-20',
-                        model_type="metric", device=f'cuda:{args.cuda}',
-                        num_process=1)
-rouge = evaluate.load('rouge', device=f'cuda:{args.cuda}',
-                      num_process=1)
+#bleurt =  evaluate.load('bleurt', 'bleurt-20',
+#                        model_type="metric", device=f'cuda:{args.cuda}',
+#                        num_process=1)
+#rouge = evaluate.load('rouge', device=f'cuda:{args.cuda}',
+#                      num_process=1)
 
 for input_length in [48]:
     temp_input_length = copy.deepcopy(input_length)
@@ -102,7 +102,7 @@ for input_length in [48]:
                                                                                                       "full_pile",
                                                                                                       split="none")
         device = f'cuda:{args.cuda}'
-        mem_score = pandas.DataFrame(columns=["set_name", "original_idx",  "mem_score"])
+        #mem_score = pandas.DataFrame(columns=["set_name", "original_idx",  "mem_score"])
         generation_samples_list = []
         for set_name in ["member", "nonmember"]:
             cleaned_data, orig_indices = clean_dataset(dataset[set_name], dataset_name, online=True)
@@ -129,15 +129,15 @@ for input_length in [48]:
                     full_decoded.append(tokenizer.decode(generations["sequences"][0]))
                 text_to_compare = tokenizer.decode(tokenized_inputs["input_ids"][0][input_length:])
                 #pdb.set_trace()
-                bleurt_scores = sum(bleurt_score(temp_results, [text_to_compare for _ in range(args.generation_samples)]))/args.generation_samples
-                rougeL_scores = sum(rougeL_score(temp_results, [text_to_compare for _ in range(args.generation_samples)]))/args.generation_samples
-                mem_score = mem_score._append({"set_name": set_name, "original_idx": orig_idx[0],
-                                               "bleurt_score": bleurt_scores, "rougle_scores":rougeL_scores
-                                               }, ignore_index=True)
+                #bleurt_scores = sum(bleurt_score(temp_results, [text_to_compare for _ in range(args.generation_samples)]))/args.generation_samples
+                #rougeL_scores = sum(rougeL_score(temp_results, [text_to_compare for _ in range(args.generation_samples)]))/args.generation_samples
+                #mem_score = mem_score._append({"set_name": set_name, "original_idx": orig_idx[0],
+                #                               "bleurt_score": bleurt_scores, "rougle_scores":rougeL_scores
+                #                               }, ignore_index=True)
                 input_length = temp_input_length
                 generation_samples_list.append([batched_text[0], full_decoded, temp_results, text_to_compare])
         os.makedirs(f"sem_mem_score_online/{args.model_size}", exist_ok=True)
-        mem_score.to_csv(f"sem_mem_score_online/{args.model_size}/{dataset_name}_{temp_input_length}_sem_mem_score.csv")
+        #mem_score.to_csv(f"sem_mem_score_online/{args.model_size}/{dataset_name}_{temp_input_length}_sem_mem_score.csv")
         pickle.dump(generation_samples_list, open(f"sem_mem_score_online/{args.model_size}/{dataset_name}_{temp_input_length}_generation_samples.pkl", "wb"))
 
 
