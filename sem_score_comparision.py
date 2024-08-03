@@ -79,9 +79,9 @@ tokenizer = AutoTokenizer.from_pretrained(
 )
 tokenizer.pad_token = tokenizer.eos_token
 model.generation_config.pad_token_id = model.generation_config.eos_token_id
-model.generation_config.output_hidden_states = True
+#model.generation_config.output_hidden_states = True
 #model.generation_config.output_attentions = True
-model.generation_config.output_scores = True
+#model.generation_config.output_scores = True
 model.generation_config.return_dict_in_generate = True
 
 bleurt =  evaluate.load('bleurt', 'bleurt-20', model_type="metric")
