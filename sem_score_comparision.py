@@ -119,15 +119,16 @@ for input_length in [32]:
                     if input_length < 0:
                         continue
                 temp_results = []
-                generations = model.generate(tokenized_inputs["input_ids"][0][:input_length].unsqueeze(0),
-                                             do_sample=True,
-                                             temperature=1,
-                                             max_length=1024,  # input+output
-                                             top_k=50,
-                                             top_p=1,
-                                            )
+                for _ in range(args.generation_samples):
+                    generations = model.generate(tokenized_inputs["input_ids"][0][:input_length].unsqueeze(0),
+                                                 do_sample=True,
+                                                 temperature=1,
+                                                 max_length=1024,  # input+output
+                                                 top_k=50,
+                                                 top_p=1,
+                                                )
+                    temp_results.append(tokenizer.decode(generations["sequences"][0][input_length:]))
                 pdb.set_trace()
-                temp_results.append(tokenizer.decode(generations["sequences"][0][input_length:]))
                 text_to_compare = tokenizer.decode(tokenized_inputs["input_ids"][0][input_length:])
                 bleurt_scores = bleurt_score(temp_results, [text_to_compare for _ in range(args.generation_samples)])
                 rougeL_scores = rougeL_score(temp_results, [text_to_compare for _ in range(args.generation_samples)])
