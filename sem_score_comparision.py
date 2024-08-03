@@ -89,7 +89,7 @@ model.generation_config.return_dict_in_generate = True
 bleurt =  evaluate.load('bleurt', 'bleurt-20', model_type="metric")
 rouge = evaluate.load('rouge')
 
-for input_length in [32]:
+for input_length in [48]:
     temp_input_length = copy.deepcopy(input_length)
     for dataset_name in dataset_names:
         if "WikiMIA" in dataset_name:
