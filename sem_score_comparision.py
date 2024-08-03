@@ -52,8 +52,6 @@ parser.add_argument("--cuda", type=int, default=1, help="cuda device")
 parser.add_argument("--skip_calculation", type=str, default="True")
 parser.add_argument("--reference_model", type=str, default="True")
 parser.add_argument("--samples", type=int, default=1000)
-parser.add_argument("--gradient_collection", type=str, default=False)
-parser.add_argument("--continuation_size", type=int, default=32)
 parser.add_argument("--generation_samples", type=int, default=15)
 args = parser.parse_args()
 
