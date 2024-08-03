@@ -83,8 +83,11 @@ model.generation_config.pad_token_id = model.generation_config.eos_token_id
 #model.generation_config.output_scores = True
 model.generation_config.return_dict_in_generate = True
 
-bleurt =  evaluate.load('bleurt', 'bleurt-20', model_type="metric", device=f'cuda:{args.cuda}')
-rouge = evaluate.load('rouge', device=f'cuda:{args.cuda}')
+bleurt =  evaluate.load('bleurt', 'bleurt-20',
+                        model_type="metric", device=f'cuda:{args.cuda}',
+                        num_process=1)
+rouge = evaluate.load('rouge', device=f'cuda:{args.cuda}',
+                      num_process=1)
 
 for input_length in [48]:
     temp_input_length = copy.deepcopy(input_length)
