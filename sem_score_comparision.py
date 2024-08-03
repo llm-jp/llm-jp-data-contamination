@@ -43,7 +43,7 @@ def rougeL_score(predictions, references):
     return rougeL_score
 
 parser = argparse.ArgumentParser()
-parser.add_argument("--batch_size", type=int, default=5)
+parser.add_argument("--batch_size", type=int, default=1)
 parser.add_argument("--model_size", type=str, default="410m")
 parser.add_argument("--dataset_name", type=str, default="all", choices=["arxiv", "dm_mathematics", "github", "hackernews", "pile_cc",
                      "pubmed_central", "wikipedia_(en)", "full_pile","WikiMIA64", "WikiMIA128","WikiMIA256",
@@ -128,7 +128,7 @@ for input_length in [48]:
                     temp_results.append(tokenizer.decode(generations["sequences"][0][input_length:]))
                     full_decoded.append(tokenizer.decode(generations["sequences"][0]))
                 text_to_compare = tokenizer.decode(tokenized_inputs["input_ids"][0][input_length:])
-                pdb.set_trace()
+                #pdb.set_trace()
                 bleurt_scores = bleurt_score(temp_results, [text_to_compare for _ in range(args.generation_samples)])
                 rougeL_scores = rougeL_score(temp_results, [text_to_compare for _ in range(args.generation_samples)])
                 mem_score = mem_score._append({"set_name": set_name, "original_idx": orig_idx[0],
