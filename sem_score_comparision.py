@@ -126,8 +126,8 @@ for input_length in [48]:
                     full_decoded.append(tokenizer.decode(generations["sequences"][0]))
                 text_to_compare = tokenizer.decode(tokenized_inputs["input_ids"][0][input_length:])
                 #pdb.set_trace()
-                bleurt_scores = bleurt_score(temp_results, [text_to_compare for _ in range(args.generation_samples)])
-                rougeL_scores = rougeL_score(temp_results, [text_to_compare for _ in range(args.generation_samples)])
+                bleurt_scores = sum(bleurt_score(temp_results, [text_to_compare for _ in range(args.generation_samples)]))/args.generation_samples
+                rougeL_scores = sum(rougeL_score(temp_results, [text_to_compare for _ in range(args.generation_samples)]))/args.generation_samples
                 mem_score = mem_score._append({"set_name": set_name, "original_idx": orig_idx[0],
                                                "bleurt_score": bleurt_scores, "rougle_scores":rougeL_scores
                                                }, ignore_index=True)
