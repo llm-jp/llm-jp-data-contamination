@@ -119,7 +119,7 @@ for input_length in [48]:
                     if input_length < 0:
                         continue
                 temp_results = []
-                for _ in range(args.generation_samples):
+                for _ in tqdm(range(args.generation_samples)):
                     generations = model.generate(tokenized_inputs["input_ids"][0][:input_length].unsqueeze(0),
                                                  do_sample=True,
                                                  temperature=1,
