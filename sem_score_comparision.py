@@ -119,7 +119,7 @@ for input_length in [48]:
                     generations = model.generate(tokenized_inputs["input_ids"][0][:input_length].unsqueeze(0),
                                                  do_sample=True,
                                                  temperature=1,
-                                                 max_length=1024,  # input+output
+                                                 max_length=len(tokenized_inputs["input_ids"][0]),  # input+output
                                                  top_k=50,
                                                  top_p=1,
                                                 )
