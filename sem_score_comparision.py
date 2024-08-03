@@ -54,7 +54,7 @@ parser.add_argument("--reference_model", type=str, default="True")
 parser.add_argument("--samples", type=int, default=1000)
 parser.add_argument("--gradient_collection", type=str, default=False)
 parser.add_argument("--continuation_size", type=int, default=32)
-parser.add_argument("--generation_samples", type=int, default=50)
+parser.add_argument("--generation_samples", type=int, default=20)
 args = parser.parse_args()
 
 
@@ -110,7 +110,7 @@ for input_length in [32]:
                 if idx * args.batch_size > args.samples:
                     break
                 batched_text = [item for item in data_batch]
-                tokenized_inputs = tokenizer(batched_text, return_tensors="pt", truncation=True, max_length=temp_input_length+args.continuation_size)
+                tokenized_inputs = tokenizer(batched_text, return_tensors="pt", truncation=True)
                 tokenized_inputs = {key: val.to(device) for key, val in tokenized_inputs.items()}
                 #input_length = int(tokenized_inputs["input_ids"].shape[1] * ratio)
                 #output_length = int(tokenized_inputs["input_ids"].shape[1] * (ratio + 0.1))
@@ -121,11 +121,12 @@ for input_length in [32]:
                 temp_results = []
                 for _ in range(args.generation_samples):
                     generations = model.generate(tokenized_inputs["input_ids"][0][:input_length].unsqueeze(0),
-                                                 temperature=0.3, top_k=0, top_p=0, max_length=500)
+                                                 temperature=0.3, top_k=0, top_p=0, max_length=250)
                     temp_results.append(tokenizer.decode(generations["sequences"][0][input_length:]))
                 pdb.set_trace()
-                bleurt_scores = bleurt_score(temp_results, [batched_text for _ in range(args.generation_samples)])
-                rougeL_scores = rougeL_score(temp_results, [batched_text for _ in range(args.generation_samples)])
+                text_to_compare = tokenizer.decode(tokenized_inputs["input_ids"][0][input_length:])
+                bleurt_scores = bleurt_score(temp_results, [text_to_compare for _ in range(args.generation_samples)])
+                rougeL_scores = rougeL_score(temp_results, [text_to_compare for _ in range(args.generation_samples)])
                 mem_score = mem_score._append({"set_name": set_name, "original_idx": orig_idx[0], "bleurt_score": bleurt_scores, "rougle_scores":rougeL_scores}, ignore_index=True)
                 input_length = temp_input_length
         os.makedirs(f"sem_mem_score_online/{args.model_size}", exist_ok=True)
