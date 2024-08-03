@@ -119,14 +119,14 @@ for input_length in [32]:
                     if input_length < 0:
                         continue
                 temp_results = []
-                for _ in range(args.generation_samples):
-                    generations = model.generate(tokenized_inputs["input_ids"][0][:input_length].unsqueeze(0),
-                                                 temperature=0.3, top_k=0, top_p=0,
-                                                 min_length=tokenized_inputs["input_ids"][0].shape[0]-20,
-                                                 max_length=tokenized_inputs["input_ids"][0].shape[0]+20,
-                                                 repetition_penalty=1.2)
-                    temp_results.append(tokenizer.decode(generations["sequences"][0][input_length:]))
+                generations = model.generate(tokenized_inputs["input_ids"][0][:input_length].unsqueeze(0),
+                                             temperature=0.3, top_k=0, top_p=0,
+                                             min_length=tokenized_inputs["input_ids"][0].shape[0]-20,
+                                             max_length=tokenized_inputs["input_ids"][0].shape[0]+20,
+                                             repetition_penalty=1.2,
+                                             num_return_sequences=args.generation_samples)
                 pdb.set_trace()
+                temp_results.append(tokenizer.decode(generations["sequences"][0][input_length:]))
                 text_to_compare = tokenizer.decode(tokenized_inputs["input_ids"][0][input_length:])
                 bleurt_scores = bleurt_score(temp_results, [text_to_compare for _ in range(args.generation_samples)])
                 rougeL_scores = rougeL_score(temp_results, [text_to_compare for _ in range(args.generation_samples)])
