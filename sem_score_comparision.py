@@ -54,7 +54,7 @@ parser.add_argument("--reference_model", type=str, default="True")
 parser.add_argument("--samples", type=int, default=1000)
 parser.add_argument("--gradient_collection", type=str, default=False)
 parser.add_argument("--continuation_size", type=int, default=32)
-parser.add_argument("--generation_samples", type=int, default=20)
+parser.add_argument("--generation_samples", type=int, default=15)
 args = parser.parse_args()
 
 
@@ -128,8 +128,8 @@ for input_length in [32]:
                                                  top_p=1,
                                                 )
                     temp_results.append(tokenizer.decode(generations["sequences"][0][input_length:]))
-                pdb.set_trace()
                 text_to_compare = tokenizer.decode(tokenized_inputs["input_ids"][0][input_length:])
+                pdb.set_trace()
                 bleurt_scores = bleurt_score(temp_results, [text_to_compare for _ in range(args.generation_samples)])
                 rougeL_scores = rougeL_score(temp_results, [text_to_compare for _ in range(args.generation_samples)])
                 mem_score = mem_score._append({"set_name": set_name, "original_idx": orig_idx[0], "bleurt_score": bleurt_scores, "rougle_scores":rougeL_scores}, ignore_index=True)
