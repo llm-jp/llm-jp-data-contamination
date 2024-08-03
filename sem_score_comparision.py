@@ -4,14 +4,13 @@ from utils import form_dataset, batched_data_with_indices, clean_dataset
 import argparse
 from tqdm import tqdm
 import torch
-import numpy as np
 import matplotlib.pyplot as plt
 import pandas
 import os
 from datasets import load_dataset
 import copy
 import evaluate
-
+import pdb
 
 def bleurt_score(predictions, references):
     """Compute the average BLEURT score over the gpt responses
@@ -122,8 +121,9 @@ for input_length in [32]:
                 temp_results = []
                 for _ in range(args.generation_samples):
                     generations = model.generate(tokenized_inputs["input_ids"][0][:input_length].unsqueeze(0),
-                                                 temperature=0.3, top_k=0, top_p=0)
+                                                 temperature=0.3, top_k=0, top_p=0, max_length=500)
                     temp_results.append(tokenizer.decode(generations["sequences"][0][input_length:]))
+                pdb.set_trace()
                 bleurt_scores = bleurt_score(temp_results, [batched_text for _ in range(args.generation_samples)])
                 rougeL_scores = rougeL_score(temp_results, [batched_text for _ in range(args.generation_samples)])
                 mem_score = mem_score._append({"set_name": set_name, "original_idx": orig_idx[0], "bleurt_score": bleurt_scores, "rougle_scores":rougeL_scores}, ignore_index=True)
