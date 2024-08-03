@@ -121,7 +121,9 @@ for input_length in [32]:
                 temp_results = []
                 for _ in range(args.generation_samples):
                     generations = model.generate(tokenized_inputs["input_ids"][0][:input_length].unsqueeze(0),
-                                                 temperature=0.3, top_k=0, top_p=0, max_length=250)
+                                                 temperature=0.3, top_k=0, top_p=0,
+                                                 min_length = tokenized_inputs["input_ids"][0].shape[0]-20,
+                                                 max_length=tokenized_inputs["input_ids"][0].shape[0]+20)
                     temp_results.append(tokenizer.decode(generations["sequences"][0][input_length:]))
                 pdb.set_trace()
                 text_to_compare = tokenizer.decode(tokenized_inputs["input_ids"][0][input_length:])
