@@ -51,7 +51,7 @@ bleurt =  evaluate.load('bleurt', 'bleurt-20',
 rouge = evaluate.load('rouge')
 dataset_name = "arxiv"
 temp_input_length = 48
-f = open(f"sem_mem_score_online/{args.model_size}/{dataset_name}_{temp_input_length}_generation_samples.pkl")
+f = open(f"sem_mem_score_online/{args.model_size}/{dataset_name}_{temp_input_length}_generation_samples.pkl", "rb")
 data = pickle.load(f)
 f.close()
 half = len(data)//2
