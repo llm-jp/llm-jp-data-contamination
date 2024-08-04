@@ -34,7 +34,7 @@ parser.add_argument("--model_size", type=str, default="2.8b")
 parser.add_argument("--dataset_name", type=str, default="Pile-CC", choices=["arxiv", "dm_mathematics", "github", "hackernews", "pile_cc",
                      "pubmed_central", "wikipedia_(en)", "full_pile", "all"])
 parser.add_argument("--cuda", type=int, default=1, help="cuda device")
-parser.add_argument("--samples", type=int, default=100)
+parser.add_argument("--samples", type=int, default=1000)
 parser.add_argument("--prepare_dataset", type=str, default="True")
 args = parser.parse_args()
 
@@ -173,7 +173,6 @@ for epoch in range(num_epochs):
     loss = criterion(outputs, y_train)
     loss.backward()
     optimizer.step()
-
     print(f'Epoch [{epoch + 1}/{num_epochs}], Loss: {loss.item():.4f}')
 
 # 评估模型
