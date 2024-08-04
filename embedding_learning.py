@@ -128,7 +128,7 @@ y = torch.cat([member_labels, nonmember_labels], axis=0)
 attention_masks = torch.cat([member_attn_masks, nonmember_attn_masks], dim=0)
 
 # 将数据分为训练集和测试集
-X_train, X_test, y_train, y_test, attn_train, attn_test = train_test_split(X, y, attention_masks, test_size=0.2, random_state=42)
+X_train, X_test, y_train, y_test, attn_train, attn_test = train_test_split(X, y, attention_masks, test_size=0.1, random_state=42)
 
 # 转换数据为tensor
 X_train = torch.tensor(X_train, dtype=torch.float32).view(-1, member_embeddings.shape[1], member_embeddings.shape[2])
