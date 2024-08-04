@@ -148,7 +148,7 @@ class TransformerClassifier(nn.Module):
 
 # 模型的超参数
 input_dim = member_embeddings.shape[2]
-hidden_dim = 256  # 可以根据需要调整
+hidden_dim = member_embeddings.shape[2]  # 可以根据需要调整
 output_dim = 2
 num_layers = 2
 num_heads = 4
