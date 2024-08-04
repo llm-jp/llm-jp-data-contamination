@@ -8,14 +8,19 @@ import torch
 import matplotlib.pyplot as plt
 import pandas as pd
 from datasets import load_dataset
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.metrics import accuracy_score, classification_report
+import torch.nn as nn
+
 
 parser = argparse.ArgumentParser()
-parser.add_argument("--batch_size", type=int, default=1)
-parser.add_argument("--model_size", type=str, default="1b")
+parser.add_argument("--batch_size", type=int, default=10)
+parser.add_argument("--model_size", type=str, default="2.8b")
 parser.add_argument("--dataset_name", type=str, default="Pile-CC", choices=["arxiv", "dm_mathematics", "github", "hackernews", "pile_cc",
                      "pubmed_central", "wikipedia_(en)", "full_pile", "all"])
 parser.add_argument("--cuda", type=int, default=1, help="cuda device")
-parser.add_argument("--samples", type=int, default=1000)
+parser.add_argument("--samples", type=int, default=100)
 parser.add_argument("--prepare_dataset", type=str, default="True")
 args = parser.parse_args()
 
@@ -64,6 +69,8 @@ for dataset_name in dataset_names:
     for set_name in ["member", "nonmember"]:
         cleaned_data, orig_indices = clean_dataset(dataset[set_name], dataset_name, online=True)
         for idx, (data_batch, orig_indices_batch) in tqdm(enumerate(batched_data_with_indices(cleaned_data, orig_indices, batch_size=args.batch_size))):
+            if idx * args.batch_size > args.samples:
+                break
             batched_text = [item for item in data_batch]
             tokenized_inputs = tokenizer(batched_text,
                                          return_tensors="pt",
@@ -79,11 +86,90 @@ for dataset_name in dataset_names:
             hidden_states = outputs.hidden_states
             context_embedding = hidden_states[-2]
             if set_name == "member":
-                member_embed_list.append(context_embedding.cpu())
+                member_embed_list.append(context_embedding.cpu().numpy())
             elif set_name == "nonmember":
                 non_member_embed_list.append(context_embedding.cpu())
-            pdb.set_trace()
-    os.makedirs(f"embeddings/{args.model_size}", exist_ok=True)
-    torch.save(member_embed_list, f"embeddings/{args.model_size}/{dataset_name}_member.pt")
-    torch.save(non_member_embed_list, f"embeddings/{args.model_size}/{dataset_name}_nonmember.pt")
+
+member_embeddings = np.concatenate(member_embed_list, axis=0)
+nonmember_embeddings = np.concatenate(non_member_embed_list, axis=0)
+
+# 创建标签
+member_labels = np.ones(member_embeddings.shape[0])
+nonmember_labels = np.zeros(nonmember_embeddings.shape[0])
+
+# 合并数据和标签
+X = np.concatenate([member_embeddings, nonmember_embeddings], axis=0)
+y = np.concatenate([member_labels, nonmember_labels], axis=0)
+
+# 将数据分为训练集和测试集
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# 将数据标准化
+scaler = StandardScaler()
+X_train = scaler.fit_transform(X_train.reshape(X_train.shape[0], -1))
+X_test = scaler.transform(X_test.reshape(X_test.shape[0], -1))
+
+# 转换数据为tensor
+X_train = torch.tensor(X_train, dtype=torch.float32).view(-1, member_embeddings.shape[1], member_embeddings.shape[2])
+X_test = torch.tensor(X_test, dtype=torch.float32).view(-1, member_embeddings.shape[1], member_embeddings.shape[2])
+y_train = torch.tensor(y_train, dtype=torch.long)
+y_test = torch.tensor(y_test, dtype=torch.long)
+
+
+# 定义二元分类模型
+class TransformerClassifier(nn.Module):
+    def __init__(self, input_dim, hidden_dim, output_dim, num_layers, num_heads):
+        super(TransformerClassifier, self).__init__()
+        self.transformer = nn.TransformerEncoder(
+            nn.TransformerEncoderLayer(d_model=hidden_dim, nhead=num_heads),
+            num_layers=num_layers
+        )
+        self.fc = nn.Linear(hidden_dim, output_dim)
+
+    def forward(self, x):
+        x = self.transformer(x)
+        x = x.mean(dim=1)  # 对时间维度进行池化操作
+        x = self.fc(x)
+        return x
+
+
+# 模型的超参数
+input_dim = member_embeddings.shape[2]
+hidden_dim = 256  # 可以根据需要调整
+output_dim = 2
+num_layers = 2
+num_heads = 4
+
+model = TransformerClassifier(input_dim, hidden_dim, output_dim, num_layers, num_heads)
+
+# 使用GPU
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+model = model.to(device)
+X_train, X_test, y_train, y_test = X_train.to(device), X_test.to(device), y_train.to(device), y_test.to(device)
+
+# 定义损失和优化器
+criterion = nn.CrossEntropyLoss()
+optimizer = optim.Adam(model.parameters(), lr=0.001)
+
+# 训练模型
+num_epochs = 10
+for epoch in range(num_epochs):
+    model.train()
+    optimizer.zero_grad()
+    outputs = model(X_train)
+    loss = criterion(outputs, y_train)
+    loss.backward()
+    optimizer.step()
+
+    print(f'Epoch [{epoch + 1}/{num_epochs}], Loss: {loss.item():.4f}')
+
+# 评估模型
+model.eval()
+with torch.no_grad():
+    test_outputs = model(X_test)
+    _, predicted = torch.max(test_outputs.data, 1)
+    accuracy = accuracy_score(y_test.cpu(), predicted.cpu())
+    print(f'Test Accuracy: {accuracy:.4f}')
+    print(classification_report(y_test.cpu(), predicted.cpu(), target_names=['Nonmember', 'Member']))
+
 
