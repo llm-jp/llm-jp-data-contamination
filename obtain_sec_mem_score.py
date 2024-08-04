@@ -2,6 +2,7 @@ import evaluate
 import argparse
 import pickle
 import numpy as np
+from tqdm import tqdm
 def bleurt_score(predictions, references):
     """Compute the average BLEURT score over the gpt responses
 
@@ -59,7 +60,7 @@ member_bleurt = []
 member_rouge = []
 nonmember_bleurt = []
 nonmember_rouge = []
-for idx, example in enumerate(data):
+for idx, example in tqdm(enumerate(data)):
     original_text = example[0]
     full_generated_texts = example[1]
     partial_generated_texts = example[2]
