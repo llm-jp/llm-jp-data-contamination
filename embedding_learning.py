@@ -78,9 +78,9 @@ for dataset_name in dataset_names:
                 outputs = model(**tokenized_inputs, labels=target_labels, output_hidden_states=True, return_dict=True)
             hidden_states = outputs.hidden_states
             context_embedding = hidden_states[-2]
-            if set_name == "member" and len(member_embed_list) < args.samples:
+            if set_name == "member" and len(member_embed_list):
                 member_embed_list.append(context_embedding.cpu())
-            elif set_name == "nonmember" and len(non_member_embed_list) < args.samples:
+            elif set_name == "nonmember" and len(non_member_embed_list):
                 non_member_embed_list.append(context_embedding.cpu())
             pdb.set_trace()
     os.makedirs(f"embeddings/{args.model_size}", exist_ok=True)
