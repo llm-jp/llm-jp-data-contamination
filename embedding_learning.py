@@ -37,7 +37,7 @@ def pad_embeddings(embed_list, max_length):
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--batch_size", type=int, default=10)
-parser.add_argument("--model_size", type=str, default="2.8b")
+parser.add_argument("--model_size", type=str, default="6.9b")
 parser.add_argument("--dataset_name", type=str, default="Pile-CC", choices=["arxiv", "dm_mathematics", "github", "hackernews", "pile_cc",
                      "pubmed_central", "wikipedia_(en)", "full_pile", "all"])
 parser.add_argument("--cuda", type=int, default=1, help="cuda device")
@@ -149,7 +149,7 @@ class TransformerClassifier(nn.Module):
     def __init__(self, input_dim, hidden_dim, output_dim, num_layers, num_heads):
         super(TransformerClassifier, self).__init__()
         self.transformer = nn.TransformerEncoder(
-            nn.TransformerEncoderLayer(d_model=hidden_dim, nhead=num_heads),
+            nn.TransformerEncoderLayer(d_model=hidden_dim, nhead=num_heads, batch_first=True),
             num_layers=num_layers
         )
         self.fc = nn.Linear(hidden_dim, output_dim)
@@ -180,6 +180,7 @@ X_train, X_test, y_train, y_test = X_train.to(device), X_test.to(device), y_trai
 # 定义损失和优化器
 criterion = nn.CrossEntropyLoss()
 optimizer = optim.Adam(model.parameters(), lr=0.001)
+scheduler = optim.lr_scheduler.StepLR(optimizer, step_size=5, gamma=0.1)
 
 # 训练模型
 num_epochs = 10
@@ -192,11 +193,10 @@ for epoch in range(num_epochs):
         loss = criterion(outputs, labels)
         loss.backward()
         optimizer.step()
-
         if (i + 1) % 10 == 0:  # 每10个批次打印一次loss
             print(f'Epoch [{epoch + 1}/{num_epochs}], Step [{i + 1}/{len(train_loader)}], Loss: {loss.item():.4f}')
-
     # 更新学习率
+    scheduler.step()
 
 # 评估模型
 model.eval()
