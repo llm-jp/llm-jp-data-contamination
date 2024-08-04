@@ -183,7 +183,7 @@ X_train, X_test, y_train, y_test = X_train.to(device), X_test.to(device), y_trai
 # 定义损失和优化器
 criterion = nn.CrossEntropyLoss()
 optimizer = optim.Adam(model.parameters(), lr=0.0001)
-#scheduler = optim.lr_scheduler.StepLR(optimizer, step_size=5, gamma=0.1)
+scheduler = optim.lr_scheduler.StepLR(optimizer, step_size=5, gamma=0.1)
 
 # 训练模型
 num_epochs = 10
@@ -199,7 +199,7 @@ for epoch in range(num_epochs):
         if (i + 1) % 10 == 0:  # 每10个批次打印一次loss
             print(f'Epoch [{epoch + 1}/{num_epochs}], Step [{i + 1}/{len(train_loader)}], Loss: {loss.item():.4f}')
     # 更新学习率
-#    scheduler.step()
+    scheduler.step()
 
 # 评估模型
 model.eval()
