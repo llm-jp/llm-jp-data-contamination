@@ -158,10 +158,10 @@ class TransformerClassifier(nn.Module):
         self.fc = nn.Linear(hidden_dim, output_dim)
 
     def forward(self, x, attention_mask):
-        attention_mask_inv = (1 - attention_mask).bool()  # convert mask to match nn.TransformerEncoder
+        attention_mask_inv = (attention_mask == 0).bool()
         x = self.transformer(x, src_key_padding_mask=attention_mask_inv)
         mask = attention_mask.unsqueeze(-1).expand_as(x)
-        x = (x * mask).sum(dim=1) / mask.sum(dim=1)  # Masked mean pooling
+        x = (x * mask).sum(dim=1) / mask.sum(dim=1)
         x = self.fc(x)
         return x
 
