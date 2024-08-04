@@ -10,7 +10,7 @@ import pandas as pd
 from datasets import load_dataset
 
 parser = argparse.ArgumentParser()
-parser.add_argument("--batch_size", type=int, default=10)
+parser.add_argument("--batch_size", type=int, default=1)
 parser.add_argument("--model_size", type=str, default="1b")
 parser.add_argument("--dataset_name", type=str, default="Pile-CC", choices=["arxiv", "dm_mathematics", "github", "hackernews", "pile_cc",
                      "pubmed_central", "wikipedia_(en)", "full_pile", "all"])
@@ -64,8 +64,6 @@ for dataset_name in dataset_names:
     for set_name in ["member", "nonmember"]:
         cleaned_data, orig_indices = clean_dataset(dataset[set_name], dataset_name, online=True)
         for idx, (data_batch, orig_indices_batch) in tqdm(enumerate(batched_data_with_indices(cleaned_data, orig_indices, batch_size=args.batch_size))):
-            if idx * args.batch_size > args.samples:
-                break
             batched_text = [item for item in data_batch]
             tokenized_inputs = tokenizer(batched_text,
                                          return_tensors="pt",
@@ -85,4 +83,7 @@ for dataset_name in dataset_names:
             elif set_name == "nonmember" and len(non_member_embed_list) < args.samples:
                 non_member_embed_list.append(context_embedding.cpu())
             pdb.set_trace()
+    os.makedirs(f"embeddings/{args.model_size}", exist_ok=True)
+    torch.save(member_embed_list, f"embeddings/{args.model_size}/{dataset_name}_member.pt")
+    torch.save(non_member_embed_list, f"embeddings/{args.model_size}/{dataset_name}_nonmember.pt")
 
