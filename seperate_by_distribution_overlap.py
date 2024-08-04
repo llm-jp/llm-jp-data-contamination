@@ -38,6 +38,9 @@ nonmember_indices = np.where(nonmember_probs >= member_probs)[0]
 filtered_member_data = all_data[np.intersect1d(member_indices, np.where(all_data <= np.max(member_data)))]
 filtered_nonmember_data = all_data[np.intersect1d(nonmember_indices, np.where(all_data > np.min(nonmember_data)))]
 
+overlap_indices = np.where((member_probs > 0) & (nonmember_probs > 0))[0]
+overlap_data = all_data[overlap_indices]
+
 print(f"原始member数据大小: {len(member_data)}, 筛选后member数据大小: {len(filtered_member_data)}")
 print(f"原始nonmember数据大小: {len(nonmember_data)}, 筛选后nonmember数据大小: {len(filtered_nonmember_data)}")
 print(f"原始member数据大小: {len(member_data)}, 筛选后member数据大小: {len(filtered_member_data)}")
@@ -46,6 +49,7 @@ plt.hist(filtered_member_data, bins=50, alpha=0.5, label="member")
 # gaussian_kde(filtered_member_data).set_bandwidth(bw_method=0.25)
 #
 plt.hist(filtered_nonmember_data, bins=50, alpha=0.5, label="nonmember")
+#plt.hist(overlap_data, bins=50, alpha=0.5, label="overlap")
 # gaussian_kde(filtered_nonmember_data).set_bandwidth(bw_method=0.25)
 
 #sns.kdeplot(filtered_member_data, bw_method=0.25, label="member")

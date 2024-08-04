@@ -3,6 +3,7 @@ import argparse
 import pickle
 import numpy as np
 from tqdm import tqdm
+
 def bleurt_score(predictions, references):
     """Compute the average BLEURT score over the gpt responses
 
@@ -73,6 +74,15 @@ for idx, example in tqdm(enumerate(data)):
     else:
         nonmember_bleurt.append(bleurt_value)
         nonmember_rouge.append(rougle_value)
+import matplotlib.pyplot as plt
+plt.hist(member_bleurt, bins=50, alpha=0.5, label="member_bleurt")
+plt.hist(nonmember_bleurt, bins=50, alpha=0.5, label="nonmember_bleurt")
+plt.hist(member_rouge, bins=50, alpha=0.5, label="member_rouge")
+plt.hist(nonmember_rouge, bins=50, alpha=0.5, label="nonmember_rouge")
+plt.legend()
+plt.savefig(f"sem_score.png")
+plt.show()
+
 
 
 
