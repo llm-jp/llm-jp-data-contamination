@@ -200,7 +200,7 @@ for epoch in range(num_epochs):
             print(f'Epoch [{epoch + 1}/{num_epochs}], Step [{i + 1}/{len(train_loader)}], Loss: {loss.item():.4f}')
     # 更新学习率
     scheduler.step()
-
+#Test Accuracy: 0.5150 model size 2.8
 # 评估模型
 model.eval()
 all_preds = []
