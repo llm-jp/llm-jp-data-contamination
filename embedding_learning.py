@@ -17,18 +17,17 @@ import numpy as np
 from torch.utils.data import DataLoader, TensorDataset
 
 
-def pad_embeddings(embed_list, max_length):
+def pad_embeddings(embed_list, attn_mask_list, max_length):
     padded_embed_list = []
     attention_masks = []
-    for batch in embed_list:
-        # batch 中的每个 embed 是一个 (batch_size, seq_len, embed_dim) 的 tensor
-        padding_size = max_length - batch.shape[1]
+    for embed, attn_mask in zip(embed_list, attn_mask_list):
+        padding_size = max_length - embed.shape[1]
         if padding_size > 0:
-            pad = torch.nn.functional.pad(batch, (0, 0, 0, padding_size))
-            attention_mask = torch.cat([torch.ones(batch.shape[0], batch.shape[1]), torch.zeros(batch.shape[0], padding_size)], dim=1)
+            pad = torch.nn.functional.pad(embed, (0, 0, 0, padding_size), value=0)  # ensure padding value is 0
+            attention_mask = torch.nn.functional.pad(attn_mask, (0, padding_size), value=0)  # pad attention_mask as well
         else:
-            pad = batch
-            attention_mask = torch.ones(batch.shape[0], batch.shape[1])
+            pad = embed
+            attention_mask = attn_mask
         padded_embed_list.append(pad)
         attention_masks.append(attention_mask)
     return torch.cat(padded_embed_list, dim=0), torch.cat(attention_masks, dim=0)
@@ -87,6 +86,8 @@ for dataset_name in dataset_names:
     device = f'cuda:{args.cuda}'
     member_embed_list = []
     non_member_embed_list = []
+    member_attn_mask_list = []
+    nonmember_attn_mask_list = []
     for set_name in ["member", "nonmember"]:
         cleaned_data, orig_indices = clean_dataset(dataset[set_name], dataset_name, online=True)
         for idx, (data_batch, orig_indices_batch) in tqdm(enumerate(batched_data_with_indices(cleaned_data, orig_indices, batch_size=args.batch_size))):
@@ -108,15 +109,17 @@ for dataset_name in dataset_names:
             context_embedding = hidden_states[-2]
             if set_name == "member":
                 member_embed_list.append(context_embedding.cpu())
+                member_attn_mask_list.append(tokenized_inputs["attention_mask"].cpu())
             elif set_name == "nonmember":
                 non_member_embed_list.append(context_embedding.cpu())
+                nonmember_attn_mask_list.append(tokenized_inputs["attention_mask"].cpu())
 
 max_length = max(max(embed.shape[1] for embed in member_embed_list),
                  max(embed.shape[1] for embed in non_member_embed_list))
 
 # 填充并合并embedding
-member_embeddings, member_attn_masks = pad_embeddings(member_embed_list, max_length)
-nonmember_embeddings, nonmember_attn_masks = pad_embeddings(non_member_embed_list, max_length)
+member_embeddings, member_attn_masks = pad_embeddings(member_embed_list, member_attn_mask_list, max_length)
+nonmember_embeddings, nonmember_attn_masks = pad_embeddings(non_member_embed_list, nonmember_attn_mask_list, max_length)
 
 # 创建标签
 member_labels = torch.ones(member_embeddings.shape[0])
@@ -180,7 +183,7 @@ X_train, X_test, y_train, y_test = X_train.to(device), X_test.to(device), y_trai
 # 定义损失和优化器
 criterion = nn.CrossEntropyLoss()
 optimizer = optim.Adam(model.parameters(), lr=0.001)
-scheduler = optim.lr_scheduler.StepLR(optimizer, step_size=5, gamma=0.1)
+#scheduler = optim.lr_scheduler.StepLR(optimizer, step_size=5, gamma=0.1)
 
 # 训练模型
 num_epochs = 10
@@ -196,7 +199,7 @@ for epoch in range(num_epochs):
         if (i + 1) % 10 == 0:  # 每10个批次打印一次loss
             print(f'Epoch [{epoch + 1}/{num_epochs}], Step [{i + 1}/{len(train_loader)}], Loss: {loss.item():.4f}')
     # 更新学习率
-    scheduler.step()
+#    scheduler.step()
 
 # 评估模型
 model.eval()
