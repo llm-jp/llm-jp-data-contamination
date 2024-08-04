@@ -15,6 +15,18 @@ import torch.nn as nn
 import torch.optim as optim
 import numpy as np
 
+def pad_embeddings(embed_list, max_length):
+    padded_embed_list = []
+    for embed in embed_list:
+        padding_size = max_length - embed.shape[1]
+        if padding_size > 0:
+            pad = torch.nn.functional.pad(embed, (0, 0, 0, padding_size))
+        else:
+            pad = embed
+        padded_embed_list.append(pad)
+    return torch.cat(padded_embed_list, dim=0)
+
+
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--batch_size", type=int, default=10)
@@ -92,16 +104,20 @@ for dataset_name in dataset_names:
             elif set_name == "nonmember":
                 non_member_embed_list.append(context_embedding.cpu())
 
-member_embeddings = torch.cat(member_embed_list, dim=0)
-nonmember_embeddings = torch.cat(non_member_embed_list, dim=0)
+max_length = max(max(embed.shape[1] for embed in member_embed_list),
+                 max(embed.shape[1] for embed in non_member_embed_list))
+
+# 填充并合并embedding
+member_embeddings = pad_embeddings(member_embed_list, max_length)
+nonmember_embeddings = pad_embeddings(non_member_embed_list, max_length)
 
 # 创建标签
-member_labels = np.ones(member_embeddings.shape[0])
-nonmember_labels = np.zeros(nonmember_embeddings.shape[0])
+member_labels = torch.ones(member_embeddings.shape[0])
+nonmember_labels = torch.zeros(nonmember_embeddings.shape[0])
 
 # 合并数据和标签
-X = np.concatenate([member_embeddings, nonmember_embeddings], axis=0)
-y = np.concatenate([member_labels, nonmember_labels], axis=0)
+X = torch.cat([member_embeddings, nonmember_embeddings], axis=0)
+y = torch.cat([member_labels, nonmember_labels], axis=0)
 
 # 将数据分为训练集和测试集
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
