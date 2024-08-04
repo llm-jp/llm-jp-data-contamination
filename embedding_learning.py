@@ -122,11 +122,6 @@ y = torch.cat([member_labels, nonmember_labels], axis=0)
 # 将数据分为训练集和测试集
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-# 将数据标准化
-scaler = StandardScaler()
-X_train = scaler.fit_transform(X_train.reshape(X_train.shape[0], -1))
-X_test = scaler.transform(X_test.reshape(X_test.shape[0], -1))
-
 # 转换数据为tensor
 X_train = torch.tensor(X_train, dtype=torch.float32).view(-1, member_embeddings.shape[1], member_embeddings.shape[2])
 X_test = torch.tensor(X_test, dtype=torch.float32).view(-1, member_embeddings.shape[1], member_embeddings.shape[2])
