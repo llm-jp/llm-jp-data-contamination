@@ -42,10 +42,11 @@ tokenizer = AutoTokenizer.from_pretrained(
 )
 tokenizer.pad_token = tokenizer.eos_token
 model.generation_config.pad_token_id = model.generation_config.eos_token_id
+model.generation_config.output_hidden_states = True
+#model.generation_config.output_attentions = True
+model.generation_config.output_scores = True
+model.generation_config.return_dict_in_generate = True
 
-results_df = pd.DataFrame(
-    columns=['Dataset Name', 'Layer Index', 'DB Index',
-             'Silhouette Score', 'Calinski Harabasz Index'])
 for dataset_name in dataset_names:
     if "WikiMIA" in dataset_name:
         dataset = form_dataset(dataset_name)
