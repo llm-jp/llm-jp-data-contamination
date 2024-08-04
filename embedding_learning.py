@@ -79,10 +79,10 @@ for dataset_name in dataset_names:
             with torch.no_grad():
                 outputs = model(**tokenized_inputs, labels=target_labels, output_hidden_states=True, return_dict=True)
             hidden_states = outputs.hidden_states
-            for layer_index in range(len(hidden_states)):
-                if layer_index not in member_embed_list:
-                    member_embed_list[layer_index] = []
-                    non_member_embed_list[layer_index] = []
-                context_embedding = hidden_states[layer_index][0]
+            context_embedding = hidden_states[-2]
+            if set_name == "member" and len(member_embed_list) < args.samples:
+                member_embed_list.append(context_embedding.cpu())
+            elif set_name == "nonmember" and len(non_member_embed_list) < args.samples:
+                non_member_embed_list.append(context_embedding.cpu())
             pdb.set_trace()
 
