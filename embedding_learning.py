@@ -13,6 +13,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import accuracy_score, classification_report
 import torch.nn as nn
 import torch.optim as optim
+import numpy as np
 
 
 parser = argparse.ArgumentParser()
@@ -87,12 +88,12 @@ for dataset_name in dataset_names:
             hidden_states = outputs.hidden_states
             context_embedding = hidden_states[-2]
             if set_name == "member":
-                member_embed_list.append(context_embedding.cpu().numpy())
+                member_embed_list.append(context_embedding.cpu())
             elif set_name == "nonmember":
                 non_member_embed_list.append(context_embedding.cpu())
 
-member_embeddings = np.concatenate(member_embed_list, axis=0)
-nonmember_embeddings = np.concatenate(non_member_embed_list, axis=0)
+member_embeddings = torch.cat(member_embed_list, dim=0)
+nonmember_embeddings = torch.cat(non_member_embed_list, dim=0)
 
 # 创建标签
 member_labels = np.ones(member_embeddings.shape[0])
