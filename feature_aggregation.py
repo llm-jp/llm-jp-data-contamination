@@ -1,43 +1,40 @@
 import pickle
 from sklearn.decomposition import PCA
-from utils import *
+#from utils import *
 from sklearn.metrics import roc_auc_score, silhouette_score, f1_score, davies_bouldin_score
-
-dataset_names = ["ArXiv", "DM Mathematics",
-                 "FreeLaw", "Github", "HackerNews", "NIH ExPorter",
-                 "Pile-CC", "PubMed Abstracts", "PubMed Central", "StackExchange",
-                 "USPTO Backgrounds", "Wikipedia (en)", "WikiMIA"]
-model_size = "160m"
+from matplotlib import pyplot as plt
+import numpy as np
+dataset_names = ["arxiv", "dm_mathematics", "github", "hackernews", "pile_cc",
+                      "pubmed_central", "wikipedia_(en)", "full_pile"]
+model_size = "12b"
 for dataset_name in dataset_names:
-    loss_dict = pickle.load(open(f"feature_result/{dataset_name}_{model_size}_loss_dict.pkl", "rb"))
-    prob_dict = pickle.load(open(f"feature_result/{dataset_name}_{model_size}_prob_dict.pkl", "rb"))
-    ppl_dict = pickle.load(open(f"feature_result/{dataset_name}_{model_size}_ppl_dict.pkl", "rb"))
-    mink_plus_dict = pickle.load(open(f"feature_result/{dataset_name}_{model_size}_mink_plus_dict.pkl", "rb"))
-    zlib_dict = pickle.load(open(f"feature_result/{dataset_name}_{model_size}_zlib_dict.pkl", "rb"))
+    loss_dict = pickle.load(open(f"feature_result_online/{dataset_name}_{model_size}_loss_dict.pkl", "rb"))
+    prob_dict = pickle.load(open(f"feature_result_online/{dataset_name}_{model_size}_prob_dict.pkl", "rb"))
+    ppl_dict = pickle.load(open(f"feature_result_online/{dataset_name}_{model_size}_ppl_dict.pkl", "rb"))
+    mink_plus_dict = pickle.load(open(f"feature_result_online/{dataset_name}_{model_size}_mink_plus_dict.pkl", "rb"))
+    zlib_dict = pickle.load(open(f"feature_result_online/{dataset_name}_{model_size}_zlib_dict.pkl", "rb"))
 
     aggregated_train = []
     aggregated_test = []
     aggregated_val = []
     for idx, dict in enumerate([loss_dict, prob_dict, ppl_dict, mink_plus_dict, zlib_dict]):
-        for set_name in ["train", "test"]:
+        for set_name in ["member", "nonmember"]:
             data = np.array(dict[dataset_name][set_name])
             data[np.isnan(data)] = data[~np.isnan(data)].mean()
             mean1, std1 = np.mean(data), np.std(data)
             normalized_value = (dict[dataset_name][set_name] - mean1) / std1
             normalized_value[np.isnan(normalized_value)] =  normalized_value[~np.isnan(normalized_value)].mean()
-            if set_name == "train":
-                aggregated_train.append(remove_outliers(normalized_value.tolist()))
-            elif set_name == "test":
-                aggregated_test.append(remove_outliers(normalized_value.tolist()))
-            else:
-                aggregated_val.append(normalized_value.tolist())
+            if set_name == "member":
+                aggregated_train.append(normalized_value.tolist())
+            elif set_name == "nonmember":
+                aggregated_test.append(normalized_value.tolist())
 
     fig, axs = plt.subplots(2, 1, figsize=(10, 10))
 
     # 去除离群值
-    train_no_outliers = remove_outliers(aggregated_train)
-    test_no_outliers = remove_outliers(aggregated_test)
-    val_no_outliers = remove_outliers(aggregated_val)
+    train_no_outliers = aggregated_train
+    test_no_outliers = aggregated_test
+    val_no_outliers = aggregated_val
 
     member_embed_array = np.array(aggregated_train).T
     non_member_embed_array = np.array(aggregated_test).T
@@ -60,12 +57,13 @@ for dataset_name in dataset_names:
     plt.title('PCA of Member and Non-Member Embeddings')
     plt.legend()
     plt.grid(True)
-    plt.savefig(f'PCA_output_feature_{dataset_name}_{model_size}.png')
+    #plt.savefig(f'PCA_output_feature_{dataset_name}_{model_size}.png')
     plt.show()
     labels = np.array([1] * len(member_embed_array) + [0] * len(non_member_embed_array))
     X = np.vstack((member_embed_array, non_member_embed_array))
     db_index = davies_bouldin_score(X, labels)
     silhouette_avg = silhouette_score(X, labels)
+    print(dataset_name)
     print(db_index)
     print(silhouette_avg)
 
