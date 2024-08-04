@@ -19,14 +19,18 @@ from torch.utils.data import DataLoader, TensorDataset
 
 def pad_embeddings(embed_list, max_length):
     padded_embed_list = []
+    attention_masks = []
     for embed in embed_list:
         padding_size = max_length - embed.shape[1]
         if padding_size > 0:
             pad = torch.nn.functional.pad(embed, (0, 0, 0, padding_size))
+            attention_mask = torch.cat([torch.ones(embed.shape[1]), torch.zeros(padding_size)])
         else:
             pad = embed
+            attention_mask = torch.ones(embed.shape[1])
         padded_embed_list.append(pad)
-    return torch.cat(padded_embed_list, dim=0)
+        attention_masks.append(attention_mask)
+    return torch.cat(padded_embed_list, dim=0), torch.stack(attention_masks)
 
 
 
@@ -110,8 +114,8 @@ max_length = max(max(embed.shape[1] for embed in member_embed_list),
                  max(embed.shape[1] for embed in non_member_embed_list))
 
 # 填充并合并embedding
-member_embeddings = pad_embeddings(member_embed_list, max_length)
-nonmember_embeddings = pad_embeddings(non_member_embed_list, max_length)
+member_embeddings, member_attn_masks = pad_embeddings(member_embed_list, max_length)
+nonmember_embeddings, nonmember_attn_masks = pad_embeddings(non_member_embed_list, max_length)
 
 # 创建标签
 member_labels = torch.ones(member_embeddings.shape[0])
@@ -120,19 +124,22 @@ nonmember_labels = torch.zeros(nonmember_embeddings.shape[0])
 # 合并数据和标签
 X = torch.cat([member_embeddings, nonmember_embeddings], axis=0)
 y = torch.cat([member_labels, nonmember_labels], axis=0)
+attention_masks = torch.cat([member_attn_masks, nonmember_attn_masks], dim=0)
 
 # 将数据分为训练集和测试集
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+X_train, X_test, y_train, y_test, attn_train, attn_test = train_test_split(X, y, attention_masks, test_size=0.2, random_state=42)
 
 # 转换数据为tensor
 X_train = torch.tensor(X_train, dtype=torch.float32).view(-1, member_embeddings.shape[1], member_embeddings.shape[2])
 X_test = torch.tensor(X_test, dtype=torch.float32).view(-1, member_embeddings.shape[1], member_embeddings.shape[2])
 y_train = torch.tensor(y_train, dtype=torch.long)
 y_test = torch.tensor(y_test, dtype=torch.long)
+attn_train = torch.tensor(attn_train, dtype=torch.float32)
+attn_test = torch.tensor(attn_test, dtype=torch.float32)
 
 batch_size = 32  # 可根据需要调整
-train_dataset = TensorDataset(X_train, y_train)
-test_dataset = TensorDataset(X_test, y_test)
+train_dataset = TensorDataset(X_train, y_train, attn_train)
+test_dataset = TensorDataset(X_test, y_test, attn_test)
 train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
 test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False)
 
@@ -146,9 +153,12 @@ class TransformerClassifier(nn.Module):
         )
         self.fc = nn.Linear(hidden_dim, output_dim)
 
-    def forward(self, x):
-        x = self.transformer(x)
-        x = x.mean(dim=1)  # 对时间维度进行池化操作
+    def forward(self, x, attention_mask):
+        # Pass the attention mask to the transformer
+        x = self.transformer(x, src_key_padding_mask=(attention_mask == 0))
+        # Masked mean pooling
+        mask = attention_mask.unsqueeze(-1).expand_as(x)
+        x = (x * mask).sum(dim=1) / mask.sum(dim=1)
         x = self.fc(x)
         return x
 
@@ -175,10 +185,10 @@ optimizer = optim.Adam(model.parameters(), lr=0.001)
 num_epochs = 10
 for epoch in range(num_epochs):
     model.train()
-    for i, (inputs, labels) in enumerate(train_loader):
-        inputs, labels = inputs.to(device), labels.to(device)
+    for i, (inputs, labels, attention_masks) in enumerate(train_loader):
+        inputs, labels, attention_masks = inputs.to(device), labels.to(device), attention_masks.to(device)
         optimizer.zero_grad()
-        outputs = model(inputs)
+        outputs = model(inputs, attention_masks)
         loss = criterion(outputs, labels)
         loss.backward()
         optimizer.step()
@@ -186,14 +196,17 @@ for epoch in range(num_epochs):
         if (i + 1) % 10 == 0:  # 每10个批次打印一次loss
             print(f'Epoch [{epoch + 1}/{num_epochs}], Step [{i + 1}/{len(train_loader)}], Loss: {loss.item():.4f}')
 
+    # 更新学习率
+    scheduler.step()
+
 # 评估模型
 model.eval()
 all_preds = []
 all_labels = []
 with torch.no_grad():
-    for inputs, labels in test_loader:
-        inputs, labels = inputs.to(device), labels.to(device)
-        outputs = model(inputs)
+    for inputs, labels, attention_masks in test_loader:
+        inputs, labels, attention_masks = inputs.to(device), labels.to(device), attention_masks.to(device)
+        outputs = model(inputs, attention_masks)
         _, predicted = torch.max(outputs.data, 1)
         all_preds.extend(predicted.cpu().numpy())
         all_labels.extend(labels.cpu().numpy())
