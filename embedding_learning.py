@@ -20,17 +20,18 @@ from torch.utils.data import DataLoader, TensorDataset
 def pad_embeddings(embed_list, max_length):
     padded_embed_list = []
     attention_masks = []
-    for embed in embed_list:
-        padding_size = max_length - embed.shape[1]
+    for batch in embed_list:
+        # batch 中的每个 embed 是一个 (batch_size, seq_len, embed_dim) 的 tensor
+        padding_size = max_length - batch.shape[1]
         if padding_size > 0:
-            pad = torch.nn.functional.pad(embed, (0, 0, 0, padding_size))
-            attention_mask = torch.cat([torch.ones(embed.shape[1]), torch.zeros(padding_size)])
+            pad = torch.nn.functional.pad(batch, (0, 0, 0, padding_size))
+            attention_mask = torch.cat([torch.ones(batch.shape[0], batch.shape[1]), torch.zeros(batch.shape[0], padding_size)], dim=1)
         else:
-            pad = embed
-            attention_mask = torch.ones(embed.shape[1])
+            pad = batch
+            attention_mask = torch.ones(batch.shape[0], batch.shape[1])
         padded_embed_list.append(pad)
         attention_masks.append(attention_mask)
-    return torch.cat(padded_embed_list, dim=0), torch.stack(attention_masks)
+    return torch.cat(padded_embed_list, dim=0), torch.cat(attention_masks, dim=0)
 
 
 
@@ -154,11 +155,10 @@ class TransformerClassifier(nn.Module):
         self.fc = nn.Linear(hidden_dim, output_dim)
 
     def forward(self, x, attention_mask):
-        # Pass the attention mask to the transformer
-        x = self.transformer(x, src_key_padding_mask=(attention_mask == 0))
-        # Masked mean pooling
+        attention_mask_inv = (1 - attention_mask).bool()  # convert mask to match nn.TransformerEncoder
+        x = self.transformer(x, src_key_padding_mask=attention_mask_inv)
         mask = attention_mask.unsqueeze(-1).expand_as(x)
-        x = (x * mask).sum(dim=1) / mask.sum(dim=1)
+        x = (x * mask).sum(dim=1) / mask.sum(dim=1)  # Masked mean pooling
         x = self.fc(x)
         return x
 
