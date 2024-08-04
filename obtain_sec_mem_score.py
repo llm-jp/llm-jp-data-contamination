@@ -65,16 +65,14 @@ for idx, example in tqdm(enumerate(data)):
     full_generated_texts = example[1]
     partial_generated_texts = example[2]
     references = example[3]
-    bleurt_score = np.array(
-        bleurt_score(partial_generated_texts, [references for _ in range(args.generation_samples)])).mean()
-    rougle_score = np.array(
-        rougeL_score(partial_generated_texts, [references for _ in range(args.generation_samples)])).mean()
+    bleurt_value = np.array(bleurt_score(partial_generated_texts, [references for _ in range(args.generation_samples)])).mean()
+    rougle_value = np.array(rougeL_score(partial_generated_texts, [references for _ in range(args.generation_samples)])).mean()
     if idx < half:
-        member_bleurt.append(bleurt_score)
-        member_rouge.append(rougle_score)
+        member_bleurt.append(bleurt_value)
+        member_rouge.append(rougle_value)
     else:
-        nonmember_bleurt.append(bleurt_score)
-        nonmember_rouge.append(rougle_score)
+        nonmember_bleurt.append(bleurt_value)
+        nonmember_rouge.append(rougle_value)
 
 
 
