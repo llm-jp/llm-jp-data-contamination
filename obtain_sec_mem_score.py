@@ -60,10 +60,10 @@ member_rouge = []
 nonmember_bleurt = []
 nonmember_rouge = []
 for idx, example in enumerate(data):
-    original_text = data[0]
-    full_generated_texts = data[1]
-    partial_generated_texts = data[2]
-    references = data[3]
+    original_text = example[0]
+    full_generated_texts = example[1]
+    partial_generated_texts = example[2]
+    references = example[3]
     bleurt_score = np.array(
         bleurt_score(partial_generated_texts, [references for _ in range(args.generation_samples)])).mean()
     rougle_score = np.array(
