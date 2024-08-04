@@ -59,8 +59,8 @@ for dataset_name in dataset_names:
             "full_pile",
             split="none")
     device = f'cuda:{args.cuda}'
-    member_embed_list = {}
-    non_member_embed_list = {}
+    member_embed_list = []
+    non_member_embed_list = []
     for set_name in ["member", "nonmember"]:
         cleaned_data, orig_indices = clean_dataset(dataset[set_name], dataset_name, online=True)
         for idx, (data_batch, orig_indices_batch) in tqdm(enumerate(batched_data_with_indices(cleaned_data, orig_indices, batch_size=args.batch_size))):
