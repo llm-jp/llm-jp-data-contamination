@@ -14,6 +14,8 @@ from sklearn.metrics import accuracy_score, classification_report
 import torch.nn as nn
 import torch.optim as optim
 import numpy as np
+from torch.utils.data import DataLoader, TensorDataset
+
 
 def pad_embeddings(embed_list, max_length):
     padded_embed_list = []
@@ -128,6 +130,11 @@ X_test = torch.tensor(X_test, dtype=torch.float32).view(-1, member_embeddings.sh
 y_train = torch.tensor(y_train, dtype=torch.long)
 y_test = torch.tensor(y_test, dtype=torch.long)
 
+batch_size = 32  # 可根据需要调整
+train_dataset = TensorDataset(X_train, y_train)
+test_dataset = TensorDataset(X_test, y_test)
+train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
+test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False)
 
 # 定义二元分类模型
 class TransformerClassifier(nn.Module):
@@ -168,20 +175,31 @@ optimizer = optim.Adam(model.parameters(), lr=0.001)
 num_epochs = 10
 for epoch in range(num_epochs):
     model.train()
-    optimizer.zero_grad()
-    outputs = model(X_train)
-    loss = criterion(outputs, y_train)
-    loss.backward()
-    optimizer.step()
-    print(f'Epoch [{epoch + 1}/{num_epochs}], Loss: {loss.item():.4f}')
+    for i, (inputs, labels) in enumerate(train_loader):
+        inputs, labels = inputs.to(device), labels.to(device)
+        optimizer.zero_grad()
+        outputs = model(inputs)
+        loss = criterion(outputs, labels)
+        loss.backward()
+        optimizer.step()
+
+        if (i + 1) % 10 == 0:  # 每10个批次打印一次loss
+            print(f'Epoch [{epoch + 1}/{num_epochs}], Step [{i + 1}/{len(train_loader)}], Loss: {loss.item():.4f}')
 
 # 评估模型
 model.eval()
+all_preds = []
+all_labels = []
 with torch.no_grad():
-    test_outputs = model(X_test)
-    _, predicted = torch.max(test_outputs.data, 1)
-    accuracy = accuracy_score(y_test.cpu(), predicted.cpu())
-    print(f'Test Accuracy: {accuracy:.4f}')
-    print(classification_report(y_test.cpu(), predicted.cpu(), target_names=['Nonmember', 'Member']))
+    for inputs, labels in test_loader:
+        inputs, labels = inputs.to(device), labels.to(device)
+        outputs = model(inputs)
+        _, predicted = torch.max(outputs.data, 1)
+        all_preds.extend(predicted.cpu().numpy())
+        all_labels.extend(labels.cpu().numpy())
+
+accuracy = accuracy_score(all_labels, all_preds)
+print(f'Test Accuracy: {accuracy:.4f}')
+print(classification_report(all_labels, all_preds, target_names=['Nonmember', 'Member']))
 
 
