@@ -25,9 +25,9 @@ def process_and_save_dataset(ds, name, items_per_file=250000, batch_size=10000):
                 filename = f"/model/pile/by_dataset/{name}_{meta_name}_{file_counters[meta_name]}.pt"
 
                 # Check if the file already exists
-                if not os.path.exists(filename):
-                    os.makedirs(os.path.dirname(filename), exist_ok=True)
-                    torch.save(grouped_by_meta[meta_name], filename)
+                # if not os.path.exists(filename):
+                #     os.makedirs(os.path.dirname(filename), exist_ok=True)
+                #     torch.save(grouped_by_meta[meta_name], filename)
 
                 # Reset current group
                 grouped_by_meta[meta_name].clear()
