@@ -38,11 +38,11 @@ def process_and_save_dataset(ds, name, items_per_file=250000, batch_size=10000):
         print(f"Processed {count} examples with {elapsed_time:.2f} seconds")
 
     # Save remaining data
-    for meta, dataset in grouped_by_meta.items():
-        if dataset:  # Save if not empty
-            filename = f"/model/pile/by_dataset/{name}_{meta}_{file_counters[meta]}.pt"
+    for key in grouped_by_meta.keys():
+        if len(grouped_by_meta[key])>0:  # Save if not empty
+            filename = f"/model/pile/by_dataset/{name}_{key}_{file_counters[key]}.pt"
             os.makedirs(os.path.dirname(filename), exist_ok=True)
-            torch.save(dataset, filename)
+            torch.save(grouped_by_meta[key], filename)
 
 
 ds_valid = load_dataset("monology/pile-uncopyrighted", cache_dir="/model/pile", split="validation", streaming=True)
