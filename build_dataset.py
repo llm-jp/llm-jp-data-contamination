@@ -4,7 +4,7 @@ import torch
 from collections import defaultdict
 from tqdm import tqdm
 import time
-
+import pdb
 
 def process_and_save_dataset(ds, name, items_per_file=250000, batch_size=10000):
     file_counters = defaultdict(int)
@@ -33,6 +33,7 @@ def process_and_save_dataset(ds, name, items_per_file=250000, batch_size=10000):
                 # Reset current group
                 grouped_by_meta[meta_name].clear()
                 file_counters[meta_name] += 1
+        pdb.set_trace()
         end_time = time.time()  # 运行完毕后再次获取当前时间戳
         elapsed_time = end_time - start_time  # 计算两次时间戳之间的差值，即运行时间
         count += len(batch)
