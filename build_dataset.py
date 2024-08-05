@@ -57,6 +57,9 @@ ds_valid = load_dataset("monology/pile-uncopyrighted", cache_dir="/model/pile", 
 ds_test = load_dataset("monology/pile-uncopyrighted", cache_dir="/model/pile", split="test", streaming=True)
 ds_train = load_dataset("monology/pile-uncopyrighted", cache_dir="/model/pile", split="train", streaming=True)
 
+print("Processing and saving valid datasets")
 process_and_save_dataset(ds_valid, "valid", items_per_file=100000000, batch_size=10000, num_workers=4)
+print("Processing and saving test datasets")
 process_and_save_dataset(ds_test, "test", items_per_file=100000000, batch_size=10000, num_workers=4)
+print("Processing and saving train datasets")
 process_and_save_dataset(ds_train, "train", items_per_file=250000, batch_size=10000, num_workers=4)
