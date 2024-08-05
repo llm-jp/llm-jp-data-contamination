@@ -8,7 +8,6 @@ import pdb
 
 def process_and_save_dataset(ds, name, items_per_file=250000, batch_size=10000):
     file_counters = defaultdict(int)
-
     grouped_by_meta = defaultdict(list)
     count = 0
 
@@ -33,7 +32,6 @@ def process_and_save_dataset(ds, name, items_per_file=250000, batch_size=10000):
                 # Reset current group
                 grouped_by_meta[meta_name].clear()
                 file_counters[meta_name] += 1
-                pdb.set_trace()
         end_time = time.time()  # 运行完毕后再次获取当前时间戳
         elapsed_time = end_time - start_time  # 计算两次时间戳之间的差值，即运行时间
         count += len(batch)
@@ -51,6 +49,6 @@ ds_valid = load_dataset("monology/pile-uncopyrighted", cache_dir="/model/pile", 
 ds_test = load_dataset("monology/pile-uncopyrighted", cache_dir="/model/pile", split="test", streaming=True)
 ds_train = load_dataset("monology/pile-uncopyrighted", cache_dir="/model/pile", split="train", streaming=True)
 
-process_and_save_dataset(ds_valid, "valid", items_per_file=1000, batch_size=10000)
+process_and_save_dataset(ds_valid, "valid", items_per_file=100000000, batch_size=10000)
 process_and_save_dataset(ds_test, "test", items_per_file=100000000, batch_size=10000)
 process_and_save_dataset(ds_train, "train", items_per_file=100000, batch_size=10000)
