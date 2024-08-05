@@ -28,10 +28,12 @@ def process_and_save_dataset(ds, name, items_per_file=250000, batch_size=10000):
                 # if not os.path.exists(filename):
                 os.makedirs(os.path.dirname(filename), exist_ok=True)
                 torch.save(grouped_by_meta[meta_name], filename)
+                pdb.set_trace()
 
                 # Reset current group
                 grouped_by_meta[meta_name].clear()
                 file_counters[meta_name] += 1
+
         end_time = time.time()  # 运行完毕后再次获取当前时间戳
         elapsed_time = end_time - start_time  # 计算两次时间戳之间的差值，即运行时间
         count += len(batch)
@@ -45,10 +47,10 @@ def process_and_save_dataset(ds, name, items_per_file=250000, batch_size=10000):
             torch.save(grouped_by_meta[key], filename)
 
 
-ds_valid = load_dataset("monology/pile-uncopyrighted", cache_dir="/model/pile", split="validation", streaming=True)
-ds_test = load_dataset("monology/pile-uncopyrighted", cache_dir="/model/pile", split="test", streaming=True)
+#ds_valid = load_dataset("monology/pile-uncopyrighted", cache_dir="/model/pile", split="validation", streaming=True)
+#ds_test = load_dataset("monology/pile-uncopyrighted", cache_dir="/model/pile", split="test", streaming=True)
 ds_train = load_dataset("monology/pile-uncopyrighted", cache_dir="/model/pile", split="train", streaming=True)
 
-process_and_save_dataset(ds_valid, "valid", items_per_file=100000000, batch_size=10000)
-process_and_save_dataset(ds_test, "test", items_per_file=100000000, batch_size=10000)
+#process_and_save_dataset(ds_valid, "valid", items_per_file=100000000, batch_size=10000)
+#process_and_save_dataset(ds_test, "test", items_per_file=100000000, batch_size=10000)
 process_and_save_dataset(ds_train, "train", items_per_file=100000, batch_size=10000)
