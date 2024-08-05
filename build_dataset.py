@@ -3,6 +3,7 @@ import os
 import torch
 from collections import defaultdict
 from tqdm import tqdm
+import time
 
 
 def process_and_save_dataset(ds, name, items_per_file=250000, batch_size=10000):
@@ -15,7 +16,7 @@ def process_and_save_dataset(ds, name, items_per_file=250000, batch_size=10000):
         batch = list(ds.take(batch_size))
         if not batch:
             break
-
+        start_time = time.time()
         for example in batch:
             meta_name = example['meta']["pile_set_name"]
             grouped_by_meta[meta_name].append(example["text"])
@@ -32,9 +33,10 @@ def process_and_save_dataset(ds, name, items_per_file=250000, batch_size=10000):
                 # Reset current group
                 grouped_by_meta[meta_name].clear()
                 file_counters[meta_name] += 1
-
+        end_time = time.time()  # 运行完毕后再次获取当前时间戳
+        elapsed_time = end_time - start_time  # 计算两次时间戳之间的差值，即运行时间
         count += len(batch)
-        print(f"Processed {count} examples")
+        print(f"Processed {count} examples with {elapsed_time:.2f} seconds")
 
     # Save remaining data
     for meta, dataset in grouped_by_meta.items():
