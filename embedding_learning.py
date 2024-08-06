@@ -236,7 +236,7 @@ for dataset_name in dataset_names:
             with torch.no_grad():
                 for inputs, labels, attention_masks in train_loader:
                     inputs, labels, attention_masks = inputs.to(device), labels.to(device), attention_masks.to(device)
-                    outputs = model(inputs, attention_masks)
+                    outputs = pred_model(inputs, attention_masks)
                     _, predicted = torch.max(outputs.data, 1)
                     all_preds.extend(predicted.cpu().numpy())
                     all_labels.extend(labels.cpu().numpy())
