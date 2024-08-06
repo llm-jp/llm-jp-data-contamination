@@ -32,20 +32,53 @@ def pad_embeddings(embed_list, attn_mask_list, max_length):
         attention_masks.append(attention_mask)
     return torch.cat(padded_embed_list, dim=0), torch.cat(attention_masks, dim=0)
 
+
+class PositionalEncoding(nn.Module):
+    def __init__(self, d_model, max_len=5000):
+        super(PositionalEncoding, self).__init__()
+        self.dropout = nn.Dropout(p=0.1)
+
+        pe = torch.zeros(max_len, d_model)
+        position = torch.arange(0, max_len, dtype=torch.float).unsqueeze(1)
+        div_term = torch.exp(torch.arange(0, d_model, 2).float() * (-torch.log(torch.tensor(10000.0)) / d_model))
+        pe[:, 0::2] = torch.sin(position * div_term)
+        pe[:, 1::2] = torch.cos(position * div_term)
+        pe = pe.unsqueeze(0).transpose(0, 1)
+        self.register_buffer('pe', pe)
+
+    def forward(self, x):
+        x = x + self.pe[:x.size(0), :]
+        return self.dropout(x)
+
+
 class TransformerClassifier(nn.Module):
-    def __init__(self, input_dim, hidden_dim, output_dim, num_layers, num_heads):
+    def __init__(self, input_dim, hidden_dim, output_dim, num_layers, num_heads, dropout=0.1, max_len=5000):
         super(TransformerClassifier, self).__init__()
+        self.embedding = nn.Linear(input_dim, hidden_dim)
+        self.positional_encoding = PositionalEncoding(hidden_dim, max_len)
+
         self.transformer = nn.TransformerEncoder(
-            nn.TransformerEncoderLayer(d_model=hidden_dim, nhead=num_heads, batch_first=True),
+            nn.TransformerEncoderLayer(d_model=hidden_dim, nhead=num_heads, dropout=dropout, batch_first=True),
             num_layers=num_layers
         )
         self.fc = nn.Linear(hidden_dim, output_dim)
+        self.dropout = nn.Dropout(dropout)
+        self.layer_norm = nn.LayerNorm(hidden_dim)
 
     def forward(self, x, attention_mask):
-        attention_mask_inv = (attention_mask == 0).bool()
+        # x: Batch_size x Seq_len x Input_dim
+        x = self.embedding(x)
+        x = self.positional_encoding(x)
+
+        attention_mask_inv = ~attention_mask.bool()
+
+        x = self.layer_norm(x)
         x = self.transformer(x, src_key_padding_mask=attention_mask_inv)
+        x = self.layer_norm(x)
+
         mask = attention_mask.unsqueeze(-1).expand_as(x)
         x = (x * mask).sum(dim=1) / mask.sum(dim=1)
+        x = self.dropout(x)
         x = self.fc(x)
         return x
 
@@ -157,7 +190,7 @@ y_test = torch.tensor(y_test, dtype=torch.long)
 attn_train = torch.tensor(attn_train, dtype=torch.float32)
 attn_test = torch.tensor(attn_test, dtype=torch.float32)
 
-batch_size = 16  # 可根据需要调整
+batch_size = 4  # 可根据需要调整
 train_dataset = TensorDataset(X_train, y_train, attn_train)
 test_dataset = TensorDataset(X_test, y_test, attn_test)
 train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
@@ -167,13 +200,22 @@ test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False)
 
 
 # 模型的超参数
-input_dim = member_embeddings.shape[2]
-hidden_dim = member_embeddings.shape[2]  # 可以根据需要调整
+# input_dim = member_embeddings.shape[2]
+# hidden_dim = member_embeddings.shape[2]  # 可以根据需要调整
+# output_dim = 2
+# num_layers = 4
+# num_heads = 4
+#
+# model = TransformerClassifier(input_dim, hidden_dim, output_dim, num_layers, num_heads)
+
+input_dim = member_embeddings.shape[2] # 输入的特征维度
+hidden_dim = 256
 output_dim = 2
 num_layers = 4
-num_heads = 4
+num_heads = 8
 
 model = TransformerClassifier(input_dim, hidden_dim, output_dim, num_layers, num_heads)
+
 
 # 使用GPU
 device = f'cuda:{args.cuda}'
