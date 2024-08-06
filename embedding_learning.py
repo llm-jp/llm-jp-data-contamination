@@ -140,7 +140,7 @@ for dataset_name in dataset_names:
     non_member_embed_list = []
     member_attn_mask_list = []
     nonmember_attn_mask_list = []
-    for layer_index in range(layer_num):
+    for layer_index in tqdm(range(layer_num)):
         for set_name in ["member", "nonmember"]:
             cleaned_data, orig_indices = clean_dataset(dataset[set_name], dataset_name, online=True)
             for idx, (data_batch, orig_indices_batch) in tqdm(enumerate(batched_data_with_indices(cleaned_data, orig_indices, batch_size=args.batch_size))):
