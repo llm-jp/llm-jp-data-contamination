@@ -241,7 +241,7 @@ for dataset_name in dataset_names:
                     all_preds.extend(predicted.cpu().numpy())
                     all_labels.extend(labels.cpu().numpy())
             train_accuracy = accuracy_score(all_labels, all_preds)
-            print(f'Train Accuracy: {accuracy:.4f}')
+            print(f'Train Accuracy: {train_accuracy:.4f}')
             print(classification_report(all_labels, all_preds, target_names=['Nonmember', 'Member']))
 
 
