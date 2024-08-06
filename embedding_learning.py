@@ -254,7 +254,8 @@ for epoch in range(num_epochs):
     print(classification_report(all_labels, all_preds, target_names=['Nonmember', 'Member']))
 
 
-#Test Accuracy: 0.5150 model size 2.8
+#Test Accuracy: 0.5450 model size 2.8 arxiv
+#
 # 评估模型
 model.eval()
 all_preds = []
