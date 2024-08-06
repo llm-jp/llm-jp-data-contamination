@@ -54,10 +54,16 @@ results_df = pd.DataFrame(
     columns=['Dataset Name', 'Layer Index', 'DB Index',
              'Silhouette Score', 'Calinski Harabasz Index'])
 for dataset_name in dataset_names:
-    dataset = load_dataset("iamgroot42/mimir", dataset_name,
-                           split="ngram_13_0.2") if dataset_name != "full_pile" else load_dataset("iamgroot42/mimir",
-                                                                                                  "full_pile",
-                                                                                                  split="none")
+    if "WikiMIA" in dataset_name:
+        dataset = form_dataset(dataset_name)
+        dataset["member"] = dataset["train"]
+        dataset["nonmember"] = dataset["test"]
+    else:
+        dataset = load_dataset("iamgroot42/mimir", dataset_name,
+                               split="ngram_13_0.2") if dataset_name != "full_pile" else load_dataset(
+            "iamgroot42/mimir",
+            "full_pile",
+            split="none")
 
     device = f'cuda:{args.cuda}'
     member_embed_list = {}
