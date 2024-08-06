@@ -96,7 +96,7 @@ args = parser.parse_args()
 
 if args.dataset_name == "all":
     dataset_names = ["arxiv", "dm_mathematics", "github", "hackernews", "pile_cc",
-                     "pubmed_central", "wikipedia_(en)", "full_pile","WikiMIA64", "WikiMIA128","WikiMIA256",
+                     "pubmed_central", "wikipedia_(en)", "full_pile","WikiMIA32", "WikiMIA64", "WikiMIA128","WikiMIA256",
                       "WikiMIAall"]
 else:
     dataset_names = [args.dataset_name]
