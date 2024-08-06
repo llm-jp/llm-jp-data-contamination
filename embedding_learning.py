@@ -211,7 +211,7 @@ for dataset_name in dataset_names:
         # 使用GPU
         device = f'cuda:{args.cuda}'
         pred_model = pred_model.to(device)
-        X_train, X_test, y_train, y_test = X_train.to(device), X_test.to(device), y_train.to(device), y_test.to(device)
+        #X_train, X_test, y_train, y_test = X_train.to(device), X_test.to(device), y_train.to(device), y_test.to(device)
 
         # 定义损失和优化器
         criterion = nn.CrossEntropyLoss()
@@ -223,8 +223,8 @@ for dataset_name in dataset_names:
             for i, (inputs, labels, attention_masks) in enumerate(train_loader):
                 inputs, labels, attention_masks = inputs.to(device), labels.to(device), attention_masks.to(device)
                 optimizer.zero_grad()
-                outputs = pred_model(inputs, attention_masks)
-                loss = criterion(outputs, labels)
+                outputs = pred_model(inputs.to(device), attention_masks.to(device))
+                loss = criterion(outputs, labels.to(device))
                 loss.backward()
                 optimizer.step()
                 if (i + 1) % 10 == 0:  # 每10个批次打印一次loss
@@ -235,7 +235,7 @@ for dataset_name in dataset_names:
             with torch.no_grad():
                 for inputs, labels, attention_masks in train_loader:
                     inputs, labels, attention_masks = inputs.to(device), labels.to(device), attention_masks.to(device)
-                    outputs = pred_model(inputs, attention_masks)
+                    outputs = pred_model(inputs.to(device), attention_masks.to(device))
                     _, predicted = torch.max(outputs.data, 1)
                     all_preds.extend(predicted.cpu().numpy())
                     all_labels.extend(labels.cpu().numpy())
@@ -253,7 +253,7 @@ for dataset_name in dataset_names:
         with torch.no_grad():
             for inputs, labels, attention_masks in test_loader:
                 inputs, labels, attention_masks = inputs.to(device), labels.to(device), attention_masks.to(device)
-                outputs = pred_model(inputs, attention_masks)
+                outputs = pred_model(inputs.to(device), attention_masks.to(device))
                 _, predicted = torch.max(outputs.data, 1)
                 all_preds.extend(predicted.cpu().numpy())
                 all_labels.extend(labels.cpu().numpy())
