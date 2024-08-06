@@ -32,6 +32,22 @@ def pad_embeddings(embed_list, attn_mask_list, max_length):
         attention_masks.append(attention_mask)
     return torch.cat(padded_embed_list, dim=0), torch.cat(attention_masks, dim=0)
 
+class TransformerClassifier(nn.Module):
+    def __init__(self, input_dim, hidden_dim, output_dim, num_layers, num_heads):
+        super(TransformerClassifier, self).__init__()
+        self.transformer = nn.TransformerEncoder(
+            nn.TransformerEncoderLayer(d_model=hidden_dim, nhead=num_heads, batch_first=True),
+            num_layers=num_layers
+        )
+        self.fc = nn.Linear(hidden_dim, output_dim)
+
+    def forward(self, x, attention_mask):
+        attention_mask_inv = (attention_mask == 0).bool()
+        x = self.transformer(x, src_key_padding_mask=attention_mask_inv)
+        mask = attention_mask.unsqueeze(-1).expand_as(x)
+        x = (x * mask).sum(dim=1) / mask.sum(dim=1)
+        x = self.fc(x)
+        return x
 
 
 parser = argparse.ArgumentParser()
@@ -141,49 +157,32 @@ y_test = torch.tensor(y_test, dtype=torch.long)
 attn_train = torch.tensor(attn_train, dtype=torch.float32)
 attn_test = torch.tensor(attn_test, dtype=torch.float32)
 
-batch_size = 32  # 可根据需要调整
+batch_size = 16  # 可根据需要调整
 train_dataset = TensorDataset(X_train, y_train, attn_train)
 test_dataset = TensorDataset(X_test, y_test, attn_test)
 train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
 test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False)
 
 # 定义二元分类模型
-class TransformerClassifier(nn.Module):
-    def __init__(self, input_dim, hidden_dim, output_dim, num_layers, num_heads):
-        super(TransformerClassifier, self).__init__()
-        self.transformer = nn.TransformerEncoder(
-            nn.TransformerEncoderLayer(d_model=hidden_dim, nhead=num_heads, batch_first=True),
-            num_layers=num_layers
-        )
-        self.fc = nn.Linear(hidden_dim, output_dim)
-
-    def forward(self, x, attention_mask):
-        attention_mask_inv = (attention_mask == 0).bool()
-        x = self.transformer(x, src_key_padding_mask=attention_mask_inv)
-        mask = attention_mask.unsqueeze(-1).expand_as(x)
-        x = (x * mask).sum(dim=1) / mask.sum(dim=1)
-        x = self.fc(x)
-        return x
 
 
 # 模型的超参数
 input_dim = member_embeddings.shape[2]
 hidden_dim = member_embeddings.shape[2]  # 可以根据需要调整
 output_dim = 2
-num_layers = 2
+num_layers = 4
 num_heads = 4
 
 model = TransformerClassifier(input_dim, hidden_dim, output_dim, num_layers, num_heads)
 
 # 使用GPU
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+device = f'cuda:{args.cuda}'
 model = model.to(device)
 X_train, X_test, y_train, y_test = X_train.to(device), X_test.to(device), y_train.to(device), y_test.to(device)
 
 # 定义损失和优化器
 criterion = nn.CrossEntropyLoss()
 optimizer = optim.Adam(model.parameters(), lr=0.0001)
-#scheduler = optim.lr_scheduler.StepLR(optimizer, step_size=5, gamma=0.1)
 
 # 训练模型
 num_epochs = 10
@@ -198,23 +197,35 @@ for epoch in range(num_epochs):
         optimizer.step()
         if (i + 1) % 10 == 0:  # 每10个批次打印一次loss
             print(f'Epoch [{epoch + 1}/{num_epochs}], Step [{i + 1}/{len(train_loader)}], Loss: {loss.item():.4f}')
-    # 更新学习率
-    #scheduler.step()
+    model.eval()
+    all_preds = []
+    all_labels = []
+    with torch.no_grad():
+        for inputs, labels, attention_masks in train_loader:
+            inputs, labels, attention_masks = inputs.to(device), labels.to(device), attention_masks.to(device)
+            outputs = model(inputs, attention_masks)
+            _, predicted = torch.max(outputs.data, 1)
+            all_preds.extend(predicted.cpu().numpy())
+            all_labels.extend(labels.cpu().numpy())
+    accuracy = accuracy_score(all_labels, all_preds)
+    print(f'Train Accuracy: {accuracy:.4f}')
+    print(classification_report(all_labels, all_preds, target_names=['Nonmember', 'Member']))
+
+
 #Test Accuracy: 0.5150 model size 2.8
 # 评估模型
 model.eval()
 all_preds = []
 all_labels = []
 with torch.no_grad():
-    for inputs, labels, attention_masks in train_loader:
+    for inputs, labels, attention_masks in test_loader:
         inputs, labels, attention_masks = inputs.to(device), labels.to(device), attention_masks.to(device)
         outputs = model(inputs, attention_masks)
         _, predicted = torch.max(outputs.data, 1)
         all_preds.extend(predicted.cpu().numpy())
         all_labels.extend(labels.cpu().numpy())
-
 accuracy = accuracy_score(all_labels, all_preds)
-print(f'Test Accuracy: {accuracy:.4f}')
+print(f'Train Accuracy: {accuracy:.4f}')
 print(classification_report(all_labels, all_preds, target_names=['Nonmember', 'Member']))
 
 
