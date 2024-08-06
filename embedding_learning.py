@@ -259,7 +259,7 @@ for dataset_name in dataset_names:
                 all_preds.extend(predicted.cpu().numpy())
                 all_labels.extend(labels.cpu().numpy())
         test_accuracy = accuracy_score(all_labels, all_preds)
-        print(f'Test Accuracy: {test_accuracy:.4f}')
+        print(f'Test Accuracy of {dataset_name} at Layer {layer_index}: {test_accuracy:.4f}')
         print(classification_report(all_labels, all_preds, target_names=['Nonmember', 'Member']))
         layer_results = layer_results._append({
             "Dataset": dataset_name,
