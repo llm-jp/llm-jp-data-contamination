@@ -24,8 +24,10 @@ parser.add_argument("--gradient_collection", type=str, default=False)
 args = parser.parse_args()
 
 if args.dataset_name == "all":
-    dataset_names = ["arxiv", "dm_mathematics", "github", "hackernews", "pile_cc",
-                     "pubmed_central", "wikipedia_(en)", "full_pile"]
+    #dataset_names = ["arxiv", "dm_mathematics", "github", "hackernews", "pile_cc",
+    #                 "pubmed_central", "wikipedia_(en)", "full_pile"]
+    dataset_names = ["WikiMIA64", "WikiMIA128", "WikiMIA256",
+                     "WikiMIAall"]
     # dataset_names = ["arxiv", "dm_mathematics", "github", "hackernews", "pile_cc", "pubmed_central", "wikipedia_(en)", "full_pile", c4, temporal_arxiv, temporal_wiki
     # ]
 else:
@@ -125,6 +127,10 @@ for dataset_name in dataset_names:
                                         'Calinski Harabasz Index': calinski_index},
                                        ignore_index=True)
 os.makedirs("embedding_results_online", exist_ok=True)
-results_df.to_csv(f"embedding_results_online/{args.model_size}_embedding_result.csv", index=False)
+csv_file_path = f"mem_score_online/{args.model_size}/{dataset_name}_mem_score.csv"
+if os.path.exists(csv_file_path):
+    results_df.to_csv(f"embedding_results_online/{args.model_size}_embedding_result.csv", mode='a', header=False, index=False)
+else:
+    results_df.to_csv(f"embedding_results_online/{args.model_size}_embedding_result.csv", index=False)
 
 

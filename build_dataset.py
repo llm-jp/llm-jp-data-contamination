@@ -38,7 +38,7 @@ def process_and_save_dataset(ds, name, items_per_file=250000, batch_size=10000):
         end_time = time.time()  # 运行完毕后再次获取当前时间戳
         elapsed_time = end_time - start_time  # 计算两次时间戳之间的差值，即运行时间
         count += len(batch)
-        #print(f"Processed {count} examples with {elapsed_time:.2f} seconds")
+        print(f"Processed {count} examples with {elapsed_time:.2f} seconds")
 
     # Save remaining data
     for key in grouped_by_meta.keys():
