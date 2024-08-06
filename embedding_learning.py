@@ -16,8 +16,6 @@ import torch.optim as optim
 import numpy as np
 from torch.utils.data import DataLoader, TensorDataset
 
-layer_results = pd.DataFrame(columns=["Dataset", "Layer", "Train Accuracy", "Test Accuracy"])
-layer_results_path = "layer_results.csv"
 def pad_embeddings(embed_list, attn_mask_list, max_length):
     padded_embed_list = []
     attention_masks = []
@@ -123,6 +121,7 @@ model.generation_config.output_scores = True
 model.generation_config.return_dict_in_generate = True
 
 layer_num = model.config.num_hidden_layers
+layer_results = pd.DataFrame(columns=["Dataset", "Layer", "Train Accuracy", "Test Accuracy"])
 
 for dataset_name in dataset_names:
     if "WikiMIA" in dataset_name:
