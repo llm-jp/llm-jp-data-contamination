@@ -255,7 +255,7 @@ for epoch in range(num_epochs):
 
 
 #Test Accuracy: 0.5450 model size 2.8 arxiv
-#
+#Test Accuracy: 0.5341 model size 2.8 hackernews
 # 评估模型
 model.eval()
 all_preds = []
