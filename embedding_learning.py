@@ -113,7 +113,7 @@ for dataset_name in dataset_names:
             elif set_name == "nonmember":
                 non_member_embed_list.append(context_embedding.cpu())
                 nonmember_attn_mask_list.append(tokenized_inputs["attention_mask"].cpu())
-
+del model
 max_length = max(max(embed.shape[1] for embed in member_embed_list),
                  max(embed.shape[1] for embed in non_member_embed_list))
 
