@@ -267,7 +267,7 @@ with torch.no_grad():
         all_preds.extend(predicted.cpu().numpy())
         all_labels.extend(labels.cpu().numpy())
 accuracy = accuracy_score(all_labels, all_preds)
-print(f'Train Accuracy: {accuracy:.4f}')
+print(f'Test Accuracy: {accuracy:.4f}')
 print(classification_report(all_labels, all_preds, target_names=['Nonmember', 'Member']))
 
 
