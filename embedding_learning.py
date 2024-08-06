@@ -267,4 +267,11 @@ for dataset_name in dataset_names:
             "Train Accuracy": train_accuracy,
             "Test Accuracy": test_accuracy},
             ignore_index=True)
+os.makedirs("embedding_learning", exist_ok=True)
+csv_file_path = f"embedding_learning/{args.model_size}/learning_results.csv"
+if os.path.exists(csv_file_path):
+    layer_results.to_csv(f"embedding_learning/{args.model_size}/learning_results.csv", mode='a', header=False, index=False)
+else:
+    layer_results.to_csv(f"embedding_learning/{args.model_size}/learning_results.csv", index=False)
+
 
