@@ -81,7 +81,7 @@ plt.hist(nonmember_bleurt, bins=50, alpha=0.5, label="nonmember_bleurt")
 plt.hist(member_rouge, bins=50, alpha=0.5, label="member_rouge")
 plt.hist(nonmember_rouge, bins=50, alpha=0.5, label="nonmember_rouge")
 plt.legend()
-plt.savefig(f"sem_score.png")
+plt.savefig(f"sem_mem_score_online/{args.model_size}/{dataset_name}.png")
 plt.show()
 
 data = {
