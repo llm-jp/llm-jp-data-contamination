@@ -83,7 +83,7 @@ for dataset_name in dataset_names:
         else:
             nonmember_bleurt.append(bleurt_value)
             nonmember_rouge.append(rougle_value)
-    results._append(pd.DataFrame({"Dataset": [dataset_name for _ in range(member_bleurt)], "member_bleurt": member_bleurt, "member_rouge": member_rouge,
+    results._append(pd.DataFrame({"Dataset": [dataset_name for _ in range(len(member_bleurt))], "member_bleurt": member_bleurt, "member_rouge": member_rouge,
                                   "nonmember_bleurt": nonmember_bleurt, "nonmember_rouge": nonmember_rouge}))
     plt.hist(member_bleurt, bins=50, alpha=0.5, label="member_bleurt")
     plt.hist(nonmember_bleurt, bins=50, alpha=0.5, label="nonmember_bleurt")
