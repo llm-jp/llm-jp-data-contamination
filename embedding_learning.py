@@ -145,9 +145,9 @@ for dataset_name in dataset_names:
         nonmember_attn_mask_list = []
         if os.path.exists(csv_file_path):
             layer_results = pd.read_csv(csv_file_path)
-        if ((layer_results["Dataset"] == dataset_name) & (layer_results["Layer"] == layer_index)).any():
-            print(f"Skipping training for {dataset_name} at layer {layer_index} as previous results are found.")
-            continue
+            if ((layer_results["Dataset"] == dataset_name) & (layer_results["Layer"] == layer_index)).any():
+                print(f"Skipping training for {dataset_name} at layer {layer_index} as previous results are found.")
+                continue
         for set_name in ["member", "nonmember"]:
             cleaned_data, orig_indices = clean_dataset(dataset[set_name], dataset_name, online=True)
             for idx, (data_batch, orig_indices_batch) in tqdm(enumerate(batched_data_with_indices(cleaned_data, orig_indices, batch_size=args.generation_batch_size))):
