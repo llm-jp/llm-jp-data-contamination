@@ -91,8 +91,7 @@ for input_length in [48]:
                 temp_results = []
                 full_decoded = []
                 for _ in tqdm(range(args.generation_samples)):
-                    if tokenized_inputs["input_ids"].shape[1] < input_length:
-                        continue
+                    if tokenized_inputs["input_ids"].shape[1] <= input_length:
                         generations = model.generate(tokenized_inputs["input_ids"][0][:int(tokenized_inputs["input_ids"].shape[1]/2)].unsqueeze(0),
                                                      do_sample=True,
                                                      temperature=1,
