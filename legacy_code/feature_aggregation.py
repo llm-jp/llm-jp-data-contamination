@@ -13,7 +13,6 @@ for dataset_name in dataset_names:
     ppl_dict = pickle.load(open(f"feature_result_online/{dataset_name}_{model_size}_ppl_dict.pkl", "rb"))
     mink_plus_dict = pickle.load(open(f"feature_result_online/{dataset_name}_{model_size}_mink_plus_dict.pkl", "rb"))
     zlib_dict = pickle.load(open(f"feature_result_online/{dataset_name}_{model_size}_zlib_dict.pkl", "rb"))
-
     aggregated_train = []
     aggregated_test = []
     aggregated_val = []
