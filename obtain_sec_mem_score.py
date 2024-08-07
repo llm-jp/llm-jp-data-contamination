@@ -52,48 +52,47 @@ args = parser.parse_args()
 bleurt =  evaluate.load('bleurt', 'bleurt-20',
                         model_type="metric")
 rouge = evaluate.load('rouge')
-dataset_name = "arxiv"
-temp_input_length = 48
-f = open(f"sem_mem_score_online/{args.model_size}/{dataset_name}_{temp_input_length}_generation_samples.pkl", "rb")
-data = pickle.load(f)
-f.close()
-half = len(data)//2
-member_bleurt = []
-member_rouge = []
-nonmember_bleurt = []
-nonmember_rouge = []
-for idx, example in tqdm(enumerate(data)):
-    original_text = example[0]
-    full_generated_texts = example[1]
-    partial_generated_texts = example[2]
-    references = example[3]
-    bleurt_value = np.array(bleurt_score(partial_generated_texts, [references for _ in range(args.generation_samples)])).mean()
-    rougle_value = np.array(rougeL_score(partial_generated_texts, [references for _ in range(args.generation_samples)])).mean()
-    if idx < half:
-        member_bleurt.append(bleurt_value)
-        member_rouge.append(rougle_value)
-    else:
-        nonmember_bleurt.append(bleurt_value)
-        nonmember_rouge.append(rougle_value)
-
-plt.hist(member_bleurt, bins=50, alpha=0.5, label="member_bleurt")
-plt.hist(nonmember_bleurt, bins=50, alpha=0.5, label="nonmember_bleurt")
-plt.hist(member_rouge, bins=50, alpha=0.5, label="member_rouge")
-plt.hist(nonmember_rouge, bins=50, alpha=0.5, label="nonmember_rouge")
-plt.legend()
-plt.savefig(f"sem_mem_score_online/{args.model_size}/{dataset_name}.png")
-plt.show()
-
-data = {
-    'member_bleurt': member_bleurt,
-    'member_rouge': member_rouge,
-    'nonmember_bleurt': nonmember_bleurt,
-    'nonmember_rouge': nonmember_rouge
-}
-
-df = pd.DataFrame(data)
-
-# Save to a csv file
-df.to_csv(f'sem_mem_score_online/{args.model_size}/{dataset_name}_sem_score_results.csv', index=False)
+if args.dataset_name == "all":
+    dataset_names = ["arxiv", "dm_mathematics", "github", "hackernews", "pile_cc",
+                    "pubmed_central", "wikipedia_(en)", "full_pile","WikiMIA64", "WikiMIA128","WikiMIA256",
+                     "WikiMIAall"]
+    #dataset_names = ["WikiMIAall"]
+else:
+    dataset_names = [args.dataset_name]
+results = pd.DataFrame(columns=["Dataset", "member_bleurt", "member_rouge", "nonmember_bleurt", "nonmember_rouge"])
+for dataset_name in dataset_names:
+    temp_input_length = 48
+    f = open(f"sem_mem_score_online/{args.model_size}/{dataset_name}_{temp_input_length}_generation_samples.pkl", "rb")
+    data = pickle.load(f)
+    f.close()
+    half = len(data)//2
+    member_bleurt = []
+    member_rouge = []
+    nonmember_bleurt = []
+    nonmember_rouge = []
+    for idx, example in tqdm(enumerate(data)):
+        original_text = example[0]
+        full_generated_texts = example[1]
+        partial_generated_texts = example[2]
+        references = example[3]
+        bleurt_value = np.array(bleurt_score(partial_generated_texts, [references for _ in range(args.generation_samples)])).mean()
+        rougle_value = np.array(rougeL_score(partial_generated_texts, [references for _ in range(args.generation_samples)])).mean()
+        if idx < half:
+            member_bleurt.append(bleurt_value)
+            member_rouge.append(rougle_value)
+        else:
+            nonmember_bleurt.append(bleurt_value)
+            nonmember_rouge.append(rougle_value)
+    results._append(pd.DataFrame({"Dataset": [dataset_name for _ in range(member_bleurt)], "member_bleurt": member_bleurt, "member_rouge": member_rouge,
+                                  "nonmember_bleurt": nonmember_bleurt, "nonmember_rouge": nonmember_rouge}))
+    plt.hist(member_bleurt, bins=50, alpha=0.5, label="member_bleurt")
+    plt.hist(nonmember_bleurt, bins=50, alpha=0.5, label="nonmember_bleurt")
+    plt.hist(member_rouge, bins=50, alpha=0.5, label="member_rouge")
+    plt.hist(nonmember_rouge, bins=50, alpha=0.5, label="nonmember_rouge")
+    plt.legend()
+    plt.savefig(f"sem_mem_score_online/{args.model_size}/{dataset_name}.png")
+    plt.show()
+    # Save to a csv file
+results.to_csv(f'sem_mem_score_online/{args.model_size}/sem_score_results.csv', index=False)
 
 
