@@ -39,7 +39,8 @@ def process_and_save_dataset(ds, name, items_per_file=250000, batch_size=10000):
         elapsed_time = end_time - start_time  # 计算两次时间戳之间的差值，即运行时间
         count += len(batch)
         print(f"Processed {count} examples with {elapsed_time:.2f} seconds")
-
+        if len(batch) < batch_size:
+            break
     # Save remaining data
     for key in grouped_by_meta.keys():
         if len(grouped_by_meta[key])>0:  # Save if not empty
