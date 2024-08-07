@@ -123,7 +123,7 @@ model.generation_config.output_hidden_states = True
 model.generation_config.return_dict_in_generate = True
 layer_num = model.config.num_hidden_layers
 layer_results = pd.DataFrame(columns=["Dataset", "Layer", "Train Accuracy", "Test Accuracy"])
-os.makedirs("embedding_learning", exist_ok=True)
+os.makedirs(f"embedding_learning/{args.model_size}", exist_ok=True)
 csv_file_path = f"embedding_learning/{args.model_size}/learning_results.csv"
 
 for dataset_name in dataset_names:
@@ -143,6 +143,11 @@ for dataset_name in dataset_names:
     member_attn_mask_list = []
     nonmember_attn_mask_list = []
     for layer_index in tqdm(range(layer_num)):
+        if os.path.exists(csv_file_path):
+            layer_results = pd.read_csv(csv_file_path)
+        if ((layer_results["Dataset"] == dataset_name) & (layer_results["Layer"] == layer_index)).any():
+            print(f"Skipping training for {dataset_name} at layer {layer_index} as previous results are found.")
+            continue
         for set_name in ["member", "nonmember"]:
             cleaned_data, orig_indices = clean_dataset(dataset[set_name], dataset_name, online=True)
             for idx, (data_batch, orig_indices_batch) in tqdm(enumerate(batched_data_with_indices(cleaned_data, orig_indices, batch_size=args.generation_batch_size))):
@@ -230,23 +235,22 @@ for dataset_name in dataset_names:
                 optimizer.step()
                 if (i + 1) % 10 == 0:  # 每10个批次打印一次loss
                     print(f'Epoch [{epoch + 1}/{args.epochs}], Step [{i + 1}/{len(train_loader)}], Loss: {loss.item():.4f}')
-            pred_model.eval()
-            all_preds = []
-            all_labels = []
-            with torch.no_grad():
-                for inputs, labels, attention_masks in train_loader:
-                    inputs, labels, attention_masks = inputs.to(device), labels.to(device), attention_masks.to(device)
-                    outputs = pred_model(inputs.to(device), attention_masks.to(device))
-                    _, predicted = torch.max(outputs.data, 1)
-                    all_preds.extend(predicted.cpu().numpy())
-                    all_labels.extend(labels.cpu().numpy())
-            train_accuracy = accuracy_score(all_labels, all_preds)
-            print(f'Train Accuracy of {dataset_name} at Layer {layer_index} at Epoch {epoch}: {train_accuracy:.4f}')
-            print(classification_report(all_labels, all_preds, target_names=['Nonmember', 'Member']))
+        pred_model.eval()
+        all_preds = []
+        all_labels = []
+        with torch.no_grad():
+            for inputs, labels, attention_masks in train_loader:
+                inputs, labels, attention_masks = inputs.to(device), labels.to(device), attention_masks.to(device)
+                outputs = pred_model(inputs.to(device), attention_masks.to(device))
+                _, predicted = torch.max(outputs.data, 1)
+                all_preds.extend(predicted.cpu().numpy())
+                all_labels.extend(labels.cpu().numpy())
+        train_accuracy = accuracy_score(all_labels, all_preds)
+        print(f'Train Accuracy of {dataset_name} at Layer {layer_index}: {train_accuracy:.4f}')
+        print(classification_report(all_labels, all_preds, target_names=['Nonmember', 'Member']))
         #Test Accuracy: 0.5450 model size 2.8 arxiv
         #Test Accuracy: 0.5341 model size 2.8 hackernews
         # 评估模型
-        pred_model.eval()
         all_preds = []
         all_labels = []
         with torch.no_grad():
@@ -265,10 +269,6 @@ for dataset_name in dataset_names:
             "Train Accuracy": train_accuracy,
             "Test Accuracy": test_accuracy},
             ignore_index=True)
-
-    if os.path.exists(csv_file_path):
-        layer_results.to_csv(f"embedding_learning/{args.model_size}/learning_results.csv", mode='a', header=False, index=False)
-    else:
         layer_results.to_csv(f"embedding_learning/{args.model_size}/learning_results.csv", index=False)
 
 
