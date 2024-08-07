@@ -29,7 +29,7 @@ def pad_embeddings(embed_list, attn_mask_list, max_length):
             attention_mask = attn_mask
         padded_embed_list.append(pad)
         attention_masks.append(attention_mask)
-    return torch.cat(padded_embed_list, dim=0), torch.cat(attention_masks, dim=0, dtype=torch.bfloat16)
+    return torch.cat(padded_embed_list, dim=0), torch.cat(attention_masks, dim=0)
 
 
 class PositionalEncoding(nn.Module):
@@ -189,7 +189,7 @@ for dataset_name in dataset_names:
         X_train, X_test, y_train, y_test, attn_train, attn_test = train_test_split(X, y, attention_masks, test_size=0.2, random_state=42)
 
         # 转换数据为tensor
-        X_traqqqin = torch.tensor(X_train, dtype=torch.float32).view(-1, member_embeddings.shape[1], member_embeddings.shape[2])
+        X_train = torch.tensor(X_train, dtype=torch.float32).view(-1, member_embeddings.shape[1], member_embeddings.shape[2])
         X_test = torch.tensor(X_test, dtype=torch.float32).view(-1, member_embeddings.shape[1], member_embeddings.shape[2])
         y_train = torch.tensor(y_train, dtype=torch.long)
         y_test = torch.tensor(y_test, dtype=torch.long)
