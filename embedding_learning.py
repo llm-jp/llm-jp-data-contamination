@@ -90,6 +90,7 @@ parser.add_argument("--dataset_name", type=str, default="Pile-CC", choices=["arx
 parser.add_argument("--cuda", type=int, default=1, help="cuda device")
 parser.add_argument("--samples", type=int, default=1000)
 parser.add_argument("--prepare_dataset", type=str, default="True")
+parser.add_argument("--epochs", type=int, default=8)
 args = parser.parse_args()
 
 if args.dataset_name == "all":
@@ -217,8 +218,7 @@ for dataset_name in dataset_names:
         criterion = nn.CrossEntropyLoss()
         optimizer = optim.Adam(pred_model.parameters(), lr=0.0001)
         # 训练模型
-        num_epochs = 10
-        for epoch in range(num_epochs):
+        for epoch in range(args.epochs):
             pred_model.train()
             for i, (inputs, labels, attention_masks) in enumerate(train_loader):
                 inputs, labels, attention_masks = inputs.to(device), labels.to(device), attention_masks.to(device)
@@ -228,7 +228,7 @@ for dataset_name in dataset_names:
                 loss.backward()
                 optimizer.step()
                 if (i + 1) % 10 == 0:  # 每10个批次打印一次loss
-                    print(f'Epoch [{epoch + 1}/{num_epochs}], Step [{i + 1}/{len(train_loader)}], Loss: {loss.item():.4f}')
+                    print(f'Epoch [{epoch + 1}/{args.epochs}], Step [{i + 1}/{len(train_loader)}], Loss: {loss.item():.4f}')
             pred_model.eval()
             all_preds = []
             all_labels = []
