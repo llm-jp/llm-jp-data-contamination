@@ -3,7 +3,8 @@ import argparse
 import pickle
 import numpy as np
 from tqdm import tqdm
-
+import matplotlib.pyplot as plt
+import pandas as pd
 def bleurt_score(predictions, references):
     """Compute the average BLEURT score over the gpt responses
 
@@ -74,7 +75,7 @@ for idx, example in tqdm(enumerate(data)):
     else:
         nonmember_bleurt.append(bleurt_value)
         nonmember_rouge.append(rougle_value)
-import matplotlib.pyplot as plt
+
 plt.hist(member_bleurt, bins=50, alpha=0.5, label="member_bleurt")
 plt.hist(nonmember_bleurt, bins=50, alpha=0.5, label="nonmember_bleurt")
 plt.hist(member_rouge, bins=50, alpha=0.5, label="member_rouge")
@@ -83,6 +84,16 @@ plt.legend()
 plt.savefig(f"sem_score.png")
 plt.show()
 
+data = {
+    'member_bleurt': member_bleurt,
+    'member_rouge': member_rouge,
+    'nonmember_bleurt': nonmember_bleurt,
+    'nonmember_rouge': nonmember_rouge
+}
 
+df = pd.DataFrame(data)
+
+# Save to a csv file
+df.to_csv(f'sem_mem_score_online/{args.model_size}/{dataset_name}_sem_score_results.csv', index=False)
 
 
