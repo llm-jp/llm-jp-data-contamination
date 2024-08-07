@@ -138,11 +138,11 @@ for dataset_name in dataset_names:
             "full_pile",
             split="none")
     device = f'cuda:{args.cuda}'
-    member_embed_list = []
-    non_member_embed_list = []
-    member_attn_mask_list = []
-    nonmember_attn_mask_list = []
     for layer_index in tqdm(range(layer_num)):
+        member_embed_list = []
+        non_member_embed_list = []
+        member_attn_mask_list = []
+        nonmember_attn_mask_list = []
         if os.path.exists(csv_file_path):
             layer_results = pd.read_csv(csv_file_path)
         if ((layer_results["Dataset"] == dataset_name) & (layer_results["Layer"] == layer_index)).any():
