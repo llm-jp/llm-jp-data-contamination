@@ -100,7 +100,6 @@ for dataset_name in dataset_names:
     mean_non_member = np.mean(non_member_entropy, axis=0)
     std_non_member = np.std(non_member_entropy, axis=0)
     os.makedirs(f"entropy_online/{args.model_size}", exist_ok=True)
-    np.save(f"entropy_online/{args.model_size}/{dataset_name}_member_entropy.npy", mean_member)
     # x轴的值
     x = list(range(1,65))
 
@@ -114,6 +113,8 @@ for dataset_name in dataset_names:
     # 绘制non_member_entropy的均值和方差
     plt.plot(x, mean_non_member, label='Non-Member Entropy', color='red')
     plt.fill_between(x, mean_non_member - std_non_member, mean_non_member + std_non_member, color='red', alpha=0.2)
+    np.save(f"entropy_online/{args.model_size}/{dataset_name}_member_entropy.npy", mean_member)
+    np.save(f"entropy_online/{args.model_size}/{dataset_name}_non_member_entropy.npy", mean_non_member)
 
     # 添加图例和标签
     plt.xlabel('Value')
