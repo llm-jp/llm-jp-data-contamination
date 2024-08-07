@@ -33,7 +33,8 @@ if args.dataset_name == "all":
     #dataset_names = ["arxiv", "dm_mathematics", "github", "hackernews", "pile_cc",
     #                 "pubmed_central", "wikipedia_(en)", "full_pile","WikiMIA64", "WikiMIA128","WikiMIA256",
     #                  "WikiMIAall"]
-    dataset_names = [#"WikiMIA64", "WikiMIA128","WikiMIA256",
+    dataset_names = ["github", "hackernews", "pile_cc",
+                     "pubmed_central", "wikipedia_(en)", "full_pile","WikiMIA64", "WikiMIA128","WikiMIA256",
                       "WikiMIAall"]
 else:
     dataset_names = [args.dataset_name]
@@ -84,7 +85,8 @@ for input_length in [48]:
                 if idx * args.batch_size > args.samples:
                     break
                 batched_text = [item for item in data_batch]
-                tokenized_inputs = tokenizer(batched_text, return_tensors="pt", truncation=True, padding=True)
+                tokenized_inputs = tokenizer(batched_text, return_tensors="pt", truncation=True, padding=True,
+                                             max_length=1024)
                 tokenized_inputs = {key: val.to(device) for key, val in tokenized_inputs.items()}
                 #input_length = int(tokenized_inputs["input_ids"].shape[1] * ratio)
                 #output_length = int(tokenized_inputs["input_ids"].shape[1] * (ratio + 0.1))
