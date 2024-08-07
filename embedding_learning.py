@@ -83,7 +83,8 @@ class TransformerClassifier(nn.Module):
 
 
 parser = argparse.ArgumentParser()
-parser.add_argument("--batch_size", type=int, default=10)
+parser.add_argument("--generation_batch_size", type=int, default=10)
+parser.add_argument("--train_batch_size", type=int, default=4)
 parser.add_argument("--model_size", type=str, default="6.9b")
 parser.add_argument("--dataset_name", type=str, default="Pile-CC", choices=["arxiv", "dm_mathematics", "github", "hackernews", "pile_cc",
                      "pubmed_central", "wikipedia_(en)", "full_pile", "all"])
@@ -144,8 +145,8 @@ for dataset_name in dataset_names:
     for layer_index in tqdm(range(layer_num)):
         for set_name in ["member", "nonmember"]:
             cleaned_data, orig_indices = clean_dataset(dataset[set_name], dataset_name, online=True)
-            for idx, (data_batch, orig_indices_batch) in tqdm(enumerate(batched_data_with_indices(cleaned_data, orig_indices, batch_size=args.batch_size))):
-                if idx * args.batch_size > args.samples:
+            for idx, (data_batch, orig_indices_batch) in tqdm(enumerate(batched_data_with_indices(cleaned_data, orig_indices, batch_size=args.generation_batch_size))):
+                if idx * args.generation_batch_size > args.samples:
                     break
                 batched_text = [item for item in data_batch]
                 tokenized_inputs = tokenizer(batched_text,
@@ -188,18 +189,17 @@ for dataset_name in dataset_names:
         X_train, X_test, y_train, y_test, attn_train, attn_test = train_test_split(X, y, attention_masks, test_size=0.2, random_state=42)
 
         # 转换数据为tensor
-        X_train = torch.tensor(X_train, dtype=torch.float32).view(-1, member_embeddings.shape[1], member_embeddings.shape[2])
+        X_traqqqin = torch.tensor(X_train, dtype=torch.float32).view(-1, member_embeddings.shape[1], member_embeddings.shape[2])
         X_test = torch.tensor(X_test, dtype=torch.float32).view(-1, member_embeddings.shape[1], member_embeddings.shape[2])
         y_train = torch.tensor(y_train, dtype=torch.long)
         y_test = torch.tensor(y_test, dtype=torch.long)
         attn_train = torch.tensor(attn_train, dtype=torch.float32)
         attn_test = torch.tensor(attn_test, dtype=torch.float32)
 
-        batch_size = 4  # 可根据需要调整
         train_dataset = TensorDataset(X_train, y_train, attn_train)
         test_dataset = TensorDataset(X_test, y_test, attn_test)
-        train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
-        test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False)
+        train_loader = DataLoader(train_dataset, batch_size=args.train_batch_size, shuffle=True)
+        test_loader = DataLoader(test_dataset, batch_size=args.train_batch_size, shuffle=False)
 
         input_dim = member_embeddings.shape[2] # 输入的特征维度
         hidden_dim = 256
@@ -243,8 +243,6 @@ for dataset_name in dataset_names:
             train_accuracy = accuracy_score(all_labels, all_preds)
             print(f'Train Accuracy of {dataset_name} at Layer {layer_index} at Epoch {epoch}: {train_accuracy:.4f}')
             print(classification_report(all_labels, all_preds, target_names=['Nonmember', 'Member']))
-
-
         #Test Accuracy: 0.5450 model size 2.8 arxiv
         #Test Accuracy: 0.5341 model size 2.8 hackernews
         # 评估模型
