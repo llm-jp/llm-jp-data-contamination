@@ -107,7 +107,7 @@ model = GPTNeoXForCausalLM.from_pretrained(
   cache_dir=f"./pythia-{args.model_size}-deduped/step143000",
   torch_dtype=torch.bfloat16,
 ).cuda(args.cuda).eval()
-#model = model.to_bettertransformer()
+model = model.to_bettertransformer()
 
 tokenizer = AutoTokenizer.from_pretrained(
   f"EleutherAI/pythia-{args.model_size}-deduped",
@@ -118,11 +118,12 @@ tokenizer.pad_token = tokenizer.eos_token
 model.generation_config.pad_token_id = model.generation_config.eos_token_id
 model.generation_config.output_hidden_states = True
 #model.generation_config.output_attentions = True
-model.generation_config.output_scores = True
+#model.generation_config.output_scores = True
 model.generation_config.return_dict_in_generate = True
-
 layer_num = model.config.num_hidden_layers
 layer_results = pd.DataFrame(columns=["Dataset", "Layer", "Train Accuracy", "Test Accuracy"])
+os.makedirs("embedding_learning", exist_ok=True)
+csv_file_path = f"embedding_learning/{args.model_size}/learning_results.csv"
 
 for dataset_name in dataset_names:
     if "WikiMIA" in dataset_name:
@@ -266,11 +267,10 @@ for dataset_name in dataset_names:
             "Train Accuracy": train_accuracy,
             "Test Accuracy": test_accuracy},
             ignore_index=True)
-os.makedirs("embedding_learning", exist_ok=True)
-csv_file_path = f"embedding_learning/{args.model_size}/learning_results.csv"
-if os.path.exists(csv_file_path):
-    layer_results.to_csv(f"embedding_learning/{args.model_size}/learning_results.csv", mode='a', header=False, index=False)
-else:
-    layer_results.to_csv(f"embedding_learning/{args.model_size}/learning_results.csv", index=False)
+
+    if os.path.exists(csv_file_path):
+        layer_results.to_csv(f"embedding_learning/{args.model_size}/learning_results.csv", mode='a', header=False, index=False)
+    else:
+        layer_results.to_csv(f"embedding_learning/{args.model_size}/learning_results.csv", index=False)
 
 
