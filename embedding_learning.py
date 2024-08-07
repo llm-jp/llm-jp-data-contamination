@@ -29,7 +29,7 @@ def pad_embeddings(embed_list, attn_mask_list, max_length):
             attention_mask = attn_mask
         padded_embed_list.append(pad)
         attention_masks.append(attention_mask)
-    return torch.cat(padded_embed_list, dim=0), torch.cat(attention_masks, dim=0)
+    return torch.cat(padded_embed_list, dim=0), torch.cat(attention_masks, dim=0, dtype=torch.bfloat16)
 
 
 class PositionalEncoding(nn.Module):
