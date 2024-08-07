@@ -50,7 +50,7 @@ def decide_threshold_direction(y_true, scores, threshold):
 # 随机种子列表
 random_seeds = [42, 52, 62, 72, 82]
 dataset_names = ["github", "pile_cc", "full_pile", "WikiMIA64", "WikiMIA128", "WikiMIA256", "WikiMIAall"]
-model_size = "12b"
+model_size = "2.8b"
 
 results = []
 
@@ -114,21 +114,25 @@ for dataset_name in dataset_names:
             train_accuracy = accuracy_score(y_train, y_train_pred)
             train_recall = recall_score(y_train, y_train_pred)
             train_precision = precision_score(y_train, y_train_pred)
-
+            train_f1 = f1_score(y_train, y_train_pred)
             # 在测试集上评估
             test_accuracy = accuracy_score(y_test, y_test_pred)
             test_recall = recall_score(y_test, y_test_pred)
             test_precision = precision_score(y_test, y_test_pred)
+            test_f1 = f1_score(y_test, y_test_pred)
+
 
             # 存储评估结果
             seed_results.append({
                 'best_threshold': best_threshold,
                 'train_accuracy': train_accuracy,
-                'train_recall': train_recall,
-                'train_precision': train_precision,
+                #'train_recall': train_recall,
+                #'train_precision': train_precision,
+                'train_f1': train_f1,
                 'test_accuracy': test_accuracy,
-                'test_recall': test_recall,
-                'test_precision': test_precision,
+               # 'test_recall': test_recall,
+               # 'test_precision': test_precision,
+                'test_f1': test_f1,
                 'threshold_direction': threshold_direction
             })
 
@@ -183,11 +187,13 @@ for dataset_name, features_results in evaluation_results.items():
             'feature': feature,
             'best_threshold': metrics['best_threshold'],
             'train_accuracy': metrics['train_accuracy'],
-            'train_recall': metrics['train_recall'],
-            'train_precision': metrics['train_precision'],
+            #'train_recall': metrics['train_recall'],
+            #'train_precision': metrics['train_precision'],
+            'train_f1': metrics['train_f1'],
             'test_accuracy': metrics['test_accuracy'],
-            'test_recall': metrics['test_recall'],
-            'test_precision': metrics['test_precision'],
+            #'test_recall': metrics['test_recall'],
+            #'test_precision': metrics['test_precision'],
+            'test_f1': metrics['test_f1'],
             'threshold_direction': metrics['threshold_direction']
         }
         results_list.append(entry)
