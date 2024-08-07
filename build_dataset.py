@@ -49,10 +49,10 @@ def process_and_save_dataset(ds, name, items_per_file=250000, batch_size=10000):
             print("Saved", filename)
 
 
-#ds_valid = load_dataset("monology/pile-uncopyrighted", cache_dir="/model/pile", split="validation", streaming=True)
-#ds_test = load_dataset("monology/pile-uncopyrighted", cache_dir="/model/pile", split="test", streaming=True)
-ds_train = load_dataset("monology/pile-uncopyrighted", cache_dir="/model/pile", split="train", streaming=True)
+ds_valid = load_dataset("monology/pile-uncopyrighted", cache_dir="/model/pile", split="validation", streaming=True)
+ds_test = load_dataset("monology/pile-uncopyrighted", cache_dir="/model/pile", split="test", streaming=True)
+#ds_train = load_dataset("monology/pile-uncopyrighted", cache_dir="/model/pile", split="train", streaming=True)
 
-#process_and_save_dataset(ds_valid, "valid", items_per_file=100000000, batch_size=10000)
-#process_and_save_dataset(ds_test, "test", items_per_file=100000000, batch_size=10000)
-process_and_save_dataset(ds_train, "train", items_per_file=100000, batch_size=10000)
+process_and_save_dataset(ds_valid, "valid", items_per_file=100000000, batch_size=10000)
+process_and_save_dataset(ds_test, "test", items_per_file=100000000, batch_size=10000)
+#process_and_save_dataset(ds_train, "train", items_per_file=100000, batch_size=10000)
