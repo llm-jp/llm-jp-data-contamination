@@ -30,11 +30,11 @@ args = parser.parse_args()
 
 
 if args.dataset_name == "all":
-    dataset_names = ["arxiv", "dm_mathematics", "github", "hackernews", "pile_cc",
-                     "pubmed_central", "wikipedia_(en)", "full_pile","WikiMIA64", "WikiMIA128","WikiMIA256",
-                      "WikiMIAall"]
-    # dataset_names = ["WikiMIA64", "WikiMIA128","WikiMIA256",
+    #dataset_names = ["arxiv", "dm_mathematics", "github", "hackernews", "pile_cc",
+    #                 "pubmed_central", "wikipedia_(en)", "full_pile","WikiMIA64", "WikiMIA128","WikiMIA256",
     #                  "WikiMIAall"]
+    dataset_names = ["WikiMIA64", "WikiMIA128","WikiMIA256",
+                      "WikiMIAall"]
 else:
     dataset_names = [args.dataset_name]
 
@@ -91,13 +91,23 @@ for input_length in [48]:
                 temp_results = []
                 full_decoded = []
                 for _ in tqdm(range(args.generation_samples)):
-                    generations = model.generate(tokenized_inputs["input_ids"][0][:input_length].unsqueeze(0),
-                                                 do_sample=True,
-                                                 temperature=1,
-                                                 max_length=len(tokenized_inputs["input_ids"][0]),  # input+output
-                                                 top_k=50,
-                                                 top_p=1,
-                                                )
+                    if tokenized_inputs["input_ids"].shape[1] < input_length:
+                        continue
+                        generations = model.generate(tokenized_inputs["input_ids"][0][:int(tokenized_inputs["input_ids"].shape[1]/2)].unsqueeze(0),
+                                                     do_sample=True,
+                                                     temperature=1,
+                                                     max_length=len(tokenized_inputs["input_ids"][0]),  # input+output
+                                                     top_k=50,
+                                                     top_p=1,
+                                                     )
+                    else:
+                        generations = model.generate(tokenized_inputs["input_ids"][0][:input_length].unsqueeze(0),
+                                                     do_sample=True,
+                                                     temperature=1,
+                                                     max_length=len(tokenized_inputs["input_ids"][0]),  # input+output
+                                                     top_k=50,
+                                                     top_p=1,
+                                                    )
                     temp_results.append(tokenizer.decode(generations["sequences"][0][input_length:]))
                     full_decoded.append(tokenizer.decode(generations["sequences"][0]))
                 text_to_compare = tokenizer.decode(tokenized_inputs["input_ids"][0][input_length:])
