@@ -10,9 +10,10 @@ def process_and_save_dataset(ds, name, items_per_file=250000, batch_size=10000):
     file_counters = defaultdict(int)
     grouped_by_meta = defaultdict(list)
     count = 0
+    ds_iter = iter(ds)  # 获取数据集迭代器
 
     while True:
-        batch = list(ds.take(batch_size))
+        batch = [example for _, example in zip(range(batch_size), ds_iter)]
         if not batch:
             break
         start_time = time.time()
@@ -39,8 +40,8 @@ def process_and_save_dataset(ds, name, items_per_file=250000, batch_size=10000):
         elapsed_time = end_time - start_time  # 计算两次时间戳之间的差值，即运行时间
         count += len(batch)
         print(f"Processed {count} examples with {elapsed_time:.2f} seconds")
-        if len(batch) < batch_size:
-            break
+        # if len(batch) < batch_size:
+        #     break
     # Save remaining data
     for key in grouped_by_meta.keys():
         if len(grouped_by_meta[key])>0:  # Save if not empty
@@ -52,8 +53,8 @@ def process_and_save_dataset(ds, name, items_per_file=250000, batch_size=10000):
 
 ds_valid = load_dataset("monology/pile-uncopyrighted", cache_dir="/model/pile", split="validation", streaming=True)
 ds_test = load_dataset("monology/pile-uncopyrighted", cache_dir="/model/pile", split="test", streaming=True)
-#ds_train = load_dataset("monology/pile-uncopyrighted", cache_dir="/model/pile", split="train", streaming=True)
+ds_train = load_dataset("monology/pile-uncopyrighted", cache_dir="/model/pile", split="train", streaming=True)
 
 process_and_save_dataset(ds_valid, "valid", items_per_file=100000000, batch_size=10000)
 process_and_save_dataset(ds_test, "test", items_per_file=100000000, batch_size=10000)
-#process_and_save_dataset(ds_train, "train", items_per_file=100000, batch_size=10000)
+process_and_save_dataset(ds_train, "train", items_per_file=100000, batch_size=10000)
