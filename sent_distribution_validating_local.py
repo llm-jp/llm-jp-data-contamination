@@ -34,35 +34,12 @@ parser.add_argument("--gradient_collection", type=str, default=False)
 parser.add_argument("--dir", type=str, default="feature_result")
 args = parser.parse_args()
 
-if args.dataset_name == "all":
-    dataset_names = ["ArXiv", "DM Mathematics",
-                  "FreeLaw", "Github",  "HackerNews", "NIH ExPorter",
-                 "Pile-CC", "PubMed Abstracts", "PubMed Central", "StackExchange",
-                 "USPTO Backgrounds", "Wikipedia (en)","WikiMIA32","WikiMIA64", "WikiMIA128","WikiMIA256",
-                     "WikiMIAall"]
-    # dataset_names = ["WikiMIA32","WikiMIA64", "WikiMIA128","WikiMIA256",
-    #                   "WikiMIAall"]
-else:
-    dataset_names = [args.dataset_name]
-
+dataset_names = get_dataset_list(args.dataset_name)
 if args.skip_calculation == "True":
-    skip_calculation = True
     for dataset_name in dataset_names:
         results_caculate_and_draw(dataset_name, args)
 else:
-    skip_calculation = False
-    model = GPTNeoXForCausalLM.from_pretrained(
-      f"EleutherAI/pythia-{args.model_size}-deduped",
-      revision="step143000",
-      cache_dir=f"./pythia-{args.model_size}-deduped/step143000",
-      torch_dtype=torch.bfloat16,
-    ).cuda(args.cuda).eval()
-    #model = model.to_bettertransformer()
-    tokenizer = AutoTokenizer.from_pretrained(
-      f"EleutherAI/pythia-{args.model_size}-deduped",
-      revision="step143000",
-      cache_dir=f"./pythia-{args.model_size}-deduped/step143000",
-    )
+    model, tokenizer = load_model_and_tokenizer(args)
     if args.reference_model == "True":
         refer_model = AutoModelForCausalLM.from_pretrained("stabilityai/stablelm-base-alpha-3b-v2",
                                                            trust_remote_code=True,
@@ -74,7 +51,7 @@ else:
     tokenizer.pad_token = tokenizer.eos_token
     refer_tokenizer.pad_token = refer_tokenizer.eos_token
     for dataset_name in dataset_names:
-        dataset = form_dataset(dataset_name)
+        dataset = obtain_dataset(dataset_name)
         loss_dict = {}
         prob_dict = {}
         ppl_dict = {}

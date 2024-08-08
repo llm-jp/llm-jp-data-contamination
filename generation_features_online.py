@@ -1,6 +1,6 @@
 import pdb
 from transformers import GPTNeoXForCausalLM, AutoTokenizer,  AutoModelForCausalLM,  LogitsProcessorList, MinLengthLogitsProcessor, StoppingCriteriaList,  MaxLengthCriteria
-from utils import form_dataset, clean_dataset, batched_data_with_indices, get_dataset_list, obtain_dataset
+from utils import form_dataset, clean_dataset, batched_data_with_indices, get_dataset_list, obtain_dataset, load_model_and_tokenizer
 import argparse
 from tqdm import tqdm
 import torch
@@ -24,19 +24,7 @@ args = parser.parse_args()
 
 
 dataset_names = get_dataset_list(args.dataset_name)
-skip_calculation = False
-model = GPTNeoXForCausalLM.from_pretrained(
-  f"EleutherAI/pythia-{args.model_size}-deduped",
-  revision="step143000",
-  cache_dir=f"./pythia-{args.model_size}-deduped/step143000",
-   torch_dtype=torch.bfloat16,
-).cuda(args.cuda).eval()
-
-tokenizer = AutoTokenizer.from_pretrained(
-  f"EleutherAI/pythia-{args.model_size}-deduped",
-  revision="step143000",
-  cache_dir=f"./pythia-{args.model_size}-deduped/step143000",
-)
+model, tokenizer = load_model_and_tokenizer(args)
 tokenizer.pad_token = tokenizer.eos_token
 
 model.generation_config.pad_token_id = model.generation_config.eos_token_id

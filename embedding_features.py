@@ -1,6 +1,6 @@
 import pdb
 from transformers import GPTNeoXForCausalLM, AutoTokenizer,  AutoModelForCausalLM,  LogitsProcessorList, MinLengthLogitsProcessor, StoppingCriteriaList,  MaxLengthCriteria
-from utils import form_dataset, batched_data_with_indices, clean_dataset, load_model_and_tokenizer
+from utils import form_dataset, batched_data_with_indices, clean_dataset, load_model_and_tokenizer, get_dataset_list, obtain_dataset
 import argparse
 from tqdm import tqdm
 import torch
@@ -23,15 +23,7 @@ parser.add_argument("--samples", type=int, default=1000)
 parser.add_argument("--gradient_collection", type=str, default=False)
 args = parser.parse_args()
 
-if args.dataset_name == "all":
-    dataset_names =["ArXiv", "DM Mathematics",
-                  "FreeLaw", "Github",  "HackerNews", "NIH ExPorter",
-                 "Pile-CC", "PubMed Abstracts", "PubMed Central", "StackExchange",
-                 "USPTO Backgrounds", "Wikipedia (en)","WikiMIA32","WikiMIA64", "WikiMIA128","WikiMIA256",
-                     "WikiMIAall"]
-else:
-    dataset_names = [args.dataset_name]
-
+dataset_names = get_dataset_list(args.dataset_name)
 skip_calculation = False
 model, tokenizer = load_model_and_tokenizer(args)
 tokenizer.pad_token = tokenizer.eos_token
@@ -39,12 +31,11 @@ model.generation_config.pad_token_id = model.generation_config.eos_token_id
 model.generation_config.output_hidden_states = True
 model.generation_config.return_dict_in_generate = True
 
-
 results_df = pd.DataFrame(
     columns=['Dataset Name', 'Layer Index', 'DB Index',
              'Silhouette Score', 'Calinski Harabasz Index'])
 for dataset_name in dataset_names:
-    dataset = form_dataset(dataset_name)
+    dataset = obtain_dataset(dataset_name)
     device = f'cuda:{args.cuda}'
     member_embed_list = {}
     non_member_embed_list = {}
