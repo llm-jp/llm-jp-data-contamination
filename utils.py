@@ -19,6 +19,8 @@ import pickle
 import random
 import seaborn as sns
 import os
+from transformers import GPTNeoXForCausalLM, AutoTokenizer
+
 
 def batched_data_with_indices(data_list, indices_list, batch_size):
     data_iter = iter(data_list)
@@ -889,4 +891,18 @@ def obtain_dataset(dataset_name, local_data = False):
             split="none")
     return dataset
 
+def load_model_and_tokenizer(args):
+    model = GPTNeoXForCausalLM.from_pretrained(
+        f"EleutherAI/pythia-{args.model_size}-deduped",
+        revision="step143000",
+        cache_dir=f"./pythia-{args.model_size}-deduped/step143000",
+        torch_dtype=torch.bfloat16,
+    ).cuda(args.cuda).eval()
+    model = model.to_bettertransformer()
 
+    tokenizer = AutoTokenizer.from_pretrained(
+        f"EleutherAI/pythia-{args.model_size}-deduped",
+        revision="step143000",
+        cache_dir=f"./pythia-{args.model_size}-deduped/step143000",
+    )
+    return model, tokenizer

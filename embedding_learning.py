@@ -1,6 +1,6 @@
 import os
 import pdb
-from transformers import GPTNeoXForCausalLM, AutoTokenizer,  AutoModelForCausalLM,  LogitsProcessorList, MinLengthLogitsProcessor, StoppingCriteriaList,  MaxLengthCriteria
+from transformers import GPTNeoXForCausalLM, AutoTokenizer
 from utils import form_dataset, batched_data_with_indices, clean_dataset
 import argparse
 from tqdm import tqdm
@@ -15,7 +15,7 @@ import torch.nn as nn
 import torch.optim as optim
 import numpy as np
 from torch.utils.data import DataLoader, TensorDataset
-from utils import obtain_dataset, get_dataset_list
+from utils import obtain_dataset, get_dataset_list, load_model_and_tokenizer
 
 def pad_embeddings(embed_list, attn_mask_list, max_length):
     padded_embed_list = []
@@ -97,19 +97,7 @@ args = parser.parse_args()
 
 dataset_names = get_dataset_list(args.dataset_name)
 skip_calculation = False
-model = GPTNeoXForCausalLM.from_pretrained(
-  f"EleutherAI/pythia-{args.model_size}-deduped",
-  revision="step143000",
-  cache_dir=f"./pythia-{args.model_size}-deduped/step143000",
-  torch_dtype=torch.bfloat16,
-).cuda(args.cuda).eval()
-model = model.to_bettertransformer()
-
-tokenizer = AutoTokenizer.from_pretrained(
-  f"EleutherAI/pythia-{args.model_size}-deduped",
-  revision="step143000",
-  cache_dir=f"./pythia-{args.model_size}-deduped/step143000",
-)
+model, tokenizer = load_model_and_tokenizer(args)
 tokenizer.pad_token = tokenizer.eos_token
 model.generation_config.pad_token_id = model.generation_config.eos_token_id
 model.generation_config.output_hidden_states = True

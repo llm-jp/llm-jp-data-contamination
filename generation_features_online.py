@@ -30,7 +30,6 @@ model = GPTNeoXForCausalLM.from_pretrained(
   revision="step143000",
   cache_dir=f"./pythia-{args.model_size}-deduped/step143000",
    torch_dtype=torch.bfloat16,
-    #attn_implementation="sdpa"
 ).cuda(args.cuda).eval()
 
 tokenizer = AutoTokenizer.from_pretrained(
@@ -39,6 +38,7 @@ tokenizer = AutoTokenizer.from_pretrained(
   cache_dir=f"./pythia-{args.model_size}-deduped/step143000",
 )
 tokenizer.pad_token = tokenizer.eos_token
+
 model.generation_config.pad_token_id = model.generation_config.eos_token_id
 model.generation_config.output_scores = True
 model.generation_config.return_dict_in_generate = True
@@ -64,7 +64,6 @@ for dataset_name in dataset_names:
             for input_length in list(range(1,65)):
                 generations = model.generate(tokenized_inputs["input_ids"][0][:input_length].unsqueeze(0),temperature=0.0,top_k=0, top_p=0, max_length=input_length+1,min_length=input_length+1)
                 logits = torch.stack(generations["scores"]).squeeze()
-                #pdb.set_trace()
                 probability_scores = torch.nn.functional.softmax(logits.float(), dim=0)
                 entropy_scores = torch.distributions.Categorical(probs=probability_scores).entropy().mean()
                 local_entropy.append(entropy_scores.cpu().item())
