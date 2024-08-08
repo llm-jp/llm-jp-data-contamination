@@ -270,7 +270,7 @@ def wasserstein_distance_caculate(dict, dataset_name,  split_set = ["train", "va
             values2 = values[np.isnan(values) == False]
             ws_stat = wasserstein_distance(values1, values2)
             ws_matrix[idx1][idx2] = ws_stat
-    return ws_matrix#close to zero means the two distributions are similar
+    return ws_matrix
 
 
 
@@ -346,53 +346,6 @@ def calculate_mean_var(dict, dataset_name, split_set=["train", "valid", "test"])
         kur = kurtosis(values)
         print("The mean, variance, std and kurtosis of {} in {} set are {},  {}, {} and {}".format(dataset_name, set1, mean, var, std, kur))
     return mean, var
-# def js_divergence(dict, dataset_name):
-#     # Ensure p and q sum to 1
-#     js_matrix = np.zeros((3, 3))
-#     split_set = ["train", "valid", "test"]
-#     for idx1, set1 in enumerate(split_set):
-#         for idx2, set2 in enumerate(split_set):
-#             values = np.array(dict[dataset_name][set1])
-#             values1 = values[np.isnan(values) == False]
-#             values = np.array(dict[dataset_name][set2])
-#             values2 = values[np.isnan(values) == False]
-#             hist1, bin_edges = np.histogram(values1, bins=300, density=True)
-#             hist2, _ = np.histogram(values2, bins=300, density=True)
-#             eps = 1e-10
-#             hist1 += eps
-#             hist2 += eps
-#             # 确保向量总和为1（归一化），表示概率分布
-#             hist1 /= hist1.sum()
-#             hist2 /= hist2.sum()
-#             m = 0.5 * (hist1 + hist2)
-#             js_matrix[idx1][idx2] = 0.5 * entropy(hist1, m) + 0.5 * entropy(hist2, m)
-#     return js_matrix#close to zero means the two distributions are similar
-#
-# def ks_hypothesis(dict, dataset_name, split_set=["train", "valid", "test"]):
-#     ks_statistic_matrix = np.zeros((3, 3))
-#     ks_p_value_matrix = np.zeros((3, 3))
-#     for idx1, set1 in enumerate(split_set):
-#         for idx2, set2 in enumerate(split_set):
-#             values = np.array(dict[dataset_name][set1])
-#             values1 = values[np.isnan(values) == False]
-#             values = np.array(dict[dataset_name][set2])
-#             values2 = values[np.isnan(values) == False]
-#             ks_stat, p_value = ks_2samp(values1, values2)
-#             ks_statistic_matrix[idx1][idx2] = ks_stat
-#             ks_p_value_matrix[idx1][idx2] = p_value
-#     return ks_statistic_matrix, ks_p_value_matrix#close to zero means the two distributions are similar
-#
-# def wasserstein_distance_caculate(dict, dataset_name, split_set=["train", "valid", "test"]):
-#     ws_matrix = np.zeros((3, 3))
-#     for idx1, set1 in enumerate(split_set):
-#         for idx2, set2 in enumerate(split_set):
-#             values = np.array(dict[dataset_name][set1])
-#             values1 = values[np.isnan(values) == False]
-#             values = np.array(dict[dataset_name][set2])
-#             values2 = values[np.isnan(values) == False]
-#             ws_stat = wasserstein_distance(values1, values2)
-#             ws_matrix[idx1][idx2] = ws_stat
-#     return ws_matrix#close to zero means the two distributions are similar
 
 def calculate_mink_and_mink_plus(batch_logits, batched_tokenized_inputs):
     batch_input_ids = batched_tokenized_inputs["input_ids"][:, 1:].unsqueeze(-1)
