@@ -52,7 +52,6 @@ def clean_dataset(dataset, dataset_name, online=False):
 
 def form_dataset(dataset_name):
     if "WikiMIA" in dataset_name:
-        # Identify which length datasets to load based on the dataset name
         dataset_lengths = ["32", "64", "128", "256"] if "all" in dataset_name else [sub_string for sub_string in
                                                                                     ["32", "64", "128", "256"] if
                                                                                     sub_string in dataset_name]
@@ -66,25 +65,20 @@ def form_dataset(dataset_name):
             # If mia_dataset does not exist, initialize it with the first loaded dataset
             if mia_dataset is None:
                 mia_dataset = DatasetDict({
-                    'train': member_data,
-                    'test': non_member_data,
-                    'valid': non_member_data
+                    'member': member_data,
+                    'nonmember': non_member_data
                 })
             else:
-                # If mia_dataset already exists(i.e., processing other than first length dataset),
-                # append the loaded data from current dataset to corresponding subset in mia_dataset
-                mia_dataset["train"].extend(member_data)
-                mia_dataset["test"].extend(non_member_data)
-                mia_dataset["valid"].extend(non_member_data)
+                mia_dataset["member"].extend(member_data)
+                mia_dataset["nonmember"].extend(non_member_data)
         return mia_dataset
     else:
         train_dataset = torch.load(f"/model/pile/by_dataset/train_{dataset_name}_0.pt")
-        valid_dataset = torch.load(f"/model/pile/by_dataset/valid_{dataset_name}.pt")
+        #valid_dataset = torch.load(f"/model/pile/by_dataset/valid_{dataset_name}.pt")
         test_dataset = torch.load(f"/model/pile/by_dataset/test_{dataset_name}.pt")
         dataset = DatasetDict({
-            'train': train_dataset,
-            'test': test_dataset,
-            'valid': valid_dataset
+            'membwe': train_dataset,
+            'nonmember': test_dataset,
         })
         return dataset
 
@@ -924,8 +918,10 @@ def get_dataset_list(dataset_name):
     else:
         return [dataset_name]
 
-def obtain_dataset(dataset_name):
-    if "WikiMIA" in dataset_name:
+def obtain_dataset(dataset_name, local_data = False):
+    if local_data:
+        dataset = form_dataset(dataset_name)
+    elif "WikiMIA" in dataset_name:
         dataset = form_dataset(dataset_name)
         dataset["member"] = dataset["train"]
         dataset["nonmember"] = dataset["test"]

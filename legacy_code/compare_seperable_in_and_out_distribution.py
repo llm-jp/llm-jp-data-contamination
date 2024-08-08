@@ -45,8 +45,8 @@ for idx, (method_name, wiki_en_dict, wiki_all_dict) in enumerate(zip(method_list
     print(wiki_en_dict["wikipedia_(en)"].keys())
     for set_name in ["member", "nonmember"]:
 #        weights = np.ones_like(wiki_en_dict["wikipedia_(en)"][set_name]) / len(wiki_en_dict["wikipedia_(en)"][set_name])
- #       plt.hist(wiki_en_dict["wikipedia_(en)"][set_name], bins=50, label="wikien"+set_name, alpha=0.25, weights=weights)
-  #      weights = np.ones_like(wiki_all_dict["WikiMIAall"][set_name]) / len(wiki_all_dict["WikiMIAall"][set_name])
+#        plt.hist(wiki_en_dict["wikipedia_(en)"][set_name], bins=50, label="wikien"+set_name, alpha=0.25, weights=weights)
+#        weights = np.ones_like(wiki_all_dict["WikiMIAall"][set_name]) / len(wiki_all_dict["WikiMIAall"][set_name])
 #        plt.hist(wiki_all_dict["WikiMIAall"][set_name], bins=50, label="wikiall"+set_name, alpha=0.25, weights=weights)
         sns.kdeplot(wiki_en_dict["wikipedia_(en)"][set_name], label="wikien"+set_name, alpha=0.75, bw_adjust=0.25, shade=True)
         sns.kdeplot(wiki_all_dict["WikiMIAall"][set_name], label="wikiall"+set_name, alpha=0.75, bw_adjust=0.25, shade=True)
