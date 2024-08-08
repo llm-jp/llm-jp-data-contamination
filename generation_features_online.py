@@ -1,6 +1,6 @@
 import pdb
 from transformers import GPTNeoXForCausalLM, AutoTokenizer,  AutoModelForCausalLM,  LogitsProcessorList, MinLengthLogitsProcessor, StoppingCriteriaList,  MaxLengthCriteria
-from utils import form_dataset, clean_dataset, batched_data_with_indices
+from utils import form_dataset, clean_dataset, batched_data_with_indices, get_dataset_list
 import argparse
 from tqdm import tqdm
 import torch
@@ -22,15 +22,8 @@ parser.add_argument("--samples", type=int, default=1000)
 parser.add_argument("--gradient_collection", type=str, default=False)
 args = parser.parse_args()
 
-if args.dataset_name == "all":
-    dataset_names = ["arxiv", "dm_mathematics", "github", "hackernews", "pile_cc",
-                     "pubmed_central", "wikipedia_(en)", "full_pile","WikiMIA64", "WikiMIA128","WikiMIA256",
-                      "WikiMIAall"]
-    # dataset_names = ["WikiMIA64", "WikiMIA128","WikiMIA256",
-    #                   "WikiMIAall"]
-else:
-    dataset_names = [args.dataset_name]
 
+dataset_names = get_dataset_list(args.dataset_name)
 skip_calculation = False
 model = GPTNeoXForCausalLM.from_pretrained(
   f"EleutherAI/pythia-{args.model_size}-deduped",
@@ -49,8 +42,6 @@ tokenizer = AutoTokenizer.from_pretrained(
 tokenizer.pad_token = tokenizer.eos_token
 model.generation_config.pad_token_id = model.generation_config.eos_token_id
 model.generation_config.output_hidden_states = True
-#model.generation_config.output_attentions = True
-model.generation_config.output_scores = True
 model.generation_config.return_dict_in_generate = True
 
 for dataset_name in dataset_names:
