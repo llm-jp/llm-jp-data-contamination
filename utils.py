@@ -924,4 +924,20 @@ def get_dataset_list(dataset_name):
     else:
         return [dataset_name]
 
+def obtain_dataset(dataset_name):
+    if "WikiMIA" in dataset_name:
+        dataset = form_dataset(dataset_name)
+        dataset["member"] = dataset["train"]
+        dataset["nonmember"] = dataset["test"]
+    elif "temporal_arxiv" in dataset_name:
+        dataset = load_dataset("iamgroot42/mimir", dataset_name,
+                               split="2023_06")
+    else:
+        dataset = load_dataset("iamgroot42/mimir", dataset_name,
+                               split="ngram_13_0.2") if dataset_name != "full_pile" else load_dataset(
+            "iamgroot42/mimir",
+            "full_pile",
+            split="none")
+    return dataset
+
 

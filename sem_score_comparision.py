@@ -10,7 +10,7 @@ import os
 from datasets import load_dataset
 import copy
 import pickle
-
+from utils import obtain_dataset, get_dataset_list
 
 
 parser = argparse.ArgumentParser()
@@ -27,15 +27,8 @@ parser.add_argument("--generation_samples", type=int, default=10)
 args = parser.parse_args()
 
 
-if args.dataset_name == "all":
-    #dataset_names = ["arxiv", "dm_mathematics", "github", "hackernews", "pile_cc",
-    #                 "pubmed_central", "wikipedia_(en)", "full_pile","WikiMIA64", "WikiMIA128","WikiMIA256",
-    #                  "WikiMIAall", "temporalarxiv_2020_08","temporalarxiv_2021_01", "temporalarxiv_2021_06",
-    #                  "temporalarxiv_2022_01", "temporalarxiv_2022_06", "temporalarxiv_2023_01", "temporalarxiv_2023_06",]
-    dataset_names = ["WikiMIAall"]
-else:
-    dataset_names = [args.dataset_name]
 
+dataset_names = get_dataset_list(args.dataset_name)
 model = GPTNeoXForCausalLM.from_pretrained(
     f"EleutherAI/pythia-{args.model_size}-deduped",
     revision="step143000",
@@ -49,31 +42,14 @@ tokenizer = AutoTokenizer.from_pretrained(
 )
 tokenizer.pad_token = tokenizer.eos_token
 model.generation_config.pad_token_id = model.generation_config.eos_token_id
-#model.generation_config.output_hidden_states = True
-#model.generation_config.output_attentions = True
-#model.generation_config.output_scores = True
-model.generation_config.return_dict_in_generate = True
 
-#bleurt =  evaluate.load('bleurt', 'bleurt-20',
-#                        model_type="metric", device=f'cuda:{args.cuda}',
-#                        num_process=1)
-#rouge = evaluate.load('rouge', device=f'cuda:{args.cuda}',
-#                      num_process=1)
+model.generation_config.return_dict_in_generate = True
 
 for input_length in [48]:
     temp_input_length = copy.deepcopy(input_length)
     for dataset_name in dataset_names:
-        if "WikiMIA" in dataset_name:
-            dataset = form_dataset(dataset_name)
-            dataset["member"] = dataset["train"]
-            dataset["nonmember"] = dataset["test"]
-        else:
-            dataset = load_dataset("iamgroot42/mimir", dataset_name,
-                               split="ngram_13_0.2") if dataset_name != "full_pile" else load_dataset("iamgroot42/mimir",
-                                                                                                      "full_pile",
-                                                                                                      split="none")
+        dataset = obtain_dataset(dataset_name)
         device = f'cuda:{args.cuda}'
-        #mem_score = pandas.DataFrame(columns=["set_name", "original_idx",  "mem_score"])
         generation_samples_list = []
         for set_name in ["member", "nonmember"]:
             cleaned_data, orig_indices = clean_dataset(dataset[set_name], dataset_name, online=True)
@@ -85,8 +61,6 @@ for input_length in [48]:
                 tokenized_inputs = tokenizer(batched_text, return_tensors="pt", truncation=True, padding=True,
                                              max_length=1024)
                 tokenized_inputs = {key: val.to(device) for key, val in tokenized_inputs.items()}
-                #input_length = int(tokenized_inputs["input_ids"].shape[1] * ratio)
-                #output_length = int(tokenized_inputs["input_ids"].shape[1] * (ratio + 0.1))
                 temp_results = []
                 full_decoded = []
                 for _ in tqdm(range(args.generation_samples)):
@@ -109,16 +83,9 @@ for input_length in [48]:
                     temp_results.append(tokenizer.decode(generations["sequences"][0][input_length:]))
                     full_decoded.append(tokenizer.decode(generations["sequences"][0]))
                 text_to_compare = tokenizer.decode(tokenized_inputs["input_ids"][0][input_length:])
-                #pdb.set_trace()
-                #bleurt_scores = sum(bleurt_score(temp_results, [text_to_compare for _ in range(args.generation_samples)]))/args.generation_samples
-                #rougeL_scores = sum(rougeL_score(temp_results, [text_to_compare for _ in range(args.generation_samples)]))/args.generation_samples
-                #mem_score = mem_score._append({"set_name": set_name, "original_idx": orig_idx[0],
-                #                               "bleurt_score": bleurt_scores, "rougle_scores":rougeL_scores
-                #                               }, ignore_index=True)
                 input_length = temp_input_length
                 generation_samples_list.append([batched_text[0], full_decoded, temp_results, text_to_compare])
         os.makedirs(f"sem_mem_score_online/{args.model_size}", exist_ok=True)
-        #mem_score.to_csv(f"sem_mem_score_online/{args.model_size}/{dataset_name}_{temp_input_length}_sem_mem_score.csv")
         pickle.dump(generation_samples_list, open(f"sem_mem_score_online/{args.model_size}/{dataset_name}_{temp_input_length}_generation_samples.pkl", "wb"))
 
 

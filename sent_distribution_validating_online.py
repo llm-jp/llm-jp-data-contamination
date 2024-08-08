@@ -32,15 +32,7 @@ parser.add_argument("--gradient_collection", type=str, default=False)
 parser.add_argument("--dir", type=str, default="feature_result_online")
 args = parser.parse_args()
 
-if args.dataset_name == "all":
-    dataset_names = ["arxiv", "dm_mathematics", "github", "hackernews", "pile_cc",
-                    "pubmed_central", "wikipedia_(en)", "full_pile","WikiMIA64", "WikiMIA128","WikiMIA256",
-                     "WikiMIAall", "temporalarxiv_2020_08","temporalarxiv_2021_01", "temporalarxiv_2021_06",
-                     "temporalarxiv_2022_01", "temporalarxiv_2022_06", "temporalarxiv_2023_01", "temporalarxiv_2023_06"]
-    #dataset_names = ["WikiMIA64", "WikiMIA128","WikiMIA256", "WikiMIAall"]
-else:
-    dataset_names = [args.dataset_name]
-
+dataset_names = get_dataset_list(args.dataset_name)
 if args.skip_calculation == "True":
     df = pd.DataFrame()
     for dataset_name in dataset_names:
@@ -70,16 +62,7 @@ else:
     refer_tokenizer.pad_token = refer_tokenizer.eos_token
     df = pd.DataFrame()
     for dataset_name in dataset_names:
-        if "WikiMIA" in dataset_name:
-            dataset = form_dataset(dataset_name)
-            dataset["member"] = dataset["train"]
-            dataset["nonmember"] = dataset["test"]
-        else:
-            dataset = load_dataset("iamgroot42/mimir", dataset_name,
-                                   split="ngram_13_0.2") if dataset_name != "full_pile" else load_dataset(
-                "iamgroot42/mimir",
-                "full_pile",
-                split="none")
+        dataset = obtain_dataset(dataset_name)
         loss_dict = {}
         prob_dict = {}
         ppl_dict = {}

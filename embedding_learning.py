@@ -15,6 +15,7 @@ import torch.nn as nn
 import torch.optim as optim
 import numpy as np
 from torch.utils.data import DataLoader, TensorDataset
+from utils import obtain_dataset, get_dataset_list
 
 def pad_embeddings(embed_list, attn_mask_list, max_length):
     padded_embed_list = []
@@ -94,13 +95,7 @@ parser.add_argument("--prepare_dataset", type=str, default="True")
 parser.add_argument("--epochs", type=int, default=8)
 args = parser.parse_args()
 
-if args.dataset_name == "all":
-    dataset_names = ["arxiv", "dm_mathematics", "github", "hackernews", "pile_cc",
-                     "pubmed_central", "wikipedia_(en)", "full_pile","WikiMIA32", "WikiMIA64", "WikiMIA128","WikiMIA256",
-                      "WikiMIAall"]
-else:
-    dataset_names = [args.dataset_name]
-
+dataset_names = get_dataset_list(args.dataset_name)
 skip_calculation = False
 model = GPTNeoXForCausalLM.from_pretrained(
   f"EleutherAI/pythia-{args.model_size}-deduped",
@@ -127,16 +122,7 @@ os.makedirs(f"embedding_learning/{args.model_size}", exist_ok=True)
 csv_file_path = f"embedding_learning/{args.model_size}/learning_results.csv"
 
 for dataset_name in dataset_names:
-    if "WikiMIA" in dataset_name:
-        dataset = form_dataset(dataset_name)
-        dataset["member"] = dataset["train"]
-        dataset["nonmember"] = dataset["test"]
-    else:
-        dataset = load_dataset("iamgroot42/mimir", dataset_name,
-                               split="ngram_13_0.2") if dataset_name != "full_pile" else load_dataset(
-            "iamgroot42/mimir",
-            "full_pile",
-            split="none")
+    dataset = obtain_dataset(dataset_name)
     device = f'cuda:{args.cuda}'
     for layer_index in tqdm(range(layer_num)):
         member_embed_list = []

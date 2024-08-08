@@ -10,6 +10,7 @@ import pandas
 import os
 from datasets import load_dataset
 import copy
+from utils import obtain_dataset, get_dataset_list
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--batch_size", type=int, default=1)
@@ -27,15 +28,8 @@ parser.add_argument("--continuation_size", type=int, default=32)
 args = parser.parse_args()
 
 
-if args.dataset_name == "all":
-    dataset_names = ["arxiv", "dm_mathematics", "github", "hackernews", "pile_cc",
-                     "pubmed_central", "wikipedia_(en)", "full_pile","WikiMIA64", "WikiMIA128","WikiMIA256",
-                      "WikiMIAall"]
-    # dataset_names = ["WikiMIA64", "WikiMIA128","WikiMIA256",
-    #                  "WikiMIAall"]
-else:
-    dataset_names = [args.dataset_name]
 
+dataset_names = get_dataset_list(args.dataset_name)
 model = GPTNeoXForCausalLM.from_pretrained(
     f"EleutherAI/pythia-{args.model_size}-deduped",
     revision="step143000",
@@ -59,15 +53,7 @@ model.generation_config.return_dict_in_generate = True
 for input_length in [8, 16, 32, 48, 64]:
     temp_input_length = copy.deepcopy(input_length)
     for dataset_name in dataset_names:
-        if "WikiMIA" in dataset_name:
-            dataset = form_dataset(dataset_name)
-            dataset["member"] = dataset["train"]
-            dataset["nonmember"] = dataset["test"]
-        else:
-            dataset = load_dataset("iamgroot42/mimir", dataset_name,
-                               split="ngram_13_0.2") if dataset_name != "full_pile" else load_dataset("iamgroot42/mimir",
-                                                                                                      "full_pile",
-                                                                                                      split="none")
+        dataset = obtain_dataset(dataset_name)
         device = f'cuda:{args.cuda}'
         mem_score = pandas.DataFrame(columns=["set_name", "original_idx",  "mem_score"])
         for set_name in ["member", "nonmember"]:

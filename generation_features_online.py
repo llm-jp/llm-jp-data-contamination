@@ -1,6 +1,6 @@
 import pdb
 from transformers import GPTNeoXForCausalLM, AutoTokenizer,  AutoModelForCausalLM,  LogitsProcessorList, MinLengthLogitsProcessor, StoppingCriteriaList,  MaxLengthCriteria
-from utils import form_dataset, clean_dataset, batched_data_with_indices, get_dataset_list
+from utils import form_dataset, clean_dataset, batched_data_with_indices, get_dataset_list, obtain_dataset
 import argparse
 from tqdm import tqdm
 import torch
@@ -45,19 +45,7 @@ model.generation_config.output_hidden_states = True
 model.generation_config.return_dict_in_generate = True
 
 for dataset_name in dataset_names:
-    if "WikiMIA" in dataset_name:
-        dataset = form_dataset(dataset_name)
-        dataset["member"] = dataset["train"]
-        dataset["nonmember"] = dataset["test"]
-    elif "temporal_arxiv" in dataset_name:
-        dataset = load_dataset("iamgroot42/mimir", dataset_name,
-                               split="2023_06")
-    else:
-        dataset = load_dataset("iamgroot42/mimir", dataset_name,
-                               split="ngram_13_0.2") if dataset_name != "full_pile" else load_dataset(
-            "iamgroot42/mimir",
-            "full_pile",
-            split="none")
+    dataset = obtain_dataset(dataset_name)
     device = f'cuda:{args.cuda}'
     member_entropy = []
     non_member_entropy = []
