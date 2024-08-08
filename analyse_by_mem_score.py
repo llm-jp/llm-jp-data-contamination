@@ -28,7 +28,7 @@ if args.dataset_name == "all":
 else:
     dataset_names = [args.dataset_name]
 
-
+dataset_names = get_dataset_list(args.dataset_name)
 for dataset_name in dataset_names:
     model = GPTNeoXForCausalLM.from_pretrained(
         f"EleutherAI/pythia-{args.model_size}-deduped",
@@ -56,7 +56,7 @@ for dataset_name in dataset_names:
     train_dict = mem_score_data[mem_score_data['set_name'] == 'train'].set_index('original_idx')['mem_score'].to_dict()
     test_dict = mem_score_data[mem_score_data['set_name'] == 'test'].set_index('original_idx')['mem_score'].to_dict()
     valid_dict = mem_score_data[mem_score_data['set_name'] == 'test'].set_index('original_idx')['mem_score'].to_dict()
-    dataset = form_dataset(dataset_name)
+    dataset = obtain_dataset(dataset_name)
     loss_dict = {}
     prob_dict = {}
     ppl_dict = {}

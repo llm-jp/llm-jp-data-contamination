@@ -30,14 +30,8 @@ parser.add_argument("--samples", type=int, default=5000)
 parser.add_argument("--dir", type=str, default="mem_score_result")
 args = parser.parse_args()
 
-if args.dataset_name == "all":
-    dataset_names = ["ArXiv", "DM Mathematics",
-                  "FreeLaw", "Github",  "HackerNews", "NIH ExPorter",
-                 "Pile-CC", "PubMed Abstracts", "PubMed Central", "StackExchange",
-                 "USPTO Backgrounds", "Wikipedia (en)","WikiMIA64", "WikiMIA128","WikiMIA256",
-                     "WikiMIAall"]
-else:
-    dataset_names = [args.dataset_name]
+
+dataset_names = get_dataset_list(args.dataset_name)
 for dataset_name in dataset_names:
     mem_score_data = pd.read_csv(f"mem_score/{args.model_size}/{dataset_name}_mem_score.csv", index_col=0)
     mem_score_data["original_idx"] = mem_score_data["original_idx"].astype(int)
