@@ -24,7 +24,7 @@ args = parser.parse_args()
 
 
 #dataset_names = get_dataset_list(args.dataset_name)
-dataset_names = get_dataset_list("WikiMIA")
+dataset_names = get_dataset_list("temporalarxiv")
 
 model, tokenizer = load_model_and_tokenizer(args)
 tokenizer.pad_token = tokenizer.eos_token
