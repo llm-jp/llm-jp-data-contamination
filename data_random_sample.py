@@ -24,7 +24,7 @@ def filter_data(data, min_length, max_length, tokenizer, batch_size):
     for i in tqdm(range(0, len(data), batch_size)):
         batch = data[i:i+batch_size]
         texts = [item for item in batch]
-        tokenized_batch = tokenizer(texts, truncation=True, padding='longest', return_tensors="pt")
+        tokenized_batch = tokenizer(texts, truncation=True, padding='longest', return_tensors="pt", max_length=max_length+1)
         # 使用 attention_mask 获得有效 Token 的长度
         lengths = tokenized_batch['attention_mask'].sum(dim=1)
         valid_indices = (lengths >= min_length) & (lengths <= max_length)
