@@ -1,6 +1,6 @@
 import os
 import pdb
-
+from tqdm import tqdm
 import torch
 import random
 from transformers import AutoTokenizer
@@ -21,7 +21,8 @@ tokenizer = AutoTokenizer.from_pretrained(
 def filter_data(data, min_length, max_length, tokenizer):
     """过滤文本长度在给定Token数量范围的数据"""
     filtered_data = []
-    for item in data:
+    print("Filtering data...")
+    for item in tqdm(data):
         tokens = tokenizer.encode(item, truncation=True, max_length=max_length+1)  # +1 确保能够截断
         if min_length <= len(tokens) <= max_length:
             filtered_data.append(item)
