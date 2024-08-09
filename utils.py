@@ -79,7 +79,7 @@ def form_dataset(dataset_name):
         #valid_dataset = torch.load(f"/model/pile/by_dataset/valid_{dataset_name}.pt")
         test_dataset = torch.load(f"/model/pile/by_dataset/test_{dataset_name}.pt")
         dataset = DatasetDict({
-            'membwe': train_dataset,
+            'member': train_dataset,
             'nonmember': test_dataset,
         })
         return dataset
