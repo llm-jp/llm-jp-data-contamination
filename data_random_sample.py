@@ -27,10 +27,8 @@ def filter_data(data, min_length, max_length, tokenizer, batch_size):
         tokenized_batch = tokenizer(texts, truncation=True, padding='longest', return_tensors="pt")
         # 使用 attention_mask 获得有效 Token 的长度
         lengths = tokenized_batch['attention_mask'].sum(dim=1)
-
-        for j, length in enumerate(lengths):
-            if min_length <= length <= max_length:
-                filtered_data.append(batch[j])
+        valid_indices = (lengths >= min_length) & (lengths <= max_length)
+        filtered_data.extend([batch[j] for j in range(len(batch)) if valid_indices[j]])
     return filtered_data
 
 def load_and_filter_data(files, folder, min_length, max_length, sample_size, tokenizer, batch_size):
