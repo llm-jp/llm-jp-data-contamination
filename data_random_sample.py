@@ -22,7 +22,7 @@ def filter_data(data, min_length, max_length, tokenizer):
     """过滤文本长度在给定Token数量范围的数据"""
     filtered_data = []
     for item in data:
-        tokens = tokenizer.encode(item['text'], truncation=True, max_length=max_length+1)  # +1 确保能够截断
+        tokens = tokenizer.encode(item, truncation=True, max_length=max_length+1)  # +1 确保能够截断
         if min_length <= len(tokens) <= max_length:
             filtered_data.append(item)
     return filtered_data
@@ -32,7 +32,6 @@ def load_and_filter_data(files, folder, min_length, max_length, sample_size, tok
     merged_data = []
     for file in files:
         dataset = torch.load(os.path.join(folder, file))
-        pdb.set_trace()
         filtered_data = filter_data(dataset, min_length, max_length, tokenizer)
         merged_data.extend(filtered_data)
     if len(merged_data) > sample_size:
