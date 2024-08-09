@@ -3,7 +3,7 @@ import torch
 import random
 from datasets import DatasetDict, Dataset
 
-dataset_name = "Arxiv"
+dataset_name = "ArXiv"
 train_folder = "/model/pile/by_dataset/"
 test_folder = "/model/pile/by_dataset/"
 
@@ -12,8 +12,8 @@ train_files = [f for f in os.listdir(train_folder) if f.startswith(f"train_{data
 test_files = [f for f in os.listdir(test_folder) if f.startswith(f"test_{dataset_name}_")]
 
 # Step 2: 随机抽样多个train_{dataset_name}_x
-num_samples = 3 # 假设我们抽样3个文件，这个数字可以根据需要调整
-sampled_train_files = random.sample(train_files, num_samples)
+train_num_samples = 3 # 假设我们抽样3个文件，这个数字可以根据需要调整
+sampled_train_files = random.sample(train_files, train_num_samples)
 
 # Step 3: 把多个train_{dataset_name}_x合并
 merged_train_data = []
