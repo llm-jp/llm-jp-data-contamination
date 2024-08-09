@@ -878,8 +878,6 @@ def obtain_dataset(dataset_name, local_data = False):
         dataset = form_dataset(dataset_name)
     elif "WikiMIA" in dataset_name:
         dataset = form_dataset(dataset_name)
-        dataset["member"] = dataset["train"]
-        dataset["nonmember"] = dataset["test"]
     elif "temporal_arxiv" in dataset_name:
         dataset = load_dataset("iamgroot42/mimir", dataset_name,
                                split="2023_06")
