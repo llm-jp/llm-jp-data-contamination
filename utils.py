@@ -879,8 +879,8 @@ def obtain_dataset(dataset_name, local_data = False):
     elif "WikiMIA" in dataset_name:
         dataset = form_dataset(dataset_name)
     elif "temporal_arxiv" in dataset_name:
-        dataset = load_dataset("iamgroot42/mimir", dataset_name,
-                               split="2023_06")
+        dataset = load_dataset("iamgroot42/mimir", "temporal_arxiv",
+                               split=dataset_name.replace("temporalarxiv_", ""))
     else:
         dataset = load_dataset("iamgroot42/mimir", dataset_name,
                                split="ngram_13_0.2") if dataset_name != "full_pile" else load_dataset(
