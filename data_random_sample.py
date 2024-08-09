@@ -4,7 +4,7 @@ import random
 from transformers import AutoTokenizer
 from datasets import DatasetDict, Dataset
 
-dataset_name = "arxiv"
+dataset_name = "ArXiv"
 train_folder = "/model/pile/by_dataset/"
 test_folder = "/model/pile/by_dataset/"
 min_length = 50  # 最小长度（Token数量）
