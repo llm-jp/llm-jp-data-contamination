@@ -9,9 +9,9 @@ from datasets import DatasetDict, Dataset
 dataset_name = "ArXiv"
 train_folder = "/model/pile/by_dataset/"
 test_folder = "/model/pile/by_dataset/"
-min_length = 50  # 最小长度（Token数量）
-max_length = 5000  # 最大长度（Token数量）
-batch_size = 100
+min_length = 50  # token
+max_length = 5000  # token
+batch_size = 100 #deocder batch size
 tokenizer = AutoTokenizer.from_pretrained(
         f"EleutherAI/pythia-12b-deduped",
         revision="step143000",
@@ -25,14 +25,14 @@ def filter_data(data, min_length, max_length, tokenizer, batch_size):
         batch = data[i:i+batch_size]
         texts = [item for item in batch]
         tokenized_batch = tokenizer(texts, truncation=True, padding='longest', return_tensors="pt")
-        # 使用 attention_mask 获得有效 Token 的长度
+        # use attention_mask to obtain the length of each text
         lengths = tokenized_batch['attention_mask'].sum(dim=1)
         valid_indices = (lengths >= min_length) & (lengths <= max_length)
         filtered_data.extend([batch[j] for j in range(len(batch)) if valid_indices[j]])
     return filtered_data
 
 def load_and_filter_data(files, folder, min_length, max_length, sample_size, tokenizer, batch_size):
-    """加载并过滤数据，然后随机抽样指定数量的样本"""
+    """filtering and load"""
     merged_data = []
     for file in files:
         dataset = torch.load(os.path.join(folder, file))
@@ -42,18 +42,17 @@ def load_and_filter_data(files, folder, min_length, max_length, sample_size, tok
         return random.sample(merged_data, sample_size)
     return merged_data
 
-# Step 1: 检测文件夹下有多少train_{dataset_name}_x
+# Step 1: see how many data files exist
 train_files = [f for f in os.listdir(train_folder) if f.startswith(f"train_{dataset_name}_")]
 test_files = [f for f in os.listdir(test_folder) if f.startswith(f"test_{dataset_name}_")]
 
-# Step 2: 随机抽样多个train_{dataset_name}_x
-num_samples = 3  # 假设我们抽样3个文件，这个数字可以根据需要调整
+# Step 2: sample train_{dataset_name}_x
+num_samples = 3
 sampled_train_files = random.sample(train_files, num_samples)
 
-# Step 3 & 4: 把多个train_{dataset_name}_x合并并在合并train_{dataset_name}_x中，随机采样20000个样本
+# Step 3 & 4: merge data and take 20000 samples
 train_data = load_and_filter_data(sampled_train_files, train_folder, min_length, max_length, 20000, tokenizer, batch_size)
 
-# Step 5: 处理test数据
 
 def load_test_data(test_folder, test_files, min_length, max_length, sample_size, filter_test, tokenizer, batch_size):
     if len(test_files) > 1:
@@ -82,11 +81,11 @@ def load_test_data(test_folder, test_files, min_length, max_length, sample_size,
                 test_data = test_dataset
     return test_data
 
-# 控制参数，用以选择是否过滤test数据
+# whether to filter the test data since the test data is rare and may not reach 20000 sample size
 filter_test = True
 test_data = load_test_data(test_folder, test_files, min_length, max_length, 20000, filter_test, tokenizer, batch_size)
 
-# 创建DatasetDict
+# create data dict
 dataset = DatasetDict({
     'member': Dataset.from_dict({'data': train_data}),
     'nonmember': Dataset.from_dict({'data': test_data}),

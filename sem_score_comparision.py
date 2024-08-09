@@ -28,7 +28,7 @@ args = parser.parse_args()
 
 
 
-dataset_names = get_dataset_list(args.dataset_name)
+dataset_names = get_dataset_list("WikiMIA")
 model = GPTNeoXForCausalLM.from_pretrained(
     f"EleutherAI/pythia-{args.model_size}-deduped",
     revision="step143000",
