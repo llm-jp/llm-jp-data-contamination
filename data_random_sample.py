@@ -3,7 +3,7 @@ import torch
 import random
 from datasets import DatasetDict, Dataset
 
-dataset_name = "arxiv"
+dataset_name = "Arxiv"
 train_folder = "/model/pile/by_dataset/"
 test_folder = "/model/pile/by_dataset/"
 
