@@ -878,7 +878,7 @@ def obtain_dataset(dataset_name, local_data = False):
         dataset = form_dataset(dataset_name)
     elif "WikiMIA" in dataset_name:
         dataset = form_dataset(dataset_name)
-    elif "temporal_arxiv" in dataset_name:
+    elif "temporalarxiv" in dataset_name:
         dataset = load_dataset("iamgroot42/mimir", "temporal_arxiv",
                                split=dataset_name.replace("temporalarxiv_", ""))
     else:
