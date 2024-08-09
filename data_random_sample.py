@@ -23,7 +23,7 @@ def filter_data(data, min_length, max_length, tokenizer, batch_size):
     filtered_data = []
     for i in tqdm(range(0, len(data), batch_size)):
         batch = data[i:i+batch_size]
-        texts = [item['text'] for item in batch]
+        texts = [item for item in batch]
         tokenized_batch = tokenizer(texts, truncation=True, padding=False)
         for j, tokens in enumerate(tokenized_batch['input_ids']):
             if min_length <= len(tokens) <= max_length:
