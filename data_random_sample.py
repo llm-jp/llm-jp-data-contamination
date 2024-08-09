@@ -11,7 +11,7 @@ train_folder = "/model/pile/by_dataset/"
 test_folder = "/model/pile/by_dataset/"
 min_length = 50  # 最小长度（Token数量）
 max_length = 5000  # 最大长度（Token数量）
-batch_size = 1000
+batch_size = 100
 tokenizer = AutoTokenizer.from_pretrained(
         f"EleutherAI/pythia-12b-deduped",
         revision="step143000",
