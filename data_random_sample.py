@@ -17,7 +17,7 @@ tokenizer = AutoTokenizer.from_pretrained(
         revision="step143000",
         cache_dir=f"./pythia-12b-deduped/step143000",
     )
-
+tokenizer.pad_token = tokenizer.eos_token
 def filter_data(data, min_length, max_length, tokenizer, batch_size):
     """批量过滤文本长度在给定Token数量范围的数据"""
     filtered_data = []
