@@ -62,12 +62,14 @@ for dataset_name in dataset_names:
     mink_plus_dict = {}
     zlib_dict = {}
     refer_dict = {}
+    grad_dict = {}
     loss_dict[dataset_name] = {"member": [], "nonmember": []}
     prob_dict[dataset_name] = {"member": [], "nonmember": []}
     ppl_dict[dataset_name] = {"member": [], "nonmember": []}
     mink_plus_dict[dataset_name] = {"member": [], "nonmember": []}
     zlib_dict[dataset_name] = {"member": [], "nonmember": []}
     refer_dict[dataset_name] = {"member": [], "nonmember": []}
+    grad_dict[dataset_name] = {"member": [], "nonmember": []}
     for split in ["member", "nonmember"]:
         loss_list, prob_list, ppl_list, mink_plus_list, zlib_list, refer_list, idx_list = feature_collection(model, tokenizer, dataset[split], args,
                                                                                                              dataset_name,
@@ -83,6 +85,7 @@ for dataset_name in dataset_names:
         mink_plus_dict[dataset_name][split].extend(mink_plus_list)
         zlib_dict[dataset_name][split].extend(zlib_list)
         refer_dict[dataset_name][split].extend(refer_list)
+        grad_dict[dataset_name][split].extend(idx_list)
     os.makedirs(args.dir, exist_ok=True)
     pickle.dump(loss_dict, open(f"{args.dir}/{dataset_name}_{args.model_size}_loss_dict.pkl", "wb"))
     pickle.dump(prob_dict, open(f"{args.dir}/{dataset_name}_{args.model_size}_prob_dict.pkl", "wb"))
@@ -90,6 +93,7 @@ for dataset_name in dataset_names:
     pickle.dump(mink_plus_dict, open(f"{args.dir}/{dataset_name}_{args.model_size}_mink_plus_dict.pkl", "wb"))
     pickle.dump(zlib_dict, open(f"{args.dir}/{dataset_name}_{args.model_size}_zlib_dict.pkl", "wb"))
     pickle.dump(refer_dict, open(f"{args.dir}/{dataset_name}_{args.model_size}_refer_dict.pkl", "wb"))
+    pickle.dump(grad_dict, open(f"{args.dir}/{dataset_name}_{args.model_size}_grad_dict.pkl", "wb"))
     pickle.dump(idx_list, open(f"{args.dir}/{dataset_name}_{args.model_size}_idx_list.pkl", "wb"))
     df = results_caculate_and_draw(dataset_name, args, df, split_set=["member", "nonmember"])
 df.to_csv(f"{args.dir}/{args.model_size}.csv")

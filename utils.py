@@ -185,16 +185,15 @@ def feature_collection(model, tokenizer, dataset, args, dataset_name, batch_size
     ppl_collect = []
     zlib_collect = []
     ref_loss_collect = []
+    grad_collect = []
     idx_list = []
     cleaned_data, orig_indices = clean_dataset(dataset)
     for idx, (data_batch, orig_indices_batch) in tqdm(
             enumerate(batched_data_with_indices(cleaned_data, orig_indices, batch_size=args.batch_size))):
         orig_idx = [item for item in orig_indices_batch]
         batched_text = [item for item in data_batch]
-        outputs,tokenized_inputs, target_labels = caculate_outputs(model, tokenizer, batched_text, device=device, min_len=min_len, max_length=args.max_length)
-        if refer_model is not None:
-            refer_outputs, refer_tokenized_inputs, refer_target_labels = caculate_outputs(refer_model, refer_tokenizer, batched_text, device=refer_device, min_len=min_len, max_length=args.max_length)
-        #pdb.set_trace()
+        outputs,tokenized_inputs, target_labels = caculate_outputs(model, tokenizer, batched_text, device=device, min_len=min_len)
+        refer_outputs, refer_tokenized_inputs, refer_target_labels = caculate_outputs(refer_model, refer_tokenizer, batched_text, device=refer_device, min_len=min_len)
         batch_mink_plus_avg, batch_mink_avg = calculate_mink_and_mink_plus(outputs[1], tokenized_inputs)
         loss_value_list, ppl_value_list, zlib_value_list = caculate_instance_loss_perplexity_zlib(outputs[1], target_labels, batched_text)
         mink_plus_collect.extend(batch_mink_plus_avg)
@@ -279,9 +278,10 @@ def results_caculate_and_draw(dataset_name, args, df, split_set = ["train", "val
     mink_plus_dict = pickle.load(open(f"{args.dir}/{dataset_name}_{args.model_size}_mink_plus_dict.pkl", "rb"))
     zlib_dict = pickle.load(open(f"{args.dir}/{dataset_name}_{args.model_size}_zlib_dict.pkl", "rb"))
     refer_dict = pickle.load(open(f"{args.dir}/{dataset_name}_{args.model_size}_refer_dict.pkl", "rb"))
+    grad_dict = pickle.load(open(f"{args.dir}/{dataset_name}_{args.model_size}_grad_dict.pkl", "rb"))
     idx_list = pickle.load(open(f"{args.dir}/{dataset_name}_{args.model_size}_idx_list.pkl", "rb"))
     all_dict = [loss_dict, prob_dict, ppl_dict, mink_plus_dict, zlib_dict, refer_dict]
-    method_list = ["loss", "prob", "ppl", "mink_plus", "zlib", "refer"]
+    method_list = ["loss", "prob", "ppl", "mink_plus", "zlib", "refer", "grad"]
     os.makedirs(f"figures/{args.model_size}", exist_ok=True)
     for idx, dict in enumerate(all_dict):
         if idx == 0:
