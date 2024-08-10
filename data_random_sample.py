@@ -64,15 +64,15 @@ for dataset_name in ["ArXiv", "Pile-CC", "Github", "StackExchange", "Wikipedia(e
     dataset_name = "ArXiv"
     train_folder = "/model/pile/by_dataset/"
     test_folder = "/model/pile/by_dataset/"
+    tokenizer = AutoTokenizer.from_pretrained(
+        f"EleutherAI/pythia-12b-deduped",
+        revision="step143000",
+        cache_dir=f"./pythia-12b-deduped/step143000",
+    )
+    tokenizer.pad_token = tokenizer.eos_token
     for min_length in [50, 150, 250, 350, 450, 550, 650, 750, 850, 950]:
         max_length = min_length + 100  # token
         batch_size = 100 #deocder batch size
-        tokenizer = AutoTokenizer.from_pretrained(
-                f"EleutherAI/pythia-12b-deduped",
-                revision="step143000",
-                cache_dir=f"./pythia-12b-deduped/step143000",
-            )
-        tokenizer.pad_token = tokenizer.eos_token
 
         # Step 1: see how many data files exist
         train_files = [f for f in os.listdir(train_folder) if f.startswith(f"train_{dataset_name}_")]
