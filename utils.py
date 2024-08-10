@@ -278,14 +278,14 @@ def wasserstein_distance_caculate(dict, dataset_name,  split_set = ["train", "va
 
 
 def results_caculate_and_draw(dataset_name, args, df, split_set = ["train", "valid", "test"]):
-    loss_dict = pickle.load(open(f"{args.dir}/{dataset_name}_{args.model_size}_loss_dict.pkl", "rb"))
-    prob_dict = pickle.load(open(f"{args.dir}/{dataset_name}_{args.model_size}_prob_dict.pkl", "rb"))
-    ppl_dict = pickle.load(open(f"{args.dir}/{dataset_name}_{args.model_size}_ppl_dict.pkl", "rb"))
-    mink_plus_dict = pickle.load(open(f"{args.dir}/{dataset_name}_{args.model_size}_mink_plus_dict.pkl", "rb"))
-    zlib_dict = pickle.load(open(f"{args.dir}/{dataset_name}_{args.model_size}_zlib_dict.pkl", "rb"))
-    refer_dict = pickle.load(open(f"{args.dir}/{dataset_name}_{args.model_size}_refer_dict.pkl", "rb"))
-    grad_dict = pickle.load(open(f"{args.dir}/{dataset_name}_{args.model_size}_grad_dict.pkl", "rb"))
-    idx_list = pickle.load(open(f"{args.dir}/{dataset_name}_{args.model_size}_idx_list.pkl", "rb"))
+    loss_dict = pickle.load(open(f"{args.dir}/{dataset_name}/{args.min_len}_{args.model_size}_loss_dict.pkl", "rb"))
+    prob_dict = pickle.load(open(f"{args.dir}/{dataset_name}/{args.min_len}_{args.model_size}_prob_dict.pkl", "rb"))
+    ppl_dict = pickle.load(open(f"{args.dir}/{dataset_name}/{args.min_len}_{args.model_size}_ppl_dict.pkl", "rb"))
+    mink_plus_dict = pickle.load(open(f"{args.dir}/{dataset_name}/{args.min_len}_{args.model_size}_mink_plus_dict.pkl", "rb"))
+    zlib_dict = pickle.load(open(f"{args.dir}/{dataset_name}/{args.min_len}_{args.model_size}_zlib_dict.pkl", "rb"))
+    refer_dict = pickle.load(open(f"{args.dir}/{dataset_name}/{args.min_len}_{args.model_size}_refer_dict.pkl", "rb"))
+    grad_dict = pickle.load(open(f"{args.dir}/{dataset_name}/{args.min_len}_{args.model_size}_grad_dict.pkl", "rb"))
+    idx_list = pickle.load(open(f"{args.dir}/{dataset_name}/{args.min_len}_{args.model_size}_idx_list.pkl", "rb"))
     all_dict = [loss_dict, prob_dict, ppl_dict, mink_plus_dict, zlib_dict, refer_dict]
     method_list = ["loss", "prob", "ppl", "mink_plus", "zlib", "refer", "grad"]
     os.makedirs(f"figures/{args.model_size}", exist_ok=True)
