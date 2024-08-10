@@ -35,14 +35,11 @@ def batched_data_with_indices(data_list, indices_list, batch_size):
         yield (data_batch, indices_batch)
 
 
-def clean_dataset(dataset, dataset_name, online=False):
+def clean_dataset(dataset):
     invalid_pattern = re.compile(r'^\s*$')
 
     def is_valid(text):
-        if  "WikiMIA" in dataset_name or online:
-            return True
-        else:
-            return not invalid_pattern.match(text) and len(text) > 10
+        return not invalid_pattern.match(text) and len(text) > 10
 
     cleaned_data = []
     orig_indices = []

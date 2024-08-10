@@ -54,7 +54,7 @@ tokenizer.pad_token = tokenizer.eos_token
 refer_tokenizer.pad_token = refer_tokenizer.eos_token
 df = pd.DataFrame()
 for dataset_name in dataset_names:
-    dataset = obtain_dataset(dataset_name, local_data=True)
+    dataset = obtain_dataset(dataset_name)
     loss_dict = {}
     prob_dict = {}
     ppl_dict = {}
@@ -75,7 +75,7 @@ for dataset_name in dataset_names:
                                                                                        upper_limit=args.samples,
                                                                                        refer_model=refer_model,
                                                                                        refer_tokenizer=refer_tokenizer,
-                                                                                       online=True)
+                                                                                       )
         loss_dict[dataset_name][split].extend(loss_list)
         prob_dict[dataset_name][split].extend(prob_list)
         ppl_dict[dataset_name][split].extend(ppl_list)
