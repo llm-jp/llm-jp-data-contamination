@@ -29,7 +29,7 @@ for dataset_name in ["ArXiv", "Pile-CC", "Github", "StackExchange", "Wikipedia(e
                 tokenized_batch = tokenizer(texts, truncation=True, padding='longest', return_tensors="pt", max_length=2048)
                 pdb.set_trace()
                 # use attention_mask to obtain the length of each text
-                lengths = tokenized_batch['attention_mask'].sum(dim=1).cuda(1)
+                lengths = tokenized_batch['attention_mask'].cuda(1).sum(dim=1)
                 valid_indices = (lengths >= min_length) & (lengths <= max_length)
                 filtered_data.extend([batch[j] for j in range(len(batch)) if valid_indices[j]])
             return filtered_data
@@ -50,7 +50,7 @@ for dataset_name in ["ArXiv", "Pile-CC", "Github", "StackExchange", "Wikipedia(e
         test_files = [f for f in os.listdir(test_folder) if f.startswith(f"test_{dataset_name}_")]
 
         # Step 2: sample train_{dataset_name}_x
-        num_samples = 3 if len(train_files) > 3 else len(train_files)
+        num_samples = 10 if len(train_files) > 3 else len(train_files)
         sampled_train_files = random.sample(train_files, num_samples)
 
         # Step 3 & 4: merge data and take 20000 samples
