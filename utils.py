@@ -200,12 +200,13 @@ def feature_collection(model, tokenizer, dataset, args, dataset_name, min_len=50
         outputs,tokenized_inputs, target_labels = caculate_outputs(model, tokenizer, batched_text, device=device, min_len=min_len)
         refer_outputs, refer_tokenized_inputs, refer_target_labels = caculate_outputs(refer_model, refer_tokenizer, batched_text, device=refer_device, min_len=min_len)
         batch_mink_plus_avg, batch_mink_avg = calculate_mink_and_mink_plus(outputs[1], tokenized_inputs)
-        loss_value_list, ppl_value_list, zlib_value_list = caculate_instance_loss_perplexity_zlib(outputs[1], target_labels, batched_text)
+        loss_value_list, ppl_value_list, zlib_value_list, grad_value_list = caculate_instance_loss_perplexity_zlib(outputs[1], target_labels, batched_text, model)
         mink_plus_collect.extend(batch_mink_plus_avg)
         mink_collect.extend(batch_mink_avg)
         loss_collect.extend(loss_value_list)
         ppl_collect.extend(ppl_value_list)
         zlib_collect.extend(zlib_value_list)
+        grad_collect.extend(grad_value_list)
         idx_list.extend(orig_idx)
         if refer_model is not None:
             ref_loss, ref_logits = refer_outputs[:2]
@@ -384,24 +385,33 @@ def calculate_mink_and_mink_plus(batch_logits, batched_tokenized_inputs):
     return batch_mink_plus_avg, batch_mink_avg
 
 
-def caculate_instance_loss_perplexity_zlib(batch_logits, target_labels, batched_text):
+def caculate_instance_loss_perplexity_zlib(batch_logits, target_labels, batched_text, model):
     shift_logits = batch_logits[:, :-1, :].contiguous()
     labels = target_labels[:, 1:].contiguous()
     loss_fct = CrossEntropyLoss(reduction='none')
     loss_value_list = []
     ppl_value_list = []
     zlib_value_list = []
+    grad_value_list = []
     lm_loss = loss_fct(shift_logits.view(-1, shift_logits.size(-1)), labels.view(-1))
     instance_losses = lm_loss.view(-1, shift_logits.size(1))
     for idx, i in enumerate(instance_losses):
         loss = i.sum() / sum(i != 0)
         pdb.set_trace()
+        loss.backward()
+        grad_norms = []
+        for param in model.parameters():
+            if param.grad is not None:
+                grad_norms.append(param.grad.detach().norm(2))
+        grad_norm = torch.stack(grad_norms).mean()
+        model.zero_grad()
         loss_value_list.append(loss.item())
         ppl = torch.exp(loss.float()).item()
         ppl_value_list.append(ppl)
         zlib_value = loss.float().cpu() / (len(zlib.compress(bytes(batched_text[idx], "utf-8"))) + 1)
         zlib_value_list.append(zlib_value.item())
-    return loss_value_list, ppl_value_list, zlib_value_list
+        grad_value_list.append(grad_norm.item())
+    return loss_value_list, ppl_value_list, zlib_value_list, grad_value_list
 
 def remove_outliers(data, m=2):
     data = np.array(data)
