@@ -186,7 +186,7 @@ def feature_collection(model, tokenizer, dataset, args, dataset_name, batch_size
     zlib_collect = []
     ref_loss_collect = []
     idx_list = []
-    cleaned_data, orig_indices = clean_dataset(dataset, dataset_name)
+    cleaned_data, orig_indices = clean_dataset(dataset)
     for idx, (data_batch, orig_indices_batch) in tqdm(
             enumerate(batched_data_with_indices(cleaned_data, orig_indices, batch_size=args.batch_size))):
         orig_idx = [item for item in orig_indices_batch]
