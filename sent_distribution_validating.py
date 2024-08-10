@@ -54,7 +54,7 @@ tokenizer.pad_token = tokenizer.eos_token
 refer_tokenizer.pad_token = refer_tokenizer.eos_token
 df = pd.DataFrame()
 for dataset_name in dataset_names:
-    dataset = obtain_dataset(dataset_name)
+    dataset = obtain_dataset(dataset_name, local_data=True)
     loss_dict = {}
     prob_dict = {}
     ppl_dict = {}
