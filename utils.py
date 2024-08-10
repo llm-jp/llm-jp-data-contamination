@@ -197,10 +197,10 @@ def feature_collection(model, tokenizer, dataset, args, dataset_name, min_len=50
             enumerate(batched_data_with_indices(cleaned_data, orig_indices, batch_size=args.batch_size))):
         orig_idx = [item for item in orig_indices_batch]
         batched_text = [item for item in data_batch]
-        outputs,tokenized_inputs, target_labels = caculate_outputs(model, tokenizer, batched_text, device=device, min_len=min_len)
+        outputs, tokenized_inputs, target_labels = caculate_outputs(model, tokenizer, batched_text, device=device, min_len=min_len)
         refer_outputs, refer_tokenized_inputs, refer_target_labels = caculate_outputs(refer_model, refer_tokenizer, batched_text, device=refer_device, min_len=min_len)
         batch_mink_plus_avg, batch_mink_avg = calculate_mink_and_mink_plus(outputs[1], tokenized_inputs)
-        loss_value_list, ppl_value_list, zlib_value_list, grad_value_list = caculate_instance_loss_perplexity_zlib(outputs[1], target_labels, batched_text, model)
+        loss_value_list, ppl_value_list, zlib_value_list, grad_value_list = caculate_instance_loss_perplexity_zlib(outputs[1], target_labels, batched_text, model, tokenized_inputs, tokenizer)
         mink_plus_collect.extend(batch_mink_plus_avg)
         mink_collect.extend(batch_mink_avg)
         loss_collect.extend(loss_value_list)
@@ -212,7 +212,7 @@ def feature_collection(model, tokenizer, dataset, args, dataset_name, min_len=50
             ref_loss, ref_logits = refer_outputs[:2]
             ref_log_probabilities = torch.nn.functional.log_softmax(ref_logits, dim=-1)
             ref_probabilities = torch.nn.functional.softmax(ref_logits, dim=-1)
-            refer_loss_value_list, _, _, _ = caculate_instance_loss_perplexity_zlib(refer_outputs[1], refer_target_labels, batched_text, refer_model)
+            refer_loss_value_list, _, _, _ = caculate_instance_loss_perplexity_zlib(refer_outputs[1], refer_target_labels, batched_text, refer_model, refer_tokenized_inputs, refer_tokenizer)
         ref_loss_collect.extend(refer_loss_value_list)
         if len(loss_collect) >= upper_limit:
              break
@@ -386,7 +386,7 @@ def calculate_mink_and_mink_plus(batch_logits, batched_tokenized_inputs):
     return batch_mink_plus_avg, batch_mink_avg
 
 
-def caculate_instance_loss_perplexity_zlib(batch_logits, target_labels, batched_text, model):
+def caculate_instance_loss_perplexity_zlib(batch_logits, target_labels, batched_text, model, tokenized_inputs, tokenizer):
     shift_logits = batch_logits[:, :-1, :].contiguous()
     labels = target_labels[:, 1:].contiguous()
     loss_fct = CrossEntropyLoss(reduction='none')
@@ -411,7 +411,7 @@ def caculate_instance_loss_perplexity_zlib(batch_logits, target_labels, batched_
         loss_value_list.append(loss.item())
         ppl = torch.exp(loss.float()).item()
         ppl_value_list.append(ppl)
-        zlib_value = loss.float().cpu() / (len(zlib.compress(bytes(batched_text[idx], "utf-8"))) + 1)
+        zlib_value = loss.float().cpu() / (len(zlib.compress(bytes(, "utf-8"))) + 1)
         zlib_value_list.append(zlib_value.item())
         grad_value_list.append(grad_norm.item())
     return loss_value_list, ppl_value_list, zlib_value_list, grad_value_list
