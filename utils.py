@@ -197,8 +197,8 @@ def feature_collection(model, tokenizer, dataset, args, dataset_name, min_len=50
             enumerate(batched_data_with_indices(cleaned_data, orig_indices, batch_size=args.batch_size))):
         orig_idx = [item for item in orig_indices_batch]
         batched_text = [item for item in data_batch]
-        outputs,tokenized_inputs, target_labels, grad_norm = caculate_outputs(model, tokenizer, batched_text, device=device, min_len=min_len)
-        refer_outputs, refer_tokenized_inputs, refer_target_labels, grad_norm = caculate_outputs(refer_model, refer_tokenizer, batched_text, device=refer_device, min_len=min_len)
+        outputs,tokenized_inputs, target_labels = caculate_outputs(model, tokenizer, batched_text, device=device, min_len=min_len)
+        refer_outputs, refer_tokenized_inputs, refer_target_labels = caculate_outputs(refer_model, refer_tokenizer, batched_text, device=refer_device, min_len=min_len)
         batch_mink_plus_avg, batch_mink_avg = calculate_mink_and_mink_plus(outputs[1], tokenized_inputs)
         loss_value_list, ppl_value_list, zlib_value_list = caculate_instance_loss_perplexity_zlib(outputs[1], target_labels, batched_text)
         mink_plus_collect.extend(batch_mink_plus_avg)
@@ -395,6 +395,7 @@ def caculate_instance_loss_perplexity_zlib(batch_logits, target_labels, batched_
     instance_losses = lm_loss.view(-1, shift_logits.size(1))
     for idx, i in enumerate(instance_losses):
         loss = i.sum() / sum(i != 0)
+        pdb.set_trace()
         loss_value_list.append(loss.item())
         ppl = torch.exp(loss.float()).item()
         ppl_value_list.append(ppl)

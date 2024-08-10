@@ -71,7 +71,19 @@ tokenizer.pad_token = tokenizer.eos_token
 for instance_text in ["I love you", "Me hate you and love him"]:
     inputs = tokenizer(instance_text, return_tensors="pt", padding=True)
     tokenized_inputs = {key: val.to(device) for key, val in inputs.items()}
+    model.zero_grad()
     with torch.set_grad_enabled(True):
+        outputs = model(**tokenized_inputs, labels=tokenized_inputs["input_ids"])
+    loss, logits = outputs[:2]
+    loss.backward()
+    grad_norms = []
+    for param in model.parameters():
+        if param.grad is not None:
+            grad_norms.append(param.grad.detach().norm(2))
+    grad_norm = torch.stack(grad_norms).mean()
+    print(grad_norm)
+    print(loss)
+    with torch.no_grad():
         outputs = model(**tokenized_inputs, labels=tokenized_inputs["input_ids"])
     loss, logits = outputs[:2]
     print(loss)
@@ -83,13 +95,6 @@ for instance_text in ["I love you", "Me hate you and love him"]:
     mu = (probs * log_probs).to(torch.bfloat16).sum(-1)
     sigma = (probs * torch.square(log_probs.to(torch.bfloat16))).sum(-1) - torch.square(mu)
     mink_plus = (token_log_probs - mu) / sigma.sqrt()#
-    loss.backward()
-    grad_norms = []
-    for param in model.parameters():
-        if param.grad is not None:
-            grad_norms.append(param.grad.detach().norm(2))
-    grad_norm = torch.stack(grad_norms).mean()
-    print(grad_norm)
 batch_text = ["I love you", "Me hate you and love him"]
 batch_inputs = tokenizer(batch_text, return_tensors="pt", padding=True, max_length=6)
 batched_tokenized_inputs = {key: val.to(device) for key, val in batch_inputs.items()}
