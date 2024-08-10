@@ -86,6 +86,7 @@ for dataset_name in dataset_names:
         refer_dict[dataset_name][split].extend(refer_list)
         grad_dict[dataset_name][split].extend(idx_list)
     os.makedirs(args.dir, exist_ok=True)
+    os.makedirs(f"{args.dir}/{dataset_name}", exist_ok=True)
     pickle.dump(loss_dict, open(f"{args.dir}/{dataset_name}/{args.min_len}_{args.model_size}_loss_dict.pkl", "wb"))
     pickle.dump(prob_dict, open(f"{args.dir}/{dataset_name}/{args.min_len}_{args.model_size}_prob_dict.pkl", "wb"))
     pickle.dump(ppl_dict, open(f"{args.dir}/{dataset_name}/{args.min_len}_{args.model_size}_ppl_dict.pkl", "wb"))
