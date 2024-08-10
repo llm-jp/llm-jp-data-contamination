@@ -75,7 +75,7 @@ def form_dataset(dataset_name, min_len=None):
         return mia_dataset
     else:
         dataset = datasets.load_from_disk(f"./filtered_dataset/{min_len}_{min_len+100}/{dataset_name}")
-        DatasetDict({
+        dataset = DatasetDict({
             'member': dataset['member']['data'],
             'nonmember': dataset['member']['data']
         })
@@ -85,7 +85,7 @@ def form_dataset(dataset_name, min_len=None):
         #     'member': member_data,
         #     'nonmember': non_member_data
         # })
-        dataset = Dataset.from_pandas(df)
+        # dataset = Dataset.from_pandas(df)
         # train_dataset = torch.load(f"/model/pile/by_dataset/train_{dataset_name}_0.pt")
         # #valid_dataset = torch.load(f"/model/pile/by_dataset/valid_{dataset_name}.pt")
         # test_dataset = torch.load(f"/model/pile/by_dataset/test_{dataset_name}.pt")
