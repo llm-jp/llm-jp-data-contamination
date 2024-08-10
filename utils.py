@@ -212,7 +212,7 @@ def feature_collection(model, tokenizer, dataset, args, dataset_name, min_len=50
             ref_loss, ref_logits = refer_outputs[:2]
             ref_log_probabilities = torch.nn.functional.log_softmax(ref_logits, dim=-1)
             ref_probabilities = torch.nn.functional.softmax(ref_logits, dim=-1)
-            refer_loss_value_list, _, _ = caculate_instance_loss_perplexity_zlib(refer_outputs[1], refer_target_labels, batched_text, refer_model)
+            refer_loss_value_list, _, _, _ = caculate_instance_loss_perplexity_zlib(refer_outputs[1], refer_target_labels, batched_text, refer_model)
         ref_loss_collect.extend(refer_loss_value_list)
         if len(loss_collect) >= upper_limit:
              break
