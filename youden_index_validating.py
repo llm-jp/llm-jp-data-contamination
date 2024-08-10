@@ -47,11 +47,12 @@ def decide_threshold_direction(y_true, scores, threshold):
     neg_mean = np.mean(negative_scores)
     return '<=' if pos_mean < neg_mean else '>='
 
+
 # 随机种子列表
+
 random_seeds = [42, 52, 62, 72, 82]
 dataset_names = ["github", "pile_cc", "full_pile", "WikiMIA64", "WikiMIA128", "WikiMIA256", "WikiMIAall"]
 model_size = "2.8b"
-
 results = []
 
 for seed in random_seeds:
@@ -59,7 +60,8 @@ for seed in random_seeds:
         loss_dict = pickle.load(open(f"feature_result_online/{dataset_name}_{model_size}_loss_dict.pkl", "rb"))
         prob_dict = pickle.load(open(f"feature_result_online/{dataset_name}_{model_size}_prob_dict.pkl", "rb"))
         ppl_dict = pickle.load(open(f"feature_result_online/{dataset_name}_{model_size}_ppl_dict.pkl", "rb"))
-        mink_plus_dict = pickle.load(open(f"feature_result_online/{dataset_name}_{model_size}_mink_plus_dict.pkl", "rb"))
+        mink_plus_dict = pickle.load(
+            open(f"feature_result_online/{dataset_name}_{model_size}_mink_plus_dict.pkl", "rb"))
         zlib_dict = pickle.load(open(f"feature_result_online/{dataset_name}_{model_size}_zlib_dict.pkl", "rb"))
 
         dict_list = [loss_dict, prob_dict, ppl_dict, mink_plus_dict, zlib_dict]
@@ -88,7 +90,6 @@ for dataset_name in dataset_names:
 
     # 遍历每个特征
     features = df_dataset['feature'].unique()
-
     for feature in features:
         df_feature = df_dataset[df_dataset['feature'] == feature]
         seed_results = []
@@ -97,7 +98,8 @@ for dataset_name in dataset_names:
             df_seed = df_feature[df_feature['seed'] == seed]
 
             # 根据8:2比例拆分数据集
-            X_train, X_test, y_train, y_test = train_test_split(df_seed['score'], df_seed['label'], test_size=0.2, random_state=seed)
+            X_train, X_test, y_train, y_test = train_test_split(df_seed['score'], df_seed['label'], test_size=0.2,
+                                                                random_state=seed)
 
             # 使用G-mean方法计算最佳阈值
             best_threshold = gmean_method(y_train, X_train)
@@ -107,32 +109,34 @@ for dataset_name in dataset_names:
             if threshold_direction == '>=':
                 y_train_pred = np.array(X_train >= best_threshold, dtype=float)
                 y_test_pred = np.array(X_test >= best_threshold, dtype=float)
+                train_auc = roc_auc_score(y_train, X_train)
+                test_auc = roc_auc_score(y_test, X_test)
             else:
                 y_train_pred = np.array(X_train <= best_threshold, dtype=float)
                 y_test_pred = np.array(X_test <= best_threshold, dtype=float)
+                train_auc = roc_auc_score(y_train, -X_train)
+                test_auc = roc_auc_score(y_test, -X_test)
 
             train_accuracy = accuracy_score(y_train, y_train_pred)
             train_recall = recall_score(y_train, y_train_pred)
             train_precision = precision_score(y_train, y_train_pred)
             train_f1 = f1_score(y_train, y_train_pred)
+
             # 在测试集上评估
             test_accuracy = accuracy_score(y_test, y_test_pred)
             test_recall = recall_score(y_test, y_test_pred)
             test_precision = precision_score(y_test, y_test_pred)
             test_f1 = f1_score(y_test, y_test_pred)
 
-
             # 存储评估结果
             seed_results.append({
                 'best_threshold': best_threshold,
                 'train_accuracy': train_accuracy,
-                #'train_recall': train_recall,
-                #'train_precision': train_precision,
                 'train_f1': train_f1,
+                'train_auc': train_auc,
                 'test_accuracy': test_accuracy,
-               # 'test_recall': test_recall,
-               # 'test_precision': test_precision,
                 'test_f1': test_f1,
+                'test_auc': test_auc,
                 'threshold_direction': threshold_direction
             })
 
@@ -156,14 +160,36 @@ for dataset_name in dataset_names:
         plt.hist(member_scores, bins=50, alpha=0.5, label='Member', color='red')
 
         if avg_results['threshold_direction'] == '>=':
-            plt.axvline(avg_results['best_threshold'], color='green', linestyle='dashed', linewidth=2, label=f'Threshold: {avg_results["best_threshold"]:.2f} (>=)')
+            plt.axvline(avg_results['best_threshold'], color='green', linestyle='dashed', linewidth=2,
+                        label=f'Threshold: {avg_results["best_threshold"]:.2f} (>=')
         else:
-            plt.axvline(avg_results['best_threshold'], color='green', linestyle='dashed', linewidth=2, label=f'Threshold: {avg_results["best_threshold"]:.2f} (<=)')
+            plt.axvline(avg_results['best_threshold'], color='green', linestyle='dashed', linewidth=2,
+                        label=f'Threshold: {avg_results["best_threshold"]:.2f} (<=)')
 
         plt.title(f'Distribution of Non-members and Members\nDataset: {dataset_name}, Feature: {feature}')
         plt.xlabel('Score')
         plt.ylabel('Frequency')
         plt.legend()
+        plt.grid(True)
+        plt.show()
+
+        # 绘制ROC曲线
+        if avg_results['threshold_direction'] == '>=':
+            fpr, tpr, _ = roc_curve(y_test, X_test)
+            auc = avg_results["test_auc"]
+        else:
+            fpr, tpr, _ = roc_curve(y_test, -X_test)
+            auc = avg_results["test_auc"]
+
+        plt.figure(figsize=(10, 6))
+        plt.plot(fpr, tpr, color='blue', lw=2, label=f'ROC curve (AUC = {auc:.2f})')
+        plt.plot([0, 1], [0, 1], color='red', lw=2, linestyle='--')
+        plt.xlim([0.0, 1.0])
+        plt.ylim([0.0, 1.05])
+        plt.xlabel('False Positive Rate')
+        plt.ylabel('True Positive Rate')
+        plt.title(f'ROC Curve\nDataset: {dataset_name}, Feature: {feature}')
+        plt.legend(loc="lower right")
         plt.grid(True)
         plt.show()
 
@@ -174,9 +200,9 @@ print("Evaluation results for each dataset and feature (averaged over seeds):")
 for dataset_name, feature_results in evaluation_results.items():
     print(f"Dataset: {dataset_name}")
     for feature, metrics in feature_results.items():
-        print(f"  Feature: {feature}")
+        print(f" Feature: {feature}")
         for metric, value in metrics.items():
-            print(f"    {metric}: {value}")
+            print(f" {metric}: {value}")
 
 # 保存结果到DataFrame
 results_list = []
@@ -187,13 +213,11 @@ for dataset_name, features_results in evaluation_results.items():
             'feature': feature,
             'best_threshold': metrics['best_threshold'],
             'train_accuracy': metrics['train_accuracy'],
-            #'train_recall': metrics['train_recall'],
-            #'train_precision': metrics['train_precision'],
             'train_f1': metrics['train_f1'],
+            'train_auc': metrics['train_auc'],
             'test_accuracy': metrics['test_accuracy'],
-            #'test_recall': metrics['test_recall'],
-            #'test_precision': metrics['test_precision'],
             'test_f1': metrics['test_f1'],
+            'test_auc': metrics['test_auc'],
             'threshold_direction': metrics['threshold_direction']
         }
         results_list.append(entry)
@@ -210,10 +234,12 @@ formatters = {column: "{:.2f}".format for column in results_df.columns if result
 latex_file_path = 'evaluation_results.tex'
 with open(latex_file_path, 'w') as f:
     f.write(results_df.to_latex(index=False, formatters=formatters))
+
 print(f'Results have been saved to {latex_file_path}')
 
 # 可视化 - 使用Bar Chart比较训练集和测试集的准确率
 fig, ax = plt.subplots(figsize=(10, 6))
+
 train_accuracies = results_df.pivot(index='dataset', columns='feature', values='train_accuracy')
 test_accuracies = results_df.pivot(index='dataset', columns='feature', values='test_accuracy')
 
