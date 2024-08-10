@@ -103,13 +103,13 @@ def caculate_outputs(model, tokenizer, text_batch, device, min_len=50):
     target_labels = tokenized_inputs["input_ids"].clone().to(device)
     target_labels[tokenized_inputs["attention_mask"] == 0] = -100
     outputs = model(**tokenized_inputs, labels=target_labels)
-    grad_norms = []
-    for param in model.parameters():
-        if param.grad is not None:
-            grad_norms.append(param.grad.detach().norm(2))
-            pdb.set_trace()
-    grad_norm = torch.stack(grad_norms).mean()
-    return outputs, tokenized_inputs, target_labels, grad_norm
+    # grad_norms = []
+    # for param in model.parameters():
+    #     if param.grad is not None:
+    #         grad_norms.append(param.grad.detach().norm(2))
+    #         pdb.set_trace()
+    # grad_norm = torch.stack(grad_norms).mean()
+    return outputs, tokenized_inputs, target_labels#, grad_norm
 
 
 
