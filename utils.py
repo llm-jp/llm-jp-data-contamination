@@ -397,12 +397,12 @@ def caculate_instance_loss_perplexity_zlib(batch_logits, target_labels, batched_
     instance_losses = lm_loss.view(-1, shift_logits.size(1))
     for idx, i in enumerate(instance_losses):
         loss = i.sum() / sum(i != 0)
-        pdb.set_trace()
         loss.backward()
         grad_norms = []
         for param in model.parameters():
             if param.grad is not None:
                 grad_norms.append(param.grad.detach().norm(2))
+        pdb.set_trace()
         grad_norm = torch.stack(grad_norms).mean()
         model.zero_grad()
         loss_value_list.append(loss.item())
