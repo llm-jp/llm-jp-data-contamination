@@ -26,8 +26,8 @@ for dataset_name in ["ArXiv", "Pile-CC", "Github", "StackExchange", "Wikipedia(e
             for i in tqdm(range(0, len(data), batch_size)):
                 batch = data[i:i+batch_size]
                 texts = [item for item in batch]
-                tokenized_batch = tokenizer(texts, truncation=True, padding='longest', return_tensors="pt", max_length=2048)
-                pdb.set_trace()
+                tokenized_batch = tokenizer(texts, truncation=True, padding='longest', return_tensors="pt", max_length=2048).to("cuda:1")
+                #pdb.set_trace()
                 # use attention_mask to obtain the length of each text
                 lengths = tokenized_batch['attention_mask'].cuda(1).sum(dim=1)
                 valid_indices = (lengths >= min_length) & (lengths <= max_length)
