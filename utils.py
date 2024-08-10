@@ -77,7 +77,7 @@ def form_dataset(dataset_name, min_len=None):
         dataset = datasets.load_from_disk(f"./filtered_dataset/{min_len}_{min_len+100}/{dataset_name}")
         dataset = DatasetDict({
             'member': dataset['member']['data'],
-            'nonmember': dataset['member']['data']
+            'nonmember': dataset['nonmember']['data']
         })
         # member_data = dataset['member']['data'][:1000]
         # non_member_data = dataset['nonmember']['data'][:1000]
