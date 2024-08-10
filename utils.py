@@ -75,12 +75,16 @@ def form_dataset(dataset_name, min_len=None):
         return mia_dataset
     else:
         dataset = datasets.load_from_disk(f"./filtered_dataset/{min_len}_{min_len+100}/{dataset_name}")
-        member_data = dataset['member']['data'][:1000]
-        non_member_data = dataset['nonmember']['data'][:1000]
-        df = pd.DataFrame({
-            'member': member_data,
-            'nonmember': non_member_data
+        DatasetDict({
+            'member': dataset['member']['data'],
+            'nonmember': dataset['member']['data']
         })
+        # member_data = dataset['member']['data'][:1000]
+        # non_member_data = dataset['nonmember']['data'][:1000]
+        # df = pd.DataFrame({
+        #     'member': member_data,
+        #     'nonmember': non_member_data
+        # })
         dataset = Dataset.from_pandas(df)
         # train_dataset = torch.load(f"/model/pile/by_dataset/train_{dataset_name}_0.pt")
         # #valid_dataset = torch.load(f"/model/pile/by_dataset/valid_{dataset_name}.pt")
@@ -115,12 +119,8 @@ def caculate_outputs(model, tokenizer, text_batch, device, min_len=50):
 
 
 def mix_distribution(dict, dataset_name, title, args, ratio=0.8, total_num=10000):
-    if "train" in dict[dataset_name].keys():
-        train_data = dict[dataset_name]["train"]
-        test_data = dict[dataset_name]["test"]
-    else:
-        train_data = dict[dataset_name]["member"]
-        test_data = dict[dataset_name]["nonmember"]
+    train_data = dict[dataset_name]["member"]
+    test_data = dict[dataset_name]["nonmember"]
     train_data_num = total_num*ratio
     test_data_num = total_num*(1-ratio)
     train_data = random.sample(train_data, min(int(train_data_num), len(train_data)))
@@ -286,7 +286,7 @@ def results_caculate_and_draw(dataset_name, args, df, split_set = ["train", "val
     refer_dict = pickle.load(open(f"{args.dir}/{dataset_name}/{args.min_len}_{args.model_size}_refer_dict.pkl", "rb"))
     grad_dict = pickle.load(open(f"{args.dir}/{dataset_name}/{args.min_len}_{args.model_size}_grad_dict.pkl", "rb"))
     idx_list = pickle.load(open(f"{args.dir}/{dataset_name}/{args.min_len}_{args.model_size}_idx_list.pkl", "rb"))
-    all_dict = [loss_dict, prob_dict, ppl_dict, mink_plus_dict, zlib_dict, refer_dict]
+    all_dict = [loss_dict, prob_dict, ppl_dict, mink_plus_dict, zlib_dict, refer_dict, grad_dict]
     method_list = ["loss", "prob", "ppl", "mink_plus", "zlib", "refer", "grad"]
     os.makedirs(f"figures/{args.model_size}", exist_ok=True)
     for idx, dict in enumerate(all_dict):
