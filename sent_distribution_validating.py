@@ -26,6 +26,7 @@ parser.add_argument("--dataset_name", type=str, default="Pile-CC", choices=["arx
 parser.add_argument("--cuda", type=int, default=0, help="cuda device")
 parser.add_argument("--refer_cuda", type=int, default=7, help="cuda device")
 parser.add_argument("--min_len", type=int, default=50)
+parser.add_argument("--local_data", type=str, default="True")
 parser.add_argument("--samples", type=int, default=5000)
 parser.add_argument("--gradient_collection", type=str, default=False)
 parser.add_argument("--dir", type=str, default="feature_result_online")
@@ -54,7 +55,7 @@ tokenizer.pad_token = tokenizer.eos_token
 refer_tokenizer.pad_token = refer_tokenizer.eos_token
 df = pd.DataFrame()
 for dataset_name in dataset_names:
-    dataset = obtain_dataset(dataset_name, local_data=True)
+    dataset = obtain_dataset(dataset_name, min_len=args.min_len, local_data=True if args.local_data == "True" else False)
     loss_dict = {}
     prob_dict = {}
     ppl_dict = {}
