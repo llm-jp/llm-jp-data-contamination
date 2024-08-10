@@ -56,7 +56,6 @@ def form_dataset(dataset_name, min_len=None):
         dataset_lengths = ["32", "64", "128", "256"] if "all" in dataset_name else [sub_string for sub_string in
                                                                                     ["32", "64", "128", "256"] if
                                                                                     sub_string in dataset_name]
-
         mia_dataset = None
         for length in dataset_lengths:
             # Load the dataset for the specific length
@@ -398,10 +397,7 @@ def caculate_instance_loss_perplexity_zlib(batch_logits, target_labels, batched_
     instance_losses = lm_loss.view(-1, shift_logits.size(1))
     for idx, i in enumerate(instance_losses):
         loss = i.sum() / sum(i != 0)
-        if idx != len(instance_losses)-1:
-            loss.backward(retain_graph=True)
-        else:
-            loss.backward()
+        loss.backward(retain_graph=True)
         grad_norms = []
         for param in model.parameters():
             if param.grad is not None:
