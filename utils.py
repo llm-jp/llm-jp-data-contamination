@@ -102,9 +102,14 @@ def caculate_outputs(model, tokenizer, text_batch, device, min_len=50):
     tokenized_inputs = {key: val.to(device) for key, val in tokenized_inputs.items()}
     target_labels = tokenized_inputs["input_ids"].clone().to(device)
     target_labels[tokenized_inputs["attention_mask"] == 0] = -100
-    with torch.no_grad():
-        outputs = model(**tokenized_inputs, labels=target_labels)
-    return outputs, tokenized_inputs, target_labels
+    outputs = model(**tokenized_inputs, labels=target_labels)
+    grad_norms = []
+    for param in model.parameters():
+        if param.grad is not None:
+            grad_norms.append(param.grad.detach().norm(2))
+            pdb.set_trace()
+    grad_norm = torch.stack(grad_norms).mean()
+    return outputs, tokenized_inputs, target_labels, grad_norm
 
 
 
@@ -176,7 +181,7 @@ def caculate_loss_instance(idx, logits, target_labels):
     return loss_i
 
 
-def feature_collection(model, tokenizer, dataset, args, dataset_name, batch_size=8, min_len=50, upper_limit=10000, refer_model=None, refer_tokenizer=None):
+def feature_collection(model, tokenizer, dataset, args, dataset_name, min_len=50, upper_limit=10000, refer_model=None, refer_tokenizer=None):
     device = f'cuda:{args.cuda}'
     refer_device = f'cuda:{args.refer_cuda}'
     loss_collect = []
@@ -192,8 +197,8 @@ def feature_collection(model, tokenizer, dataset, args, dataset_name, batch_size
             enumerate(batched_data_with_indices(cleaned_data, orig_indices, batch_size=args.batch_size))):
         orig_idx = [item for item in orig_indices_batch]
         batched_text = [item for item in data_batch]
-        outputs,tokenized_inputs, target_labels = caculate_outputs(model, tokenizer, batched_text, device=device, min_len=min_len)
-        refer_outputs, refer_tokenized_inputs, refer_target_labels = caculate_outputs(refer_model, refer_tokenizer, batched_text, device=refer_device, min_len=min_len)
+        outputs,tokenized_inputs, target_labels, grad_norm = caculate_outputs(model, tokenizer, batched_text, device=device, min_len=min_len)
+        refer_outputs, refer_tokenized_inputs, refer_target_labels, grad_norm = caculate_outputs(refer_model, refer_tokenizer, batched_text, device=refer_device, min_len=min_len)
         batch_mink_plus_avg, batch_mink_avg = calculate_mink_and_mink_plus(outputs[1], tokenized_inputs)
         loss_value_list, ppl_value_list, zlib_value_list = caculate_instance_loss_perplexity_zlib(outputs[1], target_labels, batched_text)
         mink_plus_collect.extend(batch_mink_plus_avg)
