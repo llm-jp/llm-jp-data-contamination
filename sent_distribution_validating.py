@@ -73,7 +73,6 @@ for dataset_name in dataset_names:
     for split in ["member", "nonmember"]:
         loss_list, prob_list, ppl_list, mink_plus_list, zlib_list, refer_list, idx_list = feature_collection(model, tokenizer, dataset[split], args,
                                                                                                              dataset_name,
-                                                                                       batch_size=args.batch_size,
                                                                                        min_len = args.min_len,
                                                                                        upper_limit=args.samples,
                                                                                        refer_model=refer_model,
