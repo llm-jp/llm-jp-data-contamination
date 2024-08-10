@@ -1,4 +1,6 @@
 import json
+
+import datasets
 import pandas as pd
 from eval import create_random_samples
 import torch
@@ -11,7 +13,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pdb
 import torch.nn.functional as F
-from datasets import load_dataset, DatasetDict
+from datasets import load_dataset, DatasetDict, Dataset
 from itertools import islice
 import re
 from tqdm import tqdm
@@ -40,7 +42,7 @@ def clean_dataset(dataset, dataset_name, online=False):
         if  "WikiMIA" in dataset_name or online:
             return True
         else:
-            return not invalid_pattern.match(text) and len(text.split()) > 100
+            return not invalid_pattern.match(text) and len(text) > 10
 
     cleaned_data = []
     orig_indices = []
@@ -52,7 +54,7 @@ def clean_dataset(dataset, dataset_name, online=False):
 
     return cleaned_data, orig_indices
 
-def form_dataset(dataset_name):
+def form_dataset(dataset_name, min_len=None):
     if "WikiMIA" in dataset_name:
         dataset_lengths = ["32", "64", "128", "256"] if "all" in dataset_name else [sub_string for sub_string in
                                                                                     ["32", "64", "128", "256"] if
@@ -75,22 +77,30 @@ def form_dataset(dataset_name):
                 mia_dataset["nonmember"].extend(non_member_data)
         return mia_dataset
     else:
-        train_dataset = torch.load(f"/model/pile/by_dataset/train_{dataset_name}_0.pt")
-        #valid_dataset = torch.load(f"/model/pile/by_dataset/valid_{dataset_name}.pt")
-        test_dataset = torch.load(f"/model/pile/by_dataset/test_{dataset_name}.pt")
-        dataset = DatasetDict({
-            'member': train_dataset,
-            'nonmember': test_dataset,
+        dataset = datasets.load_from_disk(f"./filtered_dataset/{min_len}_{min_len+100}/{dataset_name}")
+        member_data = dataset['member']['data'][:1000]
+        non_member_data = dataset['nonmember']['data'][:1000]
+        df = pd.DataFrame({
+            'member': member_data,
+            'nonmember': non_member_data
         })
+        dataset = Dataset.from_pandas(df)
+        # train_dataset = torch.load(f"/model/pile/by_dataset/train_{dataset_name}_0.pt")
+        # #valid_dataset = torch.load(f"/model/pile/by_dataset/valid_{dataset_name}.pt")
+        # test_dataset = torch.load(f"/model/pile/by_dataset/test_{dataset_name}.pt")
+        # dataset = DatasetDict({
+        #     'member': train_dataset,
+        #     'nonmember': test_dataset,
+        # })
         return dataset
 
 
-def caculate_outputs(model, tokenizer, text_batch, device, max_length=2048):
+def caculate_outputs(model, tokenizer, text_batch, device, min_len=50):
     tokenized_inputs = tokenizer(text_batch,
                                  return_tensors="pt",
                                  truncation=True,
                                  padding=True,
-                                 max_length=max_length,
+                                 max_length=min_len+100,
                                  )
     tokenized_inputs = {key: val.to(device) for key, val in tokenized_inputs.items()}
     target_labels = tokenized_inputs["input_ids"].clone().to(device)
@@ -116,12 +126,6 @@ def mix_distribution(dict, dataset_name, title, args, ratio=0.8, total_num=10000
     combined_data = train_data + test_data
     # 画分布图
     plt.figure(figsize=(10, 5))
-    # weights = np.ones_like(combined_data) / len(combined_data)
-    # plt.hist(combined_data, bins=100, label='Mixed Distribution', alpha=0.5, weights=weights)
-    # weights = np.ones_like(train_data) / len(train_data)
-    # plt.hist(train_data, bins=100, label='Train Distribution', alpha=0.5, weights=weights)
-    # weights = np.ones_like(test_data) / len(test_data)
-    # plt.hist(test_data, bins=100, label='Test Distribution', alpha=0.5, weights=weights)
     sns.kdeplot(combined_data, label='Mixed Distribution', alpha=1, shade=True)
     sns.kdeplot(train_data, label='Train Distribution', alpha=1, shade=True)
     sns.kdeplot(test_data, label='Test Distribution', alpha=1, shade=True)
@@ -175,7 +179,7 @@ def caculate_loss_instance(idx, logits, target_labels):
     return loss_i
 
 
-def feature_collection(model, tokenizer, dataset, args, dataset_name, batch_size=8, upper_limit=10000, refer_model=None, refer_tokenizer=None, online=False):
+def feature_collection(model, tokenizer, dataset, args, dataset_name, batch_size=8, min_len=50, upper_limit=10000, refer_model=None, refer_tokenizer=None):
     device = f'cuda:{args.cuda}'
     refer_device = f'cuda:{args.refer_cuda}'
     loss_collect = []
@@ -185,14 +189,14 @@ def feature_collection(model, tokenizer, dataset, args, dataset_name, batch_size
     zlib_collect = []
     ref_loss_collect = []
     idx_list = []
-    cleaned_data, orig_indices = clean_dataset(dataset, dataset_name, online=online)
+    cleaned_data, orig_indices = clean_dataset(dataset, dataset_name)
     for idx, (data_batch, orig_indices_batch) in tqdm(
             enumerate(batched_data_with_indices(cleaned_data, orig_indices, batch_size=args.batch_size))):
         orig_idx = [item for item in orig_indices_batch]
         batched_text = [item for item in data_batch]
-        outputs,tokenized_inputs, target_labels = caculate_outputs(model, tokenizer, batched_text, device=device, max_length=args.max_length)
+        outputs,tokenized_inputs, target_labels = caculate_outputs(model, tokenizer, batched_text, device=device, min_len=min_len, max_length=args.max_length)
         if refer_model is not None:
-            refer_outputs, refer_tokenized_inputs, refer_target_labels = caculate_outputs(refer_model, refer_tokenizer, batched_text, device=refer_device, max_length=args.max_length)
+            refer_outputs, refer_tokenized_inputs, refer_target_labels = caculate_outputs(refer_model, refer_tokenizer, batched_text, device=refer_device, min_len=min_len, max_length=args.max_length)
         #pdb.set_trace()
         batch_mink_plus_avg, batch_mink_avg = calculate_mink_and_mink_plus(outputs[1], tokenized_inputs)
         loss_value_list, ppl_value_list, zlib_value_list = caculate_instance_loss_perplexity_zlib(outputs[1], target_labels, batched_text)
@@ -210,11 +214,6 @@ def feature_collection(model, tokenizer, dataset, args, dataset_name, batch_size
         ref_loss_collect.extend(refer_loss_value_list)
         if len(loss_collect) >= upper_limit:
              break
-    # loss_collect = remove_outliers(loss_collect)
-    # mink_collect = remove_outliers(mink_collect)
-    # ppl_collect = remove_outliers(ppl_collect)
-    # mink_plus_collect = remove_outliers(mink_plus_collect)
-    # zlib_collect = remove_outliers(zlib_collect)
     return loss_collect, mink_collect, ppl_collect, mink_plus_collect, zlib_collect, ref_loss_collect, idx_list
 
 def calculate_mean_var(dict, dataset_name, split_set):
@@ -873,9 +872,9 @@ def get_dataset_list(dataset_name):
     else:
         return [dataset_name]
 
-def obtain_dataset(dataset_name, local_data = False):
+def obtain_dataset(dataset_name, min_len=50, local_data = False):
     if local_data:
-        dataset = form_dataset(dataset_name)
+        dataset = form_dataset(dataset_name, min_len)
     elif "WikiMIA" in dataset_name:
         dataset = form_dataset(dataset_name)
     elif "temporalarxiv" in dataset_name:

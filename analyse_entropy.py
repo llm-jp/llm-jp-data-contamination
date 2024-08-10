@@ -22,3 +22,5 @@ else:
 entropy_dict = {"12b":[], "6.9b":[],"1b":[], "410m":[]}
 for dataset_name in dataset_names:
     member_entropy = np.load(f"entropy_online/{args.model_size}/{dataset_name}_member_entropy.npy")
+    nonmember_entropy = np.load(f"entropy_online/{args.model_size}/{dataset_name}_nonmember_entropy.npy")
+
