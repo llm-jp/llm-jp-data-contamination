@@ -28,7 +28,7 @@ for dataset_name in ["ArXiv", "Pile-CC", "Github", "StackExchange", "Wikipedia(e
                 texts = [item for item in batch]
                 tokenized_batch = tokenizer(texts, truncation=True, padding='longest', return_tensors="pt")
                 # use attention_mask to obtain the length of each text
-                lengths = tokenized_batch['attention_mask'].sum(dim=1)
+                lengths = tokenized_batch['attention_mask'].sum(dim=1).cuda(1)
                 valid_indices = (lengths >= min_length) & (lengths <= max_length)
                 filtered_data.extend([batch[j] for j in range(len(batch)) if valid_indices[j]])
             return filtered_data
