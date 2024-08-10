@@ -312,16 +312,17 @@ def results_caculate_and_draw(dataset_name, args, df, split_set = ["train", "val
             print("Zlib Distribution Similarity Matrix")
         elif idx == 5:
             residual_dict = {}
-            if "train" in split_set:
-                residual_dict[dataset_name]=  {"train": [], "valid": [], "test": []}
-            else:
-                residual_dict[dataset_name] = {"member": [], "nonmember": []}
+            residual_dict[dataset_name] = {"member": [], "nonmember": []}
             for split in split_set:
                 residual_dict[dataset_name][split] = [loss_dict[dataset_name][split][i] - refer_dict[dataset_name][split][i]
                                         for i in range(len(loss_dict[dataset_name][split]))]
             figure_draw(residual_dict, "Refer", dataset_name, args)
             mix_distribution(residual_dict, dataset_name, "Refer", args)
             print("Refer Distribution Similarity Matrix")
+        elif idx == 6:
+            figure_draw(grad_dict, "Grad", dataset_name, args)
+            mix_distribution(grad_dict, dataset_name, "Grad", args)
+            print("Grad Distribution Similarity Matrix")
         print(idx)
         calculate_mean_var(dict, dataset_name, split_set=split_set)
         js_matrix = js_divergence(dict, dataset_name, split_set=split_set)
