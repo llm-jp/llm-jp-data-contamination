@@ -14,6 +14,7 @@ from datasets import DatasetDict
 import os
 from torch.nn import CrossEntropyLoss
 from utils import *
+from transformers import BitsAndBytesConfig, AutoModelForCausalLM, AutoTokenizer
 
 
 
@@ -33,12 +34,18 @@ parser.add_argument("--dir", type=str, default="filtered_result")
 args = parser.parse_args()
 
 dataset_names = get_dataset_list(args.dataset_name)
-
+bnb_config = BitsAndBytesConfig(
+    load_in_4bit=True,  # 开启4位量化
+    bnb_4bit_quant_type="nf4",  # 使用nf4类型量化
+    bnb_4bit_use_double_quant=True,  # 使用双重量化技术
+    bnb_4bit_compute_dtype=torch.bfloat16  # 计算过程中使用bfloat16
+)
 model = GPTNeoXForCausalLM.from_pretrained(
   f"EleutherAI/pythia-{args.model_size}-deduped",
   revision="step143000",
   cache_dir=f"./pythia-{args.model_size}-deduped/step143000",
   torch_dtype=torch.bfloat16,
+    config=bnb_config
 ).cuda(args.cuda).eval()
 model = model.to_bettertransformer()
 tokenizer = AutoTokenizer.from_pretrained(
