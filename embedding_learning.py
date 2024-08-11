@@ -121,7 +121,7 @@ for dataset_name in dataset_names:
                 print(f"Skipping training for {dataset_name} at layer {layer_index} as previous results are found.")
                 continue
         for set_name in ["member", "nonmember"]:
-            cleaned_data, orig_indices = clean_dataset(dataset[set_name], dataset_name, online=True)
+            cleaned_data, orig_indices = clean_dataset(dataset[set_name])
             for idx, (data_batch, orig_indices_batch) in tqdm(enumerate(batched_data_with_indices(cleaned_data, orig_indices, batch_size=args.generation_batch_size))):
                 if idx * args.generation_batch_size > args.samples:
                     break
