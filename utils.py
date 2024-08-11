@@ -22,6 +22,7 @@ import random
 import seaborn as sns
 import os
 from transformers import GPTNeoXForCausalLM, AutoTokenizer
+from torch.cuda.amp import autocast, GradScaler
 
 
 def batched_data_with_indices(data_list, indices_list, batch_size):
@@ -393,12 +394,13 @@ def caculate_instance_loss_perplexity_zlib(batch_logits, target_labels, batched_
     ppl_value_list = []
     zlib_value_list = []
     grad_value_list = []
+    scaler = GradScaler()
     lm_loss = loss_fct(shift_logits.view(-1, shift_logits.size(-1)), labels.view(-1))
     instance_losses = lm_loss.view(-1, shift_logits.size(1))
     for idx, i in enumerate(instance_losses):
         loss = i.sum() / sum(i != 0)
         if len(instance_losses) == 1:
-            loss.backward()
+            scaler.scale(loss).backward()
         else:
             loss.backward(retain_graph=True)
         grad_norms = []
