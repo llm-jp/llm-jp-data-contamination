@@ -387,36 +387,37 @@ def calculate_mink_and_mink_plus(batch_logits, batched_tokenized_inputs):
 
 
 def caculate_instance_loss_perplexity_zlib(batch_logits, target_labels, batched_text, model, tokenized_inputs, tokenizer):
-    shift_logits = batch_logits[:, :-1, :].contiguous()
-    labels = target_labels[:, 1:].contiguous()
-    loss_fct = CrossEntropyLoss(reduction='none')
-    loss_value_list = []
-    ppl_value_list = []
-    zlib_value_list = []
-    grad_value_list = []
-    scaler = GradScaler()
-    lm_loss = loss_fct(shift_logits.view(-1, shift_logits.size(-1)), labels.view(-1))
-    instance_losses = lm_loss.view(-1, shift_logits.size(1))
-    for idx, i in enumerate(instance_losses):
-        loss = i.sum() / sum(i != 0)
-        if len(instance_losses) == 1:
-            scaler.scale(loss).backward()
-        else:
-            loss.backward(retain_graph=True)
-        grad_norms = []
-        for param in model.parameters():
-            if param.grad is not None:
-                grad_norms.append(param.grad.detach().norm(2))
-        #pdb.set_trace()
-        grad_norm = torch.stack(grad_norms).mean()
-        model.zero_grad()
-        loss_value_list.append(loss.item())
-        ppl = torch.exp(loss.float()).item()
-        ppl_value_list.append(ppl)
-        #pdb.set_trace()
-        zlib_value = loss.float().cpu() / (len(zlib.compress(bytes(tokenizer.decode(tokenized_inputs["input_ids"][idx], skip_special_tokens=True), "utf-8"))))
-        zlib_value_list.append(zlib_value.item())
-        grad_value_list.append(grad_norm.item())
+        shift_logits = batch_logits[:, :-1, :].contiguous()
+        labels = target_labels[:, 1:].contiguous()
+        loss_fct = CrossEntropyLoss(reduction='none')
+        loss_value_list = []
+        ppl_value_list = []
+        zlib_value_list = []
+        grad_value_list = []
+        scaler = GradScaler()
+        with autocast():
+            lm_loss = loss_fct(shift_logits.view(-1, shift_logits.size(-1)), labels.view(-1))
+            instance_losses = lm_loss.view(-1, shift_logits.size(1))
+        for idx, i in enumerate(instance_losses):
+            loss = i.sum() / sum(i != 0)
+            if len(instance_losses) == 1:
+                scaler.scale(loss).backward()
+            else:
+                loss.backward(retain_graph=True)
+            grad_norms = []
+            for param in model.parameters():
+                if param.grad is not None:
+                    grad_norms.append(param.grad.detach().norm(2))
+            #pdb.set_trace()
+            grad_norm = torch.stack(grad_norms).mean()
+            model.zero_grad()
+            loss_value_list.append(loss.item())
+            ppl = torch.exp(loss.float()).item()
+            ppl_value_list.append(ppl)
+            #pdb.set_trace()
+            zlib_value = loss.float().cpu() / (len(zlib.compress(bytes(tokenizer.decode(tokenized_inputs["input_ids"][idx], skip_special_tokens=True), "utf-8"))))
+            zlib_value_list.append(zlib_value.item())
+            grad_value_list.append(grad_norm.item())
     return loss_value_list, ppl_value_list, zlib_value_list, grad_value_list
 
 def remove_outliers(data, m=2):
