@@ -45,7 +45,7 @@ model = GPTNeoXForCausalLM.from_pretrained(
   revision="step143000",
   cache_dir=f"./pythia-{args.model_size}-deduped/step143000",
   torch_dtype=torch.bfloat16,
-    config=bnb_config
+    quantization_config=bnb_config
 ).cuda(args.cuda).eval()
 model = model.to_bettertransformer()
 tokenizer = AutoTokenizer.from_pretrained(
