@@ -52,7 +52,7 @@ for input_length in [48]:
         device = f'cuda:{args.cuda}'
         generation_samples_list = []
         for set_name in ["member", "nonmember"]:
-            cleaned_data, orig_indices = clean_dataset(dataset[set_name], dataset_name, online=True)
+            cleaned_data, orig_indices = clean_dataset(dataset[set_name])
             for idx, (data_batch, orig_indices_batch) in tqdm(enumerate(batched_data_with_indices(cleaned_data, orig_indices, batch_size=args.batch_size))):
                 orig_idx = [item for item in orig_indices_batch]
                 if idx * args.batch_size > args.samples:
