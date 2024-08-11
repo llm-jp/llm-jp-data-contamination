@@ -35,10 +35,9 @@ args = parser.parse_args()
 
 dataset_names = get_dataset_list(args.dataset_name)
 bnb_config = BitsAndBytesConfig(
-    load_in_4bit=True,  # 开启4位量化
-    bnb_4bit_quant_type="nf4",  # 使用nf4类型量化
-    bnb_4bit_use_double_quant=True,  # 使用双重量化技术
-    bnb_4bit_compute_dtype=torch.bfloat16  # 计算过程中使用bfloat16
+    load_in_8bit=True,  # 开启8位量化
+    bnb_8bit_use_double_quant=True,  # 使用双重量化技术
+    bnb_8bit_compute_dtype=torch.float16  # 计算过程中使用float16
 )
 model = GPTNeoXForCausalLM.from_pretrained(
   f"EleutherAI/pythia-{args.model_size}-deduped",
