@@ -71,7 +71,7 @@ for dataset_name in dataset_names:
     refer_dict[dataset_name] = {"member": [], "nonmember": []}
     grad_dict[dataset_name] = {"member": [], "nonmember": []}
     for split in ["member", "nonmember"]:
-        loss_list, prob_list, ppl_list, mink_plus_list, zlib_list, refer_list, idx_list = feature_collection(model, tokenizer, dataset[split], args,
+        loss_list, prob_list, ppl_list, mink_plus_list, zlib_list, refer_list, idx_list, grad_list = feature_collection(model, tokenizer, dataset[split], args,
                                                                                                              dataset_name,
                                                                                        min_len = args.min_len,
                                                                                        upper_limit=args.samples,
@@ -84,7 +84,7 @@ for dataset_name in dataset_names:
         mink_plus_dict[dataset_name][split].extend(mink_plus_list)
         zlib_dict[dataset_name][split].extend(zlib_list)
         refer_dict[dataset_name][split].extend(refer_list)
-        grad_dict[dataset_name][split].extend(idx_list)
+        grad_dict[dataset_name][split].extend(grad_list)
     os.makedirs(args.dir, exist_ok=True)
     os.makedirs(f"{args.dir}/{dataset_name}", exist_ok=True)
     pickle.dump(loss_dict, open(f"{args.dir}/{dataset_name}/{args.min_len}_{args.model_size}_loss_dict.pkl", "wb"))

@@ -215,7 +215,7 @@ def feature_collection(model, tokenizer, dataset, args, dataset_name, min_len=50
         ref_loss_collect.extend(refer_loss_value_list)
         if len(loss_collect) >= upper_limit:
              break
-    return loss_collect, mink_collect, ppl_collect, mink_plus_collect, zlib_collect, ref_loss_collect, idx_list
+    return loss_collect, mink_collect, ppl_collect, mink_plus_collect, zlib_collect, ref_loss_collect, idx_list, grad_collect
 
 def calculate_mean_var(dict, dataset_name, split_set):
     for idx1, set1 in enumerate(split_set):
@@ -402,7 +402,7 @@ def caculate_instance_loss_perplexity_zlib(batch_logits, target_labels, batched_
         for param in model.parameters():
             if param.grad is not None:
                 grad_norms.append(param.grad.detach().norm(2))
-        pdb.set_trace()
+        #pdb.set_trace()
         grad_norm = torch.stack(grad_norms).mean()
         model.zero_grad()
         loss_value_list.append(loss.item())
