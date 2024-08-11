@@ -61,7 +61,6 @@ def load_and_filter_data(files, folder, min_length, max_length, sample_size, tok
 
 for dataset_name in ["ArXiv", "Pile-CC", "Github", "StackExchange", "Wikipedia(en)", "PubMed", "USPTO", "FreeLaw", "PubMed Central"
                      "Enron Emails", "HackerNews", "NIH", "DM Mathematics", "Ubuntu IRC", "EuroParil", "PhilPapers", "Gutenberg(PG-19)"]:
-    dataset_name = "ArXiv"
     train_folder = "/model/pile/by_dataset/"
     test_folder = "/model/pile/by_dataset/"
     tokenizer = AutoTokenizer.from_pretrained(
