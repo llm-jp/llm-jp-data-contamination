@@ -40,7 +40,7 @@ model = GPTNeoXForCausalLM.from_pretrained(
   cache_dir=f"./pythia-{args.model_size}-deduped/step143000",
   torch_dtype=torch.bfloat16,
 ).cuda(args.cuda).eval()
-#model = model.to_bettertransformer()
+model = model.to_bettertransformer()
 tokenizer = AutoTokenizer.from_pretrained(
   f"EleutherAI/pythia-{args.model_size}-deduped",
   revision="step143000",
