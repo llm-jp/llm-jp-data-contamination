@@ -397,7 +397,10 @@ def caculate_instance_loss_perplexity_zlib(batch_logits, target_labels, batched_
     instance_losses = lm_loss.view(-1, shift_logits.size(1))
     for idx, i in enumerate(instance_losses):
         loss = i.sum() / sum(i != 0)
-        loss.backward(retain_graph=True)
+        if len(instance_losses) == 1:
+            loss.backward()
+        else:
+            loss.backward(retain_graph=True)
         grad_norms = []
         for param in model.parameters():
             if param.grad is not None:
