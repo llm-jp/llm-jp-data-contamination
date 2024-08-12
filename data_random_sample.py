@@ -59,7 +59,7 @@ def load_and_filter_data(files, folder, min_length, max_length, sample_size, tok
         return random.sample(merged_data, sample_size)
     return merged_data
 #"ArXiv",
-for dataset_name in ["Pile-CC", "Github", "StackExchange", "Wikipedia(en)", "PubMed", "USPTO", "FreeLaw", "PubMed Central"
+for dataset_name in ["Wikipedia (en)", "PubMed", "USPTO", "FreeLaw", "PubMed Central"
                      "Enron Emails", "HackerNews", "NIH", "DM Mathematics", "Ubuntu IRC", "EuroParil", "PhilPapers", "Gutenberg(PG-19)"]:
     train_folder = "/model/pile/by_dataset/"
     test_folder = "/model/pile/by_dataset/"
