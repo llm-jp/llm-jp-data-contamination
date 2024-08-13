@@ -39,7 +39,7 @@ for dataset_name in dataset_names:
     member_embed_list = {}
     non_member_embed_list = {}
     for set_name in ["member", "nonmember"]:
-        cleaned_data, orig_indices = clean_dataset(dataset[set_name], dataset_name, online=True)
+        cleaned_data, orig_indices = clean_dataset(dataset[set_name])
         if os.path.exists(csv_file_path):
             layer_results = pd.read_csv(csv_file_path)
             if ((layer_results["Dataset Name"] == dataset_name) & (layer_results["Layer Index"] == layer_index)).any():
