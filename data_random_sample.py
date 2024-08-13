@@ -88,11 +88,17 @@ for dataset_name in ["ArXiv","Wikipedia (en)", "PubMed Abstracts", "USPTO Backgr
         test_data, test_dataset = load_test_data(test_folder, test_files, min_length, max_length, 20000, filter_test, tokenizer, batch_size)
 
         # create data dict
+        train_dataset = Dataset.from_dict({"text": train_data})
+        test_dataset_short = Dataset.from_dict({"text": test_data})
+        full_test_dataset = Dataset.from_dict({"text": test_dataset})
+
+        # 创建 DatasetDict 对象
         dataset = DatasetDict({
-            'member': train_data,
-            'nonmember': test_data,
-            "full_nonmember": test_dataset
+            'member': train_dataset,
+            'nonmember': test_dataset_short,
+            "full_nonmember": full_test_dataset
         })
+
         # save the dataset
         os.makedirs(f"./filtered_dataset/{min_length}_{max_length}/{dataset_name}", exist_ok=True)
         dataset.save_to_disk(f"./filtered_dataset/{min_length}_{max_length}/{dataset_name}")
