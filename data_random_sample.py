@@ -6,6 +6,7 @@ import random
 from transformers import AutoTokenizer
 from datasets import DatasetDict, Dataset
 
+random.seed(42)
 
 def load_test_data(test_folder, test_files, min_length, max_length, sample_size, filter_test, tokenizer, batch_size):
     if len(test_files) > 1:
@@ -25,11 +26,9 @@ def load_test_data(test_folder, test_files, min_length, max_length, sample_size,
     else:
         test_dataset = torch.load(os.path.join(test_folder, f"test_{dataset_name}_0.pt"))
         test_data = filter_data(test_dataset, min_length, max_length, tokenizer, batch_size)
-        if len(test_data) < 100:
-            test_data = test_dataset
         if len(test_data) > sample_size:
             test_data = random.sample(test_data, sample_size)
-    return test_data
+    return test_data, test_dataset
 
 
 def filter_data(data, min_length, max_length, tokenizer, batch_size):
@@ -48,8 +47,7 @@ def filter_data(data, min_length, max_length, tokenizer, batch_size):
     return filtered_data
 
 
-def \
-        load_and_filter_data(files, folder, min_length, max_length, sample_size, tokenizer, batch_size):
+def load_and_filter_data(files, folder, min_length, max_length, sample_size, tokenizer, batch_size):
     """filtering and load"""
     merged_data = []
     for file in files:
@@ -59,8 +57,9 @@ def \
     if len(merged_data) > sample_size:
         return random.sample(merged_data, sample_size)
     return merged_data
-#"ArXiv","Wikipedia (en)", "PubMed Abstracts", "USPTO Backgrounds", "FreeLaw",
-for dataset_name in [ "PubMed Central", "Enron Emails", "HackerNews", "NIH", "DM Mathematics", "Ubuntu IRC", "EuroParl", "PhilPapers", "Gutenberg (PG-19)"]:
+for dataset_name in ["ArXiv","Wikipedia (en)", "PubMed Abstracts", "USPTO Backgrounds", "FreeLaw",
+                     "PubMed Central", "Enron Emails", "HackerNews", "NIH", "DM Mathematics",
+                     "Ubuntu IRC", "EuroParl", "PhilPapers", "Gutenberg (PG-19)"]:
     train_folder = "/model/pile/by_dataset/"
     test_folder = "/model/pile/by_dataset/"
     tokenizer = AutoTokenizer.from_pretrained(
@@ -78,7 +77,7 @@ for dataset_name in [ "PubMed Central", "Enron Emails", "HackerNews", "NIH", "DM
         test_files = [f for f in os.listdir(test_folder) if f.startswith(f"test_{dataset_name}_")]
 
         # Step 2: sample train_{dataset_name}_x
-        num_samples = 5 if len(train_files) > 5 else len(train_files)
+        num_samples = 1 #5 if len(train_files) > 5 else len(train_files)
         sampled_train_files = random.sample(train_files, num_samples)
 
         # Step 3 & 4: merge data and take 20000 samples
@@ -86,12 +85,13 @@ for dataset_name in [ "PubMed Central", "Enron Emails", "HackerNews", "NIH", "DM
 
         # whether to filter the test data since the test data is rare and may not reach 20000 sample size
         filter_test = True
-        test_data = load_test_data(test_folder, test_files, min_length, max_length, 20000, filter_test, tokenizer, batch_size)
+        test_data, test_dataset = load_test_data(test_folder, test_files, min_length, max_length, 20000, filter_test, tokenizer, batch_size)
 
         # create data dict
         dataset = DatasetDict({
-            'member': Dataset.from_dict({'data': train_data}),
-            'nonmember': Dataset.from_dict({'data': test_data}),
+            'member': train_data,
+            'nonmember': test_data,
+            "full_nonmember": test_dataset
         })
         # save the dataset
         os.makedirs(f"./filtered_dataset/{min_length}_{max_length}/{dataset_name}", exist_ok=True)
