@@ -48,7 +48,8 @@ def filter_data(data, min_length, max_length, tokenizer, batch_size):
     return filtered_data
 
 
-def load_and_filter_data(files, folder, min_length, max_length, sample_size, tokenizer, batch_size):
+def \
+        load_and_filter_data(files, folder, min_length, max_length, sample_size, tokenizer, batch_size):
     """filtering and load"""
     merged_data = []
     for file in files:
@@ -58,9 +59,8 @@ def load_and_filter_data(files, folder, min_length, max_length, sample_size, tok
     if len(merged_data) > sample_size:
         return random.sample(merged_data, sample_size)
     return merged_data
-#"ArXiv",
-for dataset_name in ["Wikipedia (en)", "PubMed Abstracts", "USPTO Backgrounds", "FreeLaw", "PubMed Central"
-                     "Enron Emails", "HackerNews", "NIH", "DM Mathematics", "Ubuntu IRC", "EuroParl", "PhilPapers", "Gutenberg (PG-19)"]:
+#"ArXiv","Wikipedia (en)", "PubMed Abstracts", "USPTO Backgrounds", "FreeLaw",
+for dataset_name in [ "PubMed Central", "Enron Emails", "HackerNews", "NIH", "DM Mathematics", "Ubuntu IRC", "EuroParl", "PhilPapers", "Gutenberg (PG-19)"]:
     train_folder = "/model/pile/by_dataset/"
     test_folder = "/model/pile/by_dataset/"
     tokenizer = AutoTokenizer.from_pretrained(
