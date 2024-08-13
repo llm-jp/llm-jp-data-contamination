@@ -28,7 +28,7 @@ dataset_names = get_dataset_list(args.dataset_name)
 model, tokenizer = load_model_and_tokenizer(args)
 tokenizer.pad_token = tokenizer.eos_token
 model.generation_config.pad_token_id = model.generation_config.eos_token_id
-os.makedirs(f"embedding_results_online/{args.model_size}", exist_ok=True)
+os.makedirs(f"embedding_results_online/", exist_ok=True)
 csv_file_path = f"embedding_results_online/{args.model_size}_embedding_result.csv"
 results_df = pd.DataFrame(
     columns=['Dataset Name', 'Layer Index', 'DB Index',
@@ -69,8 +69,8 @@ for dataset_name in dataset_names:
                     non_member_embed_list[layer_index].append(context_embedding.cpu())
     for layer_index in tqdm(range(len(hidden_states))):
         if os.path.exists(csv_file_path):
-            layer_results = pd.read_csv(csv_file_path)
-            if ((layer_results["Dataset Name"] == dataset_name) & (layer_results["Layer Index"] == layer_index)).any():
+            results_df = pd.read_csv(csv_file_path)
+            if ((results_df["Dataset Name"] == dataset_name) & (results_df["Layer Index"] == layer_index)).any():
                 print(f"Skipping training for {dataset_name} at layer {layer_index} as previous results are found.")
                 continue
         member_embed_array = torch.stack(member_embed_list[layer_index])
