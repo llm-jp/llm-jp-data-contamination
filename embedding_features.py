@@ -40,11 +40,6 @@ for dataset_name in dataset_names:
     non_member_embed_list = {}
     for set_name in ["member", "nonmember"]:
         cleaned_data, orig_indices = clean_dataset(dataset[set_name])
-        if os.path.exists(csv_file_path):
-            layer_results = pd.read_csv(csv_file_path)
-            if ((layer_results["Dataset Name"] == dataset_name) & (layer_results["Layer Index"] == layer_index)).any():
-                print(f"Skipping training for {dataset_name} at layer {layer_index} as previous results are found.")
-                continue
         for idx, (data_batch, orig_indices_batch) in tqdm(enumerate(batched_data_with_indices(cleaned_data, orig_indices, batch_size=args.batch_size))):
             if idx * args.batch_size > args.samples:
                 break
@@ -73,6 +68,11 @@ for dataset_name in dataset_names:
                 elif set_name == "nonmember" and len(non_member_embed_list) < args.samples:
                     non_member_embed_list[layer_index].append(context_embedding.cpu())
     for layer_index in range(len(hidden_states)):
+        if os.path.exists(csv_file_path):
+            layer_results = pd.read_csv(csv_file_path)
+            if ((layer_results["Dataset Name"] == dataset_name) & (layer_results["Layer Index"] == layer_index)).any():
+                print(f"Skipping training for {dataset_name} at layer {layer_index} as previous results are found.")
+                continue
         member_embed_array = torch.stack(member_embed_list[layer_index])
         non_member_embed_array = torch.stack(non_member_embed_list[layer_index])
                     # Concatenate for PCA
