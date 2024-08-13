@@ -16,7 +16,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument("--batch_size", type=int, default=1)
 parser.add_argument("--model_size", type=str, default="1b")
 parser.add_argument("--dataset_name", type=str, default="Pile-CC", choices=["arxiv", "dm_mathematics", "github", "hackernews", "pile_cc",
-                     "pubmed_central", "wikipedia_(en)", "full_pile", "all"])
+                     "pubmed_central", "wikipedia_(en)", "full_pile", "temporalarxiv","all"])
 parser.add_argument("--cuda", type=int, default=1, help="cuda device")
 parser.add_argument("--skip_calculation", type=str, default="True")
 parser.add_argument("--samples", type=int, default=1000)
@@ -28,7 +28,8 @@ dataset_names = get_dataset_list(args.dataset_name)
 model, tokenizer = load_model_and_tokenizer(args)
 tokenizer.pad_token = tokenizer.eos_token
 model.generation_config.pad_token_id = model.generation_config.eos_token_id
-
+os.makedirs(f"embedding_results_online/{args.model_size}", exist_ok=True)
+csv_file_path = f"embedding_results_online/{args.model_size}_embedding_result.csv"
 results_df = pd.DataFrame(
     columns=['Dataset Name', 'Layer Index', 'DB Index',
              'Silhouette Score', 'Calinski Harabasz Index'])
@@ -39,6 +40,11 @@ for dataset_name in dataset_names:
     non_member_embed_list = {}
     for set_name in ["member", "nonmember"]:
         cleaned_data, orig_indices = clean_dataset(dataset[set_name], dataset_name, online=True)
+        if os.path.exists(csv_file_path):
+            layer_results = pd.read_csv(csv_file_path)
+            if ((layer_results["Dataset Name"] == dataset_name) & (layer_results["Layer Index"] == layer_index)).any():
+                print(f"Skipping training for {dataset_name} at layer {layer_index} as previous results are found.")
+                continue
         for idx, (data_batch, orig_indices_batch) in tqdm(enumerate(batched_data_with_indices(cleaned_data, orig_indices, batch_size=args.batch_size))):
             if idx * args.batch_size > args.samples:
                 break
@@ -101,11 +107,6 @@ for dataset_name in dataset_names:
                                         'Silhouette Score': silhouette_avg,
                                         'Calinski Harabasz Index': calinski_index},
                                        ignore_index=True)
-os.makedirs("embedding_results_online", exist_ok=True)
-csv_file_path = f"mem_score_online/{args.model_size}/{dataset_name}_mem_score.csv"
-if os.path.exists(csv_file_path):
-    results_df.to_csv(f"embedding_results_online/{args.model_size}_embedding_result.csv", mode='a', header=False, index=False)
-else:
-    results_df.to_csv(f"embedding_results_online/{args.model_size}_embedding_result.csv", index=False)
+        results_df.to_csv(f"embedding_results_online/{args.model_size}_embedding_result.csv", index=False)
 
 

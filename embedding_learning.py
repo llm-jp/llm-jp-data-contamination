@@ -88,7 +88,7 @@ parser.add_argument("--generation_batch_size", type=int, default=10)
 parser.add_argument("--train_batch_size", type=int, default=4)
 parser.add_argument("--model_size", type=str, default="6.9b")
 parser.add_argument("--dataset_name", type=str, default="Pile-CC", choices=["arxiv", "dm_mathematics", "github", "hackernews", "pile_cc",
-                     "pubmed_central", "wikipedia_(en)", "full_pile", "all"])
+                     "pubmed_central", "wikipedia_(en)", "full_pile", "temporalarxiv", "all"])
 parser.add_argument("--cuda", type=int, default=1, help="cuda device")
 parser.add_argument("--samples", type=int, default=1000)
 parser.add_argument("--prepare_dataset", type=str, default="True")

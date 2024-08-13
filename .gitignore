@@ -11,5 +11,7 @@ feature_result_online
 feature_result_online/
 embedding_results_online/
 embedding_results_online
+embedding_learning
+embedding_learning/
 feature_result_online
 feature_result_online/
