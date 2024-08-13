@@ -123,7 +123,7 @@ def process_dataset(dataset_name):
 
 
 # 多线程处理所有数据集
-with ThreadPoolExecutor(max_workers=4) as executor:
+with ThreadPoolExecutor(max_workers=3) as executor:
     futures = [executor.submit(process_dataset, dataset_name) for dataset_name in dataset_names]
     for future in futures:
         future.result()
