@@ -5,7 +5,7 @@ import torch
 import random
 from transformers import AutoTokenizer
 from datasets import DatasetDict, Dataset
-
+import argparse
 random.seed(42)
 
 def load_test_data(test_folder, test_files, min_length, max_length, sample_size, filter_test, tokenizer, batch_size):
@@ -57,10 +57,16 @@ def load_and_filter_data(files, folder, min_length, max_length, sample_size, tok
     if len(merged_data) > sample_size:
         return random.sample(merged_data, sample_size)
     return merged_data
-a =["ArXiv","Wikipedia (en)", "PubMed Abstracts", "USPTO Backgrounds", "FreeLaw"]
-#b = ["PubMed Central", "Enron Emails", "HackerNews", "NIH", "DM Mathematics"]
-#c = ["Ubuntu IRC", "EuroParl", "PhilPapers", "Gutenberg (PG-19)"]
-for dataset_name in a:
+parser = argparse.ArgumentParser()
+parser.add_argument("--list", type=int, default=1)
+args = parser.parse_args()
+if args.list == 1:
+    datalist =["ArXiv","Wikipedia (en)", "PubMed Abstracts", "USPTO Backgrounds", "FreeLaw"]
+elif args.list == 2:
+    datalist = ["PubMed Central", "Enron Emails", "HackerNews", "NIH", "DM Mathematics"]
+else:
+    datalist = ["Ubuntu IRC", "EuroParl", "PhilPapers", "Gutenberg (PG-19)"]
+for dataset_name in datalist:
     train_folder = "/model/pile/by_dataset/"
     test_folder = "/model/pile/by_dataset/"
     tokenizer = AutoTokenizer.from_pretrained(
