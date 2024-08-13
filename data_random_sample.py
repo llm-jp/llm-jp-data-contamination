@@ -52,7 +52,7 @@ def load_and_filter_data(files, folder, min_length, max_length, sample_size, tok
     merged_data = []
     with ThreadPoolExecutor() as executor:
         futures = [
-            executor.submit(load_and_filter_file, os.path.join(folder, file), min_length, max_length, 10000, tokenizer,
+            executor.submit(load_and_filter_file, os.path.join(folder, file), min_length, max_length, tokenizer,
                             batch_size) for file in files]
         for future in futures:
             filtered_data = future.result()
@@ -62,8 +62,8 @@ def load_and_filter_data(files, folder, min_length, max_length, sample_size, tok
     return merged_data
 
 
-def load_and_filter_file(filepath, min_length, max_length, limit, tokenizer, batch_size):
-    dataset = torch.load(filepath)[:limit]
+def load_and_filter_file(filepath, min_length, max_length, tokenizer, batch_size):
+    dataset = torch.load(filepath)
     return filter_data(dataset, min_length, max_length, tokenizer, batch_size)
 
 
