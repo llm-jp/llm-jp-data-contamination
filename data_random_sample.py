@@ -85,7 +85,7 @@ tokenizer.pad_token = tokenizer.eos_token
 def process_dataset(dataset_name):
     train_folder = "/model/pile/by_dataset/"
     test_folder = "/model/pile/by_dataset/"
-
+    print(dataset_name)
     for min_length in min_lengths:
         max_length = min_length + 100
         batch_size = 100
