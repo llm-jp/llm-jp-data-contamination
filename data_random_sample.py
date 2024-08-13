@@ -57,6 +57,7 @@ def load_and_filter_data(files, folder, min_length, max_length, sample_size, tok
     if len(merged_data) > sample_size:
         return random.sample(merged_data, sample_size)
     return merged_data
+
 parser = argparse.ArgumentParser()
 parser.add_argument("--list", type=int, default=1)
 args = parser.parse_args()
@@ -84,7 +85,7 @@ for dataset_name in datalist:
         test_files = [f for f in os.listdir(test_folder) if f.startswith(f"test_{dataset_name}_")]
 
         # Step 2: sample train_{dataset_name}_x
-        num_samples = 1 #5 if len(train_files) > 5 else len(train_files)
+        num_samples =  5 if len(train_files) > 5 else len(train_files)
         sampled_train_files = random.sample(train_files, num_samples)
 
         # Step 3 & 4: merge data and take 20000 samples
