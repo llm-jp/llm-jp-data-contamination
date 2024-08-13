@@ -52,7 +52,7 @@ def load_and_filter_data(files, folder, min_length, max_length, sample_size, tok
     merged_data = []
     for file in files:
         dataset = torch.load(os.path.join(folder, file))
-        filtered_data = filter_data(dataset, min_length, max_length, tokenizer, batch_size)
+        filtered_data = filter_data(dataset[:10000], min_length, max_length, tokenizer, batch_size)
         merged_data.extend(filtered_data)
     if len(merged_data) > sample_size:
         return random.sample(merged_data, sample_size)
