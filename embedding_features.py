@@ -67,7 +67,7 @@ for dataset_name in dataset_names:
                     member_embed_list[layer_index].append(context_embedding.cpu())
                 elif set_name == "nonmember" and len(non_member_embed_list) < args.samples:
                     non_member_embed_list[layer_index].append(context_embedding.cpu())
-    for layer_index in range(len(hidden_states)):
+    for layer_index in tqdm(range(len(hidden_states))):
         if os.path.exists(csv_file_path):
             layer_results = pd.read_csv(csv_file_path)
             if ((layer_results["Dataset Name"] == dataset_name) & (layer_results["Layer Index"] == layer_index)).any():
