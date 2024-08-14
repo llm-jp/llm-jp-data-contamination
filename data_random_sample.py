@@ -60,6 +60,7 @@ def load_and_filter_data(files, folder, min_length, max_length, sample_size, tok
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--list", type=int, default=1)
+parser.add_argument("--batch_size", type=int, default=100)
 args = parser.parse_args()
 if args.list == 1:
     datalist =["ArXiv","Wikipedia (en)", "PubMed Abstracts", "USPTO Backgrounds", "FreeLaw"]
@@ -78,7 +79,6 @@ for dataset_name in datalist:
     tokenizer.pad_token = tokenizer.eos_token
     for min_length in [50, 150, 250, 350, 450, 550, 650, 750, 850, 950]:
         max_length = min_length + 100  # token
-        batch_size = 100 #deocder batch size
 
         # Step 1: see how many data files exist
         train_files = [f for f in os.listdir(train_folder) if f.startswith(f"train_{dataset_name}_")]
@@ -89,11 +89,13 @@ for dataset_name in datalist:
         sampled_train_files = random.sample(train_files, num_samples)
 
         # Step 3 & 4: merge data and take 20000 samples
-        train_data = load_and_filter_data(sampled_train_files, train_folder, min_length, max_length, 20000, tokenizer, batch_size)
+        train_data = load_and_filter_data(sampled_train_files, train_folder, min_length, max_length, 20000,
+                                          tokenizer, args.batch_size)
 
         # whether to filter the test data since the test data is rare and may not reach 20000 sample size
         filter_test = True
-        test_data, test_dataset = load_test_data(test_folder, test_files, min_length, max_length, 20000, filter_test, tokenizer, batch_size)
+        test_data, test_dataset = load_test_data(test_folder, test_files, min_length, max_length, 20000, filter_test,
+                                                 tokenizer, args.batch_size)
 
         # create data dict
         train_dataset = Dataset.from_dict({"data": train_data})
