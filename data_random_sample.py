@@ -64,7 +64,7 @@ args = parser.parse_args()
 if args.list == 1:
     datalist =["ArXiv","Wikipedia (en)", "PubMed Abstracts", "USPTO Backgrounds", "FreeLaw"]
 elif args.list == 2:
-    datalist = ["PubMed Central", "Enron Emails", "HackerNews", "NIH", "DM Mathematics"]
+    datalist = ["NIH ExPorter", "DM Mathematics"]
 else:
     datalist = ["Ubuntu IRC", "EuroParl", "PhilPapers", "Gutenberg (PG-19)"]
 for dataset_name in datalist:
