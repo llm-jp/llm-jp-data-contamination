@@ -7,7 +7,8 @@ for dataset_name in ["arxiv", "dm_mathematics", "github", "hackernews", "pile_cc
     member_length = sum([len(x) for x in dataset["none"]["member"]]) / len(dataset["none"]["member"])
     nonmember_length = sum([len(x) for x in dataset["none"]["nonmember"]]) / len(dataset["none"]["nonmember"])
     print(dataset_name, member_length, nonmember_length)
-for dataset_name in ["Ar"]
+for dataset_name in ["Ar"]:
+    pass
 # arxiv 1383.931 1384.555
 # dm_mathematics 899.4157014157014 905.3552123552123
 # github 1333.3594 1306.6432
