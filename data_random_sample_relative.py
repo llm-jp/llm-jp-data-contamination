@@ -14,6 +14,7 @@ random.seed(42)
 parser = argparse.ArgumentParser()
 parser.add_argument("--list", type=int, default=1)
 parser.add_argument("--batch_size", type=int, default=100)
+parser.add_argument("--sample_size", type=int, default=1000)
 args = parser.parse_args()
 
 
@@ -124,8 +125,8 @@ for dataset_name in datalist:
         max_length = percentiles[i + 1]
 
         filtered_member_data = load_and_filter_data(sampled_train_files, train_folder, min_length, max_length,
-                                                    20000 // 10, tokenizer, args.batch_size)
-        filtered_nonmember_data = load_and_filter_data(test_files, test_folder, min_length, max_length, 20000 // 10,
+                                                    args.sample_size, tokenizer, args.batch_size)
+        filtered_nonmember_data = load_and_filter_data(test_files, test_folder, min_length, max_length, args.sample_size,
                                                        tokenizer, args.batch_size)
 
         member_data.extend(filtered_member_data)
