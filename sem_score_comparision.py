@@ -1,9 +1,11 @@
 import pdb
-from transformers import GPTNeoXForCausalLM, AutoTokenizer,  AutoModelForCausalLM,  LogitsProcessorList, MinLengthLogitsProcessor, StoppingCriteriaList,  MaxLengthCriteria
+from transformers import GPTNeoXForCausalLM, AutoTokenizer, AutoModelForCausalLM, BitsAndBytesConfig
+from transformers.generation import LogitsProcessorList, MinLengthLogitsProcessor, StoppingCriteriaList, MaxLengthCriteria
 from utils import form_dataset, batched_data_with_indices, clean_dataset
 import argparse
 from tqdm import tqdm
 import torch
+import torch.quantization
 import matplotlib.pyplot as plt
 import pandas
 import os
@@ -11,7 +13,6 @@ from datasets import load_dataset
 import copy
 import pickle
 from utils import obtain_dataset, get_dataset_list
-
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--batch_size", type=int, default=1)
@@ -29,11 +30,17 @@ args = parser.parse_args()
 
 
 dataset_names = get_dataset_list("WikiMIA")
+bnb_config = BitsAndBytesConfig(
+        load_in_8bit=True,  # 开启8位量化
+        bnb_8bit_use_double_quant=True,  # 使用双重量化技术
+        bnb_8bit_compute_dtype=torch.float16  # 计算过程中使用float16
+    )
 model = GPTNeoXForCausalLM.from_pretrained(
     f"EleutherAI/pythia-{args.model_size}-deduped",
     revision="step143000",
     cache_dir=f"./pythia-{args.model_size}-deduped/step143000",
     torch_dtype=torch.bfloat16,
+    quantization_config=bnb_config
 ).cuda(args.cuda).eval()
 tokenizer = AutoTokenizer.from_pretrained(
   f"EleutherAI/pythia-{args.model_size}-deduped",
