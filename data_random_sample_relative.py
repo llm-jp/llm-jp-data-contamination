@@ -131,20 +131,20 @@ for dataset_name in datalist:
         member_data.extend(filtered_member_data)
         nonmember_data.extend(filtered_nonmember_data)
 
-    # 创建数据集
-    train_dataset = Dataset.from_dict({"data": member_data})
-    test_dataset_short = Dataset.from_dict({"data": nonmember_data})
-    full_test_dataset = Dataset.from_dict({"data": full_nonmember_data})
+        # 创建数据集
+        train_dataset = Dataset.from_dict({"data": member_data})
+        test_dataset_short = Dataset.from_dict({"data": nonmember_data})
+        full_test_dataset = Dataset.from_dict({"data": full_nonmember_data})
 
-    # 创建 DatasetDict 对象
-    dataset = DatasetDict({
-        'member': train_dataset,
-        'nonmember': test_dataset_short,
-        "full_nonmember": full_test_dataset
-    })
+        # 创建 DatasetDict 对象
+        dataset = DatasetDict({
+            'member': train_dataset,
+            'nonmember': test_dataset_short,
+            "full_nonmember": full_test_dataset
+        })
 
-    # 保存数据集
-    os.makedirs(f"./filtered_dataset/percentiles/{dataset_name}", exist_ok=True)
-    dataset.save_to_disk(f"./filtered_dataset/percentiles/{dataset_name}")
+        # 保存数据集
+        os.makedirs(f"./relative_filtered_dataset/{i*10}/{dataset_name}", exist_ok=True)
+        dataset.save_to_disk(f"./relative_filtered_dataset/{i*10}/{dataset_name}")
 
-    print(dataset)
+        print(dataset)
