@@ -52,6 +52,7 @@ def filter_data(data, min_length, max_length, tokenizer, batch_size):
         # lengths = tokenized_batch['attention_mask'].cuda(1).sum(dim=1)
         lengths = [len(text.split()) for text in texts]
         valid_indices = (lengths >= min_length) & (lengths <= max_length)
+        pdb.set_trace()
         filtered_data.extend([batch[j] for j in range(len(batch)) if valid_indices[j]])
     return filtered_data
 
