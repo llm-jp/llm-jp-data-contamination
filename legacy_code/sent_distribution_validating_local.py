@@ -21,10 +21,12 @@ parser = argparse.ArgumentParser()
 parser.add_argument("--batch_size", type=int, default=4)
 parser.add_argument("--max_length", type=int, default=2048)
 parser.add_argument("--model_size", type=str, default="160m")
-parser.add_argument("--dataset_name", type=str, default="Pile-CC", choices=["ArXiv", "DM Mathematics",
-                 "FreeLaw", "Github",  "HackerNews", "NIH ExPorter",
-                "Pile-CC", "PubMed Abstracts", "PubMed Central", "StackExchange",
-                "USPTO Backgrounds", "Wikipedia (en)", "WikiMIA", "all"])
+parser.add_argument("--dataset_name", type=str, default="Pile-CC", choices=["ArXiv", "Wikipedia (en)", "PubMed Abstracts",
+                                                                             "USPTO Backgrounds","FreeLaw",
+                                                                            "DM Mathematics",
+                 "Github",  "HackerNews", "NIH ExPorter",
+                "Pile-CC",  "PubMed Central", "StackExchange",
+                "USPTO Backgrounds",  "WikiMIA", "all"])
 parser.add_argument("--cuda", type=int, default=0, help="cuda device")
 parser.add_argument("--refer_cuda", type=int, default=7, help="cuda device")
 parser.add_argument("--skip_calculation", type=str, default="True")

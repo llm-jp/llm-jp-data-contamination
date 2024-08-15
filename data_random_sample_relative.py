@@ -85,11 +85,11 @@ def compute_length_percentiles(data, tokenizer, batch_size):
 
 # 创建数据集名称列表
 if args.list == 1:
-    datalist = ["ArXiv", "Wikipedia (en)", "PubMed Abstracts", "USPTO Backgrounds", "FreeLaw"]
+    datalist = ["ArXiv" 'Enron Emails', "FreeLaw", 'Gutenberg (PG-19)', 'NIH ExPorter', "Pile-CC"]
 elif args.list == 2:
-    datalist = ["NIH ExPorter", "DM Mathematics"]
+    datalist = ['PubMed Central', 'Ubuntu IRC', 'Wikipedia (en)', 'DM Mathematics', "EuroParl", "Github"]
 else:
-    datalist = ["Ubuntu IRC", "EuroParl", "PhilPapers", "Gutenberg (PG-19)"]
+    datalist = ["HackerNews", "PhilPapers",	 "PubMed Abstracts",   "StackExchange",    "USPTO Backgrounds"]
 
 # 处理每个数据集
 for dataset_name in datalist:
