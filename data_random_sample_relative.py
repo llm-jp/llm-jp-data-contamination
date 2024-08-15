@@ -52,7 +52,7 @@ def filter_data(data, min_length, max_length, tokenizer, batch_size):
         # lengths = tokenized_batch['attention_mask'].cuda(1).sum(dim=1)
         lengths = [len(text.split()) for text in texts]
         valid_indices = (lengths >= min_length) & (lengths <= max_length)
-        pdb.set_trace()
+        #pdb.set_trace()
         filtered_data.extend([batch[j] for j in range(len(batch)) if valid_indices[j]])
     return filtered_data
 
@@ -117,11 +117,12 @@ for dataset_name in datalist:
 
     percentiles = compute_length_percentiles(test_dataset_full, tokenizer, args.batch_size)
 
-    member_data = []
-    nonmember_data = []
+
     full_nonmember_data = test_dataset_full
 
     for i in range(len(percentiles) - 1):
+        member_data = []
+        nonmember_data = []
         min_length = percentiles[i]
         max_length = percentiles[i + 1]
 
