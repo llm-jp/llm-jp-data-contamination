@@ -57,13 +57,11 @@ def filter_data(data, min_length, max_length, tokenizer, batch_size):
     return filtered_data
 
 
-def load_and_filter_data(files, folder, min_length, max_length, sample_size, tokenizer, batch_size):
+def load_and_filter_data(dataset, folder, min_length, max_length, sample_size, tokenizer, batch_size):
     """filtering and load"""
     merged_data = []
-    for file in files:
-        dataset = torch.load(os.path.join(folder, file))
-        filtered_data = filter_data(dataset, min_length, max_length, tokenizer, batch_size)
-        merged_data.extend(filtered_data)
+    filtered_data = filter_data(dataset, min_length, max_length, tokenizer, batch_size)
+    merged_data.extend(filtered_data)
     if len(merged_data) > sample_size:
         return random.sample(merged_data, sample_size)
     return merged_data
@@ -115,7 +113,10 @@ for dataset_name in datalist:
     for file in test_files:
         dataset = torch.load(os.path.join(test_folder, file))
         test_dataset_full.extend(dataset)
-
+    train_dataset_full = []
+    for file in sampled_train_files:
+        dataset = torch.load(os.path.join(train_folder, file))
+        train_dataset_full.extend(dataset)
     percentiles = compute_length_percentiles(test_dataset_full, tokenizer, args.batch_size)
 
 
@@ -127,9 +128,9 @@ for dataset_name in datalist:
         min_length = percentiles[i]
         max_length = percentiles[i + 1]
 
-        filtered_member_data = load_and_filter_data(sampled_train_files, train_folder, min_length, max_length,
+        filtered_member_data = load_and_filter_data(train_dataset_full, train_folder, min_length, max_length,
                                                     args.sample_size, tokenizer, args.batch_size)
-        filtered_nonmember_data = load_and_filter_data(test_files, test_folder, min_length, max_length, args.sample_size,
+        filtered_nonmember_data = load_and_filter_data(test_dataset_full, test_folder, min_length, max_length, args.sample_size,
                                                        tokenizer, args.batch_size)
 
         member_data.extend(filtered_member_data)
