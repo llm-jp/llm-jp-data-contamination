@@ -46,9 +46,10 @@ def filter_data(data, min_length, max_length, tokenizer, batch_size):
     for i in tqdm(range(0, len(data), batch_size)):
         batch = data[i:i + batch_size]
         texts = [item for item in batch]
-        tokenized_batch = tokenizer(texts, truncation=True, padding=True, return_tensors="pt", max_length=2048).to(
-            "cuda:1")
-        lengths = tokenized_batch['attention_mask'].cuda(1).sum(dim=1)
+        # tokenized_batch = tokenizer(texts, truncation=True, padding=True, return_tensors="pt", max_length=2048).to(
+        #     "cuda:1")
+        # lengths = tokenized_batch['attention_mask'].cuda(1).sum(dim=1)
+        lengths = [len(text.split()) for text in texts]
         valid_indices = (lengths >= min_length) & (lengths <= max_length)
         filtered_data.extend([batch[j] for j in range(len(batch)) if valid_indices[j]])
     return filtered_data
@@ -72,9 +73,10 @@ def compute_length_percentiles(data, tokenizer, batch_size):
     for i in tqdm(range(0, len(data), batch_size)):
         batch = data[i:i + batch_size]
         texts = [item for item in batch]
-        tokenized_batch = tokenizer(texts, truncation=True, padding=True, return_tensors="pt", max_length=2048).to(
-            "cuda:1")
-        batch_lengths = tokenized_batch['attention_mask'].cuda(1).sum(dim=1).cpu().numpy()
+        #tokenized_batch = tokenizer(texts, truncation=True, padding=True, return_tensors="pt", max_length=2048).to(
+        #    "cuda:1")
+        #batch_lengths = tokenized_batch['attention_mask'].cuda(1).sum(dim=1).cpu().numpy()
+        batch_lengths = [len(text.split()) for text in texts]
         lengths.extend(batch_lengths)
     percentiles = np.percentile(lengths, np.arange(0, 110, 10))
     return percentiles
