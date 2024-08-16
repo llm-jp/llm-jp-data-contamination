@@ -67,8 +67,8 @@ refer_model = AutoModelForCausalLM.from_pretrained("stabilityai/stablelm-base-al
 refer_tokenizer = AutoTokenizer.from_pretrained("stabilityai/stablelm-base-alpha-3b-v2")
 tokenizer.pad_token = tokenizer.eos_token
 refer_tokenizer.pad_token = refer_tokenizer.eos_token
-df = pd.DataFrame()
 for dataset_name in dataset_names:
+    df = pd.DataFrame()
     dataset = obtain_dataset(dataset_name, min_len=args.min_len, local_data=True if args.local_data == "True" else False)
     loss_dict = {}
     prob_dict = {}
@@ -110,7 +110,7 @@ for dataset_name in dataset_names:
     pickle.dump(grad_dict, open(f"{args.dir}/{dataset_name}/{args.min_len}_{args.model_size}_grad_dict.pkl", "wb"))
     pickle.dump(idx_list, open(f"{args.dir}/{dataset_name}/{args.min_len}_{args.model_size}_idx_list.pkl", "wb"))
     df = results_caculate_and_draw(dataset_name, args, df, split_set=["member", "nonmember"])
-df.to_csv(f"{args.dir}/{dataset_name}/{args.min_len}_{args.model_size}.csv")
+    df.to_csv(f"{args.dir}/{dataset_name}/{args.min_len}_{args.model_size}.csv")
 
 
 
