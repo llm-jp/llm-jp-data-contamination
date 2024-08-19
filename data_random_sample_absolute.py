@@ -120,7 +120,7 @@ for dataset_name in datalist:
 
     full_nonmember_data = test_dataset_full
 
-    for i in list[0, 100, 200, 300, 400, 500, 600, 700, 800, 900]:
+    for i in [0, 100, 200, 300, 400, 500, 600, 700, 800, 900]:
         member_data = []
         nonmember_data = []
         min_length = i if i > 0 else 5
