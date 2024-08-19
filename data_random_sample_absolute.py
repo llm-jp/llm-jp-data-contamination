@@ -15,6 +15,8 @@ parser = argparse.ArgumentParser()
 parser.add_argument("--list", type=int, default=1)
 parser.add_argument("--batch_size", type=int, default=100)
 parser.add_argument("--sample_size", type=int, default=1000)
+parser.add_argument("--select_method", type=str, default=["truncate", "nontruncate"])
+parser.add_argument("--relative_length", type=bool)
 args = parser.parse_args()
 
 
@@ -41,29 +43,33 @@ def load_test_data(test_folder, test_files, min_length, max_length, sample_size,
     return test_data, test_dataset
 
 
-def filter_data(data, min_length, max_length, tokenizer, batch_size):
+def filter_data(data, min_length, max_length, tokenizer, args):
     """批量过滤文本长度在给定Token数量范围的数据"""
     filtered_data = []
-    for i in tqdm(range(0, len(data), batch_size)):
-        batch = data[i:i + batch_size]
+    for i in tqdm(range(0, len(data), args.batch_size)):
+        batch = data[i:i + args.batch_size]
         texts = [item for item in batch]
-        # tokenized_batch = tokenizer(texts, truncation=True, padding=True, return_tensors="pt", max_length=2048).to(
-        #     "cuda:1")
-        # lengths = tokenized_batch['attention_mask'].cuda(1).sum(dim=1)
+        # if args.tokenize_method == "tokenizer":
+        #     tokenized_batch = tokenizer(texts, truncation=True, padding=True, return_tensors="pt", max_length=2048).to("cuda:1")
+        #     lengths = tokenized_batch['attention_mask'].cuda(1).sum(dim=1)
+        # elif args.tokenize_method == "space":
         lengths = [len(text.split()) for text in texts]
-        valid_indices = (np.array(lengths) >= min_length) & (np.array(lengths) <= max_length)
-        #pdb.set_trace()
-        filtered_data.extend([batch[j] for j in range(len(batch)) if valid_indices[j]])
+        if args.select_method == "nontruncate":
+            valid_indices = (np.array(lengths) >= min_length) & (np.array(lengths) <= max_length)
+            filtered_data.extend([batch[j] for j in range(len(batch)) if valid_indices[j]])
+        elif args.select_method == "truncate":
+            valid_indices = (np.array(lengths) >= max_length)
+            filtered_data.extend([" ".join(batch[j].split()[:max_length]) for j in range(len(batch)) if valid_indices[j])
     return filtered_data
 
 
-def load_and_filter_data(dataset, folder, min_length, max_length, sample_size, tokenizer, batch_size):
+def load_and_filter_data(dataset, min_length, max_length, tokenizer, args):
     """filtering and load"""
     merged_data = []
-    filtered_data = filter_data(dataset, min_length, max_length, tokenizer, batch_size)
+    filtered_data = filter_data(dataset, min_length, max_length, tokenizer, args)
     merged_data.extend(filtered_data)
-    if len(merged_data) > sample_size:
-        return random.sample(merged_data, sample_size)
+    if len(merged_data) > args.sample_size:
+        return random.sample(merged_data, args.sample_size)
     return merged_data
 
 
@@ -84,8 +90,7 @@ def compute_length_percentiles(data, tokenizer, batch_size):
 
 # 创建数据集名称列表
 if args.list == 1:
-    #'Gutenberg (PG-19)', 'NIH ExPorter', "Pile-CC"
-    datalist = ["ArXiv", "Enron Emails", "FreeLaw"]
+    datalist = ['Gutenberg (PG-19)', 'NIH ExPorter', "Pile-CC", "ArXiv", "Enron Emails", "FreeLaw"]
 elif args.list == 2:
     datalist = ['PubMed Central', 'Ubuntu IRC', 'Wikipedia (en)', 'DM Mathematics', "EuroParl", "Github"]
 else:
@@ -117,26 +122,40 @@ for dataset_name in datalist:
     for file in sampled_train_files:
         dataset = torch.load(os.path.join(train_folder, file))
         train_dataset_full.extend(dataset)
-
+    percentiles = compute_length_percentiles(test_dataset_full, tokenizer, args.batch_size)
     full_nonmember_data = test_dataset_full
-
-    for i in [0, 100, 200, 300, 400, 500, 600, 700, 800, 900, "rest"]:
+    if args.relative_length:
+        length_list = percentiles
+        length_list.append("rest")
+    else:
+        length_list = [0, 100, 200, 300, 400, 500, 600, 700, 800, 900, "rest"]
+    pdb.set_trace()
+    for i in range(len(length_list) - 1):
         member_data = []
         nonmember_data = []
-        if i ==0:
-            min_length = 5
-            max_length = 100
-        elif i == "rest":
-            min_length = 1000
-            max_length = 100000000000
+        if args.relative_length:
+            if length_list[i] == 0:
+                min_length = 5
+                max_length = length_list[i + 1]
+            elif length_list[i] == "rest":
+                min_length = length_list[i-1]
+                max_length = 100000000000
+            else:
+                min_length = length_list[i]
+                max_length = length_list[i + 1]
         else:
-            min_length = i
-            max_length = i + 100
+            if length_list[i] == 0:
+                min_length = 5
+                max_length = 100
+            elif length_list[i] == "rest":
+                min_length = 1000
+                max_length = 100000000000
+            else:
+                min_length = length_list[i]
+                max_length = length_list[i] + 100
 
-        filtered_member_data = load_and_filter_data(train_dataset_full, train_folder, min_length, max_length,
-                                                    args.sample_size, tokenizer, args.batch_size)
-        filtered_nonmember_data = load_and_filter_data(test_dataset_full, test_folder, min_length, max_length, args.sample_size,
-                                                       tokenizer, args.batch_size)
+        filtered_member_data = load_and_filter_data(train_dataset_full, train_folder, min_length, max_length, tokenizer, args)
+        filtered_nonmember_data = load_and_filter_data(test_dataset_full, test_folder, min_length, max_length, tokenizer, args)
 
         member_data.extend(filtered_member_data)
         nonmember_data.extend(filtered_nonmember_data)
@@ -154,7 +173,11 @@ for dataset_name in datalist:
         })
 
         # 保存数据集
-        os.makedirs(f"./space_filtered_dataset/{min_length}_{max_length}/{dataset_name}", exist_ok=True)
-        dataset.save_to_disk(f"./space_filtered_dataset/{min_length}_{max_length}/{dataset_name}")
+        if args.relative_length:
+            os.makedirs(f"./relative_filtered_dataset/{i}/{dataset_name}", exist_ok=True)
+            dataset.save_to_disk(f"./relative_filtered_dataset/{i}/{dataset_name}")
+        else:
+            os.makedirs(f"./abosulute_filtered_dataset/{min_length}_{max_length}/{dataset_name}", exist_ok=True)
+            dataset.save_to_disk(f"./abosulute_filtered_dataset/{min_length}_{max_length}/{dataset_name}")
 
         print(dataset)
