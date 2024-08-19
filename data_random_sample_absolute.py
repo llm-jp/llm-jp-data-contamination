@@ -43,16 +43,12 @@ def load_test_data(test_folder, test_files, min_length, max_length, sample_size,
     return test_data, test_dataset
 
 
-def filter_data(data, min_length, max_length, tokenizer, args):
+def filter_data(data, min_length, max_length, args):
     """批量过滤文本长度在给定Token数量范围的数据"""
     filtered_data = []
     for i in tqdm(range(0, len(data), args.batch_size)):
         batch = data[i:i + args.batch_size]
         texts = [item for item in batch]
-        # if args.tokenize_method == "tokenizer":
-        #     tokenized_batch = tokenizer(texts, truncation=True, padding=True, return_tensors="pt", max_length=2048).to("cuda:1")
-        #     lengths = tokenized_batch['attention_mask'].cuda(1).sum(dim=1)
-        # elif args.tokenize_method == "space":
         lengths = [len(text.split()) for text in texts]
         if args.select_method == "nontruncate":
             valid_indices = (np.array(lengths) >= min_length) & (np.array(lengths) <= max_length)
@@ -63,25 +59,22 @@ def filter_data(data, min_length, max_length, tokenizer, args):
     return filtered_data
 
 
-def load_and_filter_data(dataset, min_length, max_length, tokenizer, args):
+def load_and_filter_data(dataset, min_length, max_length, args):
     """filtering and load"""
     merged_data = []
-    filtered_data = filter_data(dataset, min_length, max_length, tokenizer, args)
+    filtered_data = filter_data(dataset, min_length, max_length, args)
     merged_data.extend(filtered_data)
     if len(merged_data) > args.sample_size:
         return random.sample(merged_data, args.sample_size)
     return merged_data
 
 
-def compute_length_percentiles(data, tokenizer, batch_size):
+def compute_length_percentiles(data, batch_size):
     """计算数据长度的百分位数"""
     lengths = []
     for i in tqdm(range(0, len(data), batch_size)):
         batch = data[i:i + batch_size]
         texts = [item for item in batch]
-        #tokenized_batch = tokenizer(texts, truncation=True, padding=True, return_tensors="pt", max_length=2048).to(
-        #    "cuda:1")
-        #batch_lengths = tokenized_batch['attention_mask'].cuda(1).sum(dim=1).cpu().numpy()
         batch_lengths = [len(text.split()) for text in texts]
         lengths.extend(batch_lengths)
     percentiles = np.percentile(lengths, np.arange(0, 110, 10))
@@ -101,10 +94,6 @@ for dataset_name in datalist:
     train_folder = "/model/pile/by_dataset/"
     test_folder = "/model/pile/by_dataset/"
 
-    tokenizer = AutoTokenizer.from_pretrained("EleutherAI/pythia-12b-deduped", revision="step143000",
-                                              cache_dir="./pythia-12b-deduped/step143000")
-    tokenizer.pad_token = tokenizer.eos_token
-
     # Step 1: see how many data files exist
     train_files = [f for f in os.listdir(train_folder) if f.startswith(f"train_{dataset_name}_")]
     test_files = [f for f in os.listdir(test_folder) if f.startswith(f"test_{dataset_name}_")]
@@ -122,7 +111,7 @@ for dataset_name in datalist:
     for file in sampled_train_files:
         dataset = torch.load(os.path.join(train_folder, file))
         train_dataset_full.extend(dataset)
-    percentiles = compute_length_percentiles(test_dataset_full, tokenizer, args.batch_size)
+    percentiles = compute_length_percentiles(test_dataset_full, args.batch_size)
     full_nonmember_data = test_dataset_full
     if args.relative_length:
         length_list = percentiles.tolist()
@@ -147,8 +136,8 @@ for dataset_name in datalist:
             else:
                 min_length = length_list[i]
                 max_length = min_length + 100
-        filtered_member_data = load_and_filter_data(train_dataset_full, min_length, max_length, tokenizer, args)
-        filtered_nonmember_data = load_and_filter_data(test_dataset_full, min_length, max_length, tokenizer, args)
+        filtered_member_data = load_and_filter_data(train_dataset_full, min_length, max_length, args)
+        filtered_nonmember_data = load_and_filter_data(test_dataset_full, min_length, max_length, args)
 
         member_data.extend(filtered_member_data)
         nonmember_data.extend(filtered_nonmember_data)
@@ -167,8 +156,8 @@ for dataset_name in datalist:
 
         # 保存数据集
         if args.relative_length:
-            os.makedirs(f"./relative_filtered_dataset/{i}/{dataset_name}", exist_ok=True)
-            dataset.save_to_disk(f"./relative_filtered_dataset/{i}/{dataset_name}")
+            os.makedirs(f"./relative_filtered_dataset/{i*10}/{dataset_name}", exist_ok=True)
+            dataset.save_to_disk(f"./relative_filtered_dataset/{i*10}/{dataset_name}")
         else:
             if args.select_method == "truncate":
                 os.makedirs(f"./absolute_filtered_dataset/{min_length}_{max_length}_truncated/{dataset_name}", exist_ok=True)
