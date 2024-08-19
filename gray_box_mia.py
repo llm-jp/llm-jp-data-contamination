@@ -16,7 +16,7 @@ parser.add_argument("--local_data", type=bool)
 parser.add_argument("--compare_same_length", type=bool)
 parser.add_argument("--samples", type=int, default=5000)
 parser.add_argument("--gradient_collection", type=str, default=False)
-parser.add_argument("--dir", type=str, default="filtered_result")
+parser.add_argument("--dir", type=str, default="spaced_filtered_result")
 parser.add_argument("--load_dir", type=str, default="space_filtered_dataset")
 
 args = parser.parse_args()
