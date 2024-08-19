@@ -126,7 +126,7 @@ for dataset_name in datalist:
     full_nonmember_data = test_dataset_full
     if args.relative_length:
         length_list = percentiles.tolist()
-        enumerate_length =  len(length_list) - 1
+        enumerate_length = len(length_list) - 1
     else:
         length_list = [0, 100, 200, 300, 400, 500, 600, 700, 800, 900, "rest"]
         enumerate_length = len(length_list)
@@ -147,8 +147,8 @@ for dataset_name in datalist:
             else:
                 min_length = length_list[i]
                 max_length = min_length + 100
-        filtered_member_data = load_and_filter_data(train_dataset_full, train_folder, min_length, max_length, tokenizer, args)
-        filtered_nonmember_data = load_and_filter_data(test_dataset_full, test_folder, min_length, max_length, tokenizer, args)
+        filtered_member_data = load_and_filter_data(train_dataset_full, min_length, max_length, tokenizer, args)
+        filtered_nonmember_data = load_and_filter_data(test_dataset_full, min_length, max_length, tokenizer, args)
 
         member_data.extend(filtered_member_data)
         nonmember_data.extend(filtered_nonmember_data)
