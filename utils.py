@@ -75,19 +75,18 @@ def form_dataset(dataset_name, args):
         return mia_dataset
     else:
         if args.same_length:
-            dataset = datasets.load_from_disk(f"./filtered_dataset/{args.min_len}_{args.min_len + 100}/{dataset_name}")
+            dataset = datasets.load_from_disk(f"./{args.load_dir}/{args.min_len}_{args.min_len + 100}/{dataset_name}")
             dataset = DatasetDict({
                 'member': dataset['member']['data'],
                 'nonmember': dataset['nonmember']['data']
             })
         else:
-            dataset = datasets.load_from_disk(f"./filtered_dataset/{args.min_len}_{args.min_len + 100}/{dataset_name}")
+            dataset = datasets.load_from_disk(f"./{args.load_dir}/{args.min_len}_{args.min_len + 100}/{dataset_name}")
             dataset = DatasetDict({
                 'member': dataset['member']['data'],
+                "nonmember": dataset['full_nonmember']['data']
             })
-            for i in os.listdir(f"./filtered_dataset/"):
-                temp_dataset = datasets.load_from_disk(f"./filtered_dataset/{i}/{dataset_name}")
-                dataset["nonmember"].extend(temp_dataset["nonmember"]["data"])
+
     return dataset
 
 
