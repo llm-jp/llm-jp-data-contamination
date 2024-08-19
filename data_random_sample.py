@@ -50,10 +50,10 @@ def filter_data(data, min_length, max_length, args):
         batch = data[i:i + args.batch_size]
         texts = [item for item in batch]
         lengths = [len(text.split()) for text in texts]
-        if args.select_method == "nontruncate":
+        if args.select_method == "nontruncate" and args.relative_length == True:
             valid_indices = (np.array(lengths) >= min_length) & (np.array(lengths) <= max_length)
             filtered_data.extend([batch[j] for j in range(len(batch)) if valid_indices[j]])
-        elif args.select_method == "truncate":
+        elif args.select_method == "truncate" and args.relative_length == False:
             valid_indices = (np.array(lengths) >= max_length)
             filtered_data.extend([" ".join(batch[j].split()[:max_length]) for j in range(len(batch)) if valid_indices[j]])
     return filtered_data
