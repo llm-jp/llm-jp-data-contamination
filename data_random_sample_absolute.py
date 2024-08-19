@@ -126,34 +126,27 @@ for dataset_name in datalist:
     full_nonmember_data = test_dataset_full
     if args.relative_length:
         length_list = percentiles.tolist()
-        length_list.append("rest")
+        enumerate_length =  len(length_list) - 1
     else:
         length_list = [0, 100, 200, 300, 400, 500, 600, 700, 800, 900, "rest"]
+        enumerate_length = len(length_list)
     pdb.set_trace()
-    for i in range(len(length_list) - 1):
+    for i in range(enumerate_length):
         member_data = []
         nonmember_data = []
         if args.relative_length:
-            if length_list[i] == 0:
-                min_length = 5
-                max_length = length_list[i + 1]
-            elif length_list[i] == "rest":
-                min_length = length_list[i-1]
-                max_length = 100000000000
-            else:
-                min_length = length_list[i]
-                max_length = length_list[i + 1]
+            min_length = length_list[i]
+            max_length = length_list[i + 1]
         else:
             if length_list[i] == 0:
                 min_length = 5
-                max_length = 100
-            elif length_list[i] == "rest":
+                max_length = length_list[i + 1]
+            elif length_list[i+1] == "rest":
                 min_length = 1000
                 max_length = 100000000000
             else:
                 min_length = length_list[i]
-                max_length = length_list[i] + 100
-
+                max_length = min_length + 100
         filtered_member_data = load_and_filter_data(train_dataset_full, train_folder, min_length, max_length, tokenizer, args)
         filtered_nonmember_data = load_and_filter_data(test_dataset_full, test_folder, min_length, max_length, tokenizer, args)
 
@@ -177,7 +170,6 @@ for dataset_name in datalist:
             os.makedirs(f"./relative_filtered_dataset/{i}/{dataset_name}", exist_ok=True)
             dataset.save_to_disk(f"./relative_filtered_dataset/{i}/{dataset_name}")
         else:
-            os.makedirs(f"./abosulute_filtered_dataset/{min_length}_{max_length}/{dataset_name}", exist_ok=True)
-            dataset.save_to_disk(f"./abosulute_filtered_dataset/{min_length}_{max_length}/{dataset_name}")
-
+            os.makedirs(f"./absolute_filtered_dataset/{min_length}_{max_length}/{dataset_name}", exist_ok=True)
+            dataset.save_to_disk(f"./absolute_filtered_dataset/{min_length}_{max_length}/{dataset_name}")
         print(dataset)
