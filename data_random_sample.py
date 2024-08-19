@@ -83,7 +83,7 @@ def compute_length_percentiles(data, batch_size):
 
 # 创建数据集名称列表
 if args.list == 1:
-    datalist = ['Gutenberg (PG-19)', 'NIH ExPorter', "Pile-CC", "ArXiv", "Enron Emails", "FreeLaw"]
+    datalist = ["ArXiv", "Enron Emails", "FreeLaw",'Gutenberg (PG-19)', 'NIH ExPorter', "Pile-CC",]
 elif args.list == 2:
     datalist = ['PubMed Central', 'Ubuntu IRC', 'Wikipedia (en)', 'DM Mathematics', "EuroParl", "Github"]
 else:
@@ -130,7 +130,7 @@ for dataset_name in datalist:
             if length_list[i] == 0:
                 min_length = 5
                 max_length = length_list[i + 1]
-            elif length_list[i+1] == "rest":
+            elif length_list[i] == "rest":
                 min_length = 1000
                 max_length = 100000000000
             else:
