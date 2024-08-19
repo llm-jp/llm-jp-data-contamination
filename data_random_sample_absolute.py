@@ -15,7 +15,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument("--list", type=int, default=1)
 parser.add_argument("--batch_size", type=int, default=100)
 parser.add_argument("--sample_size", type=int, default=1000)
-parser.add_argument("--select_method", type=str, default=["truncate", "nontruncate"])
+parser.add_argument("--select_method", type=str, default="nontruncate", choices=["truncate", "nontruncate"])
 parser.add_argument("--relative_length", type=bool)
 args = parser.parse_args()
 
