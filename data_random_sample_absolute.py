@@ -170,6 +170,10 @@ for dataset_name in datalist:
             os.makedirs(f"./relative_filtered_dataset/{i}/{dataset_name}", exist_ok=True)
             dataset.save_to_disk(f"./relative_filtered_dataset/{i}/{dataset_name}")
         else:
-            os.makedirs(f"./absolute_filtered_dataset/{min_length}_{max_length}/{dataset_name}", exist_ok=True)
-            dataset.save_to_disk(f"./absolute_filtered_dataset/{min_length}_{max_length}/{dataset_name}")
+            if args.select_method == "truncate":
+                os.makedirs(f"./absolute_filtered_dataset/{min_length}_{max_length}_truncated/{dataset_name}", exist_ok=True)
+                dataset.save_to_disk(f"./absolute_filtered_dataset/{min_length}_{max_length}_truncated/{dataset_name}")
+            else:
+                os.makedirs(f"./absolute_filtered_dataset/{min_length}_{max_length}_nontruncated/{dataset_name}", exist_ok=True)
+                dataset.save_to_disk(f"./absolute_filtered_dataset/{min_length}_{max_length}_nontruncated/{dataset_name}")
         print(dataset)
