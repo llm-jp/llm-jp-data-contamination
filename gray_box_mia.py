@@ -11,7 +11,7 @@ parser.add_argument("--dataset_name", type=str, default="Pile-CC", choices=["arx
                      "pubmed_central", "wikipedia_(en)", "full_pile", "all", "ArXiv"])
 parser.add_argument("--cuda", type=int, default=0, help="cuda device")
 parser.add_argument("--refer_cuda", type=int, default=7, help="cuda device")
-parser.add_argument("--min_len", type=int, default=50)
+parser.add_argument("--min_len", type=int, default=100)
 parser.add_argument("--local_data", type=bool)
 parser.add_argument("--same_length", type=bool, default=True)
 parser.add_argument("--samples", type=int, default=5000)
