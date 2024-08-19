@@ -125,7 +125,7 @@ for dataset_name in datalist:
     percentiles = compute_length_percentiles(test_dataset_full, tokenizer, args.batch_size)
     full_nonmember_data = test_dataset_full
     if args.relative_length:
-        length_list = percentiles
+        length_list = percentiles.tolist()
         length_list.append("rest")
     else:
         length_list = [0, 100, 200, 300, 400, 500, 600, 700, 800, 900, "rest"]
