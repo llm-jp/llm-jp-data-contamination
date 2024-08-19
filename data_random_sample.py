@@ -56,6 +56,7 @@ def filter_data(data, min_length, max_length, args):
         elif args.select_method == "truncate" and args.relative_length == False:
             if max_length == 100000000000:
                 valid_indices = (np.array(lengths) >= min_length)
+                pdb.set_trace()
             else:
                 valid_indices = (np.array(lengths) >= max_length)
             filtered_data.extend([" ".join(batch[j].split()[:max_length]) for j in range(len(batch)) if valid_indices[j]])
