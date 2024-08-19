@@ -54,8 +54,11 @@ def filter_data(data, min_length, max_length, args):
             valid_indices = (np.array(lengths) >= min_length) & (np.array(lengths) <= max_length)
             filtered_data.extend([batch[j] for j in range(len(batch)) if valid_indices[j]])
         elif args.select_method == "truncate" and args.relative_length == False:
-            #valid_indices = (np.array(lengths) >= max_length)
-            filtered_data.extend([" ".join(batch[j].split()[:max_length]) for j in range(len(batch))])
+            if max_length == 100000000000:
+                valid_indices = (np.array(lengths) >= min_length)
+            else:
+                valid_indices = (np.array(lengths) >= max_length)
+            filtered_data.extend([" ".join(batch[j].split()[:max_length]) for j in range(len(batch)) if valid_indices[j]])
     return filtered_data
 
 
@@ -117,7 +120,7 @@ for dataset_name in datalist:
         length_list = percentiles.tolist()
         enumerate_length = len(length_list) - 1
     else:
-        length_list = [0, 100, 200, 300, 400, 500, 600, 700, 800, 900, "rest"]
+        length_list = ["rest"]
         enumerate_length = len(length_list)
     #pdb.set_trace()
     for i in range(enumerate_length):
