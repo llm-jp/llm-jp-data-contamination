@@ -14,10 +14,10 @@ parser.add_argument("--dataset_name", type=str, default="Pile-CC", choices=["arx
 parser.add_argument("--cuda", type=int, default=0, help="cuda device")
 parser.add_argument("--refer_cuda", type=int, default=7, help="cuda device")
 parser.add_argument("--min_len", type=int, default=100)
-parser.add_argument("--local_data", type=bool)
+parser.add_argument("--local_data", type=bool, default=True)
 parser.add_argument("--same_length", type=bool, default=True)
 parser.add_argument("--samples", type=int, default=5000)
-parser.add_argument("--gradient_collection", type=str, default=False)
+parser.add_argument("--gradient_collection", type=str, default=True)
 parser.add_argument("--dir", type=str, default="absolute_filtered_result")
 parser.add_argument("--load_dir", type=str, default="absolute_filtered_dataset")
 
