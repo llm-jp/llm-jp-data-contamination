@@ -882,8 +882,10 @@ def get_dataset_list(dataset_name):
                      "WikiMIAall", "temporalarxiv_2020_08","temporalarxiv_2021_01", "temporalarxiv_2021_06",
                      "temporalarxiv_2022_01", "temporalarxiv_2022_06", "temporalarxiv_2023_01", "temporalarxiv_2023_06"]
     elif dataset_name=="local_all":
-        return ["ArXiv", "DMath", "GitHub", "HackerNews", "PileCC", "PubMed", "Wikipedia", "full_pile",
-    else dataset_name=="arxiv":
+        return ["ArXiv", "Enron Emails", "FreeLaw", 'Gutenberg (PG-19)', 'NIH ExPorter', "Pile-CC",'PubMed Central',
+                'Ubuntu IRC', 'Wikipedia (en)', 'DM Mathematics', "EuroParl", "Github","HackerNews", "PhilPapers",
+                "PubMed Abstracts",   "StackExchange",    "USPTO Backgrounds"]
+    else:
         return [dataset_name]
 
 def obtain_dataset(dataset_name, args):
