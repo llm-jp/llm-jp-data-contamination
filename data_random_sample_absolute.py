@@ -120,11 +120,18 @@ for dataset_name in datalist:
 
     full_nonmember_data = test_dataset_full
 
-    for i in [0, 100, 200, 300, 400, 500, 600, 700, 800, 900]:
+    for i in [0, 100, 200, 300, 400, 500, 600, 700, 800, 900, "rest"]:
         member_data = []
         nonmember_data = []
-        min_length = i if i > 0 else 5
-        max_length = i + 100
+        if i ==0:
+            min_length = 5
+            max_length = 100
+        elif i == "rest":
+            min_length = 1000
+            max_length = 100000000000
+        else:
+            min_length = i
+            max_length = i + 100
 
         filtered_member_data = load_and_filter_data(train_dataset_full, train_folder, min_length, max_length,
                                                     args.sample_size, tokenizer, args.batch_size)
