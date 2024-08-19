@@ -52,7 +52,7 @@ def clean_dataset(dataset):
 
     return cleaned_data, orig_indices
 
-def form_dataset(dataset_name, min_len=None):
+def form_dataset(dataset_name, args):
     if "WikiMIA" in dataset_name:
         dataset_lengths = ["32", "64", "128", "256"] if "all" in dataset_name else [sub_string for sub_string in
                                                                                     ["32", "64", "128", "256"] if
@@ -74,26 +74,21 @@ def form_dataset(dataset_name, min_len=None):
                 mia_dataset["nonmember"].extend(non_member_data)
         return mia_dataset
     else:
-        dataset = datasets.load_from_disk(f"./filtered_dataset/{min_len}_{min_len+100}/{dataset_name}")
-        dataset = DatasetDict({
-            'member': dataset['member']['data'],
-            'nonmember': dataset['nonmember']['data']
-        })
-        # member_data = dataset['member']['data'][:1000]
-        # non_member_data = dataset['nonmember']['data'][:1000]
-        # df = pd.DataFrame({
-        #     'member': member_data,
-        #     'nonmember': non_member_data
-        # })
-        # dataset = Dataset.from_pandas(df)
-        # train_dataset = torch.load(f"/model/pile/by_dataset/train_{dataset_name}_0.pt")
-        # #valid_dataset = torch.load(f"/model/pile/by_dataset/valid_{dataset_name}.pt")
-        # test_dataset = torch.load(f"/model/pile/by_dataset/test_{dataset_name}.pt")
-        # dataset = DatasetDict({
-        #     'member': train_dataset,
-        #     'nonmember': test_dataset,
-        # })
-        return dataset
+        if args.same_length:
+            dataset = datasets.load_from_disk(f"./filtered_dataset/{args.min_len}_{args.min_len + 100}/{dataset_name}")
+            dataset = DatasetDict({
+                'member': dataset['member']['data'],
+                'nonmember': dataset['nonmember']['data']
+            })
+        else:
+            dataset = datasets.load_from_disk(f"./filtered_dataset/{args.min_len}_{args.min_len + 100}/{dataset_name}")
+            dataset = DatasetDict({
+                'member': dataset['member']['data'],
+            })
+            for i in os.listdir(f"./filtered_dataset/"):
+                temp_dataset = datasets.load_from_disk(f"./filtered_dataset/{i}/{dataset_name}")
+                dataset["nonmember"].extend(temp_dataset["nonmember"]["data"])
+    return dataset
 
 
 def caculate_outputs(model, tokenizer, text_batch, device, min_len=50):
@@ -889,9 +884,9 @@ def get_dataset_list(dataset_name):
     else:
         return [dataset_name]
 
-def obtain_dataset(dataset_name, min_len=50, local_data = False):
-    if local_data:
-        dataset = form_dataset(dataset_name, min_len)
+def obtain_dataset(dataset_name, args):
+    if args.local_data:
+        dataset = form_dataset(dataset_name, args)
     elif "WikiMIA" in dataset_name:
         dataset = form_dataset(dataset_name)
     elif "temporalarxiv" in dataset_name:

@@ -1,21 +1,6 @@
-from datasets import load_dataset
-import torch
-from transformers import GPTNeoXForCausalLM, AutoTokenizer,  AutoModelForCausalLM,  LogitsProcessorList, MinLengthLogitsProcessor, StoppingCriteriaList,  MaxLengthCriteria
-import pickle
-from tqdm import tqdm
-import matplotlib.pyplot as plt
-import numpy as np
-import pdb
-import torch.nn.functional as F
 import argparse
-import random
-import seaborn as sns
-from datasets import DatasetDict
-import os
-from torch.nn import CrossEntropyLoss
 from utils import *
 from transformers import BitsAndBytesConfig, AutoModelForCausalLM, AutoTokenizer
-
 
 
 parser = argparse.ArgumentParser()
@@ -27,10 +12,13 @@ parser.add_argument("--dataset_name", type=str, default="Pile-CC", choices=["arx
 parser.add_argument("--cuda", type=int, default=0, help="cuda device")
 parser.add_argument("--refer_cuda", type=int, default=7, help="cuda device")
 parser.add_argument("--min_len", type=int, default=50)
-parser.add_argument("--local_data", type=str, default="True")
+parser.add_argument("--local_data", type=bool)
+parser.add_argument("--compare_same_length", type=bool)
 parser.add_argument("--samples", type=int, default=5000)
 parser.add_argument("--gradient_collection", type=str, default=False)
 parser.add_argument("--dir", type=str, default="filtered_result")
+parser.add_argument("--load_dir", type=str, default="space_filtered_dataset")
+
 args = parser.parse_args()
 
 dataset_names = get_dataset_list(args.dataset_name)
@@ -69,7 +57,7 @@ tokenizer.pad_token = tokenizer.eos_token
 refer_tokenizer.pad_token = refer_tokenizer.eos_token
 for dataset_name in dataset_names:
     df = pd.DataFrame()
-    dataset = obtain_dataset(dataset_name, min_len=args.min_len, local_data=True if args.local_data == "True" else False)
+    dataset = obtain_dataset(dataset_name, args)
     loss_dict = {}
     prob_dict = {}
     ppl_dict = {}
