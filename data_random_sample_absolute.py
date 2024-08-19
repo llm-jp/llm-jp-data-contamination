@@ -37,12 +37,14 @@ def filter_data(data, min_length, max_length, tokenizer, batch_size):
     for i in tqdm(range(0, len(data), batch_size)):
         batch = data[i:i + batch_size]
         texts = [item for item in batch]
-        tokenized_batch = tokenizer(texts, truncation=True, padding=True, return_tensors="pt", max_length=2048).to(
-            "cuda:1")
+        #tokenized_batch = tokenizer(texts, truncation=True, padding=True, return_tensors="pt", max_length=2048).to(
+        #    "cuda:1")
         # pdb.set_trace()
         # use attention_mask to obtain the length of each text
-        lengths = tokenized_batch['attention_mask'].cuda(1).sum(dim=1)
+        lengths = [len(text.split()) for text in texts]
         valid_indices = (lengths >= min_length) & (lengths <= max_length)
+        #lengths = tokenized_batch['attention_mask'].cuda(1).sum(dim=1)
+        #valid_indices = (lengths >= min_length) & (lengths <= max_length)
         filtered_data.extend([batch[j] for j in range(len(batch)) if valid_indices[j]])
     return filtered_data
 
@@ -77,15 +79,17 @@ for dataset_name in datalist:
         cache_dir=f"./pythia-12b-deduped/step143000",
     )
     tokenizer.pad_token = tokenizer.eos_token
-    for min_length in [50, 150, 250, 350, 450, 550, 650, 750, 850, 950]:
-        max_length = min_length + 100  # token
-
+    for min_length in [5, 100, 200, 300, 400, 500, 600, 700, 800, 900]:
+        if min_length==5:
+            max_length = 100  # token
+        else:
+            max_length = min_length + 100
         # Step 1: see how many data files exist
         train_files = [f for f in os.listdir(train_folder) if f.startswith(f"train_{dataset_name}_")]
         test_files = [f for f in os.listdir(test_folder) if f.startswith(f"test_{dataset_name}_")]
 
         # Step 2: sample train_{dataset_name}_x
-        num_samples =  5 if len(train_files) > 5 else len(train_files)
+        num_samples = 5 if len(train_files) > 5 else len(train_files)
         sampled_train_files = random.sample(train_files, num_samples)
 
         # Step 3 & 4: merge data and take 20000 samples
@@ -109,6 +113,6 @@ for dataset_name in datalist:
         })
 
         # save the dataset
-        os.makedirs(f"./filtered_dataset/{min_length}_{max_length}/{dataset_name}", exist_ok=True)
-        dataset.save_to_disk(f"./filtered_dataset/{min_length}_{max_length}/{dataset_name}")
+        os.makedirs(f"./filtered_dataset_space/{min_length}_{max_length}/{dataset_name}", exist_ok=True)
+        dataset.save_to_disk(f"./filtered_dataset_space/{min_length}_{max_length}/{dataset_name}")
         print(dataset)
