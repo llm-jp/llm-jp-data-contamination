@@ -892,10 +892,10 @@ def get_dataset_list(dataset_name):
         return [dataset_name]
 
 def obtain_dataset(dataset_name, args):
-    if args.local_data and "temporalarxiv" not in dataset_name and "WikiMIA" not in dataset_name:
+    if args.local_data == True and "temporalarxiv" not in dataset_name and "WikiMIA" not in dataset_name:
         dataset = form_dataset(dataset_name, args)
     elif "WikiMIA" in dataset_name:
-        dataset = form_dataset(dataset_name)
+        dataset = form_dataset(dataset_name, args)
     elif "temporalarxiv" in dataset_name:
         dataset = load_dataset("iamgroot42/mimir", "temporal_arxiv",
                                split=dataset_name.replace("temporalarxiv_", ""))
