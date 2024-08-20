@@ -152,7 +152,7 @@ def figure_draw(data_dict, title,dataset_name, args):
         ax.legend()
     plt.tight_layout()
     os.makedirs(f"{args.dir}_figures/{dataset_name}", exist_ok=True)
-    if args.same_length == True
+    if args.same_length == True:
         plt.savefig(f"{args.dir}_figures/{dataset_name}/{title}_histograms_{args.model_size}_{dataset_name}_{args.min_len}_{args.min_len+100}_same_len.png")
     else:
         plt.savefig(f"{args.dir}_figures/{dataset_name}/{title}_histograms_{args.model_size}_{dataset_name}_{args.min_len}_{args.min_len+100}_all_len.png")
