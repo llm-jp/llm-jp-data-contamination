@@ -86,7 +86,6 @@ def form_dataset(dataset_name, args):
                 'member': dataset['member']['data'],
                 "nonmember": dataset['full_nonmember']['data']
             })
-
     return dataset
 
 
