@@ -288,23 +288,23 @@ def results_caculate_and_draw(dataset_name, args, df, split_set = ["train", "val
     for idx, dict in enumerate(all_dict):
         if idx == 0:
             figure_draw(loss_dict, "Loss", dataset_name, args)
-            mix_distribution(loss_dict, dataset_name, "Loss", args)
+            #mix_distribution(loss_dict, dataset_name, "Loss", args)
             print("Loss Distribution Similarity Matrix")
         elif idx == 1:
             figure_draw(prob_dict, "Prob", dataset_name, args)
-            mix_distribution(prob_dict, dataset_name, "Prob", args)
+            #mix_distribution(prob_dict, dataset_name, "Prob", args)
             print("Prob Distribution Similarity Matrix")
         elif idx == 2:
             figure_draw(ppl_dict, "PPL", dataset_name, args)
-            mix_distribution(ppl_dict, dataset_name, "PPL", args)
+            #mix_distribution(ppl_dict, dataset_name, "PPL", args)
             print("PPL Distribution Similarity Matrix")
         elif idx == 3:
             figure_draw(mink_plus_dict, "Mink_plus", dataset_name, args)
-            mix_distribution(mink_plus_dict, dataset_name, "Mink_plus", args)
+            #mix_distribution(mink_plus_dict, dataset_name, "Mink_plus", args)
             print("Mink_plus Distribution Similarity Matrix")
         elif idx == 4:
             figure_draw(zlib_dict, "Zlib", dataset_name, args)
-            mix_distribution(zlib_dict, dataset_name, "Zlib", args)
+            #mix_distribution(zlib_dict, dataset_name, "Zlib", args)
             print("Zlib Distribution Similarity Matrix")
         elif idx == 5:
             residual_dict = {}
@@ -313,11 +313,11 @@ def results_caculate_and_draw(dataset_name, args, df, split_set = ["train", "val
                 residual_dict[dataset_name][split] = [loss_dict[dataset_name][split][i] - refer_dict[dataset_name][split][i]
                                         for i in range(len(loss_dict[dataset_name][split]))]
             figure_draw(residual_dict, "Refer", dataset_name, args)
-            mix_distribution(residual_dict, dataset_name, "Refer", args)
+            #mix_distribution(residual_dict, dataset_name, "Refer", args)
             print("Refer Distribution Similarity Matrix")
         elif idx == 6:
             figure_draw(grad_dict, "Grad", dataset_name, args)
-            mix_distribution(grad_dict, dataset_name, "Grad", args)
+            #mix_distribution(grad_dict, dataset_name, "Grad", args)
             print("Grad Distribution Similarity Matrix")
         print(idx)
         calculate_mean_var(dict, dataset_name, split_set=split_set)
