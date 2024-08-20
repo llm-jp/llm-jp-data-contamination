@@ -152,7 +152,7 @@ def figure_draw(data_dict, title,dataset_name, args):
         ax.legend()
     plt.tight_layout()
     os.makedirs(f"{args.dir}_figures/{dataset_name}", exist_ok=True)
-    plt.savefig(f"{args.dir}_figures/{dataset_name}/{title}_histograms_{args.model_size}_{dataset_name}.png")
+    plt.savefig(f"{args.dir}_figures/{dataset_name}/{title}_histograms_{args.model_size}_{dataset_name}_{args.min_len}_{args.min_len+100}.png")
     plt.show()
 
 
