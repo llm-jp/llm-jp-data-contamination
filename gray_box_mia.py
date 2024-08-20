@@ -22,7 +22,7 @@ parser.add_argument("--load_dir", type=str, default="absolute_filtered_dataset")
 parser.add_argument("--truncated", type=bool, default=True)
 
 args = parser.parse_args()
-
+print(args)
 dataset_names = get_dataset_list(args.dataset_name)
 if args.model_size == "12b":
     bnb_config = BitsAndBytesConfig(
