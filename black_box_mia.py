@@ -66,85 +66,71 @@ def rougeL_score(predictions, references):
                                  references=references, use_aggregator=False)['rougeL']
     return rougeL_score
 
-parser = argparse.ArgumentParser()
-parser.add_argument("--batch_size", type=int, default=1)
-parser.add_argument("--model_size", type=str, default="410m")
-parser.add_argument("--dataset_name", type=str, default="all", choices=["arxiv", "dm_mathematics", "github", "hackernews", "pile_cc",
-                     "pubmed_central", "wikipedia_(en)", "full_pile","WikiMIA64", "WikiMIA128","WikiMIA256",
-                      "WikiMIAall"])
-parser.add_argument("--cuda", type=int, default=1, help="cuda device")
-parser.add_argument("--samples", type=int, default=1000)
-parser.add_argument("--generation_samples", type=int, default=10)
-parser.add_argument("--max_input_tokens", type=int, default=512)
-parser.add_argument("--max_new_tokens", type=int, default=128)
-parser.add_argument("--temperature", type=float, default=0.8)
-args = parser.parse_args()
-
-
-dataset_names = get_dataset_list("WikiMIA")
-bnb_config = BitsAndBytesConfig(
-        load_in_8bit=True,  # 开启8位量化
-        bnb_8bit_use_double_quant=True,  # 使用双重量化技术
-        bnb_8bit_compute_dtype=torch.float16  # 计算过程中使用float16
+def black_box_mia(args):
+    dataset_names = get_dataset_list(args.dataset_name)
+    bnb_config = BitsAndBytesConfig(
+            load_in_8bit=True,  # 开启8位量化
+            bnb_8bit_use_double_quant=True,  # 使用双重量化技术
+            bnb_8bit_compute_dtype=torch.float16  # 计算过程中使用float16
+        )
+    model = GPTNeoXForCausalLM.from_pretrained(
+        f"EleutherAI/pythia-{args.model_size}-deduped",
+        revision="step143000",
+        cache_dir=f"./pythia-{args.model_size}-deduped/step143000",
+        torch_dtype=torch.bfloat16,
+        quantization_config=bnb_config
+    ).cuda(args.cuda).eval()
+    tokenizer = AutoTokenizer.from_pretrained(
+      f"EleutherAI/pythia-{args.model_size}-deduped",
+      revision="step143000",
+      cache_dir=f"./pythia-{args.model_size}-deduped/step143000",
     )
-model = GPTNeoXForCausalLM.from_pretrained(
-    f"EleutherAI/pythia-{args.model_size}-deduped",
-    revision="step143000",
-    cache_dir=f"./pythia-{args.model_size}-deduped/step143000",
-    torch_dtype=torch.bfloat16,
-    quantization_config=bnb_config
-).cuda(args.cuda).eval()
-tokenizer = AutoTokenizer.from_pretrained(
-  f"EleutherAI/pythia-{args.model_size}-deduped",
-  revision="step143000",
-  cache_dir=f"./pythia-{args.model_size}-deduped/step143000",
-)
-tokenizer.pad_token = tokenizer.eos_token
-model.generation_config.pad_token_id = model.generation_config.eos_token_id
-model.generation_config.return_dict_in_generate = True
-bleurt = evaluate.load('bleurt', 'bleurt-20', model_type="metric")
-for dataset_name in dataset_names:
-    if os.makedirs(f"{args.dir}/{dataset_name}/{args.min_len}_{args.model_size}.csv", exist_ok=True):
-        df = pd.read_csv(f"{args.dir}/{dataset_name}/{args.min_len}_{args.model_size}.csv")
-    else:
-        df = pd.DataFrame()
-    dataset = obtain_dataset(dataset_name)
-    device = f'cuda:{args.cuda}'
-    generation_samples_list = []
-    ccd_dict = {}
-    samia_dict = {}
-    ccd_dict[dataset_name] = {"member": [], "nonmember": []}
-    samia_dict[dataset_name] = {"member": [], "nonmember": []}
-    for set_name in ["member", "nonmember"]:
-        cleaned_data, orig_indices = clean_dataset(dataset[set_name])
-        for idx, (data_batch, orig_indices_batch) in tqdm(enumerate(batched_data_with_indices(cleaned_data, orig_indices, batch_size=args.batch_size))):
-            orig_idx = [item for item in orig_indices_batch]
-            if idx * args.batch_size > args.samples:
-                break
-            batched_text = [item for item in data_batch]
-            tokenized_inputs = tokenizer(batched_text, return_tensors="pt", truncation=True, padding=True,
-                                         max_length=1024)
-            tokenized_inputs = {key: val.to(device) for key, val in tokenized_inputs.items()}
-            full_decoded = []
-            input_length = tokenized_inputs["attention_mask"][0].sum() if tokenized_inputs["attention_mask"][
-                                                                              0].sum() < args.max_input_tokens else args.max_input_tokens
-            for _ in tqdm(range(args.generation_samples)):
-                if _ == 0:
-                    zero_temp_generation =  model.generate(tokenized_inputs["input_ids"][0][:input_length].unsqueeze(0),
-                                                 temperature=0,
+    tokenizer.pad_token = tokenizer.eos_token
+    model.generation_config.pad_token_id = model.generation_config.eos_token_id
+    model.generation_config.return_dict_in_generate = True
+    bleurt = evaluate.load('bleurt', 'bleurt-20', model_type="metric")
+    for dataset_name in dataset_names:
+        if os.makedirs(f"{args.dir}/{dataset_name}/{args.min_len}_{args.model_size}.csv", exist_ok=True):
+            df = pd.read_csv(f"{args.dir}/{dataset_name}/{args.min_len}_{args.model_size}.csv")
+        else:
+            df = pd.DataFrame()
+        dataset = obtain_dataset(dataset_name)
+        device = f'cuda:{args.cuda}'
+        generation_samples_list = []
+        ccd_dict = {}
+        samia_dict = {}
+        ccd_dict[dataset_name] = {"member": [], "nonmember": []}
+        samia_dict[dataset_name] = {"member": [], "nonmember": []}
+        for set_name in ["member", "nonmember"]:
+            cleaned_data, orig_indices = clean_dataset(dataset[set_name])
+            for idx, (data_batch, orig_indices_batch) in tqdm(enumerate(batched_data_with_indices(cleaned_data, orig_indices, batch_size=args.batch_size))):
+                orig_idx = [item for item in orig_indices_batch]
+                if idx * args.batch_size > args.samples:
+                    break
+                batched_text = [item for item in data_batch]
+                tokenized_inputs = tokenizer(batched_text, return_tensors="pt", truncation=True, padding=True,
+                                             max_length=1024)
+                tokenized_inputs = {key: val.to(device) for key, val in tokenized_inputs.items()}
+                full_decoded = []
+                input_length = tokenized_inputs["attention_mask"][0].sum() if tokenized_inputs["attention_mask"][
+                                                                                  0].sum() < args.max_input_tokens else args.max_input_tokens
+                for _ in tqdm(range(args.generation_samples)):
+                    if _ == 0:
+                        zero_temp_generation =  model.generate(tokenized_inputs["input_ids"][0][:input_length].unsqueeze(0),
+                                                     temperature=0,
+                                                     max_new_tokens=args.max_new_tokens,
+                                                    )
+                        full_decoded.append(tokenizer.decode(zero_temp_generation["sequences"][0][input_length:]))
+                    generations = model.generate(tokenized_inputs["input_ids"][0][:input_length].unsqueeze(0),
+                                                 do_sample=True,
+                                                 temperature=args.temperature,
                                                  max_new_tokens=args.max_new_tokens,
                                                 )
-                    full_decoded.append(tokenizer.decode(zero_temp_generation["sequences"][0][input_length:]))
-                generations = model.generate(tokenized_inputs["input_ids"][0][:input_length].unsqueeze(0),
-                                             do_sample=True,
-                                             temperature=args.temperature,
-                                             max_new_tokens=args.max_new_tokens,
-                                            )
-                full_decoded.append(tokenizer.decode(generations["sequences"][0][input_length:]))
-            peak = get_peak(full_decoded[1:], full_decoded[0], 0.05)
-            bleurt_value = np.array(bleurt_score(full_decoded[0], full_decoded[1:])).mean().item()
-            ccd_dict[dataset_name][set_name].extend(peak)
-            samia_dict[dataset_name][set_name].extend(bleurt_value)
-    df = results_caculate_and_draw(dataset_name, args, df, split_set=["member", "nonmember"])
-
+                    full_decoded.append(tokenizer.decode(generations["sequences"][0][input_length:]))
+                peak = get_peak(full_decoded[1:], full_decoded[0], 0.05)
+                bleurt_value = np.array(bleurt_score(full_decoded[0], full_decoded[1:])).mean().item()
+                ccd_dict[dataset_name][set_name].extend(peak)
+                samia_dict[dataset_name][set_name].extend(bleurt_value)
+        df = results_caculate_and_draw(dataset_name, args, df, split_set=["member", "nonmember"])
+        df.to_csv(f"{args.dir}/{dataset_name}/{args.min_len}_{args.model_size}.csv")
 
