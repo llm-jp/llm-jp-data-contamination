@@ -100,7 +100,10 @@ for dataset_name in dataset_names:
     pickle.dump(grad_dict, open(f"{args.dir}/{dataset_name}/{args.min_len}_{args.model_size}_grad_dict.pkl", "wb"))
     pickle.dump(idx_list, open(f"{args.dir}/{dataset_name}/{args.min_len}_{args.model_size}_idx_list.pkl", "wb"))
     df = results_caculate_and_draw(dataset_name, args, df, split_set=["member", "nonmember"])
-    df.to_csv(f"{args.dir}/{dataset_name}/{args.min_len}_{args.model_size}.csv")
+    if args.same_length:
+        df.to_csv(f"{args.dir}/{dataset_name}/{args.min_len}_{args.model_size}_same_length.csv")
+    else:
+        df.to_csv(f"{args.dir}/{dataset_name}/{args.min_len}_{args.model_size}_all_length.csv")
 
 
 
