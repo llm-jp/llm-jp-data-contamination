@@ -103,9 +103,9 @@ def compute_black_box_mia(args):
         samia_dict[dataset_name] = {"member": [], "nonmember": []}
         for set_name in ["member", "nonmember"]:
             cleaned_data, orig_indices = clean_dataset(dataset[set_name])
-            for idx, (data_batch, orig_indices_batch) in tqdm(enumerate(batched_data_with_indices(cleaned_data, orig_indices, batch_size=args.batch_size))):
+            for idx, (data_batch, orig_indices_batch) in tqdm(enumerate(batched_data_with_indices(cleaned_data, orig_indices, batch_size=args.generation_batch_size))):
                 orig_idx = [item for item in orig_indices_batch]
-                if idx * args.batch_size > args.samples:
+                if idx * args.generation_batch_size > args.samples:
                     break
                 batched_text = [item for item in data_batch]
                 tokenized_inputs = tokenizer(batched_text, return_tensors="pt", truncation=True, padding=True,
