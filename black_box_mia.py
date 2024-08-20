@@ -94,6 +94,16 @@ def compute_black_box_mia(args):
             df = pd.read_csv(f"{args.dir}/{dataset_name}/{args.min_len}_{args.model_size}.csv")
         else:
             df = pd.DataFrame()
+        if args.same_length == "True":
+            if os.makedirs(f"{args.dir}/{dataset_name}/{args.min_len}_{args.model_size}_same_length.csv", exist_ok=True):
+                df = pd.read_csv(f"{args.dir}/{dataset_name}/{args.min_len}_{args.model_size}_same_length.csv")
+            else:
+                df = pd.DataFrame()
+        else:
+            if os.makedirs(f"{args.dir}/{dataset_name}/{args.min_len}_{args.model_size}_all_length.csv", exist_ok=True):
+                df = pd.read_csv(f"{args.dir}/{dataset_name}/{args.min_len}_{args.model_size}_all_length.csv")
+            else:
+                df = pd.DataFrame()
         dataset = obtain_dataset(dataset_name)
         device = f'cuda:{args.cuda}'
         generation_samples_list = []
