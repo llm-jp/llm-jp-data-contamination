@@ -24,26 +24,26 @@ parser.add_argument("--truncated", type=bool, default=True)
 args = parser.parse_args()
 
 dataset_names = get_dataset_list(args.dataset_name)
-if args.model_size == "12b":
-    bnb_config = BitsAndBytesConfig(
-        load_in_8bit=True,  # 开启8位量化
-        bnb_8bit_use_double_quant=True,  # 使用双重量化技术
-        bnb_8bit_compute_dtype=torch.float16  # 计算过程中使用float16
-    )
-    model = GPTNeoXForCausalLM.from_pretrained(
-      f"EleutherAI/pythia-{args.model_size}-deduped",
-      revision="step143000",
-      cache_dir=f"./pythia-{args.model_size}-deduped/step143000",
-      torch_dtype=torch.bfloat16,
-        quantization_config=bnb_config
-    ).eval()#cuda(args.cuda).eval()
-else:
-    model = GPTNeoXForCausalLM.from_pretrained(
-      f"EleutherAI/pythia-{args.model_size}-deduped",
-      revision="step143000",
-      cache_dir=f"./pythia-{args.model_size}-deduped/step143000",
-      torch_dtype=torch.bfloat16
-    ).cuda(args.cuda).eval()
+#if args.model_size == "12b":
+bnb_config = BitsAndBytesConfig(
+    load_in_8bit=True,  # 开启8位量化
+    bnb_8bit_use_double_quant=True,  # 使用双重量化技术
+    bnb_8bit_compute_dtype=torch.float16  # 计算过程中使用float16
+)
+model = GPTNeoXForCausalLM.from_pretrained(
+  f"EleutherAI/pythia-{args.model_size}-deduped",
+  revision="step143000",
+  cache_dir=f"./pythia-{args.model_size}-deduped/step143000",
+  torch_dtype=torch.bfloat16,
+    quantization_config=bnb_config
+).eval()#cuda(args.cuda).eval()
+# else:
+#     model = GPTNeoXForCausalLM.from_pretrained(
+#       f"EleutherAI/pythia-{args.model_size}-deduped",
+#       revision="step143000",
+#       cache_dir=f"./pythia-{args.model_size}-deduped/step143000",
+#       torch_dtype=torch.bfloat16
+#     ).cuda(args.cuda).eval()
 model = model.to_bettertransformer()
 tokenizer = AutoTokenizer.from_pretrained(
   f"EleutherAI/pythia-{args.model_size}-deduped",
