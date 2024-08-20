@@ -282,7 +282,7 @@ def results_caculate_and_draw(dataset_name, args, df, split_set = ["train", "val
     idx_list = pickle.load(open(f"{args.dir}/{dataset_name}/{args.min_len}_{args.model_size}_idx_list.pkl", "rb"))
     all_dict = [loss_dict, prob_dict, ppl_dict, mink_plus_dict, zlib_dict, refer_dict, grad_dict]
     method_list = ["loss", "prob", "ppl", "mink_plus", "zlib", "refer", "grad"]
-    os.makedirs(f"figures/{args.model_size}", exist_ok=True)
+    os.makedirs(f"{args.dir}_figures/{args.model_size}_{args.min_len}", exist_ok=True)
     for idx, dict in enumerate(all_dict):
         if idx == 0:
             figure_draw(loss_dict, "Loss", dataset_name, args)
