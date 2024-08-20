@@ -20,7 +20,6 @@ parser.add_argument("--samples", type=int, default=1000)
 parser.add_argument("--dir", type=str, default="absolute_filtered_result")
 parser.add_argument("--load_dir", type=str, default="absolute_filtered_dataset")
 parser.add_argument("--truncated", type=bool, default=True)
-
 args = parser.parse_args()
 print(args)
 dataset_names = get_dataset_list(args.dataset_name)
