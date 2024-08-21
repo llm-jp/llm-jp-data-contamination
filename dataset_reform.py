@@ -20,7 +20,7 @@ parser.add_argument("--samples", type=int, default=1000)
 parser.add_argument("--dir", type=str, default="absolute_filtered_result")
 parser.add_argument("--load_dir", type=str, default="absolute_filtered_dataset")
 parser.add_argument("--generation_batch_size", type=int, default=1)
-parser.add_argument("--truncated", type=str, default="truncated", choices=["truncated", "untruncated", "both"])
+parser.add_argument("--truncated", type=str, default="truncated", choices=["truncated", "nontruncated", "both"])
 parser.add_argument("--generation_samples", type=int, default=10)
 parser.add_argument("--max_input_tokens", type=int, default=512)
 parser.add_argument("--max_new_tokens", type=int, default=128)
@@ -46,5 +46,9 @@ for dataset_name in dataset_names:
         os.makedirs(f"../mia_dataset_filtered/{dataset_name}_truncated", exist_ok=True)
         for min_len in [0, 100, 200, 300, 400, 500, 600, 700, 800, 900]:
             args.min_len = min_len
-            dataset = obtain_dataset(dataset_name, args)
+            #dataset = obtain_dataset(dataset_name, args)
+            added_address = args.truncated
+            min_len = args.min_len if args.min_len != 0 else 5
+            max_len = 100 if args.min_len == 0 else min_len + 100
+            dataset = datasets.load_from_disk(f"./{args.load_dir}/{min_len}_{max_len}_{added_address}/{dataset_name}")
             dataset.save_to_disk(f"../mia_dataset_filtered/{dataset_name}_truncated/{min_len}")
