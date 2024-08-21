@@ -281,62 +281,30 @@ def wasserstein_distance_caculate(dict, dataset_name,  split_set = ["train", "va
 
 
 
-def results_caculate_and_draw(dataset_name, args, df, split_set=["member", "nonmember"]):
+def results_caculate_and_draw(dataset_name, args, df,  method):
+    split_set = ["member", "nonmember"]
     loss_dict = pickle.load(open(f"{args.dir}/{dataset_name}/{args.min_len}_{args.model_size}_loss_dict.pkl", "rb"))
     prob_dict = pickle.load(open(f"{args.dir}/{dataset_name}/{args.min_len}_{args.model_size}_prob_dict.pkl", "rb"))
     ppl_dict = pickle.load(open(f"{args.dir}/{dataset_name}/{args.min_len}_{args.model_size}_ppl_dict.pkl", "rb"))
     mink_plus_dict = pickle.load(open(f"{args.dir}/{dataset_name}/{args.min_len}_{args.model_size}_mink_plus_dict.pkl", "rb"))
     zlib_dict = pickle.load(open(f"{args.dir}/{dataset_name}/{args.min_len}_{args.model_size}_zlib_dict.pkl", "rb"))
     refer_dict = pickle.load(open(f"{args.dir}/{dataset_name}/{args.min_len}_{args.model_size}_refer_dict.pkl", "rb"))
+    residual_dict = {}
+    residual_dict[dataset_name] = {"member": [], "nonmember": []}
+    for split in split_set:
+        residual_dict[dataset_name][split] = [loss_dict[dataset_name][split][i] - refer_dict[dataset_name][split][i]
+                                              for i in range(len(loss_dict[dataset_name][split]))]
     grad_dict = pickle.load(open(f"{args.dir}/{dataset_name}/{args.min_len}_{args.model_size}_grad_dict.pkl", "rb"))
     ccd_dict = pickle.load(open(f"{args.dir}/{dataset_name}/{args.min_len}_{args.model_size}_ccd_dict.pkl", "rb"))
     samia_dict = pickle.load(open(f"{args.dir}/{dataset_name}/{args.min_len}_{args.model_size}_samia_dict.pkl", "rb"))
     idx_list = pickle.load(open(f"{args.dir}/{dataset_name}/{args.min_len}_{args.model_size}_idx_list.pkl", "rb"))
-    all_dict = [loss_dict, prob_dict, ppl_dict, mink_plus_dict, zlib_dict, refer_dict, grad_dict]
+    all_dict = [loss_dict, prob_dict, ppl_dict, mink_plus_dict, zlib_dict, residual_dict, grad_dict, ccd_dict, samia_dict]
     method_list = ["loss", "prob", "ppl", "mink_plus", "zlib", "refer", "grad", "ccd", "samia"]
     os.makedirs(f"{args.dir}_figures/{args.model_size}_{args.min_len}", exist_ok=True)
     for idx, dict in enumerate(all_dict):
-        if idx == 0:
-            figure_draw(loss_dict, "Loss", dataset_name, args)
-            #mix_distribution(loss_dict, dataset_name, "Loss", args)
-            print("Loss Distribution Similarity Matrix")
-        elif idx == 1:
-            figure_draw(prob_dict, "Prob", dataset_name, args)
-            #mix_distribution(prob_dict, dataset_name, "Prob", args)
-            print("Prob Distribution Similarity Matrix")
-        elif idx == 2:
-            figure_draw(ppl_dict, "PPL", dataset_name, args)
-            #mix_distribution(ppl_dict, dataset_name, "PPL", args)
-            print("PPL Distribution Similarity Matrix")
-        elif idx == 3:
-            figure_draw(mink_plus_dict, "Mink_plus", dataset_name, args)
-            #mix_distribution(mink_plus_dict, dataset_name, "Mink_plus", args)
-            print("Mink_plus Distribution Similarity Matrix")
-        elif idx == 4:
-            figure_draw(zlib_dict, "Zlib", dataset_name, args)
-            #mix_distribution(zlib_dict, dataset_name, "Zlib", args)
-            print("Zlib Distribution Similarity Matrix")
-        elif idx == 5:
-            residual_dict = {}
-            residual_dict[dataset_name] = {"member": [], "nonmember": []}
-            for split in split_set:
-                residual_dict[dataset_name][split] = [loss_dict[dataset_name][split][i] - refer_dict[dataset_name][split][i]
-                                        for i in range(len(loss_dict[dataset_name][split]))]
-            figure_draw(residual_dict, "Refer", dataset_name, args)
-            #mix_distribution(residual_dict, dataset_name, "Refer", args)
-            print("Refer Distribution Similarity Matrix")
-        elif idx == 6:
-            figure_draw(grad_dict, "Grad", dataset_name, args)
-            #mix_distribution(grad_dict, dataset_name, "Grad", args)
-            print("Grad Distribution Similarity Matrix")
-        elif idx == 7:
-            figure_draw(ccd_dict, "CCD", dataset_name, args)
-            #mix_distribution(ccd_dict, dataset_name, "CCD", args)
-            print("CCD Distribution Similarity Matrix")
-        elif idx == 8:
-            figure_draw(samia_dict, "SAMIA", dataset_name, args)
-            #mix_distribution(samia_dict, dataset_name, "SAMIA", args)
-            print("SAMIA Distribution Similarity Matrix")
+        figure_draw(all_dict[idx], method_list[idx], dataset_name, args)
+        #mix_distribution(loss_dict, dataset_name, "Loss", args)
+        print(f"{method_list[idx]} Distribution Similarity Matrix")
         print(idx)
         calculate_mean_var(dict, dataset_name, split_set=split_set)
         js_matrix = js_divergence(dict, dataset_name, split_set=split_set)
