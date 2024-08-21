@@ -74,18 +74,20 @@ def form_dataset(dataset_name, args):
                 mia_dataset["nonmember"].extend(non_member_data)
         return mia_dataset
     else:
+        min_len = args.min_len if args.min_len != 0 else 5
+        max_len = 100 if args.min_len == 0 else min_len + 100
         if args.truncated == "truncated":
             added_address = "truncated"
         else:
             added_address = "nontruncated"
         if args.same_length:
-            dataset = datasets.load_from_disk(f"./{args.load_dir}/{args.min_len}_{args.min_len + 100}_{added_address}/{dataset_name}")
+            dataset = datasets.load_from_disk(f"./{args.load_dir}/{min_len}_{max_len}_{added_address}/{dataset_name}")
             dataset = DatasetDict({
                 'member': dataset['member']['data'],
                 'nonmember': dataset['nonmember']['data']
             })
         else:
-            dataset = datasets.load_from_disk(f"./{args.load_dir}/{args.min_len}_{args.min_len + 100}_{added_address}/{dataset_name}")
+            dataset = datasets.load_from_disk(f"./{args.load_dir}/{min_len}_{max_len}_{added_address}/{dataset_name}")
             dataset = DatasetDict({
                 'member': dataset['member']['data'],
                 "nonmember": dataset['full_nonmember']['data']
