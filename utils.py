@@ -871,7 +871,7 @@ def get_dataset_list(args):
     elif args.dataset_name=="local_all":
         if args.truncated == "truncated":
             return['Wikipedia (en)', "USPTO Backgrounds", "StackExchange", 'PubMed Central', "Pile-CC", "HackerNews",
-                   "Github", "FreeLaw", "EuroParl",'DM Mathematics',"Arxiv",]
+                   "Github", "FreeLaw", "EuroParl",'DM Mathematics',"ArXiv",]
         else:
             return ['Wikipedia (en)', "USPTO Backgrounds", "StackExchange", "Pile-CC", "Github", "FreeLaw"]
     else:
