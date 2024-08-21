@@ -27,6 +27,7 @@ parser.add_argument("--max_input_tokens", type=int, default=512)
 parser.add_argument("--max_new_tokens", type=int, default=128)
 parser.add_argument("--temperature", type=float, default=0.8)
 args = parser.parse_args()
+print(args)
 compute_gray_box_method(args)
 #compute_black_box_mia(args)
 

@@ -3,7 +3,6 @@ from utils import *
 from transformers import BitsAndBytesConfig, AutoModelForCausalLM, AutoTokenizer
 
 def compute_gray_box_method(args):
-    print(args)
     dataset_names = get_dataset_list(args.dataset_name)
     if args.model_size == "12b":
         bnb_config = BitsAndBytesConfig(
@@ -16,7 +15,7 @@ def compute_gray_box_method(args):
           revision="step143000",
           cache_dir=f"./pythia-{args.model_size}-deduped/step143000",
           torch_dtype=torch.bfloat16,
-            quantization_config=bnb_config
+          quantization_config=bnb_config
         ).eval()#cuda(args.cuda).eval()
     else:
         model = GPTNeoXForCausalLM.from_pretrained(
