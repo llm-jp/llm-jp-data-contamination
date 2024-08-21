@@ -1,6 +1,7 @@
 import datasets
 from utils import *
 import argparse
+import os
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--batch_size", type=int, default=4)
@@ -29,7 +30,8 @@ args = parser.parse_args()
 dataset_names = get_dataset_list(args.dataset_name)
 for dataset_name in dataset_names:
     print(dataset_name)
-    for min_len in [100, 200, 300, 400, 500, 600, 700, 800, 900]:
+    dataset_indicator = True
+    for min_len in [0, 100, 200, 300, 400, 500, 600, 700, 800, 900]:
         args.min_len = min_len
         dataset = obtain_dataset(dataset_name, args)
         print("average member length", sum([len(x.split()) for x in dataset["member"]])/len(dataset["member"]))
@@ -38,3 +40,11 @@ for dataset_name in dataset_names:
         print("nonmember set size:", len(dataset["nonmember"]))
         if len(dataset["member"]) < 100 or len(dataset["nonmember"]) < 100:
             print("too small")
+            dataset_indicator = False
+    if dataset_indicator:
+        print("dataset is good")
+        os.makedirs(f"../mia_dataset_filtered/{dataset_name}_truncated", exist_ok=True)
+        for min_len in [0, 100, 200, 300, 400, 500, 600, 700, 800, 900]:
+            args.min_len = min_len
+            dataset = obtain_dataset(dataset_name, args)
+            dataset.save_to_disk(f"../mia_dataset_filtered/{dataset_name}_truncated/{min_len}")
