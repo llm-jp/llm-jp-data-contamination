@@ -75,9 +75,9 @@ def form_dataset(dataset_name, args):
         return mia_dataset
     else:
         if args.truncated == "truncated":
-            added_address = "_truncated"
+            added_address = "truncated"
         else:
-            added_address = "_nontruncated"
+            added_address = "nontruncated"
         if args.same_length:
             dataset = datasets.load_from_disk(f"./{args.load_dir}/{args.min_len}_{args.min_len + 100}_{added_address}/{dataset_name}")
             dataset = DatasetDict({
