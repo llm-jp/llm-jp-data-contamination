@@ -308,13 +308,13 @@ def results_caculate_and_draw(dataset_name, args, df, method_list):
         #mix_distribution(loss_dict, dataset_name, "Loss", args)
         print(f"{method_name} Distribution Similarity Matrix")
         print(idx)
-        calculate_mean_var(dict, dataset_name, split_set=split_set)
-        js_matrix = js_divergence(dict, dataset_name, split_set=split_set)
+        calculate_mean_var(value_dict, dataset_name, split_set=split_set)
+        js_matrix = js_divergence(value_dict, dataset_name, split_set=split_set)
         print(js_matrix)
-        ks_matrix, ks_p_value_matrix = ks_hypothesis(dict, dataset_name, split_set=split_set)
+        ks_matrix, ks_p_value_matrix = ks_hypothesis(value_dict, dataset_name, split_set=split_set)
         print(ks_matrix)
         print(ks_p_value_matrix)
-        ws_matrix = wasserstein_distance_caculate(dict, dataset_name, split_set=split_set)
+        ws_matrix = wasserstein_distance_caculate(value_dict, dataset_name, split_set=split_set)
         print(ws_matrix)
         df = df._append({'Dataset Name': dataset_name,
                          "Method": method_list[idx],
