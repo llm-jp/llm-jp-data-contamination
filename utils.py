@@ -847,23 +847,23 @@ def fig_fpr_tpr(all_output, output_dir):
     plt.legend(fontsize=8)
     plt.savefig(f"{output_dir}/auc.png")
 
-def get_dataset_list(dataset_name, args):
-    if dataset_name == "WikiMIA":
+def get_dataset_list(args):
+    if args.dataset_name == "WikiMIA":
         return ["WikiMIA64", "WikiMIA128", "WikiMIA256", "WikiMIAall"]
-    elif dataset_name == "temporalarxiv":
+    elif args.dataset_name == "temporalarxiv":
         return ["temporalarxiv_2020_08", "temporalarxiv_2021_01", "temporalarxiv_2021_06",
                 "temporalarxiv_2022_01", "temporalarxiv_2022_06", "temporalarxiv_2023_01", "temporalarxiv_2023_06"]
-    elif dataset_name=="online_all":
+    elif args.dataset_name=="online_all":
         return ["arxiv", "dm_mathematics", "github", "hackernews", "pile_cc",
                     "pubmed_central", "wikipedia_(en)", "full_pile"]
-    elif dataset_name=="local_all":
+    elif args.dataset_name=="local_all":
         if args.truncated == "truncated":
             return['Wikipedia (en)', "USPTO Backgrounds", "StackExchange", 'PubMed Central', "Pile-CC", "HackerNews",
                    "Github", "FreeLaw", "EuroParl",'DM Mathematics',"Arxiv",]
         else:
             return ['Wikipedia (en)', "USPTO Backgrounds", "StackExchange", "Pile-CC", "Github", "FreeLaw"]
     else:
-        return [dataset_name]
+        return [args.dataset_name]
 
 def obtain_dataset(dataset_name, args):
     if args.local_data == True and "temporalarxiv" not in dataset_name and "WikiMIA" not in dataset_name:

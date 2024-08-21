@@ -3,7 +3,7 @@ from utils import *
 from transformers import BitsAndBytesConfig, AutoModelForCausalLM, AutoTokenizer
 
 def compute_gray_box_method(args):
-    dataset_names = get_dataset_list(args.dataset_name)
+    dataset_names = get_dataset_list(args)
     if args.model_size == "12b":
         bnb_config = BitsAndBytesConfig(
             load_in_8bit=True,  # 开启8位量化
