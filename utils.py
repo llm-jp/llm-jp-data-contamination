@@ -79,13 +79,13 @@ def form_dataset(dataset_name, args):
         else:
             added_address = "_nontruncated"
         if args.same_length:
-            dataset = datasets.load_from_disk(f"./{args.load_dir}/{args.min_len}_{args.min_len + 100}_truncated/{dataset_name}")
+            dataset = datasets.load_from_disk(f"./{args.load_dir}/{args.min_len}_{args.min_len + 100}_{added_address}/{dataset_name}")
             dataset = DatasetDict({
                 'member': dataset['member']['data'],
                 'nonmember': dataset['nonmember']['data']
             })
         else:
-            dataset = datasets.load_from_disk(f"./{args.load_dir}/{args.min_len}_{args.min_len + 100}_truncated/{dataset_name}")
+            dataset = datasets.load_from_disk(f"./{args.load_dir}/{args.min_len}_{args.min_len + 100}_{added_address}/{dataset_name}")
             dataset = DatasetDict({
                 'member': dataset['member']['data'],
                 "nonmember": dataset['full_nonmember']['data']
