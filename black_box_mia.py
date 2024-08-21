@@ -115,18 +115,16 @@ def compute_black_box_mia(args):
             cleaned_data, orig_indices = clean_dataset(dataset[set_name])
             for idx, (data_batch, orig_indices_batch) in tqdm(enumerate(batched_data_with_indices(cleaned_data, orig_indices, batch_size=args.generation_batch_size))):
                 orig_idx = [item for item in orig_indices_batch]
-                if idx * args.generation_batch_size > args.samples:
-                    break
                 batched_text = [item for item in data_batch]
                 tokenized_inputs = tokenizer(batched_text, return_tensors="pt", truncation=True, padding=True,
                                              max_length=1024)
                 tokenized_inputs = {key: val.to(device) for key, val in tokenized_inputs.items()}
                 full_decoded = []
-                input_length = tokenized_inputs["attention_mask"][0].sum() if tokenized_inputs["attention_mask"][
-                                                                                  0].sum() < args.max_input_tokens else args.max_input_tokens
+                input_length = int(tokenized_inputs["attention_mask"][0].sum()/2) if (tokenized_inputs["attention_mask"][0].sum()
+                                                                               < args.max_input_tokens) else args.max_input_tokens
                 for _ in tqdm(range(args.generation_samples)):
                     if _ == 0:
-                        zero_temp_generation =  model.generate(tokenized_inputs["input_ids"][0][:input_length].unsqueeze(0),
+                        zero_temp_generation = model.generate(tokenized_inputs["input_ids"][0][:input_length].unsqueeze(0),
                                                      temperature=0,
                                                      max_new_tokens=args.max_new_tokens,
                                                     )
@@ -141,6 +139,8 @@ def compute_black_box_mia(args):
                 bleurt_value = np.array(bleurt_score(full_decoded[0], full_decoded[1:])).mean().item()
                 ccd_dict[dataset_name][set_name].extend(peak)
                 samia_dict[dataset_name][set_name].extend(bleurt_value)
+        pickle.dump(ccd_dict, open(f"{args.dir}/{dataset_name}/{args.min_len}_{args.model_size}_ccd_dict.pkl", "wb"))
+        pickle.dump(samia_dict, open(f"{args.dir}/{dataset_name}/{args.min_len}_{args.model_size}_samia_dict.pkl", "wb"))
         df = results_caculate_and_draw(dataset_name, args, df, split_set=["member", "nonmember"])
         df.to_csv(f"{args.dir}/{dataset_name}/{args.min_len}_{args.model_size}.csv")
 

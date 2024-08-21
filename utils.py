@@ -40,7 +40,7 @@ def clean_dataset(dataset):
     invalid_pattern = re.compile(r'^\s*$')
 
     def is_valid(text):
-        return not invalid_pattern.match(text) and len(text) > 10
+        return not invalid_pattern.match(text) and len(text) > 5
 
     cleaned_data = []
     orig_indices = []
@@ -289,9 +289,11 @@ def results_caculate_and_draw(dataset_name, args, df, split_set = ["train", "val
     zlib_dict = pickle.load(open(f"{args.dir}/{dataset_name}/{args.min_len}_{args.model_size}_zlib_dict.pkl", "rb"))
     refer_dict = pickle.load(open(f"{args.dir}/{dataset_name}/{args.min_len}_{args.model_size}_refer_dict.pkl", "rb"))
     grad_dict = pickle.load(open(f"{args.dir}/{dataset_name}/{args.min_len}_{args.model_size}_grad_dict.pkl", "rb"))
+    ccd_dict = pickle.load(open(f"{args.dir}/{dataset_name}/{args.min_len}_{args.model_size}_ccd_dict.pkl", "rb"))
+    samia_dict = pickle.load(open(f"{args.dir}/{dataset_name}/{args.min_len}_{args.model_size}_samia_dict.pkl", "rb"))
     idx_list = pickle.load(open(f"{args.dir}/{dataset_name}/{args.min_len}_{args.model_size}_idx_list.pkl", "rb"))
     all_dict = [loss_dict, prob_dict, ppl_dict, mink_plus_dict, zlib_dict, refer_dict, grad_dict]
-    method_list = ["loss", "prob", "ppl", "mink_plus", "zlib", "refer", "grad"]
+    method_list = ["loss", "prob", "ppl", "mink_plus", "zlib", "refer", "grad", "ccd", "samia"]
     os.makedirs(f"{args.dir}_figures/{args.model_size}_{args.min_len}", exist_ok=True)
     for idx, dict in enumerate(all_dict):
         if idx == 0:
@@ -327,6 +329,14 @@ def results_caculate_and_draw(dataset_name, args, df, split_set = ["train", "val
             figure_draw(grad_dict, "Grad", dataset_name, args)
             #mix_distribution(grad_dict, dataset_name, "Grad", args)
             print("Grad Distribution Similarity Matrix")
+        elif idx == 7:
+            figure_draw(ccd_dict, "CCD", dataset_name, args)
+            #mix_distribution(ccd_dict, dataset_name, "CCD", args)
+            print("CCD Distribution Similarity Matrix")
+        elif idx == 8:
+            figure_draw(samia_dict, "SAMIA", dataset_name, args)
+            #mix_distribution(samia_dict, dataset_name, "SAMIA", args)
+            print("SAMIA Distribution Similarity Matrix")
         print(idx)
         calculate_mean_var(dict, dataset_name, split_set=split_set)
         js_matrix = js_divergence(dict, dataset_name, split_set=split_set)
