@@ -58,7 +58,6 @@ def compute_gray_box_method(args):
             loss_list, prob_list, ppl_list, mink_plus_list, zlib_list, refer_list, idx_list, grad_list = feature_collection(model, tokenizer, dataset[split], args,
                                                                                                                  dataset_name,
                                                                                            min_len = args.min_len,
-                                                                                           upper_limit=args.samples,
                                                                                            refer_model=refer_model,
                                                                                            refer_tokenizer=refer_tokenizer,
                                                                                            )
