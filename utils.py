@@ -847,7 +847,7 @@ def fig_fpr_tpr(all_output, output_dir):
     plt.legend(fontsize=8)
     plt.savefig(f"{output_dir}/auc.png")
 
-def get_dataset_list(dataset_name):
+def get_dataset_list(dataset_name, args):
     if dataset_name == "WikiMIA":
         return ["WikiMIA64", "WikiMIA128", "WikiMIA256", "WikiMIAall"]
     elif dataset_name == "temporalarxiv":
@@ -857,9 +857,11 @@ def get_dataset_list(dataset_name):
         return ["arxiv", "dm_mathematics", "github", "hackernews", "pile_cc",
                     "pubmed_central", "wikipedia_(en)", "full_pile"]
     elif dataset_name=="local_all":
-        return ["ArXiv", "Enron Emails", "FreeLaw", 'Gutenberg (PG-19)', 'NIH ExPorter', "Pile-CC",'PubMed Central',
-                'Ubuntu IRC', 'Wikipedia (en)', 'DM Mathematics', "EuroParl", "Github","HackerNews", "PhilPapers",
-                "PubMed Abstracts", "StackExchange", "USPTO Backgrounds"]
+        if args.truncated == "truncated":
+            return['Wikipedia (en)', "USPTO Backgrounds", "StackExchange", 'PubMed Central', "Pile-CC", "HackerNews",
+                   "Github", "FreeLaw", "EuroParl",'DM Mathematics',"Arxiv",]
+        else:
+            return ['Wikipedia (en)', "USPTO Backgrounds", "StackExchange", "Pile-CC", "Github", "FreeLaw"]
     else:
         return [dataset_name]
 
