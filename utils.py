@@ -76,26 +76,16 @@ def form_dataset(dataset_name, args):
     else:
         min_len = args.min_len if args.min_len != 0 else 5
         max_len = 100 if args.min_len == 0 else min_len + 100
-        if args.truncated == "truncated":
-            added_address = "truncated"
-        else:
-            added_address = "nontruncated"
+        dataset = datasets.load_from_disk(f"./{args.load_dir}_{args.truncated}/{dataset_name}/{min_len}_{max_len}")
+        member = random.sample(dataset['member']['data'], min(args.samples, len(dataset['member']['data'])))
         if args.same_length:
-            dataset = datasets.load_from_disk(f"./{args.load_dir}/{min_len}_{max_len}_{added_address}/{dataset_name}")
-            member = random.sample(dataset['member']['data'], min(args.samples, len(dataset['member']['data'])))
             nonmember = random.sample(dataset['nonmember']['data'], min(args.samples, len(dataset['nonmember']['data'])))
-            dataset = DatasetDict({
-                'member': member,
-                'nonmember': nonmember
-            })
         else:
-            dataset = datasets.load_from_disk(f"./{args.load_dir}/{min_len}_{max_len}_{added_address}/{dataset_name}")
-            member = random.sample(dataset['member']['data'], min(args.samples, len(dataset['member']['data'])))
-            nonmember = random.sample(dataset['nonmember']['data'], min(args.samples, len(dataset['nonmember']['data'])))
-            dataset = DatasetDict({
-                'member': member,
-                "nonmember": nonmember
-            })
+            nonmember = random.sample(dataset['full_nonmember']['data'], min(args.samples, len(dataset['full_nonmember']['data']))
+        dataset = DatasetDict({
+            'member': member,
+            'nonmember': nonmember
+        })
     return dataset
 
 
