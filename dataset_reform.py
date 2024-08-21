@@ -36,5 +36,5 @@ for dataset_name in dataset_names:
         print("average nonmember length", sum([len(x.split()) for x in dataset["nonmember"]])/len(dataset["nonmember"]))
         print("member set size:", len(dataset["member"]))
         print("nonmember set size:", len(dataset["nonmember"]))
-        if len(dataset["member"]) < 300 or len(dataset["nonmember"]) < 300:
+        if len(dataset["member"]) < 100 or len(dataset["nonmember"]) < 100:
             print("too small")
