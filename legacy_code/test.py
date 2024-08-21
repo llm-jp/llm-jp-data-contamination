@@ -56,7 +56,7 @@ def calculate_mink_and_mink_plus(batch_logits, batched_tokenized_inputs):
 model = GPTNeoXForCausalLM.from_pretrained(
       f"EleutherAI/pythia-160m-deduped",
       revision="step143000",
-      cache_dir=f"./pythia-70m-deduped/step143000",
+      cache_dir=f"../pythia-70m-deduped/step143000",
     ).eval()
 #model = model.to_bettertransformer()
 device = torch.device("cuda:2" if torch.cuda.is_available() else "cpu")
@@ -64,7 +64,7 @@ model = model.to(device)
 tokenizer = AutoTokenizer.from_pretrained(
   f"EleutherAI/pythia-160m-deduped",
   revision="step143000",
-  cache_dir=f"./pythia-70m-deduped/step143000",
+  cache_dir=f"../pythia-70m-deduped/step143000",
 )
 #model.train()
 tokenizer.pad_token = tokenizer.eos_token
