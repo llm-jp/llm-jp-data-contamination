@@ -67,21 +67,21 @@ def compute_gray_box_method(args):
             zlib_dict[dataset_name][split].extend(zlib_list)
             refer_dict[dataset_name][split].extend(refer_list)
             grad_dict[dataset_name][split].extend(grad_list)
-        os.makedirs(args.dir, exist_ok=True)
-        os.makedirs(f"{args.dir}/{dataset_name}/{args.truncated}", exist_ok=True)
-        pickle.dump(loss_dict, open(f"{args.dir}/{dataset_name}/{args.truncated}/{args.min_len}_{args.model_size}_loss_dict.pkl", "wb"))
-        pickle.dump(prob_dict, open(f"{args.dir}/{dataset_name}/{args.truncated}/{args.min_len}_{args.model_size}_prob_dict.pkl", "wb"))
-        pickle.dump(ppl_dict, open(f"{args.dir}/{dataset_name}/{args.truncated}/{args.min_len}_{args.model_size}_ppl_dict.pkl", "wb"))
-        pickle.dump(mink_plus_dict, open(f"{args.dir}/{dataset_name}/{args.truncated}/{args.min_len}_{args.model_size}_mink_plus_dict.pkl", "wb"))
-        pickle.dump(zlib_dict, open(f"{args.dir}/{dataset_name}/{args.truncated}/{args.min_len}_{args.model_size}_zlib_dict.pkl", "wb"))
-        pickle.dump(refer_dict, open(f"{args.dir}/{dataset_name}/{args.truncated}/{args.min_len}_{args.model_size}_refer_dict.pkl", "wb"))
-        pickle.dump(grad_dict, open(f"{args.dir}/{dataset_name}/{args.truncated}/{args.min_len}_{args.model_size}_grad_dict.pkl", "wb"))
-        pickle.dump(idx_list, open(f"{args.dir}/{dataset_name}/{args.truncated}/{args.min_len}_{args.model_size}_idx_list.pkl", "wb"))
+        os.makedirs(args.save_dir, exist_ok=True)
+        os.makedirs(f"{args.save_dir}/{dataset_name}/{args.truncated}", exist_ok=True)
+        pickle.dump(loss_dict, open(f"{args.save_dir}/{dataset_name}/{args.truncated}/{args.min_len}_{args.model_size}_loss_dict.pkl", "wb"))
+        pickle.dump(prob_dict, open(f"{args.save_dir}/{dataset_name}/{args.truncated}/{args.min_len}_{args.model_size}_prob_dict.pkl", "wb"))
+        pickle.dump(ppl_dict, open(f"{args.save_dir}/{dataset_name}/{args.truncated}/{args.min_len}_{args.model_size}_ppl_dict.pkl", "wb"))
+        pickle.dump(mink_plus_dict, open(f"{args.save_dir}/{dataset_name}/{args.truncated}/{args.min_len}_{args.model_size}_mink_plus_dict.pkl", "wb"))
+        pickle.dump(zlib_dict, open(f"{args.save_dir}/{dataset_name}/{args.truncated}/{args.min_len}_{args.model_size}_zlib_dict.pkl", "wb"))
+        pickle.dump(refer_dict, open(f"{args.save_dir}/{dataset_name}/{args.truncated}/{args.min_len}_{args.model_size}_refer_dict.pkl", "wb"))
+        pickle.dump(grad_dict, open(f"{args.save_dir}/{dataset_name}/{args.truncated}/{args.min_len}_{args.model_size}_grad_dict.pkl", "wb"))
+        pickle.dump(idx_list, open(f"{args.save_dir}/{dataset_name}/{args.truncated}/{args.min_len}_{args.model_size}_idx_list.pkl", "wb"))
         df = results_caculate_and_draw(dataset_name, args, df, method_list=["loss", "prob", "ppl", "mink_plus", "zlib", "refer", "grad"])
         if args.same_length:
-            df.to_csv(f"{args.dir}/{dataset_name}/{args.truncated}/{args.min_len}_{args.model_size}_same_length.csv")
+            df.to_csv(f"{args.save_dir}/{dataset_name}/{args.truncated}/{args.min_len}_{args.model_size}_same_length.csv")
         else:
-            df.to_csv(f"{args.dir}/{dataset_name}/{args.truncated}/{args.min_len}_{args.model_size}_all_length.csv")
+            df.to_csv(f"{args.save_dir}/{dataset_name}/{args.truncated}/{args.min_len}_{args.model_size}_all_length.csv")
 
 
 

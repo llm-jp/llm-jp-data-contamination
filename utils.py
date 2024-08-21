@@ -291,14 +291,14 @@ def results_caculate_and_draw(dataset_name, args, df, method_list):
     # samia_dict = pickle.load(open(f"{args.dir}/{dataset_name}/{args.truncated}/{args.min_len}_{args.model_size}_samia_dict.pkl", "rb"))
     # all_dict = [loss_dict, prob_dict, ppl_dict, mink_plus_dict, zlib_dict, residual_dict, grad_dict, ccd_dict, samia_dict]
     # method_list = ["loss", "prob", "ppl", "mink_plus", "zlib", "refer", "grad", "ccd", "samia"]
-    os.makedirs(f"{args.dir}_figures/{args.model_size}_{args.min_len}", exist_ok=True)
+    os.makedirs(f"{args.save_dir}_figures/{args.model_size}_{args.min_len}", exist_ok=True)
     for idx, method_name in enumerate(method_list):
-        value_dict = pickle.load(open(f"{args.dir}/{dataset_name}/{args.truncated}/{args.min_len}_{args.model_size}_{method_name}_dict.pkl", "rb"))
+        value_dict = pickle.load(open(f"{args.save_dir}/{dataset_name}/{args.truncated}/{args.min_len}_{args.model_size}_{method_name}_dict.pkl", "rb"))
         if method_name == "refer":
             residual_dict = {}
             residual_dict[dataset_name] = {"member": [], "nonmember": []}
-            loss_dict = pickle.load(open(f"{args.dir}/{dataset_name}/{args.truncated}/{args.min_len}_{args.model_size}_loss_dict.pkl", "rb"))
-            refer_dict = pickle.load(open(f"{args.dir}/{dataset_name}/{args.truncated}/{args.min_len}_{args.model_size}_refer_dict.pkl", "rb"))
+            loss_dict = pickle.load(open(f"{args.save_dir}/{dataset_name}/{args.truncated}/{args.min_len}_{args.model_size}_loss_dict.pkl", "rb"))
+            refer_dict = pickle.load(open(f"{args.save_dir}/{dataset_name}/{args.truncated}/{args.min_len}_{args.model_size}_refer_dict.pkl", "rb"))
             for split in split_set:
                 residual_dict[dataset_name][split] = [
                     loss_dict[dataset_name][split][i] - refer_dict[dataset_name][split][i]
