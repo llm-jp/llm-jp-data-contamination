@@ -30,6 +30,7 @@ dataset_names = get_dataset_list(args.dataset_name)
 for dataset_name in dataset_names:
     print(dataset_name)
     for min_len in [100, 200, 300, 400, 500, 600, 700, 800, 900]:
+        args.min_len = min_len
         dataset = obtain_dataset(dataset_name, args)
         print("average member length", sum([len(x.split()) for x in dataset["member"]])/len(dataset["member"]))
         print("average nonmember length", sum([len(x.split()) for x in dataset["nonmember"]])/len(dataset["nonmember"]))
