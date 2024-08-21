@@ -81,7 +81,7 @@ def form_dataset(dataset_name, args):
         if args.same_length:
             nonmember = random.sample(dataset['nonmember']['data'], min(args.samples, len(dataset['nonmember']['data'])))
         else:
-            nonmember = random.sample(dataset['full_nonmember']['data'], min(args.samples, len(dataset['full_nonmember']['data']))
+            nonmember = random.sample(dataset['full_nonmember']['data'], min(args.samples, len(dataset['full_nonmember']['data'])))
         dataset = DatasetDict({
             'member': member,
             'nonmember': nonmember
