@@ -31,7 +31,6 @@ def compute_gray_box_method(args):
       revision="step143000",
       cache_dir=f"./pythia-{args.model_size}-deduped/step143000",
     )
-
     refer_model = AutoModelForCausalLM.from_pretrained("stabilityai/stablelm-base-alpha-3b-v2",
                                                        trust_remote_code=True,
                                                        torch_dtype=torch.bfloat16).cuda(args.refer_cuda).eval()

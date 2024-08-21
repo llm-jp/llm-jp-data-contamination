@@ -1,7 +1,9 @@
 import argparse
 from gray_box_mia import compute_gray_box_method
 from black_box_mia import compute_black_box_mia
+import random
 
+random.seed(42)
 parser = argparse.ArgumentParser()
 parser.add_argument("--batch_size", type=int, default=4)
 parser.add_argument("--max_length", type=int, default=2048)

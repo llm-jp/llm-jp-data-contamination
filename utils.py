@@ -82,15 +82,19 @@ def form_dataset(dataset_name, args):
             added_address = "nontruncated"
         if args.same_length:
             dataset = datasets.load_from_disk(f"./{args.load_dir}/{min_len}_{max_len}_{added_address}/{dataset_name}")
+            member = random.sample(dataset['member']['data'], min(args.samples, len(dataset['member']['data'])))
+            nonmember = random.sample(dataset['nonmember']['data'], min(args.samples, len(dataset['nonmember']['data'])))
             dataset = DatasetDict({
-                'member': dataset['member']['data'],
-                'nonmember': dataset['nonmember']['data']
+                'member': member,
+                'nonmember': nonmember
             })
         else:
             dataset = datasets.load_from_disk(f"./{args.load_dir}/{min_len}_{max_len}_{added_address}/{dataset_name}")
+            member = random.sample(dataset['member']['data'], min(args.samples, len(dataset['member']['data'])))
+            nonmember = random.sample(dataset['nonmember']['data'], min(args.samples, len(dataset['nonmember']['data'])))
             dataset = DatasetDict({
-                'member': dataset['member']['data'],
-                "nonmember": dataset['full_nonmember']['data']
+                'member': member,
+                "nonmember": nonmember
             })
     return dataset
 
