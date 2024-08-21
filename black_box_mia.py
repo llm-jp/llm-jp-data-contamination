@@ -92,11 +92,11 @@ def compute_black_box_mia(args):
     for dataset_name in dataset_names:
         df = pd.DataFrame()
         if args.same_length == "True":
-            if os.makedirs(f"{args.dir}/{dataset_name}/{args.min_len}_{args.model_size}_same_length.csv", exist_ok=True):
-                df = pd.read_csv(f"{args.dir}/{dataset_name}/{args.min_len}_{args.model_size}_same_length.csv")
+            if os.makedirs(f"{args.dir}/{dataset_name}/{args.truncated}/{args.min_len}_{args.model_size}_same_length.csv", exist_ok=True):
+                df = pd.read_csv(f"{args.dir}/{dataset_name}/{args.truncated}/{args.min_len}_{args.model_size}_same_length.csv")
         else:
-            if os.makedirs(f"{args.dir}/{dataset_name}/{args.min_len}_{args.model_size}_all_length.csv", exist_ok=True):
-                df = pd.read_csv(f"{args.dir}/{dataset_name}/{args.min_len}_{args.model_size}_all_length.csv")
+            if os.makedirs(f"{args.dir}/{dataset_name}/{args.truncated}/{args.min_len}_{args.model_size}_all_length.csv", exist_ok=True):
+                df = pd.read_csv(f"{args.dir}/{dataset_name}/{args.truncated}/{args.min_len}_{args.model_size}_all_length.csv")
         dataset = obtain_dataset(dataset_name)
         device = f'cuda:{args.cuda}'
         generation_samples_list = []
@@ -132,8 +132,10 @@ def compute_black_box_mia(args):
                 bleurt_value = np.array(bleurt_score(full_decoded[0], full_decoded[1:])).mean().item()
                 ccd_dict[dataset_name][set_name].extend(peak)
                 samia_dict[dataset_name][set_name].extend(bleurt_value)
-        pickle.dump(ccd_dict, open(f"{args.dir}/{dataset_name}/{args.min_len}_{args.model_size}_ccd_dict.pkl", "wb"))
-        pickle.dump(samia_dict, open(f"{args.dir}/{dataset_name}/{args.min_len}_{args.model_size}_samia_dict.pkl", "wb"))
+        os.makedirs(args.dir, exist_ok=True)
+        os.makedirs(f"{args.dir}/{dataset_name}/{args.truncated}", exist_ok=True)
+        pickle.dump(ccd_dict, open(f"{args.dir}/{dataset_name}/{args.truncated}/{args.min_len}_{args.model_size}_ccd_dict.pkl", "wb"))
+        pickle.dump(samia_dict, open(f"{args.dir}/{dataset_name}/{args.truncated}/{args.min_len}_{args.model_size}_samia_dict.pkl", "wb"))
         df = results_caculate_and_draw(dataset_name, args, df, split_set=["member", "nonmember"])
-        df.to_csv(f"{args.dir}/{dataset_name}/{args.min_len}_{args.model_size}.csv")
+        df.to_csv(f"{args.dir}/{dataset_name}/{args.truncated}/{args.min_len}_{args.model_size}.csv")
 
