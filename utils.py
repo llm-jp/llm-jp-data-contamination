@@ -150,11 +150,11 @@ def figure_draw(data_dict, title,dataset_name, args):
         ax.set_ylabel('Density')
         ax.legend()
     plt.tight_layout()
-    os.makedirs(f"{args.dir}_figures/{dataset_name}/{args.truncated}/{args.min_len}_{args.max_len}", exist_ok=True)
+    os.makedirs(f"{args.save_dir}_figures/{dataset_name}/{args.truncated}/{args.min_len}_{args.max_len}", exist_ok=True)
     if args.same_length == True:
-        plt.savefig(f"{args.dir}_figures/{dataset_name}/{args.truncated}/{args.min_len}_{args.max_len}/{title}_histograms_{args.model_size}_{dataset_name}_same_len.png")
+        plt.savefig(f"{args.save_dir}_figures/{dataset_name}/{args.truncated}/{args.min_len}_{args.max_len}/{title}_histograms_{args.model_size}_{dataset_name}_same_len.png")
     else:
-        plt.savefig(f"{args.dir}_figures/{dataset_name}/{args.truncated}/{args.min_len}_{args.max_len}/{title}_histograms_{args.model_size}_{dataset_name}_all_len.png")
+        plt.savefig(f"{args.save_dir}_figures/{dataset_name}/{args.truncated}/{args.min_len}_{args.max_len}/{title}_histograms_{args.model_size}_{dataset_name}_all_len.png")
     plt.show()
 
 
