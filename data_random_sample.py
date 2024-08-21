@@ -121,7 +121,7 @@ for dataset_name in datalist:
         length_list = percentiles.tolist()
         enumerate_length = len(length_list) - 1
     else:
-        length_list = ["rest"]
+        length_list = [0, 100, 200, 300, 400, 500, 600, 700, 800, 900, "rest"]
         enumerate_length = len(length_list)
     #pdb.set_trace()
     for i in range(enumerate_length):
