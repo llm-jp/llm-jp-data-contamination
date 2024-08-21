@@ -6,7 +6,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument("--batch_size", type=int, default=4)
 parser.add_argument("--max_length", type=int, default=2048)
 parser.add_argument("--model_size", type=str, default="160m")
-parser.add_argument("--dataset_name", type=str, default="Pile-CC", choices=["arxiv", "dm_mathematics", "github", "hackernews", "pile_cc",
+parser.add_argument("--dataset_name", type=str, default="local_all", choices=["arxiv", "dm_mathematics", "github", "hackernews", "pile_cc",
                      "pubmed_central", "wikipedia_(en)", "full_pile", "all","ArXiv", "Enron Emails", "FreeLaw", 'Gutenberg (PG-19)', 'NIH ExPorter', "Pile-CC",'PubMed Central',
                 'Ubuntu IRC', 'Wikipedia (en)', 'DM Mathematics', "EuroParl", "Github","HackerNews", "PhilPapers",
                 "PubMed Abstracts", "StackExchange", "local_all"])
