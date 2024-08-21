@@ -67,7 +67,7 @@ def rougeL_score(predictions, references):
     return rougeL_score
 
 def compute_black_box_mia(args):
-    dataset_names = get_dataset_list(args.dataset_name)
+    dataset_names = get_dataset_list(args)
     bnb_config = BitsAndBytesConfig(
             load_in_8bit=True,  # 开启8位量化
             bnb_8bit_use_double_quant=True,  # 使用双重量化技术

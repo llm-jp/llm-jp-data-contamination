@@ -271,30 +271,42 @@ def wasserstein_distance_caculate(dict, dataset_name,  split_set = ["train", "va
 
 
 
-def results_caculate_and_draw(dataset_name, args, df,  method):
+def results_caculate_and_draw(dataset_name, args, df):
     split_set = ["member", "nonmember"]
-    loss_dict = pickle.load(open(f"{args.dir}/{dataset_name}/{args.truncated}/{args.min_len}_{args.model_size}_loss_dict.pkl", "rb"))
-    prob_dict = pickle.load(open(f"{args.dir}/{dataset_name}/{args.truncated}/{args.min_len}_{args.model_size}_prob_dict.pkl", "rb"))
-    ppl_dict = pickle.load(open(f"{args.dir}/{dataset_name}/{args.truncated}/{args.min_len}_{args.model_size}_ppl_dict.pkl", "rb"))
-    mink_plus_dict = pickle.load(open(f"{args.dir}/{dataset_name}/{args.truncated}/{args.min_len}_{args.model_size}_mink_plus_dict.pkl", "rb"))
-    zlib_dict = pickle.load(open(f"{args.dir}/{dataset_name}/{args.truncated}/{args.min_len}_{args.model_size}_zlib_dict.pkl", "rb"))
-    refer_dict = pickle.load(open(f"{args.dir}/{dataset_name}/{args.truncated}/{args.min_len}_{args.model_size}_refer_dict.pkl", "rb"))
-    residual_dict = {}
-    residual_dict[dataset_name] = {"member": [], "nonmember": []}
-    for split in split_set:
-        residual_dict[dataset_name][split] = [loss_dict[dataset_name][split][i] - refer_dict[dataset_name][split][i]
-                                              for i in range(len(loss_dict[dataset_name][split]))]
-    grad_dict = pickle.load(open(f"{args.dir}/{dataset_name}/{args.truncated}/{args.min_len}_{args.model_size}_grad_dict.pkl", "rb"))
-    ccd_dict = pickle.load(open(f"{args.dir}/{dataset_name}/{args.truncated}/{args.min_len}_{args.model_size}_ccd_dict.pkl", "rb"))
-    samia_dict = pickle.load(open(f"{args.dir}/{dataset_name}/{args.truncated}/{args.min_len}_{args.model_size}_samia_dict.pkl", "rb"))
-    idx_list = pickle.load(open(f"{args.dir}/{dataset_name}/{args.truncated}/{args.min_len}_{args.model_size}_idx_list.pkl", "rb"))
-    all_dict = [loss_dict, prob_dict, ppl_dict, mink_plus_dict, zlib_dict, residual_dict, grad_dict, ccd_dict, samia_dict]
-    method_list = ["loss", "prob", "ppl", "mink_plus", "zlib", "refer", "grad", "ccd", "samia"]
+    # loss_dict = pickle.load(open(f"{args.dir}/{dataset_name}/{args.truncated}/{args.min_len}_{args.model_size}_loss_dict.pkl", "rb"))
+    # prob_dict = pickle.load(open(f"{args.dir}/{dataset_name}/{args.truncated}/{args.min_len}_{args.model_size}_prob_dict.pkl", "rb"))
+    # ppl_dict = pickle.load(open(f"{args.dir}/{dataset_name}/{args.truncated}/{args.min_len}_{args.model_size}_ppl_dict.pkl", "rb"))
+    # mink_plus_dict = pickle.load(open(f"{args.dir}/{dataset_name}/{args.truncated}/{args.min_len}_{args.model_size}_mink_plus_dict.pkl", "rb"))
+    # zlib_dict = pickle.load(open(f"{args.dir}/{dataset_name}/{args.truncated}/{args.min_len}_{args.model_size}_zlib_dict.pkl", "rb"))
+    # refer_dict = pickle.load(open(f"{args.dir}/{dataset_name}/{args.truncated}/{args.min_len}_{args.model_size}_refer_dict.pkl", "rb"))
+    # idx_list = pickle.load(
+    #     open(f"{args.dir}/{dataset_name}/{args.truncated}/{args.min_len}_{args.model_size}_idx_list.pkl", "rb"))
+    # residual_dict = {}
+    # residual_dict[dataset_name] = {"member": [], "nonmember": []}
+    # for split in split_set:
+    #     residual_dict[dataset_name][split] = [loss_dict[dataset_name][split][i] - refer_dict[dataset_name][split][i]
+    #                                           for i in range(len(loss_dict[dataset_name][split]))]
+    # grad_dict = pickle.load(open(f"{args.dir}/{dataset_name}/{args.truncated}/{args.min_len}_{args.model_size}_grad_dict.pkl", "rb"))
+    # ccd_dict = pickle.load(open(f"{args.dir}/{dataset_name}/{args.truncated}/{args.min_len}_{args.model_size}_ccd_dict.pkl", "rb"))
+    # samia_dict = pickle.load(open(f"{args.dir}/{dataset_name}/{args.truncated}/{args.min_len}_{args.model_size}_samia_dict.pkl", "rb"))
+    # all_dict = [loss_dict, prob_dict, ppl_dict, mink_plus_dict, zlib_dict, residual_dict, grad_dict, ccd_dict, samia_dict]
+    # method_list = ["loss", "prob", "ppl", "mink_plus", "zlib", "refer", "grad", "ccd", "samia"]
     os.makedirs(f"{args.dir}_figures/{args.model_size}_{args.min_len}", exist_ok=True)
-    for idx, dict in enumerate(all_dict):
-        figure_draw(all_dict[idx], method_list[idx], dataset_name, args)
+    for idx, method_name in enumerate(method_list):
+        value_dict = pickle.load(open(f"{args.dir}/{dataset_name}/{args.truncated}/{args.min_len}_{args.model_size}_{method_name}_dict.pkl", "rb"))
+        if method_name == "refer":
+            residual_dict = {}
+            residual_dict[dataset_name] = {"member": [], "nonmember": []}
+            loss_dict = pickle.load(open(f"{args.dir}/{dataset_name}/{args.truncated}/{args.min_len}_{args.model_size}_loss_dict.pkl", "rb"))
+            refer_dict = pickle.load(open(f"{args.dir}/{dataset_name}/{args.truncated}/{args.min_len}_{args.model_size}_refer_dict.pkl", "rb"))
+            for split in split_set:
+                residual_dict[dataset_name][split] = [
+                    loss_dict[dataset_name][split][i] - refer_dict[dataset_name][split][i]
+                    for i in range(len(loss_dict[dataset_name][split]))]
+            value_dict = residual_dict
+        figure_draw(value_dict, method_name, dataset_name, args)
         #mix_distribution(loss_dict, dataset_name, "Loss", args)
-        print(f"{method_list[idx]} Distribution Similarity Matrix")
+        print(f"{method_name} Distribution Similarity Matrix")
         print(idx)
         calculate_mean_var(dict, dataset_name, split_set=split_set)
         js_matrix = js_divergence(dict, dataset_name, split_set=split_set)
