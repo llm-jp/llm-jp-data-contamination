@@ -281,7 +281,7 @@ def wasserstein_distance_caculate(dict, dataset_name,  split_set = ["train", "va
 
 
 
-def results_caculate_and_draw(dataset_name, args, df, split_set = ["train", "valid", "test"]):
+def results_caculate_and_draw(dataset_name, args, df, split_set=["member", "nonmember"]):
     loss_dict = pickle.load(open(f"{args.dir}/{dataset_name}/{args.min_len}_{args.model_size}_loss_dict.pkl", "rb"))
     prob_dict = pickle.load(open(f"{args.dir}/{dataset_name}/{args.min_len}_{args.model_size}_prob_dict.pkl", "rb"))
     ppl_dict = pickle.load(open(f"{args.dir}/{dataset_name}/{args.min_len}_{args.model_size}_ppl_dict.pkl", "rb"))

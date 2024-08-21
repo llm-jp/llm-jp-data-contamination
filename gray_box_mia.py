@@ -78,7 +78,7 @@ def compute_gray_box_method(args):
         pickle.dump(refer_dict, open(f"{args.dir}/{dataset_name}/{args.min_len}_{args.model_size}_refer_dict.pkl", "wb"))
         pickle.dump(grad_dict, open(f"{args.dir}/{dataset_name}/{args.min_len}_{args.model_size}_grad_dict.pkl", "wb"))
         pickle.dump(idx_list, open(f"{args.dir}/{dataset_name}/{args.min_len}_{args.model_size}_idx_list.pkl", "wb"))
-        df = results_caculate_and_draw(dataset_name, args, df, split_set=["member", "nonmember"])
+        df = results_caculate_and_draw(dataset_name, args, df)
         if args.same_length:
             df.to_csv(f"{args.dir}/{dataset_name}/{args.min_len}_{args.model_size}_same_length.csv")
         else:
