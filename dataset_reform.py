@@ -38,7 +38,7 @@ for dataset_name in dataset_names:
     for min_len in enumerate_list:
         min_len = min_len if min_len != 0 else 5
         max_len = 100 if min_len == 5 else min_len + 100
-        dataset = datasets.load_from_disk(f"./{args.load_dir}/{min_len}_{max_len}/{dataset_name}/")
+        dataset = datasets.load_from_disk(f"./{args.load_dir}/{min_len}_{max_len}_{args.truncated}/{dataset_name}/")
         dataset = DatasetDict({
             'member': dataset['member']['data'],
             'nonmember': dataset['nonmember']['data']
