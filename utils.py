@@ -306,8 +306,8 @@ def results_caculate_and_draw(dataset_name, args, df, method_list):
         if method_name == "refer":
             residual_dict = {}
             residual_dict[dataset_name] = {"member": [], "nonmember": []}
-            loss_dict = pickle.load(open(f"{args.save_dir}/{dataset_name}/{args.truncated}/{args.min_len}_{args.model_size}_loss_dict.pkl", "rb"))
-            refer_dict = pickle.load(open(f"{args.save_dir}/{dataset_name}/{args.truncated}/{args.min_len}_{args.model_size}_refer_dict.pkl", "rb"))
+            loss_dict = pickle.load(open(f"{args.save_dir}/{dataset_name}/{args.relative}/{args.truncated}/{args.min_len}_{args.model_size}_loss_dict.pkl", "rb"))
+            refer_dict = pickle.load(open(f"{args.save_dir}/{dataset_name}/{args.relative}/{args.truncated}/{args.min_len}_{args.model_size}_refer_dict.pkl", "rb"))
             for split in split_set:
                 residual_dict[dataset_name][split] = [
                     loss_dict[dataset_name][split][i] - refer_dict[dataset_name][split][i]

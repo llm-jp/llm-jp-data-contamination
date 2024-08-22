@@ -57,6 +57,5 @@ for dataset_name in dataset_names:
             else:
                 min_len = min_len if min_len != 0 else 5
                 max_len = 100 if min_len == 5 else min_len + 100
-
                 dataset = datasets.load_from_disk(f"./{args.load_dir}/{min_len}_{max_len}_{added_address}/{dataset_name}")
                 dataset.save_to_disk(f"./mia_dataset_{added_address}/{dataset_name}/{min_len}_{max_len}")
