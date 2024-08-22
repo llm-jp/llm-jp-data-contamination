@@ -300,7 +300,7 @@ def results_caculate_and_draw(dataset_name, args, df, method_list):
     # samia_dict = pickle.load(open(f"{args.dir}/{dataset_name}/{args.truncated}/{args.min_len}_{args.model_size}_samia_dict.pkl", "rb"))
     # all_dict = [loss_dict, prob_dict, ppl_dict, mink_plus_dict, zlib_dict, residual_dict, grad_dict, ccd_dict, samia_dict]
     # method_list = ["loss", "prob", "ppl", "mink_plus", "zlib", "refer", "grad", "ccd", "samia"]
-    os.makedirs(f"{args.save_dir}_figures/{args.model_size}_{args.min_len}", exist_ok=True)
+    os.makedirs(f"{args.save_dir}_figures/{dataset_name}/", exist_ok=True)
     for idx, method_name in enumerate(method_list):
         value_dict = pickle.load(open(f"{args.save_dir}/{dataset_name}/{args.truncated}/{args.min_len}_{args.model_size}_{method_name}_dict.pkl", "rb"))
         if method_name == "refer":
