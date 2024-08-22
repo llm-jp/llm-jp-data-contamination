@@ -879,7 +879,7 @@ def get_dataset_list(args):
                     "pubmed_central", "wikipedia_(en)", "full_pile"]
     elif args.dataset_name=="local_all" and args.relative == "absolute":
         if args.truncated == "truncated":
-            return['Wikipedia (en)', "USPTO Backgrounds", "StackExchange", 'PubMed Central', "Pile-CC", "HackerNews",
+            return['Wikipedia (en)', "StackExchange", 'PubMed Central', "Pile-CC", "HackerNews",
                    "Github", "FreeLaw", "EuroParl",'DM Mathematics',"ArXiv",]
         elif args.truncated == "untruncated":
             return ['Wikipedia (en)', "USPTO Backgrounds", "StackExchange", "Pile-CC", "Github", "FreeLaw"]
