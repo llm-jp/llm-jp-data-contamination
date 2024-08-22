@@ -60,8 +60,6 @@ def filter_data(data, min_length, max_length, args):
             else:
                 valid_indices = (np.array(lengths) >= min_length)
             filtered_data.extend([" ".join(batch[j].split()[:max_length]) for j in range(len(batch)) if valid_indices[j]])
-        elif args.select_method == "mir":
-
     return filtered_data
 
 
