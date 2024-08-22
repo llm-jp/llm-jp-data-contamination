@@ -16,18 +16,23 @@ parser.add_argument("--refer_cuda", type=int, default=7, help="cuda device")
 parser.add_argument("--min_len", type=int, default=100)
 parser.add_argument("--local_data", type=bool, default=True)
 parser.add_argument("--same_length", action='store_false')
+parser.add_argument("--relative", type=str, default="absolute", choices=["absolute", "relative"])
 parser.add_argument("--samples", type=int, default=1000)
-parser.add_argument("--dir", type=str, default="absolute_filtered_result")
-parser.add_argument("--load_dir", type=str, default="absolute_filtered_dataset")
+parser.add_argument("--dir", type=str, default="relative_filtered_result")
+parser.add_argument("--load_dir", type=str, default="relative_filtered_dataset")
 parser.add_argument("--generation_batch_size", type=int, default=1)
-parser.add_argument("--truncated", type=str, default="nontruncated", choices=["truncated", "nontruncated", "both"])
+parser.add_argument("--truncated", type=str, default="nontruncated", choices=["truncated", "untruncated", "both"])
 args = parser.parse_args()
 
 dataset_names = get_dataset_list(args.dataset_name)
 for dataset_name in dataset_names:
     print(dataset_name)
     dataset_indicator = True
-    for min_len in [0, 100, 200, 300, 400, 500, 600, 700, 800, 900]:
+    if "absolute" in args.dir:
+        enumerate_list = [0, 100, 200, 300, 400, 500, 600, 700, 800, 900]
+    else:
+        enumerate_list = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90]
+    for min_len in enumerate_list:
         args.min_len = min_len
         dataset = obtain_dataset(dataset_name, args)
         if len(dataset["member"]) == 0 or len(dataset["nonmember"]) == 0:
@@ -44,8 +49,13 @@ for dataset_name in dataset_names:
         print("dataset is good")
         added_address = args.truncated
         os.makedirs(f"./mia_dataset_{added_address}/{dataset_name}", exist_ok=True)
-        for min_len in [0, 100, 200, 300, 400, 500, 600, 700, 800, 900]:
-            min_len = min_len if min_len != 0 else 5
-            max_len = 100 if min_len == 5 else min_len + 100
-            dataset = datasets.load_from_disk(f"./{args.load_dir}/{min_len}_{max_len}_{added_address}/{dataset_name}")
-            dataset.save_to_disk(f"./mia_dataset_{added_address}/{dataset_name}/{min_len}_{max_len}")
+        for min_len in enumerate_list:
+            if args.relative == "relative":
+                dataset = datasets.load_from_disk(f"./{args.load_dir}/{min_len}/{dataset_name}")
+                dataset.save_to_disk(f"./mia_dataset_relative/{dataset_name}/{min_len}")
+            else:
+                min_len = min_len if min_len != 0 else 5
+                max_len = 100 if min_len == 5 else min_len + 100
+
+                dataset = datasets.load_from_disk(f"./{args.load_dir}/{min_len}_{max_len}_{added_address}/{dataset_name}")
+                dataset.save_to_disk(f"./mia_dataset_{added_address}/{dataset_name}/{min_len}_{max_len}")

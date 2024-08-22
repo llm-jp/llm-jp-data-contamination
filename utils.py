@@ -74,18 +74,27 @@ def form_dataset(dataset_name, args):
                 mia_dataset["nonmember"].extend(non_member_data)
         return mia_dataset
     else:
-        min_len = args.min_len if args.min_len != 0 else 5
-        max_len = 100 if args.min_len == 0 else min_len + 100
-        dataset = datasets.load_from_disk(f"./{args.load_dir}_{args.truncated}/{dataset_name}/{min_len}_{max_len}")
-        member = random.sample(dataset['member']['data'], min(args.samples, len(dataset['member']['data'])))
-        if args.same_length:
+        if args.relative == "relative":
+            dataset = datasets.load_from_disk(f"./{args.load_dir}_{args.truncated}/{dataset_name}/{args.min_len}")
+            member = random.sample(dataset['member']['data'], min(args.samples, len(dataset['member']['data'])))
             nonmember = random.sample(dataset['nonmember']['data'], min(args.samples, len(dataset['nonmember']['data'])))
+            dataset = DatasetDict({
+                'member': member,
+                'nonmember': nonmember
+            })
         else:
-            nonmember = random.sample(dataset['full_nonmember']['data'], min(args.samples, len(dataset['full_nonmember']['data'])))
-        dataset = DatasetDict({
-            'member': member,
-            'nonmember': nonmember
-        })
+            min_len = args.min_len if args.min_len != 0 else 5
+            max_len = 100 if args.min_len == 0 else min_len + 100
+            dataset = datasets.load_from_disk(f"./{args.load_dir}_{args.truncated}/{dataset_name}/{min_len}_{max_len}")
+            member = random.sample(dataset['member']['data'], min(args.samples, len(dataset['member']['data'])))
+            if args.same_length:
+                nonmember = random.sample(dataset['nonmember']['data'], min(args.samples, len(dataset['nonmember']['data'])))
+            else:
+                nonmember = random.sample(dataset['full_nonmember']['data'], min(args.samples, len(dataset['full_nonmember']['data'])))
+            dataset = DatasetDict({
+                'member': member,
+                'nonmember': nonmember
+            })
     return dataset
 
 
@@ -872,8 +881,12 @@ def get_dataset_list(args):
         if args.truncated == "truncated":
             return['Wikipedia (en)', "USPTO Backgrounds", "StackExchange", 'PubMed Central', "Pile-CC", "HackerNews",
                    "Github", "FreeLaw", "EuroParl",'DM Mathematics',"ArXiv",]
-        else:
+        elif args.truncated == "untruncated":
             return ['Wikipedia (en)', "USPTO Backgrounds", "StackExchange", "Pile-CC", "Github", "FreeLaw"]
+        elif "relative" in args.dir:
+            return ["ArXiv", "Enron Emails", "FreeLaw", 'Gutenberg (PG-19)', 'NIH ExPorter', "Pile-CC", 'PubMed Central',
+            'Ubuntu IRC', 'Wikipedia (en)', 'DM Mathematics', "EuroParl", "Github", "HackerNews", "PhilPapers",
+            "PubMed Abstracts", "StackExchange"]
     else:
         return [args.dataset_name]
 
