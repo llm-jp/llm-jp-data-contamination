@@ -26,6 +26,7 @@ args = parser.parse_args()
 
 dataset_names = get_dataset_list(args.dataset_name)
 for dataset_name in dataset_names:
+    args.dataset_name = dataset_name
     print(dataset_name)
     dataset_indicator = True
     if "absolute" in args.dir:
@@ -34,7 +35,7 @@ for dataset_name in dataset_names:
         enumerate_list = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90]
     for min_len in enumerate_list:
         args.min_len = min_len
-        dataset = obtain_dataset(dataset_name, args)
+        dataset = obtain_dataset(args)
         if len(dataset["member"]) == 0 or len(dataset["nonmember"]) == 0:
             print("empty")
             continue
