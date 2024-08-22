@@ -68,7 +68,7 @@ def compute_gray_box_method(args):
             refer_dict[dataset_name][split].extend(refer_list)
             grad_dict[dataset_name][split].extend(grad_list)
         os.makedirs(args.save_dir, exist_ok=True)
-        os.makedirs(f"{args.save_dir}/{dataset_name}/{args.truncated}", exist_ok=True)
+        os.makedirs(f"{args.save_dir}/{dataset_name}/{args.relative}/{args.truncated}", exist_ok=True)
         pickle.dump(loss_dict, open(f"{args.save_dir}/{dataset_name}/{args.relative}/{args.truncated}/{args.min_len}_{args.model_size}_loss_dict.pkl", "wb"))
         pickle.dump(prob_dict, open(f"{args.save_dir}/{dataset_name}/{args.relative}/{args.truncated}/{args.min_len}_{args.model_size}_prob_dict.pkl", "wb"))
         pickle.dump(ppl_dict, open(f"{args.save_dir}/{dataset_name}/{args.relative}/{args.truncated}/{args.min_len}_{args.model_size}_ppl_dict.pkl", "wb"))
