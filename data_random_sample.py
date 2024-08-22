@@ -15,7 +15,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument("--list", type=int, default=1)
 parser.add_argument("--batch_size", type=int, default=100)
 parser.add_argument("--sample_size", type=int, default=1000)
-parser.add_argument("--select_method", type=str, default="nontruncate", choices=["truncate", "nontruncate"])
+parser.add_argument("--select_method", type=str, default="nontruncate", choices=["truncate", "nontruncate", "mir"])
 parser.add_argument("--relative_length", type=bool, default=False)
 args = parser.parse_args()
 
@@ -58,8 +58,10 @@ def filter_data(data, min_length, max_length, args):
                 valid_indices = (np.array(lengths) >= min_length)
                 #pdb.set_trace()
             else:
-                valid_indices = (np.array(lengths) >= max_length)
+                valid_indices = (np.array(lengths) >= min_length)
             filtered_data.extend([" ".join(batch[j].split()[:max_length]) for j in range(len(batch)) if valid_indices[j]])
+        elif args.select_method == "mir":
+
     return filtered_data
 
 
