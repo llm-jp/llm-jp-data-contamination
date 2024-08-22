@@ -159,11 +159,11 @@ def figure_draw(data_dict, title,dataset_name, args):
         ax.set_ylabel('Density')
         ax.legend()
     plt.tight_layout()
-    os.makedirs(f"{args.save_dir}_figures/{dataset_name}/{args.truncated}/{args.min_len}_{args.min_len+100}", exist_ok=True)
+    os.makedirs(f"{args.save_dir}_figures/{dataset_name}/{args.relative}/{args.truncated}/{args.min_len}_{args.min_len+100}", exist_ok=True)
     if args.same_length == True:
-        plt.savefig(f"{args.save_dir}_figures/{dataset_name}/{args.truncated}/{args.min_len}_{args.min_len+100}/{title}_histograms_{args.model_size}_{dataset_name}_same_len.png")
+        plt.savefig(f"{args.save_dir}_figures/{dataset_name}/{args.relative}/{args.truncated}/{args.min_len}_{args.min_len+100}/{title}_histograms_{args.model_size}_{dataset_name}_same_len.png")
     else:
-        plt.savefig(f"{args.save_dir}_figures/{dataset_name}/{args.truncated}/{args.min_len}_{args.min_len+100}/{title}_histograms_{args.model_size}_{dataset_name}_all_len.png")
+        plt.savefig(f"{args.save_dir}_figures/{dataset_name}/{args.relative}/{args.truncated}/{args.min_len}_{args.min_len+100}/{title}_histograms_{args.model_size}_{dataset_name}_all_len.png")
     plt.show()
 
 
@@ -302,7 +302,7 @@ def results_caculate_and_draw(dataset_name, args, df, method_list):
     # method_list = ["loss", "prob", "ppl", "mink_plus", "zlib", "refer", "grad", "ccd", "samia"]
     os.makedirs(f"{args.save_dir}_figures/{dataset_name}/", exist_ok=True)
     for idx, method_name in enumerate(method_list):
-        value_dict = pickle.load(open(f"{args.save_dir}/{dataset_name}/{args.truncated}/{args.min_len}_{args.model_size}_{method_name}_dict.pkl", "rb"))
+        value_dict = pickle.load(open(f"{args.save_dir}/{dataset_name}/{args.relative}/{args.truncated}/{args.min_len}_{args.model_size}_{method_name}_dict.pkl", "rb"))
         if method_name == "refer":
             residual_dict = {}
             residual_dict[dataset_name] = {"member": [], "nonmember": []}
