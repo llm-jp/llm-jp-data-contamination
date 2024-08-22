@@ -35,7 +35,7 @@ for dataset_name in dataset_names:
         enumerate_list = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90]
     for min_len in enumerate_list:
         args.min_len = min_len
-        dataset = obtain_dataset(args)
+        dataset = obtain_dataset(dataset_name, args)
         if len(dataset["member"]) == 0 or len(dataset["nonmember"]) == 0:
             print("empty")
             continue
