@@ -24,7 +24,7 @@ parser.add_argument("--generation_batch_size", type=int, default=1)
 parser.add_argument("--truncated", type=str, default="nontruncated", choices=["truncated", "untruncated", "both"])
 args = parser.parse_args()
 
-dataset_names = get_dataset_list(args.dataset_name)
+dataset_names = get_dataset_list(args)
 for dataset_name in dataset_names:
     args.dataset_name = dataset_name
     print(dataset_name)

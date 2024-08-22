@@ -75,7 +75,7 @@ def form_dataset(dataset_name, args):
         return mia_dataset
     else:
         if args.relative == "relative":
-            dataset = datasets.load_from_disk(f"./{args.load_dir}_{args.truncated}/{dataset_name}/{args.min_len}")
+            dataset = datasets.load_from_disk(f"./{args.load_dir}/{args.min_len}/{dataset_name}/")
             member = random.sample(dataset['member']['data'], min(args.samples, len(dataset['member']['data'])))
             nonmember = random.sample(dataset['nonmember']['data'], min(args.samples, len(dataset['nonmember']['data'])))
             dataset = DatasetDict({
