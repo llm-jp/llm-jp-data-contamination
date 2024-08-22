@@ -877,16 +877,15 @@ def get_dataset_list(args):
     elif args.dataset_name=="online_all":
         return ["arxiv", "dm_mathematics", "github", "hackernews", "pile_cc",
                     "pubmed_central", "wikipedia_(en)", "full_pile"]
-    elif args.dataset_name=="local_all":
+    elif args.dataset_name=="local_all" and args.relative == "absolute":
         if args.truncated == "truncated":
             return['Wikipedia (en)', "USPTO Backgrounds", "StackExchange", 'PubMed Central', "Pile-CC", "HackerNews",
                    "Github", "FreeLaw", "EuroParl",'DM Mathematics',"ArXiv",]
         elif args.truncated == "untruncated":
             return ['Wikipedia (en)', "USPTO Backgrounds", "StackExchange", "Pile-CC", "Github", "FreeLaw"]
-        elif "relative" in args.dir:
-            return ["ArXiv", "Enron Emails", "FreeLaw", 'Gutenberg (PG-19)', 'NIH ExPorter', "Pile-CC", 'PubMed Central',
-            'Ubuntu IRC', 'Wikipedia (en)', 'DM Mathematics', "EuroParl", "Github", "HackerNews", "PhilPapers",
-            "PubMed Abstracts", "StackExchange"]
+    elif args.dataset_name=="local_all" and args.relative == "relative":
+        return ["Wikipedia (en)",  "StackExchange",'PubMed Central', "Pile-CC", "NIH ExPorter", "HackerNews",
+                   "Github", "FreeLaw", "Enron Emails",  "DM Mathematics", "ArXiv"]
     else:
         return [args.dataset_name]
 
