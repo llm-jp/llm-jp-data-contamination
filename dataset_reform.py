@@ -18,13 +18,15 @@ parser.add_argument("--local_data", type=bool, default=True)
 parser.add_argument("--same_length", action='store_false')
 parser.add_argument("--relative", type=str, default="relative", choices=["absolute", "relative"])
 parser.add_argument("--samples", type=int, default=1000)
-parser.add_argument("--dir", type=str, default="relative_filtered_result")
-parser.add_argument("--load_dir", type=str, default="relative_filtered_dataset")
+parser.add_argument("--dir", type=str, default="absolute_filtered_result")
+parser.add_argument("--load_dir", type=str, default="absolute_filtered_dataset")
 parser.add_argument("--generation_batch_size", type=int, default=1)
-parser.add_argument("--truncated", type=str, default="nontruncated", choices=["truncated", "untruncated", "both"])
+parser.add_argument("--truncated", type=str, default="truncated", choices=["truncated", "untruncated", "both"])
 args = parser.parse_args()
 
-dataset_names = get_dataset_list(args)
+dataset_names = ["ArXiv", "Enron Emails", "FreeLaw", 'Gutenberg (PG-19)', 'NIH ExPorter', "Pile-CC",'PubMed Central',
+                'Ubuntu IRC', 'Wikipedia (en)', 'DM Mathematics', "EuroParl", "Github","HackerNews", "PhilPapers",
+                "PubMed Abstracts", "StackExchange"]
 for dataset_name in dataset_names:
     args.dataset_name = dataset_name
     print(dataset_name)
@@ -34,8 +36,9 @@ for dataset_name in dataset_names:
     else:
         enumerate_list = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90]
     for min_len in enumerate_list:
-        args.min_len = min_len
-        dataset = obtain_dataset(dataset_name, args)
+        min_len = min_len if min_len != 0 else 5
+        max_len = 100 if min_len == 5 else min_len + 100
+        dataset = datasets.load_from_disk(f"./{args.load_dir}/{min_len}_{max_len}/{dataset_name}/")
         if len(dataset["member"]) == 0 or len(dataset["nonmember"]) == 0:
             print("empty")
             continue
