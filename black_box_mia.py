@@ -97,7 +97,7 @@ def compute_black_box_mia(args):
         else:
             if os.makedirs(f"{args.dir}/{dataset_name}/{args.truncated}/{args.min_len}_{args.model_size}_all_length.csv", exist_ok=True):
                 df = pd.read_csv(f"{args.dir}/{dataset_name}/{args.truncated}/{args.min_len}_{args.model_size}_all_length.csv")
-        dataset = obtain_dataset(dataset_name)
+        dataset = obtain_dataset(dataset_name, args)
         device = f'cuda:{args.cuda}'
         generation_samples_list = []
         ccd_dict = {}
@@ -134,8 +134,10 @@ def compute_black_box_mia(args):
                 samia_dict[dataset_name][set_name].extend(bleurt_value)
         os.makedirs(args.save_dir, exist_ok=True)
         os.makedirs(f"{args.save_dir}/{dataset_name}/{args.truncated}", exist_ok=True)
-        pickle.dump(ccd_dict, open(f"{args.save_dir}/{dataset_name}/{args.truncated}/{args.min_len}_{args.model_size}_ccd_dict.pkl", "wb"))
-        pickle.dump(samia_dict, open(f"{args.save_dir}/{dataset_name}/{args.truncated}/{args.min_len}_{args.model_size}_samia_dict.pkl", "wb"))
+        pickle.dump(ccd_dict, open(f"{args.save_dir}/{dataset_name}/{args.relative}/{args.truncated}/{args.min_len}_{args.model_size}_ccd_dict.pkl", "wb"))
+        pickle.dump(samia_dict, open(f"{args.save_dir}/{dataset_name}/{args.relative}/{args.truncated}/{args.min_len}_{args.model_size}_samia_dict.pkl", "wb"))
         df = results_caculate_and_draw(dataset_name, args, df, method_list=["ccd", "samia"])
-        df.to_csv(f"{args.save_dir}/{dataset_name}/{args.truncated}/{args.min_len}_{args.model_size}.csv")
-
+        if args.same_length:
+            df.to_csv(f"{args.save_dir}/{dataset_name}/{args.relative}/{args.truncated}/{args.min_len}_{args.model_size}_same_length.csv")
+        else:
+            df.to_csv(f"{args.save_dir}/{dataset_name}/{args.relative}/{args.truncated}/{args.min_len}_{args.model_size}_all_length.csv")
