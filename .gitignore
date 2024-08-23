@@ -17,3 +17,5 @@ feature_result_online
 feature_result_online/
 mem_score_online
 mem_score_online/
+entropy_online
+entropy_online/
