@@ -30,5 +30,5 @@ parser.add_argument("--temperature", type=float, default=0.8)
 args = parser.parse_args()
 print(args)
 compute_gray_box_method(args)
-#compute_black_box_mia(args)
+compute_black_box_mia(args)
 
