@@ -107,10 +107,12 @@ def compute_black_box_mia(args):
         df = pd.DataFrame()
         if args.same_length == True:
             if os.path.isfile(f"{args.save_dir}/{dataset_name}/{args.relative}/{args.truncated}/{args.min_len}_{args.model_size}_same_length.csv"):
-                df = pd.read_csv(f"{args.save_dir}/{dataset_name}/{args.relative}/{args.truncated}/{args.min_len}_{args.model_size}_same_length.csv")
+                df = pd.read_csv(f"{args.save_dir}/{dataset_name}/{args.relative}/{args.truncated}/{args.min_len}_{args.model_size}_same_length.csv", index_col=0)
+                df = df.loc[:, ~df.columns.str.contains('^Unnamed')]
         else:
             if os.path.isfile(f"{args.save_dir}/{dataset_name}/{args.relative}/{args.truncated}/{args.min_len}_{args.model_size}_all_length.csv"):
-                df = pd.read_csv(f"{args.save_dir}/{dataset_name}/{args.relative}/{args.truncated}/{args.min_len}_{args.model_size}_all_length.csv")
+                df = pd.read_csv(f"{args.save_dir}/{dataset_name}/{args.relative}/{args.truncated}/{args.min_len}_{args.model_size}_all_length.csv", index_col=0)
+                df = df.loc[:, ~df.columns.str.contains('^Unnamed')]
         dataset = obtain_dataset(dataset_name, args)
         device = f'cuda:{args.cuda}'
         ccd_dict = {}
