@@ -38,7 +38,7 @@ def get_peak(samples, s_0, alpha):
     peak = sum(rhos)
 
     return peak
-def bleurt_score(predictions, references):
+def bleurt_score(bleurt, predictions, references):
     """Compute the average BLEURT score over the gpt responses
 
     Args:
@@ -69,8 +69,6 @@ def rougeL_score(predictions, references):
 
 def compute_black_box_mia(args):
     dataset_names = get_dataset_list(args)
-    bleurt = evaluate.load('bleurt', 'bleurt-20',
-                           model_type="metric")
     bnb_config = BitsAndBytesConfig(
             load_in_8bit=True,  # 开启8位量化
             bnb_8bit_use_double_quant=True,  # 使用双重量化技术
@@ -133,7 +131,7 @@ def compute_black_box_mia(args):
                     full_decoded.append(tokenizer.decode(generations["sequences"][0][input_length:]))
                 pdb.set_trace()
                 peak = get_peak(full_decoded[1:], full_decoded[0], 0.05)
-                bleurt_value = np.array(bleurt_score(full_decoded[0], full_decoded[1:])).mean().item()
+                bleurt_value = np.array(bleurt_score(bleurt, full_decoded[0], full_decoded[1:])).mean().item()
                 ccd_dict[dataset_name][set_name].extend(peak)
                 samia_dict[dataset_name][set_name].extend(bleurt_value)
         os.makedirs(args.save_dir, exist_ok=True)
