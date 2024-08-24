@@ -113,7 +113,6 @@ def compute_black_box_mia(args):
                 df = pd.read_csv(f"{args.save_dir}/{dataset_name}/{args.relative}/{args.truncated}/{args.min_len}_{args.model_size}_all_length.csv")
         dataset = obtain_dataset(dataset_name, args)
         device = f'cuda:{args.cuda}'
-        generation_samples_list = []
         ccd_dict = {}
         samia_dict = {}
         ccd_dict[dataset_name] = {"member": [], "nonmember": []}
@@ -144,7 +143,6 @@ def compute_black_box_mia(args):
                                                  top_k=50,
                                                 )
                         full_decoded.append(tokenizer.decode(generations["sequences"][0][input_length:], skip_special_tokens=True))
-                pdb.set_trace()
                 peak = get_peak(full_decoded[1:], full_decoded[0], 0.05)
                 bleurt_value = np.array(bleurt_score(bleurt_model, bleurt_tokenizer,  full_decoded[0], full_decoded[1:], args)).mean().item()
                 ccd_dict[dataset_name][set_name].extend(peak)
