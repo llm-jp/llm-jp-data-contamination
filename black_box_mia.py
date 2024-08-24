@@ -138,7 +138,7 @@ def compute_black_box_mia(args):
                         for i in range(args.generation_batch_size):
                             full_decoded[i].append(decoded_sentences[i])
                     else:
-                        generations = model.generate(tokenized_inputs["input_ids"][0][:, :input_length],
+                        generations = model.generate(tokenized_inputs["input_ids"][:, :input_length],
                                                  do_sample=True,
                                                  temperature=args.temperature,
                                                  max_new_tokens=args.max_new_tokens,
