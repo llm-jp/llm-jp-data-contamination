@@ -124,7 +124,7 @@ def compute_black_box_mia(args):
                 batched_text = [item for item in data_batch]
                 tokenized_inputs = tokenizer(batched_text, return_tensors="pt", truncation=True, padding=True,
                                              max_length=1024)
-                tokenized_inputs = {key: val.to(device) for key, val in tokenized_inputs.items()}
+                #tokenized_inputs = {key: val.to(device) for key, val in tokenized_inputs.items()}
                 full_decoded = []
                 input_length = int(tokenized_inputs["attention_mask"][0].sum()/2) if (tokenized_inputs["attention_mask"][0].sum()
                                                                                < args.max_input_tokens) else args.max_input_tokens
