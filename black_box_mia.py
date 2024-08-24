@@ -88,7 +88,7 @@ def compute_black_box_mia(args):
         f"EleutherAI/pythia-{args.model_size}-deduped",
         revision="step143000",
         cache_dir=f"./pythia-{args.model_size}-deduped/step143000",
-        #torch_dtype=torch.bfloat16,
+        torch_dtype=torch.bfloat16,
         quantization_config=bnb_config
     ).eval()#.cuda(args.cuda).eval()
     tokenizer = AutoTokenizer.from_pretrained(
