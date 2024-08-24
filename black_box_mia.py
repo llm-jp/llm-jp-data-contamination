@@ -124,9 +124,9 @@ def compute_black_box_mia(args):
                                                     )
                         full_decoded.append(tokenizer.decode(zero_temp_generation["sequences"][0][input_length:]))
                     generations = model.generate(tokenized_inputs["input_ids"][0][:input_length].unsqueeze(0),
-                                                 do_sample=True,
                                                  temperature=args.temperature,
                                                  max_new_tokens=args.max_new_tokens,
+                                                 top_k=10,
                                                 )
                     full_decoded.append(tokenizer.decode(generations["sequences"][0][input_length:]))
                 pdb.set_trace()
