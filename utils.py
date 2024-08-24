@@ -869,26 +869,32 @@ def fig_fpr_tpr(all_output, output_dir):
     plt.savefig(f"{output_dir}/auc.png")
 
 def get_dataset_list(args):
+    dataset_list = []
+    length_list = []
     if args.dataset_name == "WikiMIA":
-        return ["WikiMIA64", "WikiMIA128", "WikiMIA256", "WikiMIAall"]
+        dataset_list = ["WikiMIA64", "WikiMIA128", "WikiMIA256", "WikiMIAall"]
     elif args.dataset_name == "temporalarxiv":
-        return ["temporalarxiv_2020_08", "temporalarxiv_2021_01", "temporalarxiv_2021_06",
-                "temporalarxiv_2022_01", "temporalarxiv_2022_06", "temporalarxiv_2023_01", "temporalarxiv_2023_06"]
+        dataset_list = ["temporalarxiv_2020_08", "temporalarxiv_2021_01", "temporalarxiv_2021_06",
+                        "temporalarxiv_2022_01", "temporalarxiv_2022_06", "temporalarxiv_2023_01", "temporalarxiv_2023_06"]
     elif args.dataset_name=="online_all":
-        return ["arxiv", "dm_mathematics", "github", "hackernews", "pile_cc",
-                    "pubmed_central", "wikipedia_(en)", "full_pile"]
+        dataset_list = ["arxiv", "dm_mathematics", "github", "hackernews", "pile_cc",
+                        "pubmed_central", "wikipedia_(en)", "full_pile"]
     elif args.dataset_name=="local_all" and args.relative == "absolute":
         if args.truncated == "truncated":
-            return['Wikipedia (en)', "StackExchange", 'PubMed Central', "Pile-CC", "HackerNews",
+            dataset_list = ['Wikipedia (en)', "StackExchange", 'PubMed Central', "Pile-CC", "HackerNews",
                    "Github", "FreeLaw", "EuroParl",'DM Mathematics',"ArXiv",]
         elif args.truncated == "untruncated":
-            return ['Wikipedia (en)', "USPTO Backgrounds", "StackExchange", "Pile-CC", "Github", "FreeLaw"]
+            dataset_list = ['Wikipedia (en)', "USPTO Backgrounds", "StackExchange", "Pile-CC", "Github", "FreeLaw"]
     elif args.dataset_name=="local_all" and args.relative == "relative":
-        return ["Wikipedia (en)",  "StackExchange",'PubMed Central', "Pile-CC", "NIH ExPorter", "HackerNews",
+        dataset_list = ["Wikipedia (en)",  "StackExchange",'PubMed Central', "Pile-CC", "NIH ExPorter", "HackerNews",
                    "Github", "FreeLaw", "Enron Emails",  "DM Mathematics", "ArXiv"]
     else:
-        return [args.dataset_name]
-
+        dataset_list = [args.dataset_name]
+    if args.relative == "relative":
+        length_list = list(range(args.min_len,100,10))
+    else:
+        length_list =  list(range(args.min_len,1000,100))
+    return dataset_list, length_list
 def obtain_dataset(dataset_name, args):
     if args.local_data == True and "temporalarxiv" not in dataset_name and "WikiMIA" not in dataset_name:
         dataset = form_dataset(dataset_name, args)

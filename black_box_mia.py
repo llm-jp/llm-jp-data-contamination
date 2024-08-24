@@ -78,7 +78,7 @@ def bleurt_score(bleurt, tokenizer, reference, generations, args):
     return res
 
 def compute_black_box_mia(args):
-    dataset_names = get_dataset_list(args)
+    dataset_names, length_list = get_dataset_list(args)
     # bnb_config = BitsAndBytesConfig(
     #          load_in_4bit=True,  # 开启8位量化
     #          #bnb_8bit_use_double_quant=True,  # 使用双重量化技术
@@ -103,64 +103,66 @@ def compute_black_box_mia(args):
     bleurt_model = BleurtForSequenceClassification.from_pretrained('lucadiliello/BLEURT-20').cuda(args.refer_cuda)
     bleurt_tokenizer = BleurtTokenizer.from_pretrained('lucadiliello/BLEURT-20')
     bleurt_model.eval()
-    for dataset_name in dataset_names:
-        df = pd.DataFrame()
-        if args.same_length == True:
-            if os.path.isfile(f"{args.save_dir}/{dataset_name}/{args.relative}/{args.truncated}/{args.min_len}_{args.model_size}_same_length.csv"):
-                df = pd.read_csv(f"{args.save_dir}/{dataset_name}/{args.relative}/{args.truncated}/{args.min_len}_{args.model_size}_same_length.csv", index_col=0)
-                df = df.loc[:, ~df.columns.str.contains('^Unnamed')]
-        else:
-            if os.path.isfile(f"{args.save_dir}/{dataset_name}/{args.relative}/{args.truncated}/{args.min_len}_{args.model_size}_all_length.csv"):
-                df = pd.read_csv(f"{args.save_dir}/{dataset_name}/{args.relative}/{args.truncated}/{args.min_len}_{args.model_size}_all_length.csv", index_col=0)
-                df = df.loc[:, ~df.columns.str.contains('^Unnamed')]
-        dataset = obtain_dataset(dataset_name, args)
-        device = f'cuda:{args.cuda}'
-        ccd_dict = {}
-        samia_dict = {}
-        ccd_dict[dataset_name] = {"member": [], "nonmember": []}
-        samia_dict[dataset_name] = {"member": [], "nonmember": []}
-        for set_name in ["member", "nonmember"]:
-            cleaned_data, orig_indices = clean_dataset(dataset[set_name])
-            for idx, (data_batch, orig_indices_batch) in tqdm(enumerate(batched_data_with_indices(cleaned_data, orig_indices, batch_size=args.generation_batch_size))):
-                orig_idx = [item for item in orig_indices_batch]
-                batched_text = [item for item in data_batch]
-                tokenized_inputs = tokenizer(batched_text, return_tensors="pt", truncation=True, padding=True,
-                                             max_length=1024)
-                tokenized_inputs = {key: val.to(device) for key, val in tokenized_inputs.items()}
-                full_decoded = [[] for _ in range(args.generation_batch_size)]
-                input_length = int(min(tokenized_inputs["attention_mask"].sum(dim=1))/2) if (tokenized_inputs["attention_mask"][0].sum() < args.max_input_tokens) else args.max_input_tokens
-                for _ in tqdm(range(args.generation_samples)):
-                    if _ == 0:
-                        zero_temp_generation = model.generate(tokenized_inputs["input_ids"][:, :input_length],
-                                                     temperature=0,
+    for min_len in length_list:
+        args.min_len = min_len
+        for dataset_name in dataset_names:
+            df = pd.DataFrame()
+            if args.same_length == True:
+                if os.path.isfile(f"{args.save_dir}/{dataset_name}/{args.relative}/{args.truncated}/{args.min_len}_{args.model_size}_same_length.csv"):
+                    df = pd.read_csv(f"{args.save_dir}/{dataset_name}/{args.relative}/{args.truncated}/{args.min_len}_{args.model_size}_same_length.csv", index_col=0)
+                    df = df.loc[:, ~df.columns.str.contains('^Unnamed')]
+            else:
+                if os.path.isfile(f"{args.save_dir}/{dataset_name}/{args.relative}/{args.truncated}/{args.min_len}_{args.model_size}_all_length.csv"):
+                    df = pd.read_csv(f"{args.save_dir}/{dataset_name}/{args.relative}/{args.truncated}/{args.min_len}_{args.model_size}_all_length.csv", index_col=0)
+                    df = df.loc[:, ~df.columns.str.contains('^Unnamed')]
+            dataset = obtain_dataset(dataset_name, args)
+            device = f'cuda:{args.cuda}'
+            ccd_dict = {}
+            samia_dict = {}
+            ccd_dict[dataset_name] = {"member": [], "nonmember": []}
+            samia_dict[dataset_name] = {"member": [], "nonmember": []}
+            for set_name in ["member", "nonmember"]:
+                cleaned_data, orig_indices = clean_dataset(dataset[set_name])
+                for idx, (data_batch, orig_indices_batch) in tqdm(enumerate(batched_data_with_indices(cleaned_data, orig_indices, batch_size=args.generation_batch_size))):
+                    orig_idx = [item for item in orig_indices_batch]
+                    batched_text = [item for item in data_batch]
+                    tokenized_inputs = tokenizer(batched_text, return_tensors="pt", truncation=True, padding=True,
+                                                 max_length=1024)
+                    tokenized_inputs = {key: val.to(device) for key, val in tokenized_inputs.items()}
+                    full_decoded = [[] for _ in range(args.generation_batch_size)]
+                    input_length = int(min(tokenized_inputs["attention_mask"].sum(dim=1))/2) if (tokenized_inputs["attention_mask"][0].sum() < args.max_input_tokens) else args.max_input_tokens
+                    for _ in tqdm(range(args.generation_samples)):
+                        if _ == 0:
+                            zero_temp_generation = model.generate(tokenized_inputs["input_ids"][:, :input_length],
+                                                         temperature=0,
+                                                         max_new_tokens=args.max_new_tokens,
+                                                        )
+                            decoded_sentences = tokenizer.batch_decode(zero_temp_generation["sequences"][:, input_length:],
+                                                   skip_special_tokens=True)
+                            for i in range(zero_temp_generation["sequences"].shape[0]):
+                                full_decoded[i].append(decoded_sentences[i])
+                        else:
+                            generations = model.generate(tokenized_inputs["input_ids"][:, :input_length],
+                                                     do_sample=True,
+                                                     temperature=args.temperature,
                                                      max_new_tokens=args.max_new_tokens,
+                                                     top_k=50,
                                                     )
-                        decoded_sentences = tokenizer.batch_decode(zero_temp_generation["sequences"][:, input_length:],
-                                               skip_special_tokens=True)
-                        for i in range(zero_temp_generation["sequences"].shape[0]):
-                            full_decoded[i].append(decoded_sentences[i])
-                    else:
-                        generations = model.generate(tokenized_inputs["input_ids"][:, :input_length],
-                                                 do_sample=True,
-                                                 temperature=args.temperature,
-                                                 max_new_tokens=args.max_new_tokens,
-                                                 top_k=50,
-                                                )
-                        decoded_sentences = tokenizer.batch_decode(generations["sequences"][:, input_length:], skip_special_tokens=True)
-                        for i in range(zero_temp_generation["sequences"].shape[0]):
-                            full_decoded[i].append(decoded_sentences[i])
-                        full_decoded.append(tokenizer.batch_decode(generations["sequences"][:, input_length:], skip_special_tokens=True))
-                for batch_idx in range(zero_temp_generation["sequences"].shape[0]):
-                    peak = get_peak(full_decoded[batch_idx][1:], full_decoded[batch_idx][0], 0.05)
-                    bleurt_value = np.array(bleurt_score(bleurt_model, bleurt_tokenizer,  full_decoded[batch_idx][0], full_decoded[batch_idx][1:], args)).mean().item()
-                ccd_dict[dataset_name][set_name].append(peak)
-                samia_dict[dataset_name][set_name].append(bleurt_value)
-        os.makedirs(args.save_dir, exist_ok=True)
-        os.makedirs(f"{args.save_dir}/{dataset_name}/{args.relative}/{args.truncated}", exist_ok=True)
-        pickle.dump(ccd_dict, open(f"{args.save_dir}/{dataset_name}/{args.relative}/{args.truncated}/{args.min_len}_{args.model_size}_ccd_dict.pkl", "wb"))
-        pickle.dump(samia_dict, open(f"{args.save_dir}/{dataset_name}/{args.relative}/{args.truncated}/{args.min_len}_{args.model_size}_samia_dict.pkl", "wb"))
-        df = results_caculate_and_draw(dataset_name, args, df, method_list=["ccd", "samia"])
-        if args.same_length:
-            df.to_csv(f"{args.save_dir}/{dataset_name}/{args.relative}/{args.truncated}/{args.min_len}_{args.model_size}_same_length.csv")
-        else:
-            df.to_csv(f"{args.save_dir}/{dataset_name}/{args.relative}/{args.truncated}/{args.min_len}_{args.model_size}_all_length.csv")
+                            decoded_sentences = tokenizer.batch_decode(generations["sequences"][:, input_length:], skip_special_tokens=True)
+                            for i in range(zero_temp_generation["sequences"].shape[0]):
+                                full_decoded[i].append(decoded_sentences[i])
+                            full_decoded.append(tokenizer.batch_decode(generations["sequences"][:, input_length:], skip_special_tokens=True))
+                    for batch_idx in range(zero_temp_generation["sequences"].shape[0]):
+                        peak = get_peak(full_decoded[batch_idx][1:], full_decoded[batch_idx][0], 0.05)
+                        bleurt_value = np.array(bleurt_score(bleurt_model, bleurt_tokenizer,  full_decoded[batch_idx][0], full_decoded[batch_idx][1:], args)).mean().item()
+                    ccd_dict[dataset_name][set_name].append(peak)
+                    samia_dict[dataset_name][set_name].append(bleurt_value)
+            os.makedirs(args.save_dir, exist_ok=True)
+            os.makedirs(f"{args.save_dir}/{dataset_name}/{args.relative}/{args.truncated}", exist_ok=True)
+            pickle.dump(ccd_dict, open(f"{args.save_dir}/{dataset_name}/{args.relative}/{args.truncated}/{args.min_len}_{args.model_size}_ccd_dict.pkl", "wb"))
+            pickle.dump(samia_dict, open(f"{args.save_dir}/{dataset_name}/{args.relative}/{args.truncated}/{args.min_len}_{args.model_size}_samia_dict.pkl", "wb"))
+            df = results_caculate_and_draw(dataset_name, args, df, method_list=["ccd", "samia"])
+            if args.same_length:
+                df.to_csv(f"{args.save_dir}/{dataset_name}/{args.relative}/{args.truncated}/{args.min_len}_{args.model_size}_same_length.csv")
+            else:
+                df.to_csv(f"{args.save_dir}/{dataset_name}/{args.relative}/{args.truncated}/{args.min_len}_{args.model_size}_all_length.csv")
