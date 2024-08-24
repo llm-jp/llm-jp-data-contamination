@@ -69,10 +69,11 @@ def rougeL_score(predictions, references):
                                  references=references, use_aggregator=False)['rougeL']
     return rougeL_score
 
-def bleurt_score(bleurt, tokenizer, reference, generations):
+def bleurt_score(bleurt, tokenizer, reference, generations, args):
     bleurt.eval()
     with torch.no_grad():
         inputs = tokenizer([reference for i in range(len(generations))], generations, padding='longest', return_tensors='pt')
+        inputs = {key: value.to(args.refer_cuda) for key, value in inputs.items()}
         res = bleurt(**inputs).logits.flatten().tolist()
     return res
 
@@ -145,7 +146,7 @@ def compute_black_box_mia(args):
                         full_decoded.append(tokenizer.decode(generations["sequences"][0][input_length:], skip_special_tokens=True))
                 pdb.set_trace()
                 peak = get_peak(full_decoded[1:], full_decoded[0], 0.05)
-                bleurt_value = np.array(bleurt_score(bleurt_model, bleurt_tokenizer,  full_decoded[0], full_decoded[1:])).mean().item()
+                bleurt_value = np.array(bleurt_score(bleurt_model, bleurt_tokenizer,  full_decoded[0], full_decoded[1:], args)).mean().item()
                 ccd_dict[dataset_name][set_name].extend(peak)
                 samia_dict[dataset_name][set_name].extend(bleurt_value)
         os.makedirs(args.save_dir, exist_ok=True)
