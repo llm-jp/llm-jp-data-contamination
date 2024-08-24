@@ -140,7 +140,7 @@ def compute_black_box_mia(args):
                                                  do_sample=True,
                                                  temperature=args.temperature,
                                                  max_new_tokens=args.max_new_tokens,
-                                                 top_k=50,
+                                                 top_k=25,
                                                 )
                         full_decoded.append(tokenizer.decode(generations["sequences"][0][input_length:], skip_special_tokens=True))
                 peak = get_peak(full_decoded[1:], full_decoded[0], 0.05)
