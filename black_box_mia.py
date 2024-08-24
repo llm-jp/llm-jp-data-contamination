@@ -126,11 +126,12 @@ def compute_black_box_mia(args):
                                              max_length=1024)
                 #tokenized_inputs = {key: val.to(device) for key, val in tokenized_inputs.items()}
                 full_decoded = []
-                input_length = int(tokenized_inputs["attention_mask"][0].sum()/2) if (tokenized_inputs["attention_mask"][0].sum()
+                pdb.set_trace()
+                input_length = int(min(tokenized_inputs["attention_mask"].sum(dim=0))/2) if (tokenized_inputs["attention_mask"][0].sum()
                                                                                < args.max_input_tokens) else args.max_input_tokens
                 for _ in tqdm(range(args.generation_samples)):
                     if _ == 0:
-                        zero_temp_generation = model.generate(tokenized_inputs["input_ids"][0][:input_length].unsqueeze(0),
+                        zero_temp_generation = model.generate(tokenized_inputs["input_ids"][:][:input_length].unsqueeze(0),
                                                      temperature=0,
                                                      max_new_tokens=args.max_new_tokens,
                                                     )
