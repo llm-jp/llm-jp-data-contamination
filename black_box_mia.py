@@ -125,7 +125,7 @@ def compute_black_box_mia(args):
                 tokenized_inputs = tokenizer(batched_text, return_tensors="pt", truncation=True, padding=True,
                                              max_length=1024)
                 tokenized_inputs = {key: val.to(device) for key, val in tokenized_inputs.items()}
-                full_decoded = []
+                full_decoded = [[] for _ in range(args.generation_batch_size)]
                 input_length = int(min(tokenized_inputs["attention_mask"].sum(dim=1))/2) if (tokenized_inputs["attention_mask"][0].sum() < args.max_input_tokens) else args.max_input_tokens
                 for _ in tqdm(range(args.generation_samples)):
                     if _ == 0:
@@ -133,8 +133,10 @@ def compute_black_box_mia(args):
                                                      temperature=0,
                                                      max_new_tokens=args.max_new_tokens,
                                                     )
-                        pdb.set_trace()
-                        full_decoded.append(tokenizer.decode(zero_temp_generation["sequences"][0][input_length:], skip_special_tokens=True))
+                        decoded_sentences = tokenizer.batch_decode(zero_temp_generation["sequences"][:, input_length:],
+                                               skip_special_tokens=True)
+                        for i in range(args.generation_batch_size):
+                            full_decoded[i].append(decoded_sentences[i])
                     else:
                         generations = model.generate(tokenized_inputs["input_ids"][0][:, :input_length],
                                                  do_sample=True,
@@ -142,9 +144,13 @@ def compute_black_box_mia(args):
                                                  max_new_tokens=args.max_new_tokens,
                                                  top_k=50,
                                                 )
-                        full_decoded.append(tokenizer.decode(generations["sequences"][0][input_length:], skip_special_tokens=True))
-                peak = get_peak(full_decoded[1:], full_decoded[0], 0.05)
-                bleurt_value = np.array(bleurt_score(bleurt_model, bleurt_tokenizer,  full_decoded[0], full_decoded[1:], args)).mean().item()
+                        decoded_sentences = tokenizer.batch_decode(generations["sequences"][:, input_length:], skip_special_tokens=True)
+                        for i in range(args.generation_batch_size):
+                            full_decoded[i].append(decoded_sentences[i])
+                        full_decoded.append(tokenizer.batch_decode(generations["sequences"][:, input_length:], skip_special_tokens=True))
+                for batch_idx in range(args.generation_batch_size):
+                    peak = get_peak(full_decoded[batch_idx][1:], full_decoded[batch_idx][0], 0.05)
+                    bleurt_value = np.array(bleurt_score(bleurt_model, bleurt_tokenizer,  full_decoded[batch_idx][0], full_decoded[batch_idx][1:], args)).mean().item()
                 ccd_dict[dataset_name][set_name].append(peak)
                 samia_dict[dataset_name][set_name].append(bleurt_value)
         os.makedirs(args.save_dir, exist_ok=True)
