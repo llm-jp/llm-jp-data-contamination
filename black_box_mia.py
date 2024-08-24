@@ -72,7 +72,8 @@ def rougeL_score(predictions, references):
 def bleurt_score(bleurt, tokenizer, reference, generations, args):
     bleurt.eval()
     with torch.no_grad():
-        inputs = tokenizer([reference for i in range(len(generations))], generations, padding='longest', return_tensors='pt')
+        inputs = tokenizer([reference for i in range(len(generations))], generations, padding='longest',
+                           return_tensors='pt', max_length=512)
         inputs = {key: value.to(args.refer_cuda) for key, value in inputs.items()}
         res = bleurt(**inputs).logits.flatten().tolist()
     return res
@@ -127,7 +128,7 @@ def compute_black_box_mia(args):
                     orig_idx = [item for item in orig_indices_batch]
                     batched_text = [item for item in data_batch]
                     tokenized_inputs = tokenizer(batched_text, return_tensors="pt", truncation=True, padding=True,
-                                                 max_length=1024)
+                                                 max_length=args.max_length)
                     tokenized_inputs = {key: val.to(device) for key, val in tokenized_inputs.items()}
                     full_decoded = [[] for _ in range(args.generation_batch_size)]
                     input_length = int(min(tokenized_inputs["attention_mask"].sum(dim=1))/2) if (tokenized_inputs["attention_mask"][0].sum() < args.max_input_tokens) else args.max_input_tokens
