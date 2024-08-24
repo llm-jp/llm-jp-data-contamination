@@ -106,6 +106,7 @@ def compute_black_box_mia(args):
     for dataset_name in dataset_names:
         df = pd.DataFrame()
         if args.same_length == "True":
+            pdb.set_trace()
             if os.path.isfile(f"{args.save_dir}/{dataset_name}/{args.relative}/{args.truncated}/{args.min_len}_{args.model_size}_same_length.csv"):
                 df = pd.read_csv(f"{args.save_dir}/{dataset_name}/{args.relative}/{args.truncated}/{args.min_len}_{args.model_size}_same_length.csv")
         else:
