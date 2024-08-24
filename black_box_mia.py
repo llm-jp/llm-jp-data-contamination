@@ -10,6 +10,7 @@ import pickle
 import numpy as np
 import evaluate
 import pandas as pd
+
 def get_ed(a, b):
     if len(b) == 0:
         return len(a)
@@ -130,6 +131,7 @@ def compute_black_box_mia(args):
                                                  max_new_tokens=args.max_new_tokens,
                                                 )
                     full_decoded.append(tokenizer.decode(generations["sequences"][0][input_length:]))
+                pdb.set_trace()
                 peak = get_peak(full_decoded[1:], full_decoded[0], 0.05)
                 bleurt_value = np.array(bleurt_score(full_decoded[0], full_decoded[1:])).mean().item()
                 ccd_dict[dataset_name][set_name].extend(peak)
