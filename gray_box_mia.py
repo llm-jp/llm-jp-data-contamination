@@ -4,18 +4,26 @@ from transformers import BitsAndBytesConfig, AutoModelForCausalLM, AutoTokenizer
 
 def compute_gray_box_method(args):
     dataset_names, length_list = get_dataset_list(args)
-    if args.model_size == "12b" or args.model_size == "6b":
+    if args.model_size == "12b" or args.model_size == "6.9b":
         bnb_config = BitsAndBytesConfig(
             load_in_8bit=True,  # 开启8位量化
             bnb_8bit_use_double_quant=True,  # 使用双重量化技术
             bnb_8bit_compute_dtype=torch.float16  # 计算过程中使用float16
         )
+        device_map = {
+        "transformer.word_embeddings": args.cuda,
+        "transformer.word_embeddings_layernorm": args.cuda,
+        "lm_head": "cpu",
+        "transformer.h": args.cuda,
+        "transformer.ln_f": args.cuda,
+    }
         model = GPTNeoXForCausalLM.from_pretrained(
           f"EleutherAI/pythia-{args.model_size}-deduped",
           revision="step143000",
           cache_dir=f"./pythia-{args.model_size}-deduped/step143000",
           torch_dtype=torch.bfloat16,
-          quantization_config=bnb_config
+          quantization_config=bnb_config,
+            device_map=device_map
         ).eval()#.to(args.cuda)
     else:
         model = GPTNeoXForCausalLM.from_pretrained(
