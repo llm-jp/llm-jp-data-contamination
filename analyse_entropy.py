@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 dataset_names = [
     "arxiv", "pile_cc", "dm_mathematics", "WikiMIAall"
 ]
-model_size_list = ["12b", "6.9b"]
+model_size_list = ["410m", "1b"]
 
 # 计算所有数据集和模型熵的最大最小值
 min_entropy, max_entropy = float('inf'), float('-inf')
