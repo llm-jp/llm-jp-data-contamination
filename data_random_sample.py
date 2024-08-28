@@ -20,7 +20,7 @@ def filter_data(data, min_length, max_length, args):
         if args.select_method == "nontruncate":
             valid_indices = (np.array(lengths) >= min_length) & (np.array(lengths) <= max_length)
             filtered_data.extend([batch[j] for j in range(len(batch)) if valid_indices[j]])
-        elif args.select_method == "truncate" and args.relative_length == False:
+        elif args.select_method == "truncate" and args.relative_length == "False":
             valid_indices = (np.array(lengths) >= min_length)
             filtered_data.extend([" ".join(batch[j].split()[:max_length]) for j in range(len(batch)) if valid_indices[j]])
     return filtered_data
@@ -73,7 +73,7 @@ parser.add_argument("--list", type=int, default=1)
 parser.add_argument("--batch_size", type=int, default=100)
 parser.add_argument("--sample_size", type=int, default=1000)
 parser.add_argument("--select_method", type=str, default="nontruncate", choices=["truncate", "nontruncate"])
-parser.add_argument("--relative_length", type=bool, default=False)
+parser.add_argument("--relative_length", type=str, default="False")
 args = parser.parse_args()
 if args.list == 1:
     datalist = ["ArXiv", "Enron Emails", "FreeLaw",'Gutenberg (PG-19)', 'NIH ExPorter', "Pile-CC",]
