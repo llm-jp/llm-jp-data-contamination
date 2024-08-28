@@ -112,7 +112,7 @@ for idx, seed in enumerate(seed_list):
             train_dataset_full.extend(dataset)
         percentiles = compute_length_percentiles(test_dataset_full, args.batch_size)
         full_nonmember_data = test_dataset_full
-        if args.relative_length:
+        if args.relative_length == "True":
             length_list = percentiles.tolist()
             enumerate_length = len(length_list) - 1
         else:
