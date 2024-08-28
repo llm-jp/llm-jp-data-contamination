@@ -82,7 +82,7 @@ elif args.list == 2:
 elif args.list == 3:
     datalist = ["HackerNews", "PhilPapers",	 "PubMed Abstracts",   "StackExchange",    "USPTO Backgrounds"]
 else:
-    dataset = ["ArXiv", "Enron Emails", "FreeLaw",'Gutenberg (PG-19)', 'NIH ExPorter', "Pile-CC",
+    datalist = ["ArXiv", "Enron Emails", "FreeLaw",'Gutenberg (PG-19)', 'NIH ExPorter', "Pile-CC",
                 'PubMed Central', 'Ubuntu IRC', 'Wikipedia (en)', 'DM Mathematics', "EuroParl", "Github",
                 "HackerNews", "PhilPapers",	 "PubMed Abstracts",   "StackExchange",   "USPTO Backgrounds"]
 
