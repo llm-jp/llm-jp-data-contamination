@@ -19,3 +19,5 @@ mem_score_online
 mem_score_online/
 entropy_online
 entropy_online/
+mia_dataset_results
+mia_dataset_results/
