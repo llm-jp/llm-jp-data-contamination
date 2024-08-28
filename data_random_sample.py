@@ -159,7 +159,7 @@ for idx, seed in enumerate(seed_list):
             })
 
             # 保存数据集
-            if args.relative_length:
+            if args.relative_length=="True":
                 os.makedirs(f"./relative_filtered_dataset_{idx+1}/{i*10}/{dataset_name}", exist_ok=True)
                 dataset.save_to_disk(f"./relative_filtered_dataset_{idx+1}/{i*10}/{dataset_name}")
             else:
