@@ -113,9 +113,11 @@ for idx, seed in enumerate(seed_list):
         percentiles = compute_length_percentiles(test_dataset_full, args.batch_size)
         full_nonmember_data = test_dataset_full
         if args.relative_length == "True":
+            print("run relative split")
             length_list = percentiles.tolist()
             enumerate_length = len(length_list) - 1
         else:
+            print("run absolute split")
             length_list = [0, 100, 200, 300, 400, 500, 600, 700, 800, 900, "rest"]
             enumerate_length = len(length_list)
         #pdb.set_trace()
