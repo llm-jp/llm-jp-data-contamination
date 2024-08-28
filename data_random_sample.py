@@ -79,9 +79,12 @@ if args.list == 1:
     datalist = ["ArXiv", "Enron Emails", "FreeLaw",'Gutenberg (PG-19)', 'NIH ExPorter', "Pile-CC",]
 elif args.list == 2:
     datalist = ['PubMed Central', 'Ubuntu IRC', 'Wikipedia (en)', 'DM Mathematics', "EuroParl", "Github"]
-else:
+elif args.list == 3:
     datalist = ["HackerNews", "PhilPapers",	 "PubMed Abstracts",   "StackExchange",    "USPTO Backgrounds"]
-
+else:
+    dataset = ["ArXiv", "Enron Emails", "FreeLaw",'Gutenberg (PG-19)', 'NIH ExPorter', "Pile-CC",
+                'PubMed Central', 'Ubuntu IRC', 'Wikipedia (en)', 'DM Mathematics', "EuroParl", "Github",
+                "HackerNews", "PhilPapers",	 "PubMed Abstracts",   "StackExchange",   "USPTO Backgrounds"]
 
 seed_list = [10345, 19238, 19093, 91924]
 for idx, seed in enumerate(seed_list):
