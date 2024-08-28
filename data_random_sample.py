@@ -127,7 +127,7 @@ for idx, seed in enumerate(seed_list):
         for i in range(enumerate_length):
             member_data = []
             nonmember_data = []
-            if args.relative_length:
+            if args.relative_length == "True":
                 min_length = length_list[i]
                 max_length = length_list[i + 1]
             else:
