@@ -38,7 +38,6 @@ for dataset_name in dataset_names:
         enumerate_list = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90]
     for min_len in enumerate_list:
         if args.relative == "relative":
-            max_len = min_len + 10
             dataset = datasets.load_from_disk(
                 f"./{args.load_dir}_{args.idx}/{min_len}/{dataset_name}/")
             dataset = DatasetDict({
