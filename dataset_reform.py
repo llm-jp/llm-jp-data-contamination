@@ -18,7 +18,6 @@ parser.add_argument("--local_data", type=bool, default=True)
 parser.add_argument("--same_length", action='store_false')
 parser.add_argument("--relative", type=str, default="absolute", choices=["absolute", "relative"])
 parser.add_argument("--samples", type=int, default=1000)
-parser.add_argument("--dir", type=str, default="absolute_filtered_result")
 parser.add_argument("--idx", type=int, default=1)
 parser.add_argument("--load_dir", type=str, default="absolute_filtered_dataset")
 parser.add_argument("--generation_batch_size", type=int, default=1)
@@ -32,7 +31,7 @@ for dataset_name in dataset_names:
     args.dataset_name = dataset_name
     print(dataset_name)
     dataset_indicator = True
-    if "absolute" in args.dir:
+    if "absolute" in args.load_dir:
         enumerate_list = [0, 100, 200, 300, 400, 500, 600, 700, 800, 900]
     else:
         enumerate_list = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90]
