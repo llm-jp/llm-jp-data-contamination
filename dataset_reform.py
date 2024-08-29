@@ -19,6 +19,7 @@ parser.add_argument("--same_length", action='store_false')
 parser.add_argument("--relative", type=str, default="absolute", choices=["absolute", "relative"])
 parser.add_argument("--samples", type=int, default=1000)
 parser.add_argument("--dir", type=str, default="absolute_filtered_result")
+parser.add_argument("--idx", type=int, default=1)
 parser.add_argument("--load_dir", type=str, default="absolute_filtered_dataset")
 parser.add_argument("--generation_batch_size", type=int, default=1)
 parser.add_argument("--truncated", type=str, default="truncated", choices=["truncated", "untruncated", "both"])
@@ -38,7 +39,7 @@ for dataset_name in dataset_names:
     for min_len in enumerate_list:
         min_len = min_len if min_len != 0 else 5
         max_len = 100 if min_len == 5 else min_len + 100
-        dataset = datasets.load_from_disk(f"./{args.load_dir}/{min_len}_{max_len}_{args.truncated}/{dataset_name}/")
+        dataset = datasets.load_from_disk(f"./{args.load_dir}_{args.idx}/{min_len}_{max_len}_{args.truncated}/{dataset_name}/")
         dataset = DatasetDict({
             'member': dataset['member']['data'],
             'nonmember': dataset['nonmember']['data']
@@ -55,13 +56,13 @@ for dataset_name in dataset_names:
             dataset_indicator = False
     if dataset_indicator:
         print("dataset is good")
-        os.makedirs(f"./mia_dataset_{args.truncated}/{dataset_name}", exist_ok=True)
+        os.makedirs(f"./mia_dataset_{args.truncated}_{args.idx}/{dataset_name}", exist_ok=True)
         for min_len in enumerate_list:
             if args.relative == "relative":
-                dataset = datasets.load_from_disk(f"./{args.load_dir}/{min_len}/{dataset_name}")
-                dataset.save_to_disk(f"./mia_dataset_relative/{dataset_name}/{min_len}")
+                dataset = datasets.load_from_disk(f"./{args.load_dir}_{args.idx}/{min_len}/{dataset_name}")
+                dataset.save_to_disk(f"./mia_dataset_relative_{args.idx}/{dataset_name}/{min_len}")
             else:
                 min_len = min_len if min_len != 0 else 5
                 max_len = 100 if min_len == 5 else min_len + 100
-                dataset = datasets.load_from_disk(f"./{args.load_dir}/{min_len}_{max_len}_{args.truncated}/{dataset_name}")
-                dataset.save_to_disk(f"./mia_dataset_{args.truncated}/{dataset_name}/{min_len}_{max_len}")
+                dataset = datasets.load_from_disk(f"./{args.load_dir}_{args.idx}/{min_len}_{max_len}_{args.truncated}/{dataset_name}")
+                dataset.save_to_disk(f"./mia_dataset_{args.truncated}_{args.idx}/{dataset_name}/{min_len}_{max_len}")
