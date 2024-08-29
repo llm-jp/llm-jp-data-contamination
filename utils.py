@@ -75,7 +75,7 @@ def form_dataset(dataset_name, args):
         return mia_dataset
     else:
         if args.relative == "relative":
-            dataset = datasets.load_from_disk(f"./{args.load_dir}_relative/{dataset_name}/{args.min_len}")
+            dataset = datasets.load_from_disk(f"./{args.load_dir}_relative_{args.dataset_idx}/{dataset_name}/{args.min_len}")
             member = random.sample(dataset['member']['data'], min(args.samples, len(dataset['member']['data'])))
             nonmember = random.sample(dataset['nonmember']['data'], min(args.samples, len(dataset['nonmember']['data'])))
             dataset = DatasetDict({
@@ -85,7 +85,7 @@ def form_dataset(dataset_name, args):
         else:
             min_len = args.min_len if args.min_len != 0 else 5
             max_len = 100 if args.min_len == 0 else min_len + 100
-            dataset = datasets.load_from_disk(f"./{args.load_dir}_{args.truncated}/{dataset_name}/{min_len}_{max_len}")
+            dataset = datasets.load_from_disk(f"./{args.load_dir}_{args.truncated}_{args.dataset_idx}/{dataset_name}/{min_len}_{max_len}")
             member = random.sample(dataset['member']['data'], min(args.samples, len(dataset['member']['data'])))
             if args.same_length:
                 nonmember = random.sample(dataset['nonmember']['data'], min(args.samples, len(dataset['nonmember']['data'])))
@@ -302,12 +302,12 @@ def results_caculate_and_draw(dataset_name, args, df, method_list):
     # method_list = ["loss", "prob", "ppl", "mink_plus", "zlib", "refer", "grad", "ccd", "samia"]
     os.makedirs(f"{args.save_dir}_figures/{dataset_name}/", exist_ok=True)
     for idx, method_name in enumerate(method_list):
-        value_dict = pickle.load(open(f"{args.save_dir}/{dataset_name}/{args.relative}/{args.truncated}/{args.min_len}_{args.model_size}_{method_name}_dict.pkl", "rb"))
+        value_dict = pickle.load(open(f"{args.save_dir}_{args.dataset_idx}/{dataset_name}/{args.relative}/{args.truncated}/{args.min_len}_{args.model_size}_{method_name}_dict.pkl", "rb"))
         if method_name == "refer":
             residual_dict = {}
             residual_dict[dataset_name] = {"member": [], "nonmember": []}
-            loss_dict = pickle.load(open(f"{args.save_dir}/{dataset_name}/{args.relative}/{args.truncated}/{args.min_len}_{args.model_size}_loss_dict.pkl", "rb"))
-            refer_dict = pickle.load(open(f"{args.save_dir}/{dataset_name}/{args.relative}/{args.truncated}/{args.min_len}_{args.model_size}_refer_dict.pkl", "rb"))
+            loss_dict = pickle.load(open(f"{args.save_dir}_{args.dataset_idx}/{dataset_name}/{args.relative}/{args.truncated}/{args.min_len}_{args.model_size}_loss_dict.pkl", "rb"))
+            refer_dict = pickle.load(open(f"{args.save_dir}_{args.dataset_idx}/{dataset_name}/{args.relative}/{args.truncated}/{args.min_len}_{args.model_size}_refer_dict.pkl", "rb"))
             for split in split_set:
                 residual_dict[dataset_name][split] = [
                     loss_dict[dataset_name][split][i] - refer_dict[dataset_name][split][i]
@@ -884,6 +884,7 @@ def get_dataset_list(args):
             dataset_list = ['Wikipedia (en)', "StackExchange", 'PubMed Central', "Pile-CC", "HackerNews",
                    "Github", "FreeLaw", "EuroParl",'DM Mathematics',"ArXiv",]
         elif args.truncated == "untruncated":
+            #dataset_list = ['Wikipedia (en)', "USPTO Backgrounds", "StackExchange", "Pile-CC", "Github", "FreeLaw"]
             dataset_list = ['Wikipedia (en)', "USPTO Backgrounds", "StackExchange", "Pile-CC", "Github", "FreeLaw"]
     elif args.dataset_name=="local_all" and args.relative == "relative":
         dataset_list = ["Wikipedia (en)",  "StackExchange",'PubMed Central', "Pile-CC", "NIH ExPorter", "HackerNews",
