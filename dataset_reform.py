@@ -22,7 +22,7 @@ parser.add_argument("--dir", type=str, default="absolute_filtered_result")
 parser.add_argument("--idx", type=int, default=1)
 parser.add_argument("--load_dir", type=str, default="absolute_filtered_dataset")
 parser.add_argument("--generation_batch_size", type=int, default=1)
-parser.add_argument("--truncated", type=str, default="truncated", choices=["truncated", "untruncated", "both"])
+parser.add_argument("--truncated", type=str, default="truncated", choices=["truncated", "nontruncated", "both"])
 args = parser.parse_args()
 
 dataset_names = ["ArXiv", "Enron Emails", "FreeLaw", 'Gutenberg (PG-19)', 'NIH ExPorter', "Pile-CC",'PubMed Central',
