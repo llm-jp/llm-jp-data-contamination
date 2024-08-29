@@ -37,13 +37,22 @@ for dataset_name in dataset_names:
     else:
         enumerate_list = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90]
     for min_len in enumerate_list:
-        min_len = min_len if min_len != 0 else 5
-        max_len = 100 if min_len == 5 else min_len + 100
-        dataset = datasets.load_from_disk(f"./{args.load_dir}_{args.idx}/{min_len}_{max_len}_{args.truncated}/{dataset_name}/")
-        dataset = DatasetDict({
-            'member': dataset['member']['data'],
-            'nonmember': dataset['nonmember']['data']
-        })
+        if args.relative == "relative":
+            max_len = min_len + 10
+            dataset = datasets.load_from_disk(
+                f"./{args.load_dir}_{args.idx}/{min_len}/{dataset_name}/")
+            dataset = DatasetDict({
+                'member': dataset['member']['data'],
+                'nonmember': dataset['nonmember']['data']
+            })
+        else:
+            min_len = min_len if min_len != 0 else 5
+            max_len = 100 if min_len == 5 else min_len + 100
+            dataset = datasets.load_from_disk(f"./{args.load_dir}_{args.idx}/{min_len}_{max_len}_{args.truncated}/{dataset_name}/")
+            dataset = DatasetDict({
+                'member': dataset['member']['data'],
+                'nonmember': dataset['nonmember']['data']
+            })
         if len(dataset["member"]) == 0 or len(dataset["nonmember"]) == 0:
             print("empty")
             continue
@@ -56,12 +65,13 @@ for dataset_name in dataset_names:
             dataset_indicator = False
     if dataset_indicator:
         print("dataset is good")
-        os.makedirs(f"./mia_dataset_{args.truncated}_{args.idx}/{dataset_name}", exist_ok=True)
         for min_len in enumerate_list:
             if args.relative == "relative":
+                os.makedirs(f"./mia_dataset_relative_{args.idx}/{dataset_name}", exist_ok=True)
                 dataset = datasets.load_from_disk(f"./{args.load_dir}_{args.idx}/{min_len}/{dataset_name}")
                 dataset.save_to_disk(f"./mia_dataset_relative_{args.idx}/{dataset_name}/{min_len}")
             else:
+                os.makedirs(f"./mia_dataset_{args.truncated}_{args.idx}/{dataset_name}", exist_ok=True)
                 min_len = min_len if min_len != 0 else 5
                 max_len = 100 if min_len == 5 else min_len + 100
                 dataset = datasets.load_from_disk(f"./{args.load_dir}_{args.idx}/{min_len}_{max_len}_{args.truncated}/{dataset_name}")
