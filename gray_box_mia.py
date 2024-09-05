@@ -41,7 +41,10 @@ def compute_gray_box_method(args):
     )
     refer_model = AutoModelForCausalLM.from_pretrained("stabilityai/stablelm-base-alpha-3b-v2",
                                                        trust_remote_code=True,
-                                                       torch_dtype=torch.bfloat16).cuda(args.refer_cuda).eval()
+                                                       torch_dtype=torch.bfloat16,
+                                                       load_in_8bit=True,
+                                                       device_map=args.refer_cuda
+                                                       ).eval()
     refer_tokenizer = AutoTokenizer.from_pretrained("stabilityai/stablelm-base-alpha-3b-v2")
     tokenizer.pad_token = tokenizer.eos_token
     refer_tokenizer.pad_token = refer_tokenizer.eos_token
