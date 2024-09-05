@@ -98,12 +98,12 @@ def form_dataset(dataset_name, args):
     return dataset
 
 
-def caculate_outputs(model, tokenizer, text_batch, device, min_len=50):
+def caculate_outputs(model, tokenizer, text_batch, args, device, min_len=50):
     tokenized_inputs = tokenizer(text_batch,
                                  return_tensors="pt",
                                  truncation=True,
                                  padding=True,
-                                 max_length=min_len+100,
+                                 max_length=min_len+100 if args.relative == "absolute" else 1024,
                                  )
     tokenized_inputs = {key: val.to(device) for key, val in tokenized_inputs.items()}
     target_labels = tokenized_inputs["input_ids"].clone().to(device)
@@ -202,8 +202,8 @@ def feature_collection(model, tokenizer, dataset, args, dataset_name, min_len=50
             enumerate(batched_data_with_indices(cleaned_data, orig_indices, batch_size=args.batch_size))):
         orig_idx = [item for item in orig_indices_batch]
         batched_text = [item for item in data_batch]
-        outputs, tokenized_inputs, target_labels = caculate_outputs(model, tokenizer, batched_text, device=device, min_len=min_len)
-        refer_outputs, refer_tokenized_inputs, refer_target_labels = caculate_outputs(refer_model, refer_tokenizer, batched_text, device=refer_device, min_len=min_len)
+        outputs, tokenized_inputs, target_labels = caculate_outputs(model, tokenizer, batched_text, args, device=device, min_len=min_len)
+        refer_outputs, refer_tokenized_inputs, refer_target_labels = caculate_outputs(refer_model, refer_tokenizer, batched_text, args, device=refer_device, min_len=min_len)
         batch_mink_plus_avg, batch_mink_avg = calculate_mink_and_mink_plus(outputs[1], tokenized_inputs)
         loss_value_list, ppl_value_list, zlib_value_list, grad_value_list = caculate_instance_loss_perplexity_zlib(outputs[1], target_labels, batched_text, model, tokenized_inputs, tokenizer)
         mink_plus_collect.extend(batch_mink_plus_avg)
