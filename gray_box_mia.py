@@ -4,12 +4,12 @@ from transformers import BitsAndBytesConfig, AutoModelForCausalLM, AutoTokenizer
 
 def compute_gray_box_method(args):
     dataset_names, length_list = get_dataset_list(args)
+    bnb_config = BitsAndBytesConfig(
+        load_in_8bit=True,  # 开启8位量化
+        bnb_8bit_use_double_quant=True,  # 使用双重量化技术
+        bnb_8bit_compute_dtype=torch.float16  # 计算过程中使用float16
+    )
     if args.model_size == "12b" or args.model_size == "6.9b":
-    #     bnb_config = BitsAndBytesConfig(
-    #         load_in_8bit=True,  # 开启8位量化
-    #         bnb_8bit_use_double_quant=True,  # 使用双重量化技术
-    #         bnb_8bit_compute_dtype=torch.float16  # 计算过程中使用float16
-    #     )
     #     device_map = {
     #     "transformer.word_embeddings": args.cuda,
     #     "transformer.word_embeddings_layernorm": args.cuda,
@@ -42,9 +42,10 @@ def compute_gray_box_method(args):
     refer_model = AutoModelForCausalLM.from_pretrained("stabilityai/stablelm-base-alpha-3b-v2",
                                                        trust_remote_code=True,
                                                        torch_dtype=torch.bfloat16,
-                                                       load_in_8bit=True,
-                                                       device_map=args.refer_cuda
-                                                       ).eval()
+                                                       #load_in_8bit=True,
+                                                       #device_map=args.refer_cuda
+                                                       ).cuda(args.refer_cuda).eval()
+    refer_model = refer_model.to_bettertransformer()
     refer_tokenizer = AutoTokenizer.from_pretrained("stabilityai/stablelm-base-alpha-3b-v2")
     tokenizer.pad_token = tokenizer.eos_token
     refer_tokenizer.pad_token = refer_tokenizer.eos_token
