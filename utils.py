@@ -892,9 +892,9 @@ def get_dataset_list(args):
     else:
         dataset_list = [args.dataset_name]
     if args.relative == "relative":
-        length_list = list(range(args.min_len, 90,10))
+        length_list = list(range(args.min_len, 100,10))
     else:
-        length_list =  list(range(args.min_len, 900,100))
+        length_list =  list(range(args.min_len, 1000,100))
     return dataset_list, length_list
 
 def obtain_dataset(dataset_name, args):
