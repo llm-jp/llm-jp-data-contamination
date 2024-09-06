@@ -78,7 +78,7 @@ args = parser.parse_args()
 dataset_names = ["ArXiv", "DM Mathematics", "Enron Emails", "EuroParl", "FreeLaw", "Github", "Gutenberg (PG-19)",
                 "HackerNews", "NIH ExPorter", "PhilPapers", "PubMed Abstracts", "PubMed Central", "Pile-CC",
                 "StackExchange", "Ubuntu IRC", "USPTO Backgrounds", "Wikipedia (en)"]
-dataset_num = {"Arxiv":4841, "DM Mathematics": 3929, "Enron Emails": 1957, "EuroParl": 290, "FreeLaw": 10195,
+dataset_num = {"ArXiv":4841, "DM Mathematics": 3929, "Enron Emails": 1957, "EuroParl": 290, "FreeLaw": 10195,
                "Github": 36532, "Gutenberg (PG-19)": 140, "HackerNews": 3251, "NIH ExPorter":3709, "PhilPapers": 132,
                "PubMed Abstracts": 59766, "PubMed Central": 11888, "Pile-CC": 105582, "StackExchange": 60328, "Ubuntu IRC":43,
                "USPTO Backgrounds": 22802, "Wikipedia (en)": 34989}
