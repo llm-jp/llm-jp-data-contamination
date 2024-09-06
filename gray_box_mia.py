@@ -50,7 +50,7 @@ def compute_gray_box_method(args):
     refer_tokenizer = AutoTokenizer.from_pretrained("stabilityai/stablelm-base-alpha-3b-v2")
     tokenizer.pad_token = tokenizer.eos_token
     refer_tokenizer.pad_token = refer_tokenizer.eos_token
-    for dataset_idx in list(range(args.dataset_idx, 5)):
+    for dataset_idx in list(range(args.dataset_idx, 4)):
         args.dataset_idx = dataset_idx
         for min_len in length_list:
             args.min_len = min_len
