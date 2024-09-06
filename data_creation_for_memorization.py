@@ -98,13 +98,14 @@ for idx, seed in enumerate(seed_list):
         # Step 2: sample train_{dataset_name}_x
         num_samples = 5 if len(train_files) > 5 else len(train_files)
         sampled_train_files = random.sample(train_files, num_samples)
-        # Step 3 & 4: merge data and take 20000 samples
+        # Step 3 & 4: merge data and sample
         train_dataset_full = []
         for file in sampled_train_files:
             dataset = torch.load(os.path.join(train_folder, file))
             train_dataset_full.extend(dataset)
-        random.sample(train_dataset_full, dataset_num[dataset_name])
+        data = random.sample(train_dataset_full, dataset_num[dataset_name])
+
         # Step 5: save the sampled dataset
-        torch.save(train_dataset_full, f"pythia-train/train_{dataset_name}_0.pt")
+        torch.save(data, f"pythia-train/train_{dataset_name}_0.pt")
         #pdb.set_trace()
 
