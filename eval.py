@@ -1,14 +1,12 @@
 import os
 import random
 import argparse
-import dotenv
 from openai import OpenAI
 import evaluate
 from utils import *
 import pdb
 from tqdm import tqdm
 import numpy as np
-dotenv.load_dotenv()
 import torch
 from transformers import AutoTokenizer, AutoModelForCausalLM
 def bleurt_score(predictions, references):
