@@ -22,7 +22,7 @@ def compute_gray_box_method(args):
           revision="step143000",
           cache_dir=f"./pythia-{args.model_size}-deduped/step143000",
           torch_dtype=torch.bfloat16,
-          load_in_8bit=True,
+          #load_in_8bit=True,
           device_map=args.cuda
           #quantization_config=bnb_config,
         ).eval()#.to(args.cuda)
