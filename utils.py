@@ -888,7 +888,7 @@ def get_dataset_list(args):
                    "Github", "FreeLaw", "EuroParl",'DM Mathematics',"ArXiv",]
         elif args.truncated == "untruncated":
             #dataset_list = ['Wikipedia (en)', "USPTO Backgrounds", "StackExchange", "Pile-CC", "Github", "FreeLaw"]
-            dataset_list = ['Wikipedia (en)', "USPTO Backgrounds", "StackExchange", "Pile-CC", "Github", "FreeLaw"]
+            dataset_list = ['Wikipedia (en)',  "StackExchange", "Pile-CC", "Github", "FreeLaw"]
     elif args.dataset_name=="local_all" and args.relative == "relative":
         dataset_list = ["Wikipedia (en)",  "StackExchange",'PubMed Central', "Pile-CC", "NIH ExPorter", "HackerNews",
                    "Github", "FreeLaw", "Enron Emails",  "DM Mathematics", "ArXiv"]
