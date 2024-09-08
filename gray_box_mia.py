@@ -44,7 +44,7 @@ def compute_gray_box_method(args):
                                                        torch_dtype=torch.bfloat16,
                                                        #load_in_8bit=True,
                                                        device_map=args.refer_cuda,
-                                                       quantization_config=bnb_config
+                                                       #quantization_config=bnb_config
                                                        ).eval()#.cuda(args.refer_cuda)
     #refer_model = refer_model.to_bettertransformer()
     refer_tokenizer = AutoTokenizer.from_pretrained("stabilityai/stablelm-base-alpha-3b-v2")
