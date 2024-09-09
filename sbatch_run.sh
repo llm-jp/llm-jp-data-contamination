@@ -7,7 +7,7 @@
 #SBATCH --output=runall
 #SBATCH --error=runall
 #SBATCH --ntasks=4                # 总共运行四个任务
-#SBATCH --cpus-per-task=4         # 每个任务分配4个CPU
+#SBATCH --cpus-per-task=8         # 每个任务分配4个CPU
 
 # 创建日志目录
 
