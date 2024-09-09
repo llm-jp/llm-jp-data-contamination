@@ -5,7 +5,7 @@
 #SBATCH --nodes=1                 # 只需要一个节点
 #SBATCH --time=72:00:00
 #SBATCH --output=runall
-#SBATCH --error=runall
+#SBATCH --error=runaller
 #SBATCH --ntasks=4                # 总共运行四个任务
 #SBATCH --cpus-per-task=8         # 每个任务分配4个CPU
 
