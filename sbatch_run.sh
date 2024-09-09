@@ -17,15 +17,16 @@ set -e
 
 # 定义并行化函数
 srun_parallel () {
-    local model_size=$1
-    local truncated=$2
-    local cuda_id=$3
-    local refer_cuda_id=$4
+    local relative=$1
+    local model_size=$2
+    local truncated=$3
+    local cuda_id=$4
+    local refer_cuda_id=$5
 
     echo "Running task with model_size=$model_size, truncated=$truncated, cuda_id=$cuda_id, refer_cuda_id=$refer_cuda_id"
 
     python runing_both.py \
-        --relative absolute \
+        --relative $relative \
         --model_size $model_size \
         --truncated $truncated \
         --dataset_name local_all \
@@ -37,10 +38,10 @@ srun_parallel () {
 }
 
 # 启动并行任务
-srun --ntasks=1 --cpus-per-task=8 --gres=gpu:2 bash -c "$(declare -f srun_parallel); srun_parallel 12b truncated 0 1" &
-srun --ntasks=1 --cpus-per-task=8 --gres=gpu:2 bash -c "$(declare -f srun_parallel); srun_parallel 12b untruncated 0 1" &
-srun --ntasks=1 --cpus-per-task=8 --gres=gpu:2 bash -c "$(declare -f srun_parallel); srun_parallel 6.9b truncated 0 1" &
-srun --ntasks=1 --cpus-per-task=8 --gres=gpu:2 bash -c "$(declare -f srun_parallel); srun_parallel 6.9b untruncated 0 1" &
+srun --ntasks=1 --cpus-per-task=8 --gres=gpu:2 bash -c "$(declare -f srun_parallel); srun_parallel absolute 12b truncated 0 1" &
+srun --ntasks=1 --cpus-per-task=8 --gres=gpu:2 bash -c "$(declare -f srun_parallel); srun_parallel absolute 12b untruncated 0 1" &
+srun --ntasks=1 --cpus-per-task=8 --gres=gpu:2 bash -c "$(declare -f srun_parallel); srun_parallel absolute 6.9b truncated 0 1" &
+srun --ntasks=1 --cpus-per-task=8 --gres=gpu:2 bash -c "$(declare -f srun_parallel); srun_parallel absolute 6.9b untruncated 0 1" &
 
 # 等待所有任务结束
 wait
