@@ -5,8 +5,8 @@
 #SBATCH --nodes=1
 #SBATCH --ntasks=4
 #SBATCH --time=72:00:00
-#SBATCH --output=logs/runall_%j.log
-#SBATCH --error=logs/runaller_%j.err
+#SBATCH --output=runall.log
+#SBATCH --error=runaller.err
 #SBATCH --cpus-per-task=8
 
 # 创建日志目录
