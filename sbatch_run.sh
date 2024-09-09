@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --job-name=DataContaminationall
 #SBATCH --partition=gpu-small
-#SBATCH --gres=gpu:2              # total out of 2 nodes which creates 4 tasks)
+#SBATCH --gres=gpu:8              # total out of 2 nodes which creates 4 tasks)
 #SBATCH --nodes=1                 # one node
 #SBATCH --ntasks=4  # 总共运行四个任务
 #SBATCH --time=72:00:00
