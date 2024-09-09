@@ -56,7 +56,7 @@ def compute_gray_box_method(args):
             args.min_len = min_len
             for dataset_name in dataset_names:
                 if os.path.exists(f"{args.save_dir}_{args.dataset_idx}/{dataset_name}/{args.relative}/{args.truncated}/{args.min_len}_{args.model_size}_loss_dict.pkl") and args.relative == "absolute":
-                    print(f"{dataset_name} {args.min_len} {args.model_size} finished")
+                    print(f"{dataset_idx} {dataset_name} {args.min_len} {args.model_size} finished")
                     continue
                 df = pd.DataFrame()
                 dataset = obtain_dataset(dataset_name, args)
