@@ -22,8 +22,10 @@ srun_parallel () {
     local truncated=$3
     local cuda_id=$4
     local refer_cuda_id=$5
+    local dataset_idx=$6
+    local batch_size=$7
 
-    echo "Running task with model_size=$model_size, truncated=$truncated, cuda_id=$cuda_id, refer_cuda_id=$refer_cuda_id relative=$relative"
+    echo "Running task with model_size=$model_size, truncated=$truncated, cuda_id=$cuda_id, refer_cuda_id=$refer_cuda_id relative=$relative dataset_idx=$dataset_idx batch_size=$batch_size"
 
     python runing_both.py \
         --relative $relative \
@@ -33,15 +35,15 @@ srun_parallel () {
         --min_len 0 \
         --cuda $cuda_id \
         --refer_cuda $refer_cuda_id \
-        --dataset_idx 1 \
-        --batch_size 1
+        --dataset_idx $dataset_idx \
+        --batch_size $batch_size
 }
 
 # 启动并行任务
-srun --ntasks=1 --cpus-per-task=8 --gres=gpu:2 bash -c "$(declare -f srun_parallel); srun_parallel relative 12b truncated 0 1" &
-srun --ntasks=1 --cpus-per-task=8 --gres=gpu:2 bash -c "$(declare -f srun_parallel); srun_parallel relative 6.9b truncated 0 1" &
-srun --ntasks=1 --cpus-per-task=8 --gres=gpu:2 bash -c "$(declare -f srun_parallel); srun_parallel relative 2.8b truncated 0 1" &
-srun --ntasks=1 --cpus-per-task=8 --gres=gpu:2 bash -c "$(declare -f srun_parallel); srun_parallel relative 1b truncated 0 1" &
+srun --ntasks=1 --cpus-per-task=8 --gres=gpu:2 bash -c "$(declare -f srun_parallel); srun_parallel relative 12b truncated 0 1 0 1" &
+srun --ntasks=1 --cpus-per-task=8 --gres=gpu:2 bash -c "$(declare -f srun_parallel); srun_parallel relative 6.9b truncated 0 1 0 2" &
+srun --ntasks=1 --cpus-per-task=8 --gres=gpu:2 bash -c "$(declare -f srun_parallel); srun_parallel relative 2.8b truncated 0 1 0 4" &
+srun --ntasks=1 --cpus-per-task=8 --gres=gpu:2 bash -c "$(declare -f srun_parallel); srun_parallel relative 1b truncated 0 1 0 4" &
 
 # 等待所有任务结束
 wait
