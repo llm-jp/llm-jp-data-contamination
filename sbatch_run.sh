@@ -10,7 +10,7 @@
 
 
 # Run your script
-srun runing_both.py \
+srun python runing_both.py \
   --relative absolute \
   --model_size 12b \
   --truncated untruncated \
