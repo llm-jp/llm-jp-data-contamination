@@ -200,28 +200,25 @@ def feature_collection(model, tokenizer, dataset, args, dataset_name, min_len=50
     cleaned_data, orig_indices = clean_dataset(dataset)
     for idx, (data_batch, orig_indices_batch) in tqdm(
             enumerate(batched_data_with_indices(cleaned_data, orig_indices, batch_size=args.batch_size))):
-        try:
-            orig_idx = [item for item in orig_indices_batch]
-            batched_text = [item for item in data_batch]
-            outputs, tokenized_inputs, target_labels = caculate_outputs(model, tokenizer, batched_text, args, device=device, min_len=min_len)
-            refer_outputs, refer_tokenized_inputs, refer_target_labels = caculate_outputs(refer_model, refer_tokenizer, batched_text, args, device=refer_device, min_len=min_len)
-            batch_mink_plus_avg, batch_mink_avg = calculate_mink_and_mink_plus(outputs[1], tokenized_inputs)
-            loss_value_list, ppl_value_list, zlib_value_list, grad_value_list = caculate_instance_loss_perplexity_zlib(outputs[1], target_labels, batched_text, model, tokenized_inputs, tokenizer)
-            mink_plus_collect.extend(batch_mink_plus_avg)
-            mink_collect.extend(batch_mink_avg)
-            loss_collect.extend(loss_value_list)
-            ppl_collect.extend(ppl_value_list)
-            zlib_collect.extend(zlib_value_list)
-            grad_collect.extend(grad_value_list)
-            idx_list.extend(orig_idx)
-            if refer_model is not None:
-                ref_loss, ref_logits = refer_outputs[:2]
-                ref_log_probabilities = torch.nn.functional.log_softmax(ref_logits, dim=-1)
-                ref_probabilities = torch.nn.functional.softmax(ref_logits, dim=-1)
-                refer_loss_value_list, _, _, _ = caculate_instance_loss_perplexity_zlib(refer_outputs[1], refer_target_labels, batched_text, refer_model, refer_tokenized_inputs, refer_tokenizer)
-            ref_loss_collect.extend(refer_loss_value_list)
-        except:
-            pass
+        orig_idx = [item for item in orig_indices_batch]
+        batched_text = [item for item in data_batch]
+        outputs, tokenized_inputs, target_labels = caculate_outputs(model, tokenizer, batched_text, args, device=device, min_len=min_len)
+        refer_outputs, refer_tokenized_inputs, refer_target_labels = caculate_outputs(refer_model, refer_tokenizer, batched_text, args, device=refer_device, min_len=min_len)
+        batch_mink_plus_avg, batch_mink_avg = calculate_mink_and_mink_plus(outputs[1], tokenized_inputs)
+        loss_value_list, ppl_value_list, zlib_value_list, grad_value_list = caculate_instance_loss_perplexity_zlib(outputs[1], target_labels, batched_text, model, tokenized_inputs, tokenizer)
+        mink_plus_collect.extend(batch_mink_plus_avg)
+        mink_collect.extend(batch_mink_avg)
+        loss_collect.extend(loss_value_list)
+        ppl_collect.extend(ppl_value_list)
+        zlib_collect.extend(zlib_value_list)
+        grad_collect.extend(grad_value_list)
+        idx_list.extend(orig_idx)
+        if refer_model is not None:
+            ref_loss, ref_logits = refer_outputs[:2]
+            ref_log_probabilities = torch.nn.functional.log_softmax(ref_logits, dim=-1)
+            ref_probabilities = torch.nn.functional.softmax(ref_logits, dim=-1)
+            refer_loss_value_list, _, _, _ = caculate_instance_loss_perplexity_zlib(refer_outputs[1], refer_target_labels, batched_text, refer_model, refer_tokenized_inputs, refer_tokenizer)
+        ref_loss_collect.extend(refer_loss_value_list)
     return loss_collect, mink_collect, ppl_collect, mink_plus_collect, zlib_collect, ref_loss_collect, idx_list, grad_collect
 
 def calculate_mean_var(dict, dataset_name, split_set):
