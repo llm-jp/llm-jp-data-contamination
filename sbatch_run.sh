@@ -1,12 +1,12 @@
 #!/bin/bash
-#SBATCH --job-name=33_DataCont1
+#SBATCH --job-name=33_DataCont
 #SBATCH --partition=gpu-small
 #SBATCH --gres=gpu:8
 #SBATCH --nodes=1
 #SBATCH --ntasks=4
 #SBATCH --time=72:00:00
-#SBATCH --output=runall1.log
-#SBATCH --error=runaller1.err
+#SBATCH --output=runall.log
+#SBATCH --error=runaller.err
 #SBATCH --cpus-per-task=8
 
 # 创建日志目录
