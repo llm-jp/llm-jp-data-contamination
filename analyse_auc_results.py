@@ -115,31 +115,56 @@ sns.set(style="whitegrid")
 
 
 # Function to plot PDF for a specific category
-def plot_pdf_by_category(df, category, title):
+
+def plot_hist_by_category(df, category, title, bins=30, xmin=0.5, xmax=1.0, show_hist=False):
     plt.figure(figsize=(12, 8))
 
-    # Use seaborn to plot the density function
-    sns.kdeplot(data=df, x="auc", hue=category, shade=True, linewidth=2)
+    # 设置Seaborn样式
+    sns.set_style("whitegrid")  # 白色网格背景
+    sns.set_palette("Set2")  # 设置颜色调色板
 
-    # Customize the plot
-    plt.title(title, fontsize=16)
-    plt.xlabel("AUC", fontsize=14)
-    plt.ylabel("Density", fontsize=14)
-    plt.xticks(fontsize=12)
-    plt.yticks(fontsize=12)
-    plt.legend(title=category, fontsize=12, title_fontsize='13')
+    unique_categories = df[category].unique()
+    # 如果类别数量较多，使用不同的调色板和样式
+    if len(unique_categories) > 10:
+        sns.set_palette(sns.color_palette("husl", len(unique_categories)))
 
+    for i, cat in enumerate(unique_categories):
+        subset = df[df[category] == cat]
+        data = subset['auc']
+
+        if show_hist:
+            sns.histplot(data, bins=bins, kde=True, label=cat, stat='density', element='step', linewidth=1.5)
+        else:
+            sns.kdeplot(data, label=cat, linewidth=2, linestyle=('-' if i % 2 == 0 else '--'), alpha=0.7)
+
+    # 设置标题和标签
+    plt.title(title, fontsize=20, weight='bold')
+    plt.xlabel("AUC", fontsize=16, weight='bold')
+    plt.ylabel("Density", fontsize=16, weight='bold')
+    plt.xticks(fontsize=14)
+    plt.yticks(fontsize=14)
+
+    # 设置x轴和y轴范围
+    plt.xlim(xmin, xmax)
+    plt.ylim(0, None)
+
+    # 美化图例，将其放在图表外部
+    plt.legend(title=category, fontsize=12, title_fontsize='13', loc='center left', bbox_to_anchor=(1, 0.5))
+
+    # 显示网格线
+    plt.grid(True, linestyle='--', alpha=0.7)
+
+    # 显示绘制的图形
+    plt.tight_layout(rect=[0, 0, 0.85, 1])  # 确保子图可以完整展示
     plt.show()
 
 
-# Plot the PDF for all datasets in one figure
-plot_pdf_by_category(untruncated_results, "dataset", "Probability Density Function of AUC for All Datasets")
-
-# Plot the PDF for all model sizes in one figure
-plot_pdf_by_category(untruncated_results, "model_size", "Probability Density Function of AUC for All Model Sizes")
-
-# Plot the PDF for all features in one figure
-plot_pdf_by_category(untruncated_results, "feature", "Probability Density Function of AUC for All Features")
-
-# Plot the PDF for all lengths in one figure
-plot_pdf_by_category(untruncated_results, "length", "Probability Density Function of AUC for All Length")
+# Example for all datasets using histogram with KDE
+plot_hist_by_category(relative_results, "dataset", "Probability Density Function of AUC for All Datasets", bins=30,
+                      xmin=0.5, xmax=0.6, show_hist=False)
+plot_hist_by_category(relative_results, "model_size", "Probability Density Function of AUC for All Model Sizes",
+                      bins=30, xmin=0.5, xmax=0.6, show_hist=False)
+plot_hist_by_category(relative_results, "feature", "Probability Density Function of AUC for All Features", bins=30,
+                      xmin=0.5, xmax=0.6, show_hist=False)
+plot_hist_by_category(relative_results, "length", "Probability Density Function of AUC for All Length", bins=30,
+                      xmin=0.5, xmax=0.6, show_hist=False)
