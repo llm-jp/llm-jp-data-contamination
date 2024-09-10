@@ -357,7 +357,7 @@ def calculate_mink_and_mink_plus(batch_logits, batched_tokenized_inputs):
     batch_probs_masked = batch_probs.where(mask, 0)
     batch_log_probs_masked = batch_log_probs.where(mask, 0)
     batch_mu = (batch_probs_masked.float() * batch_log_probs_masked.float()).float().sum(-1)
-    batch_sigma =  ((batch_probs_masked.float() * torch.square(torch.where(batch_probs_masked > 0,batch_log_probs_masked.float(),  torch.tensor(0.0, device=batch_log_probs_masked.device, dtype=torch.float32)))).sum(dim=-1)- torch.square(batch_mu.float()).squeeze())
+    batch_sigma = ((batch_probs_masked.float() * torch.square(torch.where(batch_probs_masked > 0,batch_log_probs_masked.float(),  torch.tensor(0.0, device=batch_log_probs_masked.device, dtype=torch.float32)))).sum(dim=-1)- torch.square(batch_mu.float()).squeeze())
     mask = mask.squeeze(-1)
     batch_mink_plus = (batch_token_log_probs - batch_mu).float() * mask / batch_sigma.float().sqrt()
     token_length = mask.sum(dim=1)
@@ -368,12 +368,13 @@ def calculate_mink_and_mink_plus(batch_logits, batched_tokenized_inputs):
     batch_mink_plus_avg = []
     batch_mink_avg = []
     for i, length in enumerate(token_length):
-        front_values = sorted_mink_plus[i, :length]
+        caculate_length = int(length*0.2) if length > 5 else length
+        front_values = sorted_mink_plus[i, :caculate_length]
         avg = torch.mean(front_values.float()).item()
         batch_mink_plus_avg.append(avg)
         if torch.tensor(avg) == torch.inf:
             pdb.set_trace()
-        front_values = sorted_mink[i, :length]
+        front_values = sorted_mink[i, :caculate_length]
         avg = torch.mean(front_values.float()).item()
         batch_mink_avg.append(avg)
     return batch_mink_plus_avg, batch_mink_avg
