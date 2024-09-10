@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=DataContRelative
+#SBATCH --job-name=33_DataCont
 #SBATCH --partition=gpu-small
 #SBATCH --gres=gpu:8
 #SBATCH --nodes=1
