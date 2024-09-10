@@ -59,18 +59,21 @@ def decide_threshold_direction(y_true, scores, threshold):
 #truncated
 #dataset_names = ['Wikipedia (en)', "StackExchange", 'PubMed Central', "Pile-CC", "HackerNews",
 #                    "Github", "FreeLaw", "EuroParl", 'DM Mathematics', "ArXiv", ]
-split = "relative"
+split = "absolute"
 truncate_status = "truncated"
 if split == "relative":
     length_values = np.arange(0, 100, 10)
 else:
     length_values = np.arange(0, 1000, 100)
-#untruncated
+#absolute untruncated
 #dataset_names = ['Wikipedia (en)', "USPTO Backgrounds", "StackExchange", "Pile-CC", "Github", "FreeLaw"]
 #relative
-dataset_names = ["Wikipedia (en)", "StackExchange", 'PubMed Central', "Pile-CC", "NIH ExPorter", "HackerNews",
-                    "Github", "FreeLaw", "Enron Emails", "DM Mathematics", "ArXiv"]
+#dataset_names = ["Wikipedia (en)", "StackExchange", 'PubMed Central', "Pile-CC", "NIH ExPorter", "HackerNews",
+#                    "Github", "FreeLaw", "Enron Emails", "DM Mathematics", "ArXiv"]
+dataset_names = ['Wikipedia (en)', "StackExchange", 'PubMed Central', "Pile-CC", "HackerNews",
+                   "Github", "FreeLaw", "EuroParl",'DM Mathematics',"ArXiv"]
 # 随机种子列表
+#absolute truncated
 #dataset_names = ["github", "pile_cc", "full_pile", "WikiMIA64", "WikiMIA128", "WikiMIA256", "WikiMIAall"]
 model_sizes = ["410m", "1b", "2.8b", "6.9b"]
 results = []
@@ -130,7 +133,7 @@ for dataset_name in dataset_names:
                     overall_auc = 0.5
 
                 # If AUC is less than 0.5, invert the scores and recalculate
-                if overall_auc < 0.5:
+                if overall_auc <= 0.5:
                     overall_auc = 1 - overall_auc
                     overall_scores = -overall_scores
 
