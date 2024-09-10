@@ -39,16 +39,6 @@ Wikipedia (en),loss,600,6.9b,0.5330159010600707
 Wikipedia (en),loss,700,6.9b,0.5343540372670808
 Wikipedia (en),loss,800,6.9b,0.531782913165266
 Wikipedia (en),loss,900,6.9b,0.5125952380952381
-Wikipedia (en),loss,0,12b,0.515174
-Wikipedia (en),loss,100,12b,0.52534
-Wikipedia (en),loss,200,12b,0.5183815
-Wikipedia (en),loss,300,12b,0.508706
-Wikipedia (en),loss,400,12b,0.5498042105263158
-Wikipedia (en),loss,500,12b,0.5146760471204188
-Wikipedia (en),loss,600,12b,0.538
-Wikipedia (en),loss,700,12b,0.5375465838509317
-Wikipedia (en),loss,800,12b,0.5376008403361344
-Wikipedia (en),loss,900,12b,0.5082840136054421
 Wikipedia (en),prob,0,410m,0.5001950000000001
 Wikipedia (en),prob,100,410m,0.514996
 Wikipedia (en),prob,200,410m,0.5011425
@@ -89,16 +79,6 @@ Wikipedia (en),prob,600,6.9b,0.5330989399293287
 Wikipedia (en),prob,700,6.9b,0.5346853002070393
 Wikipedia (en),prob,800,6.9b,0.5314817927170867
 Wikipedia (en),prob,900,6.9b,0.5123809523809524
-Wikipedia (en),prob,0,12b,0.515236
-Wikipedia (en),prob,100,12b,0.525354
-Wikipedia (en),prob,200,12b,0.5181669999999999
-Wikipedia (en),prob,300,12b,0.508752
-Wikipedia (en),prob,400,12b,0.5493673684210527
-Wikipedia (en),prob,500,12b,0.5150549738219895
-Wikipedia (en),prob,600,12b,0.5376148409893993
-Wikipedia (en),prob,700,12b,0.5376853002070393
-Wikipedia (en),prob,800,12b,0.538141456582633
-Wikipedia (en),prob,900,12b,0.507891156462585
 Wikipedia (en),ppl,0,410m,0.5003755
 Wikipedia (en),ppl,100,410m,0.515193
 Wikipedia (en),ppl,200,410m,0.501017
@@ -139,16 +119,6 @@ Wikipedia (en),ppl,600,6.9b,0.5330159010600707
 Wikipedia (en),ppl,700,6.9b,0.5343540372670808
 Wikipedia (en),ppl,800,6.9b,0.531782913165266
 Wikipedia (en),ppl,900,6.9b,0.5125952380952381
-Wikipedia (en),ppl,0,12b,0.515174
-Wikipedia (en),ppl,100,12b,0.52534
-Wikipedia (en),ppl,200,12b,0.5183815
-Wikipedia (en),ppl,300,12b,0.508706
-Wikipedia (en),ppl,400,12b,0.5498042105263158
-Wikipedia (en),ppl,500,12b,0.5146760471204188
-Wikipedia (en),ppl,600,12b,0.538
-Wikipedia (en),ppl,700,12b,0.5375465838509317
-Wikipedia (en),ppl,800,12b,0.5376008403361344
-Wikipedia (en),ppl,900,12b,0.5082840136054421
 Wikipedia (en),mink_plus,0,410m,0.512106
 Wikipedia (en),mink_plus,100,410m,0.50147
 Wikipedia (en),mink_plus,200,410m,0.511795
@@ -189,16 +159,6 @@ Wikipedia (en),mink_plus,600,6.9b,0.5635017667844524
 Wikipedia (en),mink_plus,700,6.9b,0.5533478260869565
 Wikipedia (en),mink_plus,800,6.9b,0.5491526610644258
 Wikipedia (en),mink_plus,900,6.9b,0.5723707482993198
-Wikipedia (en),mink_plus,0,12b,0.531355
-Wikipedia (en),mink_plus,100,12b,0.555088
-Wikipedia (en),mink_plus,200,12b,0.5557955
-Wikipedia (en),mink_plus,300,12b,0.5638650000000001
-Wikipedia (en),mink_plus,400,12b,0.5671610526315789
-Wikipedia (en),mink_plus,500,12b,0.5490013089005237
-Wikipedia (en),mink_plus,600,12b,0.5757650176678445
-Wikipedia (en),mink_plus,700,12b,0.5626915113871636
-Wikipedia (en),mink_plus,800,12b,0.5855182072829132
-Wikipedia (en),mink_plus,900,12b,0.5820034013605443
 Wikipedia (en),zlib,0,410m,0.5087665
 Wikipedia (en),zlib,100,410m,0.5212205
 Wikipedia (en),zlib,200,410m,0.5032325
@@ -239,16 +199,6 @@ Wikipedia (en),zlib,600,6.9b,0.5347985865724382
 Wikipedia (en),zlib,700,6.9b,0.5365538302277433
 Wikipedia (en),zlib,800,6.9b,0.5389803921568628
 Wikipedia (en),zlib,900,6.9b,0.5101496598639457
-Wikipedia (en),zlib,0,12b,0.509216
-Wikipedia (en),zlib,100,12b,0.5281800000000001
-Wikipedia (en),zlib,200,12b,0.523908
-Wikipedia (en),zlib,300,12b,0.500489
-Wikipedia (en),zlib,400,12b,0.5533426315789474
-Wikipedia (en),zlib,500,12b,0.5107212041884817
-Wikipedia (en),zlib,600,12b,0.5416316254416962
-Wikipedia (en),zlib,700,12b,0.5402163561076605
-Wikipedia (en),zlib,800,12b,0.5448291316526611
-Wikipedia (en),zlib,900,12b,0.5138163265306123
 Wikipedia (en),grad,0,410m,0.5114730000000001
 Wikipedia (en),grad,100,410m,0.501865
 Wikipedia (en),grad,200,410m,0.5025035
@@ -289,16 +239,6 @@ Wikipedia (en),grad,600,6.9b,0.5299540636042404
 Wikipedia (en),grad,700,6.9b,0.5490134575569359
 Wikipedia (en),grad,800,6.9b,0.5304621848739497
 Wikipedia (en),grad,900,6.9b,0.5141003401360544
-Wikipedia (en),grad,0,12b,0.5162795
-Wikipedia (en),grad,100,12b,0.532554
-Wikipedia (en),grad,200,12b,0.542326
-Wikipedia (en),grad,300,12b,0.51522
-Wikipedia (en),grad,400,12b,0.5063268421052631
-Wikipedia (en),grad,500,12b,0.5098979057591624
-Wikipedia (en),grad,600,12b,0.5152455830388692
-Wikipedia (en),grad,700,12b,0.512067287784679
-Wikipedia (en),grad,800,12b,0.5072969187675069
-Wikipedia (en),grad,900,12b,0.5271785714285714
 Wikipedia (en),refer,0,410m,0.500896
 Wikipedia (en),refer,100,410m,0.5112765
 Wikipedia (en),refer,200,410m,0.5013004999999999
@@ -339,366 +279,6 @@ Wikipedia (en),refer,600,6.9b,0.5151625441696113
 Wikipedia (en),refer,700,6.9b,0.5233985507246377
 Wikipedia (en),refer,800,6.9b,0.5167310924369748
 Wikipedia (en),refer,900,6.9b,0.5305289115646259
-Wikipedia (en),refer,0,12b,0.500896
-Wikipedia (en),refer,100,12b,0.5112765
-Wikipedia (en),refer,200,12b,0.5013004999999999
-Wikipedia (en),refer,300,12b,0.5219995
-Wikipedia (en),refer,400,12b,0.5260157894736841
-Wikipedia (en),refer,500,12b,0.5019823298429319
-Wikipedia (en),refer,600,12b,0.5151625441696113
-Wikipedia (en),refer,700,12b,0.5233985507246377
-Wikipedia (en),refer,800,12b,0.5167310924369748
-Wikipedia (en),refer,900,12b,0.5305289115646259
-USPTO Backgrounds,loss,0,410m,0.5034849749582638
-USPTO Backgrounds,loss,100,410m,0.507035
-USPTO Backgrounds,loss,200,410m,0.5028320000000001
-USPTO Backgrounds,loss,300,410m,0.5036025
-USPTO Backgrounds,loss,400,410m,0.5030125
-USPTO Backgrounds,loss,500,410m,0.5110932560590095
-USPTO Backgrounds,loss,600,410m,0.5196302013422819
-USPTO Backgrounds,loss,700,410m,0.5063747940691928
-USPTO Backgrounds,loss,800,410m,0.5141093439363817
-USPTO Backgrounds,loss,900,410m,0.5074974226804123
-USPTO Backgrounds,loss,0,1b,0.5008055091819701
-USPTO Backgrounds,loss,100,1b,0.5088514999999999
-USPTO Backgrounds,loss,200,1b,0.5019485
-USPTO Backgrounds,loss,300,1b,0.5083345
-USPTO Backgrounds,loss,400,1b,0.50205
-USPTO Backgrounds,loss,500,1b,0.5144926238145416
-USPTO Backgrounds,loss,600,1b,0.5182275167785235
-USPTO Backgrounds,loss,700,1b,0.5074159802306426
-USPTO Backgrounds,loss,800,1b,0.5119065606361829
-USPTO Backgrounds,loss,900,1b,0.5062036082474226
-USPTO Backgrounds,loss,0,2.8b,0.5017495826377296
-USPTO Backgrounds,loss,100,2.8b,0.502279
-USPTO Backgrounds,loss,200,2.8b,0.502398
-USPTO Backgrounds,loss,300,2.8b,0.517129
-USPTO Backgrounds,loss,400,2.8b,0.502878
-USPTO Backgrounds,loss,500,2.8b,0.521336143308746
-USPTO Backgrounds,loss,600,2.8b,0.5239342281879195
-USPTO Backgrounds,loss,700,2.8b,0.5128797364085667
-USPTO Backgrounds,loss,800,2.8b,0.5022236580516899
-USPTO Backgrounds,loss,900,2.8b,0.5115798969072165
-USPTO Backgrounds,loss,0,6.9b,0.5021652754590985
-USPTO Backgrounds,loss,100,6.9b,0.5052125
-USPTO Backgrounds,loss,200,6.9b,0.501884
-USPTO Backgrounds,loss,300,6.9b,0.517276
-USPTO Backgrounds,loss,400,6.9b,0.5048750000000001
-USPTO Backgrounds,loss,500,6.9b,0.523077449947313
-USPTO Backgrounds,loss,600,6.9b,0.5235946308724833
-USPTO Backgrounds,loss,700,6.9b,0.5149110378912685
-USPTO Backgrounds,loss,800,6.9b,0.501265407554672
-USPTO Backgrounds,loss,900,6.9b,0.5083621134020619
-USPTO Backgrounds,loss,0,12b,0.502474123539232
-USPTO Backgrounds,loss,100,12b,0.5060445
-USPTO Backgrounds,loss,200,12b,0.502776
-USPTO Backgrounds,loss,300,12b,0.5210950000000001
-USPTO Backgrounds,loss,400,12b,0.5064040000000001
-USPTO Backgrounds,loss,500,12b,0.5256306638566912
-USPTO Backgrounds,loss,600,12b,0.5252248322147651
-USPTO Backgrounds,loss,700,12b,0.5190288303130148
-USPTO Backgrounds,loss,800,12b,0.5018021868787277
-USPTO Backgrounds,loss,900,12b,0.508701030927835
-USPTO Backgrounds,prob,0,410m,0.5032470784641068
-USPTO Backgrounds,prob,100,410m,0.5068565
-USPTO Backgrounds,prob,200,410m,0.503071
-USPTO Backgrounds,prob,300,410m,0.5037985
-USPTO Backgrounds,prob,400,410m,0.503243
-USPTO Backgrounds,prob,500,410m,0.5109899894625922
-USPTO Backgrounds,prob,600,410m,0.5192677852348994
-USPTO Backgrounds,prob,700,410m,0.5062257001647447
-USPTO Backgrounds,prob,800,410m,0.5142783300198807
-USPTO Backgrounds,prob,900,410m,0.507479381443299
-USPTO Backgrounds,prob,0,1b,0.5007378964941569
-USPTO Backgrounds,prob,100,1b,0.5092015
-USPTO Backgrounds,prob,200,1b,0.50194
-USPTO Backgrounds,prob,300,1b,0.508292
-USPTO Backgrounds,prob,400,1b,0.502164
-USPTO Backgrounds,prob,500,1b,0.5150089567966281
-USPTO Backgrounds,prob,600,1b,0.518713422818792
-USPTO Backgrounds,prob,700,1b,0.5077915980230643
-USPTO Backgrounds,prob,800,1b,0.5116361829025845
-USPTO Backgrounds,prob,900,1b,0.5061932989690722
-USPTO Backgrounds,prob,0,2.8b,0.5018914858096828
-USPTO Backgrounds,prob,100,2.8b,0.502113
-USPTO Backgrounds,prob,200,2.8b,0.5022139999999999
-USPTO Backgrounds,prob,300,2.8b,0.5173395
-USPTO Backgrounds,prob,400,2.8b,0.5026970000000001
-USPTO Backgrounds,prob,500,2.8b,0.5214041095890412
-USPTO Backgrounds,prob,600,2.8b,0.5239040268456376
-USPTO Backgrounds,prob,700,2.8b,0.5127388797364085
-USPTO Backgrounds,prob,800,2.8b,0.5019244532803181
-USPTO Backgrounds,prob,900,2.8b,0.5113453608247422
-USPTO Backgrounds,prob,0,6.9b,0.5021836393989983
-USPTO Backgrounds,prob,100,6.9b,0.5054219999999999
-USPTO Backgrounds,prob,200,6.9b,0.5016345
-USPTO Backgrounds,prob,300,6.9b,0.517467
-USPTO Backgrounds,prob,400,6.9b,0.504724
-USPTO Backgrounds,prob,500,6.9b,0.5228603793466806
-USPTO Backgrounds,prob,600,6.9b,0.5236248322147651
-USPTO Backgrounds,prob,700,6.9b,0.5152380560131796
-USPTO Backgrounds,prob,800,6.9b,0.5011361829025844
-USPTO Backgrounds,prob,900,6.9b,0.508576030927835
-USPTO Backgrounds,prob,0,12b,0.5024507512520868
-USPTO Backgrounds,prob,100,12b,0.5061775
-USPTO Backgrounds,prob,200,12b,0.5026630000000001
-USPTO Backgrounds,prob,300,12b,0.5209515
-USPTO Backgrounds,prob,400,12b,0.5065219999999999
-USPTO Backgrounds,prob,500,12b,0.525786617492097
-USPTO Backgrounds,prob,600,12b,0.5249389261744967
-USPTO Backgrounds,prob,700,12b,0.5192380560131796
-USPTO Backgrounds,prob,800,12b,0.5018270377733598
-USPTO Backgrounds,prob,900,12b,0.5091752577319588
-USPTO Backgrounds,ppl,0,410m,0.5034849749582638
-USPTO Backgrounds,ppl,100,410m,0.507035
-USPTO Backgrounds,ppl,200,410m,0.5028320000000001
-USPTO Backgrounds,ppl,300,410m,0.5036025
-USPTO Backgrounds,ppl,400,410m,0.5030125
-USPTO Backgrounds,ppl,500,410m,0.5110932560590095
-USPTO Backgrounds,ppl,600,410m,0.5196302013422819
-USPTO Backgrounds,ppl,700,410m,0.5063747940691928
-USPTO Backgrounds,ppl,800,410m,0.5141093439363817
-USPTO Backgrounds,ppl,900,410m,0.5074974226804123
-USPTO Backgrounds,ppl,0,1b,0.5008055091819701
-USPTO Backgrounds,ppl,100,1b,0.5088514999999999
-USPTO Backgrounds,ppl,200,1b,0.5019485
-USPTO Backgrounds,ppl,300,1b,0.5083345
-USPTO Backgrounds,ppl,400,1b,0.50205
-USPTO Backgrounds,ppl,500,1b,0.5144926238145416
-USPTO Backgrounds,ppl,600,1b,0.5182275167785235
-USPTO Backgrounds,ppl,700,1b,0.5074159802306426
-USPTO Backgrounds,ppl,800,1b,0.5119065606361829
-USPTO Backgrounds,ppl,900,1b,0.5062036082474226
-USPTO Backgrounds,ppl,0,2.8b,0.5017495826377296
-USPTO Backgrounds,ppl,100,2.8b,0.502279
-USPTO Backgrounds,ppl,200,2.8b,0.502398
-USPTO Backgrounds,ppl,300,2.8b,0.517129
-USPTO Backgrounds,ppl,400,2.8b,0.502878
-USPTO Backgrounds,ppl,500,2.8b,0.521336143308746
-USPTO Backgrounds,ppl,600,2.8b,0.5239342281879195
-USPTO Backgrounds,ppl,700,2.8b,0.5128797364085667
-USPTO Backgrounds,ppl,800,2.8b,0.5022236580516899
-USPTO Backgrounds,ppl,900,2.8b,0.5115798969072165
-USPTO Backgrounds,ppl,0,6.9b,0.5021652754590985
-USPTO Backgrounds,ppl,100,6.9b,0.5052125
-USPTO Backgrounds,ppl,200,6.9b,0.501884
-USPTO Backgrounds,ppl,300,6.9b,0.517276
-USPTO Backgrounds,ppl,400,6.9b,0.5048750000000001
-USPTO Backgrounds,ppl,500,6.9b,0.523077449947313
-USPTO Backgrounds,ppl,600,6.9b,0.5235946308724833
-USPTO Backgrounds,ppl,700,6.9b,0.5149110378912685
-USPTO Backgrounds,ppl,800,6.9b,0.501265407554672
-USPTO Backgrounds,ppl,900,6.9b,0.5083621134020619
-USPTO Backgrounds,ppl,0,12b,0.502474123539232
-USPTO Backgrounds,ppl,100,12b,0.5060445
-USPTO Backgrounds,ppl,200,12b,0.502776
-USPTO Backgrounds,ppl,300,12b,0.5210950000000001
-USPTO Backgrounds,ppl,400,12b,0.5064040000000001
-USPTO Backgrounds,ppl,500,12b,0.5256306638566912
-USPTO Backgrounds,ppl,600,12b,0.5252248322147651
-USPTO Backgrounds,ppl,700,12b,0.5190288303130148
-USPTO Backgrounds,ppl,800,12b,0.5018021868787277
-USPTO Backgrounds,ppl,900,12b,0.508701030927835
-USPTO Backgrounds,mink_plus,0,410m,0.5279282136894825
-USPTO Backgrounds,mink_plus,100,410m,0.5087824999999999
-USPTO Backgrounds,mink_plus,200,410m,0.504874
-USPTO Backgrounds,mink_plus,300,410m,0.5001895
-USPTO Backgrounds,mink_plus,400,410m,0.513133
-USPTO Backgrounds,mink_plus,500,410m,0.502663329820864
-USPTO Backgrounds,mink_plus,600,410m,0.518134899328859
-USPTO Backgrounds,mink_plus,700,410m,0.5001952224052719
-USPTO Backgrounds,mink_plus,800,410m,0.5021013916500994
-USPTO Backgrounds,mink_plus,900,410m,0.5441262886597938
-USPTO Backgrounds,mink_plus,0,1b,0.5120300500834725
-USPTO Backgrounds,mink_plus,100,1b,0.5075395
-USPTO Backgrounds,mink_plus,200,1b,0.510864
-USPTO Backgrounds,mink_plus,300,1b,0.5086145
-USPTO Backgrounds,mink_plus,400,1b,0.506349
-USPTO Backgrounds,mink_plus,500,1b,0.514781348788198
-USPTO Backgrounds,mink_plus,600,1b,0.5204248322147651
-USPTO Backgrounds,mink_plus,700,1b,0.500167215815486
-USPTO Backgrounds,mink_plus,800,1b,0.5056163021868788
-USPTO Backgrounds,mink_plus,900,1b,0.5431778350515464
-USPTO Backgrounds,mink_plus,0,2.8b,0.5268898163606011
-USPTO Backgrounds,mink_plus,100,2.8b,0.518913
-USPTO Backgrounds,mink_plus,200,2.8b,0.50401
-USPTO Backgrounds,mink_plus,300,2.8b,0.5265105
-USPTO Backgrounds,mink_plus,400,2.8b,0.5242979999999999
-USPTO Backgrounds,mink_plus,500,2.8b,0.5279488935721812
-USPTO Backgrounds,mink_plus,600,2.8b,0.5455979865771813
-USPTO Backgrounds,mink_plus,700,2.8b,0.5280238879736409
-USPTO Backgrounds,mink_plus,800,2.8b,0.530155069582505
-USPTO Backgrounds,mink_plus,900,2.8b,0.5547319587628866
-USPTO Backgrounds,mink_plus,0,6.9b,0.5188664440734557
-USPTO Backgrounds,mink_plus,100,6.9b,0.5184785
-USPTO Backgrounds,mink_plus,200,6.9b,0.506651
-USPTO Backgrounds,mink_plus,300,6.9b,0.5288845
-USPTO Backgrounds,mink_plus,400,6.9b,0.521344
-USPTO Backgrounds,mink_plus,500,6.9b,0.5230827186512118
-USPTO Backgrounds,mink_plus,600,6.9b,0.5437362416107383
-USPTO Backgrounds,mink_plus,700,6.9b,0.5332693574958813
-USPTO Backgrounds,mink_plus,800,6.9b,0.5360059642147118
-USPTO Backgrounds,mink_plus,900,6.9b,0.5635025773195876
-USPTO Backgrounds,mink_plus,0,12b,0.5157746243739566
-USPTO Backgrounds,mink_plus,100,12b,0.5209735
-USPTO Backgrounds,mink_plus,200,12b,0.511575
-USPTO Backgrounds,mink_plus,300,12b,0.5272924999999999
-USPTO Backgrounds,mink_plus,400,12b,0.52931
-USPTO Backgrounds,mink_plus,500,12b,0.5378466807165437
-USPTO Backgrounds,mink_plus,600,12b,0.5476744966442953
-USPTO Backgrounds,mink_plus,700,12b,0.5427322899505767
-USPTO Backgrounds,mink_plus,800,12b,0.5409025844930417
-USPTO Backgrounds,mink_plus,900,12b,0.575311855670103
-USPTO Backgrounds,zlib,0,410m,0.511958263772955
-USPTO Backgrounds,zlib,100,410m,0.522554
-USPTO Backgrounds,zlib,200,410m,0.5012825
-USPTO Backgrounds,zlib,300,410m,0.5149095
-USPTO Backgrounds,zlib,400,410m,0.5063764999999999
-USPTO Backgrounds,zlib,500,410m,0.5054035827186512
-USPTO Backgrounds,zlib,600,410m,0.5136026845637585
-USPTO Backgrounds,zlib,700,410m,0.5096128500823723
-USPTO Backgrounds,zlib,800,410m,0.5134741550695825
-USPTO Backgrounds,zlib,900,410m,0.5015386597938144
-USPTO Backgrounds,zlib,0,1b,0.5090734557595993
-USPTO Backgrounds,zlib,100,1b,0.5220465
-USPTO Backgrounds,zlib,200,1b,0.5003725000000001
-USPTO Backgrounds,zlib,300,1b,0.522956
-USPTO Backgrounds,zlib,400,1b,0.5061505000000001
-USPTO Backgrounds,zlib,500,1b,0.5125079030558484
-USPTO Backgrounds,zlib,600,1b,0.5133134228187919
-USPTO Backgrounds,zlib,700,1b,0.5035840197693575
-USPTO Backgrounds,zlib,800,1b,0.5105149105367793
-USPTO Backgrounds,zlib,900,1b,0.5011559278350516
-USPTO Backgrounds,zlib,0,2.8b,0.5087829716193656
-USPTO Backgrounds,zlib,100,2.8b,0.5141015
-USPTO Backgrounds,zlib,200,2.8b,0.503281
-USPTO Backgrounds,zlib,300,2.8b,0.530885
-USPTO Backgrounds,zlib,400,2.8b,0.5023084999999999
-USPTO Backgrounds,zlib,500,2.8b,0.5218487881981033
-USPTO Backgrounds,zlib,600,2.8b,0.5221114093959731
-USPTO Backgrounds,zlib,700,2.8b,0.5093887973640856
-USPTO Backgrounds,zlib,800,2.8b,0.5031838966202783
-USPTO Backgrounds,zlib,900,2.8b,0.5115438144329897
-USPTO Backgrounds,zlib,0,6.9b,0.5096427378964942
-USPTO Backgrounds,zlib,100,6.9b,0.5174124999999999
-USPTO Backgrounds,zlib,200,6.9b,0.5067010000000001
-USPTO Backgrounds,zlib,300,6.9b,0.5314565
-USPTO Backgrounds,zlib,400,6.9b,0.5012795
-USPTO Backgrounds,zlib,500,6.9b,0.5242739726027398
-USPTO Backgrounds,zlib,600,6.9b,0.5229335570469799
-USPTO Backgrounds,zlib,700,6.9b,0.5118105436573311
-USPTO Backgrounds,zlib,800,6.9b,0.5037614314115308
-USPTO Backgrounds,zlib,900,6.9b,0.5060012886597938
-USPTO Backgrounds,zlib,0,12b,0.5106310517529216
-USPTO Backgrounds,zlib,100,12b,0.5178955
-USPTO Backgrounds,zlib,200,12b,0.5074935
-USPTO Backgrounds,zlib,300,12b,0.5368105
-USPTO Backgrounds,zlib,400,12b,0.502434
-USPTO Backgrounds,zlib,500,12b,0.5274847207586933
-USPTO Backgrounds,zlib,600,12b,0.5251637583892617
-USPTO Backgrounds,zlib,700,12b,0.5165337726523888
-USPTO Backgrounds,zlib,800,12b,0.508582504970179
-USPTO Backgrounds,zlib,900,12b,0.508278350515464
-USPTO Backgrounds,grad,0,410m,0.5109849749582638
-USPTO Backgrounds,grad,100,410m,0.500291
-USPTO Backgrounds,grad,200,410m,0.5130025
-USPTO Backgrounds,grad,300,410m,0.534231
-USPTO Backgrounds,grad,400,410m,0.5176689999999999
-USPTO Backgrounds,grad,500,410m,0.5053340358271865
-USPTO Backgrounds,grad,600,410m,0.5051993288590604
-USPTO Backgrounds,grad,700,410m,0.5082331136738056
-USPTO Backgrounds,grad,800,410m,0.5109850894632206
-USPTO Backgrounds,grad,900,410m,0.5089548969072165
-USPTO Backgrounds,grad,0,1b,0.5213330550918198
-USPTO Backgrounds,grad,100,1b,0.5193065
-USPTO Backgrounds,grad,200,1b,0.516872
-USPTO Backgrounds,grad,300,1b,0.5231595
-USPTO Backgrounds,grad,400,1b,0.5102865000000001
-USPTO Backgrounds,grad,500,1b,0.5217855637513171
-USPTO Backgrounds,grad,600,1b,0.5291483221476511
-USPTO Backgrounds,grad,700,1b,0.5088640856672157
-USPTO Backgrounds,grad,800,1b,0.5117803180914513
-USPTO Backgrounds,grad,900,1b,0.5306597938144331
-USPTO Backgrounds,grad,0,2.8b,0.5242996661101835
-USPTO Backgrounds,grad,100,2.8b,0.5088429999999999
-USPTO Backgrounds,grad,200,2.8b,0.510046
-USPTO Backgrounds,grad,300,2.8b,0.500712
-USPTO Backgrounds,grad,400,2.8b,0.525462
-USPTO Backgrounds,grad,500,2.8b,0.526881454162276
-USPTO Backgrounds,grad,600,2.8b,0.523851677852349
-USPTO Backgrounds,grad,700,2.8b,0.5368904448105436
-USPTO Backgrounds,grad,800,2.8b,0.5064691848906561
-USPTO Backgrounds,grad,900,2.8b,0.5221082474226804
-USPTO Backgrounds,grad,0,6.9b,0.5189557595993322
-USPTO Backgrounds,grad,100,6.9b,0.5081869999999999
-USPTO Backgrounds,grad,200,6.9b,0.5017099999999999
-USPTO Backgrounds,grad,300,6.9b,0.5097325
-USPTO Backgrounds,grad,400,6.9b,0.5171429999999999
-USPTO Backgrounds,grad,500,6.9b,0.5006506849315069
-USPTO Backgrounds,grad,600,6.9b,0.5267120805369128
-USPTO Backgrounds,grad,700,6.9b,0.5220354200988467
-USPTO Backgrounds,grad,800,6.9b,0.5096073558648112
-USPTO Backgrounds,grad,900,6.9b,0.5275721649484536
-USPTO Backgrounds,grad,0,12b,0.5087654424040067
-USPTO Backgrounds,grad,100,12b,0.501926
-USPTO Backgrounds,grad,200,12b,0.5229895
-USPTO Backgrounds,grad,300,12b,0.5076265
-USPTO Backgrounds,grad,400,12b,0.5063664999999999
-USPTO Backgrounds,grad,500,12b,0.5111195995785037
-USPTO Backgrounds,grad,600,12b,0.5087624161073826
-USPTO Backgrounds,grad,700,12b,0.5268904448105436
-USPTO Backgrounds,grad,800,12b,0.5106660039761431
-USPTO Backgrounds,grad,900,12b,0.5070257731958763
-USPTO Backgrounds,refer,0,410m,0.5027328881469115
-USPTO Backgrounds,refer,100,410m,0.5141295000000001
-USPTO Backgrounds,refer,200,410m,0.503314
-USPTO Backgrounds,refer,300,410m,0.5023124999999999
-USPTO Backgrounds,refer,400,410m,0.5009020000000001
-USPTO Backgrounds,refer,500,410m,0.5140237091675448
-USPTO Backgrounds,refer,600,410m,0.5153785234899328
-USPTO Backgrounds,refer,700,410m,0.5087891268533773
-USPTO Backgrounds,refer,800,410m,0.5111848906560637
-USPTO Backgrounds,refer,900,410m,0.5000579896907217
-USPTO Backgrounds,refer,0,1b,0.5027328881469115
-USPTO Backgrounds,refer,100,1b,0.5141295000000001
-USPTO Backgrounds,refer,200,1b,0.503314
-USPTO Backgrounds,refer,300,1b,0.5023124999999999
-USPTO Backgrounds,refer,400,1b,0.5009020000000001
-USPTO Backgrounds,refer,500,1b,0.5140237091675448
-USPTO Backgrounds,refer,600,1b,0.5153785234899328
-USPTO Backgrounds,refer,700,1b,0.5087891268533773
-USPTO Backgrounds,refer,800,1b,0.5111848906560637
-USPTO Backgrounds,refer,900,1b,0.5000579896907217
-USPTO Backgrounds,refer,0,2.8b,0.5027328881469115
-USPTO Backgrounds,refer,100,2.8b,0.5141295000000001
-USPTO Backgrounds,refer,200,2.8b,0.503314
-USPTO Backgrounds,refer,300,2.8b,0.5023124999999999
-USPTO Backgrounds,refer,400,2.8b,0.5009020000000001
-USPTO Backgrounds,refer,500,2.8b,0.5140237091675448
-USPTO Backgrounds,refer,600,2.8b,0.5153785234899328
-USPTO Backgrounds,refer,700,2.8b,0.5087891268533773
-USPTO Backgrounds,refer,800,2.8b,0.5111848906560637
-USPTO Backgrounds,refer,900,2.8b,0.5000579896907217
-USPTO Backgrounds,refer,0,6.9b,0.5027328881469115
-USPTO Backgrounds,refer,100,6.9b,0.5141295000000001
-USPTO Backgrounds,refer,200,6.9b,0.503314
-USPTO Backgrounds,refer,300,6.9b,0.5023124999999999
-USPTO Backgrounds,refer,400,6.9b,0.5009020000000001
-USPTO Backgrounds,refer,500,6.9b,0.5140237091675448
-USPTO Backgrounds,refer,600,6.9b,0.5153785234899328
-USPTO Backgrounds,refer,700,6.9b,0.5087891268533773
-USPTO Backgrounds,refer,800,6.9b,0.5111848906560637
-USPTO Backgrounds,refer,900,6.9b,0.5000579896907217
-USPTO Backgrounds,refer,0,12b,0.5027328881469115
-USPTO Backgrounds,refer,100,12b,0.5141295000000001
-USPTO Backgrounds,refer,200,12b,0.503314
-USPTO Backgrounds,refer,300,12b,0.5023124999999999
-USPTO Backgrounds,refer,400,12b,0.5009020000000001
-USPTO Backgrounds,refer,500,12b,0.5140237091675448
-USPTO Backgrounds,refer,600,12b,0.5153785234899328
-USPTO Backgrounds,refer,700,12b,0.5087891268533773
-USPTO Backgrounds,refer,800,12b,0.5111848906560637
-USPTO Backgrounds,refer,900,12b,0.5000579896907217
 StackExchange,loss,0,410m,0.5009615000000001
 StackExchange,loss,100,410m,0.5038604999999999
 StackExchange,loss,200,410m,0.5084985
@@ -739,16 +319,6 @@ StackExchange,loss,600,6.9b,0.502031746031746
 StackExchange,loss,700,6.9b,0.5025514851485149
 StackExchange,loss,800,6.9b,0.5139690909090908
 StackExchange,loss,900,6.9b,0.5251493775933609
-StackExchange,loss,0,12b,0.507437
-StackExchange,loss,100,12b,0.5038545000000001
-StackExchange,loss,200,12b,0.503293
-StackExchange,loss,300,12b,0.510338
-StackExchange,loss,400,12b,0.5111685
-StackExchange,loss,500,12b,0.5064255
-StackExchange,loss,600,12b,0.5041210317460317
-StackExchange,loss,700,12b,0.5051207920792079
-StackExchange,loss,800,12b,0.5159127272727273
-StackExchange,loss,900,12b,0.52799377593361
 StackExchange,prob,0,410m,0.500772
 StackExchange,prob,100,410m,0.50406
 StackExchange,prob,200,410m,0.508749
@@ -789,16 +359,6 @@ StackExchange,prob,600,6.9b,0.5019285714285714
 StackExchange,prob,700,6.9b,0.5024693069306931
 StackExchange,prob,800,6.9b,0.5140872727272727
 StackExchange,prob,900,6.9b,0.525298755186722
-StackExchange,prob,0,12b,0.5075645
-StackExchange,prob,100,12b,0.5040614999999999
-StackExchange,prob,200,12b,0.503248
-StackExchange,prob,300,12b,0.5103730000000001
-StackExchange,prob,400,12b,0.5111515
-StackExchange,prob,500,12b,0.506299
-StackExchange,prob,600,12b,0.5040370370370371
-StackExchange,prob,700,12b,0.5052158415841583
-StackExchange,prob,800,12b,0.5160872727272727
-StackExchange,prob,900,12b,0.5281369294605809
 StackExchange,ppl,0,410m,0.5009615000000001
 StackExchange,ppl,100,410m,0.5038604999999999
 StackExchange,ppl,200,410m,0.5084985
@@ -839,16 +399,6 @@ StackExchange,ppl,600,6.9b,0.502031746031746
 StackExchange,ppl,700,6.9b,0.5025514851485149
 StackExchange,ppl,800,6.9b,0.5139690909090908
 StackExchange,ppl,900,6.9b,0.5251493775933609
-StackExchange,ppl,0,12b,0.507437
-StackExchange,ppl,100,12b,0.5038545000000001
-StackExchange,ppl,200,12b,0.503293
-StackExchange,ppl,300,12b,0.510338
-StackExchange,ppl,400,12b,0.5111685
-StackExchange,ppl,500,12b,0.5064255
-StackExchange,ppl,600,12b,0.5041210317460317
-StackExchange,ppl,700,12b,0.5051207920792079
-StackExchange,ppl,800,12b,0.5159127272727273
-StackExchange,ppl,900,12b,0.52799377593361
 StackExchange,mink_plus,0,410m,0.514887
 StackExchange,mink_plus,100,410m,0.504826
 StackExchange,mink_plus,200,410m,0.513405
@@ -889,16 +439,6 @@ StackExchange,mink_plus,600,6.9b,0.5668743386243387
 StackExchange,mink_plus,700,6.9b,0.5563049504950495
 StackExchange,mink_plus,800,6.9b,0.5803236363636364
 StackExchange,mink_plus,900,6.9b,0.5484190871369294
-StackExchange,mink_plus,0,12b,0.530962
-StackExchange,mink_plus,100,12b,0.5243039999999999
-StackExchange,mink_plus,200,12b,0.544046
-StackExchange,mink_plus,300,12b,0.531734
-StackExchange,mink_plus,400,12b,0.529895
-StackExchange,mink_plus,500,12b,0.542008
-StackExchange,mink_plus,600,12b,0.5789682539682539
-StackExchange,mink_plus,700,12b,0.5705940594059405
-StackExchange,mink_plus,800,12b,0.586589090909091
-StackExchange,mink_plus,900,12b,0.5536141078838174
 StackExchange,zlib,0,410m,0.5030135
 StackExchange,zlib,100,410m,0.503462
 StackExchange,zlib,200,410m,0.511466
@@ -939,16 +479,6 @@ StackExchange,zlib,600,6.9b,0.517047619047619
 StackExchange,zlib,700,6.9b,0.5003653465346535
 StackExchange,zlib,800,6.9b,0.538710909090909
 StackExchange,zlib,900,6.9b,0.5357946058091286
-StackExchange,zlib,0,12b,0.508463
-StackExchange,zlib,100,12b,0.506061
-StackExchange,zlib,200,12b,0.5071275000000001
-StackExchange,zlib,300,12b,0.5106025000000001
-StackExchange,zlib,400,12b,0.511079
-StackExchange,zlib,500,12b,0.5054354999999999
-StackExchange,zlib,600,12b,0.5210853174603174
-StackExchange,zlib,700,12b,0.5036336633663366
-StackExchange,zlib,800,12b,0.5422127272727272
-StackExchange,zlib,900,12b,0.5421556016597511
 StackExchange,grad,0,410m,0.5117704999999999
 StackExchange,grad,100,410m,0.519779
 StackExchange,grad,200,410m,0.5090255
@@ -989,16 +519,6 @@ StackExchange,grad,600,6.9b,0.5159537037037037
 StackExchange,grad,700,6.9b,0.5115999999999999
 StackExchange,grad,800,6.9b,0.5070618181818183
 StackExchange,grad,900,6.9b,0.5405186721991702
-StackExchange,grad,0,12b,0.5067125
-StackExchange,grad,100,12b,0.50343
-StackExchange,grad,200,12b,0.5192585
-StackExchange,grad,300,12b,0.5182770000000001
-StackExchange,grad,400,12b,0.508199
-StackExchange,grad,500,12b,0.5006
-StackExchange,grad,600,12b,0.5053921957671957
-StackExchange,grad,700,12b,0.563119801980198
-StackExchange,grad,800,12b,0.5123163636363636
-StackExchange,grad,900,12b,0.5097489626556017
 StackExchange,refer,0,410m,0.504893
 StackExchange,refer,100,410m,0.5055645
 StackExchange,refer,200,410m,0.507425
@@ -1039,16 +559,6 @@ StackExchange,refer,600,6.9b,0.507300925925926
 StackExchange,refer,700,6.9b,0.5073227722772278
 StackExchange,refer,800,6.9b,0.5066763636363637
 StackExchange,refer,900,6.9b,0.5173443983402489
-StackExchange,refer,0,12b,0.504893
-StackExchange,refer,100,12b,0.5055645
-StackExchange,refer,200,12b,0.507425
-StackExchange,refer,300,12b,0.500533
-StackExchange,refer,400,12b,0.5216705
-StackExchange,refer,500,12b,0.516784
-StackExchange,refer,600,12b,0.507300925925926
-StackExchange,refer,700,12b,0.5073227722772278
-StackExchange,refer,800,12b,0.5066763636363637
-StackExchange,refer,900,12b,0.5173443983402489
 Pile-CC,loss,0,410m,0.5099365
 Pile-CC,loss,100,410m,0.5109109999999999
 Pile-CC,loss,200,410m,0.5121985
@@ -1089,16 +599,6 @@ Pile-CC,loss,600,6.9b,0.5203825
 Pile-CC,loss,700,6.9b,0.5094635000000001
 Pile-CC,loss,800,6.9b,0.510222
 Pile-CC,loss,900,6.9b,0.5153105
-Pile-CC,loss,0,12b,0.5048855
-Pile-CC,loss,100,12b,0.500791
-Pile-CC,loss,200,12b,0.501161
-Pile-CC,loss,300,12b,0.526784
-Pile-CC,loss,400,12b,0.5070560000000001
-Pile-CC,loss,500,12b,0.5544819999999999
-Pile-CC,loss,600,12b,0.524405
-Pile-CC,loss,700,12b,0.504433
-Pile-CC,loss,800,12b,0.514538
-Pile-CC,loss,900,12b,0.5198590000000001
 Pile-CC,prob,0,410m,0.509908
 Pile-CC,prob,100,410m,0.511072
 Pile-CC,prob,200,410m,0.511829
@@ -1139,16 +639,6 @@ Pile-CC,prob,600,6.9b,0.5208484999999999
 Pile-CC,prob,700,6.9b,0.50966
 Pile-CC,prob,800,6.9b,0.5104139999999999
 Pile-CC,prob,900,6.9b,0.515344
-Pile-CC,prob,0,12b,0.5049475000000001
-Pile-CC,prob,100,12b,0.50047
-Pile-CC,prob,200,12b,0.501273
-Pile-CC,prob,300,12b,0.52667
-Pile-CC,prob,400,12b,0.507146
-Pile-CC,prob,500,12b,0.554133
-Pile-CC,prob,600,12b,0.5241709999999999
-Pile-CC,prob,700,12b,0.504312
-Pile-CC,prob,800,12b,0.5148400000000001
-Pile-CC,prob,900,12b,0.519632
 Pile-CC,ppl,0,410m,0.5099365
 Pile-CC,ppl,100,410m,0.5109109999999999
 Pile-CC,ppl,200,410m,0.5121985
@@ -1189,16 +679,6 @@ Pile-CC,ppl,600,6.9b,0.5203825
 Pile-CC,ppl,700,6.9b,0.5094635000000001
 Pile-CC,ppl,800,6.9b,0.510222
 Pile-CC,ppl,900,6.9b,0.5153105
-Pile-CC,ppl,0,12b,0.5048855
-Pile-CC,ppl,100,12b,0.500791
-Pile-CC,ppl,200,12b,0.501161
-Pile-CC,ppl,300,12b,0.526784
-Pile-CC,ppl,400,12b,0.5070560000000001
-Pile-CC,ppl,500,12b,0.5544819999999999
-Pile-CC,ppl,600,12b,0.524405
-Pile-CC,ppl,700,12b,0.504433
-Pile-CC,ppl,800,12b,0.514538
-Pile-CC,ppl,900,12b,0.5198590000000001
 Pile-CC,mink_plus,0,410m,0.5024899999999999
 Pile-CC,mink_plus,100,410m,0.518871
 Pile-CC,mink_plus,200,410m,0.501003
@@ -1239,16 +719,6 @@ Pile-CC,mink_plus,600,6.9b,0.5868490000000001
 Pile-CC,mink_plus,700,6.9b,0.554548
 Pile-CC,mink_plus,800,6.9b,0.547155
 Pile-CC,mink_plus,900,6.9b,0.56052
-Pile-CC,mink_plus,0,12b,0.527188
-Pile-CC,mink_plus,100,12b,0.5352429999999999
-Pile-CC,mink_plus,200,12b,0.534279
-Pile-CC,mink_plus,300,12b,0.5621389999999999
-Pile-CC,mink_plus,400,12b,0.546632
-Pile-CC,mink_plus,500,12b,0.572108
-Pile-CC,mink_plus,600,12b,0.5916969999999999
-Pile-CC,mink_plus,700,12b,0.5751890000000001
-Pile-CC,mink_plus,800,12b,0.549749
-Pile-CC,mink_plus,900,12b,0.568606
 Pile-CC,zlib,0,410m,0.503253
 Pile-CC,zlib,100,410m,0.5124569999999999
 Pile-CC,zlib,200,410m,0.5107385
@@ -1289,16 +759,6 @@ Pile-CC,zlib,600,6.9b,0.52022
 Pile-CC,zlib,700,6.9b,0.5001745000000001
 Pile-CC,zlib,800,6.9b,0.5060304999999999
 Pile-CC,zlib,900,6.9b,0.5253545
-Pile-CC,zlib,0,12b,0.5037775
-Pile-CC,zlib,100,12b,0.5054865
-Pile-CC,zlib,200,12b,0.5034814999999999
-Pile-CC,zlib,300,12b,0.5219155
-Pile-CC,zlib,400,12b,0.5072405
-Pile-CC,zlib,500,12b,0.5481705
-Pile-CC,zlib,600,12b,0.5256745
-Pile-CC,zlib,700,12b,0.505435
-Pile-CC,zlib,800,12b,0.511215
-Pile-CC,zlib,900,12b,0.5300050000000001
 Pile-CC,grad,0,410m,0.51549
 Pile-CC,grad,100,410m,0.5060115000000001
 Pile-CC,grad,200,410m,0.5067459999999999
@@ -1339,16 +799,6 @@ Pile-CC,grad,600,6.9b,0.5380024999999999
 Pile-CC,grad,700,6.9b,0.5076145
 Pile-CC,grad,800,6.9b,0.506106
 Pile-CC,grad,900,6.9b,0.504858
-Pile-CC,grad,0,12b,0.5173935
-Pile-CC,grad,100,12b,0.5069494999999999
-Pile-CC,grad,200,12b,0.521388
-Pile-CC,grad,300,12b,0.5213035
-Pile-CC,grad,400,12b,0.5032544999999999
-Pile-CC,grad,500,12b,0.5062300000000001
-Pile-CC,grad,600,12b,0.5337434999999999
-Pile-CC,grad,700,12b,0.507226
-Pile-CC,grad,800,12b,0.5197975
-Pile-CC,grad,900,12b,0.5132614999999999
 Pile-CC,refer,0,410m,0.5151334999999999
 Pile-CC,refer,100,410m,0.514191
 Pile-CC,refer,200,410m,0.515532
@@ -1389,16 +839,6 @@ Pile-CC,refer,600,6.9b,0.51016
 Pile-CC,refer,700,6.9b,0.5216255
 Pile-CC,refer,800,6.9b,0.5003655
 Pile-CC,refer,900,6.9b,0.5031875
-Pile-CC,refer,0,12b,0.5151334999999999
-Pile-CC,refer,100,12b,0.514191
-Pile-CC,refer,200,12b,0.515532
-Pile-CC,refer,300,12b,0.5110490000000001
-Pile-CC,refer,400,12b,0.5054405
-Pile-CC,refer,500,12b,0.5353765
-Pile-CC,refer,600,12b,0.51016
-Pile-CC,refer,700,12b,0.5216255
-Pile-CC,refer,800,12b,0.5003655
-Pile-CC,refer,900,12b,0.5031875
 Github,loss,0,410m,0.5211935000000001
 Github,loss,100,410m,0.5275365
 Github,loss,200,410m,0.5038239999999999
@@ -1439,16 +879,6 @@ Github,loss,600,6.9b,0.502251893939394
 Github,loss,700,6.9b,0.5279372037914691
 Github,loss,800,6.9b,0.5236687306501548
 Github,loss,900,6.9b,0.5123676470588235
-Github,loss,0,12b,0.5277935
-Github,loss,100,12b,0.5317365000000001
-Github,loss,200,12b,0.5008655000000001
-Github,loss,300,12b,0.5049935
-Github,loss,400,12b,0.5161050561797753
-Github,loss,500,12b,0.5352993730407524
-Github,loss,600,12b,0.5002537878787878
-Github,loss,700,12b,0.5287997630331753
-Github,loss,800,12b,0.5257058823529412
-Github,loss,900,12b,0.5116525735294117
 Github,prob,0,410m,0.521297
 Github,prob,100,410m,0.5274475
 Github,prob,200,410m,0.5038900000000001
@@ -1489,16 +919,6 @@ Github,prob,600,6.9b,0.502153409090909
 Github,prob,700,6.9b,0.5275545023696683
 Github,prob,800,6.9b,0.5232074303405573
 Github,prob,900,6.9b,0.512108455882353
-Github,prob,0,12b,0.527797
-Github,prob,100,12b,0.5317165
-Github,prob,200,12b,0.500814
-Github,prob,300,12b,0.504921
-Github,prob,400,12b,0.5161258426966292
-Github,prob,500,12b,0.5354757053291537
-Github,prob,600,12b,0.5001761363636364
-Github,prob,700,12b,0.5283341232227488
-Github,prob,800,12b,0.5258544891640867
-Github,prob,900,12b,0.5116305147058824
 Github,ppl,0,410m,0.5211935000000001
 Github,ppl,100,410m,0.5275365
 Github,ppl,200,410m,0.5038239999999999
@@ -1539,16 +959,6 @@ Github,ppl,600,6.9b,0.502251893939394
 Github,ppl,700,6.9b,0.5279372037914691
 Github,ppl,800,6.9b,0.5236687306501548
 Github,ppl,900,6.9b,0.5123676470588235
-Github,ppl,0,12b,0.5277935
-Github,ppl,100,12b,0.5317365000000001
-Github,ppl,200,12b,0.5008655000000001
-Github,ppl,300,12b,0.5049935
-Github,ppl,400,12b,0.5161050561797753
-Github,ppl,500,12b,0.5352993730407524
-Github,ppl,600,12b,0.5002537878787878
-Github,ppl,700,12b,0.5287997630331753
-Github,ppl,800,12b,0.5257058823529412
-Github,ppl,900,12b,0.5116525735294117
 Github,mink_plus,0,410m,0.507101
 Github,mink_plus,100,410m,0.5377345
 Github,mink_plus,200,410m,0.505636
@@ -1589,16 +999,6 @@ Github,mink_plus,600,6.9b,0.5452670454545454
 Github,mink_plus,700,6.9b,0.5328815165876777
 Github,mink_plus,800,6.9b,0.520984520123839
 Github,mink_plus,900,6.9b,0.5249172794117647
-Github,mink_plus,0,12b,0.510669
-Github,mink_plus,100,12b,0.5451525
-Github,mink_plus,200,12b,0.506896
-Github,mink_plus,300,12b,0.534994
-Github,mink_plus,400,12b,0.5443325842696629
-Github,mink_plus,500,12b,0.5010995297805643
-Github,mink_plus,600,12b,0.5504772727272726
-Github,mink_plus,700,12b,0.5458530805687204
-Github,mink_plus,800,12b,0.5261764705882352
-Github,mink_plus,900,12b,0.5383363970588235
 Github,zlib,0,410m,0.518489
 Github,zlib,100,410m,0.521853
 Github,zlib,200,410m,0.5012650000000001
@@ -1639,16 +1039,6 @@ Github,zlib,600,6.9b,0.5138892045454546
 Github,zlib,700,6.9b,0.5192180094786729
 Github,zlib,800,6.9b,0.5161300309597523
 Github,zlib,900,6.9b,0.5243694852941176
-Github,zlib,0,12b,0.526727
-Github,zlib,100,12b,0.527142
-Github,zlib,200,12b,0.5046425
-Github,zlib,300,12b,0.5011574999999999
-Github,zlib,400,12b,0.517976404494382
-Github,zlib,500,12b,0.5362594043887147
-Github,zlib,600,12b,0.5156486742424242
-Github,zlib,700,12b,0.5207037914691943
-Github,zlib,800,12b,0.5189659442724459
-Github,zlib,900,12b,0.5233216911764706
 Github,grad,0,410m,0.513104
 Github,grad,100,410m,0.5050215
 Github,grad,200,410m,0.514364
@@ -1689,16 +1079,6 @@ Github,grad,600,6.9b,0.5170984848484849
 Github,grad,700,6.9b,0.5211469194312797
 Github,grad,800,6.9b,0.5257569659442725
 Github,grad,900,6.9b,0.50475
-Github,grad,0,12b,0.527982
-Github,grad,100,12b,0.5206475
-Github,grad,200,12b,0.5057375
-Github,grad,300,12b,0.5191475
-Github,grad,400,12b,0.5131230337078652
-Github,grad,500,12b,0.5367037617554858
-Github,grad,600,12b,0.517283143939394
-Github,grad,700,12b,0.5171718009478673
-Github,grad,800,12b,0.5131145510835913
-Github,grad,900,12b,0.5088566176470588
 Github,refer,0,410m,0.5108185000000001
 Github,refer,100,410m,0.5164909999999999
 Github,refer,200,410m,0.50008
@@ -1739,16 +1119,6 @@ Github,refer,600,6.9b,0.509842803030303
 Github,refer,700,6.9b,0.5137914691943128
 Github,refer,800,6.9b,0.5154643962848298
 Github,refer,900,6.9b,0.5169705882352942
-Github,refer,0,12b,0.5108185000000001
-Github,refer,100,12b,0.5164909999999999
-Github,refer,200,12b,0.50008
-Github,refer,300,12b,0.5173895
-Github,refer,400,12b,0.505358988764045
-Github,refer,500,12b,0.5349968652037618
-Github,refer,600,12b,0.509842803030303
-Github,refer,700,12b,0.5137914691943128
-Github,refer,800,12b,0.5154643962848298
-Github,refer,900,12b,0.5169705882352942
 FreeLaw,loss,0,410m,0.5167042151162791
 FreeLaw,loss,100,410m,0.5070213675213675
 FreeLaw,loss,200,410m,0.5754617117117117
@@ -1789,16 +1159,6 @@ FreeLaw,loss,600,6.9b,0.5167542372881356
 FreeLaw,loss,700,6.9b,0.5147815533980583
 FreeLaw,loss,800,6.9b,0.5349714285714287
 FreeLaw,loss,900,6.9b,0.522655
-FreeLaw,loss,0,12b,0.5092158430232558
-FreeLaw,loss,100,12b,0.5019017094017093
-FreeLaw,loss,200,12b,0.5721981981981983
-FreeLaw,loss,300,12b,0.5145764331210192
-FreeLaw,loss,400,12b,0.5394514925373134
-FreeLaw,loss,500,12b,0.531707627118644
-FreeLaw,loss,600,12b,0.5184279661016948
-FreeLaw,loss,700,12b,0.5170970873786408
-FreeLaw,loss,800,12b,0.5362238095238095
-FreeLaw,loss,900,12b,0.51796
 FreeLaw,prob,0,410m,0.5169883720930233
 FreeLaw,prob,100,410m,0.5069273504273504
 FreeLaw,prob,200,410m,0.5757027027027026
@@ -1839,16 +1199,6 @@ FreeLaw,prob,600,6.9b,0.5169152542372881
 FreeLaw,prob,700,6.9b,0.5146796116504855
 FreeLaw,prob,800,6.9b,0.534952380952381
 FreeLaw,prob,900,6.9b,0.522835
-FreeLaw,prob,0,12b,0.5092209302325581
-FreeLaw,prob,100,12b,0.5019059829059829
-FreeLaw,prob,200,12b,0.5723963963963965
-FreeLaw,prob,300,12b,0.5145477707006368
-FreeLaw,prob,400,12b,0.5393582089552239
-FreeLaw,prob,500,12b,0.5312415254237288
-FreeLaw,prob,600,12b,0.5187542372881356
-FreeLaw,prob,700,12b,0.5169902912621359
-FreeLaw,prob,800,12b,0.5361619047619048
-FreeLaw,prob,900,12b,0.5177849999999999
 FreeLaw,ppl,0,410m,0.5167042151162791
 FreeLaw,ppl,100,410m,0.5070213675213675
 FreeLaw,ppl,200,410m,0.5754617117117117
@@ -1889,16 +1239,6 @@ FreeLaw,ppl,600,6.9b,0.5167542372881356
 FreeLaw,ppl,700,6.9b,0.5147815533980583
 FreeLaw,ppl,800,6.9b,0.5349714285714287
 FreeLaw,ppl,900,6.9b,0.522655
-FreeLaw,ppl,0,12b,0.5092158430232558
-FreeLaw,ppl,100,12b,0.5019017094017093
-FreeLaw,ppl,200,12b,0.5721981981981983
-FreeLaw,ppl,300,12b,0.5145764331210192
-FreeLaw,ppl,400,12b,0.5394514925373134
-FreeLaw,ppl,500,12b,0.531707627118644
-FreeLaw,ppl,600,12b,0.5184279661016948
-FreeLaw,ppl,700,12b,0.5170970873786408
-FreeLaw,ppl,800,12b,0.5362238095238095
-FreeLaw,ppl,900,12b,0.51796
 FreeLaw,mink_plus,0,410m,0.5211061046511628
 FreeLaw,mink_plus,100,410m,0.5126837606837606
 FreeLaw,mink_plus,200,410m,0.5342657657657658
@@ -1939,16 +1279,6 @@ FreeLaw,mink_plus,600,6.9b,0.5341355932203391
 FreeLaw,mink_plus,700,6.9b,0.533388349514563
 FreeLaw,mink_plus,800,6.9b,0.5522571428571429
 FreeLaw,mink_plus,900,6.9b,0.577575
-FreeLaw,mink_plus,0,12b,0.501155523255814
-FreeLaw,mink_plus,100,12b,0.5146196581196582
-FreeLaw,mink_plus,200,12b,0.5207342342342343
-FreeLaw,mink_plus,300,12b,0.5381656050955413
-FreeLaw,mink_plus,400,12b,0.5189477611940299
-FreeLaw,mink_plus,500,12b,0.5296398305084746
-FreeLaw,mink_plus,600,12b,0.5405
-FreeLaw,mink_plus,700,12b,0.5392621359223301
-FreeLaw,mink_plus,800,12b,0.5537333333333332
-FreeLaw,mink_plus,900,12b,0.591985
 FreeLaw,zlib,0,410m,0.5033953488372094
 FreeLaw,zlib,100,410m,0.5031517094017094
 FreeLaw,zlib,200,410m,0.5781238738738739
@@ -1989,16 +1319,6 @@ FreeLaw,zlib,600,6.9b,0.5133305084745763
 FreeLaw,zlib,700,6.9b,0.5213446601941748
 FreeLaw,zlib,800,6.9b,0.5343190476190476
 FreeLaw,zlib,900,6.9b,0.52737
-FreeLaw,zlib,0,12b,0.5025058139534884
-FreeLaw,zlib,100,12b,0.5006538461538461
-FreeLaw,zlib,200,12b,0.5758738738738739
-FreeLaw,zlib,300,12b,0.5124171974522294
-FreeLaw,zlib,400,12b,0.5342574626865672
-FreeLaw,zlib,500,12b,0.5269491525423728
-FreeLaw,zlib,600,12b,0.5152245762711865
-FreeLaw,zlib,700,12b,0.5237864077669903
-FreeLaw,zlib,800,12b,0.5365
-FreeLaw,zlib,900,12b,0.5219450000000001
 FreeLaw,grad,0,410m,0.5166838662790697
 FreeLaw,grad,100,410m,0.5095747863247864
 FreeLaw,grad,200,410m,0.5123333333333333
@@ -2039,16 +1359,6 @@ FreeLaw,grad,600,6.9b,0.5003601694915254
 FreeLaw,grad,700,6.9b,0.5372184466019418
 FreeLaw,grad,800,6.9b,0.5618619047619047
 FreeLaw,grad,900,6.9b,0.5228700000000001
-FreeLaw,grad,0,12b,0.5009563953488372
-FreeLaw,grad,100,12b,0.5039700854700855
-FreeLaw,grad,200,12b,0.5510698198198198
-FreeLaw,grad,300,12b,0.504984076433121
-FreeLaw,grad,400,12b,0.5078470149253732
-FreeLaw,grad,500,12b,0.5054491525423729
-FreeLaw,grad,600,12b,0.5286355932203389
-FreeLaw,grad,700,12b,0.5000388349514563
-FreeLaw,grad,800,12b,0.5220857142857143
-FreeLaw,grad,900,12b,0.508175
 FreeLaw,refer,0,410m,0.5090843023255814
 FreeLaw,refer,100,410m,0.5115811965811965
 FreeLaw,refer,200,410m,0.5718738738738739
@@ -2089,13 +1399,3 @@ FreeLaw,refer,600,6.9b,0.5109364406779662
 FreeLaw,refer,700,6.9b,0.5021407766990291
 FreeLaw,refer,800,6.9b,0.5130619047619048
 FreeLaw,refer,900,6.9b,0.53093
-FreeLaw,refer,0,12b,0.5090843023255814
-FreeLaw,refer,100,12b,0.5115811965811965
-FreeLaw,refer,200,12b,0.5718738738738739
-FreeLaw,refer,300,12b,0.5102770700636943
-FreeLaw,refer,400,12b,0.5329925373134328
-FreeLaw,refer,500,12b,0.5220974576271187
-FreeLaw,refer,600,12b,0.5109364406779662
-FreeLaw,refer,700,12b,0.5021407766990291
-FreeLaw,refer,800,12b,0.5130619047619048
-FreeLaw,refer,900,12b,0.53093
