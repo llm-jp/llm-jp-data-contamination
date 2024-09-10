@@ -60,18 +60,18 @@ def decide_threshold_direction(y_true, scores, threshold):
 #dataset_names = ['Wikipedia (en)', "StackExchange", 'PubMed Central', "Pile-CC", "HackerNews",
 #                    "Github", "FreeLaw", "EuroParl", 'DM Mathematics', "ArXiv", ]
 split = "absolute"
-truncate_status = "truncated"
+truncate_status = "untruncated"
 if split == "relative":
     length_values = np.arange(0, 100, 10)
 else:
     length_values = np.arange(0, 1000, 100)
 #absolute untruncated
-#dataset_names = ['Wikipedia (en)', "USPTO Backgrounds", "StackExchange", "Pile-CC", "Github", "FreeLaw"]
+dataset_names = ['Wikipedia (en)',  "StackExchange", "Pile-CC", "Github", "FreeLaw"]
 #relative
 #dataset_names = ["Wikipedia (en)", "StackExchange", 'PubMed Central', "Pile-CC", "NIH ExPorter", "HackerNews",
 #                    "Github", "FreeLaw", "Enron Emails", "DM Mathematics", "ArXiv"]
-dataset_names = ['Wikipedia (en)', "StackExchange", 'PubMed Central', "Pile-CC", "HackerNews",
-                   "Github", "FreeLaw", "EuroParl",'DM Mathematics',"ArXiv"]
+#dataset_names = ['Wikipedia (en)', "StackExchange", 'PubMed Central', "Pile-CC", "HackerNews",
+#                   "Github", "FreeLaw", "EuroParl",'DM Mathematics',"ArXiv"]
 # 随机种子列表
 #absolute truncated
 #dataset_names = ["github", "pile_cc", "full_pile", "WikiMIA64", "WikiMIA128", "WikiMIA256", "WikiMIAall"]
