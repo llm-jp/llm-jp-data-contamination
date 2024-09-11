@@ -130,8 +130,7 @@ def rougeL_score(predictions, references):
 def bleurt_score(bleurt, tokenizer, reference, generations, args):
     bleurt.eval()
     with torch.no_grad():
-        inputs = tokenizer([reference for i in range(len(generations))], generations, padding='longest',
-                           return_tensors='pt', max_length=512)
+        inputs = tokenizer([reference for i in range(len(generations))], generations, max_length=512, truncation=True, padding="max_length")
         inputs = {key: value.to(args.refer_cuda) for key, value in inputs.items()}
         res = bleurt(**inputs).logits.flatten().tolist()
     return res
