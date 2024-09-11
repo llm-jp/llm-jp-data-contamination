@@ -148,7 +148,7 @@ def compute_black_box_mia(args):
                             decoded_sentences = tokenizer.batch_decode(generations["sequences"][:, input_length:], skip_special_tokens=True)
                             for i in range(zero_temp_generation["sequences"].shape[0]):
                                 full_decoded[i].append(decoded_sentences[i])
-                            full_decoded.append(tokenizer.batch_decode(generations["sequences"][:, input_length:], skip_special_tokens=True))
+                            #full_decoded.append(tokenizer.batch_decode(generations["sequences"][:, input_length:], skip_special_tokens=True))
                     for batch_idx in range(zero_temp_generation["sequences"].shape[0]):
                         peak = get_peak(full_decoded[batch_idx][1:], full_decoded[batch_idx][0], 0.05)
                         bleurt_value = np.array(bleurt_score(bleurt_model, bleurt_tokenizer,  full_decoded[batch_idx][0], full_decoded[batch_idx][1:], args)).mean().item()
