@@ -152,9 +152,9 @@ def compute_black_box_mia(args):
                     for batch_idx in range(zero_temp_generation["sequences"].shape[0]):
                         peak = get_peak(full_decoded[batch_idx][1:], full_decoded[batch_idx][0], 0.05)
                         bleurt_value = np.array(bleurt_score(bleurt_model, bleurt_tokenizer,  full_decoded[batch_idx][0], full_decoded[batch_idx][1:], args)).mean().item()
+                        ccd_dict[dataset_name][set_name].append(peak)
+                        samia_dict[dataset_name][set_name].append(bleurt_value)
                     pdb.set_trace()
-                    ccd_dict[dataset_name][set_name].append(peak)
-                    samia_dict[dataset_name][set_name].append(bleurt_value)
             os.makedirs(args.save_dir, exist_ok=True)
             os.makedirs(f"{args.save_dir}/{dataset_name}/{args.relative}/{args.truncated}", exist_ok=True)
             pickle.dump(ccd_dict, open(f"{args.save_dir}/{dataset_name}/{args.relative}/{args.truncated}/{args.min_len}_{args.model_size}_ccd_dict.pkl", "wb"))
