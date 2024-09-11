@@ -161,6 +161,10 @@ def compute_black_box_mia(args):
     for min_len in length_list:
         args.min_len = min_len
         for dataset_name in dataset_names:
+            if os.path.exists(
+                    f"{args.save_dir}_{args.dataset_idx}/{dataset_name}/{args.relative}/{args.truncated}/{args.min_len}_{args.model_size}_ccd_dict.pkl"):
+                print(f"{args.dataset_idx} {dataset_name} {args.min_len} {args.model_size} finished")
+                continue
             df = pd.DataFrame()
             if args.same_length == True:
                 if os.path.isfile(f"{args.save_dir}/{dataset_name}/{args.relative}/{args.truncated}/{args.min_len}_{args.model_size}_same_length.csv"):
