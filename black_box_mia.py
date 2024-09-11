@@ -80,11 +80,6 @@ def bleurt_score(bleurt, tokenizer, reference, generations, args):
 
 def compute_black_box_mia(args):
     dataset_names, length_list = get_dataset_list(args)
-    # bnb_config = BitsAndBytesConfig(
-    #          load_in_4bit=True,  # 开启8位量化
-    #          #bnb_8bit_use_double_quant=True,  # 使用双重量化技术
-    #          #bnb_8bit_compute_dtype=torch.float16  # 计算过程中使用float16
-    #      )
     model = GPTNeoXForCausalLM.from_pretrained(
         f"EleutherAI/pythia-{args.model_size}-deduped",
         revision="step143000",

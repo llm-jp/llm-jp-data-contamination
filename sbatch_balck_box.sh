@@ -1,12 +1,12 @@
 #!/bin/bash
-#SBATCH --job-name=33_ContTr
+#SBATCH --job-name=33_ContBl
 #SBATCH --partition=gpu-small
 #SBATCH --gres=gpu:8
 #SBATCH --nodes=1
 #SBATCH --ntasks=4
 #SBATCH --time=72:00:00
-#SBATCH --output=truncate.log
-#SBATCH --error=truncate.err
+#SBATCH --output=Black.log
+#SBATCH --error=Black.err
 #SBATCH --cpus-per-task=8
 
 # 创建日志目录
@@ -25,6 +25,7 @@ srun_parallel () {
     local dataset_idx=$6
     local batch_size=$7
 
+
     echo "Running task with model_size=$model_size, truncated=$truncated, cuda_id=$cuda_id, refer_cuda_id=$refer_cuda_id relative=$relative dataset_idx=$dataset_idx batch_size=$batch_size"
 
     python runing_both.py \
@@ -36,14 +37,20 @@ srun_parallel () {
         --cuda $cuda_id \
         --refer_cuda $refer_cuda_id \
         --dataset_idx $dataset_idx \
-        --batch_size $batch_size
+        --batch_size $batch_size  \
+        --gray black
 }
 
 # 启动并行任务
-srun --ntasks=1 --cpus-per-task=8 --gres=gpu:2 bash -c "$(declare -f srun_parallel); srun_parallel absolute 12b truncated 0 1 0 1" &
-srun --ntasks=1 --cpus-per-task=8 --gres=gpu:2 bash -c "$(declare -f srun_parallel); srun_parallel absolute 6.9b truncated 0 1 0 1" &
-srun --ntasks=1 --cpus-per-task=8 --gres=gpu:2 bash -c "$(declare -f srun_parallel); srun_parallel absolute 2.8b  truncated 0 1 0 2" &
-srun --ntasks=1 --cpus-per-task=8 --gres=gpu:2 bash -c "$(declare -f srun_parallel); srun_parallel absolute 1b truncated 0 1 0 2" &
+srun --ntasks=1 --cpus-per-task=8 --gres=gpu:1 bash -c "$(declare -f srun_parallel); srun_parallel absolute 12b truncated 0 0 1" &
+srun --ntasks=1 --cpus-per-task=8 --gres=gpu:1 bash -c "$(declare -f srun_parallel); srun_parallel absolute 6.9b truncated 0 0 1" &
+srun --ntasks=1 --cpus-per-task=8 --gres=gpu:1 bash -c "$(declare -f srun_parallel); srun_parallel absolute 2.8b  truncated 0 0 1" &
+srun --ntasks=1 --cpus-per-task=8 --gres=gpu:1 bash -c "$(declare -f srun_parallel); srun_parallel absolute 1b truncated 0 0 1" &
+srun --ntasks=1 --cpus-per-task=8 --gres=gpu:1 bash -c "$(declare -f srun_parallel); srun_parallel absolute 410m truncated 0 0 1" &
+srun --ntasks=1 --cpus-per-task=8 --gres=gpu:1 bash -c "$(declare -f srun_parallel); srun_parallel absolute 160m truncated 0 0 1" &
+srun --ntasks=1 --cpus-per-task=8 --gres=gpu:1 bash -c "$(declare -f srun_parallel); srun_parallel relaitve 12b truncated 0 0 1" &
+srun --ntasks=1 --cpus-per-task=8 --gres=gpu:1 bash -c "$(declare -f srun_parallel); srun_parallel absolute 6.9b truncated 0 0 1" &
+
 
 # 等待所有任务结束
 wait
