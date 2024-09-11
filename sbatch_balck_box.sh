@@ -21,9 +21,8 @@ srun_parallel () {
     local model_size=$2
     local truncated=$3
     local cuda_id=$4
-    local refer_cuda_id=$5
-    local dataset_idx=$6
-    local batch_size=$7
+    local dataset_idx=$5
+    local batch_size=$6
 
 
     echo "Running task with model_size=$model_size, truncated=$truncated, cuda_id=$cuda_id, refer_cuda_id=$refer_cuda_id relative=$relative dataset_idx=$dataset_idx batch_size=$batch_size"
