@@ -155,7 +155,7 @@ def compute_black_box_mia(args):
     model.generation_config.pad_token_id = model.generation_config.eos_token_id
     model.generation_config.return_dict_in_generate = True
     #bleurt = evaluate.load('bleurt', 'bleurt-20', model_type="metric")
-    bleurt_model = BleurtForSequenceClassification.from_pretrained('lucadiliello/BLEURT-20').cuda(args.refer_cuda)
+    bleurt_model = BleurtForSequenceClassification.from_pretrained('lucadiliello/BLEURT-20')#.cuda(args.refer_cuda)
     bleurt_tokenizer = BleurtTokenizer.from_pretrained('lucadiliello/BLEURT-20')
     bleurt_model.eval()
     for min_len in length_list:
@@ -213,6 +213,7 @@ def compute_black_box_mia(args):
                             for i in range(zero_temp_generation["sequences"].shape[0]):
                                 full_decoded[i].append(decoded_sentences[i])
                             #full_decoded.append(tokenizer.batch_decode(generations["sequences"][:, input_length:], skip_special_tokens=True))
+                    bleurt_model = bleurt_model.to(device)
                     for batch_idx in range(zero_temp_generation["sequences"].shape[0]):
                         #peak = get_peak(full_decoded[batch_idx][1:], full_decoded[batch_idx][0], 0.05)
                         dist, ml = get_edit_distance_distribution_star(full_decoded[batch_idx][1:], full_decoded[batch_idx][0],
@@ -221,6 +222,7 @@ def compute_black_box_mia(args):
                         bleurt_value = np.array(bleurt_score(bleurt_model, bleurt_tokenizer,  full_decoded[batch_idx][0], full_decoded[batch_idx][1:], args)).mean().item()
                         ccd_dict[dataset_name][set_name].append(sum(dist)/len(dist))
                         samia_dict[dataset_name][set_name].append(bleurt_value)
+                    bleurt_model = bleurt_model.cpu()
                     #pdb.set_trace()
             os.makedirs(args.save_dir, exist_ok=True)
             os.makedirs(f"{args.save_dir}/{dataset_name}/{args.relative}/{args.truncated}", exist_ok=True)
