@@ -152,6 +152,7 @@ def compute_black_box_mia(args):
                     for batch_idx in range(zero_temp_generation["sequences"].shape[0]):
                         peak = get_peak(full_decoded[batch_idx][1:], full_decoded[batch_idx][0], 0.05)
                         bleurt_value = np.array(bleurt_score(bleurt_model, bleurt_tokenizer,  full_decoded[batch_idx][0], full_decoded[batch_idx][1:], args)).mean().item()
+                    pdb.set_trace()
                     ccd_dict[dataset_name][set_name].append(peak)
                     samia_dict[dataset_name][set_name].append(bleurt_value)
             os.makedirs(args.save_dir, exist_ok=True)
