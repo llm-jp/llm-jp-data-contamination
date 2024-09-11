@@ -217,7 +217,7 @@ def compute_black_box_mia(args):
                         bleurt_value = np.array(bleurt_score(bleurt_model, bleurt_tokenizer,  full_decoded[batch_idx][0], full_decoded[batch_idx][1:], args)).mean().item()
                         ccd_dict[dataset_name][set_name].append(sum(dist)/len(dist))
                         samia_dict[dataset_name][set_name].append(bleurt_value)
-                    pdb.set_trace()
+                    #pdb.set_trace()
             os.makedirs(args.save_dir, exist_ok=True)
             os.makedirs(f"{args.save_dir}/{dataset_name}/{args.relative}/{args.truncated}", exist_ok=True)
             pickle.dump(ccd_dict, open(f"{args.save_dir}/{dataset_name}/{args.relative}/{args.truncated}/{args.min_len}_{args.model_size}_ccd_dict.pkl", "wb"))
