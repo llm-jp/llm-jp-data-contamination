@@ -34,7 +34,7 @@ srun_parallel () {
         --dataset_name local_all \
         --min_len 0 \
         --cuda $cuda_id \
-        --refer_cuda $refer_cuda_id \
+        --refer_cuda 0 \
         --dataset_idx $dataset_idx \
         --generation_batch_size $batch_size  \
         --gray black
