@@ -224,12 +224,13 @@ def compute_black_box_mia(args):
                         samia_dict[dataset_name][set_name].append(bleurt_value)
                     bleurt_model = bleurt_model.cpu()
                     #pdb.set_trace()
-            os.makedirs(args.save_dir, exist_ok=True)
-            os.makedirs(f"{args.save_dir}/{dataset_name}/{args.relative}/{args.truncated}", exist_ok=True)
-            pickle.dump(ccd_dict, open(f"{args.save_dir}/{dataset_name}/{args.relative}/{args.truncated}/{args.min_len}_{args.model_size}_ccd_dict.pkl", "wb"))
-            pickle.dump(samia_dict, open(f"{args.save_dir}/{dataset_name}/{args.relative}/{args.truncated}/{args.min_len}_{args.model_size}_samia_dict.pkl", "wb"))
+            os.makedirs(f"{args.save_dir}_{args.dataset_idx}", exist_ok=True)
+            os.makedirs(f"{args.save_dir}_{args.dataset_idx}/{dataset_name}/{args.relative}/{args.truncated}",
+                        exist_ok=True)
+            pickle.dump(ccd_dict, open(f"{args.save_dir}_{args.dataset_idx}/{dataset_name}/{args.relative}/{args.truncated}/{args.min_len}_{args.model_size}_ccd_dict.pkl", "wb"))
+            pickle.dump(samia_dict, open(f"{args.save_dir}_{args.dataset_idx}/{dataset_name}/{args.relative}/{args.truncated}/{args.min_len}_{args.model_size}_samia_dict.pkl", "wb"))
             df = results_caculate_and_draw(dataset_name, args, df, method_list=["ccd", "samia"])
             if args.same_length:
-                df.to_csv(f"{args.save_dir}/{dataset_name}/{args.relative}/{args.truncated}/{args.min_len}_{args.model_size}_same_length.csv")
+                df.to_csv(f"{args.save_dir}_{args.dataset_idx}/{dataset_name}/{args.relative}/{args.truncated}/{args.min_len}_{args.model_size}_same_length.csv")
             else:
-                df.to_csv(f"{args.save_dir}/{dataset_name}/{args.relative}/{args.truncated}/{args.min_len}_{args.model_size}_all_length.csv")
+                df.to_csv(f"{args.save_dir}_{args.dataset_idx}/{dataset_name}/{args.relative}/{args.truncated}/{args.min_len}_{args.model_size}_all_length.csv")
