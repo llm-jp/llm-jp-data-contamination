@@ -130,7 +130,7 @@ def compute_black_box_mia(args):
                     input_length = int(min(tokenized_inputs["attention_mask"].sum(dim=1))/2) if (tokenized_inputs["attention_mask"][0].sum() < args.max_input_tokens) else args.max_input_tokens
                     for _ in tqdm(range(args.generation_samples)):
                         if _ == 0:
-                            zero_temp_generation = model.generate(tokenized_inputs["input_ids"][:, :input_length],
+                            zero_temp_generation = model.generate(tokenized_inputs["input_ids"],
                                                          temperature=0,
                                                          max_new_tokens=args.max_new_tokens,
                                                         )
@@ -145,7 +145,7 @@ def compute_black_box_mia(args):
                                                      max_new_tokens=args.max_new_tokens,
                                                      top_k=50,
                                                     )
-                            decoded_sentences = tokenizer.batch_decode(generations["sequences"][:, input_length:], skip_special_tokens=True)
+                            decoded_sentences = tokenizer.batch_decode(generations["sequences"], skip_special_tokens=True)
                             for i in range(zero_temp_generation["sequences"].shape[0]):
                                 full_decoded[i].append(decoded_sentences[i])
                             #full_decoded.append(tokenizer.batch_decode(generations["sequences"][:, input_length:], skip_special_tokens=True))
