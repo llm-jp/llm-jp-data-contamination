@@ -134,7 +134,7 @@ def compute_black_box_mia(args):
                                                          temperature=0,
                                                          max_new_tokens=args.max_new_tokens,
                                                         )
-                            decoded_sentences = tokenizer.batch_decode(zero_temp_generation["sequences"][:, input_length:],
+                            decoded_sentences = tokenizer.batch_decode(zero_temp_generation["sequences"],
                                                    skip_special_tokens=True)
                             for i in range(zero_temp_generation["sequences"].shape[0]):
                                 full_decoded[i].append(decoded_sentences[i])
