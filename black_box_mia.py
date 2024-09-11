@@ -37,6 +37,7 @@ def get_peak(samples, s_0, alpha):
     thresh = int(np.ceil(alpha * l))
     distances = [get_ed(s, s_0) for s in samples]
     rhos = [len([x for x in distances if x == d]) for d in range(0, thresh + 1)]
+    pdb.set_trace()
     peak = sum(rhos)
 
     return peak
