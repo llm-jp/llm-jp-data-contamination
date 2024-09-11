@@ -13,6 +13,63 @@ import pandas as pd
 from bleurt_pytorch import BleurtConfig, BleurtForSequenceClassification, BleurtTokenizer
 
 
+def levenshtein_distance(str1, str2):
+    if len(str1) > len(str2):
+        str1, str2 = str2, str1
+
+    distances = range(len(str1) + 1)
+    for index2, char2 in enumerate(str2):
+        new_distances = [index2 + 1]
+        for index1, char1 in enumerate(str1):
+            if char1 == char2:
+                new_distances.append(distances[index1])
+            else:
+                new_distances.append(1 + min((distances[index1], distances[index1 + 1], new_distances[-1])))
+        distances = new_distances
+
+    return distances[-1]
+
+
+def strip_code(sample):
+    return sample.strip().split('\n\n\n')[0] if '\n\n\n' in sample else sample.strip().split('```')[0]
+
+
+def truncate_prompt(sample, method_name):
+    if f'def {method_name}(' in sample:
+        output = sample.replace("'''", '"""')
+        output = output[output.find('def ' + method_name):]
+        output = output[output.find('"""') + 3:]
+        output = output[output.find('"""\n') + 4:] if '"""\n' in output else output[output.find('"""') + 3:]
+    else:
+        output = sample
+
+    return output
+
+
+def tokenize_code(sample, tokenizer, length):
+    return tokenizer.encode(sample)[:length] if length else tokenizer.encode(sample)
+
+
+def get_edit_distance_distribution_star(samples, gready_sample, tokenizer, length=100):
+    gready_sample = strip_code(gready_sample)
+    gs = tokenize_code(gready_sample, tokenizer, length)
+    num = []
+    max_length = len(gs)
+    for sample in samples:
+        sample = strip_code(sample)
+        s = tokenize_code(sample, tokenizer, length)
+        num.append(levenshtein_distance(gs, s))
+        max_length = max(max_length, len(s))
+    return num, max_length
+
+
+def calculate_ratio(numbers, alpha=1):
+    count = sum(1 for num in numbers if num <= alpha)
+    total = len(numbers)
+    ratio = count / total if total > 0 else 0
+    return ratio
+
+
 def get_ed(a, b):
     if len(b) == 0:
         return len(a)
@@ -153,7 +210,10 @@ def compute_black_box_mia(args):
                                 full_decoded[i].append(decoded_sentences[i])
                             #full_decoded.append(tokenizer.batch_decode(generations["sequences"][:, input_length:], skip_special_tokens=True))
                     for batch_idx in range(zero_temp_generation["sequences"].shape[0]):
-                        peak = get_peak(full_decoded[batch_idx][1:], full_decoded[batch_idx][0], 0.05)
+                        #peak = get_peak(full_decoded[batch_idx][1:], full_decoded[batch_idx][0], 0.05)
+                        dist, ml = get_edit_distance_distribution_star(full_decoded[batch_idx][1:], full_decoded[batch_idx][0],
+                                                                       tokenizer)
+                        peak = calculate_ratio(dist, 0.05 * ml)
                         bleurt_value = np.array(bleurt_score(bleurt_model, bleurt_tokenizer,  full_decoded[batch_idx][0], full_decoded[batch_idx][1:], args)).mean().item()
                         ccd_dict[dataset_name][set_name].append(peak)
                         samia_dict[dataset_name][set_name].append(bleurt_value)
