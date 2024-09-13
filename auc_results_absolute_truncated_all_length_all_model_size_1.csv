@@ -1,0 +1,2801 @@
+dataset,feature,length,model_size,auc
+Wikipedia (en),loss,0,1b,0.512289
+Wikipedia (en),loss,100,1b,0.509755
+Wikipedia (en),loss,200,1b,0.5081785
+Wikipedia (en),loss,300,1b,0.5117205
+Wikipedia (en),loss,400,1b,0.5429655
+Wikipedia (en),loss,500,1b,0.502876
+Wikipedia (en),loss,600,1b,0.513274
+Wikipedia (en),loss,700,1b,0.5004215000000001
+Wikipedia (en),loss,800,1b,0.501058
+Wikipedia (en),loss,900,1b,0.5072034999999999
+Wikipedia (en),loss,0,2.8b,0.5088755
+Wikipedia (en),loss,100,2.8b,0.5175095000000001
+Wikipedia (en),loss,200,2.8b,0.5200995
+Wikipedia (en),loss,300,2.8b,0.5018605
+Wikipedia (en),loss,400,2.8b,0.556006
+Wikipedia (en),loss,500,2.8b,0.5162615
+Wikipedia (en),loss,600,2.8b,0.5271005
+Wikipedia (en),loss,700,2.8b,0.513355
+Wikipedia (en),loss,800,2.8b,0.5161975
+Wikipedia (en),loss,900,2.8b,0.5097815000000001
+Wikipedia (en),loss,0,6.9b,0.5061985
+Wikipedia (en),loss,100,6.9b,0.5137700000000001
+Wikipedia (en),loss,200,6.9b,0.5211920000000001
+Wikipedia (en),loss,300,6.9b,0.506089
+Wikipedia (en),loss,400,6.9b,0.5533669999999999
+Wikipedia (en),loss,500,6.9b,0.511244
+Wikipedia (en),loss,600,6.9b,0.5216495
+Wikipedia (en),loss,700,6.9b,0.5116970000000001
+Wikipedia (en),loss,800,6.9b,0.5130155000000001
+Wikipedia (en),loss,900,6.9b,0.5046630000000001
+Wikipedia (en),loss,0,12b,0.502247
+Wikipedia (en),loss,100,12b,0.516358
+Wikipedia (en),loss,200,12b,0.5243425
+Wikipedia (en),loss,300,12b,0.5031734999999999
+Wikipedia (en),loss,400,12b,0.557705
+Wikipedia (en),loss,500,12b,0.515916
+Wikipedia (en),loss,600,12b,0.525499
+Wikipedia (en),loss,700,12b,0.514564
+Wikipedia (en),loss,800,12b,0.519221
+Wikipedia (en),loss,900,12b,0.5089585000000001
+Wikipedia (en),prob,0,1b,0.5089325
+Wikipedia (en),prob,100,1b,0.51952
+Wikipedia (en),prob,200,1b,0.506105
+Wikipedia (en),prob,300,1b,0.5054
+Wikipedia (en),prob,400,1b,0.545366
+Wikipedia (en),prob,500,1b,0.504341
+Wikipedia (en),prob,600,1b,0.510591
+Wikipedia (en),prob,700,1b,0.5038630000000001
+Wikipedia (en),prob,800,1b,0.5055540000000001
+Wikipedia (en),prob,900,1b,0.5027285
+Wikipedia (en),prob,0,2.8b,0.506844
+Wikipedia (en),prob,100,2.8b,0.5332325
+Wikipedia (en),prob,200,2.8b,0.522699
+Wikipedia (en),prob,300,2.8b,0.507352
+Wikipedia (en),prob,400,2.8b,0.5652505
+Wikipedia (en),prob,500,2.8b,0.523519
+Wikipedia (en),prob,600,2.8b,0.5301910000000001
+Wikipedia (en),prob,700,2.8b,0.510652
+Wikipedia (en),prob,800,2.8b,0.5244960000000001
+Wikipedia (en),prob,900,2.8b,0.515835
+Wikipedia (en),prob,0,6.9b,0.5025904999999999
+Wikipedia (en),prob,100,6.9b,0.525763
+Wikipedia (en),prob,200,6.9b,0.52452
+Wikipedia (en),prob,300,6.9b,0.503513
+Wikipedia (en),prob,400,6.9b,0.560761
+Wikipedia (en),prob,500,6.9b,0.5153774999999999
+Wikipedia (en),prob,600,6.9b,0.5226879999999999
+Wikipedia (en),prob,700,6.9b,0.506963
+Wikipedia (en),prob,800,6.9b,0.5194854999999999
+Wikipedia (en),prob,900,6.9b,0.510651
+Wikipedia (en),prob,0,12b,0.5015769999999999
+Wikipedia (en),prob,100,12b,0.530244
+Wikipedia (en),prob,200,12b,0.529908
+Wikipedia (en),prob,300,12b,0.50634
+Wikipedia (en),prob,400,12b,0.567759
+Wikipedia (en),prob,500,12b,0.523191
+Wikipedia (en),prob,600,12b,0.529346
+Wikipedia (en),prob,700,12b,0.5114449999999999
+Wikipedia (en),prob,800,12b,0.527154
+Wikipedia (en),prob,900,12b,0.517321
+Wikipedia (en),ppl,0,1b,0.512289
+Wikipedia (en),ppl,100,1b,0.509755
+Wikipedia (en),ppl,200,1b,0.5081785
+Wikipedia (en),ppl,300,1b,0.5117205
+Wikipedia (en),ppl,400,1b,0.5429655
+Wikipedia (en),ppl,500,1b,0.502876
+Wikipedia (en),ppl,600,1b,0.513274
+Wikipedia (en),ppl,700,1b,0.5004215000000001
+Wikipedia (en),ppl,800,1b,0.501058
+Wikipedia (en),ppl,900,1b,0.5072034999999999
+Wikipedia (en),ppl,0,2.8b,0.5088755
+Wikipedia (en),ppl,100,2.8b,0.5175095000000001
+Wikipedia (en),ppl,200,2.8b,0.5200995
+Wikipedia (en),ppl,300,2.8b,0.5018605
+Wikipedia (en),ppl,400,2.8b,0.556006
+Wikipedia (en),ppl,500,2.8b,0.5162615
+Wikipedia (en),ppl,600,2.8b,0.5271005
+Wikipedia (en),ppl,700,2.8b,0.513355
+Wikipedia (en),ppl,800,2.8b,0.5161975
+Wikipedia (en),ppl,900,2.8b,0.5097815000000001
+Wikipedia (en),ppl,0,6.9b,0.5061985
+Wikipedia (en),ppl,100,6.9b,0.5137700000000001
+Wikipedia (en),ppl,200,6.9b,0.5211920000000001
+Wikipedia (en),ppl,300,6.9b,0.506089
+Wikipedia (en),ppl,400,6.9b,0.5533669999999999
+Wikipedia (en),ppl,500,6.9b,0.511244
+Wikipedia (en),ppl,600,6.9b,0.5216495
+Wikipedia (en),ppl,700,6.9b,0.5116970000000001
+Wikipedia (en),ppl,800,6.9b,0.5130155000000001
+Wikipedia (en),ppl,900,6.9b,0.5046630000000001
+Wikipedia (en),ppl,0,12b,0.502247
+Wikipedia (en),ppl,100,12b,0.516358
+Wikipedia (en),ppl,200,12b,0.5243425
+Wikipedia (en),ppl,300,12b,0.5031734999999999
+Wikipedia (en),ppl,400,12b,0.557705
+Wikipedia (en),ppl,500,12b,0.515916
+Wikipedia (en),ppl,600,12b,0.525499
+Wikipedia (en),ppl,700,12b,0.514564
+Wikipedia (en),ppl,800,12b,0.519221
+Wikipedia (en),ppl,900,12b,0.5089585000000001
+Wikipedia (en),mink_plus,0,1b,0.500196
+Wikipedia (en),mink_plus,100,1b,0.508412
+Wikipedia (en),mink_plus,200,1b,0.50363
+Wikipedia (en),mink_plus,300,1b,0.5054395
+Wikipedia (en),mink_plus,400,1b,0.5391050000000001
+Wikipedia (en),mink_plus,500,1b,0.503042
+Wikipedia (en),mink_plus,600,1b,0.5033114999999999
+Wikipedia (en),mink_plus,700,1b,0.503011
+Wikipedia (en),mink_plus,800,1b,0.504854
+Wikipedia (en),mink_plus,900,1b,0.5087094999999999
+Wikipedia (en),mink_plus,0,2.8b,0.5008589999999999
+Wikipedia (en),mink_plus,100,2.8b,0.5335329999999999
+Wikipedia (en),mink_plus,200,2.8b,0.5362119999999999
+Wikipedia (en),mink_plus,300,2.8b,0.5323015
+Wikipedia (en),mink_plus,400,2.8b,0.561025
+Wikipedia (en),mink_plus,500,2.8b,0.537634
+Wikipedia (en),mink_plus,600,2.8b,0.54511
+Wikipedia (en),mink_plus,700,2.8b,0.527354
+Wikipedia (en),mink_plus,800,2.8b,0.5482155
+Wikipedia (en),mink_plus,900,2.8b,0.54728
+Wikipedia (en),mink_plus,0,6.9b,0.5037295
+Wikipedia (en),mink_plus,100,6.9b,0.529311
+Wikipedia (en),mink_plus,200,6.9b,0.528395
+Wikipedia (en),mink_plus,300,6.9b,0.5336645
+Wikipedia (en),mink_plus,400,6.9b,0.566651
+Wikipedia (en),mink_plus,500,6.9b,0.529989
+Wikipedia (en),mink_plus,600,6.9b,0.541347
+Wikipedia (en),mink_plus,700,6.9b,0.5342294999999999
+Wikipedia (en),mink_plus,800,6.9b,0.532308
+Wikipedia (en),mink_plus,900,6.9b,0.5368269999999999
+Wikipedia (en),mink_plus,0,12b,0.5092260000000001
+Wikipedia (en),mink_plus,100,12b,0.5397474999999999
+Wikipedia (en),mink_plus,200,12b,0.5444724999999999
+Wikipedia (en),mink_plus,300,12b,0.536679
+Wikipedia (en),mink_plus,400,12b,0.576661
+Wikipedia (en),mink_plus,500,12b,0.546922
+Wikipedia (en),mink_plus,600,12b,0.549148
+Wikipedia (en),mink_plus,700,12b,0.5367850000000001
+Wikipedia (en),mink_plus,800,12b,0.5424125
+Wikipedia (en),mink_plus,900,12b,0.547088
+Wikipedia (en),zlib,0,1b,0.5012915
+Wikipedia (en),zlib,100,1b,0.5212525
+Wikipedia (en),zlib,200,1b,0.516214
+Wikipedia (en),zlib,300,1b,0.5150025
+Wikipedia (en),zlib,400,1b,0.5293345
+Wikipedia (en),zlib,500,1b,0.5090185
+Wikipedia (en),zlib,600,1b,0.5152935
+Wikipedia (en),zlib,700,1b,0.500572
+Wikipedia (en),zlib,800,1b,0.503468
+Wikipedia (en),zlib,900,1b,0.5158345
+Wikipedia (en),zlib,0,2.8b,0.5008295
+Wikipedia (en),zlib,100,2.8b,0.526852
+Wikipedia (en),zlib,200,2.8b,0.530004
+Wikipedia (en),zlib,300,2.8b,0.5047555
+Wikipedia (en),zlib,400,2.8b,0.54659
+Wikipedia (en),zlib,500,2.8b,0.50827
+Wikipedia (en),zlib,600,2.8b,0.5314135
+Wikipedia (en),zlib,700,2.8b,0.5126685
+Wikipedia (en),zlib,800,2.8b,0.519015
+Wikipedia (en),zlib,900,2.8b,0.502517
+Wikipedia (en),zlib,0,6.9b,0.500687
+Wikipedia (en),zlib,100,6.9b,0.5258605000000001
+Wikipedia (en),zlib,200,6.9b,0.5301830000000001
+Wikipedia (en),zlib,300,6.9b,0.5088495
+Wikipedia (en),zlib,400,6.9b,0.5430865
+Wikipedia (en),zlib,500,6.9b,0.503533
+Wikipedia (en),zlib,600,6.9b,0.5274675
+Wikipedia (en),zlib,700,6.9b,0.5132410000000001
+Wikipedia (en),zlib,800,6.9b,0.516863
+Wikipedia (en),zlib,900,6.9b,0.5016204999999999
+Wikipedia (en),zlib,0,12b,0.504713
+Wikipedia (en),zlib,100,12b,0.5286235
+Wikipedia (en),zlib,200,12b,0.534783
+Wikipedia (en),zlib,300,12b,0.5043275
+Wikipedia (en),zlib,400,12b,0.547784
+Wikipedia (en),zlib,500,12b,0.5086299999999999
+Wikipedia (en),zlib,600,12b,0.5311405
+Wikipedia (en),zlib,700,12b,0.516999
+Wikipedia (en),zlib,800,12b,0.522931
+Wikipedia (en),zlib,900,12b,0.5024204999999999
+Wikipedia (en),grad,0,1b,0.501761
+Wikipedia (en),grad,100,1b,0.5046185000000001
+Wikipedia (en),grad,200,1b,0.5089279999999999
+Wikipedia (en),grad,300,1b,0.507193
+Wikipedia (en),grad,400,1b,0.51815
+Wikipedia (en),grad,500,1b,0.5047174999999999
+Wikipedia (en),grad,600,1b,0.5047275
+Wikipedia (en),grad,700,1b,0.515805
+Wikipedia (en),grad,800,1b,0.516832
+Wikipedia (en),grad,900,1b,0.5011055
+Wikipedia (en),grad,0,2.8b,0.5002915000000001
+Wikipedia (en),grad,100,2.8b,0.5305755000000001
+Wikipedia (en),grad,200,2.8b,0.5072935000000001
+Wikipedia (en),grad,300,2.8b,0.500537
+Wikipedia (en),grad,400,2.8b,0.520304
+Wikipedia (en),grad,500,2.8b,0.511343
+Wikipedia (en),grad,600,2.8b,0.514436
+Wikipedia (en),grad,700,2.8b,0.5137974999999999
+Wikipedia (en),grad,800,2.8b,0.510755
+Wikipedia (en),grad,900,2.8b,0.5146390000000001
+Wikipedia (en),grad,0,6.9b,0.500985
+Wikipedia (en),grad,100,6.9b,0.5242345
+Wikipedia (en),grad,200,6.9b,0.5005805
+Wikipedia (en),grad,300,6.9b,0.5052055000000001
+Wikipedia (en),grad,400,6.9b,0.5210325
+Wikipedia (en),grad,500,6.9b,0.5074000000000001
+Wikipedia (en),grad,600,6.9b,0.508208
+Wikipedia (en),grad,700,6.9b,0.5246435
+Wikipedia (en),grad,800,6.9b,0.5012650000000001
+Wikipedia (en),grad,900,6.9b,0.5034569999999999
+Wikipedia (en),grad,0,12b,0.5046925
+Wikipedia (en),grad,100,12b,0.5309765
+Wikipedia (en),grad,200,12b,0.501926
+Wikipedia (en),grad,300,12b,0.5133065
+Wikipedia (en),grad,400,12b,0.5080055
+Wikipedia (en),grad,500,12b,0.500589
+Wikipedia (en),grad,600,12b,0.5068670000000001
+Wikipedia (en),grad,700,12b,0.507997
+Wikipedia (en),grad,800,12b,0.520105
+Wikipedia (en),grad,900,12b,0.5029535
+Wikipedia (en),refer,0,1b,0.5158054999999999
+Wikipedia (en),refer,100,1b,0.502195
+Wikipedia (en),refer,200,1b,0.5052935000000001
+Wikipedia (en),refer,300,1b,0.5146045
+Wikipedia (en),refer,400,1b,0.531778
+Wikipedia (en),refer,500,1b,0.504354
+Wikipedia (en),refer,600,1b,0.508034
+Wikipedia (en),refer,700,1b,0.5025725
+Wikipedia (en),refer,800,1b,0.500304
+Wikipedia (en),refer,900,1b,0.5140685
+Wikipedia (en),refer,0,2.8b,0.5158054999999999
+Wikipedia (en),refer,100,2.8b,0.502195
+Wikipedia (en),refer,200,2.8b,0.5052935000000001
+Wikipedia (en),refer,300,2.8b,0.5146045
+Wikipedia (en),refer,400,2.8b,0.531778
+Wikipedia (en),refer,500,2.8b,0.504354
+Wikipedia (en),refer,600,2.8b,0.508034
+Wikipedia (en),refer,700,2.8b,0.5025725
+Wikipedia (en),refer,800,2.8b,0.500304
+Wikipedia (en),refer,900,2.8b,0.5140685
+Wikipedia (en),refer,0,6.9b,0.5157425
+Wikipedia (en),refer,100,6.9b,0.50214
+Wikipedia (en),refer,200,6.9b,0.5053030000000001
+Wikipedia (en),refer,300,6.9b,0.514562
+Wikipedia (en),refer,400,6.9b,0.531778
+Wikipedia (en),refer,500,6.9b,0.504354
+Wikipedia (en),refer,600,6.9b,0.508034
+Wikipedia (en),refer,700,6.9b,0.5024500000000001
+Wikipedia (en),refer,800,6.9b,0.500304
+Wikipedia (en),refer,900,6.9b,0.5140685
+Wikipedia (en),refer,0,12b,0.5157425
+Wikipedia (en),refer,100,12b,0.50214
+Wikipedia (en),refer,200,12b,0.5052865
+Wikipedia (en),refer,300,12b,0.5145164999999999
+Wikipedia (en),refer,400,12b,0.531778
+Wikipedia (en),refer,500,12b,0.504354
+Wikipedia (en),refer,600,12b,0.508034
+Wikipedia (en),refer,700,12b,0.5024500000000001
+Wikipedia (en),refer,800,12b,0.500304
+Wikipedia (en),refer,900,12b,0.5140685
+StackExchange,loss,0,1b,0.5039129999999999
+StackExchange,loss,100,1b,0.51961
+StackExchange,loss,200,1b,0.51051
+StackExchange,loss,300,1b,0.5088265
+StackExchange,loss,400,1b,0.5043745000000001
+StackExchange,loss,500,1b,0.513468
+StackExchange,loss,600,1b,0.5345865000000001
+StackExchange,loss,700,1b,0.500167
+StackExchange,loss,800,1b,0.505822
+StackExchange,loss,900,1b,0.5285852130325814
+StackExchange,loss,0,2.8b,0.5053224999999999
+StackExchange,loss,100,2.8b,0.520571
+StackExchange,loss,200,2.8b,0.511678
+StackExchange,loss,300,2.8b,0.507425
+StackExchange,loss,400,2.8b,0.501406
+StackExchange,loss,500,2.8b,0.5162905
+StackExchange,loss,600,2.8b,0.539543
+StackExchange,loss,700,2.8b,0.5022009999999999
+StackExchange,loss,800,2.8b,0.50838
+StackExchange,loss,900,2.8b,0.530046992481203
+StackExchange,loss,0,6.9b,0.5119875
+StackExchange,loss,100,6.9b,0.5195935
+StackExchange,loss,200,6.9b,0.5124475
+StackExchange,loss,300,6.9b,0.506463
+StackExchange,loss,400,6.9b,0.5015495
+StackExchange,loss,500,6.9b,0.518462
+StackExchange,loss,600,6.9b,0.5422795
+StackExchange,loss,700,6.9b,0.5028125000000001
+StackExchange,loss,800,6.9b,0.5092679999999999
+StackExchange,loss,900,6.9b,0.5310357142857143
+StackExchange,loss,0,12b,0.513521
+StackExchange,loss,100,12b,0.5196775
+StackExchange,loss,200,12b,0.514743
+StackExchange,loss,300,12b,0.5039955
+StackExchange,loss,400,12b,0.5002435000000001
+StackExchange,loss,500,12b,0.5197750000000001
+StackExchange,loss,600,12b,0.5433895
+StackExchange,loss,700,12b,0.504701
+StackExchange,loss,800,12b,0.5114209999999999
+StackExchange,loss,900,12b,0.5326986215538847
+StackExchange,prob,0,1b,0.506212
+StackExchange,prob,100,1b,0.5209980000000001
+StackExchange,prob,200,1b,0.516185
+StackExchange,prob,300,1b,0.5123565
+StackExchange,prob,400,1b,0.509843
+StackExchange,prob,500,1b,0.522305
+StackExchange,prob,600,1b,0.533097
+StackExchange,prob,700,1b,0.503557
+StackExchange,prob,800,1b,0.505293
+StackExchange,prob,900,1b,0.523157894736842
+StackExchange,prob,0,2.8b,0.5040884999999999
+StackExchange,prob,100,2.8b,0.5279780000000001
+StackExchange,prob,200,2.8b,0.519239
+StackExchange,prob,300,2.8b,0.509383
+StackExchange,prob,400,2.8b,0.505674
+StackExchange,prob,500,2.8b,0.525227
+StackExchange,prob,600,2.8b,0.540386
+StackExchange,prob,700,2.8b,0.505996
+StackExchange,prob,800,2.8b,0.509872
+StackExchange,prob,900,2.8b,0.5253195488721805
+StackExchange,prob,0,6.9b,0.503391
+StackExchange,prob,100,6.9b,0.525625
+StackExchange,prob,200,6.9b,0.5210520000000001
+StackExchange,prob,300,6.9b,0.507592
+StackExchange,prob,400,6.9b,0.504228
+StackExchange,prob,500,6.9b,0.52877
+StackExchange,prob,600,6.9b,0.544323
+StackExchange,prob,700,6.9b,0.507023
+StackExchange,prob,800,6.9b,0.511781
+StackExchange,prob,900,6.9b,0.5290601503759398
+StackExchange,prob,0,12b,0.503288
+StackExchange,prob,100,12b,0.527417
+StackExchange,prob,200,12b,0.528144
+StackExchange,prob,300,12b,0.500432
+StackExchange,prob,400,12b,0.501021
+StackExchange,prob,500,12b,0.533053
+StackExchange,prob,600,12b,0.5468445
+StackExchange,prob,700,12b,0.5101725
+StackExchange,prob,800,12b,0.515124
+StackExchange,prob,900,12b,0.5312568922305764
+StackExchange,ppl,0,1b,0.5039129999999999
+StackExchange,ppl,100,1b,0.51961
+StackExchange,ppl,200,1b,0.51051
+StackExchange,ppl,300,1b,0.5088265
+StackExchange,ppl,400,1b,0.5043745000000001
+StackExchange,ppl,500,1b,0.513468
+StackExchange,ppl,600,1b,0.5345865000000001
+StackExchange,ppl,700,1b,0.500167
+StackExchange,ppl,800,1b,0.505822
+StackExchange,ppl,900,1b,0.5285852130325814
+StackExchange,ppl,0,2.8b,0.5053224999999999
+StackExchange,ppl,100,2.8b,0.520571
+StackExchange,ppl,200,2.8b,0.511678
+StackExchange,ppl,300,2.8b,0.507425
+StackExchange,ppl,400,2.8b,0.501406
+StackExchange,ppl,500,2.8b,0.5162905
+StackExchange,ppl,600,2.8b,0.539543
+StackExchange,ppl,700,2.8b,0.5022009999999999
+StackExchange,ppl,800,2.8b,0.50838
+StackExchange,ppl,900,2.8b,0.530046992481203
+StackExchange,ppl,0,6.9b,0.5119875
+StackExchange,ppl,100,6.9b,0.5195935
+StackExchange,ppl,200,6.9b,0.5124475
+StackExchange,ppl,300,6.9b,0.506463
+StackExchange,ppl,400,6.9b,0.5015495
+StackExchange,ppl,500,6.9b,0.518462
+StackExchange,ppl,600,6.9b,0.5422795
+StackExchange,ppl,700,6.9b,0.5028125000000001
+StackExchange,ppl,800,6.9b,0.5092679999999999
+StackExchange,ppl,900,6.9b,0.5310357142857143
+StackExchange,ppl,0,12b,0.513521
+StackExchange,ppl,100,12b,0.5196775
+StackExchange,ppl,200,12b,0.514743
+StackExchange,ppl,300,12b,0.5039955
+StackExchange,ppl,400,12b,0.5002435000000001
+StackExchange,ppl,500,12b,0.5197750000000001
+StackExchange,ppl,600,12b,0.5433895
+StackExchange,ppl,700,12b,0.504701
+StackExchange,ppl,800,12b,0.5114209999999999
+StackExchange,ppl,900,12b,0.5326986215538847
+StackExchange,mink_plus,0,1b,0.510918
+StackExchange,mink_plus,100,1b,0.528952
+StackExchange,mink_plus,200,1b,0.5107119999999999
+StackExchange,mink_plus,300,1b,0.5025959999999999
+StackExchange,mink_plus,400,1b,0.502083
+StackExchange,mink_plus,500,1b,0.511567
+StackExchange,mink_plus,600,1b,0.5340995
+StackExchange,mink_plus,700,1b,0.524673
+StackExchange,mink_plus,800,1b,0.5304985000000001
+StackExchange,mink_plus,900,1b,0.5173721804511278
+StackExchange,mink_plus,0,2.8b,0.509188
+StackExchange,mink_plus,100,2.8b,0.524782
+StackExchange,mink_plus,200,2.8b,0.516894
+StackExchange,mink_plus,300,2.8b,0.508436
+StackExchange,mink_plus,400,2.8b,0.5064059999999999
+StackExchange,mink_plus,500,2.8b,0.520924
+StackExchange,mink_plus,600,2.8b,0.5463060000000001
+StackExchange,mink_plus,700,2.8b,0.526165
+StackExchange,mink_plus,800,2.8b,0.53565
+StackExchange,mink_plus,900,2.8b,0.5226140350877193
+StackExchange,mink_plus,0,6.9b,0.5157740000000001
+StackExchange,mink_plus,100,6.9b,0.530651
+StackExchange,mink_plus,200,6.9b,0.521998
+StackExchange,mink_plus,300,6.9b,0.512953
+StackExchange,mink_plus,400,6.9b,0.512327
+StackExchange,mink_plus,500,6.9b,0.535478
+StackExchange,mink_plus,600,6.9b,0.559743
+StackExchange,mink_plus,700,6.9b,0.533366
+StackExchange,mink_plus,800,6.9b,0.536238
+StackExchange,mink_plus,900,6.9b,0.5309711779448623
+StackExchange,mink_plus,0,12b,0.5114735
+StackExchange,mink_plus,100,12b,0.534023
+StackExchange,mink_plus,200,12b,0.5301119999999999
+StackExchange,mink_plus,300,12b,0.528171
+StackExchange,mink_plus,400,12b,0.52092
+StackExchange,mink_plus,500,12b,0.540331
+StackExchange,mink_plus,600,12b,0.563821
+StackExchange,mink_plus,700,12b,0.5380149999999999
+StackExchange,mink_plus,800,12b,0.5457425
+StackExchange,mink_plus,900,12b,0.5421804511278197
+StackExchange,zlib,0,1b,0.5015265
+StackExchange,zlib,100,1b,0.5158085
+StackExchange,zlib,200,1b,0.515874
+StackExchange,zlib,300,1b,0.5199795
+StackExchange,zlib,400,1b,0.5169520000000001
+StackExchange,zlib,500,1b,0.5205035
+StackExchange,zlib,600,1b,0.5443804999999999
+StackExchange,zlib,700,1b,0.5085155
+StackExchange,zlib,800,1b,0.506989
+StackExchange,zlib,900,1b,0.5218834586466166
+StackExchange,zlib,0,2.8b,0.5031165
+StackExchange,zlib,100,2.8b,0.519543
+StackExchange,zlib,200,2.8b,0.5173965
+StackExchange,zlib,300,2.8b,0.516248
+StackExchange,zlib,400,2.8b,0.5093160000000001
+StackExchange,zlib,500,2.8b,0.52375
+StackExchange,zlib,600,2.8b,0.5528069999999999
+StackExchange,zlib,700,2.8b,0.5117725000000001
+StackExchange,zlib,800,2.8b,0.513219
+StackExchange,zlib,900,2.8b,0.5278464912280703
+StackExchange,zlib,0,6.9b,0.5105955
+StackExchange,zlib,100,6.9b,0.5195115
+StackExchange,zlib,200,6.9b,0.518606
+StackExchange,zlib,300,6.9b,0.513564
+StackExchange,zlib,400,6.9b,0.5093785
+StackExchange,zlib,500,6.9b,0.527783
+StackExchange,zlib,600,6.9b,0.5586465
+StackExchange,zlib,700,6.9b,0.5129765
+StackExchange,zlib,800,6.9b,0.5142415
+StackExchange,zlib,900,6.9b,0.5300751879699248
+StackExchange,zlib,0,12b,0.5134380000000001
+StackExchange,zlib,100,12b,0.5193800000000001
+StackExchange,zlib,200,12b,0.5221695000000001
+StackExchange,zlib,300,12b,0.5086535
+StackExchange,zlib,400,12b,0.506121
+StackExchange,zlib,500,12b,0.5293915
+StackExchange,zlib,600,12b,0.559831
+StackExchange,zlib,700,12b,0.5163329999999999
+StackExchange,zlib,800,12b,0.5191295
+StackExchange,zlib,900,12b,0.5344492481203007
+StackExchange,grad,0,1b,0.5098150000000001
+StackExchange,grad,100,1b,0.5269235
+StackExchange,grad,200,1b,0.5015580000000001
+StackExchange,grad,300,1b,0.5209710000000001
+StackExchange,grad,400,1b,0.5082055
+StackExchange,grad,500,1b,0.5223994999999999
+StackExchange,grad,600,1b,0.525531
+StackExchange,grad,700,1b,0.5020045
+StackExchange,grad,800,1b,0.5118119999999999
+StackExchange,grad,900,1b,0.5128333333333334
+StackExchange,grad,0,2.8b,0.5013905000000001
+StackExchange,grad,100,2.8b,0.528169
+StackExchange,grad,200,2.8b,0.512757
+StackExchange,grad,300,2.8b,0.5205949999999999
+StackExchange,grad,400,2.8b,0.5198365
+StackExchange,grad,500,2.8b,0.511049
+StackExchange,grad,600,2.8b,0.506553
+StackExchange,grad,700,2.8b,0.5090385
+StackExchange,grad,800,2.8b,0.5091995
+StackExchange,grad,900,2.8b,0.526735588972431
+StackExchange,grad,0,6.9b,0.5020089999999999
+StackExchange,grad,100,6.9b,0.5328005
+StackExchange,grad,200,6.9b,0.5218125
+StackExchange,grad,300,6.9b,0.5116689999999999
+StackExchange,grad,400,6.9b,0.512992
+StackExchange,grad,500,6.9b,0.5172955
+StackExchange,grad,600,6.9b,0.5016235
+StackExchange,grad,700,6.9b,0.5017625
+StackExchange,grad,800,6.9b,0.5131349999999999
+StackExchange,grad,900,6.9b,0.5142631578947368
+StackExchange,grad,0,12b,0.5029645
+StackExchange,grad,100,12b,0.522232
+StackExchange,grad,200,12b,0.5446484999999999
+StackExchange,grad,300,12b,0.530224
+StackExchange,grad,400,12b,0.523245
+StackExchange,grad,500,12b,0.5213725
+StackExchange,grad,600,12b,0.5135805
+StackExchange,grad,700,12b,0.510832
+StackExchange,grad,800,12b,0.521732
+StackExchange,grad,900,12b,0.5331115288220551
+StackExchange,refer,0,1b,0.5019565
+StackExchange,refer,100,1b,0.515432
+StackExchange,refer,200,1b,0.506205
+StackExchange,refer,300,1b,0.5124165
+StackExchange,refer,400,1b,0.5076004999999999
+StackExchange,refer,500,1b,0.510686
+StackExchange,refer,600,1b,0.5341764999999999
+StackExchange,refer,700,1b,0.504624
+StackExchange,refer,800,1b,0.5007675
+StackExchange,refer,900,1b,0.5230219298245614
+StackExchange,refer,0,2.8b,0.5019565
+StackExchange,refer,100,2.8b,0.515432
+StackExchange,refer,200,2.8b,0.506205
+StackExchange,refer,300,2.8b,0.5124165
+StackExchange,refer,400,2.8b,0.5076004999999999
+StackExchange,refer,500,2.8b,0.510686
+StackExchange,refer,600,2.8b,0.5341764999999999
+StackExchange,refer,700,2.8b,0.504624
+StackExchange,refer,800,2.8b,0.5007675
+StackExchange,refer,900,2.8b,0.5230219298245614
+StackExchange,refer,0,6.9b,0.5019565
+StackExchange,refer,100,6.9b,0.5154455
+StackExchange,refer,200,6.9b,0.506205
+StackExchange,refer,300,6.9b,0.51239
+StackExchange,refer,400,6.9b,0.5076004999999999
+StackExchange,refer,500,6.9b,0.5106835
+StackExchange,refer,600,6.9b,0.5341764999999999
+StackExchange,refer,700,6.9b,0.5046815
+StackExchange,refer,800,6.9b,0.5007675
+StackExchange,refer,900,6.9b,0.5230219298245614
+StackExchange,refer,0,12b,0.5019565
+StackExchange,refer,100,12b,0.5154455
+StackExchange,refer,200,12b,0.506201
+StackExchange,refer,300,12b,0.5122534999999999
+StackExchange,refer,400,12b,0.5075924999999999
+StackExchange,refer,500,12b,0.5106835
+StackExchange,refer,600,12b,0.5341764999999999
+StackExchange,refer,700,12b,0.5046815
+StackExchange,refer,800,12b,0.5007675
+StackExchange,refer,900,12b,0.5230219298245614
+PubMed Central,loss,0,1b,0.5156855
+PubMed Central,loss,100,1b,0.5109895
+PubMed Central,loss,200,1b,0.5030224999999999
+PubMed Central,loss,300,1b,0.507519
+PubMed Central,loss,400,1b,0.5057159999999999
+PubMed Central,loss,500,1b,0.5063325
+PubMed Central,loss,600,1b,0.5052205
+PubMed Central,loss,700,1b,0.504461
+PubMed Central,loss,800,1b,0.501335
+PubMed Central,loss,900,1b,0.501404
+PubMed Central,loss,0,2.8b,0.512845
+PubMed Central,loss,100,2.8b,0.5147625
+PubMed Central,loss,200,2.8b,0.5002390000000001
+PubMed Central,loss,300,2.8b,0.5086855
+PubMed Central,loss,400,2.8b,0.5011265
+PubMed Central,loss,500,2.8b,0.5027265
+PubMed Central,loss,600,2.8b,0.5087075
+PubMed Central,loss,700,2.8b,0.5020249999999999
+PubMed Central,loss,800,2.8b,0.506574
+PubMed Central,loss,900,2.8b,0.5063695
+PubMed Central,loss,0,6.9b,0.5091175
+PubMed Central,loss,100,6.9b,0.5195835
+PubMed Central,loss,200,6.9b,0.5058825
+PubMed Central,loss,300,6.9b,0.512836
+PubMed Central,loss,400,6.9b,0.5034025
+PubMed Central,loss,500,6.9b,0.506702
+PubMed Central,loss,600,6.9b,0.510935
+PubMed Central,loss,700,6.9b,0.507217
+PubMed Central,loss,800,6.9b,0.5082930000000001
+PubMed Central,loss,900,6.9b,0.5097765
+PubMed Central,loss,0,12b,0.5062955
+PubMed Central,loss,100,12b,0.5181725
+PubMed Central,loss,200,12b,0.5095594999999999
+PubMed Central,loss,300,12b,0.51204
+PubMed Central,loss,400,12b,0.504067
+PubMed Central,loss,500,12b,0.506516
+PubMed Central,loss,600,12b,0.5124569999999999
+PubMed Central,loss,700,12b,0.5070330000000001
+PubMed Central,loss,800,12b,0.5101735000000001
+PubMed Central,loss,900,12b,0.5108325
+PubMed Central,prob,0,1b,0.505487
+PubMed Central,prob,100,1b,0.5063264999999999
+PubMed Central,prob,200,1b,0.5066295
+PubMed Central,prob,300,1b,0.5109309999999999
+PubMed Central,prob,400,1b,0.5169775000000001
+PubMed Central,prob,500,1b,0.501942
+PubMed Central,prob,600,1b,0.5190135
+PubMed Central,prob,700,1b,0.502813
+PubMed Central,prob,800,1b,0.500483
+PubMed Central,prob,900,1b,0.506624
+PubMed Central,prob,0,2.8b,0.5058750000000001
+PubMed Central,prob,100,2.8b,0.512587
+PubMed Central,prob,200,2.8b,0.5111
+PubMed Central,prob,300,2.8b,0.5172235
+PubMed Central,prob,400,2.8b,0.508167
+PubMed Central,prob,500,2.8b,0.512078
+PubMed Central,prob,600,2.8b,0.5219015
+PubMed Central,prob,700,2.8b,0.5108579999999999
+PubMed Central,prob,800,2.8b,0.5105185
+PubMed Central,prob,900,2.8b,0.5197309999999999
+PubMed Central,prob,0,6.9b,0.502035
+PubMed Central,prob,100,6.9b,0.5222795
+PubMed Central,prob,200,6.9b,0.514536
+PubMed Central,prob,300,6.9b,0.5206915
+PubMed Central,prob,400,6.9b,0.5047505
+PubMed Central,prob,500,6.9b,0.5191485
+PubMed Central,prob,600,6.9b,0.526736
+PubMed Central,prob,700,6.9b,0.519393
+PubMed Central,prob,800,6.9b,0.5145040000000001
+PubMed Central,prob,900,6.9b,0.5231950000000001
+PubMed Central,prob,0,12b,0.5023799999999999
+PubMed Central,prob,100,12b,0.51878
+PubMed Central,prob,200,12b,0.5243395
+PubMed Central,prob,300,12b,0.5236149999999999
+PubMed Central,prob,400,12b,0.5026525000000001
+PubMed Central,prob,500,12b,0.522651
+PubMed Central,prob,600,12b,0.5296725
+PubMed Central,prob,700,12b,0.5221939999999999
+PubMed Central,prob,800,12b,0.517818
+PubMed Central,prob,900,12b,0.526875
+PubMed Central,ppl,0,1b,0.5156855
+PubMed Central,ppl,100,1b,0.5109895
+PubMed Central,ppl,200,1b,0.5030224999999999
+PubMed Central,ppl,300,1b,0.507519
+PubMed Central,ppl,400,1b,0.5057159999999999
+PubMed Central,ppl,500,1b,0.5063325
+PubMed Central,ppl,600,1b,0.5052205
+PubMed Central,ppl,700,1b,0.504461
+PubMed Central,ppl,800,1b,0.501335
+PubMed Central,ppl,900,1b,0.501404
+PubMed Central,ppl,0,2.8b,0.512845
+PubMed Central,ppl,100,2.8b,0.5147625
+PubMed Central,ppl,200,2.8b,0.5002390000000001
+PubMed Central,ppl,300,2.8b,0.5086855
+PubMed Central,ppl,400,2.8b,0.5011265
+PubMed Central,ppl,500,2.8b,0.5027265
+PubMed Central,ppl,600,2.8b,0.5087075
+PubMed Central,ppl,700,2.8b,0.5020249999999999
+PubMed Central,ppl,800,2.8b,0.506574
+PubMed Central,ppl,900,2.8b,0.5063695
+PubMed Central,ppl,0,6.9b,0.5091175
+PubMed Central,ppl,100,6.9b,0.5195835
+PubMed Central,ppl,200,6.9b,0.5058825
+PubMed Central,ppl,300,6.9b,0.512836
+PubMed Central,ppl,400,6.9b,0.5034025
+PubMed Central,ppl,500,6.9b,0.506702
+PubMed Central,ppl,600,6.9b,0.510935
+PubMed Central,ppl,700,6.9b,0.507217
+PubMed Central,ppl,800,6.9b,0.5082930000000001
+PubMed Central,ppl,900,6.9b,0.5097765
+PubMed Central,ppl,0,12b,0.5062955
+PubMed Central,ppl,100,12b,0.5181725
+PubMed Central,ppl,200,12b,0.5095594999999999
+PubMed Central,ppl,300,12b,0.51204
+PubMed Central,ppl,400,12b,0.504067
+PubMed Central,ppl,500,12b,0.506516
+PubMed Central,ppl,600,12b,0.5124569999999999
+PubMed Central,ppl,700,12b,0.5070330000000001
+PubMed Central,ppl,800,12b,0.5101735000000001
+PubMed Central,ppl,900,12b,0.5108325
+PubMed Central,mink_plus,0,1b,0.504579
+PubMed Central,mink_plus,100,1b,0.5055080000000001
+PubMed Central,mink_plus,200,1b,0.518892
+PubMed Central,mink_plus,300,1b,0.508166
+PubMed Central,mink_plus,400,1b,0.501424
+PubMed Central,mink_plus,500,1b,0.500208
+PubMed Central,mink_plus,600,1b,0.506961
+PubMed Central,mink_plus,700,1b,0.503718
+PubMed Central,mink_plus,800,1b,0.517963
+PubMed Central,mink_plus,900,1b,0.5120250000000001
+PubMed Central,mink_plus,0,2.8b,0.501363
+PubMed Central,mink_plus,100,2.8b,0.504335
+PubMed Central,mink_plus,200,2.8b,0.515393
+PubMed Central,mink_plus,300,2.8b,0.5039955
+PubMed Central,mink_plus,400,2.8b,0.509293
+PubMed Central,mink_plus,500,2.8b,0.514161
+PubMed Central,mink_plus,600,2.8b,0.507999
+PubMed Central,mink_plus,700,2.8b,0.50454
+PubMed Central,mink_plus,800,2.8b,0.509169
+PubMed Central,mink_plus,900,2.8b,0.501719
+PubMed Central,mink_plus,0,6.9b,0.5018419999999999
+PubMed Central,mink_plus,100,6.9b,0.504995
+PubMed Central,mink_plus,200,6.9b,0.5111859999999999
+PubMed Central,mink_plus,300,6.9b,0.503285
+PubMed Central,mink_plus,400,6.9b,0.501234
+PubMed Central,mink_plus,500,6.9b,0.509852
+PubMed Central,mink_plus,600,6.9b,0.500437
+PubMed Central,mink_plus,700,6.9b,0.511501
+PubMed Central,mink_plus,800,6.9b,0.509732
+PubMed Central,mink_plus,900,6.9b,0.500774
+PubMed Central,mink_plus,0,12b,0.505396
+PubMed Central,mink_plus,100,12b,0.507609
+PubMed Central,mink_plus,200,12b,0.513565
+PubMed Central,mink_plus,300,12b,0.501107
+PubMed Central,mink_plus,400,12b,0.502296
+PubMed Central,mink_plus,500,12b,0.509406
+PubMed Central,mink_plus,600,12b,0.503158
+PubMed Central,mink_plus,700,12b,0.509568
+PubMed Central,mink_plus,800,12b,0.514254
+PubMed Central,mink_plus,900,12b,0.504569
+PubMed Central,zlib,0,1b,0.515236
+PubMed Central,zlib,100,1b,0.51408
+PubMed Central,zlib,200,1b,0.5075544999999999
+PubMed Central,zlib,300,1b,0.5067745
+PubMed Central,zlib,400,1b,0.5122755
+PubMed Central,zlib,500,1b,0.51608
+PubMed Central,zlib,600,1b,0.521806
+PubMed Central,zlib,700,1b,0.5045474999999999
+PubMed Central,zlib,800,1b,0.514976
+PubMed Central,zlib,900,1b,0.510071
+PubMed Central,zlib,0,2.8b,0.513065
+PubMed Central,zlib,100,2.8b,0.519863
+PubMed Central,zlib,200,2.8b,0.5114194999999999
+PubMed Central,zlib,300,2.8b,0.5083249999999999
+PubMed Central,zlib,400,2.8b,0.5019300000000001
+PubMed Central,zlib,500,2.8b,0.5039450000000001
+PubMed Central,zlib,600,2.8b,0.525252
+PubMed Central,zlib,700,2.8b,0.5130345000000001
+PubMed Central,zlib,800,2.8b,0.506656
+PubMed Central,zlib,900,2.8b,0.51793
+PubMed Central,zlib,0,6.9b,0.507155
+PubMed Central,zlib,100,6.9b,0.5254
+PubMed Central,zlib,200,6.9b,0.5183095
+PubMed Central,zlib,300,6.9b,0.5130990000000001
+PubMed Central,zlib,400,6.9b,0.5010405
+PubMed Central,zlib,500,6.9b,0.501876
+PubMed Central,zlib,600,6.9b,0.528467
+PubMed Central,zlib,700,6.9b,0.5198745
+PubMed Central,zlib,800,6.9b,0.502916
+PubMed Central,zlib,900,6.9b,0.5239985
+PubMed Central,zlib,0,12b,0.5058245
+PubMed Central,zlib,100,12b,0.524451
+PubMed Central,zlib,200,12b,0.522477
+PubMed Central,zlib,300,12b,0.5120665
+PubMed Central,zlib,400,12b,0.5003095
+PubMed Central,zlib,500,12b,0.5016229999999999
+PubMed Central,zlib,600,12b,0.5308759999999999
+PubMed Central,zlib,700,12b,0.5190655
+PubMed Central,zlib,800,12b,0.501554
+PubMed Central,zlib,900,12b,0.5253574999999999
+PubMed Central,grad,0,1b,0.50994
+PubMed Central,grad,100,1b,0.5087725
+PubMed Central,grad,200,1b,0.500895
+PubMed Central,grad,300,1b,0.5019115000000001
+PubMed Central,grad,400,1b,0.509441
+PubMed Central,grad,500,1b,0.505714
+PubMed Central,grad,600,1b,0.5058145000000001
+PubMed Central,grad,700,1b,0.514398
+PubMed Central,grad,800,1b,0.5031640000000001
+PubMed Central,grad,900,1b,0.5012995
+PubMed Central,grad,0,2.8b,0.502133
+PubMed Central,grad,100,2.8b,0.5190305
+PubMed Central,grad,200,2.8b,0.511379
+PubMed Central,grad,300,2.8b,0.5154835
+PubMed Central,grad,400,2.8b,0.501984
+PubMed Central,grad,500,2.8b,0.5086465
+PubMed Central,grad,600,2.8b,0.5204869999999999
+PubMed Central,grad,700,2.8b,0.5037050000000001
+PubMed Central,grad,800,2.8b,0.5094190000000001
+PubMed Central,grad,900,2.8b,0.5033924999999999
+PubMed Central,grad,0,6.9b,0.5042415
+PubMed Central,grad,100,6.9b,0.5281115000000001
+PubMed Central,grad,200,6.9b,0.517435
+PubMed Central,grad,300,6.9b,0.5121435
+PubMed Central,grad,400,6.9b,0.50953
+PubMed Central,grad,500,6.9b,0.513304
+PubMed Central,grad,600,6.9b,0.5149135
+PubMed Central,grad,700,6.9b,0.500749
+PubMed Central,grad,800,6.9b,0.505049
+PubMed Central,grad,900,6.9b,0.5113195
+PubMed Central,grad,0,12b,0.5095055
+PubMed Central,grad,100,12b,0.5102295
+PubMed Central,grad,200,12b,0.5015645
+PubMed Central,grad,300,12b,0.505396
+PubMed Central,grad,400,12b,0.5122120000000001
+PubMed Central,grad,500,12b,0.500665
+PubMed Central,grad,600,12b,0.509648
+PubMed Central,grad,700,12b,0.5020315
+PubMed Central,grad,800,12b,0.5132515000000001
+PubMed Central,grad,900,12b,0.5171265
+PubMed Central,refer,0,1b,0.5211110000000001
+PubMed Central,refer,100,1b,0.50447
+PubMed Central,refer,200,1b,0.5058735
+PubMed Central,refer,300,1b,0.5029645
+PubMed Central,refer,400,1b,0.5149265000000001
+PubMed Central,refer,500,1b,0.5106115
+PubMed Central,refer,600,1b,0.5023934999999999
+PubMed Central,refer,700,1b,0.5064125
+PubMed Central,refer,800,1b,0.5013934999999999
+PubMed Central,refer,900,1b,0.505401
+PubMed Central,refer,0,2.8b,0.5211110000000001
+PubMed Central,refer,100,2.8b,0.50447
+PubMed Central,refer,200,2.8b,0.5058735
+PubMed Central,refer,300,2.8b,0.5029645
+PubMed Central,refer,400,2.8b,0.5149265000000001
+PubMed Central,refer,500,2.8b,0.5106115
+PubMed Central,refer,600,2.8b,0.5023934999999999
+PubMed Central,refer,700,2.8b,0.5064125
+PubMed Central,refer,800,2.8b,0.5013934999999999
+PubMed Central,refer,900,2.8b,0.505401
+PubMed Central,refer,0,6.9b,0.5211110000000001
+PubMed Central,refer,100,6.9b,0.50447
+PubMed Central,refer,200,6.9b,0.5058735
+PubMed Central,refer,300,6.9b,0.5031524999999999
+PubMed Central,refer,400,6.9b,0.5149265000000001
+PubMed Central,refer,500,6.9b,0.5106115
+PubMed Central,refer,600,6.9b,0.5023934999999999
+PubMed Central,refer,700,6.9b,0.506645
+PubMed Central,refer,800,6.9b,0.5013934999999999
+PubMed Central,refer,900,6.9b,0.505401
+PubMed Central,refer,0,12b,0.5211110000000001
+PubMed Central,refer,100,12b,0.50447
+PubMed Central,refer,200,12b,0.5058845000000001
+PubMed Central,refer,300,12b,0.5030505
+PubMed Central,refer,400,12b,0.5149265000000001
+PubMed Central,refer,500,12b,0.5106115
+PubMed Central,refer,600,12b,0.5023934999999999
+PubMed Central,refer,700,12b,0.506645
+PubMed Central,refer,800,12b,0.5013934999999999
+PubMed Central,refer,900,12b,0.505401
+Pile-CC,loss,0,1b,0.5121629999999999
+Pile-CC,loss,100,1b,0.5154015000000001
+Pile-CC,loss,200,1b,0.5204394999999999
+Pile-CC,loss,300,1b,0.5044875
+Pile-CC,loss,400,1b,0.5041815
+Pile-CC,loss,500,1b,0.5022595000000001
+Pile-CC,loss,600,1b,0.5165495
+Pile-CC,loss,700,1b,0.5055885
+Pile-CC,loss,800,1b,0.5072350000000001
+Pile-CC,loss,900,1b,0.519977
+Pile-CC,loss,0,2.8b,0.5098145000000001
+Pile-CC,loss,100,2.8b,0.515673
+Pile-CC,loss,200,2.8b,0.5202135
+Pile-CC,loss,300,2.8b,0.5061785
+Pile-CC,loss,400,2.8b,0.5048725000000001
+Pile-CC,loss,500,2.8b,0.5029414999999999
+Pile-CC,loss,600,2.8b,0.515086
+Pile-CC,loss,700,2.8b,0.5045645000000001
+Pile-CC,loss,800,2.8b,0.5077704999999999
+Pile-CC,loss,900,2.8b,0.5214049999999999
+Pile-CC,loss,0,6.9b,0.515163
+Pile-CC,loss,100,6.9b,0.523182
+Pile-CC,loss,200,6.9b,0.5120895
+Pile-CC,loss,300,6.9b,0.5171840000000001
+Pile-CC,loss,400,6.9b,0.513318
+Pile-CC,loss,500,6.9b,0.5154029999999998
+Pile-CC,loss,600,6.9b,0.522467
+Pile-CC,loss,700,6.9b,0.513852
+Pile-CC,loss,800,6.9b,0.5163755
+Pile-CC,loss,900,6.9b,0.5322165000000001
+Pile-CC,loss,0,12b,0.520918
+Pile-CC,loss,100,12b,0.5249309999999999
+Pile-CC,loss,200,12b,0.5094175000000001
+Pile-CC,loss,300,12b,0.5210509999999999
+Pile-CC,loss,400,12b,0.5147315
+Pile-CC,loss,500,12b,0.5170215
+Pile-CC,loss,600,12b,0.5259349999999999
+Pile-CC,loss,700,12b,0.516786
+Pile-CC,loss,800,12b,0.521249
+Pile-CC,loss,900,12b,0.5371355
+Pile-CC,prob,0,1b,0.515079
+Pile-CC,prob,100,1b,0.520121
+Pile-CC,prob,200,1b,0.520442
+Pile-CC,prob,300,1b,0.504775
+Pile-CC,prob,400,1b,0.5062525
+Pile-CC,prob,500,1b,0.5067664999999999
+Pile-CC,prob,600,1b,0.527552
+Pile-CC,prob,700,1b,0.516621
+Pile-CC,prob,800,1b,0.5095019999999999
+Pile-CC,prob,900,1b,0.520302
+Pile-CC,prob,0,2.8b,0.512886
+Pile-CC,prob,100,2.8b,0.525219
+Pile-CC,prob,200,2.8b,0.517497
+Pile-CC,prob,300,2.8b,0.503363
+Pile-CC,prob,400,2.8b,0.5076400000000001
+Pile-CC,prob,500,2.8b,0.5041995
+Pile-CC,prob,600,2.8b,0.5256005
+Pile-CC,prob,700,2.8b,0.513494
+Pile-CC,prob,800,2.8b,0.512766
+Pile-CC,prob,900,2.8b,0.5209560000000001
+Pile-CC,prob,0,6.9b,0.519613
+Pile-CC,prob,100,6.9b,0.535267
+Pile-CC,prob,200,6.9b,0.5070840000000001
+Pile-CC,prob,300,6.9b,0.515182
+Pile-CC,prob,400,6.9b,0.5207535
+Pile-CC,prob,500,6.9b,0.5227515
+Pile-CC,prob,600,6.9b,0.538269
+Pile-CC,prob,700,6.9b,0.527394
+Pile-CC,prob,800,6.9b,0.522663
+Pile-CC,prob,900,6.9b,0.538164
+Pile-CC,prob,0,12b,0.527072
+Pile-CC,prob,100,12b,0.5360309999999999
+Pile-CC,prob,200,12b,0.500011
+Pile-CC,prob,300,12b,0.517932
+Pile-CC,prob,400,12b,0.5232140000000001
+Pile-CC,prob,500,12b,0.522621
+Pile-CC,prob,600,12b,0.5403505
+Pile-CC,prob,700,12b,0.531255
+Pile-CC,prob,800,12b,0.529844
+Pile-CC,prob,900,12b,0.5428390000000001
+Pile-CC,ppl,0,1b,0.5121629999999999
+Pile-CC,ppl,100,1b,0.5154015000000001
+Pile-CC,ppl,200,1b,0.5204394999999999
+Pile-CC,ppl,300,1b,0.5044875
+Pile-CC,ppl,400,1b,0.5041815
+Pile-CC,ppl,500,1b,0.5022595000000001
+Pile-CC,ppl,600,1b,0.5165495
+Pile-CC,ppl,700,1b,0.5055885
+Pile-CC,ppl,800,1b,0.5072350000000001
+Pile-CC,ppl,900,1b,0.519977
+Pile-CC,ppl,0,2.8b,0.5098145000000001
+Pile-CC,ppl,100,2.8b,0.515673
+Pile-CC,ppl,200,2.8b,0.5202135
+Pile-CC,ppl,300,2.8b,0.5061785
+Pile-CC,ppl,400,2.8b,0.5048725000000001
+Pile-CC,ppl,500,2.8b,0.5029414999999999
+Pile-CC,ppl,600,2.8b,0.515086
+Pile-CC,ppl,700,2.8b,0.5045645000000001
+Pile-CC,ppl,800,2.8b,0.5077704999999999
+Pile-CC,ppl,900,2.8b,0.5214049999999999
+Pile-CC,ppl,0,6.9b,0.515163
+Pile-CC,ppl,100,6.9b,0.523182
+Pile-CC,ppl,200,6.9b,0.5120895
+Pile-CC,ppl,300,6.9b,0.5171840000000001
+Pile-CC,ppl,400,6.9b,0.513318
+Pile-CC,ppl,500,6.9b,0.5154029999999998
+Pile-CC,ppl,600,6.9b,0.522467
+Pile-CC,ppl,700,6.9b,0.513852
+Pile-CC,ppl,800,6.9b,0.5163755
+Pile-CC,ppl,900,6.9b,0.5322165000000001
+Pile-CC,ppl,0,12b,0.520918
+Pile-CC,ppl,100,12b,0.5249309999999999
+Pile-CC,ppl,200,12b,0.5094175000000001
+Pile-CC,ppl,300,12b,0.5210509999999999
+Pile-CC,ppl,400,12b,0.5147315
+Pile-CC,ppl,500,12b,0.5170215
+Pile-CC,ppl,600,12b,0.5259349999999999
+Pile-CC,ppl,700,12b,0.516786
+Pile-CC,ppl,800,12b,0.521249
+Pile-CC,ppl,900,12b,0.5371355
+Pile-CC,mink_plus,0,1b,0.510448
+Pile-CC,mink_plus,100,1b,0.503572
+Pile-CC,mink_plus,200,1b,0.508988
+Pile-CC,mink_plus,300,1b,0.512065
+Pile-CC,mink_plus,400,1b,0.508493
+Pile-CC,mink_plus,500,1b,0.510923
+Pile-CC,mink_plus,600,1b,0.520921
+Pile-CC,mink_plus,700,1b,0.51482
+Pile-CC,mink_plus,800,1b,0.5018465
+Pile-CC,mink_plus,900,1b,0.5309729999999999
+Pile-CC,mink_plus,0,2.8b,0.502196
+Pile-CC,mink_plus,100,2.8b,0.512375
+Pile-CC,mink_plus,200,2.8b,0.506365
+Pile-CC,mink_plus,300,2.8b,0.5174735
+Pile-CC,mink_plus,400,2.8b,0.508853
+Pile-CC,mink_plus,500,2.8b,0.505584
+Pile-CC,mink_plus,600,2.8b,0.510385
+Pile-CC,mink_plus,700,2.8b,0.502487
+Pile-CC,mink_plus,800,2.8b,0.506713
+Pile-CC,mink_plus,900,2.8b,0.527835
+Pile-CC,mink_plus,0,6.9b,0.509555
+Pile-CC,mink_plus,100,6.9b,0.522766
+Pile-CC,mink_plus,200,6.9b,0.516954
+Pile-CC,mink_plus,300,6.9b,0.5457734999999999
+Pile-CC,mink_plus,400,6.9b,0.537833
+Pile-CC,mink_plus,500,6.9b,0.5407500000000001
+Pile-CC,mink_plus,600,6.9b,0.546895
+Pile-CC,mink_plus,700,6.9b,0.5367055
+Pile-CC,mink_plus,800,6.9b,0.5210710000000001
+Pile-CC,mink_plus,900,6.9b,0.552055
+Pile-CC,mink_plus,0,12b,0.5259305
+Pile-CC,mink_plus,100,12b,0.5281465
+Pile-CC,mink_plus,200,12b,0.5383020000000001
+Pile-CC,mink_plus,300,12b,0.554158
+Pile-CC,mink_plus,400,12b,0.538467
+Pile-CC,mink_plus,500,12b,0.532001
+Pile-CC,mink_plus,600,12b,0.5524425
+Pile-CC,mink_plus,700,12b,0.5392530000000001
+Pile-CC,mink_plus,800,12b,0.539622
+Pile-CC,mink_plus,900,12b,0.5695935000000001
+Pile-CC,zlib,0,1b,0.5055339999999999
+Pile-CC,zlib,100,1b,0.5125095
+Pile-CC,zlib,200,1b,0.520494
+Pile-CC,zlib,300,1b,0.5015985
+Pile-CC,zlib,400,1b,0.5132665
+Pile-CC,zlib,500,1b,0.5075035
+Pile-CC,zlib,600,1b,0.5270375
+Pile-CC,zlib,700,1b,0.5133735
+Pile-CC,zlib,800,1b,0.5161815000000001
+Pile-CC,zlib,900,1b,0.515468
+Pile-CC,zlib,0,2.8b,0.5037355
+Pile-CC,zlib,100,2.8b,0.513007
+Pile-CC,zlib,200,2.8b,0.5197785
+Pile-CC,zlib,300,2.8b,0.501055
+Pile-CC,zlib,400,2.8b,0.5149865
+Pile-CC,zlib,500,2.8b,0.5072465
+Pile-CC,zlib,600,2.8b,0.5254345
+Pile-CC,zlib,700,2.8b,0.5118165
+Pile-CC,zlib,800,2.8b,0.5161665
+Pile-CC,zlib,900,2.8b,0.516454
+Pile-CC,zlib,0,6.9b,0.5080395
+Pile-CC,zlib,100,6.9b,0.520127
+Pile-CC,zlib,200,6.9b,0.512134
+Pile-CC,zlib,300,6.9b,0.5139225000000001
+Pile-CC,zlib,400,6.9b,0.5245355
+Pile-CC,zlib,500,6.9b,0.5204115
+Pile-CC,zlib,600,6.9b,0.5336695
+Pile-CC,zlib,700,6.9b,0.5225355
+Pile-CC,zlib,800,6.9b,0.524874
+Pile-CC,zlib,900,6.9b,0.5281115000000001
+Pile-CC,zlib,0,12b,0.513946
+Pile-CC,zlib,100,12b,0.5226850000000001
+Pile-CC,zlib,200,12b,0.5092565
+Pile-CC,zlib,300,12b,0.518333
+Pile-CC,zlib,400,12b,0.525694
+Pile-CC,zlib,500,12b,0.5207649999999999
+Pile-CC,zlib,600,12b,0.5370379999999999
+Pile-CC,zlib,700,12b,0.5256265
+Pile-CC,zlib,800,12b,0.5305985
+Pile-CC,zlib,900,12b,0.5326299999999999
+Pile-CC,grad,0,1b,0.530986
+Pile-CC,grad,100,1b,0.517605
+Pile-CC,grad,200,1b,0.502713
+Pile-CC,grad,300,1b,0.5098444999999999
+Pile-CC,grad,400,1b,0.508132
+Pile-CC,grad,500,1b,0.509082
+Pile-CC,grad,600,1b,0.5187634999999999
+Pile-CC,grad,700,1b,0.518377
+Pile-CC,grad,800,1b,0.5022940000000001
+Pile-CC,grad,900,1b,0.5030875
+Pile-CC,grad,0,2.8b,0.5242255
+Pile-CC,grad,100,2.8b,0.5179320000000001
+Pile-CC,grad,200,2.8b,0.5024025000000001
+Pile-CC,grad,300,2.8b,0.500512
+Pile-CC,grad,400,2.8b,0.5235785
+Pile-CC,grad,500,2.8b,0.5061154999999999
+Pile-CC,grad,600,2.8b,0.5160739999999999
+Pile-CC,grad,700,2.8b,0.520378
+Pile-CC,grad,800,2.8b,0.501556
+Pile-CC,grad,900,2.8b,0.5012420000000001
+Pile-CC,grad,0,6.9b,0.5153099999999999
+Pile-CC,grad,100,6.9b,0.5180530000000001
+Pile-CC,grad,200,6.9b,0.5056160000000001
+Pile-CC,grad,300,6.9b,0.5005605
+Pile-CC,grad,400,6.9b,0.5190335
+Pile-CC,grad,500,6.9b,0.513224
+Pile-CC,grad,600,6.9b,0.5395285000000001
+Pile-CC,grad,700,6.9b,0.51406
+Pile-CC,grad,800,6.9b,0.5033125
+Pile-CC,grad,900,6.9b,0.507972
+Pile-CC,grad,0,12b,0.5012369999999999
+Pile-CC,grad,100,12b,0.5074695
+Pile-CC,grad,200,12b,0.508127
+Pile-CC,grad,300,12b,0.5039085000000001
+Pile-CC,grad,400,12b,0.511134
+Pile-CC,grad,500,12b,0.5177134999999999
+Pile-CC,grad,600,12b,0.5321095
+Pile-CC,grad,700,12b,0.5269605
+Pile-CC,grad,800,12b,0.5072395000000001
+Pile-CC,grad,900,12b,0.5127579999999999
+Pile-CC,refer,0,1b,0.5023885
+Pile-CC,refer,100,1b,0.506276
+Pile-CC,refer,200,1b,0.5200855
+Pile-CC,refer,300,1b,0.506319
+Pile-CC,refer,400,1b,0.504961
+Pile-CC,refer,500,1b,0.5030459999999999
+Pile-CC,refer,600,1b,0.514388
+Pile-CC,refer,700,1b,0.5016765
+Pile-CC,refer,800,1b,0.5028094999999999
+Pile-CC,refer,900,1b,0.5189055
+Pile-CC,refer,0,2.8b,0.5023885
+Pile-CC,refer,100,2.8b,0.506276
+Pile-CC,refer,200,2.8b,0.5200855
+Pile-CC,refer,300,2.8b,0.506319
+Pile-CC,refer,400,2.8b,0.504961
+Pile-CC,refer,500,2.8b,0.5030459999999999
+Pile-CC,refer,600,2.8b,0.514388
+Pile-CC,refer,700,2.8b,0.5016765
+Pile-CC,refer,800,2.8b,0.5028094999999999
+Pile-CC,refer,900,2.8b,0.5189055
+Pile-CC,refer,0,6.9b,0.5023885
+Pile-CC,refer,100,6.9b,0.5062615
+Pile-CC,refer,200,6.9b,0.5200675
+Pile-CC,refer,300,6.9b,0.506213
+Pile-CC,refer,400,6.9b,0.504961
+Pile-CC,refer,500,6.9b,0.5030355
+Pile-CC,refer,600,6.9b,0.514388
+Pile-CC,refer,700,6.9b,0.5023225
+Pile-CC,refer,800,6.9b,0.5028094999999999
+Pile-CC,refer,900,6.9b,0.5189055
+Pile-CC,refer,0,12b,0.5023885
+Pile-CC,refer,100,12b,0.5062615
+Pile-CC,refer,200,12b,0.5199125
+Pile-CC,refer,300,12b,0.5059865000000001
+Pile-CC,refer,400,12b,0.5049455
+Pile-CC,refer,500,12b,0.5030355
+Pile-CC,refer,600,12b,0.514388
+Pile-CC,refer,700,12b,0.5023225
+Pile-CC,refer,800,12b,0.5028094999999999
+Pile-CC,refer,900,12b,0.5189055
+HackerNews,loss,0,1b,0.501237
+HackerNews,loss,100,1b,0.51217
+HackerNews,loss,200,1b,0.5055169902912621
+HackerNews,loss,300,1b,0.528987087517934
+HackerNews,loss,400,1b,0.5116157556270096
+HackerNews,loss,500,1b,0.5125303571428572
+HackerNews,loss,600,1b,0.5347751937984496
+HackerNews,loss,700,1b,0.5011673553719008
+HackerNews,loss,800,1b,0.5085550458715596
+HackerNews,loss,900,1b,0.5154614427860696
+HackerNews,loss,0,2.8b,0.5043960000000001
+HackerNews,loss,100,2.8b,0.5228405
+HackerNews,loss,200,2.8b,0.5126219660194176
+HackerNews,loss,300,2.8b,0.5388715925394548
+HackerNews,loss,400,2.8b,0.518104501607717
+HackerNews,loss,500,2.8b,0.5209267857142856
+HackerNews,loss,600,2.8b,0.5407422480620155
+HackerNews,loss,700,2.8b,0.5095340909090909
+HackerNews,loss,800,2.8b,0.5171341743119267
+HackerNews,loss,900,2.8b,0.5266592039800995
+HackerNews,loss,0,6.9b,0.504607
+HackerNews,loss,100,6.9b,0.5236080000000001
+HackerNews,loss,200,6.9b,0.5152002427184466
+HackerNews,loss,300,6.9b,0.5414505021520803
+HackerNews,loss,400,6.9b,0.5237090032154341
+HackerNews,loss,500,6.9b,0.5281839285714286
+HackerNews,loss,600,6.9b,0.5470852713178294
+HackerNews,loss,700,6.9b,0.514534090909091
+HackerNews,loss,800,6.9b,0.5221456422018349
+HackerNews,loss,900,6.9b,0.5345062189054727
+HackerNews,loss,0,12b,0.5061725
+HackerNews,loss,100,12b,0.5304679999999999
+HackerNews,loss,200,12b,0.5182342233009709
+HackerNews,loss,300,12b,0.5478041606886657
+HackerNews,loss,400,12b,0.5295008038585209
+HackerNews,loss,500,12b,0.53163125
+HackerNews,loss,600,12b,0.5501182170542636
+HackerNews,loss,700,12b,0.5184493801652892
+HackerNews,loss,800,12b,0.527769495412844
+HackerNews,loss,900,12b,0.5394788557213931
+HackerNews,prob,0,1b,0.517413
+HackerNews,prob,100,1b,0.5086035
+HackerNews,prob,200,1b,0.5019684466019416
+HackerNews,prob,300,1b,0.5239010043041606
+HackerNews,prob,400,1b,0.501386655948553
+HackerNews,prob,500,1b,0.5204535714285714
+HackerNews,prob,600,1b,0.5356579457364341
+HackerNews,prob,700,1b,0.5100010330578513
+HackerNews,prob,800,1b,0.5039655963302753
+HackerNews,prob,900,1b,0.514955223880597
+HackerNews,prob,0,2.8b,0.520323
+HackerNews,prob,100,2.8b,0.5236040000000001
+HackerNews,prob,200,2.8b,0.5114563106796117
+HackerNews,prob,300,2.8b,0.5375107604017217
+HackerNews,prob,400,2.8b,0.5066318327974277
+HackerNews,prob,500,2.8b,0.5288517857142857
+HackerNews,prob,600,2.8b,0.546672480620155
+HackerNews,prob,700,2.8b,0.5052603305785124
+HackerNews,prob,800,2.8b,0.5193073394495412
+HackerNews,prob,900,2.8b,0.5305572139303483
+HackerNews,prob,0,6.9b,0.524941
+HackerNews,prob,100,6.9b,0.5215974999999999
+HackerNews,prob,200,6.9b,0.5192202669902912
+HackerNews,prob,300,6.9b,0.5393629842180775
+HackerNews,prob,400,6.9b,0.5132122186495177
+HackerNews,prob,500,6.9b,0.5340178571428572
+HackerNews,prob,600,6.9b,0.5465901162790698
+HackerNews,prob,700,6.9b,0.5054297520661157
+HackerNews,prob,800,6.9b,0.5217706422018349
+HackerNews,prob,900,6.9b,0.5367512437810945
+HackerNews,prob,0,12b,0.5281015
+HackerNews,prob,100,12b,0.530781
+HackerNews,prob,200,12b,0.5210740291262136
+HackerNews,prob,300,12b,0.5479756097560976
+HackerNews,prob,400,12b,0.5202146302250804
+HackerNews,prob,500,12b,0.5367428571428571
+HackerNews,prob,600,12b,0.5490813953488372
+HackerNews,prob,700,12b,0.5115413223140497
+HackerNews,prob,800,12b,0.5258853211009173
+HackerNews,prob,900,12b,0.5433955223880597
+HackerNews,ppl,0,1b,0.501237
+HackerNews,ppl,100,1b,0.51217
+HackerNews,ppl,200,1b,0.5055169902912621
+HackerNews,ppl,300,1b,0.528987087517934
+HackerNews,ppl,400,1b,0.5116157556270096
+HackerNews,ppl,500,1b,0.5125303571428572
+HackerNews,ppl,600,1b,0.5347751937984496
+HackerNews,ppl,700,1b,0.5011673553719008
+HackerNews,ppl,800,1b,0.5085550458715596
+HackerNews,ppl,900,1b,0.5154614427860696
+HackerNews,ppl,0,2.8b,0.5043960000000001
+HackerNews,ppl,100,2.8b,0.5228405
+HackerNews,ppl,200,2.8b,0.5126219660194176
+HackerNews,ppl,300,2.8b,0.5388715925394548
+HackerNews,ppl,400,2.8b,0.518104501607717
+HackerNews,ppl,500,2.8b,0.5209267857142856
+HackerNews,ppl,600,2.8b,0.5407422480620155
+HackerNews,ppl,700,2.8b,0.5095340909090909
+HackerNews,ppl,800,2.8b,0.5171341743119267
+HackerNews,ppl,900,2.8b,0.5266592039800995
+HackerNews,ppl,0,6.9b,0.504607
+HackerNews,ppl,100,6.9b,0.5236080000000001
+HackerNews,ppl,200,6.9b,0.5152002427184466
+HackerNews,ppl,300,6.9b,0.5414505021520803
+HackerNews,ppl,400,6.9b,0.5237090032154341
+HackerNews,ppl,500,6.9b,0.5281839285714286
+HackerNews,ppl,600,6.9b,0.5470852713178294
+HackerNews,ppl,700,6.9b,0.514534090909091
+HackerNews,ppl,800,6.9b,0.5221456422018349
+HackerNews,ppl,900,6.9b,0.5345062189054727
+HackerNews,ppl,0,12b,0.5061725
+HackerNews,ppl,100,12b,0.5304679999999999
+HackerNews,ppl,200,12b,0.5182342233009709
+HackerNews,ppl,300,12b,0.5478041606886657
+HackerNews,ppl,400,12b,0.5295008038585209
+HackerNews,ppl,500,12b,0.53163125
+HackerNews,ppl,600,12b,0.5501182170542636
+HackerNews,ppl,700,12b,0.5184493801652892
+HackerNews,ppl,800,12b,0.527769495412844
+HackerNews,ppl,900,12b,0.5394788557213931
+HackerNews,mink_plus,0,1b,0.533552
+HackerNews,mink_plus,100,1b,0.500203
+HackerNews,mink_plus,200,1b,0.5104381067961166
+HackerNews,mink_plus,300,1b,0.5234031563845051
+HackerNews,mink_plus,400,1b,0.5126760450160772
+HackerNews,mink_plus,500,1b,0.5190142857142857
+HackerNews,mink_plus,600,1b,0.5214011627906977
+HackerNews,mink_plus,700,1b,0.513004132231405
+HackerNews,mink_plus,800,1b,0.5183646788990826
+HackerNews,mink_plus,900,1b,0.519681592039801
+HackerNews,mink_plus,0,2.8b,0.528331
+HackerNews,mink_plus,100,2.8b,0.514987
+HackerNews,mink_plus,200,2.8b,0.5159587378640776
+HackerNews,mink_plus,300,2.8b,0.5362424677187948
+HackerNews,mink_plus,400,2.8b,0.5140852090032154
+HackerNews,mink_plus,500,2.8b,0.5224374999999999
+HackerNews,mink_plus,600,2.8b,0.5470639534883721
+HackerNews,mink_plus,700,2.8b,0.518085743801653
+HackerNews,mink_plus,800,2.8b,0.5424839449541284
+HackerNews,mink_plus,900,2.8b,0.5525149253731344
+HackerNews,mink_plus,0,6.9b,0.5306919999999999
+HackerNews,mink_plus,100,6.9b,0.502338
+HackerNews,mink_plus,200,6.9b,0.502504854368932
+HackerNews,mink_plus,300,6.9b,0.5166499282639885
+HackerNews,mink_plus,400,6.9b,0.5028987138263665
+HackerNews,mink_plus,500,6.9b,0.5103607142857143
+HackerNews,mink_plus,600,6.9b,0.5273972868217054
+HackerNews,mink_plus,700,6.9b,0.5191260330578512
+HackerNews,mink_plus,800,6.9b,0.5378405963302753
+HackerNews,mink_plus,900,6.9b,0.5454427860696518
+HackerNews,mink_plus,0,12b,0.531211
+HackerNews,mink_plus,100,12b,0.509421
+HackerNews,mink_plus,200,12b,0.5046705097087378
+HackerNews,mink_plus,300,12b,0.5301549497847919
+HackerNews,mink_plus,400,12b,0.506209003215434
+HackerNews,mink_plus,500,12b,0.5099035714285713
+HackerNews,mink_plus,600,12b,0.5194447674418605
+HackerNews,mink_plus,700,12b,0.5198574380165288
+HackerNews,mink_plus,800,12b,0.5279564220183486
+HackerNews,mink_plus,900,12b,0.5372661691542289
+HackerNews,zlib,0,1b,0.5149969999999999
+HackerNews,zlib,100,1b,0.509344
+HackerNews,zlib,200,1b,0.5210242718446602
+HackerNews,zlib,300,1b,0.5304827833572453
+HackerNews,zlib,400,1b,0.5129131832797428
+HackerNews,zlib,500,1b,0.5170955357142857
+HackerNews,zlib,600,1b,0.5349544573643411
+HackerNews,zlib,700,1b,0.506870867768595
+HackerNews,zlib,800,1b,0.5197832568807339
+HackerNews,zlib,900,1b,0.5180310945273632
+HackerNews,zlib,0,2.8b,0.519754
+HackerNews,zlib,100,2.8b,0.520278
+HackerNews,zlib,200,2.8b,0.5311978155339805
+HackerNews,zlib,300,2.8b,0.5439641319942612
+HackerNews,zlib,400,2.8b,0.5184067524115756
+HackerNews,zlib,500,2.8b,0.5277866071428572
+HackerNews,zlib,600,2.8b,0.5440813953488373
+HackerNews,zlib,700,2.8b,0.5181518595041322
+HackerNews,zlib,800,2.8b,0.5284862385321101
+HackerNews,zlib,900,2.8b,0.5284402985074628
+HackerNews,zlib,0,6.9b,0.5184230000000001
+HackerNews,zlib,100,6.9b,0.521697
+HackerNews,zlib,200,6.9b,0.5349702669902912
+HackerNews,zlib,300,6.9b,0.5475652797704448
+HackerNews,zlib,400,6.9b,0.5251856913183279
+HackerNews,zlib,500,6.9b,0.5378785714285714
+HackerNews,zlib,600,6.9b,0.5526492248062016
+HackerNews,zlib,700,6.9b,0.5233388429752066
+HackerNews,zlib,800,6.9b,0.533105504587156
+HackerNews,zlib,900,6.9b,0.5378308457711443
+HackerNews,zlib,0,12b,0.5222355000000001
+HackerNews,zlib,100,12b,0.5309805
+HackerNews,zlib,200,12b,0.5407317961165048
+HackerNews,zlib,300,12b,0.5582137733142036
+HackerNews,zlib,400,12b,0.5359879421221865
+HackerNews,zlib,500,12b,0.5435767857142857
+HackerNews,zlib,600,12b,0.5581695736434109
+HackerNews,zlib,700,12b,0.5306652892561983
+HackerNews,zlib,800,12b,0.5421490825688073
+HackerNews,zlib,900,12b,0.5453905472636816
+HackerNews,grad,0,1b,0.5255775
+HackerNews,grad,100,1b,0.5160355000000001
+HackerNews,grad,200,1b,0.5150491504854369
+HackerNews,grad,300,1b,0.5167568149210904
+HackerNews,grad,400,1b,0.5109879421221866
+HackerNews,grad,500,1b,0.5039428571428571
+HackerNews,grad,600,1b,0.5406434108527132
+HackerNews,grad,700,1b,0.522180785123967
+HackerNews,grad,800,1b,0.521559633027523
+HackerNews,grad,900,1b,0.5292251243781094
+HackerNews,grad,0,2.8b,0.5412545
+HackerNews,grad,100,2.8b,0.5208809999999999
+HackerNews,grad,200,2.8b,0.5299575242718446
+HackerNews,grad,300,2.8b,0.5447252510760401
+HackerNews,grad,400,2.8b,0.5144413183279742
+HackerNews,grad,500,2.8b,0.51035
+HackerNews,grad,600,2.8b,0.5425232558139534
+HackerNews,grad,700,2.8b,0.5262004132231405
+HackerNews,grad,800,2.8b,0.5309346330275229
+HackerNews,grad,900,2.8b,0.5555422885572139
+HackerNews,grad,0,6.9b,0.5261899999999999
+HackerNews,grad,100,6.9b,0.503661
+HackerNews,grad,200,6.9b,0.5286747572815534
+HackerNews,grad,300,6.9b,0.5468601147776184
+HackerNews,grad,400,6.9b,0.5308030546623794
+HackerNews,grad,500,6.9b,0.5261767857142857
+HackerNews,grad,600,6.9b,0.5398294573643411
+HackerNews,grad,700,6.9b,0.530926652892562
+HackerNews,grad,800,6.9b,0.5384862385321101
+HackerNews,grad,900,6.9b,0.5418258706467662
+HackerNews,grad,0,12b,0.5242694999999999
+HackerNews,grad,100,12b,0.5110025
+HackerNews,grad,200,12b,0.532867718446602
+HackerNews,grad,300,12b,0.528335007173601
+HackerNews,grad,400,12b,0.5148754019292605
+HackerNews,grad,500,12b,0.5057642857142857
+HackerNews,grad,600,12b,0.5146065891472869
+HackerNews,grad,700,12b,0.5181663223140496
+HackerNews,grad,800,12b,0.5186066513761467
+HackerNews,grad,900,12b,0.5045634328358208
+HackerNews,refer,0,1b,0.5005975
+HackerNews,refer,100,1b,0.518849
+HackerNews,refer,200,1b,0.5060776699029126
+HackerNews,refer,300,1b,0.5307044476327116
+HackerNews,refer,400,1b,0.5063046623794212
+HackerNews,refer,500,1b,0.5085696428571429
+HackerNews,refer,600,1b,0.529643410852713
+HackerNews,refer,700,1b,0.5036095041322314
+HackerNews,refer,800,1b,0.5011571100917431
+HackerNews,refer,900,1b,0.5141977611940299
+HackerNews,refer,0,2.8b,0.5005975
+HackerNews,refer,100,2.8b,0.518849
+HackerNews,refer,200,2.8b,0.5060776699029126
+HackerNews,refer,300,2.8b,0.5307044476327116
+HackerNews,refer,400,2.8b,0.5063046623794212
+HackerNews,refer,500,2.8b,0.5085696428571429
+HackerNews,refer,600,2.8b,0.529643410852713
+HackerNews,refer,700,2.8b,0.5036095041322314
+HackerNews,refer,800,2.8b,0.5011571100917431
+HackerNews,refer,900,2.8b,0.5141977611940299
+HackerNews,refer,0,6.9b,0.5006079999999999
+HackerNews,refer,100,6.9b,0.5188645000000001
+HackerNews,refer,200,6.9b,0.5060776699029126
+HackerNews,refer,300,6.9b,0.5303988522238163
+HackerNews,refer,400,6.9b,0.5063046623794212
+HackerNews,refer,500,6.9b,0.5085696428571429
+HackerNews,refer,600,6.9b,0.529643410852713
+HackerNews,refer,700,6.9b,0.503551652892562
+HackerNews,refer,800,6.9b,0.5011571100917431
+HackerNews,refer,900,6.9b,0.5141977611940299
+HackerNews,refer,0,12b,0.5006079999999999
+HackerNews,refer,100,12b,0.5188645000000001
+HackerNews,refer,200,12b,0.5060412621359223
+HackerNews,refer,300,12b,0.5308177905308464
+HackerNews,refer,400,12b,0.5063046623794212
+HackerNews,refer,500,12b,0.5085696428571429
+HackerNews,refer,600,12b,0.529643410852713
+HackerNews,refer,700,12b,0.503551652892562
+HackerNews,refer,800,12b,0.5011571100917431
+HackerNews,refer,900,12b,0.5141977611940299
+Github,loss,0,1b,0.5014495
+Github,loss,100,1b,0.5196375
+Github,loss,200,1b,0.508709
+Github,loss,300,1b,0.5118155
+Github,loss,400,1b,0.5096745
+Github,loss,500,1b,0.5061880000000001
+Github,loss,600,1b,0.510034
+Github,loss,700,1b,0.5061305
+Github,loss,800,1b,0.5054544999999999
+Github,loss,900,1b,0.507397
+Github,loss,0,2.8b,0.5037875
+Github,loss,100,2.8b,0.5172939999999999
+Github,loss,200,2.8b,0.5078905
+Github,loss,300,2.8b,0.5086445
+Github,loss,400,2.8b,0.509432
+Github,loss,500,2.8b,0.5017704999999999
+Github,loss,600,2.8b,0.5082015
+Github,loss,700,2.8b,0.5064275
+Github,loss,800,2.8b,0.501989
+Github,loss,900,2.8b,0.50841
+Github,loss,0,6.9b,0.503317
+Github,loss,100,6.9b,0.5174814999999999
+Github,loss,200,6.9b,0.5052365000000001
+Github,loss,300,6.9b,0.5092705
+Github,loss,400,6.9b,0.5070975
+Github,loss,500,6.9b,0.5059065
+Github,loss,600,6.9b,0.5098065
+Github,loss,700,6.9b,0.5027499999999999
+Github,loss,800,6.9b,0.5026759999999999
+Github,loss,900,6.9b,0.5018035000000001
+Github,loss,0,12b,0.5001015
+Github,loss,100,12b,0.518567
+Github,loss,200,12b,0.5030155
+Github,loss,300,12b,0.5074460000000001
+Github,loss,400,12b,0.506494
+Github,loss,500,12b,0.5069425000000001
+Github,loss,600,12b,0.506945
+Github,loss,700,12b,0.500808
+Github,loss,800,12b,0.5023985
+Github,loss,900,12b,0.5008665000000001
+Github,prob,0,1b,0.5045645
+Github,prob,100,1b,0.5181535
+Github,prob,200,1b,0.5078605
+Github,prob,300,1b,0.5086055
+Github,prob,400,1b,0.514858
+Github,prob,500,1b,0.5064805
+Github,prob,600,1b,0.5070345
+Github,prob,700,1b,0.5052135
+Github,prob,800,1b,0.5003299999999999
+Github,prob,900,1b,0.5032384999999999
+Github,prob,0,2.8b,0.50185
+Github,prob,100,2.8b,0.5186285
+Github,prob,200,2.8b,0.5060705
+Github,prob,300,2.8b,0.5066325
+Github,prob,400,2.8b,0.512278
+Github,prob,500,2.8b,0.5030475000000001
+Github,prob,600,2.8b,0.5061075
+Github,prob,700,2.8b,0.5046370000000001
+Github,prob,800,2.8b,0.50132
+Github,prob,900,2.8b,0.5051985
+Github,prob,0,6.9b,0.5011635
+Github,prob,100,6.9b,0.5176395
+Github,prob,200,6.9b,0.5039345
+Github,prob,300,6.9b,0.5069365
+Github,prob,400,6.9b,0.509099
+Github,prob,500,6.9b,0.5080045
+Github,prob,600,6.9b,0.5077545
+Github,prob,700,6.9b,0.5005145
+Github,prob,800,6.9b,0.5015355
+Github,prob,900,6.9b,0.5031965
+Github,prob,0,12b,0.5038549999999999
+Github,prob,100,12b,0.5189665
+Github,prob,200,12b,0.5007604999999999
+Github,prob,300,12b,0.5054285000000001
+Github,prob,400,12b,0.507597
+Github,prob,500,12b,0.5091525
+Github,prob,600,12b,0.5042005
+Github,prob,700,12b,0.5022455
+Github,prob,800,12b,0.501724
+Github,prob,900,12b,0.5060135
+Github,ppl,0,1b,0.5014495
+Github,ppl,100,1b,0.5196375
+Github,ppl,200,1b,0.508709
+Github,ppl,300,1b,0.5118155
+Github,ppl,400,1b,0.5096745
+Github,ppl,500,1b,0.5061880000000001
+Github,ppl,600,1b,0.510034
+Github,ppl,700,1b,0.5061305
+Github,ppl,800,1b,0.5054544999999999
+Github,ppl,900,1b,0.507397
+Github,ppl,0,2.8b,0.5037875
+Github,ppl,100,2.8b,0.5172939999999999
+Github,ppl,200,2.8b,0.5078905
+Github,ppl,300,2.8b,0.5086445
+Github,ppl,400,2.8b,0.509432
+Github,ppl,500,2.8b,0.5017704999999999
+Github,ppl,600,2.8b,0.5082015
+Github,ppl,700,2.8b,0.5064275
+Github,ppl,800,2.8b,0.501989
+Github,ppl,900,2.8b,0.50841
+Github,ppl,0,6.9b,0.503317
+Github,ppl,100,6.9b,0.5174814999999999
+Github,ppl,200,6.9b,0.5052365000000001
+Github,ppl,300,6.9b,0.5092705
+Github,ppl,400,6.9b,0.5070975
+Github,ppl,500,6.9b,0.5059065
+Github,ppl,600,6.9b,0.5098065
+Github,ppl,700,6.9b,0.5027499999999999
+Github,ppl,800,6.9b,0.5026759999999999
+Github,ppl,900,6.9b,0.5018035000000001
+Github,ppl,0,12b,0.5001015
+Github,ppl,100,12b,0.518567
+Github,ppl,200,12b,0.5030155
+Github,ppl,300,12b,0.5074460000000001
+Github,ppl,400,12b,0.506494
+Github,ppl,500,12b,0.5069425000000001
+Github,ppl,600,12b,0.506945
+Github,ppl,700,12b,0.500808
+Github,ppl,800,12b,0.5023985
+Github,ppl,900,12b,0.5008665000000001
+Github,mink_plus,0,1b,0.5040025
+Github,mink_plus,100,1b,0.5195624999999999
+Github,mink_plus,200,1b,0.5159104999999999
+Github,mink_plus,300,1b,0.5058425000000001
+Github,mink_plus,400,1b,0.5172300000000001
+Github,mink_plus,500,1b,0.5041574999999999
+Github,mink_plus,600,1b,0.5106185
+Github,mink_plus,700,1b,0.502086
+Github,mink_plus,800,1b,0.513688
+Github,mink_plus,900,1b,0.509582
+Github,mink_plus,0,2.8b,0.5005645000000001
+Github,mink_plus,100,2.8b,0.5332935
+Github,mink_plus,200,2.8b,0.5088975
+Github,mink_plus,300,2.8b,0.507979
+Github,mink_plus,400,2.8b,0.504406
+Github,mink_plus,500,2.8b,0.5025634999999999
+Github,mink_plus,600,2.8b,0.5067365
+Github,mink_plus,700,2.8b,0.5015255000000001
+Github,mink_plus,800,2.8b,0.500276
+Github,mink_plus,900,2.8b,0.5043905
+Github,mink_plus,0,6.9b,0.504
+Github,mink_plus,100,6.9b,0.5109045
+Github,mink_plus,200,6.9b,0.5140954999999999
+Github,mink_plus,300,6.9b,0.503661
+Github,mink_plus,400,6.9b,0.505332
+Github,mink_plus,500,6.9b,0.5121114999999999
+Github,mink_plus,600,6.9b,0.5009575
+Github,mink_plus,700,6.9b,0.5090755
+Github,mink_plus,800,6.9b,0.5099855
+Github,mink_plus,900,6.9b,0.5044645
+Github,mink_plus,0,12b,0.5026465
+Github,mink_plus,100,12b,0.5224185
+Github,mink_plus,200,12b,0.5185845
+Github,mink_plus,300,12b,0.5018125
+Github,mink_plus,400,12b,0.501838
+Github,mink_plus,500,12b,0.5133424999999999
+Github,mink_plus,600,12b,0.5102785
+Github,mink_plus,700,12b,0.5194165
+Github,mink_plus,800,12b,0.5069985
+Github,mink_plus,900,12b,0.5067735
+Github,zlib,0,1b,0.5042019999999999
+Github,zlib,100,1b,0.5182415
+Github,zlib,200,1b,0.505084
+Github,zlib,300,1b,0.5071025
+Github,zlib,400,1b,0.507341
+Github,zlib,500,1b,0.5050325
+Github,zlib,600,1b,0.5006695
+Github,zlib,700,1b,0.518003
+Github,zlib,800,1b,0.500999
+Github,zlib,900,1b,0.503968
+Github,zlib,0,2.8b,0.500196
+Github,zlib,100,2.8b,0.517811
+Github,zlib,200,2.8b,0.5058345
+Github,zlib,300,2.8b,0.505258
+Github,zlib,400,2.8b,0.509109
+Github,zlib,500,2.8b,0.5033799999999999
+Github,zlib,600,2.8b,0.50043
+Github,zlib,700,2.8b,0.511386
+Github,zlib,800,2.8b,0.5043865000000001
+Github,zlib,900,2.8b,0.5080739999999999
+Github,zlib,0,6.9b,0.5003405000000001
+Github,zlib,100,6.9b,0.5189904999999999
+Github,zlib,200,6.9b,0.5035799999999999
+Github,zlib,300,6.9b,0.5069940000000001
+Github,zlib,400,6.9b,0.5059444999999999
+Github,zlib,500,6.9b,0.5053369999999999
+Github,zlib,600,6.9b,0.5010809999999999
+Github,zlib,700,6.9b,0.515745
+Github,zlib,800,6.9b,0.5044695
+Github,zlib,900,6.9b,0.5036090000000001
+Github,zlib,0,12b,0.5026735
+Github,zlib,100,12b,0.5197069999999999
+Github,zlib,200,12b,0.501269
+Github,zlib,300,12b,0.5057400000000001
+Github,zlib,400,12b,0.5058064999999999
+Github,zlib,500,12b,0.5075645
+Github,zlib,600,12b,0.5016499999999999
+Github,zlib,700,12b,0.5172524999999999
+Github,zlib,800,12b,0.5048065
+Github,zlib,900,12b,0.5074625
+Github,grad,0,1b,0.5038155
+Github,grad,100,1b,0.5142755
+Github,grad,200,1b,0.5138450000000001
+Github,grad,300,1b,0.5061104999999999
+Github,grad,400,1b,0.5014105
+Github,grad,500,1b,0.5052570000000001
+Github,grad,600,1b,0.510127
+Github,grad,700,1b,0.5008435
+Github,grad,800,1b,0.523875
+Github,grad,900,1b,0.5268345
+Github,grad,0,2.8b,0.5023930000000001
+Github,grad,100,2.8b,0.5130705
+Github,grad,200,2.8b,0.5025394999999999
+Github,grad,300,2.8b,0.5083485
+Github,grad,400,2.8b,0.500837
+Github,grad,500,2.8b,0.512522
+Github,grad,600,2.8b,0.5033610000000001
+Github,grad,700,2.8b,0.502102
+Github,grad,800,2.8b,0.5142315
+Github,grad,900,2.8b,0.513962
+Github,grad,0,6.9b,0.501831
+Github,grad,100,6.9b,0.5053885
+Github,grad,200,6.9b,0.5065395
+Github,grad,300,6.9b,0.5007685
+Github,grad,400,6.9b,0.5035975
+Github,grad,500,6.9b,0.512094
+Github,grad,600,6.9b,0.5010495000000001
+Github,grad,700,6.9b,0.5054975
+Github,grad,800,6.9b,0.5121315
+Github,grad,900,6.9b,0.5204614999999999
+Github,grad,0,12b,0.50369
+Github,grad,100,12b,0.52598
+Github,grad,200,12b,0.509468
+Github,grad,300,12b,0.5086700000000001
+Github,grad,400,12b,0.514498
+Github,grad,500,12b,0.5076229999999999
+Github,grad,600,12b,0.5086035
+Github,grad,700,12b,0.5078405
+Github,grad,800,12b,0.5051525
+Github,grad,900,12b,0.5160365
+Github,refer,0,1b,0.5040215
+Github,refer,100,1b,0.5135845000000001
+Github,refer,200,1b,0.5068835
+Github,refer,300,1b,0.5094004999999999
+Github,refer,400,1b,0.5139965
+Github,refer,500,1b,0.5043605
+Github,refer,600,1b,0.5156369999999999
+Github,refer,700,1b,0.5006845
+Github,refer,800,1b,0.502683
+Github,refer,900,1b,0.5154384999999999
+Github,refer,0,2.8b,0.5040215
+Github,refer,100,2.8b,0.5135845000000001
+Github,refer,200,2.8b,0.5068835
+Github,refer,300,2.8b,0.5094004999999999
+Github,refer,400,2.8b,0.5139965
+Github,refer,500,2.8b,0.5043605
+Github,refer,600,2.8b,0.5156369999999999
+Github,refer,700,2.8b,0.5006845
+Github,refer,800,2.8b,0.502683
+Github,refer,900,2.8b,0.5154384999999999
+Github,refer,0,6.9b,0.5040614999999999
+Github,refer,100,6.9b,0.5135825
+Github,refer,200,6.9b,0.5068835
+Github,refer,300,6.9b,0.5095035
+Github,refer,400,6.9b,0.5139965
+Github,refer,500,6.9b,0.5043605
+Github,refer,600,6.9b,0.5156270000000001
+Github,refer,700,6.9b,0.5006515
+Github,refer,800,6.9b,0.502683
+Github,refer,900,6.9b,0.5154384999999999
+Github,refer,0,12b,0.5040614999999999
+Github,refer,100,12b,0.5135805
+Github,refer,200,12b,0.506885
+Github,refer,300,12b,0.509523
+Github,refer,400,12b,0.5139965
+Github,refer,500,12b,0.5043605
+Github,refer,600,12b,0.5156270000000001
+Github,refer,700,12b,0.5006515
+Github,refer,800,12b,0.502683
+Github,refer,900,12b,0.5154384999999999
+FreeLaw,loss,0,1b,0.515811
+FreeLaw,loss,100,1b,0.5296890000000001
+FreeLaw,loss,200,1b,0.509974
+FreeLaw,loss,300,1b,0.5415085
+FreeLaw,loss,400,1b,0.5095125
+FreeLaw,loss,500,1b,0.5023215
+FreeLaw,loss,600,1b,0.5023065
+FreeLaw,loss,700,1b,0.509898
+FreeLaw,loss,800,1b,0.5008739999999999
+FreeLaw,loss,900,1b,0.5052675
+FreeLaw,loss,0,2.8b,0.520329
+FreeLaw,loss,100,2.8b,0.5296035
+FreeLaw,loss,200,2.8b,0.5124285000000001
+FreeLaw,loss,300,2.8b,0.540645
+FreeLaw,loss,400,2.8b,0.512463
+FreeLaw,loss,500,2.8b,0.501345
+FreeLaw,loss,600,2.8b,0.5028064999999999
+FreeLaw,loss,700,2.8b,0.5147705
+FreeLaw,loss,800,2.8b,0.5078665
+FreeLaw,loss,900,2.8b,0.506938
+FreeLaw,loss,0,6.9b,0.5217125
+FreeLaw,loss,100,6.9b,0.5330374999999999
+FreeLaw,loss,200,6.9b,0.5141955
+FreeLaw,loss,300,6.9b,0.546629
+FreeLaw,loss,400,6.9b,0.514813
+FreeLaw,loss,500,6.9b,0.5040644999999999
+FreeLaw,loss,600,6.9b,0.5073624999999999
+FreeLaw,loss,700,6.9b,0.5201020000000001
+FreeLaw,loss,800,6.9b,0.5150175
+FreeLaw,loss,900,6.9b,0.5139009999999999
+FreeLaw,loss,0,12b,0.5235795
+FreeLaw,loss,100,12b,0.5354260000000001
+FreeLaw,loss,200,12b,0.517576
+FreeLaw,loss,300,12b,0.54922
+FreeLaw,loss,400,12b,0.5176725
+FreeLaw,loss,500,12b,0.5058165
+FreeLaw,loss,600,12b,0.5105325000000001
+FreeLaw,loss,700,12b,0.5241895000000001
+FreeLaw,loss,800,12b,0.518192
+FreeLaw,loss,900,12b,0.5183975
+FreeLaw,prob,0,1b,0.509786
+FreeLaw,prob,100,1b,0.5319955000000001
+FreeLaw,prob,200,1b,0.508548
+FreeLaw,prob,300,1b,0.535996
+FreeLaw,prob,400,1b,0.50556
+FreeLaw,prob,500,1b,0.505799
+FreeLaw,prob,600,1b,0.509482
+FreeLaw,prob,700,1b,0.5090480000000001
+FreeLaw,prob,800,1b,0.504239
+FreeLaw,prob,900,1b,0.501553
+FreeLaw,prob,0,2.8b,0.514573
+FreeLaw,prob,100,2.8b,0.5305065
+FreeLaw,prob,200,2.8b,0.5093624999999999
+FreeLaw,prob,300,2.8b,0.5370524999999999
+FreeLaw,prob,400,2.8b,0.5094089999999999
+FreeLaw,prob,500,2.8b,0.5012224999999999
+FreeLaw,prob,600,2.8b,0.500935
+FreeLaw,prob,700,2.8b,0.516487
+FreeLaw,prob,800,2.8b,0.507373
+FreeLaw,prob,900,2.8b,0.508816
+FreeLaw,prob,0,6.9b,0.513868
+FreeLaw,prob,100,6.9b,0.533917
+FreeLaw,prob,200,6.9b,0.513857
+FreeLaw,prob,300,6.9b,0.54711
+FreeLaw,prob,400,6.9b,0.517139
+FreeLaw,prob,500,6.9b,0.5069969999999999
+FreeLaw,prob,600,6.9b,0.5070585000000001
+FreeLaw,prob,700,6.9b,0.527293
+FreeLaw,prob,800,6.9b,0.518066
+FreeLaw,prob,900,6.9b,0.5198335000000001
+FreeLaw,prob,0,12b,0.5185909999999999
+FreeLaw,prob,100,12b,0.5381509999999999
+FreeLaw,prob,200,12b,0.519531
+FreeLaw,prob,300,12b,0.5520700000000001
+FreeLaw,prob,400,12b,0.5189459999999999
+FreeLaw,prob,500,12b,0.507451
+FreeLaw,prob,600,12b,0.5112939999999999
+FreeLaw,prob,700,12b,0.5334829999999999
+FreeLaw,prob,800,12b,0.522715
+FreeLaw,prob,900,12b,0.526456
+FreeLaw,ppl,0,1b,0.515811
+FreeLaw,ppl,100,1b,0.5296890000000001
+FreeLaw,ppl,200,1b,0.509974
+FreeLaw,ppl,300,1b,0.5415085
+FreeLaw,ppl,400,1b,0.5095125
+FreeLaw,ppl,500,1b,0.5023215
+FreeLaw,ppl,600,1b,0.5023065
+FreeLaw,ppl,700,1b,0.509898
+FreeLaw,ppl,800,1b,0.5008739999999999
+FreeLaw,ppl,900,1b,0.5052675
+FreeLaw,ppl,0,2.8b,0.520329
+FreeLaw,ppl,100,2.8b,0.5296035
+FreeLaw,ppl,200,2.8b,0.5124285000000001
+FreeLaw,ppl,300,2.8b,0.540645
+FreeLaw,ppl,400,2.8b,0.512463
+FreeLaw,ppl,500,2.8b,0.501345
+FreeLaw,ppl,600,2.8b,0.5028064999999999
+FreeLaw,ppl,700,2.8b,0.5147705
+FreeLaw,ppl,800,2.8b,0.5078665
+FreeLaw,ppl,900,2.8b,0.506938
+FreeLaw,ppl,0,6.9b,0.5217125
+FreeLaw,ppl,100,6.9b,0.5330374999999999
+FreeLaw,ppl,200,6.9b,0.5141955
+FreeLaw,ppl,300,6.9b,0.546629
+FreeLaw,ppl,400,6.9b,0.514813
+FreeLaw,ppl,500,6.9b,0.5040644999999999
+FreeLaw,ppl,600,6.9b,0.5073624999999999
+FreeLaw,ppl,700,6.9b,0.5201020000000001
+FreeLaw,ppl,800,6.9b,0.5150175
+FreeLaw,ppl,900,6.9b,0.5139009999999999
+FreeLaw,ppl,0,12b,0.5235795
+FreeLaw,ppl,100,12b,0.5354260000000001
+FreeLaw,ppl,200,12b,0.517576
+FreeLaw,ppl,300,12b,0.54922
+FreeLaw,ppl,400,12b,0.5176725
+FreeLaw,ppl,500,12b,0.5058165
+FreeLaw,ppl,600,12b,0.5105325000000001
+FreeLaw,ppl,700,12b,0.5241895000000001
+FreeLaw,ppl,800,12b,0.518192
+FreeLaw,ppl,900,12b,0.5183975
+FreeLaw,mink_plus,0,1b,0.5023310000000001
+FreeLaw,mink_plus,100,1b,0.505311
+FreeLaw,mink_plus,200,1b,0.509201
+FreeLaw,mink_plus,300,1b,0.5173760000000001
+FreeLaw,mink_plus,400,1b,0.502458
+FreeLaw,mink_plus,500,1b,0.501139
+FreeLaw,mink_plus,600,1b,0.5221849999999999
+FreeLaw,mink_plus,700,1b,0.5123925
+FreeLaw,mink_plus,800,1b,0.501346
+FreeLaw,mink_plus,900,1b,0.501486
+FreeLaw,mink_plus,0,2.8b,0.51485
+FreeLaw,mink_plus,100,2.8b,0.516295
+FreeLaw,mink_plus,200,2.8b,0.511512
+FreeLaw,mink_plus,300,2.8b,0.518659
+FreeLaw,mink_plus,400,2.8b,0.510433
+FreeLaw,mink_plus,500,2.8b,0.5115645
+FreeLaw,mink_plus,600,2.8b,0.519749
+FreeLaw,mink_plus,700,2.8b,0.5276695
+FreeLaw,mink_plus,800,2.8b,0.5274939999999999
+FreeLaw,mink_plus,900,2.8b,0.516463
+FreeLaw,mink_plus,0,6.9b,0.513766
+FreeLaw,mink_plus,100,6.9b,0.509891
+FreeLaw,mink_plus,200,6.9b,0.509088
+FreeLaw,mink_plus,300,6.9b,0.527906
+FreeLaw,mink_plus,400,6.9b,0.505388
+FreeLaw,mink_plus,500,6.9b,0.516097
+FreeLaw,mink_plus,600,6.9b,0.535338
+FreeLaw,mink_plus,700,6.9b,0.537227
+FreeLaw,mink_plus,800,6.9b,0.5191699999999999
+FreeLaw,mink_plus,900,6.9b,0.5319335000000001
+FreeLaw,mink_plus,0,12b,0.519612
+FreeLaw,mink_plus,100,12b,0.513423
+FreeLaw,mink_plus,200,12b,0.519601
+FreeLaw,mink_plus,300,12b,0.523238
+FreeLaw,mink_plus,400,12b,0.5062040000000001
+FreeLaw,mink_plus,500,12b,0.516065
+FreeLaw,mink_plus,600,12b,0.531923
+FreeLaw,mink_plus,700,12b,0.535428
+FreeLaw,mink_plus,800,12b,0.525943
+FreeLaw,mink_plus,900,12b,0.5413859999999999
+FreeLaw,zlib,0,1b,0.509992
+FreeLaw,zlib,100,1b,0.527989
+FreeLaw,zlib,200,1b,0.5011325
+FreeLaw,zlib,300,1b,0.5402625
+FreeLaw,zlib,400,1b,0.5019865
+FreeLaw,zlib,500,1b,0.5039450000000001
+FreeLaw,zlib,600,1b,0.5018025
+FreeLaw,zlib,700,1b,0.507327
+FreeLaw,zlib,800,1b,0.504769
+FreeLaw,zlib,900,1b,0.512436
+FreeLaw,zlib,0,2.8b,0.511557
+FreeLaw,zlib,100,2.8b,0.5289895
+FreeLaw,zlib,200,2.8b,0.50377
+FreeLaw,zlib,300,2.8b,0.539601
+FreeLaw,zlib,400,2.8b,0.5017065
+FreeLaw,zlib,500,2.8b,0.501898
+FreeLaw,zlib,600,2.8b,0.5036940000000001
+FreeLaw,zlib,700,2.8b,0.5130480000000001
+FreeLaw,zlib,800,2.8b,0.502957
+FreeLaw,zlib,900,2.8b,0.5144775
+FreeLaw,zlib,0,6.9b,0.514491
+FreeLaw,zlib,100,6.9b,0.5326825
+FreeLaw,zlib,200,6.9b,0.505757
+FreeLaw,zlib,300,6.9b,0.546984
+FreeLaw,zlib,400,6.9b,0.5035054999999999
+FreeLaw,zlib,500,6.9b,0.503513
+FreeLaw,zlib,600,6.9b,0.508065
+FreeLaw,zlib,700,6.9b,0.518116
+FreeLaw,zlib,800,6.9b,0.5101285
+FreeLaw,zlib,900,6.9b,0.521969
+FreeLaw,zlib,0,12b,0.515799
+FreeLaw,zlib,100,12b,0.5347625
+FreeLaw,zlib,200,12b,0.5089319999999999
+FreeLaw,zlib,300,12b,0.548657
+FreeLaw,zlib,400,12b,0.50592
+FreeLaw,zlib,500,12b,0.505116
+FreeLaw,zlib,600,12b,0.5112840000000001
+FreeLaw,zlib,700,12b,0.5227875000000001
+FreeLaw,zlib,800,12b,0.5144255
+FreeLaw,zlib,900,12b,0.5262100000000001
+FreeLaw,grad,0,1b,0.5026145
+FreeLaw,grad,100,1b,0.5151275
+FreeLaw,grad,200,1b,0.508024
+FreeLaw,grad,300,1b,0.502867
+FreeLaw,grad,400,1b,0.5067980000000001
+FreeLaw,grad,500,1b,0.5036535000000001
+FreeLaw,grad,600,1b,0.5210655
+FreeLaw,grad,700,1b,0.5003305
+FreeLaw,grad,800,1b,0.5113135
+FreeLaw,grad,900,1b,0.5114795000000001
+FreeLaw,grad,0,2.8b,0.5084255
+FreeLaw,grad,100,2.8b,0.520367
+FreeLaw,grad,200,2.8b,0.5200659999999999
+FreeLaw,grad,300,2.8b,0.518627
+FreeLaw,grad,400,2.8b,0.527482
+FreeLaw,grad,500,2.8b,0.5110284999999999
+FreeLaw,grad,600,2.8b,0.513407
+FreeLaw,grad,700,2.8b,0.5143085000000001
+FreeLaw,grad,800,2.8b,0.509944
+FreeLaw,grad,900,2.8b,0.5061089999999999
+FreeLaw,grad,0,6.9b,0.5057415
+FreeLaw,grad,100,6.9b,0.5321365
+FreeLaw,grad,200,6.9b,0.5246425
+FreeLaw,grad,300,6.9b,0.529818
+FreeLaw,grad,400,6.9b,0.5192885
+FreeLaw,grad,500,6.9b,0.523203
+FreeLaw,grad,600,6.9b,0.5059125000000001
+FreeLaw,grad,700,6.9b,0.5174590000000001
+FreeLaw,grad,800,6.9b,0.5177155
+FreeLaw,grad,900,6.9b,0.516689
+FreeLaw,grad,0,12b,0.5050295
+FreeLaw,grad,100,12b,0.5205645000000001
+FreeLaw,grad,200,12b,0.5151209999999999
+FreeLaw,grad,300,12b,0.5209265000000001
+FreeLaw,grad,400,12b,0.5038685
+FreeLaw,grad,500,12b,0.5032575
+FreeLaw,grad,600,12b,0.5115055
+FreeLaw,grad,700,12b,0.521709
+FreeLaw,grad,800,12b,0.5245789999999999
+FreeLaw,grad,900,12b,0.5012444999999999
+FreeLaw,refer,0,1b,0.5158739999999999
+FreeLaw,refer,100,1b,0.5215665
+FreeLaw,refer,200,1b,0.5075685
+FreeLaw,refer,300,1b,0.5379295
+FreeLaw,refer,400,1b,0.5094205
+FreeLaw,refer,500,1b,0.5000775000000001
+FreeLaw,refer,600,1b,0.5062979999999999
+FreeLaw,refer,700,1b,0.513302
+FreeLaw,refer,800,1b,0.500928
+FreeLaw,refer,900,1b,0.500731
+FreeLaw,refer,0,2.8b,0.5158739999999999
+FreeLaw,refer,100,2.8b,0.5215665
+FreeLaw,refer,200,2.8b,0.5075685
+FreeLaw,refer,300,2.8b,0.5379295
+FreeLaw,refer,400,2.8b,0.5094205
+FreeLaw,refer,500,2.8b,0.5000775000000001
+FreeLaw,refer,600,2.8b,0.5062979999999999
+FreeLaw,refer,700,2.8b,0.513302
+FreeLaw,refer,800,2.8b,0.500928
+FreeLaw,refer,900,2.8b,0.500731
+FreeLaw,refer,0,6.9b,0.5158815000000001
+FreeLaw,refer,100,6.9b,0.5215665
+FreeLaw,refer,200,6.9b,0.5075685
+FreeLaw,refer,300,6.9b,0.5377620000000001
+FreeLaw,refer,400,6.9b,0.5094205
+FreeLaw,refer,500,6.9b,0.5000775000000001
+FreeLaw,refer,600,6.9b,0.5062979999999999
+FreeLaw,refer,700,6.9b,0.51296
+FreeLaw,refer,800,6.9b,0.500928
+FreeLaw,refer,900,6.9b,0.500731
+FreeLaw,refer,0,12b,0.5158815000000001
+FreeLaw,refer,100,12b,0.5216105
+FreeLaw,refer,200,12b,0.507573
+FreeLaw,refer,300,12b,0.5375559999999999
+FreeLaw,refer,400,12b,0.5094205
+FreeLaw,refer,500,12b,0.5000775000000001
+FreeLaw,refer,600,12b,0.5062979999999999
+FreeLaw,refer,700,12b,0.51296
+FreeLaw,refer,800,12b,0.500928
+FreeLaw,refer,900,12b,0.500731
+EuroParl,loss,0,1b,0.5042611464968153
+EuroParl,loss,100,1b,0.5236830985915493
+EuroParl,loss,200,1b,0.5225912698412698
+EuroParl,loss,300,1b,0.5127094017094017
+EuroParl,loss,400,1b,0.5045347826086957
+EuroParl,loss,500,1b,0.505063063063063
+EuroParl,loss,600,1b,0.5062264150943396
+EuroParl,loss,700,1b,0.5138190476190476
+EuroParl,loss,800,1b,0.5019903846153846
+EuroParl,loss,900,1b,0.5098980582524272
+EuroParl,loss,0,2.8b,0.5007547770700637
+EuroParl,loss,100,2.8b,0.5377394366197182
+EuroParl,loss,200,2.8b,0.5349444444444444
+EuroParl,loss,300,2.8b,0.5229700854700855
+EuroParl,loss,400,2.8b,0.5184782608695653
+EuroParl,loss,500,2.8b,0.5146936936936937
+EuroParl,loss,600,2.8b,0.521688679245283
+EuroParl,loss,700,2.8b,0.5281238095238096
+EuroParl,loss,800,2.8b,0.5188125
+EuroParl,loss,900,2.8b,0.5239563106796117
+EuroParl,loss,0,6.9b,0.5200955414012738
+EuroParl,loss,100,6.9b,0.5433098591549295
+EuroParl,loss,200,6.9b,0.5398888888888889
+EuroParl,loss,300,6.9b,0.5249017094017094
+EuroParl,loss,400,6.9b,0.5221173913043478
+EuroParl,loss,500,6.9b,0.520391891891892
+EuroParl,loss,600,6.9b,0.5275896226415094
+EuroParl,loss,700,6.9b,0.534304761904762
+EuroParl,loss,800,6.9b,0.5200336538461539
+EuroParl,loss,900,6.9b,0.5332912621359225
+EuroParl,loss,0,12b,0.5204012738853503
+EuroParl,loss,100,12b,0.551411971830986
+EuroParl,loss,200,12b,0.5515039682539683
+EuroParl,loss,300,12b,0.5392264957264957
+EuroParl,loss,400,12b,0.5364782608695653
+EuroParl,loss,500,12b,0.5322882882882884
+EuroParl,loss,600,12b,0.539193396226415
+EuroParl,loss,700,12b,0.5445666666666666
+EuroParl,loss,800,12b,0.5312115384615386
+EuroParl,loss,900,12b,0.5449320388349514
+EuroParl,prob,0,1b,0.5124522292993631
+EuroParl,prob,100,1b,0.5298098591549295
+EuroParl,prob,200,1b,0.5230396825396826
+EuroParl,prob,300,1b,0.5095555555555555
+EuroParl,prob,400,1b,0.5034
+EuroParl,prob,500,1b,0.5037927927927928
+EuroParl,prob,600,1b,0.5017169811320755
+EuroParl,prob,700,1b,0.5109619047619047
+EuroParl,prob,800,1b,0.5004615384615385
+EuroParl,prob,900,1b,0.5168446601941747
+EuroParl,prob,0,2.8b,0.5075350318471338
+EuroParl,prob,100,2.8b,0.5402464788732394
+EuroParl,prob,200,2.8b,0.5370238095238096
+EuroParl,prob,300,2.8b,0.5281709401709401
+EuroParl,prob,400,2.8b,0.5176521739130435
+EuroParl,prob,500,2.8b,0.5160630630630632
+EuroParl,prob,600,2.8b,0.5175849056603773
+EuroParl,prob,700,2.8b,0.5316095238095238
+EuroParl,prob,800,2.8b,0.5213461538461538
+EuroParl,prob,900,2.8b,0.531757281553398
+EuroParl,prob,0,6.9b,0.5269617834394905
+EuroParl,prob,100,6.9b,0.5499084507042253
+EuroParl,prob,200,6.9b,0.5428095238095239
+EuroParl,prob,300,6.9b,0.5297863247863247
+EuroParl,prob,400,6.9b,0.5289739130434782
+EuroParl,prob,500,6.9b,0.5267927927927928
+EuroParl,prob,600,6.9b,0.5266698113207547
+EuroParl,prob,700,6.9b,0.5433904761904762
+EuroParl,prob,800,6.9b,0.5300865384615385
+EuroParl,prob,900,6.9b,0.5485145631067961
+EuroParl,prob,0,12b,0.5261783439490446
+EuroParl,prob,100,12b,0.5606267605633802
+EuroParl,prob,200,12b,0.5587380952380953
+EuroParl,prob,300,12b,0.5486923076923077
+EuroParl,prob,400,12b,0.5388173913043479
+EuroParl,prob,500,12b,0.5374414414414415
+EuroParl,prob,600,12b,0.5383301886792453
+EuroParl,prob,700,12b,0.5537809523809524
+EuroParl,prob,800,12b,0.5407211538461538
+EuroParl,prob,900,12b,0.5579223300970875
+EuroParl,ppl,0,1b,0.5042611464968153
+EuroParl,ppl,100,1b,0.5236830985915493
+EuroParl,ppl,200,1b,0.5225912698412698
+EuroParl,ppl,300,1b,0.5127094017094017
+EuroParl,ppl,400,1b,0.5045347826086957
+EuroParl,ppl,500,1b,0.505063063063063
+EuroParl,ppl,600,1b,0.5062264150943396
+EuroParl,ppl,700,1b,0.5138190476190476
+EuroParl,ppl,800,1b,0.5019903846153846
+EuroParl,ppl,900,1b,0.5098980582524272
+EuroParl,ppl,0,2.8b,0.5007547770700637
+EuroParl,ppl,100,2.8b,0.5377394366197182
+EuroParl,ppl,200,2.8b,0.5349444444444444
+EuroParl,ppl,300,2.8b,0.5229700854700855
+EuroParl,ppl,400,2.8b,0.5184782608695653
+EuroParl,ppl,500,2.8b,0.5146936936936937
+EuroParl,ppl,600,2.8b,0.521688679245283
+EuroParl,ppl,700,2.8b,0.5281238095238096
+EuroParl,ppl,800,2.8b,0.5188125
+EuroParl,ppl,900,2.8b,0.5239563106796117
+EuroParl,ppl,0,6.9b,0.5200955414012738
+EuroParl,ppl,100,6.9b,0.5433098591549295
+EuroParl,ppl,200,6.9b,0.5398888888888889
+EuroParl,ppl,300,6.9b,0.5249017094017094
+EuroParl,ppl,400,6.9b,0.5221173913043478
+EuroParl,ppl,500,6.9b,0.520391891891892
+EuroParl,ppl,600,6.9b,0.5275896226415094
+EuroParl,ppl,700,6.9b,0.534304761904762
+EuroParl,ppl,800,6.9b,0.5200336538461539
+EuroParl,ppl,900,6.9b,0.5332912621359225
+EuroParl,ppl,0,12b,0.5204012738853503
+EuroParl,ppl,100,12b,0.551411971830986
+EuroParl,ppl,200,12b,0.5515039682539683
+EuroParl,ppl,300,12b,0.5392264957264957
+EuroParl,ppl,400,12b,0.5364782608695653
+EuroParl,ppl,500,12b,0.5322882882882884
+EuroParl,ppl,600,12b,0.539193396226415
+EuroParl,ppl,700,12b,0.5445666666666666
+EuroParl,ppl,800,12b,0.5312115384615386
+EuroParl,ppl,900,12b,0.5449320388349514
+EuroParl,mink_plus,0,1b,0.5278089171974523
+EuroParl,mink_plus,100,1b,0.534725352112676
+EuroParl,mink_plus,200,1b,0.5123015873015873
+EuroParl,mink_plus,300,1b,0.5021367521367521
+EuroParl,mink_plus,400,1b,0.5048608695652175
+EuroParl,mink_plus,500,1b,0.5011801801801802
+EuroParl,mink_plus,600,1b,0.5101698113207547
+EuroParl,mink_plus,700,1b,0.5258571428571429
+EuroParl,mink_plus,800,1b,0.5134326923076924
+EuroParl,mink_plus,900,1b,0.5338446601941748
+EuroParl,mink_plus,0,2.8b,0.5211337579617834
+EuroParl,mink_plus,100,2.8b,0.5590845070422535
+EuroParl,mink_plus,200,2.8b,0.5360317460317461
+EuroParl,mink_plus,300,2.8b,0.5368290598290598
+EuroParl,mink_plus,400,2.8b,0.5293043478260869
+EuroParl,mink_plus,500,2.8b,0.5363648648648649
+EuroParl,mink_plus,600,2.8b,0.5517169811320755
+EuroParl,mink_plus,700,2.8b,0.5556761904761904
+EuroParl,mink_plus,800,2.8b,0.5521634615384616
+EuroParl,mink_plus,900,2.8b,0.5629805825242719
+EuroParl,mink_plus,0,6.9b,0.5210828025477707
+EuroParl,mink_plus,100,6.9b,0.5531901408450705
+EuroParl,mink_plus,200,6.9b,0.5346428571428571
+EuroParl,mink_plus,300,6.9b,0.5506752136752137
+EuroParl,mink_plus,400,6.9b,0.5510782608695652
+EuroParl,mink_plus,500,6.9b,0.5427657657657657
+EuroParl,mink_plus,600,6.9b,0.565622641509434
+EuroParl,mink_plus,700,6.9b,0.5785047619047619
+EuroParl,mink_plus,800,6.9b,0.5673653846153847
+EuroParl,mink_plus,900,6.9b,0.5868446601941748
+EuroParl,mink_plus,0,12b,0.5312165605095541
+EuroParl,mink_plus,100,12b,0.5721619718309858
+EuroParl,mink_plus,200,12b,0.5636984126984126
+EuroParl,mink_plus,300,12b,0.5831111111111111
+EuroParl,mink_plus,400,12b,0.5646521739130436
+EuroParl,mink_plus,500,12b,0.5624594594594594
+EuroParl,mink_plus,600,12b,0.5788490566037736
+EuroParl,mink_plus,700,12b,0.583695238095238
+EuroParl,mink_plus,800,12b,0.5726346153846154
+EuroParl,mink_plus,900,12b,0.5979514563106797
+EuroParl,zlib,0,1b,0.5105127388535031
+EuroParl,zlib,100,1b,0.5193802816901409
+EuroParl,zlib,200,1b,0.5244166666666666
+EuroParl,zlib,300,1b,0.5110213675213675
+EuroParl,zlib,400,1b,0.501091304347826
+EuroParl,zlib,500,1b,0.5225855855855857
+EuroParl,zlib,600,1b,0.513438679245283
+EuroParl,zlib,700,1b,0.5295190476190477
+EuroParl,zlib,800,1b,0.505826923076923
+EuroParl,zlib,900,1b,0.5164660194174757
+EuroParl,zlib,0,2.8b,0.5025031847133759
+EuroParl,zlib,100,2.8b,0.5383098591549296
+EuroParl,zlib,200,2.8b,0.5412579365079365
+EuroParl,zlib,300,2.8b,0.5239871794871795
+EuroParl,zlib,400,2.8b,0.5123130434782608
+EuroParl,zlib,500,2.8b,0.5313918918918918
+EuroParl,zlib,600,2.8b,0.5284009433962265
+EuroParl,zlib,700,2.8b,0.5440666666666667
+EuroParl,zlib,800,2.8b,0.5244182692307693
+EuroParl,zlib,900,2.8b,0.5359854368932039
+EuroParl,zlib,0,6.9b,0.5221464968152867
+EuroParl,zlib,100,6.9b,0.5475704225352113
+EuroParl,zlib,200,6.9b,0.5432103174603174
+EuroParl,zlib,300,6.9b,0.5242521367521368
+EuroParl,zlib,400,6.9b,0.5167086956521739
+EuroParl,zlib,500,6.9b,0.5359504504504504
+EuroParl,zlib,600,6.9b,0.534754716981132
+EuroParl,zlib,700,6.9b,0.5510333333333333
+EuroParl,zlib,800,6.9b,0.5274278846153846
+EuroParl,zlib,900,6.9b,0.544873786407767
+EuroParl,zlib,0,12b,0.5267738853503184
+EuroParl,zlib,100,12b,0.5591091549295775
+EuroParl,zlib,200,12b,0.5596547619047618
+EuroParl,zlib,300,12b,0.542991452991453
+EuroParl,zlib,400,12b,0.5320173913043478
+EuroParl,zlib,500,12b,0.5474054054054054
+EuroParl,zlib,600,12b,0.5461320754716981
+EuroParl,zlib,700,12b,0.5618571428571428
+EuroParl,zlib,800,12b,0.5408413461538462
+EuroParl,zlib,900,12b,0.5628834951456311
+EuroParl,grad,0,1b,0.5078184713375795
+EuroParl,grad,100,1b,0.5016232394366198
+EuroParl,grad,200,1b,0.5107261904761905
+EuroParl,grad,300,1b,0.5232649572649574
+EuroParl,grad,400,1b,0.5195478260869565
+EuroParl,grad,500,1b,0.5366126126126126
+EuroParl,grad,600,1b,0.5279528301886792
+EuroParl,grad,700,1b,0.5285952380952381
+EuroParl,grad,800,1b,0.5185673076923079
+EuroParl,grad,900,1b,0.511368932038835
+EuroParl,grad,0,2.8b,0.5073917197452229
+EuroParl,grad,100,2.8b,0.5343732394366197
+EuroParl,grad,200,2.8b,0.5395119047619048
+EuroParl,grad,300,2.8b,0.5286324786324786
+EuroParl,grad,400,2.8b,0.5227869565217391
+EuroParl,grad,500,2.8b,0.5410810810810811
+EuroParl,grad,600,2.8b,0.5365566037735849
+EuroParl,grad,700,2.8b,0.5533142857142858
+EuroParl,grad,800,2.8b,0.5486634615384616
+EuroParl,grad,900,2.8b,0.5465922330097088
+EuroParl,grad,0,6.9b,0.5223662420382166
+EuroParl,grad,100,6.9b,0.5535563380281691
+EuroParl,grad,200,6.9b,0.5485714285714286
+EuroParl,grad,300,6.9b,0.5373717948717949
+EuroParl,grad,400,6.9b,0.522904347826087
+EuroParl,grad,500,6.9b,0.5332657657657658
+EuroParl,grad,600,6.9b,0.5378962264150944
+EuroParl,grad,700,6.9b,0.5468809523809524
+EuroParl,grad,800,6.9b,0.5429903846153846
+EuroParl,grad,900,6.9b,0.5500242718446602
+EuroParl,grad,0,12b,0.547952229299363
+EuroParl,grad,100,12b,0.56575
+EuroParl,grad,200,12b,0.5389285714285714
+EuroParl,grad,300,12b,0.5412179487179487
+EuroParl,grad,400,12b,0.5456347826086957
+EuroParl,grad,500,12b,0.5734144144144144
+EuroParl,grad,600,12b,0.552127358490566
+EuroParl,grad,700,12b,0.5829857142857142
+EuroParl,grad,800,12b,0.5319326923076924
+EuroParl,grad,900,12b,0.5259660194174757
+EuroParl,refer,0,1b,0.5005382165605096
+EuroParl,refer,100,1b,0.545644366197183
+EuroParl,refer,200,1b,0.5297460317460317
+EuroParl,refer,300,1b,0.5212820512820513
+EuroParl,refer,400,1b,0.513404347826087
+EuroParl,refer,500,1b,0.5086891891891892
+EuroParl,refer,600,1b,0.5065471698113208
+EuroParl,refer,700,1b,0.5187571428571428
+EuroParl,refer,800,1b,0.5033221153846154
+EuroParl,refer,900,1b,0.5171553398058253
+EuroParl,refer,0,2.8b,0.5005382165605096
+EuroParl,refer,100,2.8b,0.545644366197183
+EuroParl,refer,200,2.8b,0.5297460317460317
+EuroParl,refer,300,2.8b,0.5212820512820513
+EuroParl,refer,400,2.8b,0.513404347826087
+EuroParl,refer,500,2.8b,0.5086891891891892
+EuroParl,refer,600,2.8b,0.5065471698113208
+EuroParl,refer,700,2.8b,0.5187571428571428
+EuroParl,refer,800,2.8b,0.5033221153846154
+EuroParl,refer,900,2.8b,0.5171553398058253
+EuroParl,refer,0,6.9b,0.5005382165605096
+EuroParl,refer,100,6.9b,0.545644366197183
+EuroParl,refer,200,6.9b,0.5297460317460317
+EuroParl,refer,300,6.9b,0.5206837606837607
+EuroParl,refer,400,6.9b,0.513404347826087
+EuroParl,refer,500,6.9b,0.5086891891891892
+EuroParl,refer,600,6.9b,0.5065471698113208
+EuroParl,refer,700,6.9b,0.5194333333333333
+EuroParl,refer,800,6.9b,0.5033221153846154
+EuroParl,refer,900,6.9b,0.5171553398058253
+EuroParl,refer,0,12b,0.5005382165605096
+EuroParl,refer,100,12b,0.5456408450704225
+EuroParl,refer,200,12b,0.5297460317460317
+EuroParl,refer,300,12b,0.520491452991453
+EuroParl,refer,400,12b,0.513404347826087
+EuroParl,refer,500,12b,0.5086891891891892
+EuroParl,refer,600,12b,0.5065471698113208
+EuroParl,refer,700,12b,0.5194333333333333
+EuroParl,refer,800,12b,0.5033221153846154
+EuroParl,refer,900,12b,0.5171553398058253
+DM Mathematics,loss,0,1b,0.5043365
+DM Mathematics,loss,100,1b,0.5021245
+DM Mathematics,loss,200,1b,0.502656
+DM Mathematics,loss,300,1b,0.503209
+DM Mathematics,loss,400,1b,0.5038225
+DM Mathematics,loss,500,1b,0.5087845
+DM Mathematics,loss,600,1b,0.5027889999999999
+DM Mathematics,loss,700,1b,0.5092735
+DM Mathematics,loss,800,1b,0.5135835000000001
+DM Mathematics,loss,900,1b,0.504125
+DM Mathematics,loss,0,2.8b,0.5076365
+DM Mathematics,loss,100,2.8b,0.5014635
+DM Mathematics,loss,200,2.8b,0.5051875000000001
+DM Mathematics,loss,300,2.8b,0.5038675
+DM Mathematics,loss,400,2.8b,0.5106785
+DM Mathematics,loss,500,2.8b,0.5102635
+DM Mathematics,loss,600,2.8b,0.503062
+DM Mathematics,loss,700,2.8b,0.504048
+DM Mathematics,loss,800,2.8b,0.5117905
+DM Mathematics,loss,900,2.8b,0.5037960000000001
+DM Mathematics,loss,0,6.9b,0.501486
+DM Mathematics,loss,100,6.9b,0.506704
+DM Mathematics,loss,200,6.9b,0.505778
+DM Mathematics,loss,300,6.9b,0.501409
+DM Mathematics,loss,400,6.9b,0.500404
+DM Mathematics,loss,500,6.9b,0.5096539999999999
+DM Mathematics,loss,600,6.9b,0.5035925000000001
+DM Mathematics,loss,700,6.9b,0.5088064999999999
+DM Mathematics,loss,800,6.9b,0.521661
+DM Mathematics,loss,900,6.9b,0.516907
+DM Mathematics,loss,0,12b,0.500469
+DM Mathematics,loss,100,12b,0.5016084999999999
+DM Mathematics,loss,200,12b,0.5043305
+DM Mathematics,loss,300,12b,0.5036120000000001
+DM Mathematics,loss,400,12b,0.503204
+DM Mathematics,loss,500,12b,0.5049095
+DM Mathematics,loss,600,12b,0.5020214999999999
+DM Mathematics,loss,700,12b,0.5100899999999999
+DM Mathematics,loss,800,12b,0.5155645
+DM Mathematics,loss,900,12b,0.5108334999999999
+DM Mathematics,prob,0,1b,0.5023150000000001
+DM Mathematics,prob,100,1b,0.501004
+DM Mathematics,prob,200,1b,0.500637
+DM Mathematics,prob,300,1b,0.50874
+DM Mathematics,prob,400,1b,0.505101
+DM Mathematics,prob,500,1b,0.5081705
+DM Mathematics,prob,600,1b,0.500708
+DM Mathematics,prob,700,1b,0.5008210000000001
+DM Mathematics,prob,800,1b,0.5139750000000001
+DM Mathematics,prob,900,1b,0.505649
+DM Mathematics,prob,0,2.8b,0.506223
+DM Mathematics,prob,100,2.8b,0.5051645
+DM Mathematics,prob,200,2.8b,0.507478
+DM Mathematics,prob,300,2.8b,0.500881
+DM Mathematics,prob,400,2.8b,0.508073
+DM Mathematics,prob,500,2.8b,0.5111295
+DM Mathematics,prob,600,2.8b,0.501602
+DM Mathematics,prob,700,2.8b,0.506588
+DM Mathematics,prob,800,2.8b,0.513657
+DM Mathematics,prob,900,2.8b,0.505223
+DM Mathematics,prob,0,6.9b,0.500928
+DM Mathematics,prob,100,6.9b,0.5049600000000001
+DM Mathematics,prob,200,6.9b,0.502776
+DM Mathematics,prob,300,6.9b,0.503613
+DM Mathematics,prob,400,6.9b,0.5058130000000001
+DM Mathematics,prob,500,6.9b,0.512497
+DM Mathematics,prob,600,6.9b,0.50298
+DM Mathematics,prob,700,6.9b,0.501134
+DM Mathematics,prob,800,6.9b,0.518112
+DM Mathematics,prob,900,6.9b,0.523754
+DM Mathematics,prob,0,12b,0.504096
+DM Mathematics,prob,100,12b,0.5069859999999999
+DM Mathematics,prob,200,12b,0.500645
+DM Mathematics,prob,300,12b,0.500287
+DM Mathematics,prob,400,12b,0.501131
+DM Mathematics,prob,500,12b,0.506715
+DM Mathematics,prob,600,12b,0.5056255000000001
+DM Mathematics,prob,700,12b,0.5025379999999999
+DM Mathematics,prob,800,12b,0.516396
+DM Mathematics,prob,900,12b,0.517051
+DM Mathematics,ppl,0,1b,0.5043365
+DM Mathematics,ppl,100,1b,0.5021245
+DM Mathematics,ppl,200,1b,0.502656
+DM Mathematics,ppl,300,1b,0.503209
+DM Mathematics,ppl,400,1b,0.5038225
+DM Mathematics,ppl,500,1b,0.5087845
+DM Mathematics,ppl,600,1b,0.5027889999999999
+DM Mathematics,ppl,700,1b,0.5092735
+DM Mathematics,ppl,800,1b,0.5135835000000001
+DM Mathematics,ppl,900,1b,0.504125
+DM Mathematics,ppl,0,2.8b,0.5076365
+DM Mathematics,ppl,100,2.8b,0.5014635
+DM Mathematics,ppl,200,2.8b,0.5051875000000001
+DM Mathematics,ppl,300,2.8b,0.5038675
+DM Mathematics,ppl,400,2.8b,0.5106785
+DM Mathematics,ppl,500,2.8b,0.5102635
+DM Mathematics,ppl,600,2.8b,0.503062
+DM Mathematics,ppl,700,2.8b,0.504048
+DM Mathematics,ppl,800,2.8b,0.5117905
+DM Mathematics,ppl,900,2.8b,0.5037960000000001
+DM Mathematics,ppl,0,6.9b,0.501486
+DM Mathematics,ppl,100,6.9b,0.506704
+DM Mathematics,ppl,200,6.9b,0.505778
+DM Mathematics,ppl,300,6.9b,0.501409
+DM Mathematics,ppl,400,6.9b,0.500404
+DM Mathematics,ppl,500,6.9b,0.5096539999999999
+DM Mathematics,ppl,600,6.9b,0.5035925000000001
+DM Mathematics,ppl,700,6.9b,0.5088064999999999
+DM Mathematics,ppl,800,6.9b,0.521661
+DM Mathematics,ppl,900,6.9b,0.516907
+DM Mathematics,ppl,0,12b,0.500469
+DM Mathematics,ppl,100,12b,0.5016084999999999
+DM Mathematics,ppl,200,12b,0.5043305
+DM Mathematics,ppl,300,12b,0.5036120000000001
+DM Mathematics,ppl,400,12b,0.503204
+DM Mathematics,ppl,500,12b,0.5049095
+DM Mathematics,ppl,600,12b,0.5020214999999999
+DM Mathematics,ppl,700,12b,0.5100899999999999
+DM Mathematics,ppl,800,12b,0.5155645
+DM Mathematics,ppl,900,12b,0.5108334999999999
+DM Mathematics,mink_plus,0,1b,0.512193
+DM Mathematics,mink_plus,100,1b,0.5067485
+DM Mathematics,mink_plus,200,1b,0.501993
+DM Mathematics,mink_plus,300,1b,0.5024489999999999
+DM Mathematics,mink_plus,400,1b,0.5002920000000001
+DM Mathematics,mink_plus,500,1b,0.512846
+DM Mathematics,mink_plus,600,1b,0.502633
+DM Mathematics,mink_plus,700,1b,0.50034
+DM Mathematics,mink_plus,800,1b,0.505123
+DM Mathematics,mink_plus,900,1b,0.5057849999999999
+DM Mathematics,mink_plus,0,2.8b,0.5071460000000001
+DM Mathematics,mink_plus,100,2.8b,0.51986
+DM Mathematics,mink_plus,200,2.8b,0.5170440000000001
+DM Mathematics,mink_plus,300,2.8b,0.50358
+DM Mathematics,mink_plus,400,2.8b,0.500335
+DM Mathematics,mink_plus,500,2.8b,0.503147
+DM Mathematics,mink_plus,600,2.8b,0.503453
+DM Mathematics,mink_plus,700,2.8b,0.507972
+DM Mathematics,mink_plus,800,2.8b,0.50752
+DM Mathematics,mink_plus,900,2.8b,0.50986
+DM Mathematics,mink_plus,0,6.9b,0.501477
+DM Mathematics,mink_plus,100,6.9b,0.508493
+DM Mathematics,mink_plus,200,6.9b,0.507376
+DM Mathematics,mink_plus,300,6.9b,0.503062
+DM Mathematics,mink_plus,400,6.9b,0.5047050000000001
+DM Mathematics,mink_plus,500,6.9b,0.5221225
+DM Mathematics,mink_plus,600,6.9b,0.505269
+DM Mathematics,mink_plus,700,6.9b,0.50216
+DM Mathematics,mink_plus,800,6.9b,0.505796
+DM Mathematics,mink_plus,900,6.9b,0.524891
+DM Mathematics,mink_plus,0,12b,0.511262
+DM Mathematics,mink_plus,100,12b,0.508355
+DM Mathematics,mink_plus,200,12b,0.50591
+DM Mathematics,mink_plus,300,12b,0.503491
+DM Mathematics,mink_plus,400,12b,0.51078
+DM Mathematics,mink_plus,500,12b,0.505176
+DM Mathematics,mink_plus,600,12b,0.50064
+DM Mathematics,mink_plus,700,12b,0.505426
+DM Mathematics,mink_plus,800,12b,0.507046
+DM Mathematics,mink_plus,900,12b,0.5079910000000001
+DM Mathematics,zlib,0,1b,0.500926
+DM Mathematics,zlib,100,1b,0.5124625
+DM Mathematics,zlib,200,1b,0.5021154999999999
+DM Mathematics,zlib,300,1b,0.5072945
+DM Mathematics,zlib,400,1b,0.5029015
+DM Mathematics,zlib,500,1b,0.5125915
+DM Mathematics,zlib,600,1b,0.5000545
+DM Mathematics,zlib,700,1b,0.5054485
+DM Mathematics,zlib,800,1b,0.513569
+DM Mathematics,zlib,900,1b,0.508697
+DM Mathematics,zlib,0,2.8b,0.5040055
+DM Mathematics,zlib,100,2.8b,0.5085759999999999
+DM Mathematics,zlib,200,2.8b,0.5003770000000001
+DM Mathematics,zlib,300,2.8b,0.5032475000000001
+DM Mathematics,zlib,400,2.8b,0.5074375
+DM Mathematics,zlib,500,2.8b,0.50178
+DM Mathematics,zlib,600,2.8b,0.5006145
+DM Mathematics,zlib,700,2.8b,0.509566
+DM Mathematics,zlib,800,2.8b,0.5143555
+DM Mathematics,zlib,900,2.8b,0.507962
+DM Mathematics,zlib,0,6.9b,0.5009170000000001
+DM Mathematics,zlib,100,6.9b,0.5029205
+DM Mathematics,zlib,200,6.9b,0.5082335
+DM Mathematics,zlib,300,6.9b,0.5004715
+DM Mathematics,zlib,400,6.9b,0.5005085
+DM Mathematics,zlib,500,6.9b,0.5068815
+DM Mathematics,zlib,600,6.9b,0.5020735
+DM Mathematics,zlib,700,6.9b,0.504406
+DM Mathematics,zlib,800,6.9b,0.5196655
+DM Mathematics,zlib,900,6.9b,0.5230395
+DM Mathematics,zlib,0,12b,0.5043415
+DM Mathematics,zlib,100,12b,0.5147705
+DM Mathematics,zlib,200,12b,0.5094665
+DM Mathematics,zlib,300,12b,0.500237
+DM Mathematics,zlib,400,12b,0.500301
+DM Mathematics,zlib,500,12b,0.5103565
+DM Mathematics,zlib,600,12b,0.5031059999999999
+DM Mathematics,zlib,700,12b,0.5044585
+DM Mathematics,zlib,800,12b,0.5194365000000001
+DM Mathematics,zlib,900,12b,0.520415
+DM Mathematics,grad,0,1b,0.501299
+DM Mathematics,grad,100,1b,0.5043759999999999
+DM Mathematics,grad,200,1b,0.5030924999999999
+DM Mathematics,grad,300,1b,0.500035
+DM Mathematics,grad,400,1b,0.518429
+DM Mathematics,grad,500,1b,0.5183220000000001
+DM Mathematics,grad,600,1b,0.508188
+DM Mathematics,grad,700,1b,0.509255
+DM Mathematics,grad,800,1b,0.515076
+DM Mathematics,grad,900,1b,0.51252
+DM Mathematics,grad,0,2.8b,0.50885
+DM Mathematics,grad,100,2.8b,0.5118495000000001
+DM Mathematics,grad,200,2.8b,0.5059055
+DM Mathematics,grad,300,2.8b,0.513775
+DM Mathematics,grad,400,2.8b,0.5130195000000001
+DM Mathematics,grad,500,2.8b,0.5132075
+DM Mathematics,grad,600,2.8b,0.510434
+DM Mathematics,grad,700,2.8b,0.505574
+DM Mathematics,grad,800,2.8b,0.501642
+DM Mathematics,grad,900,2.8b,0.5095475
+DM Mathematics,grad,0,6.9b,0.502555
+DM Mathematics,grad,100,6.9b,0.5068950000000001
+DM Mathematics,grad,200,6.9b,0.5068765
+DM Mathematics,grad,300,6.9b,0.5037465
+DM Mathematics,grad,400,6.9b,0.5005955
+DM Mathematics,grad,500,6.9b,0.5168295
+DM Mathematics,grad,600,6.9b,0.5051239999999999
+DM Mathematics,grad,700,6.9b,0.503581
+DM Mathematics,grad,800,6.9b,0.5228305
+DM Mathematics,grad,900,6.9b,0.516778
+DM Mathematics,grad,0,12b,0.5043185000000001
+DM Mathematics,grad,100,12b,0.5043440000000001
+DM Mathematics,grad,200,12b,0.501413
+DM Mathematics,grad,300,12b,0.5093665
+DM Mathematics,grad,400,12b,0.5017969999999999
+DM Mathematics,grad,500,12b,0.503282
+DM Mathematics,grad,600,12b,0.501927
+DM Mathematics,grad,700,12b,0.5124115
+DM Mathematics,grad,800,12b,0.502561
+DM Mathematics,grad,900,12b,0.5087045
+DM Mathematics,refer,0,1b,0.5091169999999999
+DM Mathematics,refer,100,1b,0.502177
+DM Mathematics,refer,200,1b,0.5120865000000001
+DM Mathematics,refer,300,1b,0.5044390000000001
+DM Mathematics,refer,400,1b,0.5028785
+DM Mathematics,refer,500,1b,0.5152574999999999
+DM Mathematics,refer,600,1b,0.5019745
+DM Mathematics,refer,700,1b,0.5148820000000001
+DM Mathematics,refer,800,1b,0.509862
+DM Mathematics,refer,900,1b,0.509089
+DM Mathematics,refer,0,2.8b,0.5091169999999999
+DM Mathematics,refer,100,2.8b,0.502177
+DM Mathematics,refer,200,2.8b,0.5120865000000001
+DM Mathematics,refer,300,2.8b,0.5044390000000001
+DM Mathematics,refer,400,2.8b,0.5028785
+DM Mathematics,refer,500,2.8b,0.5152574999999999
+DM Mathematics,refer,600,2.8b,0.5019745
+DM Mathematics,refer,700,2.8b,0.5148820000000001
+DM Mathematics,refer,800,2.8b,0.509862
+DM Mathematics,refer,900,2.8b,0.509089
+DM Mathematics,refer,0,6.9b,0.5091169999999999
+DM Mathematics,refer,100,6.9b,0.502177
+DM Mathematics,refer,200,6.9b,0.5120865000000001
+DM Mathematics,refer,300,6.9b,0.504283
+DM Mathematics,refer,400,6.9b,0.5028785
+DM Mathematics,refer,500,6.9b,0.5152574999999999
+DM Mathematics,refer,600,6.9b,0.5019745
+DM Mathematics,refer,700,6.9b,0.5146895
+DM Mathematics,refer,800,6.9b,0.509862
+DM Mathematics,refer,900,6.9b,0.509089
+DM Mathematics,refer,0,12b,0.5091169999999999
+DM Mathematics,refer,100,12b,0.502177
+DM Mathematics,refer,200,12b,0.5120865000000001
+DM Mathematics,refer,300,12b,0.5044109999999999
+DM Mathematics,refer,400,12b,0.5028785
+DM Mathematics,refer,500,12b,0.5152574999999999
+DM Mathematics,refer,600,12b,0.5019745
+DM Mathematics,refer,700,12b,0.5146895
+DM Mathematics,refer,800,12b,0.509862
+DM Mathematics,refer,900,12b,0.509089
+ArXiv,loss,0,1b,0.5016084999999999
+ArXiv,loss,100,1b,0.5045540000000001
+ArXiv,loss,200,1b,0.502353
+ArXiv,loss,300,1b,0.5004294999999999
+ArXiv,loss,400,1b,0.5209185000000001
+ArXiv,loss,500,1b,0.5093705
+ArXiv,loss,600,1b,0.5127075
+ArXiv,loss,700,1b,0.5051695
+ArXiv,loss,800,1b,0.503904
+ArXiv,loss,900,1b,0.5437805
+ArXiv,loss,0,2.8b,0.500285
+ArXiv,loss,100,2.8b,0.511308
+ArXiv,loss,200,2.8b,0.500125
+ArXiv,loss,300,2.8b,0.504996
+ArXiv,loss,400,2.8b,0.5250189999999999
+ArXiv,loss,500,2.8b,0.520035
+ArXiv,loss,600,2.8b,0.5239245
+ArXiv,loss,700,2.8b,0.5022804999999999
+ArXiv,loss,800,2.8b,0.50981
+ArXiv,loss,900,2.8b,0.5507115
+ArXiv,loss,0,6.9b,0.5009705
+ArXiv,loss,100,6.9b,0.515448
+ArXiv,loss,200,6.9b,0.5024355
+ArXiv,loss,300,6.9b,0.5108345
+ArXiv,loss,400,6.9b,0.5296265
+ArXiv,loss,500,6.9b,0.5212555
+ArXiv,loss,600,6.9b,0.526994
+ArXiv,loss,700,6.9b,0.505185
+ArXiv,loss,800,6.9b,0.5149365
+ArXiv,loss,900,6.9b,0.5542135
+ArXiv,loss,0,12b,0.5045759999999999
+ArXiv,loss,100,12b,0.5187125
+ArXiv,loss,200,12b,0.507304
+ArXiv,loss,300,12b,0.515374
+ArXiv,loss,400,12b,0.5347955
+ArXiv,loss,500,12b,0.5256935
+ArXiv,loss,600,12b,0.5311980000000001
+ArXiv,loss,700,12b,0.5104875
+ArXiv,loss,800,12b,0.5187815
+ArXiv,loss,900,12b,0.557221
+ArXiv,prob,0,1b,0.5061385
+ArXiv,prob,100,1b,0.502747
+ArXiv,prob,200,1b,0.515279
+ArXiv,prob,300,1b,0.502328
+ArXiv,prob,400,1b,0.512035
+ArXiv,prob,500,1b,0.510121
+ArXiv,prob,600,1b,0.5185630000000001
+ArXiv,prob,700,1b,0.5110600000000001
+ArXiv,prob,800,1b,0.50454
+ArXiv,prob,900,1b,0.54595
+ArXiv,prob,0,2.8b,0.50867
+ArXiv,prob,100,2.8b,0.50861
+ArXiv,prob,200,2.8b,0.521101
+ArXiv,prob,300,2.8b,0.509304
+ArXiv,prob,400,2.8b,0.518265
+ArXiv,prob,500,2.8b,0.523545
+ArXiv,prob,600,2.8b,0.530403
+ArXiv,prob,700,2.8b,0.500937
+ArXiv,prob,800,2.8b,0.508491
+ArXiv,prob,900,2.8b,0.555673
+ArXiv,prob,0,6.9b,0.5065504999999999
+ArXiv,prob,100,6.9b,0.5188995000000001
+ArXiv,prob,200,6.9b,0.523825
+ArXiv,prob,300,6.9b,0.515502
+ArXiv,prob,400,6.9b,0.526501
+ArXiv,prob,500,6.9b,0.527145
+ArXiv,prob,600,6.9b,0.535995
+ArXiv,prob,700,6.9b,0.506439
+ArXiv,prob,800,6.9b,0.517332
+ArXiv,prob,900,6.9b,0.561248
+ArXiv,prob,0,12b,0.510175
+ArXiv,prob,100,12b,0.515188
+ArXiv,prob,200,12b,0.5319315
+ArXiv,prob,300,12b,0.5218505
+ArXiv,prob,400,12b,0.534031
+ArXiv,prob,500,12b,0.5321885
+ArXiv,prob,600,12b,0.5420615
+ArXiv,prob,700,12b,0.513713
+ArXiv,prob,800,12b,0.5213760000000001
+ArXiv,prob,900,12b,0.5663090000000001
+ArXiv,ppl,0,1b,0.5016084999999999
+ArXiv,ppl,100,1b,0.5045540000000001
+ArXiv,ppl,200,1b,0.502353
+ArXiv,ppl,300,1b,0.5004294999999999
+ArXiv,ppl,400,1b,0.5209185000000001
+ArXiv,ppl,500,1b,0.5093705
+ArXiv,ppl,600,1b,0.5127075
+ArXiv,ppl,700,1b,0.5051695
+ArXiv,ppl,800,1b,0.503904
+ArXiv,ppl,900,1b,0.5437805
+ArXiv,ppl,0,2.8b,0.500285
+ArXiv,ppl,100,2.8b,0.511308
+ArXiv,ppl,200,2.8b,0.500125
+ArXiv,ppl,300,2.8b,0.504996
+ArXiv,ppl,400,2.8b,0.5250189999999999
+ArXiv,ppl,500,2.8b,0.520035
+ArXiv,ppl,600,2.8b,0.5239245
+ArXiv,ppl,700,2.8b,0.5022804999999999
+ArXiv,ppl,800,2.8b,0.50981
+ArXiv,ppl,900,2.8b,0.5507115
+ArXiv,ppl,0,6.9b,0.5009705
+ArXiv,ppl,100,6.9b,0.515448
+ArXiv,ppl,200,6.9b,0.5024355
+ArXiv,ppl,300,6.9b,0.5108345
+ArXiv,ppl,400,6.9b,0.5296265
+ArXiv,ppl,500,6.9b,0.5212555
+ArXiv,ppl,600,6.9b,0.526994
+ArXiv,ppl,700,6.9b,0.505185
+ArXiv,ppl,800,6.9b,0.5149365
+ArXiv,ppl,900,6.9b,0.5542135
+ArXiv,ppl,0,12b,0.5045759999999999
+ArXiv,ppl,100,12b,0.5187125
+ArXiv,ppl,200,12b,0.507304
+ArXiv,ppl,300,12b,0.515374
+ArXiv,ppl,400,12b,0.5347955
+ArXiv,ppl,500,12b,0.5256935
+ArXiv,ppl,600,12b,0.5311980000000001
+ArXiv,ppl,700,12b,0.5104875
+ArXiv,ppl,800,12b,0.5187815
+ArXiv,ppl,900,12b,0.557221
+ArXiv,mink_plus,0,1b,0.5043230000000001
+ArXiv,mink_plus,100,1b,0.502791
+ArXiv,mink_plus,200,1b,0.5091350000000001
+ArXiv,mink_plus,300,1b,0.529269
+ArXiv,mink_plus,400,1b,0.500908
+ArXiv,mink_plus,500,1b,0.501671
+ArXiv,mink_plus,600,1b,0.502717
+ArXiv,mink_plus,700,1b,0.501074
+ArXiv,mink_plus,800,1b,0.514758
+ArXiv,mink_plus,900,1b,0.500822
+ArXiv,mink_plus,0,2.8b,0.500983
+ArXiv,mink_plus,100,2.8b,0.500153
+ArXiv,mink_plus,200,2.8b,0.506426
+ArXiv,mink_plus,300,2.8b,0.529297
+ArXiv,mink_plus,400,2.8b,0.51443
+ArXiv,mink_plus,500,2.8b,0.50519
+ArXiv,mink_plus,600,2.8b,0.516209
+ArXiv,mink_plus,700,2.8b,0.5066930000000001
+ArXiv,mink_plus,800,2.8b,0.505405
+ArXiv,mink_plus,900,2.8b,0.511078
+ArXiv,mink_plus,0,6.9b,0.5016115
+ArXiv,mink_plus,100,6.9b,0.517551
+ArXiv,mink_plus,200,6.9b,0.5093750000000001
+ArXiv,mink_plus,300,6.9b,0.511281
+ArXiv,mink_plus,400,6.9b,0.513618
+ArXiv,mink_plus,500,6.9b,0.509074
+ArXiv,mink_plus,600,6.9b,0.5000979999999999
+ArXiv,mink_plus,700,6.9b,0.5013270000000001
+ArXiv,mink_plus,800,6.9b,0.505031
+ArXiv,mink_plus,900,6.9b,0.5113669999999999
+ArXiv,mink_plus,0,12b,0.505621
+ArXiv,mink_plus,100,12b,0.502587
+ArXiv,mink_plus,200,12b,0.519866
+ArXiv,mink_plus,300,12b,0.520276
+ArXiv,mink_plus,400,12b,0.505951
+ArXiv,mink_plus,500,12b,0.511992
+ArXiv,mink_plus,600,12b,0.504823
+ArXiv,mink_plus,700,12b,0.513041
+ArXiv,mink_plus,800,12b,0.5020979999999999
+ArXiv,mink_plus,900,12b,0.525268
+ArXiv,zlib,0,1b,0.504386
+ArXiv,zlib,100,1b,0.5015385
+ArXiv,zlib,200,1b,0.501906
+ArXiv,zlib,300,1b,0.5090385
+ArXiv,zlib,400,1b,0.500544
+ArXiv,zlib,500,1b,0.5187035
+ArXiv,zlib,600,1b,0.504931
+ArXiv,zlib,700,1b,0.5063555
+ArXiv,zlib,800,1b,0.504322
+ArXiv,zlib,900,1b,0.544715
+ArXiv,zlib,0,2.8b,0.50162
+ArXiv,zlib,100,2.8b,0.508038
+ArXiv,zlib,200,2.8b,0.508706
+ArXiv,zlib,300,2.8b,0.5007715
+ArXiv,zlib,400,2.8b,0.5090085
+ArXiv,zlib,500,2.8b,0.500184
+ArXiv,zlib,600,2.8b,0.522158
+ArXiv,zlib,700,2.8b,0.505568
+ArXiv,zlib,800,2.8b,0.5136510000000001
+ArXiv,zlib,900,2.8b,0.5581385
+ArXiv,zlib,0,6.9b,0.501632
+ArXiv,zlib,100,6.9b,0.5162545000000001
+ArXiv,zlib,200,6.9b,0.513799
+ArXiv,zlib,300,6.9b,0.5102154999999999
+ArXiv,zlib,400,6.9b,0.5179104999999999
+ArXiv,zlib,500,6.9b,0.5033605
+ArXiv,zlib,600,6.9b,0.5293795
+ArXiv,zlib,700,6.9b,0.5111475
+ArXiv,zlib,800,6.9b,0.523458
+ArXiv,zlib,900,6.9b,0.5637855
+ArXiv,zlib,0,12b,0.505916
+ArXiv,zlib,100,12b,0.519955
+ArXiv,zlib,200,12b,0.5202975
+ArXiv,zlib,300,12b,0.5194795000000001
+ArXiv,zlib,400,12b,0.526157
+ArXiv,zlib,500,12b,0.5096955
+ArXiv,zlib,600,12b,0.536089
+ArXiv,zlib,700,12b,0.5201169999999999
+ArXiv,zlib,800,12b,0.5290045
+ArXiv,zlib,900,12b,0.569059
+ArXiv,grad,0,1b,0.5026165
+ArXiv,grad,100,1b,0.5078085
+ArXiv,grad,200,1b,0.518663
+ArXiv,grad,300,1b,0.5043930000000001
+ArXiv,grad,400,1b,0.504964
+ArXiv,grad,500,1b,0.506161
+ArXiv,grad,600,1b,0.5082315
+ArXiv,grad,700,1b,0.5124234999999999
+ArXiv,grad,800,1b,0.5014449999999999
+ArXiv,grad,900,1b,0.512581
+ArXiv,grad,0,2.8b,0.5028185000000001
+ArXiv,grad,100,2.8b,0.5103325
+ArXiv,grad,200,2.8b,0.5275495
+ArXiv,grad,300,2.8b,0.515408
+ArXiv,grad,400,2.8b,0.5082475
+ArXiv,grad,500,2.8b,0.511301
+ArXiv,grad,600,2.8b,0.507463
+ArXiv,grad,700,2.8b,0.5062475
+ArXiv,grad,800,2.8b,0.51348
+ArXiv,grad,900,2.8b,0.533445
+ArXiv,grad,0,6.9b,0.5043
+ArXiv,grad,100,6.9b,0.5112905
+ArXiv,grad,200,6.9b,0.528515
+ArXiv,grad,300,6.9b,0.507268
+ArXiv,grad,400,6.9b,0.506577
+ArXiv,grad,500,6.9b,0.5211085
+ArXiv,grad,600,6.9b,0.503898
+ArXiv,grad,700,6.9b,0.5048025
+ArXiv,grad,800,6.9b,0.5028255
+ArXiv,grad,900,6.9b,0.54487
+ArXiv,grad,0,12b,0.503946
+ArXiv,grad,100,12b,0.51534
+ArXiv,grad,200,12b,0.505904
+ArXiv,grad,300,12b,0.500739
+ArXiv,grad,400,12b,0.5101375
+ArXiv,grad,500,12b,0.5006305
+ArXiv,grad,600,12b,0.541176
+ArXiv,grad,700,12b,0.5042575
+ArXiv,grad,800,12b,0.5259179999999999
+ArXiv,grad,900,12b,0.51935
+ArXiv,refer,0,1b,0.5140165
+ArXiv,refer,100,1b,0.5020720000000001
+ArXiv,refer,200,1b,0.5050495
+ArXiv,refer,300,1b,0.5046735
+ArXiv,refer,400,1b,0.509676
+ArXiv,refer,500,1b,0.5044125
+ArXiv,refer,600,1b,0.5092085
+ArXiv,refer,700,1b,0.5105175000000001
+ArXiv,refer,800,1b,0.5011559999999999
+ArXiv,refer,900,1b,0.536028
+ArXiv,refer,0,2.8b,0.5140165
+ArXiv,refer,100,2.8b,0.5020720000000001
+ArXiv,refer,200,2.8b,0.5050495
+ArXiv,refer,300,2.8b,0.5046735
+ArXiv,refer,400,2.8b,0.509676
+ArXiv,refer,500,2.8b,0.5044125
+ArXiv,refer,600,2.8b,0.5092085
+ArXiv,refer,700,2.8b,0.5105175000000001
+ArXiv,refer,800,2.8b,0.5011559999999999
+ArXiv,refer,900,2.8b,0.536028
+ArXiv,refer,0,6.9b,0.5140165
+ArXiv,refer,100,6.9b,0.5020720000000001
+ArXiv,refer,200,6.9b,0.5050495
+ArXiv,refer,300,6.9b,0.504949
+ArXiv,refer,400,6.9b,0.509676
+ArXiv,refer,500,6.9b,0.5044125
+ArXiv,refer,600,6.9b,0.5092085
+ArXiv,refer,700,6.9b,0.5104785000000001
+ArXiv,refer,800,6.9b,0.5011559999999999
+ArXiv,refer,900,6.9b,0.536028
+ArXiv,refer,0,12b,0.5140165
+ArXiv,refer,100,12b,0.5020720000000001
+ArXiv,refer,200,12b,0.5050495
+ArXiv,refer,300,12b,0.5044155
+ArXiv,refer,400,12b,0.509676
+ArXiv,refer,500,12b,0.5044125
+ArXiv,refer,600,12b,0.5092085
+ArXiv,refer,700,12b,0.5104785000000001
+ArXiv,refer,800,12b,0.5011559999999999
+ArXiv,refer,900,12b,0.536028

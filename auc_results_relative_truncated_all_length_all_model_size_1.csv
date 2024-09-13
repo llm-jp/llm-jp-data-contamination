@@ -1,0 +1,3081 @@
+dataset,feature,length,model_size,auc
+Wikipedia (en),loss,0,1b,0.503043
+Wikipedia (en),loss,10,1b,0.5120285
+Wikipedia (en),loss,20,1b,0.5031844999999999
+Wikipedia (en),loss,30,1b,0.5008165
+Wikipedia (en),loss,40,1b,0.5109685
+Wikipedia (en),loss,50,1b,0.5079025
+Wikipedia (en),loss,60,1b,0.5009215
+Wikipedia (en),loss,70,1b,0.5288225
+Wikipedia (en),loss,80,1b,0.517972
+Wikipedia (en),loss,90,1b,0.5196405
+Wikipedia (en),loss,0,2.8b,0.5030859999999999
+Wikipedia (en),loss,10,2.8b,0.5035095
+Wikipedia (en),loss,20,2.8b,0.512415
+Wikipedia (en),loss,30,2.8b,0.507896
+Wikipedia (en),loss,40,2.8b,0.50247
+Wikipedia (en),loss,50,2.8b,0.5214155
+Wikipedia (en),loss,60,2.8b,0.5029714999999999
+Wikipedia (en),loss,70,2.8b,0.5439075
+Wikipedia (en),loss,80,2.8b,0.5295685
+Wikipedia (en),loss,90,2.8b,0.5359605000000001
+Wikipedia (en),loss,0,6.9b,0.5063565
+Wikipedia (en),loss,10,6.9b,0.5030595
+Wikipedia (en),loss,20,6.9b,0.5123475
+Wikipedia (en),loss,30,6.9b,0.505945
+Wikipedia (en),loss,40,6.9b,0.502354
+Wikipedia (en),loss,50,6.9b,0.521126
+Wikipedia (en),loss,60,6.9b,0.5038885
+Wikipedia (en),loss,70,6.9b,0.5434675
+Wikipedia (en),loss,80,6.9b,0.526523
+Wikipedia (en),loss,90,6.9b,0.5300644999999999
+Wikipedia (en),loss,0,12b,0.503561
+Wikipedia (en),loss,10,12b,0.500686
+Wikipedia (en),loss,20,12b,0.5153365000000001
+Wikipedia (en),loss,30,12b,0.508173
+Wikipedia (en),loss,40,12b,0.5009125
+Wikipedia (en),loss,50,12b,0.5260335
+Wikipedia (en),loss,60,12b,0.506049
+Wikipedia (en),loss,70,12b,0.5484344999999999
+Wikipedia (en),loss,80,12b,0.530094
+Wikipedia (en),loss,90,12b,0.53444
+Wikipedia (en),prob,0,1b,0.5084150000000001
+Wikipedia (en),prob,10,1b,0.511762
+Wikipedia (en),prob,20,1b,0.508559
+Wikipedia (en),prob,30,1b,0.50105
+Wikipedia (en),prob,40,1b,0.506591
+Wikipedia (en),prob,50,1b,0.5066039999999999
+Wikipedia (en),prob,60,1b,0.50349
+Wikipedia (en),prob,70,1b,0.532824
+Wikipedia (en),prob,80,1b,0.522361
+Wikipedia (en),prob,90,1b,0.5218510000000001
+Wikipedia (en),prob,0,2.8b,0.503296
+Wikipedia (en),prob,10,2.8b,0.50096
+Wikipedia (en),prob,20,2.8b,0.516757
+Wikipedia (en),prob,30,2.8b,0.515865
+Wikipedia (en),prob,40,2.8b,0.502979
+Wikipedia (en),prob,50,2.8b,0.5212
+Wikipedia (en),prob,60,2.8b,0.506129
+Wikipedia (en),prob,70,2.8b,0.550077
+Wikipedia (en),prob,80,2.8b,0.539834
+Wikipedia (en),prob,90,2.8b,0.5450115
+Wikipedia (en),prob,0,6.9b,0.508542
+Wikipedia (en),prob,10,6.9b,0.500427
+Wikipedia (en),prob,20,6.9b,0.5197120000000001
+Wikipedia (en),prob,30,6.9b,0.511523
+Wikipedia (en),prob,40,6.9b,0.503802
+Wikipedia (en),prob,50,6.9b,0.520424
+Wikipedia (en),prob,60,6.9b,0.5085839999999999
+Wikipedia (en),prob,70,6.9b,0.548671
+Wikipedia (en),prob,80,6.9b,0.534118
+Wikipedia (en),prob,90,6.9b,0.5368345000000001
+Wikipedia (en),prob,0,12b,0.5041230000000001
+Wikipedia (en),prob,10,12b,0.503004
+Wikipedia (en),prob,20,12b,0.5219280000000001
+Wikipedia (en),prob,30,12b,0.515736
+Wikipedia (en),prob,40,12b,0.5084559999999999
+Wikipedia (en),prob,50,12b,0.525308
+Wikipedia (en),prob,60,12b,0.5114985
+Wikipedia (en),prob,70,12b,0.5526465
+Wikipedia (en),prob,80,12b,0.537968
+Wikipedia (en),prob,90,12b,0.545851
+Wikipedia (en),ppl,0,1b,0.503043
+Wikipedia (en),ppl,10,1b,0.5120285
+Wikipedia (en),ppl,20,1b,0.5031844999999999
+Wikipedia (en),ppl,30,1b,0.5008165
+Wikipedia (en),ppl,40,1b,0.5109685
+Wikipedia (en),ppl,50,1b,0.5079025
+Wikipedia (en),ppl,60,1b,0.5009215
+Wikipedia (en),ppl,70,1b,0.5288225
+Wikipedia (en),ppl,80,1b,0.517972
+Wikipedia (en),ppl,90,1b,0.5196405
+Wikipedia (en),ppl,0,2.8b,0.5030859999999999
+Wikipedia (en),ppl,10,2.8b,0.5035095
+Wikipedia (en),ppl,20,2.8b,0.512415
+Wikipedia (en),ppl,30,2.8b,0.507896
+Wikipedia (en),ppl,40,2.8b,0.50247
+Wikipedia (en),ppl,50,2.8b,0.5214155
+Wikipedia (en),ppl,60,2.8b,0.5029714999999999
+Wikipedia (en),ppl,70,2.8b,0.5439075
+Wikipedia (en),ppl,80,2.8b,0.5295685
+Wikipedia (en),ppl,90,2.8b,0.5359605000000001
+Wikipedia (en),ppl,0,6.9b,0.5063565
+Wikipedia (en),ppl,10,6.9b,0.5030595
+Wikipedia (en),ppl,20,6.9b,0.5123475
+Wikipedia (en),ppl,30,6.9b,0.505945
+Wikipedia (en),ppl,40,6.9b,0.502354
+Wikipedia (en),ppl,50,6.9b,0.521126
+Wikipedia (en),ppl,60,6.9b,0.5038885
+Wikipedia (en),ppl,70,6.9b,0.5434675
+Wikipedia (en),ppl,80,6.9b,0.526523
+Wikipedia (en),ppl,90,6.9b,0.5300644999999999
+Wikipedia (en),ppl,0,12b,0.503561
+Wikipedia (en),ppl,10,12b,0.500686
+Wikipedia (en),ppl,20,12b,0.5153365000000001
+Wikipedia (en),ppl,30,12b,0.508173
+Wikipedia (en),ppl,40,12b,0.5009125
+Wikipedia (en),ppl,50,12b,0.5260335
+Wikipedia (en),ppl,60,12b,0.506049
+Wikipedia (en),ppl,70,12b,0.5484344999999999
+Wikipedia (en),ppl,80,12b,0.530094
+Wikipedia (en),ppl,90,12b,0.53444
+Wikipedia (en),mink_plus,0,1b,0.500511
+Wikipedia (en),mink_plus,10,1b,0.500815
+Wikipedia (en),mink_plus,20,1b,0.516463
+Wikipedia (en),mink_plus,30,1b,0.501009
+Wikipedia (en),mink_plus,40,1b,0.500607
+Wikipedia (en),mink_plus,50,1b,0.521139
+Wikipedia (en),mink_plus,60,1b,0.5005919999999999
+Wikipedia (en),mink_plus,70,1b,0.5427245
+Wikipedia (en),mink_plus,80,1b,0.520645
+Wikipedia (en),mink_plus,90,1b,0.5017210000000001
+Wikipedia (en),mink_plus,0,2.8b,0.5009399999999999
+Wikipedia (en),mink_plus,10,2.8b,0.5135980000000001
+Wikipedia (en),mink_plus,20,2.8b,0.5273555
+Wikipedia (en),mink_plus,30,2.8b,0.5226005
+Wikipedia (en),mink_plus,40,2.8b,0.5143515000000001
+Wikipedia (en),mink_plus,50,2.8b,0.55197
+Wikipedia (en),mink_plus,60,2.8b,0.5287660000000001
+Wikipedia (en),mink_plus,70,2.8b,0.573782
+Wikipedia (en),mink_plus,80,2.8b,0.564206
+Wikipedia (en),mink_plus,90,2.8b,0.5488305
+Wikipedia (en),mink_plus,0,6.9b,0.505189
+Wikipedia (en),mink_plus,10,6.9b,0.5097339999999999
+Wikipedia (en),mink_plus,20,6.9b,0.527131
+Wikipedia (en),mink_plus,30,6.9b,0.5163979999999999
+Wikipedia (en),mink_plus,40,6.9b,0.518061
+Wikipedia (en),mink_plus,50,6.9b,0.5491779999999999
+Wikipedia (en),mink_plus,60,6.9b,0.528841
+Wikipedia (en),mink_plus,70,6.9b,0.5734575000000002
+Wikipedia (en),mink_plus,80,6.9b,0.5488005
+Wikipedia (en),mink_plus,90,6.9b,0.5358445000000001
+Wikipedia (en),mink_plus,0,12b,0.507537
+Wikipedia (en),mink_plus,10,12b,0.5126850000000001
+Wikipedia (en),mink_plus,20,12b,0.528015
+Wikipedia (en),mink_plus,30,12b,0.525927
+Wikipedia (en),mink_plus,40,12b,0.529109
+Wikipedia (en),mink_plus,50,12b,0.552743
+Wikipedia (en),mink_plus,60,12b,0.5341279999999999
+Wikipedia (en),mink_plus,70,12b,0.57494
+Wikipedia (en),mink_plus,80,12b,0.557866
+Wikipedia (en),mink_plus,90,12b,0.551731
+Wikipedia (en),zlib,0,1b,0.511502
+Wikipedia (en),zlib,10,1b,0.516103
+Wikipedia (en),zlib,20,1b,0.5078225000000001
+Wikipedia (en),zlib,30,1b,0.5006665
+Wikipedia (en),zlib,40,1b,0.505066
+Wikipedia (en),zlib,50,1b,0.5105625
+Wikipedia (en),zlib,60,1b,0.5101825
+Wikipedia (en),zlib,70,1b,0.5164125
+Wikipedia (en),zlib,80,1b,0.5267085
+Wikipedia (en),zlib,90,1b,0.500984
+Wikipedia (en),zlib,0,2.8b,0.511168
+Wikipedia (en),zlib,10,2.8b,0.5069775
+Wikipedia (en),zlib,20,2.8b,0.5156095
+Wikipedia (en),zlib,30,2.8b,0.5099164999999999
+Wikipedia (en),zlib,40,2.8b,0.5021085000000001
+Wikipedia (en),zlib,50,2.8b,0.523903
+Wikipedia (en),zlib,60,2.8b,0.5117095
+Wikipedia (en),zlib,70,2.8b,0.5318895
+Wikipedia (en),zlib,80,2.8b,0.540498
+Wikipedia (en),zlib,90,2.8b,0.523557
+Wikipedia (en),zlib,0,6.9b,0.5146930000000001
+Wikipedia (en),zlib,10,6.9b,0.506742
+Wikipedia (en),zlib,20,6.9b,0.5158655
+Wikipedia (en),zlib,30,6.9b,0.5080535
+Wikipedia (en),zlib,40,6.9b,0.5018265
+Wikipedia (en),zlib,50,6.9b,0.5232465
+Wikipedia (en),zlib,60,6.9b,0.513636
+Wikipedia (en),zlib,70,6.9b,0.5311825
+Wikipedia (en),zlib,80,6.9b,0.536656
+Wikipedia (en),zlib,90,6.9b,0.517155
+Wikipedia (en),zlib,0,12b,0.511834
+Wikipedia (en),zlib,10,12b,0.504529
+Wikipedia (en),zlib,20,12b,0.519201
+Wikipedia (en),zlib,30,12b,0.5103535
+Wikipedia (en),zlib,40,12b,0.5047380000000001
+Wikipedia (en),zlib,50,12b,0.528921
+Wikipedia (en),zlib,60,12b,0.515328
+Wikipedia (en),zlib,70,12b,0.5361009999999999
+Wikipedia (en),zlib,80,12b,0.5408285
+Wikipedia (en),zlib,90,12b,0.5230565
+Wikipedia (en),grad,0,1b,0.522671
+Wikipedia (en),grad,10,1b,0.508005
+Wikipedia (en),grad,20,1b,0.5151979999999999
+Wikipedia (en),grad,30,1b,0.5038549999999999
+Wikipedia (en),grad,40,1b,0.5100315
+Wikipedia (en),grad,50,1b,0.5054835
+Wikipedia (en),grad,60,1b,0.519227
+Wikipedia (en),grad,70,1b,0.506813
+Wikipedia (en),grad,80,1b,0.5238425
+Wikipedia (en),grad,90,1b,0.5166115
+Wikipedia (en),grad,0,2.8b,0.5139015
+Wikipedia (en),grad,10,2.8b,0.505349
+Wikipedia (en),grad,20,2.8b,0.507901
+Wikipedia (en),grad,30,2.8b,0.5264564999999999
+Wikipedia (en),grad,40,2.8b,0.525385
+Wikipedia (en),grad,50,2.8b,0.5181775
+Wikipedia (en),grad,60,2.8b,0.550072
+Wikipedia (en),grad,70,2.8b,0.525655
+Wikipedia (en),grad,80,2.8b,0.547779
+Wikipedia (en),grad,90,2.8b,0.519683
+Wikipedia (en),grad,0,6.9b,0.5101530000000001
+Wikipedia (en),grad,10,6.9b,0.5014715000000001
+Wikipedia (en),grad,20,6.9b,0.511747
+Wikipedia (en),grad,30,6.9b,0.526232
+Wikipedia (en),grad,40,6.9b,0.523254
+Wikipedia (en),grad,50,6.9b,0.5178875000000001
+Wikipedia (en),grad,60,6.9b,0.5312730000000001
+Wikipedia (en),grad,70,6.9b,0.5194375
+Wikipedia (en),grad,80,6.9b,0.5284535
+Wikipedia (en),grad,90,6.9b,0.5232845
+Wikipedia (en),grad,0,12b,0.514846
+Wikipedia (en),grad,10,12b,0.5009440000000001
+Wikipedia (en),grad,20,12b,0.5196544999999999
+Wikipedia (en),grad,30,12b,0.514507
+Wikipedia (en),grad,40,12b,0.5256290000000001
+Wikipedia (en),grad,50,12b,0.5115135000000001
+Wikipedia (en),grad,60,12b,0.5205299999999999
+Wikipedia (en),grad,70,12b,0.518912
+Wikipedia (en),grad,80,12b,0.5088239999999999
+Wikipedia (en),grad,90,12b,0.508507
+Wikipedia (en),refer,0,1b,0.508335
+Wikipedia (en),refer,10,1b,0.5082205
+Wikipedia (en),refer,20,1b,0.5008994999999999
+Wikipedia (en),refer,30,1b,0.5031830000000002
+Wikipedia (en),refer,40,1b,0.5139294999999999
+Wikipedia (en),refer,50,1b,0.503836
+Wikipedia (en),refer,60,1b,0.506572
+Wikipedia (en),refer,70,1b,0.5258860000000001
+Wikipedia (en),refer,80,1b,0.5075225000000001
+Wikipedia (en),refer,90,1b,0.515834
+Wikipedia (en),refer,0,2.8b,0.508335
+Wikipedia (en),refer,10,2.8b,0.5082205
+Wikipedia (en),refer,20,2.8b,0.5008994999999999
+Wikipedia (en),refer,30,2.8b,0.5031830000000002
+Wikipedia (en),refer,40,2.8b,0.5139294999999999
+Wikipedia (en),refer,50,2.8b,0.503836
+Wikipedia (en),refer,60,2.8b,0.506572
+Wikipedia (en),refer,70,2.8b,0.5258860000000001
+Wikipedia (en),refer,80,2.8b,0.5075225000000001
+Wikipedia (en),refer,90,2.8b,0.515834
+Wikipedia (en),refer,0,6.9b,0.5084609999999999
+Wikipedia (en),refer,10,6.9b,0.508316
+Wikipedia (en),refer,20,6.9b,0.500914
+Wikipedia (en),refer,30,6.9b,0.503305
+Wikipedia (en),refer,40,6.9b,0.5140315
+Wikipedia (en),refer,50,6.9b,0.5036785
+Wikipedia (en),refer,60,6.9b,0.5062685
+Wikipedia (en),refer,70,6.9b,0.5257535
+Wikipedia (en),refer,80,6.9b,0.5075075
+Wikipedia (en),refer,90,6.9b,0.515834
+Wikipedia (en),refer,0,12b,0.508301
+Wikipedia (en),refer,10,12b,0.5083139999999999
+Wikipedia (en),refer,20,12b,0.501011
+Wikipedia (en),refer,30,12b,0.503175
+Wikipedia (en),refer,40,12b,0.5140159999999999
+Wikipedia (en),refer,50,12b,0.5036430000000001
+Wikipedia (en),refer,60,12b,0.5062534999999999
+Wikipedia (en),refer,70,12b,0.5258670000000001
+Wikipedia (en),refer,80,12b,0.5075395
+Wikipedia (en),refer,90,12b,0.515834
+StackExchange,loss,0,1b,0.5040155
+StackExchange,loss,10,1b,0.527536
+StackExchange,loss,20,1b,0.5007965000000001
+StackExchange,loss,30,1b,0.503061
+StackExchange,loss,40,1b,0.5040615
+StackExchange,loss,50,1b,0.5038395
+StackExchange,loss,60,1b,0.511036
+StackExchange,loss,70,1b,0.531142
+StackExchange,loss,80,1b,0.507667
+StackExchange,loss,90,1b,0.5113725
+StackExchange,loss,0,2.8b,0.500227
+StackExchange,loss,10,2.8b,0.5226035
+StackExchange,loss,20,2.8b,0.5034985000000001
+StackExchange,loss,30,2.8b,0.5002089999999999
+StackExchange,loss,40,2.8b,0.5053065000000001
+StackExchange,loss,50,2.8b,0.508775
+StackExchange,loss,60,2.8b,0.507458
+StackExchange,loss,70,2.8b,0.5276434999999999
+StackExchange,loss,80,2.8b,0.5050545
+StackExchange,loss,90,2.8b,0.5142089999999999
+StackExchange,loss,0,6.9b,0.503244
+StackExchange,loss,10,6.9b,0.5203635
+StackExchange,loss,20,6.9b,0.5031345
+StackExchange,loss,30,6.9b,0.503706
+StackExchange,loss,40,6.9b,0.508755
+StackExchange,loss,50,6.9b,0.5111465
+StackExchange,loss,60,6.9b,0.5059075
+StackExchange,loss,70,6.9b,0.5248735
+StackExchange,loss,80,6.9b,0.5024605
+StackExchange,loss,90,6.9b,0.515201
+StackExchange,loss,0,12b,0.505423
+StackExchange,loss,10,12b,0.5178710000000001
+StackExchange,loss,20,12b,0.5065279999999999
+StackExchange,loss,30,12b,0.50604
+StackExchange,loss,40,12b,0.5107889999999999
+StackExchange,loss,50,12b,0.5120795
+StackExchange,loss,60,12b,0.5046275
+StackExchange,loss,70,12b,0.5233
+StackExchange,loss,80,12b,0.5009490000000001
+StackExchange,loss,90,12b,0.517711
+StackExchange,prob,0,1b,0.503668
+StackExchange,prob,10,1b,0.526078
+StackExchange,prob,20,1b,0.500579
+StackExchange,prob,30,1b,0.503032
+StackExchange,prob,40,1b,0.51459
+StackExchange,prob,50,1b,0.5091349999999999
+StackExchange,prob,60,1b,0.5083
+StackExchange,prob,70,1b,0.533388
+StackExchange,prob,80,1b,0.5043325
+StackExchange,prob,90,1b,0.5132545000000001
+StackExchange,prob,0,2.8b,0.50051
+StackExchange,prob,10,2.8b,0.519609
+StackExchange,prob,20,2.8b,0.506444
+StackExchange,prob,30,2.8b,0.5068605
+StackExchange,prob,40,2.8b,0.517694
+StackExchange,prob,50,2.8b,0.517837
+StackExchange,prob,60,2.8b,0.5010060000000001
+StackExchange,prob,70,2.8b,0.526752
+StackExchange,prob,80,2.8b,0.500022
+StackExchange,prob,90,2.8b,0.5185385
+StackExchange,prob,0,6.9b,0.505267
+StackExchange,prob,10,6.9b,0.515871
+StackExchange,prob,20,6.9b,0.507123
+StackExchange,prob,30,6.9b,0.512936
+StackExchange,prob,40,6.9b,0.522883
+StackExchange,prob,50,6.9b,0.519837
+StackExchange,prob,60,6.9b,0.5001175
+StackExchange,prob,70,6.9b,0.522047
+StackExchange,prob,80,6.9b,0.50474
+StackExchange,prob,90,6.9b,0.520853
+StackExchange,prob,0,12b,0.511774
+StackExchange,prob,10,12b,0.512771
+StackExchange,prob,20,12b,0.513066
+StackExchange,prob,30,12b,0.515539
+StackExchange,prob,40,12b,0.5262875
+StackExchange,prob,50,12b,0.5223530000000001
+StackExchange,prob,60,12b,0.50372
+StackExchange,prob,70,12b,0.51783
+StackExchange,prob,80,12b,0.507317
+StackExchange,prob,90,12b,0.5250170000000001
+StackExchange,ppl,0,1b,0.5040155
+StackExchange,ppl,10,1b,0.527536
+StackExchange,ppl,20,1b,0.5007965000000001
+StackExchange,ppl,30,1b,0.503061
+StackExchange,ppl,40,1b,0.5040615
+StackExchange,ppl,50,1b,0.5038395
+StackExchange,ppl,60,1b,0.511036
+StackExchange,ppl,70,1b,0.531142
+StackExchange,ppl,80,1b,0.507667
+StackExchange,ppl,90,1b,0.5113725
+StackExchange,ppl,0,2.8b,0.500227
+StackExchange,ppl,10,2.8b,0.5226035
+StackExchange,ppl,20,2.8b,0.5034985000000001
+StackExchange,ppl,30,2.8b,0.5002089999999999
+StackExchange,ppl,40,2.8b,0.5053065000000001
+StackExchange,ppl,50,2.8b,0.508775
+StackExchange,ppl,60,2.8b,0.507458
+StackExchange,ppl,70,2.8b,0.5276434999999999
+StackExchange,ppl,80,2.8b,0.5050545
+StackExchange,ppl,90,2.8b,0.5142089999999999
+StackExchange,ppl,0,6.9b,0.503244
+StackExchange,ppl,10,6.9b,0.5203635
+StackExchange,ppl,20,6.9b,0.5031345
+StackExchange,ppl,30,6.9b,0.503706
+StackExchange,ppl,40,6.9b,0.508755
+StackExchange,ppl,50,6.9b,0.5111465
+StackExchange,ppl,60,6.9b,0.5059075
+StackExchange,ppl,70,6.9b,0.5248735
+StackExchange,ppl,80,6.9b,0.5024605
+StackExchange,ppl,90,6.9b,0.515201
+StackExchange,ppl,0,12b,0.505423
+StackExchange,ppl,10,12b,0.5178710000000001
+StackExchange,ppl,20,12b,0.5065279999999999
+StackExchange,ppl,30,12b,0.50604
+StackExchange,ppl,40,12b,0.5107889999999999
+StackExchange,ppl,50,12b,0.5120795
+StackExchange,ppl,60,12b,0.5046275
+StackExchange,ppl,70,12b,0.5233
+StackExchange,ppl,80,12b,0.5009490000000001
+StackExchange,ppl,90,12b,0.517711
+StackExchange,mink_plus,0,1b,0.516327
+StackExchange,mink_plus,10,1b,0.530295
+StackExchange,mink_plus,20,1b,0.510777
+StackExchange,mink_plus,30,1b,0.528286
+StackExchange,mink_plus,40,1b,0.525241
+StackExchange,mink_plus,50,1b,0.546038
+StackExchange,mink_plus,60,1b,0.512953
+StackExchange,mink_plus,70,1b,0.5328895
+StackExchange,mink_plus,80,1b,0.518396
+StackExchange,mink_plus,90,1b,0.53401
+StackExchange,mink_plus,0,2.8b,0.52564
+StackExchange,mink_plus,10,2.8b,0.513593
+StackExchange,mink_plus,20,2.8b,0.520135
+StackExchange,mink_plus,30,2.8b,0.526138
+StackExchange,mink_plus,40,2.8b,0.531994
+StackExchange,mink_plus,50,2.8b,0.551829
+StackExchange,mink_plus,60,2.8b,0.5052595
+StackExchange,mink_plus,70,2.8b,0.517786
+StackExchange,mink_plus,80,2.8b,0.524681
+StackExchange,mink_plus,90,2.8b,0.53771
+StackExchange,mink_plus,0,6.9b,0.526601
+StackExchange,mink_plus,10,6.9b,0.504875
+StackExchange,mink_plus,20,6.9b,0.5226575
+StackExchange,mink_plus,30,6.9b,0.541108
+StackExchange,mink_plus,40,6.9b,0.5428155000000001
+StackExchange,mink_plus,50,6.9b,0.561821
+StackExchange,mink_plus,60,6.9b,0.513457
+StackExchange,mink_plus,70,6.9b,0.5022740000000001
+StackExchange,mink_plus,80,6.9b,0.533249
+StackExchange,mink_plus,90,6.9b,0.546396
+StackExchange,mink_plus,0,12b,0.53735
+StackExchange,mink_plus,10,12b,0.502735
+StackExchange,mink_plus,20,12b,0.532889
+StackExchange,mink_plus,30,12b,0.547519
+StackExchange,mink_plus,40,12b,0.547324
+StackExchange,mink_plus,50,12b,0.562572
+StackExchange,mink_plus,60,12b,0.517968
+StackExchange,mink_plus,70,12b,0.502571
+StackExchange,mink_plus,80,12b,0.5370309999999999
+StackExchange,mink_plus,90,12b,0.556227
+StackExchange,zlib,0,1b,0.5005645
+StackExchange,zlib,10,1b,0.5265375
+StackExchange,zlib,20,1b,0.5035000000000001
+StackExchange,zlib,30,1b,0.512144
+StackExchange,zlib,40,1b,0.5009175
+StackExchange,zlib,50,1b,0.5050055
+StackExchange,zlib,60,1b,0.5113565
+StackExchange,zlib,70,1b,0.5257409999999999
+StackExchange,zlib,80,1b,0.5071325
+StackExchange,zlib,90,1b,0.511406
+StackExchange,zlib,0,2.8b,0.5031855000000001
+StackExchange,zlib,10,2.8b,0.522293
+StackExchange,zlib,20,2.8b,0.5003225000000001
+StackExchange,zlib,30,2.8b,0.509679
+StackExchange,zlib,40,2.8b,0.5020150000000001
+StackExchange,zlib,50,2.8b,0.508807
+StackExchange,zlib,60,2.8b,0.5078214999999999
+StackExchange,zlib,70,2.8b,0.5228995
+StackExchange,zlib,80,2.8b,0.5046725000000001
+StackExchange,zlib,90,2.8b,0.515496
+StackExchange,zlib,0,6.9b,0.5046649999999999
+StackExchange,zlib,10,6.9b,0.520843
+StackExchange,zlib,20,6.9b,0.50024
+StackExchange,zlib,30,6.9b,0.5065755
+StackExchange,zlib,40,6.9b,0.504576
+StackExchange,zlib,50,6.9b,0.5109225000000001
+StackExchange,zlib,60,6.9b,0.5065615
+StackExchange,zlib,70,6.9b,0.520582
+StackExchange,zlib,80,6.9b,0.5018285
+StackExchange,zlib,90,6.9b,0.517393
+StackExchange,zlib,0,12b,0.505976
+StackExchange,zlib,10,12b,0.5185665
+StackExchange,zlib,20,12b,0.502294
+StackExchange,zlib,30,12b,0.5047495
+StackExchange,zlib,40,12b,0.5058825000000001
+StackExchange,zlib,50,12b,0.5117405
+StackExchange,zlib,60,12b,0.505317
+StackExchange,zlib,70,12b,0.518832
+StackExchange,zlib,80,12b,0.500013
+StackExchange,zlib,90,12b,0.522026
+StackExchange,grad,0,1b,0.5099505000000001
+StackExchange,grad,10,1b,0.5397125
+StackExchange,grad,20,1b,0.5127385000000001
+StackExchange,grad,30,1b,0.5068684999999999
+StackExchange,grad,40,1b,0.505243
+StackExchange,grad,50,1b,0.509229
+StackExchange,grad,60,1b,0.5094455
+StackExchange,grad,70,1b,0.5352745
+StackExchange,grad,80,1b,0.503342
+StackExchange,grad,90,1b,0.5114615
+StackExchange,grad,0,2.8b,0.50029
+StackExchange,grad,10,2.8b,0.5334045
+StackExchange,grad,20,2.8b,0.509086
+StackExchange,grad,30,2.8b,0.5027124999999999
+StackExchange,grad,40,2.8b,0.5054675
+StackExchange,grad,50,2.8b,0.512259
+StackExchange,grad,60,2.8b,0.5031375
+StackExchange,grad,70,2.8b,0.526162
+StackExchange,grad,80,2.8b,0.506194
+StackExchange,grad,90,2.8b,0.5221825
+StackExchange,grad,0,6.9b,0.5029345
+StackExchange,grad,10,6.9b,0.5293215
+StackExchange,grad,20,6.9b,0.504182
+StackExchange,grad,30,6.9b,0.5022230000000001
+StackExchange,grad,40,6.9b,0.512602
+StackExchange,grad,50,6.9b,0.5184325000000001
+StackExchange,grad,60,6.9b,0.5064795
+StackExchange,grad,70,6.9b,0.5263495
+StackExchange,grad,80,6.9b,0.5038845
+StackExchange,grad,90,6.9b,0.5240085
+StackExchange,grad,0,12b,0.507083
+StackExchange,grad,10,12b,0.5071705
+StackExchange,grad,20,12b,0.5004834999999999
+StackExchange,grad,30,12b,0.502837
+StackExchange,grad,40,12b,0.5287845
+StackExchange,grad,50,12b,0.5372655
+StackExchange,grad,60,12b,0.5115505
+StackExchange,grad,70,12b,0.5308025000000001
+StackExchange,grad,80,12b,0.5054704999999999
+StackExchange,grad,90,12b,0.50818
+StackExchange,refer,0,1b,0.503004
+StackExchange,refer,10,1b,0.5285495
+StackExchange,refer,20,1b,0.5005179999999999
+StackExchange,refer,30,1b,0.5039715
+StackExchange,refer,40,1b,0.5002665000000001
+StackExchange,refer,50,1b,0.502547
+StackExchange,refer,60,1b,0.5129565
+StackExchange,refer,70,1b,0.5327985
+StackExchange,refer,80,1b,0.509042
+StackExchange,refer,90,1b,0.5086025000000001
+StackExchange,refer,0,2.8b,0.503004
+StackExchange,refer,10,2.8b,0.5285495
+StackExchange,refer,20,2.8b,0.5005179999999999
+StackExchange,refer,30,2.8b,0.5039715
+StackExchange,refer,40,2.8b,0.5002665000000001
+StackExchange,refer,50,2.8b,0.502547
+StackExchange,refer,60,2.8b,0.5129565
+StackExchange,refer,70,2.8b,0.5327985
+StackExchange,refer,80,2.8b,0.509042
+StackExchange,refer,90,2.8b,0.5086025000000001
+StackExchange,refer,0,6.9b,0.503238
+StackExchange,refer,10,6.9b,0.528654
+StackExchange,refer,20,6.9b,0.5004139999999999
+StackExchange,refer,30,6.9b,0.5040330000000001
+StackExchange,refer,40,6.9b,0.5003825000000001
+StackExchange,refer,50,6.9b,0.5026714999999999
+StackExchange,refer,60,6.9b,0.5128755
+StackExchange,refer,70,6.9b,0.5327489999999999
+StackExchange,refer,80,6.9b,0.5090025
+StackExchange,refer,90,6.9b,0.508572
+StackExchange,refer,0,12b,0.503229
+StackExchange,refer,10,12b,0.528537
+StackExchange,refer,20,12b,0.5003744999999999
+StackExchange,refer,30,12b,0.5040024999999999
+StackExchange,refer,40,12b,0.500303
+StackExchange,refer,50,12b,0.502684
+StackExchange,refer,60,12b,0.5128535
+StackExchange,refer,70,12b,0.5327535
+StackExchange,refer,80,12b,0.5089595
+StackExchange,refer,90,12b,0.5086040000000001
+PubMed Central,loss,0,1b,0.5081883561643836
+PubMed Central,loss,10,1b,0.5030962837837838
+PubMed Central,loss,20,1b,0.505766441821248
+PubMed Central,loss,30,1b,0.507522765598651
+PubMed Central,loss,40,1b,0.5101424957841483
+PubMed Central,loss,50,1b,0.5004172297297298
+PubMed Central,loss,60,1b,0.5026663879598663
+PubMed Central,loss,70,1b,0.5085751689189189
+PubMed Central,loss,80,1b,0.505625
+PubMed Central,loss,90,1b,0.5139341216216217
+PubMed Central,loss,0,2.8b,0.5092945205479452
+PubMed Central,loss,10,2.8b,0.5095270270270271
+PubMed Central,loss,20,2.8b,0.5032175379426644
+PubMed Central,loss,30,2.8b,0.5001829679595279
+PubMed Central,loss,40,2.8b,0.5033220910623946
+PubMed Central,loss,50,2.8b,0.5042964527027027
+PubMed Central,loss,60,2.8b,0.5044899665551841
+PubMed Central,loss,70,2.8b,0.5114847972972973
+PubMed Central,loss,80,2.8b,0.5021866554054054
+PubMed Central,loss,90,2.8b,0.51140625
+PubMed Central,loss,0,6.9b,0.5065719178082192
+PubMed Central,loss,10,6.9b,0.5119197635135135
+PubMed Central,loss,20,6.9b,0.5076424957841484
+PubMed Central,loss,30,6.9b,0.5031736930860033
+PubMed Central,loss,40,6.9b,0.5019949409780775
+PubMed Central,loss,50,6.9b,0.5088614864864864
+PubMed Central,loss,60,6.9b,0.5098235785953178
+PubMed Central,loss,70,6.9b,0.5144873310810811
+PubMed Central,loss,80,6.9b,0.5055422297297297
+PubMed Central,loss,90,6.9b,0.5047854729729728
+PubMed Central,loss,0,12b,0.505972602739726
+PubMed Central,loss,10,12b,0.5137956081081082
+PubMed Central,loss,20,12b,0.5124097807757166
+PubMed Central,loss,30,12b,0.5072225969645868
+PubMed Central,loss,40,12b,0.5020244519392918
+PubMed Central,loss,50,12b,0.5097939189189189
+PubMed Central,loss,60,12b,0.5119824414715719
+PubMed Central,loss,70,12b,0.5180608108108109
+PubMed Central,loss,80,12b,0.5061300675675675
+PubMed Central,loss,90,12b,0.500370777027027
+PubMed Central,prob,0,1b,0.5053436073059361
+PubMed Central,prob,10,1b,0.5014949324324324
+PubMed Central,prob,20,1b,0.5088768971332209
+PubMed Central,prob,30,1b,0.5028246205733559
+PubMed Central,prob,40,1b,0.5048954468802699
+PubMed Central,prob,50,1b,0.5046216216216216
+PubMed Central,prob,60,1b,0.5041772575250836
+PubMed Central,prob,70,1b,0.5136283783783784
+PubMed Central,prob,80,1b,0.5047483108108107
+PubMed Central,prob,90,1b,0.5157753378378378
+PubMed Central,prob,0,2.8b,0.507466894977169
+PubMed Central,prob,10,2.8b,0.5076148648648648
+PubMed Central,prob,20,2.8b,0.5056610455311972
+PubMed Central,prob,30,2.8b,0.5048060708263069
+PubMed Central,prob,40,2.8b,0.5047824620573356
+PubMed Central,prob,50,2.8b,0.5135996621621621
+PubMed Central,prob,60,2.8b,0.5183829431438127
+PubMed Central,prob,70,2.8b,0.5179493243243243
+PubMed Central,prob,80,2.8b,0.5036140202702702
+PubMed Central,prob,90,2.8b,0.5074146959459459
+PubMed Central,prob,0,6.9b,0.5047009132420092
+PubMed Central,prob,10,6.9b,0.5107905405405405
+PubMed Central,prob,20,6.9b,0.5099949409780776
+PubMed Central,prob,30,6.9b,0.5105843170320404
+PubMed Central,prob,40,6.9b,0.5081905564924114
+PubMed Central,prob,50,6.9b,0.5185456081081081
+PubMed Central,prob,60,6.9b,0.5245050167224081
+PubMed Central,prob,70,6.9b,0.525762668918919
+PubMed Central,prob,80,6.9b,0.5118277027027027
+PubMed Central,prob,90,6.9b,0.5007111486486486
+PubMed Central,prob,0,12b,0.5046027397260274
+PubMed Central,prob,10,12b,0.5146410472972973
+PubMed Central,prob,20,12b,0.5187495784148397
+PubMed Central,prob,30,12b,0.5174822934232715
+PubMed Central,prob,40,12b,0.5141096121416526
+PubMed Central,prob,50,12b,0.5193766891891891
+PubMed Central,prob,60,12b,0.5260702341137125
+PubMed Central,prob,70,12b,0.5300608108108108
+PubMed Central,prob,80,12b,0.5139805743243243
+PubMed Central,prob,90,12b,0.5060059121621622
+PubMed Central,ppl,0,1b,0.5081883561643836
+PubMed Central,ppl,10,1b,0.5030962837837838
+PubMed Central,ppl,20,1b,0.505766441821248
+PubMed Central,ppl,30,1b,0.507522765598651
+PubMed Central,ppl,40,1b,0.5101424957841483
+PubMed Central,ppl,50,1b,0.5004172297297298
+PubMed Central,ppl,60,1b,0.5026663879598663
+PubMed Central,ppl,70,1b,0.5085751689189189
+PubMed Central,ppl,80,1b,0.505625
+PubMed Central,ppl,90,1b,0.5139341216216217
+PubMed Central,ppl,0,2.8b,0.5092945205479452
+PubMed Central,ppl,10,2.8b,0.5095270270270271
+PubMed Central,ppl,20,2.8b,0.5032175379426644
+PubMed Central,ppl,30,2.8b,0.5001829679595279
+PubMed Central,ppl,40,2.8b,0.5033220910623946
+PubMed Central,ppl,50,2.8b,0.5042964527027027
+PubMed Central,ppl,60,2.8b,0.5044899665551841
+PubMed Central,ppl,70,2.8b,0.5114847972972973
+PubMed Central,ppl,80,2.8b,0.5021866554054054
+PubMed Central,ppl,90,2.8b,0.51140625
+PubMed Central,ppl,0,6.9b,0.5065719178082192
+PubMed Central,ppl,10,6.9b,0.5119197635135135
+PubMed Central,ppl,20,6.9b,0.5076424957841484
+PubMed Central,ppl,30,6.9b,0.5031736930860033
+PubMed Central,ppl,40,6.9b,0.5019949409780775
+PubMed Central,ppl,50,6.9b,0.5088614864864864
+PubMed Central,ppl,60,6.9b,0.5098235785953178
+PubMed Central,ppl,70,6.9b,0.5144873310810811
+PubMed Central,ppl,80,6.9b,0.5055422297297297
+PubMed Central,ppl,90,6.9b,0.5047854729729728
+PubMed Central,ppl,0,12b,0.505972602739726
+PubMed Central,ppl,10,12b,0.5137956081081082
+PubMed Central,ppl,20,12b,0.5124097807757166
+PubMed Central,ppl,30,12b,0.5072225969645868
+PubMed Central,ppl,40,12b,0.5020244519392918
+PubMed Central,ppl,50,12b,0.5097939189189189
+PubMed Central,ppl,60,12b,0.5119824414715719
+PubMed Central,ppl,70,12b,0.5180608108108109
+PubMed Central,ppl,80,12b,0.5061300675675675
+PubMed Central,ppl,90,12b,0.500370777027027
+PubMed Central,mink_plus,0,1b,0.504662100456621
+PubMed Central,mink_plus,10,1b,0.5164484797297297
+PubMed Central,mink_plus,20,1b,0.5006112984822935
+PubMed Central,mink_plus,30,1b,0.5034198988195615
+PubMed Central,mink_plus,40,1b,0.5083220910623947
+PubMed Central,mink_plus,50,1b,0.5092753378378378
+PubMed Central,mink_plus,60,1b,0.5102458193979933
+PubMed Central,mink_plus,70,1b,0.5059391891891892
+PubMed Central,mink_plus,80,1b,0.5005168918918919
+PubMed Central,mink_plus,90,1b,0.5042179054054055
+PubMed Central,mink_plus,0,2.8b,0.5065148401826484
+PubMed Central,mink_plus,10,2.8b,0.5237128378378378
+PubMed Central,mink_plus,20,2.8b,0.5223456998313659
+PubMed Central,mink_plus,30,2.8b,0.5106121416526139
+PubMed Central,mink_plus,40,2.8b,0.5076981450252951
+PubMed Central,mink_plus,50,2.8b,0.5286672297297298
+PubMed Central,mink_plus,60,2.8b,0.5233670568561872
+PubMed Central,mink_plus,70,2.8b,0.5097804054054054
+PubMed Central,mink_plus,80,2.8b,0.511491554054054
+PubMed Central,mink_plus,90,2.8b,0.5193277027027027
+PubMed Central,mink_plus,0,6.9b,0.5024783105022831
+PubMed Central,mink_plus,10,6.9b,0.5347162162162162
+PubMed Central,mink_plus,20,6.9b,0.5236736930860033
+PubMed Central,mink_plus,30,6.9b,0.5236458684654299
+PubMed Central,mink_plus,40,6.9b,0.5108920741989882
+PubMed Central,mink_plus,50,6.9b,0.5356030405405405
+PubMed Central,mink_plus,60,6.9b,0.5340401337792642
+PubMed Central,mink_plus,70,6.9b,0.526108108108108
+PubMed Central,mink_plus,80,6.9b,0.52475
+PubMed Central,mink_plus,90,6.9b,0.5287905405405405
+PubMed Central,mink_plus,0,12b,0.5021906392694064
+PubMed Central,mink_plus,10,12b,0.5439898648648648
+PubMed Central,mink_plus,20,12b,0.5400893760539629
+PubMed Central,mink_plus,30,12b,0.5399510961214166
+PubMed Central,mink_plus,40,12b,0.5184030354131535
+PubMed Central,mink_plus,50,12b,0.5381638513513514
+PubMed Central,mink_plus,60,12b,0.5289790969899666
+PubMed Central,mink_plus,70,12b,0.5289358108108109
+PubMed Central,mink_plus,80,12b,0.5317297297297298
+PubMed Central,mink_plus,90,12b,0.542866554054054
+PubMed Central,zlib,0,1b,0.5106004566210045
+PubMed Central,zlib,10,1b,0.5058048986486486
+PubMed Central,zlib,20,1b,0.5029721753794267
+PubMed Central,zlib,30,1b,0.514362563237774
+PubMed Central,zlib,40,1b,0.504862563237774
+PubMed Central,zlib,50,1b,0.5087322635135136
+PubMed Central,zlib,60,1b,0.5052123745819398
+PubMed Central,zlib,70,1b,0.516295608108108
+PubMed Central,zlib,80,1b,0.5009298986486487
+PubMed Central,zlib,90,1b,0.5313682432432433
+PubMed Central,zlib,0,2.8b,0.5107020547945205
+PubMed Central,zlib,10,2.8b,0.5017170608108108
+PubMed Central,zlib,20,2.8b,0.5064308600337267
+PubMed Central,zlib,30,2.8b,0.5056880269814502
+PubMed Central,zlib,40,2.8b,0.5049258010118044
+PubMed Central,zlib,50,2.8b,0.5025084459459459
+PubMed Central,zlib,60,2.8b,0.50125
+PubMed Central,zlib,70,2.8b,0.5204341216216216
+PubMed Central,zlib,80,2.8b,0.5083361486486486
+PubMed Central,zlib,90,2.8b,0.5267913851351351
+PubMed Central,zlib,0,6.9b,0.5083595890410959
+PubMed Central,zlib,10,6.9b,0.5000971283783784
+PubMed Central,zlib,20,6.9b,0.5118086003372682
+PubMed Central,zlib,30,6.9b,0.5003465430016864
+PubMed Central,zlib,40,6.9b,0.5063532883642495
+PubMed Central,zlib,50,6.9b,0.5021334459459459
+PubMed Central,zlib,60,6.9b,0.5075267558528428
+PubMed Central,zlib,70,6.9b,0.5254434121621622
+PubMed Central,zlib,80,6.9b,0.5143015202702703
+PubMed Central,zlib,90,6.9b,0.5172913851351351
+PubMed Central,zlib,0,12b,0.5083630136986301
+PubMed Central,zlib,10,12b,0.50153125
+PubMed Central,zlib,20,12b,0.5176483979763913
+PubMed Central,zlib,30,12b,0.5044645868465429
+PubMed Central,zlib,40,12b,0.5100691399662732
+PubMed Central,zlib,50,12b,0.5052618243243243
+PubMed Central,zlib,60,12b,0.5115677257525084
+PubMed Central,zlib,70,12b,0.5278868243243243
+PubMed Central,zlib,80,12b,0.515660472972973
+PubMed Central,zlib,90,12b,0.5109298986486487
+PubMed Central,grad,0,1b,0.5150468036529681
+PubMed Central,grad,10,1b,0.506418918918919
+PubMed Central,grad,20,1b,0.5014156829679595
+PubMed Central,grad,30,1b,0.5053423271500843
+PubMed Central,grad,40,1b,0.5093254637436762
+PubMed Central,grad,50,1b,0.5030295608108108
+PubMed Central,grad,60,1b,0.5051295986622073
+PubMed Central,grad,70,1b,0.5090160472972973
+PubMed Central,grad,80,1b,0.5040177364864865
+PubMed Central,grad,90,1b,0.5065337837837838
+PubMed Central,grad,0,2.8b,0.5134143835616438
+PubMed Central,grad,10,2.8b,0.5073893581081081
+PubMed Central,grad,20,2.8b,0.5040919055649242
+PubMed Central,grad,30,2.8b,0.507526981450253
+PubMed Central,grad,40,2.8b,0.5021989881956155
+PubMed Central,grad,50,2.8b,0.5105751689189189
+PubMed Central,grad,60,2.8b,0.5050585284280936
+PubMed Central,grad,70,2.8b,0.5063800675675676
+PubMed Central,grad,80,2.8b,0.5067905405405405
+PubMed Central,grad,90,2.8b,0.5006528716216216
+PubMed Central,grad,0,6.9b,0.5088230593607306
+PubMed Central,grad,10,6.9b,0.5059104729729731
+PubMed Central,grad,20,6.9b,0.5025219224283305
+PubMed Central,grad,30,6.9b,0.502862563237774
+PubMed Central,grad,40,6.9b,0.5064173693086003
+PubMed Central,grad,50,6.9b,0.5110126689189189
+PubMed Central,grad,60,6.9b,0.5139448160535117
+PubMed Central,grad,70,6.9b,0.5040565878378378
+PubMed Central,grad,80,6.9b,0.5165329391891891
+PubMed Central,grad,90,6.9b,0.5081157094594594
+PubMed Central,grad,0,12b,0.5111815068493151
+PubMed Central,grad,10,12b,0.518576858108108
+PubMed Central,grad,20,12b,0.5406551433389546
+PubMed Central,grad,30,12b,0.5295649241146712
+PubMed Central,grad,40,12b,0.5004165261382799
+PubMed Central,grad,50,12b,0.5215616554054054
+PubMed Central,grad,60,12b,0.5099807692307692
+PubMed Central,grad,70,12b,0.5014932432432432
+PubMed Central,grad,80,12b,0.5118935810810811
+PubMed Central,grad,90,12b,0.5148682432432432
+PubMed Central,refer,0,1b,0.5007534246575343
+PubMed Central,refer,10,1b,0.5034577702702703
+PubMed Central,refer,20,1b,0.509102023608769
+PubMed Central,refer,30,1b,0.5120210792580101
+PubMed Central,refer,40,1b,0.5106568296795952
+PubMed Central,refer,50,1b,0.5045574324324325
+PubMed Central,refer,60,1b,0.5033051839464884
+PubMed Central,refer,70,1b,0.5040059121621621
+PubMed Central,refer,80,1b,0.5126418918918919
+PubMed Central,refer,90,1b,0.5171283783783784
+PubMed Central,refer,0,2.8b,0.5007534246575343
+PubMed Central,refer,10,2.8b,0.5034577702702703
+PubMed Central,refer,20,2.8b,0.509102023608769
+PubMed Central,refer,30,2.8b,0.5120210792580101
+PubMed Central,refer,40,2.8b,0.5106568296795952
+PubMed Central,refer,50,2.8b,0.5045574324324325
+PubMed Central,refer,60,2.8b,0.5033051839464884
+PubMed Central,refer,70,2.8b,0.5040059121621621
+PubMed Central,refer,80,2.8b,0.5126418918918919
+PubMed Central,refer,90,2.8b,0.5171283783783784
+PubMed Central,refer,0,6.9b,0.5005924657534246
+PubMed Central,refer,10,6.9b,0.5035641891891891
+PubMed Central,refer,20,6.9b,0.509102023608769
+PubMed Central,refer,30,6.9b,0.5120210792580101
+PubMed Central,refer,40,6.9b,0.5106568296795952
+PubMed Central,refer,50,6.9b,0.5045574324324325
+PubMed Central,refer,60,6.9b,0.5033051839464884
+PubMed Central,refer,70,6.9b,0.5040059121621621
+PubMed Central,refer,80,6.9b,0.5126418918918919
+PubMed Central,refer,90,6.9b,0.5171283783783784
+PubMed Central,refer,0,12b,0.5006244292237443
+PubMed Central,refer,10,12b,0.503464527027027
+PubMed Central,refer,20,12b,0.509102023608769
+PubMed Central,refer,30,12b,0.5120210792580101
+PubMed Central,refer,40,12b,0.5106568296795952
+PubMed Central,refer,50,12b,0.5045574324324325
+PubMed Central,refer,60,12b,0.5033051839464884
+PubMed Central,refer,70,12b,0.5040059121621621
+PubMed Central,refer,80,12b,0.5126418918918919
+PubMed Central,refer,90,12b,0.5171283783783784
+Pile-CC,loss,0,1b,0.5001639999999999
+Pile-CC,loss,10,1b,0.509348
+Pile-CC,loss,20,1b,0.527503
+Pile-CC,loss,30,1b,0.519804
+Pile-CC,loss,40,1b,0.514905
+Pile-CC,loss,50,1b,0.5244965
+Pile-CC,loss,60,1b,0.502265
+Pile-CC,loss,70,1b,0.5073384999999999
+Pile-CC,loss,80,1b,0.5409295
+Pile-CC,loss,90,1b,0.5120009999999999
+Pile-CC,loss,0,2.8b,0.5023219999999999
+Pile-CC,loss,10,2.8b,0.512089
+Pile-CC,loss,20,2.8b,0.528209
+Pile-CC,loss,30,2.8b,0.5215695
+Pile-CC,loss,40,2.8b,0.5155875000000001
+Pile-CC,loss,50,2.8b,0.521218
+Pile-CC,loss,60,2.8b,0.505311
+Pile-CC,loss,70,2.8b,0.5064525
+Pile-CC,loss,80,2.8b,0.5435274999999999
+Pile-CC,loss,90,2.8b,0.5108975
+Pile-CC,loss,0,6.9b,0.5071425
+Pile-CC,loss,10,6.9b,0.506562
+Pile-CC,loss,20,6.9b,0.5366685
+Pile-CC,loss,30,6.9b,0.5321995
+Pile-CC,loss,40,6.9b,0.5231159999999999
+Pile-CC,loss,50,6.9b,0.514585
+Pile-CC,loss,60,6.9b,0.5123595000000001
+Pile-CC,loss,70,6.9b,0.501058
+Pile-CC,loss,80,6.9b,0.550581
+Pile-CC,loss,90,6.9b,0.501393
+Pile-CC,loss,0,12b,0.512814
+Pile-CC,loss,10,12b,0.5052715000000001
+Pile-CC,loss,20,12b,0.5381355
+Pile-CC,loss,30,12b,0.5364424999999999
+Pile-CC,loss,40,12b,0.525798
+Pile-CC,loss,50,12b,0.5112165
+Pile-CC,loss,60,12b,0.5159255
+Pile-CC,loss,70,12b,0.504111
+Pile-CC,loss,80,12b,0.553307
+Pile-CC,loss,90,12b,0.5042795
+Pile-CC,prob,0,1b,0.508656
+Pile-CC,prob,10,1b,0.5032490000000001
+Pile-CC,prob,20,1b,0.527428
+Pile-CC,prob,30,1b,0.517883
+Pile-CC,prob,40,1b,0.517003
+Pile-CC,prob,50,1b,0.523345
+Pile-CC,prob,60,1b,0.5052025
+Pile-CC,prob,70,1b,0.50426
+Pile-CC,prob,80,1b,0.537633
+Pile-CC,prob,90,1b,0.511556
+Pile-CC,prob,0,2.8b,0.504459
+Pile-CC,prob,10,2.8b,0.505331
+Pile-CC,prob,20,2.8b,0.5274889999999999
+Pile-CC,prob,30,2.8b,0.523918
+Pile-CC,prob,40,2.8b,0.517295
+Pile-CC,prob,50,2.8b,0.519188
+Pile-CC,prob,60,2.8b,0.508499
+Pile-CC,prob,70,2.8b,0.5025944999999999
+Pile-CC,prob,80,2.8b,0.542818
+Pile-CC,prob,90,2.8b,0.509668
+Pile-CC,prob,0,6.9b,0.506421
+Pile-CC,prob,10,6.9b,0.5022329999999999
+Pile-CC,prob,20,6.9b,0.543972
+Pile-CC,prob,30,6.9b,0.5343439999999999
+Pile-CC,prob,40,6.9b,0.5234989999999999
+Pile-CC,prob,50,6.9b,0.51154
+Pile-CC,prob,60,6.9b,0.5202009999999999
+Pile-CC,prob,70,6.9b,0.505077
+Pile-CC,prob,80,6.9b,0.550515
+Pile-CC,prob,90,6.9b,0.5045959999999999
+Pile-CC,prob,0,12b,0.5111315000000001
+Pile-CC,prob,10,12b,0.504174
+Pile-CC,prob,20,12b,0.545399
+Pile-CC,prob,30,12b,0.5447069999999999
+Pile-CC,prob,40,12b,0.529668
+Pile-CC,prob,50,12b,0.5066905
+Pile-CC,prob,60,12b,0.522948
+Pile-CC,prob,70,12b,0.5105385
+Pile-CC,prob,80,12b,0.556741
+Pile-CC,prob,90,12b,0.5096015
+Pile-CC,ppl,0,1b,0.5001639999999999
+Pile-CC,ppl,10,1b,0.509348
+Pile-CC,ppl,20,1b,0.527503
+Pile-CC,ppl,30,1b,0.519804
+Pile-CC,ppl,40,1b,0.514905
+Pile-CC,ppl,50,1b,0.5244965
+Pile-CC,ppl,60,1b,0.502265
+Pile-CC,ppl,70,1b,0.5073384999999999
+Pile-CC,ppl,80,1b,0.5409295
+Pile-CC,ppl,90,1b,0.5120009999999999
+Pile-CC,ppl,0,2.8b,0.5023219999999999
+Pile-CC,ppl,10,2.8b,0.512089
+Pile-CC,ppl,20,2.8b,0.528209
+Pile-CC,ppl,30,2.8b,0.5215695
+Pile-CC,ppl,40,2.8b,0.5155875000000001
+Pile-CC,ppl,50,2.8b,0.521218
+Pile-CC,ppl,60,2.8b,0.505311
+Pile-CC,ppl,70,2.8b,0.5064525
+Pile-CC,ppl,80,2.8b,0.5435274999999999
+Pile-CC,ppl,90,2.8b,0.5108975
+Pile-CC,ppl,0,6.9b,0.5071425
+Pile-CC,ppl,10,6.9b,0.506562
+Pile-CC,ppl,20,6.9b,0.5366685
+Pile-CC,ppl,30,6.9b,0.5321995
+Pile-CC,ppl,40,6.9b,0.5231159999999999
+Pile-CC,ppl,50,6.9b,0.514585
+Pile-CC,ppl,60,6.9b,0.5123595000000001
+Pile-CC,ppl,70,6.9b,0.501058
+Pile-CC,ppl,80,6.9b,0.550581
+Pile-CC,ppl,90,6.9b,0.501393
+Pile-CC,ppl,0,12b,0.512814
+Pile-CC,ppl,10,12b,0.5052715000000001
+Pile-CC,ppl,20,12b,0.5381355
+Pile-CC,ppl,30,12b,0.5364424999999999
+Pile-CC,ppl,40,12b,0.525798
+Pile-CC,ppl,50,12b,0.5112165
+Pile-CC,ppl,60,12b,0.5159255
+Pile-CC,ppl,70,12b,0.504111
+Pile-CC,ppl,80,12b,0.553307
+Pile-CC,ppl,90,12b,0.5042795
+Pile-CC,mink_plus,0,1b,0.521955
+Pile-CC,mink_plus,10,1b,0.512131
+Pile-CC,mink_plus,20,1b,0.514956
+Pile-CC,mink_plus,30,1b,0.5150085
+Pile-CC,mink_plus,40,1b,0.532987
+Pile-CC,mink_plus,50,1b,0.516992
+Pile-CC,mink_plus,60,1b,0.528852
+Pile-CC,mink_plus,70,1b,0.514909
+Pile-CC,mink_plus,80,1b,0.5426985
+Pile-CC,mink_plus,90,1b,0.507706
+Pile-CC,mink_plus,0,2.8b,0.5127729999999999
+Pile-CC,mink_plus,10,2.8b,0.5173920000000001
+Pile-CC,mink_plus,20,2.8b,0.5126615
+Pile-CC,mink_plus,30,2.8b,0.5223085000000001
+Pile-CC,mink_plus,40,2.8b,0.5389700000000001
+Pile-CC,mink_plus,50,2.8b,0.5114110000000001
+Pile-CC,mink_plus,60,2.8b,0.519123
+Pile-CC,mink_plus,70,2.8b,0.51081
+Pile-CC,mink_plus,80,2.8b,0.5418405
+Pile-CC,mink_plus,90,2.8b,0.5133949999999999
+Pile-CC,mink_plus,0,6.9b,0.5068429999999999
+Pile-CC,mink_plus,10,6.9b,0.505716
+Pile-CC,mink_plus,20,6.9b,0.538913
+Pile-CC,mink_plus,30,6.9b,0.533513
+Pile-CC,mink_plus,40,6.9b,0.547282
+Pile-CC,mink_plus,50,6.9b,0.505685
+Pile-CC,mink_plus,60,6.9b,0.540304
+Pile-CC,mink_plus,70,6.9b,0.526582
+Pile-CC,mink_plus,80,6.9b,0.5765
+Pile-CC,mink_plus,90,6.9b,0.5374285
+Pile-CC,mink_plus,0,12b,0.502198
+Pile-CC,mink_plus,10,12b,0.501179
+Pile-CC,mink_plus,20,12b,0.539643
+Pile-CC,mink_plus,30,12b,0.553906
+Pile-CC,mink_plus,40,12b,0.560785
+Pile-CC,mink_plus,50,12b,0.513856
+Pile-CC,mink_plus,60,12b,0.539918
+Pile-CC,mink_plus,70,12b,0.536814
+Pile-CC,mink_plus,80,12b,0.58563
+Pile-CC,mink_plus,90,12b,0.5391835
+Pile-CC,zlib,0,1b,0.5046565
+Pile-CC,zlib,10,1b,0.518493
+Pile-CC,zlib,20,1b,0.519216
+Pile-CC,zlib,30,1b,0.5061615
+Pile-CC,zlib,40,1b,0.5056045
+Pile-CC,zlib,50,1b,0.518544
+Pile-CC,zlib,60,1b,0.501756
+Pile-CC,zlib,70,1b,0.5010479999999999
+Pile-CC,zlib,80,1b,0.5369200000000001
+Pile-CC,zlib,90,1b,0.5088885
+Pile-CC,zlib,0,2.8b,0.5038455
+Pile-CC,zlib,10,2.8b,0.520364
+Pile-CC,zlib,20,2.8b,0.5214975000000001
+Pile-CC,zlib,30,2.8b,0.509308
+Pile-CC,zlib,40,2.8b,0.5066525
+Pile-CC,zlib,50,2.8b,0.5163260000000001
+Pile-CC,zlib,60,2.8b,0.5006765
+Pile-CC,zlib,70,2.8b,0.50125
+Pile-CC,zlib,80,2.8b,0.5407955
+Pile-CC,zlib,90,2.8b,0.5073394999999999
+Pile-CC,zlib,0,6.9b,0.5083015
+Pile-CC,zlib,10,6.9b,0.516442
+Pile-CC,zlib,20,6.9b,0.5298674999999999
+Pile-CC,zlib,30,6.9b,0.5200009999999999
+Pile-CC,zlib,40,6.9b,0.51386
+Pile-CC,zlib,50,6.9b,0.5108225
+Pile-CC,zlib,60,6.9b,0.5084850000000001
+Pile-CC,zlib,70,6.9b,0.50602
+Pile-CC,zlib,80,6.9b,0.5468115
+Pile-CC,zlib,90,6.9b,0.5050494999999999
+Pile-CC,zlib,0,12b,0.5117825
+Pile-CC,zlib,10,12b,0.5153105
+Pile-CC,zlib,20,12b,0.531093
+Pile-CC,zlib,30,12b,0.5244055
+Pile-CC,zlib,40,12b,0.5153034999999999
+Pile-CC,zlib,50,12b,0.5075385
+Pile-CC,zlib,60,12b,0.5113395000000001
+Pile-CC,zlib,70,12b,0.5102690000000001
+Pile-CC,zlib,80,12b,0.5498435
+Pile-CC,zlib,90,12b,0.5085605
+Pile-CC,grad,0,1b,0.517722
+Pile-CC,grad,10,1b,0.508328
+Pile-CC,grad,20,1b,0.5187059999999999
+Pile-CC,grad,30,1b,0.5026025
+Pile-CC,grad,40,1b,0.502072
+Pile-CC,grad,50,1b,0.508699
+Pile-CC,grad,60,1b,0.503578
+Pile-CC,grad,70,1b,0.5174305
+Pile-CC,grad,80,1b,0.5030540000000001
+Pile-CC,grad,90,1b,0.5076205
+Pile-CC,grad,0,2.8b,0.5132479999999999
+Pile-CC,grad,10,2.8b,0.5001095
+Pile-CC,grad,20,2.8b,0.515623
+Pile-CC,grad,30,2.8b,0.500716
+Pile-CC,grad,40,2.8b,0.5029755
+Pile-CC,grad,50,2.8b,0.508622
+Pile-CC,grad,60,2.8b,0.5027115
+Pile-CC,grad,70,2.8b,0.5178634999999999
+Pile-CC,grad,80,2.8b,0.5057385
+Pile-CC,grad,90,2.8b,0.5007440000000001
+Pile-CC,grad,0,6.9b,0.5121605
+Pile-CC,grad,10,6.9b,0.5040235
+Pile-CC,grad,20,6.9b,0.5318
+Pile-CC,grad,30,6.9b,0.507543
+Pile-CC,grad,40,6.9b,0.5114075
+Pile-CC,grad,50,6.9b,0.510202
+Pile-CC,grad,60,6.9b,0.5053225
+Pile-CC,grad,70,6.9b,0.5339535
+Pile-CC,grad,80,6.9b,0.5066685
+Pile-CC,grad,90,6.9b,0.5162964999999999
+Pile-CC,grad,0,12b,0.5198785
+Pile-CC,grad,10,12b,0.5136975
+Pile-CC,grad,20,12b,0.5166065
+Pile-CC,grad,30,12b,0.502694
+Pile-CC,grad,40,12b,0.5039705
+Pile-CC,grad,50,12b,0.5139229999999999
+Pile-CC,grad,60,12b,0.503309
+Pile-CC,grad,70,12b,0.5190935
+Pile-CC,grad,80,12b,0.5232755
+Pile-CC,grad,90,12b,0.5014415
+Pile-CC,refer,0,1b,0.50126
+Pile-CC,refer,10,1b,0.5110455
+Pile-CC,refer,20,1b,0.5192384999999999
+Pile-CC,refer,30,1b,0.5125359999999999
+Pile-CC,refer,40,1b,0.5167435
+Pile-CC,refer,50,1b,0.5167595
+Pile-CC,refer,60,1b,0.5006585000000001
+Pile-CC,refer,70,1b,0.512861
+Pile-CC,refer,80,1b,0.5414845
+Pile-CC,refer,90,1b,0.5124915000000001
+Pile-CC,refer,0,2.8b,0.50126
+Pile-CC,refer,10,2.8b,0.5110455
+Pile-CC,refer,20,2.8b,0.5192384999999999
+Pile-CC,refer,30,2.8b,0.5125359999999999
+Pile-CC,refer,40,2.8b,0.5167435
+Pile-CC,refer,50,2.8b,0.5167595
+Pile-CC,refer,60,2.8b,0.5006585000000001
+Pile-CC,refer,70,2.8b,0.512861
+Pile-CC,refer,80,2.8b,0.5414845
+Pile-CC,refer,90,2.8b,0.5124915000000001
+Pile-CC,refer,0,6.9b,0.501453
+Pile-CC,refer,10,6.9b,0.511043
+Pile-CC,refer,20,6.9b,0.5192424999999999
+Pile-CC,refer,30,6.9b,0.512513
+Pile-CC,refer,40,6.9b,0.5171359999999999
+Pile-CC,refer,50,6.9b,0.5165140000000001
+Pile-CC,refer,60,6.9b,0.500584
+Pile-CC,refer,70,6.9b,0.5129294999999999
+Pile-CC,refer,80,6.9b,0.5414845
+Pile-CC,refer,90,6.9b,0.5124915000000001
+Pile-CC,refer,0,12b,0.5013515000000001
+Pile-CC,refer,10,12b,0.5112245
+Pile-CC,refer,20,12b,0.5191825
+Pile-CC,refer,30,12b,0.5120965
+Pile-CC,refer,40,12b,0.5169515
+Pile-CC,refer,50,12b,0.5166165
+Pile-CC,refer,60,12b,0.5005265
+Pile-CC,refer,70,12b,0.5129925
+Pile-CC,refer,80,12b,0.5414845
+Pile-CC,refer,90,12b,0.5124915000000001
+NIH ExPorter,loss,0,1b,0.5296375661375661
+NIH ExPorter,loss,10,1b,0.560952380952381
+NIH ExPorter,loss,20,1b,0.5335743589743589
+NIH ExPorter,loss,30,1b,0.5293926701570681
+NIH ExPorter,loss,40,1b,0.5151581632653062
+NIH ExPorter,loss,50,1b,0.5105052356020943
+NIH ExPorter,loss,60,1b,0.5027550000000001
+NIH ExPorter,loss,70,1b,0.5051613756613758
+NIH ExPorter,loss,80,1b,0.5089026315789473
+NIH ExPorter,loss,90,1b,0.53555
+NIH ExPorter,loss,0,2.8b,0.5348306878306879
+NIH ExPorter,loss,10,2.8b,0.5622936507936508
+NIH ExPorter,loss,20,2.8b,0.5369769230769231
+NIH ExPorter,loss,30,2.8b,0.535803664921466
+NIH ExPorter,loss,40,2.8b,0.5212525510204082
+NIH ExPorter,loss,50,2.8b,0.5187513089005236
+NIH ExPorter,loss,60,2.8b,0.5078475
+NIH ExPorter,loss,70,2.8b,0.5133465608465608
+NIH ExPorter,loss,80,2.8b,0.5151473684210527
+NIH ExPorter,loss,90,2.8b,0.5232368421052631
+NIH ExPorter,loss,0,6.9b,0.5355502645502646
+NIH ExPorter,loss,10,6.9b,0.5683597883597884
+NIH ExPorter,loss,20,6.9b,0.5402666666666667
+NIH ExPorter,loss,30,6.9b,0.5416596858638743
+NIH ExPorter,loss,40,6.9b,0.5245918367346938
+NIH ExPorter,loss,50,6.9b,0.5213769633507853
+NIH ExPorter,loss,60,6.9b,0.5074974999999999
+NIH ExPorter,loss,70,6.9b,0.5199365079365079
+NIH ExPorter,loss,80,6.9b,0.5174078947368421
+NIH ExPorter,loss,90,6.9b,0.5245236842105263
+NIH ExPorter,loss,0,12b,0.5391296296296297
+NIH ExPorter,loss,10,12b,0.5735502645502646
+NIH ExPorter,loss,20,12b,0.5454025641025642
+NIH ExPorter,loss,30,12b,0.5474659685863874
+NIH ExPorter,loss,40,12b,0.534079081632653
+NIH ExPorter,loss,50,12b,0.5242801047120418
+NIH ExPorter,loss,60,12b,0.5088975
+NIH ExPorter,loss,70,12b,0.5229973544973544
+NIH ExPorter,loss,80,12b,0.516828947368421
+NIH ExPorter,loss,90,12b,0.5225789473684211
+NIH ExPorter,prob,0,1b,0.5205449735449735
+NIH ExPorter,prob,10,1b,0.5501798941798942
+NIH ExPorter,prob,20,1b,0.538302564102564
+NIH ExPorter,prob,30,1b,0.5371989528795811
+NIH ExPorter,prob,40,1b,0.5126785714285713
+NIH ExPorter,prob,50,1b,0.5017486910994764
+NIH ExPorter,prob,60,1b,0.5021549999999999
+NIH ExPorter,prob,70,1b,0.512362433862434
+NIH ExPorter,prob,80,1b,0.5131526315789474
+NIH ExPorter,prob,90,1b,0.5352342105263157
+NIH ExPorter,prob,0,2.8b,0.5273068783068783
+NIH ExPorter,prob,10,2.8b,0.5558624338624338
+NIH ExPorter,prob,20,2.8b,0.5469384615384616
+NIH ExPorter,prob,30,2.8b,0.5452146596858638
+NIH ExPorter,prob,40,2.8b,0.5200688775510205
+NIH ExPorter,prob,50,2.8b,0.5127120418848167
+NIH ExPorter,prob,60,2.8b,0.512175
+NIH ExPorter,prob,70,2.8b,0.5211904761904762
+NIH ExPorter,prob,80,2.8b,0.5213578947368421
+NIH ExPorter,prob,90,2.8b,0.5242684210526316
+NIH ExPorter,prob,0,6.9b,0.5262169312169312
+NIH ExPorter,prob,10,6.9b,0.558862433862434
+NIH ExPorter,prob,20,6.9b,0.5474974358974359
+NIH ExPorter,prob,30,6.9b,0.5534921465968586
+NIH ExPorter,prob,40,6.9b,0.5263520408163265
+NIH ExPorter,prob,50,6.9b,0.5184450261780105
+NIH ExPorter,prob,60,6.9b,0.5172375
+NIH ExPorter,prob,70,6.9b,0.5262857142857142
+NIH ExPorter,prob,80,6.9b,0.524257894736842
+NIH ExPorter,prob,90,6.9b,0.5221684210526316
+NIH ExPorter,prob,0,12b,0.53189417989418
+NIH ExPorter,prob,10,12b,0.5706931216931217
+NIH ExPorter,prob,20,12b,0.5567641025641026
+NIH ExPorter,prob,30,12b,0.5606701570680628
+NIH ExPorter,prob,40,12b,0.5366632653061225
+NIH ExPorter,prob,50,12b,0.5204240837696334
+NIH ExPorter,prob,60,12b,0.51834
+NIH ExPorter,prob,70,12b,0.532962962962963
+NIH ExPorter,prob,80,12b,0.5288526315789474
+NIH ExPorter,prob,90,12b,0.5235736842105263
+NIH ExPorter,ppl,0,1b,0.5296375661375661
+NIH ExPorter,ppl,10,1b,0.560952380952381
+NIH ExPorter,ppl,20,1b,0.5335743589743589
+NIH ExPorter,ppl,30,1b,0.5293926701570681
+NIH ExPorter,ppl,40,1b,0.5151581632653062
+NIH ExPorter,ppl,50,1b,0.5105052356020943
+NIH ExPorter,ppl,60,1b,0.5027550000000001
+NIH ExPorter,ppl,70,1b,0.5051613756613758
+NIH ExPorter,ppl,80,1b,0.5089026315789473
+NIH ExPorter,ppl,90,1b,0.53555
+NIH ExPorter,ppl,0,2.8b,0.5348306878306879
+NIH ExPorter,ppl,10,2.8b,0.5622936507936508
+NIH ExPorter,ppl,20,2.8b,0.5369769230769231
+NIH ExPorter,ppl,30,2.8b,0.535803664921466
+NIH ExPorter,ppl,40,2.8b,0.5212525510204082
+NIH ExPorter,ppl,50,2.8b,0.5187513089005236
+NIH ExPorter,ppl,60,2.8b,0.5078475
+NIH ExPorter,ppl,70,2.8b,0.5133465608465608
+NIH ExPorter,ppl,80,2.8b,0.5151473684210527
+NIH ExPorter,ppl,90,2.8b,0.5232368421052631
+NIH ExPorter,ppl,0,6.9b,0.5355502645502646
+NIH ExPorter,ppl,10,6.9b,0.5683597883597884
+NIH ExPorter,ppl,20,6.9b,0.5402666666666667
+NIH ExPorter,ppl,30,6.9b,0.5416596858638743
+NIH ExPorter,ppl,40,6.9b,0.5245918367346938
+NIH ExPorter,ppl,50,6.9b,0.5213769633507853
+NIH ExPorter,ppl,60,6.9b,0.5074974999999999
+NIH ExPorter,ppl,70,6.9b,0.5199365079365079
+NIH ExPorter,ppl,80,6.9b,0.5174078947368421
+NIH ExPorter,ppl,90,6.9b,0.5245236842105263
+NIH ExPorter,ppl,0,12b,0.5391296296296297
+NIH ExPorter,ppl,10,12b,0.5735502645502646
+NIH ExPorter,ppl,20,12b,0.5454025641025642
+NIH ExPorter,ppl,30,12b,0.5474659685863874
+NIH ExPorter,ppl,40,12b,0.534079081632653
+NIH ExPorter,ppl,50,12b,0.5242801047120418
+NIH ExPorter,ppl,60,12b,0.5088975
+NIH ExPorter,ppl,70,12b,0.5229973544973544
+NIH ExPorter,ppl,80,12b,0.516828947368421
+NIH ExPorter,ppl,90,12b,0.5225789473684211
+NIH ExPorter,mink_plus,0,1b,0.501005291005291
+NIH ExPorter,mink_plus,10,1b,0.5334497354497354
+NIH ExPorter,mink_plus,20,1b,0.5426307692307692
+NIH ExPorter,mink_plus,30,1b,0.5135916230366492
+NIH ExPorter,mink_plus,40,1b,0.5125306122448979
+NIH ExPorter,mink_plus,50,1b,0.507848167539267
+NIH ExPorter,mink_plus,60,1b,0.53592
+NIH ExPorter,mink_plus,70,1b,0.5136455026455027
+NIH ExPorter,mink_plus,80,1b,0.5158421052631579
+NIH ExPorter,mink_plus,90,1b,0.5298684210526315
+NIH ExPorter,mink_plus,0,2.8b,0.5258571428571428
+NIH ExPorter,mink_plus,10,2.8b,0.5333968253968254
+NIH ExPorter,mink_plus,20,2.8b,0.5349897435897436
+NIH ExPorter,mink_plus,30,2.8b,0.51782722513089
+NIH ExPorter,mink_plus,40,2.8b,0.518795918367347
+NIH ExPorter,mink_plus,50,2.8b,0.5194502617801047
+NIH ExPorter,mink_plus,60,2.8b,0.508625
+NIH ExPorter,mink_plus,70,2.8b,0.5211534391534391
+NIH ExPorter,mink_plus,80,2.8b,0.5053368421052631
+NIH ExPorter,mink_plus,90,2.8b,0.5052736842105263
+NIH ExPorter,mink_plus,0,6.9b,0.5178730158730158
+NIH ExPorter,mink_plus,10,6.9b,0.5269788359788359
+NIH ExPorter,mink_plus,20,6.9b,0.5428410256410257
+NIH ExPorter,mink_plus,30,6.9b,0.5404764397905759
+NIH ExPorter,mink_plus,40,6.9b,0.509576530612245
+NIH ExPorter,mink_plus,50,6.9b,0.5161465968586387
+NIH ExPorter,mink_plus,60,6.9b,0.5076700000000001
+NIH ExPorter,mink_plus,70,6.9b,0.5375132275132275
+NIH ExPorter,mink_plus,80,6.9b,0.5254842105263158
+NIH ExPorter,mink_plus,90,6.9b,0.5083526315789473
+NIH ExPorter,mink_plus,0,12b,0.5423439153439154
+NIH ExPorter,mink_plus,10,12b,0.5460899470899471
+NIH ExPorter,mink_plus,20,12b,0.549723076923077
+NIH ExPorter,mink_plus,30,12b,0.5595602094240838
+NIH ExPorter,mink_plus,40,12b,0.5300918367346938
+NIH ExPorter,mink_plus,50,12b,0.5220471204188482
+NIH ExPorter,mink_plus,60,12b,0.50789
+NIH ExPorter,mink_plus,70,12b,0.5373862433862434
+NIH ExPorter,mink_plus,80,12b,0.5325105263157895
+NIH ExPorter,mink_plus,90,12b,0.5034631578947368
+NIH ExPorter,zlib,0,1b,0.5053121693121694
+NIH ExPorter,zlib,10,1b,0.5309338624338624
+NIH ExPorter,zlib,20,1b,0.5222717948717948
+NIH ExPorter,zlib,30,1b,0.5380916230366491
+NIH ExPorter,zlib,40,1b,0.5054948979591837
+NIH ExPorter,zlib,50,1b,0.5630366492146597
+NIH ExPorter,zlib,60,1b,0.5120325
+NIH ExPorter,zlib,70,1b,0.523420634920635
+NIH ExPorter,zlib,80,1b,0.5097868421052631
+NIH ExPorter,zlib,90,1b,0.5018078947368421
+NIH ExPorter,zlib,0,2.8b,0.5060396825396826
+NIH ExPorter,zlib,10,2.8b,0.5377248677248677
+NIH ExPorter,zlib,20,2.8b,0.5254282051282051
+NIH ExPorter,zlib,30,2.8b,0.5473481675392671
+NIH ExPorter,zlib,40,2.8b,0.513640306122449
+NIH ExPorter,zlib,50,2.8b,0.5687408376963351
+NIH ExPorter,zlib,60,2.8b,0.5008825
+NIH ExPorter,zlib,70,2.8b,0.5335
+NIH ExPorter,zlib,80,2.8b,0.5167026315789474
+NIH ExPorter,zlib,90,2.8b,0.5092052631578947
+NIH ExPorter,zlib,0,6.9b,0.5068544973544973
+NIH ExPorter,zlib,10,6.9b,0.5426111111111112
+NIH ExPorter,zlib,20,6.9b,0.528448717948718
+NIH ExPorter,zlib,30,6.9b,0.549086387434555
+NIH ExPorter,zlib,40,6.9b,0.5151454081632654
+NIH ExPorter,zlib,50,6.9b,0.5710575916230367
+NIH ExPorter,zlib,60,6.9b,0.5021150000000001
+NIH ExPorter,zlib,70,6.9b,0.5391851851851852
+NIH ExPorter,zlib,80,6.9b,0.5194763157894737
+NIH ExPorter,zlib,90,6.9b,0.5089
+NIH ExPorter,zlib,0,12b,0.5083359788359789
+NIH ExPorter,zlib,10,12b,0.5472962962962963
+NIH ExPorter,zlib,20,12b,0.5316179487179487
+NIH ExPorter,zlib,30,12b,0.557193717277487
+NIH ExPorter,zlib,40,12b,0.5237244897959183
+NIH ExPorter,zlib,50,12b,0.5739267015706806
+NIH ExPorter,zlib,60,12b,0.5012775
+NIH ExPorter,zlib,70,12b,0.5433306878306878
+NIH ExPorter,zlib,80,12b,0.5196815789473685
+NIH ExPorter,zlib,90,12b,0.5090421052631577
+NIH ExPorter,grad,0,1b,0.5033835978835979
+NIH ExPorter,grad,10,1b,0.542957671957672
+NIH ExPorter,grad,20,1b,0.5155358974358974
+NIH ExPorter,grad,30,1b,0.5197617801047121
+NIH ExPorter,grad,40,1b,0.5041249999999999
+NIH ExPorter,grad,50,1b,0.5411806282722513
+NIH ExPorter,grad,60,1b,0.5111825000000001
+NIH ExPorter,grad,70,1b,0.5308730158730159
+NIH ExPorter,grad,80,1b,0.5255342105263159
+NIH ExPorter,grad,90,1b,0.501321052631579
+NIH ExPorter,grad,0,2.8b,0.5083121693121693
+NIH ExPorter,grad,10,2.8b,0.5584365079365079
+NIH ExPorter,grad,20,2.8b,0.5361435897435898
+NIH ExPorter,grad,30,2.8b,0.5281596858638744
+NIH ExPorter,grad,40,2.8b,0.5011301020408163
+NIH ExPorter,grad,50,2.8b,0.5336125654450262
+NIH ExPorter,grad,60,2.8b,0.521575
+NIH ExPorter,grad,70,2.8b,0.5028888888888889
+NIH ExPorter,grad,80,2.8b,0.5152736842105263
+NIH ExPorter,grad,90,2.8b,0.5033236842105263
+NIH ExPorter,grad,0,6.9b,0.5120555555555555
+NIH ExPorter,grad,10,6.9b,0.571521164021164
+NIH ExPorter,grad,20,6.9b,0.5321179487179487
+NIH ExPorter,grad,30,6.9b,0.5257643979057591
+NIH ExPorter,grad,40,6.9b,0.515576530612245
+NIH ExPorter,grad,50,6.9b,0.5304031413612565
+NIH ExPorter,grad,60,6.9b,0.508595
+NIH ExPorter,grad,70,6.9b,0.5165661375661376
+NIH ExPorter,grad,80,6.9b,0.5255894736842105
+NIH ExPorter,grad,90,6.9b,0.5163184210526316
+NIH ExPorter,grad,0,12b,0.5098280423280424
+NIH ExPorter,grad,10,12b,0.5366931216931217
+NIH ExPorter,grad,20,12b,0.515523076923077
+NIH ExPorter,grad,30,12b,0.5051518324607329
+NIH ExPorter,grad,40,12b,0.520015306122449
+NIH ExPorter,grad,50,12b,0.5086884816753927
+NIH ExPorter,grad,60,12b,0.503385
+NIH ExPorter,grad,70,12b,0.559952380952381
+NIH ExPorter,grad,80,12b,0.5064473684210526
+NIH ExPorter,grad,90,12b,0.5221973684210526
+NIH ExPorter,refer,0,1b,0.5221719576719577
+NIH ExPorter,refer,10,1b,0.5508968253968254
+NIH ExPorter,refer,20,1b,0.5277487179487179
+NIH ExPorter,refer,30,1b,0.5240863874345549
+NIH ExPorter,refer,40,1b,0.5157525510204082
+NIH ExPorter,refer,50,1b,0.5100340314136126
+NIH ExPorter,refer,60,1b,0.5070825000000001
+NIH ExPorter,refer,70,1b,0.5017962962962963
+NIH ExPorter,refer,80,1b,0.5032131578947368
+NIH ExPorter,refer,90,1b,0.5350052631578948
+NIH ExPorter,refer,0,2.8b,0.5221719576719577
+NIH ExPorter,refer,10,2.8b,0.5508968253968254
+NIH ExPorter,refer,20,2.8b,0.5277487179487179
+NIH ExPorter,refer,30,2.8b,0.5240863874345549
+NIH ExPorter,refer,40,2.8b,0.5157525510204082
+NIH ExPorter,refer,50,2.8b,0.5100340314136126
+NIH ExPorter,refer,60,2.8b,0.5070825000000001
+NIH ExPorter,refer,70,2.8b,0.5017962962962963
+NIH ExPorter,refer,80,2.8b,0.5032131578947368
+NIH ExPorter,refer,90,2.8b,0.5350052631578948
+NIH ExPorter,refer,0,6.9b,0.5224682539682539
+NIH ExPorter,refer,10,6.9b,0.5503121693121693
+NIH ExPorter,refer,20,6.9b,0.5283769230769231
+NIH ExPorter,refer,30,6.9b,0.5232408376963351
+NIH ExPorter,refer,40,6.9b,0.5153826530612244
+NIH ExPorter,refer,50,6.9b,0.5096518324607329
+NIH ExPorter,refer,60,6.9b,0.5074424999999999
+NIH ExPorter,refer,70,6.9b,0.5016825396825396
+NIH ExPorter,refer,80,6.9b,0.5034421052631579
+NIH ExPorter,refer,90,6.9b,0.5341657894736842
+NIH ExPorter,refer,0,12b,0.5220396825396825
+NIH ExPorter,refer,10,12b,0.5507724867724868
+NIH ExPorter,refer,20,12b,0.5279
+NIH ExPorter,refer,30,12b,0.5238219895287959
+NIH ExPorter,refer,40,12b,0.5157270408163265
+NIH ExPorter,refer,50,12b,0.509413612565445
+NIH ExPorter,refer,60,12b,0.5081924999999999
+NIH ExPorter,refer,70,12b,0.5018095238095239
+NIH ExPorter,refer,80,12b,0.5035631578947368
+NIH ExPorter,refer,90,12b,0.5346578947368421
+HackerNews,loss,0,1b,0.5098393939393939
+HackerNews,loss,10,1b,0.5369
+HackerNews,loss,20,1b,0.5155029239766082
+HackerNews,loss,30,1b,0.5447865497076023
+HackerNews,loss,40,1b,0.5417621951219511
+HackerNews,loss,50,1b,0.514390243902439
+HackerNews,loss,60,1b,0.5034575757575757
+HackerNews,loss,70,1b,0.5373220858895705
+HackerNews,loss,80,1b,0.5207699386503069
+HackerNews,loss,90,1b,0.5040701219512196
+HackerNews,loss,0,2.8b,0.5039515151515152
+HackerNews,loss,10,2.8b,0.5493085714285714
+HackerNews,loss,20,2.8b,0.5276257309941521
+HackerNews,loss,30,2.8b,0.5479912280701753
+HackerNews,loss,40,2.8b,0.5335060975609757
+HackerNews,loss,50,2.8b,0.5256341463414634
+HackerNews,loss,60,2.8b,0.5130757575757576
+HackerNews,loss,70,2.8b,0.5428895705521473
+HackerNews,loss,80,2.8b,0.5279907975460123
+HackerNews,loss,90,2.8b,0.5137926829268293
+HackerNews,loss,0,6.9b,0.5057393939393939
+HackerNews,loss,10,6.9b,0.5398514285714286
+HackerNews,loss,20,6.9b,0.5287982456140351
+HackerNews,loss,30,6.9b,0.5575877192982457
+HackerNews,loss,40,6.9b,0.5258231707317073
+HackerNews,loss,50,6.9b,0.5331951219512195
+HackerNews,loss,60,6.9b,0.5165545454545454
+HackerNews,loss,70,6.9b,0.5478926380368099
+HackerNews,loss,80,6.9b,0.5391042944785276
+HackerNews,loss,90,6.9b,0.5203048780487805
+HackerNews,loss,0,12b,0.5022151515151516
+HackerNews,loss,10,12b,0.5407885714285714
+HackerNews,loss,20,12b,0.5364795321637427
+HackerNews,loss,30,12b,0.5554415204678362
+HackerNews,loss,40,12b,0.5198932926829268
+HackerNews,loss,50,12b,0.535795731707317
+HackerNews,loss,60,12b,0.5235181818181818
+HackerNews,loss,70,12b,0.5513159509202454
+HackerNews,loss,80,12b,0.5448711656441718
+HackerNews,loss,90,12b,0.5319786585365853
+HackerNews,prob,0,1b,0.502369696969697
+HackerNews,prob,10,1b,0.52764
+HackerNews,prob,20,1b,0.5001754385964913
+HackerNews,prob,30,1b,0.5326315789473685
+HackerNews,prob,40,1b,0.5339634146341463
+HackerNews,prob,50,1b,0.5092378048780488
+HackerNews,prob,60,1b,0.5015636363636364
+HackerNews,prob,70,1b,0.5400153374233129
+HackerNews,prob,80,1b,0.5205766871165645
+HackerNews,prob,90,1b,0.5086524390243903
+HackerNews,prob,0,2.8b,0.5136181818181818
+HackerNews,prob,10,2.8b,0.55156
+HackerNews,prob,20,2.8b,0.519859649122807
+HackerNews,prob,30,2.8b,0.5327134502923977
+HackerNews,prob,40,2.8b,0.5131341463414634
+HackerNews,prob,50,2.8b,0.52675
+HackerNews,prob,60,2.8b,0.5154424242424243
+HackerNews,prob,70,2.8b,0.5440245398773006
+HackerNews,prob,80,2.8b,0.5289294478527607
+HackerNews,prob,90,2.8b,0.5236585365853659
+HackerNews,prob,0,6.9b,0.5033212121212122
+HackerNews,prob,10,6.9b,0.5354685714285714
+HackerNews,prob,20,6.9b,0.5144093567251462
+HackerNews,prob,30,6.9b,0.5457836257309941
+HackerNews,prob,40,6.9b,0.5102987804878049
+HackerNews,prob,50,6.9b,0.5408475609756097
+HackerNews,prob,60,6.9b,0.5214787878787879
+HackerNews,prob,70,6.9b,0.5534785276073619
+HackerNews,prob,80,6.9b,0.5502085889570553
+HackerNews,prob,90,6.9b,0.5327804878048781
+HackerNews,prob,0,12b,0.5223333333333333
+HackerNews,prob,10,12b,0.5373657142857142
+HackerNews,prob,20,12b,0.5243040935672515
+HackerNews,prob,30,12b,0.5446725146198831
+HackerNews,prob,40,12b,0.5071158536585366
+HackerNews,prob,50,12b,0.5410579268292683
+HackerNews,prob,60,12b,0.5300060606060606
+HackerNews,prob,70,12b,0.5548527607361964
+HackerNews,prob,80,12b,0.5557177914110429
+HackerNews,prob,90,12b,0.5474146341463415
+HackerNews,ppl,0,1b,0.5098393939393939
+HackerNews,ppl,10,1b,0.5369
+HackerNews,ppl,20,1b,0.5155029239766082
+HackerNews,ppl,30,1b,0.5447865497076023
+HackerNews,ppl,40,1b,0.5417621951219511
+HackerNews,ppl,50,1b,0.514390243902439
+HackerNews,ppl,60,1b,0.5034575757575757
+HackerNews,ppl,70,1b,0.5373220858895705
+HackerNews,ppl,80,1b,0.5207699386503069
+HackerNews,ppl,90,1b,0.5040701219512196
+HackerNews,ppl,0,2.8b,0.5039515151515152
+HackerNews,ppl,10,2.8b,0.5493085714285714
+HackerNews,ppl,20,2.8b,0.5276257309941521
+HackerNews,ppl,30,2.8b,0.5479912280701753
+HackerNews,ppl,40,2.8b,0.5335060975609757
+HackerNews,ppl,50,2.8b,0.5256341463414634
+HackerNews,ppl,60,2.8b,0.5130757575757576
+HackerNews,ppl,70,2.8b,0.5428895705521473
+HackerNews,ppl,80,2.8b,0.5279907975460123
+HackerNews,ppl,90,2.8b,0.5137926829268293
+HackerNews,ppl,0,6.9b,0.5057393939393939
+HackerNews,ppl,10,6.9b,0.5398514285714286
+HackerNews,ppl,20,6.9b,0.5287982456140351
+HackerNews,ppl,30,6.9b,0.5575877192982457
+HackerNews,ppl,40,6.9b,0.5258231707317073
+HackerNews,ppl,50,6.9b,0.5331951219512195
+HackerNews,ppl,60,6.9b,0.5165545454545454
+HackerNews,ppl,70,6.9b,0.5478926380368099
+HackerNews,ppl,80,6.9b,0.5391042944785276
+HackerNews,ppl,90,6.9b,0.5203048780487805
+HackerNews,ppl,0,12b,0.5022151515151516
+HackerNews,ppl,10,12b,0.5407885714285714
+HackerNews,ppl,20,12b,0.5364795321637427
+HackerNews,ppl,30,12b,0.5554415204678362
+HackerNews,ppl,40,12b,0.5198932926829268
+HackerNews,ppl,50,12b,0.535795731707317
+HackerNews,ppl,60,12b,0.5235181818181818
+HackerNews,ppl,70,12b,0.5513159509202454
+HackerNews,ppl,80,12b,0.5448711656441718
+HackerNews,ppl,90,12b,0.5319786585365853
+HackerNews,mink_plus,0,1b,0.5017515151515152
+HackerNews,mink_plus,10,1b,0.5099142857142857
+HackerNews,mink_plus,20,1b,0.5140818713450293
+HackerNews,mink_plus,30,1b,0.5587836257309942
+HackerNews,mink_plus,40,1b,0.5195365853658537
+HackerNews,mink_plus,50,1b,0.5175060975609755
+HackerNews,mink_plus,60,1b,0.5088484848484849
+HackerNews,mink_plus,70,1b,0.5496319018404907
+HackerNews,mink_plus,80,1b,0.5188588957055215
+HackerNews,mink_plus,90,1b,0.5240426829268292
+HackerNews,mink_plus,0,2.8b,0.5077090909090909
+HackerNews,mink_plus,10,2.8b,0.5074
+HackerNews,mink_plus,20,2.8b,0.5197894736842106
+HackerNews,mink_plus,30,2.8b,0.5512046783625731
+HackerNews,mink_plus,40,2.8b,0.5236646341463415
+HackerNews,mink_plus,50,2.8b,0.5282439024390244
+HackerNews,mink_plus,60,2.8b,0.5114727272727273
+HackerNews,mink_plus,70,2.8b,0.561963190184049
+HackerNews,mink_plus,80,2.8b,0.5404846625766871
+HackerNews,mink_plus,90,2.8b,0.5537743902439024
+HackerNews,mink_plus,0,6.9b,0.5188121212121213
+HackerNews,mink_plus,10,6.9b,0.5188342857142857
+HackerNews,mink_plus,20,6.9b,0.5217894736842106
+HackerNews,mink_plus,30,6.9b,0.564514619883041
+HackerNews,mink_plus,40,6.9b,0.5236341463414633
+HackerNews,mink_plus,50,6.9b,0.5548292682926829
+HackerNews,mink_plus,60,6.9b,0.5206363636363637
+HackerNews,mink_plus,70,6.9b,0.5738098159509202
+HackerNews,mink_plus,80,6.9b,0.5614846625766872
+HackerNews,mink_plus,90,6.9b,0.5886951219512195
+HackerNews,mink_plus,0,12b,0.5202
+HackerNews,mink_plus,10,12b,0.5080742857142857
+HackerNews,mink_plus,20,12b,0.5328947368421053
+HackerNews,mink_plus,30,12b,0.5600175438596492
+HackerNews,mink_plus,40,12b,0.5159207317073171
+HackerNews,mink_plus,50,12b,0.5597865853658537
+HackerNews,mink_plus,60,12b,0.5359939393939395
+HackerNews,mink_plus,70,12b,0.580840490797546
+HackerNews,mink_plus,80,12b,0.5580981595092024
+HackerNews,mink_plus,90,12b,0.5813353658536585
+HackerNews,zlib,0,1b,0.5116363636363637
+HackerNews,zlib,10,1b,0.5384857142857142
+HackerNews,zlib,20,1b,0.5181140350877192
+HackerNews,zlib,30,1b,0.543514619883041
+HackerNews,zlib,40,1b,0.5029085365853658
+HackerNews,zlib,50,1b,0.5076280487804877
+HackerNews,zlib,60,1b,0.5395121212121212
+HackerNews,zlib,70,1b,0.5503895705521473
+HackerNews,zlib,80,1b,0.5181533742331288
+HackerNews,zlib,90,1b,0.5143262195121951
+HackerNews,zlib,0,2.8b,0.5073454545454545
+HackerNews,zlib,10,2.8b,0.5473742857142858
+HackerNews,zlib,20,2.8b,0.5238099415204678
+HackerNews,zlib,30,2.8b,0.5442982456140351
+HackerNews,zlib,40,2.8b,0.5063628048780489
+HackerNews,zlib,50,2.8b,0.5137743902439024
+HackerNews,zlib,60,2.8b,0.5439121212121212
+HackerNews,zlib,70,2.8b,0.5580460122699387
+HackerNews,zlib,80,2.8b,0.5327822085889571
+HackerNews,zlib,90,2.8b,0.5228414634146341
+HackerNews,zlib,0,6.9b,0.5070181818181818
+HackerNews,zlib,10,6.9b,0.5399657142857144
+HackerNews,zlib,20,6.9b,0.5237690058479532
+HackerNews,zlib,30,6.9b,0.5514707602339181
+HackerNews,zlib,40,6.9b,0.5094115853658536
+HackerNews,zlib,50,6.9b,0.5186798780487805
+HackerNews,zlib,60,6.9b,0.5453878787878788
+HackerNews,zlib,70,6.9b,0.5649171779141104
+HackerNews,zlib,80,6.9b,0.5456073619631903
+HackerNews,zlib,90,6.9b,0.5348323170731708
+HackerNews,zlib,0,12b,0.5055000000000001
+HackerNews,zlib,10,12b,0.5408942857142858
+HackerNews,zlib,20,12b,0.5278567251461987
+HackerNews,zlib,30,12b,0.5500994152046783
+HackerNews,zlib,40,12b,0.5120640243902439
+HackerNews,zlib,50,12b,0.5196890243902439
+HackerNews,zlib,60,12b,0.5477151515151515
+HackerNews,zlib,70,12b,0.5696319018404907
+HackerNews,zlib,80,12b,0.5561687116564418
+HackerNews,zlib,90,12b,0.5470914634146342
+HackerNews,grad,0,1b,0.5042818181818182
+HackerNews,grad,10,1b,0.5271057142857143
+HackerNews,grad,20,1b,0.5221929824561403
+HackerNews,grad,30,1b,0.5804561403508772
+HackerNews,grad,40,1b,0.500420731707317
+HackerNews,grad,50,1b,0.5013231707317073
+HackerNews,grad,60,1b,0.5297636363636364
+HackerNews,grad,70,1b,0.5448619631901841
+HackerNews,grad,80,1b,0.5289202453987729
+HackerNews,grad,90,1b,0.5415823170731707
+HackerNews,grad,0,2.8b,0.5154515151515151
+HackerNews,grad,10,2.8b,0.5112742857142857
+HackerNews,grad,20,2.8b,0.5317836257309941
+HackerNews,grad,30,2.8b,0.5691257309941521
+HackerNews,grad,40,2.8b,0.5176371951219512
+HackerNews,grad,50,2.8b,0.5114542682926828
+HackerNews,grad,60,2.8b,0.5257575757575758
+HackerNews,grad,70,2.8b,0.5279447852760737
+HackerNews,grad,80,2.8b,0.5502484662576688
+HackerNews,grad,90,2.8b,0.5293018292682927
+HackerNews,grad,0,6.9b,0.5181848484848485
+HackerNews,grad,10,6.9b,0.5228971428571428
+HackerNews,grad,20,6.9b,0.547812865497076
+HackerNews,grad,30,6.9b,0.5745204678362572
+HackerNews,grad,40,6.9b,0.5055518292682927
+HackerNews,grad,50,6.9b,0.5254878048780487
+HackerNews,grad,60,6.9b,0.5454606060606061
+HackerNews,grad,70,6.9b,0.5211042944785276
+HackerNews,grad,80,6.9b,0.5441380368098159
+HackerNews,grad,90,6.9b,0.5031036585365853
+HackerNews,grad,0,12b,0.5220030303030303
+HackerNews,grad,10,12b,0.5144485714285715
+HackerNews,grad,20,12b,0.5323245614035088
+HackerNews,grad,30,12b,0.5509239766081871
+HackerNews,grad,40,12b,0.5062835365853658
+HackerNews,grad,50,12b,0.5031707317073171
+HackerNews,grad,60,12b,0.5247757575757576
+HackerNews,grad,70,12b,0.5329263803680981
+HackerNews,grad,80,12b,0.5340030674846626
+HackerNews,grad,90,12b,0.5142134146341464
+HackerNews,refer,0,1b,0.5051606060606061
+HackerNews,refer,10,1b,0.5503857142857143
+HackerNews,refer,20,1b,0.5073099415204678
+HackerNews,refer,30,1b,0.5445526315789473
+HackerNews,refer,40,1b,0.5486219512195122
+HackerNews,refer,50,1b,0.5035152439024391
+HackerNews,refer,60,1b,0.5061636363636364
+HackerNews,refer,70,1b,0.5165644171779141
+HackerNews,refer,80,1b,0.5144693251533743
+HackerNews,refer,90,1b,0.5016707317073171
+HackerNews,refer,0,2.8b,0.5051606060606061
+HackerNews,refer,10,2.8b,0.5503857142857143
+HackerNews,refer,20,2.8b,0.5073099415204678
+HackerNews,refer,30,2.8b,0.5445526315789473
+HackerNews,refer,40,2.8b,0.5486219512195122
+HackerNews,refer,50,2.8b,0.5035152439024391
+HackerNews,refer,60,2.8b,0.5061636363636364
+HackerNews,refer,70,2.8b,0.5165644171779141
+HackerNews,refer,80,2.8b,0.5144693251533743
+HackerNews,refer,90,2.8b,0.5016707317073171
+HackerNews,refer,0,6.9b,0.5043636363636363
+HackerNews,refer,10,6.9b,0.5498828571428571
+HackerNews,refer,20,6.9b,0.5070233918128655
+HackerNews,refer,30,6.9b,0.5438216374269006
+HackerNews,refer,40,6.9b,0.5491615853658537
+HackerNews,refer,50,6.9b,0.5025396341463415
+HackerNews,refer,60,6.9b,0.5061030303030304
+HackerNews,refer,70,6.9b,0.5165644171779141
+HackerNews,refer,80,6.9b,0.5144693251533743
+HackerNews,refer,90,6.9b,0.5016707317073171
+HackerNews,refer,0,12b,0.5050606060606061
+HackerNews,refer,10,12b,0.54948
+HackerNews,refer,20,12b,0.5069883040935672
+HackerNews,refer,30,12b,0.5433333333333333
+HackerNews,refer,40,12b,0.5484969512195121
+HackerNews,refer,50,12b,0.5032560975609757
+HackerNews,refer,60,12b,0.5071333333333333
+HackerNews,refer,70,12b,0.5165644171779141
+HackerNews,refer,80,12b,0.5144693251533743
+HackerNews,refer,90,12b,0.5016707317073171
+Github,loss,0,1b,0.5040862376371711
+Github,loss,10,1b,0.504339
+Github,loss,20,1b,0.5002245000000001
+Github,loss,30,1b,0.5182505
+Github,loss,40,1b,0.5025705
+Github,loss,50,1b,0.5045580000000001
+Github,loss,60,1b,0.5137305
+Github,loss,70,1b,0.5044150000000001
+Github,loss,80,1b,0.513223
+Github,loss,90,1b,0.5228949999999999
+Github,loss,0,2.8b,0.5017600452917643
+Github,loss,10,2.8b,0.501199
+Github,loss,20,2.8b,0.5066105
+Github,loss,30,2.8b,0.5232855000000001
+Github,loss,40,2.8b,0.5010955
+Github,loss,50,2.8b,0.503678
+Github,loss,60,2.8b,0.5184075
+Github,loss,70,2.8b,0.5066465
+Github,loss,80,2.8b,0.5128615000000001
+Github,loss,90,2.8b,0.5131365000000001
+Github,loss,0,6.9b,0.5047012606954444
+Github,loss,10,6.9b,0.501
+Github,loss,20,6.9b,0.502832
+Github,loss,30,6.9b,0.5205755
+Github,loss,40,6.9b,0.5034965
+Github,loss,50,6.9b,0.5004065
+Github,loss,60,6.9b,0.518316
+Github,loss,70,6.9b,0.5062490000000001
+Github,loss,80,6.9b,0.514896
+Github,loss,90,6.9b,0.517451
+Github,loss,0,12b,0.5014464242620487
+Github,loss,10,12b,0.5066809999999999
+Github,loss,20,12b,0.504425
+Github,loss,30,12b,0.5226029999999999
+Github,loss,40,12b,0.506019
+Github,loss,50,12b,0.5004505
+Github,loss,60,12b,0.5200205
+Github,loss,70,12b,0.5070764999999999
+Github,loss,80,12b,0.5138125
+Github,loss,90,12b,0.515004
+Github,prob,0,1b,0.5035262000841074
+Github,prob,10,1b,0.503377
+Github,prob,20,1b,0.502189
+Github,prob,30,1b,0.5166325
+Github,prob,40,1b,0.5043935
+Github,prob,50,1b,0.502127
+Github,prob,60,1b,0.5157635
+Github,prob,70,1b,0.505507
+Github,prob,80,1b,0.5155890000000001
+Github,prob,90,1b,0.521752
+Github,prob,0,2.8b,0.5009994124696943
+Github,prob,10,2.8b,0.501897
+Github,prob,20,2.8b,0.509619
+Github,prob,30,2.8b,0.523656
+Github,prob,40,2.8b,0.5019705
+Github,prob,50,2.8b,0.501923
+Github,prob,60,2.8b,0.5196835
+Github,prob,70,2.8b,0.5075935
+Github,prob,80,2.8b,0.5143155
+Github,prob,90,2.8b,0.5118575000000001
+Github,prob,0,6.9b,0.5037929816093849
+Github,prob,10,6.9b,0.502124
+Github,prob,20,6.9b,0.5055689999999999
+Github,prob,30,6.9b,0.5207930000000001
+Github,prob,40,6.9b,0.5039585
+Github,prob,50,6.9b,0.501911
+Github,prob,60,6.9b,0.520163
+Github,prob,70,6.9b,0.507361
+Github,prob,80,6.9b,0.517237
+Github,prob,90,6.9b,0.5147845
+Github,prob,0,12b,0.5023068455935736
+Github,prob,10,12b,0.508678
+Github,prob,20,12b,0.50725
+Github,prob,30,12b,0.5229425
+Github,prob,40,12b,0.506924
+Github,prob,50,12b,0.5022310000000001
+Github,prob,60,12b,0.522247
+Github,prob,70,12b,0.5082345
+Github,prob,80,12b,0.5161765
+Github,prob,90,12b,0.511683
+Github,ppl,0,1b,0.5040862376371711
+Github,ppl,10,1b,0.504339
+Github,ppl,20,1b,0.5002245000000001
+Github,ppl,30,1b,0.5182505
+Github,ppl,40,1b,0.5025705
+Github,ppl,50,1b,0.5045580000000001
+Github,ppl,60,1b,0.5137305
+Github,ppl,70,1b,0.5044150000000001
+Github,ppl,80,1b,0.513223
+Github,ppl,90,1b,0.5228949999999999
+Github,ppl,0,2.8b,0.5017600452917643
+Github,ppl,10,2.8b,0.501199
+Github,ppl,20,2.8b,0.5066105
+Github,ppl,30,2.8b,0.5232855000000001
+Github,ppl,40,2.8b,0.5010955
+Github,ppl,50,2.8b,0.503678
+Github,ppl,60,2.8b,0.5184075
+Github,ppl,70,2.8b,0.5066465
+Github,ppl,80,2.8b,0.5128615000000001
+Github,ppl,90,2.8b,0.5131365000000001
+Github,ppl,0,6.9b,0.5047012606954444
+Github,ppl,10,6.9b,0.501
+Github,ppl,20,6.9b,0.502832
+Github,ppl,30,6.9b,0.5205755
+Github,ppl,40,6.9b,0.5034965
+Github,ppl,50,6.9b,0.5004065
+Github,ppl,60,6.9b,0.518316
+Github,ppl,70,6.9b,0.5062490000000001
+Github,ppl,80,6.9b,0.514896
+Github,ppl,90,6.9b,0.517451
+Github,ppl,0,12b,0.5014464242620487
+Github,ppl,10,12b,0.5066809999999999
+Github,ppl,20,12b,0.504425
+Github,ppl,30,12b,0.5226029999999999
+Github,ppl,40,12b,0.506019
+Github,ppl,50,12b,0.5004505
+Github,ppl,60,12b,0.5200205
+Github,ppl,70,12b,0.5070764999999999
+Github,ppl,80,12b,0.5138125
+Github,ppl,90,12b,0.515004
+Github,mink_plus,0,1b,0.5060886264518973
+Github,mink_plus,10,1b,0.5091870000000001
+Github,mink_plus,20,1b,0.501638
+Github,mink_plus,30,1b,0.5170405
+Github,mink_plus,40,1b,0.50796
+Github,mink_plus,50,1b,0.501709
+Github,mink_plus,60,1b,0.5152025
+Github,mink_plus,70,1b,0.504314
+Github,mink_plus,80,1b,0.5226795
+Github,mink_plus,90,1b,0.512619
+Github,mink_plus,0,2.8b,0.5116070328497664
+Github,mink_plus,10,2.8b,0.502653
+Github,mink_plus,20,2.8b,0.506123
+Github,mink_plus,30,2.8b,0.5254885
+Github,mink_plus,40,2.8b,0.5140885000000001
+Github,mink_plus,50,2.8b,0.501537
+Github,mink_plus,60,2.8b,0.5129475
+Github,mink_plus,70,2.8b,0.5029129999999999
+Github,mink_plus,80,2.8b,0.5230250000000001
+Github,mink_plus,90,2.8b,0.504447
+Github,mink_plus,0,6.9b,0.5158775737544001
+Github,mink_plus,10,6.9b,0.506471
+Github,mink_plus,20,6.9b,0.5006409999999999
+Github,mink_plus,30,6.9b,0.5254544999999999
+Github,mink_plus,40,6.9b,0.524167
+Github,mink_plus,50,6.9b,0.508246
+Github,mink_plus,60,6.9b,0.5154030000000001
+Github,mink_plus,70,6.9b,0.50988
+Github,mink_plus,80,6.9b,0.528929
+Github,mink_plus,90,6.9b,0.502837
+Github,mink_plus,0,12b,0.5147778636502026
+Github,mink_plus,10,12b,0.518407
+Github,mink_plus,20,12b,0.5106459999999999
+Github,mink_plus,30,12b,0.5294155
+Github,mink_plus,40,12b,0.5310435
+Github,mink_plus,50,12b,0.508894
+Github,mink_plus,60,12b,0.522949
+Github,mink_plus,70,12b,0.5115050000000001
+Github,mink_plus,80,12b,0.5301370000000001
+Github,mink_plus,90,12b,0.503215
+Github,zlib,0,1b,0.5014902090161972
+Github,zlib,10,1b,0.501385
+Github,zlib,20,1b,0.50689
+Github,zlib,30,1b,0.5253129999999999
+Github,zlib,40,1b,0.5078469999999999
+Github,zlib,50,1b,0.5071575
+Github,zlib,60,1b,0.5116165
+Github,zlib,70,1b,0.5017955
+Github,zlib,80,1b,0.515886
+Github,zlib,90,1b,0.505394
+Github,zlib,0,2.8b,0.5005091250482396
+Github,zlib,10,2.8b,0.5032895
+Github,zlib,20,2.8b,0.5011745
+Github,zlib,30,2.8b,0.5303995
+Github,zlib,40,2.8b,0.50783
+Github,zlib,50,2.8b,0.5076894999999999
+Github,zlib,60,2.8b,0.5158499999999999
+Github,zlib,70,2.8b,0.5013175
+Github,zlib,80,2.8b,0.5147889999999999
+Github,zlib,90,2.8b,0.500095
+Github,zlib,0,6.9b,0.5000549855052099
+Github,zlib,10,6.9b,0.502475
+Github,zlib,20,6.9b,0.5027395
+Github,zlib,30,6.9b,0.5277955000000001
+Github,zlib,40,6.9b,0.502321
+Github,zlib,50,6.9b,0.5036754999999999
+Github,zlib,60,6.9b,0.515298
+Github,zlib,70,6.9b,0.5014375
+Github,zlib,80,6.9b,0.5165025000000001
+Github,zlib,90,6.9b,0.5012535
+Github,zlib,0,12b,0.5017585179166195
+Github,zlib,10,12b,0.5069950000000001
+Github,zlib,20,12b,0.501745
+Github,zlib,30,12b,0.5292635
+Github,zlib,40,12b,0.5002445
+Github,zlib,50,12b,0.5035939999999999
+Github,zlib,60,12b,0.516937
+Github,zlib,70,12b,0.5024835000000001
+Github,zlib,80,12b,0.5159404999999999
+Github,zlib,90,12b,0.500673
+Github,grad,0,1b,0.5199098441364577
+Github,grad,10,1b,0.5040795
+Github,grad,20,1b,0.5012365
+Github,grad,30,1b,0.530322
+Github,grad,40,1b,0.5071410000000001
+Github,grad,50,1b,0.50483
+Github,grad,60,1b,0.501242
+Github,grad,70,1b,0.509674
+Github,grad,80,1b,0.5383549999999999
+Github,grad,90,1b,0.5063390000000001
+Github,grad,0,2.8b,0.5110174660439049
+Github,grad,10,2.8b,0.503031
+Github,grad,20,2.8b,0.5071460000000001
+Github,grad,30,2.8b,0.5281635
+Github,grad,40,2.8b,0.5058414999999999
+Github,grad,50,2.8b,0.5027165
+Github,grad,60,2.8b,0.5073375
+Github,grad,70,2.8b,0.5147015
+Github,grad,80,2.8b,0.5440595
+Github,grad,90,2.8b,0.5061745
+Github,grad,0,6.9b,0.51739883939854
+Github,grad,10,6.9b,0.50025
+Github,grad,20,6.9b,0.5134465
+Github,grad,30,6.9b,0.5350005
+Github,grad,40,6.9b,0.5117965
+Github,grad,50,6.9b,0.5154145
+Github,grad,60,6.9b,0.5091455
+Github,grad,70,6.9b,0.5107425
+Github,grad,80,6.9b,0.531102
+Github,grad,90,6.9b,0.5160325
+Github,grad,0,12b,0.5233046899581193
+Github,grad,10,12b,0.503159
+Github,grad,20,12b,0.519226
+Github,grad,30,12b,0.5154095
+Github,grad,40,12b,0.5161665
+Github,grad,50,12b,0.5232935000000001
+Github,grad,60,12b,0.5122565
+Github,grad,70,12b,0.5068835
+Github,grad,80,12b,0.5155784999999999
+Github,grad,90,12b,0.5047950000000001
+Github,refer,0,1b,0.5065173097425151
+Github,refer,10,1b,0.5020169999999999
+Github,refer,20,1b,0.5018739999999999
+Github,refer,30,1b,0.5194595
+Github,refer,40,1b,0.503663
+Github,refer,50,1b,0.5039845000000001
+Github,refer,60,1b,0.5100775
+Github,refer,70,1b,0.503983
+Github,refer,80,1b,0.514301
+Github,refer,90,1b,0.5234225
+Github,refer,0,2.8b,0.5065173097425151
+Github,refer,10,2.8b,0.5020169999999999
+Github,refer,20,2.8b,0.5018739999999999
+Github,refer,30,2.8b,0.5194595
+Github,refer,40,2.8b,0.503663
+Github,refer,50,2.8b,0.5039845000000001
+Github,refer,60,2.8b,0.5100775
+Github,refer,70,2.8b,0.503983
+Github,refer,80,2.8b,0.514301
+Github,refer,90,2.8b,0.5234225
+Github,refer,0,6.9b,0.506548875495506
+Github,refer,10,6.9b,0.5020935
+Github,refer,20,6.9b,0.501867
+Github,refer,30,6.9b,0.5195235
+Github,refer,40,6.9b,0.503585
+Github,refer,50,6.9b,0.5039275
+Github,refer,60,6.9b,0.510092
+Github,refer,70,6.9b,0.5039855
+Github,refer,80,6.9b,0.514301
+Github,refer,90,6.9b,0.5234225
+Github,refer,0,12b,0.5064898169899101
+Github,refer,10,12b,0.501924
+Github,refer,20,12b,0.5017435
+Github,refer,30,12b,0.5195700000000001
+Github,refer,40,12b,0.50365
+Github,refer,50,12b,0.5040585
+Github,refer,60,12b,0.5100750000000001
+Github,refer,70,12b,0.5039775
+Github,refer,80,12b,0.514301
+Github,refer,90,12b,0.5234225
+FreeLaw,loss,0,1b,0.5122945205479452
+FreeLaw,loss,10,1b,0.5341972920696325
+FreeLaw,loss,20,1b,0.502908203125
+FreeLaw,loss,30,1b,0.5037093933463797
+FreeLaw,loss,40,1b,0.500795321637427
+FreeLaw,loss,50,1b,0.51368359375
+FreeLaw,loss,60,1b,0.50197265625
+FreeLaw,loss,70,1b,0.5233698630136986
+FreeLaw,loss,80,1b,0.5208737769080235
+FreeLaw,loss,90,1b,0.5316399217221135
+FreeLaw,loss,0,2.8b,0.5099784735812133
+FreeLaw,loss,10,2.8b,0.5359352030947775
+FreeLaw,loss,20,2.8b,0.5029511718749999
+FreeLaw,loss,30,2.8b,0.5084579256360078
+FreeLaw,loss,40,2.8b,0.509130604288499
+FreeLaw,loss,50,2.8b,0.5174023437499999
+FreeLaw,loss,60,2.8b,0.5005234375000001
+FreeLaw,loss,70,2.8b,0.5289452054794521
+FreeLaw,loss,80,2.8b,0.5283277886497064
+FreeLaw,loss,90,2.8b,0.5271878669275929
+FreeLaw,loss,0,6.9b,0.519793542074364
+FreeLaw,loss,10,6.9b,0.533463249516441
+FreeLaw,loss,20,6.9b,0.5051123046875
+FreeLaw,loss,30,6.9b,0.5089833659491194
+FreeLaw,loss,40,6.9b,0.5107631578947368
+FreeLaw,loss,50,6.9b,0.5222783203125001
+FreeLaw,loss,60,6.9b,0.5052578125
+FreeLaw,loss,70,6.9b,0.5344285714285714
+FreeLaw,loss,80,6.9b,0.5347974559686888
+FreeLaw,loss,90,6.9b,0.5173884540117417
+FreeLaw,loss,0,12b,0.5202495107632094
+FreeLaw,loss,10,12b,0.5308781431334623
+FreeLaw,loss,20,12b,0.5065283203125001
+FreeLaw,loss,30,12b,0.5103502935420743
+FreeLaw,loss,40,12b,0.5140750487329435
+FreeLaw,loss,50,12b,0.5239169921875
+FreeLaw,loss,60,12b,0.5080917968750001
+FreeLaw,loss,70,12b,0.540068493150685
+FreeLaw,loss,80,12b,0.5392945205479451
+FreeLaw,loss,90,12b,0.5131046966731898
+FreeLaw,prob,0,1b,0.5124931506849315
+FreeLaw,prob,10,1b,0.5332050290135397
+FreeLaw,prob,20,1b,0.5024433593750001
+FreeLaw,prob,30,1b,0.50273385518591
+FreeLaw,prob,40,1b,0.5008781676413255
+FreeLaw,prob,50,1b,0.5169423828125
+FreeLaw,prob,60,1b,0.5042421875
+FreeLaw,prob,70,1b,0.5226262230919765
+FreeLaw,prob,80,1b,0.5183082191780822
+FreeLaw,prob,90,1b,0.5156301369863013
+FreeLaw,prob,0,2.8b,0.5159295499021527
+FreeLaw,prob,10,2.8b,0.5342804642166344
+FreeLaw,prob,20,2.8b,0.50335546875
+FreeLaw,prob,30,2.8b,0.5106947162426615
+FreeLaw,prob,40,2.8b,0.5121296296296296
+FreeLaw,prob,50,2.8b,0.522828125
+FreeLaw,prob,60,2.8b,0.509314453125
+FreeLaw,prob,70,2.8b,0.5322465753424658
+FreeLaw,prob,80,2.8b,0.5306927592954991
+FreeLaw,prob,90,2.8b,0.513624266144814
+FreeLaw,prob,0,6.9b,0.5227866927592955
+FreeLaw,prob,10,6.9b,0.5310773694390716
+FreeLaw,prob,20,6.9b,0.50638671875
+FreeLaw,prob,30,6.9b,0.511225048923679
+FreeLaw,prob,40,6.9b,0.5172534113060429
+FreeLaw,prob,50,6.9b,0.532078125
+FreeLaw,prob,60,6.9b,0.5148203124999999
+FreeLaw,prob,70,6.9b,0.5405577299412916
+FreeLaw,prob,80,6.9b,0.5410508806262231
+FreeLaw,prob,90,6.9b,0.5016722113502936
+FreeLaw,prob,0,12b,0.5275283757338551
+FreeLaw,prob,10,12b,0.528384912959381
+FreeLaw,prob,20,12b,0.5087890625
+FreeLaw,prob,30,12b,0.5145303326810176
+FreeLaw,prob,40,12b,0.5222709551656921
+FreeLaw,prob,50,12b,0.5351865234375
+FreeLaw,prob,60,12b,0.5210859375
+FreeLaw,prob,70,12b,0.5470567514677104
+FreeLaw,prob,80,12b,0.5467632093933464
+FreeLaw,prob,90,12b,0.505921722113503
+FreeLaw,ppl,0,1b,0.5122945205479452
+FreeLaw,ppl,10,1b,0.5341972920696325
+FreeLaw,ppl,20,1b,0.502908203125
+FreeLaw,ppl,30,1b,0.5037093933463797
+FreeLaw,ppl,40,1b,0.500795321637427
+FreeLaw,ppl,50,1b,0.51368359375
+FreeLaw,ppl,60,1b,0.50197265625
+FreeLaw,ppl,70,1b,0.5233698630136986
+FreeLaw,ppl,80,1b,0.5208737769080235
+FreeLaw,ppl,90,1b,0.5316399217221135
+FreeLaw,ppl,0,2.8b,0.5099784735812133
+FreeLaw,ppl,10,2.8b,0.5359352030947775
+FreeLaw,ppl,20,2.8b,0.5029511718749999
+FreeLaw,ppl,30,2.8b,0.5084579256360078
+FreeLaw,ppl,40,2.8b,0.509130604288499
+FreeLaw,ppl,50,2.8b,0.5174023437499999
+FreeLaw,ppl,60,2.8b,0.5005234375000001
+FreeLaw,ppl,70,2.8b,0.5289452054794521
+FreeLaw,ppl,80,2.8b,0.5283277886497064
+FreeLaw,ppl,90,2.8b,0.5271878669275929
+FreeLaw,ppl,0,6.9b,0.519793542074364
+FreeLaw,ppl,10,6.9b,0.533463249516441
+FreeLaw,ppl,20,6.9b,0.5051123046875
+FreeLaw,ppl,30,6.9b,0.5089833659491194
+FreeLaw,ppl,40,6.9b,0.5107631578947368
+FreeLaw,ppl,50,6.9b,0.5222783203125001
+FreeLaw,ppl,60,6.9b,0.5052578125
+FreeLaw,ppl,70,6.9b,0.5344285714285714
+FreeLaw,ppl,80,6.9b,0.5347974559686888
+FreeLaw,ppl,90,6.9b,0.5173884540117417
+FreeLaw,ppl,0,12b,0.5202495107632094
+FreeLaw,ppl,10,12b,0.5308781431334623
+FreeLaw,ppl,20,12b,0.5065283203125001
+FreeLaw,ppl,30,12b,0.5103502935420743
+FreeLaw,ppl,40,12b,0.5140750487329435
+FreeLaw,ppl,50,12b,0.5239169921875
+FreeLaw,ppl,60,12b,0.5080917968750001
+FreeLaw,ppl,70,12b,0.540068493150685
+FreeLaw,ppl,80,12b,0.5392945205479451
+FreeLaw,ppl,90,12b,0.5131046966731898
+FreeLaw,mink_plus,0,1b,0.5098336594911937
+FreeLaw,mink_plus,10,1b,0.512458413926499
+FreeLaw,mink_plus,20,1b,0.510318359375
+FreeLaw,mink_plus,30,1b,0.512362035225049
+FreeLaw,mink_plus,40,1b,0.5308089668615985
+FreeLaw,mink_plus,50,1b,0.5122734375
+FreeLaw,mink_plus,60,1b,0.50762109375
+FreeLaw,mink_plus,70,1b,0.533784735812133
+FreeLaw,mink_plus,80,1b,0.5111379647749511
+FreeLaw,mink_plus,90,1b,0.50093542074364
+FreeLaw,mink_plus,0,2.8b,0.516252446183953
+FreeLaw,mink_plus,10,2.8b,0.5104429400386847
+FreeLaw,mink_plus,20,2.8b,0.5098281250000001
+FreeLaw,mink_plus,30,2.8b,0.5195538160469668
+FreeLaw,mink_plus,40,2.8b,0.5535555555555556
+FreeLaw,mink_plus,50,2.8b,0.53026171875
+FreeLaw,mink_plus,60,2.8b,0.5243203125
+FreeLaw,mink_plus,70,2.8b,0.5470998043052838
+FreeLaw,mink_plus,80,2.8b,0.5436399217221135
+FreeLaw,mink_plus,90,2.8b,0.5078317025440313
+FreeLaw,mink_plus,0,6.9b,0.5267495107632094
+FreeLaw,mink_plus,10,6.9b,0.5027350096711799
+FreeLaw,mink_plus,20,6.9b,0.51080078125
+FreeLaw,mink_plus,30,6.9b,0.5239549902152643
+FreeLaw,mink_plus,40,6.9b,0.5562651072124756
+FreeLaw,mink_plus,50,6.9b,0.552205078125
+FreeLaw,mink_plus,60,6.9b,0.52003125
+FreeLaw,mink_plus,70,6.9b,0.550412915851272
+FreeLaw,mink_plus,80,6.9b,0.5529256360078278
+FreeLaw,mink_plus,90,6.9b,0.5236105675146772
+FreeLaw,mink_plus,0,12b,0.5311624266144814
+FreeLaw,mink_plus,10,12b,0.5009206963249516
+FreeLaw,mink_plus,20,12b,0.5154921875
+FreeLaw,mink_plus,30,12b,0.5375831702544032
+FreeLaw,mink_plus,40,12b,0.572401559454191
+FreeLaw,mink_plus,50,12b,0.550876953125
+FreeLaw,mink_plus,60,12b,0.535548828125
+FreeLaw,mink_plus,70,12b,0.5531154598825831
+FreeLaw,mink_plus,80,12b,0.5668023483365949
+FreeLaw,mink_plus,90,12b,0.5455107632093934
+FreeLaw,zlib,0,1b,0.518380626223092
+FreeLaw,zlib,10,1b,0.5251470019342359
+FreeLaw,zlib,20,1b,0.5050576171875001
+FreeLaw,zlib,30,1b,0.5047191780821918
+FreeLaw,zlib,40,1b,0.5053518518518518
+FreeLaw,zlib,50,1b,0.5052041015625
+FreeLaw,zlib,60,1b,0.5083828125000001
+FreeLaw,zlib,70,1b,0.5174667318982388
+FreeLaw,zlib,80,1b,0.5127074363992172
+FreeLaw,zlib,90,1b,0.5145851272015656
+FreeLaw,zlib,0,2.8b,0.5147230919765167
+FreeLaw,zlib,10,2.8b,0.5243191489361702
+FreeLaw,zlib,20,2.8b,0.5043955078125
+FreeLaw,zlib,30,2.8b,0.5100489236790606
+FreeLaw,zlib,40,2.8b,0.5033430799220273
+FreeLaw,zlib,50,2.8b,0.5098486328125
+FreeLaw,zlib,60,2.8b,0.5049638671875
+FreeLaw,zlib,70,2.8b,0.5250900195694717
+FreeLaw,zlib,80,2.8b,0.523206457925636
+FreeLaw,zlib,90,2.8b,0.5103874755381604
+FreeLaw,zlib,0,6.9b,0.522537181996086
+FreeLaw,zlib,10,6.9b,0.524237911025145
+FreeLaw,zlib,20,6.9b,0.5026435546875
+FreeLaw,zlib,30,6.9b,0.5101800391389433
+FreeLaw,zlib,40,6.9b,0.5051715399610136
+FreeLaw,zlib,50,6.9b,0.51471484375
+FreeLaw,zlib,60,6.9b,0.501826171875
+FreeLaw,zlib,70,6.9b,0.5309960861056751
+FreeLaw,zlib,80,6.9b,0.5309500978473581
+FreeLaw,zlib,90,6.9b,0.5002886497064579
+FreeLaw,zlib,0,12b,0.5231154598825831
+FreeLaw,zlib,10,12b,0.5229574468085106
+FreeLaw,zlib,20,12b,0.5018232421875
+FreeLaw,zlib,30,12b,0.5121320939334638
+FreeLaw,zlib,40,12b,0.5096539961013644
+FreeLaw,zlib,50,12b,0.5170439453125
+FreeLaw,zlib,60,12b,0.50439453125
+FreeLaw,zlib,70,12b,0.5375401174168297
+FreeLaw,zlib,80,12b,0.5376027397260275
+FreeLaw,zlib,90,12b,0.5039657534246575
+FreeLaw,grad,0,1b,0.5192348336594912
+FreeLaw,grad,10,1b,0.517941005802708
+FreeLaw,grad,20,1b,0.5107333984375001
+FreeLaw,grad,30,1b,0.5414608610567515
+FreeLaw,grad,40,1b,0.5176120857699805
+FreeLaw,grad,50,1b,0.509908203125
+FreeLaw,grad,60,1b,0.5177148437499999
+FreeLaw,grad,70,1b,0.5166232876712329
+FreeLaw,grad,80,1b,0.5034168297455969
+FreeLaw,grad,90,1b,0.5120410958904109
+FreeLaw,grad,0,2.8b,0.5046506849315069
+FreeLaw,grad,10,2.8b,0.5168742746615087
+FreeLaw,grad,20,2.8b,0.5204863281250001
+FreeLaw,grad,30,2.8b,0.5439403131115459
+FreeLaw,grad,40,2.8b,0.5238703703703703
+FreeLaw,grad,50,2.8b,0.5290751953125
+FreeLaw,grad,60,2.8b,0.5242333984375
+FreeLaw,grad,70,2.8b,0.5315831702544032
+FreeLaw,grad,80,2.8b,0.5155939334637964
+FreeLaw,grad,90,2.8b,0.515307240704501
+FreeLaw,grad,0,6.9b,0.5269755381604697
+FreeLaw,grad,10,6.9b,0.5174651837524178
+FreeLaw,grad,20,6.9b,0.52305078125
+FreeLaw,grad,30,6.9b,0.5360264187866928
+FreeLaw,grad,40,6.9b,0.5336783625730994
+FreeLaw,grad,50,6.9b,0.5325087890625
+FreeLaw,grad,60,6.9b,0.5248232421874999
+FreeLaw,grad,70,6.9b,0.5356242661448141
+FreeLaw,grad,80,6.9b,0.522527397260274
+FreeLaw,grad,90,6.9b,0.5127602739726027
+FreeLaw,grad,0,12b,0.5262446183953033
+FreeLaw,grad,10,12b,0.5092717601547389
+FreeLaw,grad,20,12b,0.5063740234375
+FreeLaw,grad,30,12b,0.5114716242661448
+FreeLaw,grad,40,12b,0.5215009746588692
+FreeLaw,grad,50,12b,0.5046689453125
+FreeLaw,grad,60,12b,0.5168193359375
+FreeLaw,grad,70,12b,0.5207592954990214
+FreeLaw,grad,80,12b,0.5229882583170254
+FreeLaw,grad,90,12b,0.501600782778865
+FreeLaw,refer,0,1b,0.5112622309197652
+FreeLaw,refer,10,1b,0.5358597678916828
+FreeLaw,refer,20,1b,0.50226953125
+FreeLaw,refer,30,1b,0.5046849315068492
+FreeLaw,refer,40,1b,0.5060272904483432
+FreeLaw,refer,50,1b,0.5082226562500001
+FreeLaw,refer,60,1b,0.5107724609375
+FreeLaw,refer,70,1b,0.5187553816046967
+FreeLaw,refer,80,1b,0.5172788649706459
+FreeLaw,refer,90,1b,0.5358913894324853
+FreeLaw,refer,0,2.8b,0.5112622309197652
+FreeLaw,refer,10,2.8b,0.5358597678916828
+FreeLaw,refer,20,2.8b,0.50226953125
+FreeLaw,refer,30,2.8b,0.5046849315068492
+FreeLaw,refer,40,2.8b,0.5060272904483432
+FreeLaw,refer,50,2.8b,0.5082226562500001
+FreeLaw,refer,60,2.8b,0.5107724609375
+FreeLaw,refer,70,2.8b,0.5187553816046967
+FreeLaw,refer,80,2.8b,0.5172788649706459
+FreeLaw,refer,90,2.8b,0.5358913894324853
+FreeLaw,refer,0,6.9b,0.5120880626223092
+FreeLaw,refer,10,6.9b,0.5360145067698259
+FreeLaw,refer,20,6.9b,0.5021347656249999
+FreeLaw,refer,30,6.9b,0.5046761252446184
+FreeLaw,refer,40,6.9b,0.5060272904483432
+FreeLaw,refer,50,6.9b,0.5082226562500001
+FreeLaw,refer,60,6.9b,0.5107724609375
+FreeLaw,refer,70,6.9b,0.5187553816046967
+FreeLaw,refer,80,6.9b,0.5172788649706459
+FreeLaw,refer,90,6.9b,0.5358913894324853
+FreeLaw,refer,0,12b,0.5117064579256361
+FreeLaw,refer,10,12b,0.5359883945841393
+FreeLaw,refer,20,12b,0.5022685546875001
+FreeLaw,refer,30,12b,0.5046839530332681
+FreeLaw,refer,40,12b,0.5060272904483432
+FreeLaw,refer,50,12b,0.5082226562500001
+FreeLaw,refer,60,12b,0.5107724609375
+FreeLaw,refer,70,12b,0.5187553816046967
+FreeLaw,refer,80,12b,0.5172788649706459
+FreeLaw,refer,90,12b,0.5358913894324853
+Enron Emails,loss,0,1b,0.5
+Enron Emails,loss,10,1b,0.5403509615384616
+Enron Emails,loss,20,1b,0.5003701923076923
+Enron Emails,loss,30,1b,0.5023564356435644
+Enron Emails,loss,40,1b,0.5330961538461538
+Enron Emails,loss,50,1b,0.505673076923077
+Enron Emails,loss,60,1b,0.5506421568627451
+Enron Emails,loss,70,1b,0.5092376237623762
+Enron Emails,loss,80,1b,0.5293267326732674
+Enron Emails,loss,90,1b,0.5007970297029702
+Enron Emails,loss,0,2.8b,0.5
+Enron Emails,loss,10,2.8b,0.5506826923076924
+Enron Emails,loss,20,2.8b,0.5081346153846154
+Enron Emails,loss,30,2.8b,0.5196732673267327
+Enron Emails,loss,40,2.8b,0.5000192307692308
+Enron Emails,loss,50,2.8b,0.5254038461538462
+Enron Emails,loss,60,2.8b,0.559735294117647
+Enron Emails,loss,70,2.8b,0.5301633663366336
+Enron Emails,loss,80,2.8b,0.5062623762376237
+Enron Emails,loss,90,2.8b,0.523509900990099
+Enron Emails,loss,0,6.9b,0.5
+Enron Emails,loss,10,6.9b,0.5541298076923078
+Enron Emails,loss,20,6.9b,0.5033942307692307
+Enron Emails,loss,30,6.9b,0.5072821782178218
+Enron Emails,loss,40,6.9b,0.5075048076923077
+Enron Emails,loss,50,6.9b,0.5057115384615385
+Enron Emails,loss,60,6.9b,0.5402990196078431
+Enron Emails,loss,70,6.9b,0.507539603960396
+Enron Emails,loss,80,6.9b,0.5333960396039604
+Enron Emails,loss,90,6.9b,0.5029950495049504
+Enron Emails,loss,0,12b,0.5
+Enron Emails,loss,10,12b,0.54575
+Enron Emails,loss,20,12b,0.5061586538461538
+Enron Emails,loss,30,12b,0.5041287128712871
+Enron Emails,loss,40,12b,0.5072403846153846
+Enron Emails,loss,50,12b,0.5051778846153847
+Enron Emails,loss,60,12b,0.5387843137254902
+Enron Emails,loss,70,12b,0.5056188118811882
+Enron Emails,loss,80,12b,0.5330544554455445
+Enron Emails,loss,90,12b,0.5080742574257426
+Enron Emails,prob,0,1b,0.5
+Enron Emails,prob,10,1b,0.5657307692307693
+Enron Emails,prob,20,1b,0.5073173076923077
+Enron Emails,prob,30,1b,0.5046237623762376
+Enron Emails,prob,40,1b,0.5314134615384616
+Enron Emails,prob,50,1b,0.5127788461538461
+Enron Emails,prob,60,1b,0.5405882352941176
+Enron Emails,prob,70,1b,0.5037821782178218
+Enron Emails,prob,80,1b,0.5153960396039604
+Enron Emails,prob,90,1b,0.5333861386138614
+Enron Emails,prob,0,2.8b,0.5
+Enron Emails,prob,10,2.8b,0.5744615384615386
+Enron Emails,prob,20,2.8b,0.5008269230769231
+Enron Emails,prob,30,2.8b,0.5443663366336634
+Enron Emails,prob,40,2.8b,0.5079903846153846
+Enron Emails,prob,50,2.8b,0.5510769230769231
+Enron Emails,prob,60,2.8b,0.5671372549019608
+Enron Emails,prob,70,2.8b,0.548950495049505
+Enron Emails,prob,80,2.8b,0.531950495049505
+Enron Emails,prob,90,2.8b,0.5203465346534654
+Enron Emails,prob,0,6.9b,0.5
+Enron Emails,prob,10,6.9b,0.5680000000000001
+Enron Emails,prob,20,6.9b,0.5040096153846154
+Enron Emails,prob,30,6.9b,0.5224554455445545
+Enron Emails,prob,40,6.9b,0.5050384615384615
+Enron Emails,prob,50,6.9b,0.5230865384615385
+Enron Emails,prob,60,6.9b,0.5377647058823529
+Enron Emails,prob,70,6.9b,0.5146930693069307
+Enron Emails,prob,80,6.9b,0.5122376237623762
+Enron Emails,prob,90,6.9b,0.5196138613861386
+Enron Emails,prob,0,12b,0.5
+Enron Emails,prob,10,12b,0.5633846153846154
+Enron Emails,prob,20,12b,0.506375
+Enron Emails,prob,30,12b,0.5242376237623763
+Enron Emails,prob,40,12b,0.5039134615384615
+Enron Emails,prob,50,12b,0.5269038461538461
+Enron Emails,prob,60,12b,0.537235294117647
+Enron Emails,prob,70,12b,0.5169009900990099
+Enron Emails,prob,80,12b,0.5129306930693069
+Enron Emails,prob,90,12b,0.5092970297029703
+Enron Emails,ppl,0,1b,0.5
+Enron Emails,ppl,10,1b,0.5403509615384616
+Enron Emails,ppl,20,1b,0.5003701923076923
+Enron Emails,ppl,30,1b,0.5023564356435644
+Enron Emails,ppl,40,1b,0.5330961538461538
+Enron Emails,ppl,50,1b,0.505673076923077
+Enron Emails,ppl,60,1b,0.5506421568627451
+Enron Emails,ppl,70,1b,0.5092376237623762
+Enron Emails,ppl,80,1b,0.5293267326732674
+Enron Emails,ppl,90,1b,0.5007970297029702
+Enron Emails,ppl,0,2.8b,0.5
+Enron Emails,ppl,10,2.8b,0.5506826923076924
+Enron Emails,ppl,20,2.8b,0.5081346153846154
+Enron Emails,ppl,30,2.8b,0.5196732673267327
+Enron Emails,ppl,40,2.8b,0.5000192307692308
+Enron Emails,ppl,50,2.8b,0.5254038461538462
+Enron Emails,ppl,60,2.8b,0.559735294117647
+Enron Emails,ppl,70,2.8b,0.5301633663366336
+Enron Emails,ppl,80,2.8b,0.5062623762376237
+Enron Emails,ppl,90,2.8b,0.523509900990099
+Enron Emails,ppl,0,6.9b,0.5
+Enron Emails,ppl,10,6.9b,0.5541298076923078
+Enron Emails,ppl,20,6.9b,0.5033942307692307
+Enron Emails,ppl,30,6.9b,0.5072821782178218
+Enron Emails,ppl,40,6.9b,0.5075048076923077
+Enron Emails,ppl,50,6.9b,0.5057115384615385
+Enron Emails,ppl,60,6.9b,0.5402990196078431
+Enron Emails,ppl,70,6.9b,0.507539603960396
+Enron Emails,ppl,80,6.9b,0.5333960396039604
+Enron Emails,ppl,90,6.9b,0.5029950495049504
+Enron Emails,ppl,0,12b,0.5
+Enron Emails,ppl,10,12b,0.54575
+Enron Emails,ppl,20,12b,0.5061586538461538
+Enron Emails,ppl,30,12b,0.5041287128712871
+Enron Emails,ppl,40,12b,0.5072403846153846
+Enron Emails,ppl,50,12b,0.5051778846153847
+Enron Emails,ppl,60,12b,0.5387843137254902
+Enron Emails,ppl,70,12b,0.5056188118811882
+Enron Emails,ppl,80,12b,0.5330544554455445
+Enron Emails,ppl,90,12b,0.5080742574257426
+Enron Emails,mink_plus,0,1b,0.5
+Enron Emails,mink_plus,10,1b,0.5632692307692307
+Enron Emails,mink_plus,20,1b,0.5291538461538461
+Enron Emails,mink_plus,30,1b,0.5170594059405941
+Enron Emails,mink_plus,40,1b,0.5064903846153845
+Enron Emails,mink_plus,50,1b,0.5085576923076923
+Enron Emails,mink_plus,60,1b,0.535343137254902
+Enron Emails,mink_plus,70,1b,0.572950495049505
+Enron Emails,mink_plus,80,1b,0.5075643564356436
+Enron Emails,mink_plus,90,1b,0.5103168316831683
+Enron Emails,mink_plus,0,2.8b,0.5
+Enron Emails,mink_plus,10,2.8b,0.5698942307692307
+Enron Emails,mink_plus,20,2.8b,0.502125
+Enron Emails,mink_plus,30,2.8b,0.5941584158415841
+Enron Emails,mink_plus,40,2.8b,0.5673942307692308
+Enron Emails,mink_plus,50,2.8b,0.5680480769230769
+Enron Emails,mink_plus,60,2.8b,0.5776176470588235
+Enron Emails,mink_plus,70,2.8b,0.5992376237623762
+Enron Emails,mink_plus,80,2.8b,0.5722277227722772
+Enron Emails,mink_plus,90,2.8b,0.5843465346534653
+Enron Emails,mink_plus,0,6.9b,0.5
+Enron Emails,mink_plus,10,6.9b,0.5518942307692308
+Enron Emails,mink_plus,20,6.9b,0.5213173076923077
+Enron Emails,mink_plus,30,6.9b,0.5551287128712872
+Enron Emails,mink_plus,40,6.9b,0.5434134615384616
+Enron Emails,mink_plus,50,6.9b,0.5027692307692307
+Enron Emails,mink_plus,60,6.9b,0.5404803921568627
+Enron Emails,mink_plus,70,6.9b,0.5641584158415841
+Enron Emails,mink_plus,80,6.9b,0.5012178217821782
+Enron Emails,mink_plus,90,6.9b,0.5093366336633663
+Enron Emails,mink_plus,0,12b,0.5
+Enron Emails,mink_plus,10,12b,0.5539903846153846
+Enron Emails,mink_plus,20,12b,0.5112692307692308
+Enron Emails,mink_plus,30,12b,0.5490792079207921
+Enron Emails,mink_plus,40,12b,0.5438846153846153
+Enron Emails,mink_plus,50,12b,0.5110769230769231
+Enron Emails,mink_plus,60,12b,0.5481274509803922
+Enron Emails,mink_plus,70,12b,0.5581782178217821
+Enron Emails,mink_plus,80,12b,0.5013960396039604
+Enron Emails,mink_plus,90,12b,0.5301881188118811
+Enron Emails,zlib,0,1b,0.5
+Enron Emails,zlib,10,1b,0.5356971153846154
+Enron Emails,zlib,20,1b,0.5056730769230768
+Enron Emails,zlib,30,1b,0.5123168316831683
+Enron Emails,zlib,40,1b,0.5310673076923077
+Enron Emails,zlib,50,1b,0.5000576923076923
+Enron Emails,zlib,60,1b,0.5575539215686275
+Enron Emails,zlib,70,1b,0.5050049504950495
+Enron Emails,zlib,80,1b,0.5220049504950495
+Enron Emails,zlib,90,1b,0.5307079207920793
+Enron Emails,zlib,0,2.8b,0.5
+Enron Emails,zlib,10,2.8b,0.5445432692307692
+Enron Emails,zlib,20,2.8b,0.5119519230769232
+Enron Emails,zlib,30,2.8b,0.5010990099009901
+Enron Emails,zlib,40,2.8b,0.5042884615384615
+Enron Emails,zlib,50,2.8b,0.5127403846153846
+Enron Emails,zlib,60,2.8b,0.5631813725490196
+Enron Emails,zlib,70,2.8b,0.5300742574257425
+Enron Emails,zlib,80,2.8b,0.5029752475247525
+Enron Emails,zlib,90,2.8b,0.5013019801980199
+Enron Emails,zlib,0,6.9b,0.5
+Enron Emails,zlib,10,6.9b,0.5466682692307693
+Enron Emails,zlib,20,6.9b,0.5062740384615385
+Enron Emails,zlib,30,6.9b,0.5085940594059406
+Enron Emails,zlib,40,6.9b,0.5110673076923077
+Enron Emails,zlib,50,6.9b,0.5037740384615385
+Enron Emails,zlib,60,6.9b,0.5486274509803921
+Enron Emails,zlib,70,6.9b,0.5127029702970296
+Enron Emails,zlib,80,6.9b,0.5294108910891089
+Enron Emails,zlib,90,6.9b,0.5289851485148515
+Enron Emails,zlib,0,12b,0.5
+Enron Emails,zlib,10,12b,0.5407980769230769
+Enron Emails,zlib,20,12b,0.5085240384615385
+Enron Emails,zlib,30,12b,0.5116435643564357
+Enron Emails,zlib,40,12b,0.5106105769230769
+Enron Emails,zlib,50,12b,0.5035096153846154
+Enron Emails,zlib,60,12b,0.547235294117647
+Enron Emails,zlib,70,12b,0.5075643564356436
+Enron Emails,zlib,80,12b,0.5271435643564356
+Enron Emails,zlib,90,12b,0.5212376237623763
+Enron Emails,grad,0,1b,0.501872426012834
+Enron Emails,grad,10,1b,0.5221153846153846
+Enron Emails,grad,20,1b,0.5268461538461539
+Enron Emails,grad,30,1b,0.5249455445544555
+Enron Emails,grad,40,1b,0.5101875
+Enron Emails,grad,50,1b,0.5084759615384615
+Enron Emails,grad,60,1b,0.5068872549019608
+Enron Emails,grad,70,1b,0.5479257425742574
+Enron Emails,grad,80,1b,0.5205940594059406
+Enron Emails,grad,90,1b,0.5053415841584158
+Enron Emails,grad,0,2.8b,0.5008476199597739
+Enron Emails,grad,10,2.8b,0.5177932692307692
+Enron Emails,grad,20,2.8b,0.5114663461538462
+Enron Emails,grad,30,2.8b,0.5115445544554456
+Enron Emails,grad,40,2.8b,0.5016826923076924
+Enron Emails,grad,50,2.8b,0.5620624999999999
+Enron Emails,grad,60,2.8b,0.6117745098039216
+Enron Emails,grad,70,2.8b,0.5429257425742574
+Enron Emails,grad,80,2.8b,0.5507772277227723
+Enron Emails,grad,90,2.8b,0.5892227722772277
+Enron Emails,grad,0,6.9b,0.500249018293267
+Enron Emails,grad,10,6.9b,0.5295384615384615
+Enron Emails,grad,20,6.9b,0.5050576923076924
+Enron Emails,grad,30,6.9b,0.5243217821782178
+Enron Emails,grad,40,6.9b,0.5118461538461538
+Enron Emails,grad,50,6.9b,0.5269423076923078
+Enron Emails,grad,60,6.9b,0.5839754901960784
+Enron Emails,grad,70,6.9b,0.557539603960396
+Enron Emails,grad,80,6.9b,0.5092475247524753
+Enron Emails,grad,90,6.9b,0.5193069306930693
+Enron Emails,grad,0,12b,0.5045493726654535
+Enron Emails,grad,10,12b,0.5334711538461538
+Enron Emails,grad,20,12b,0.5214375
+Enron Emails,grad,30,12b,0.5172524752475247
+Enron Emails,grad,40,12b,0.533110576923077
+Enron Emails,grad,50,12b,0.5026538461538461
+Enron Emails,grad,60,12b,0.5305147058823529
+Enron Emails,grad,70,12b,0.5734752475247524
+Enron Emails,grad,80,12b,0.5633564356435643
+Enron Emails,grad,90,12b,0.5136930693069306
+Enron Emails,refer,0,1b,0.5
+Enron Emails,refer,10,1b,0.510875
+Enron Emails,refer,20,1b,0.5065384615384616
+Enron Emails,refer,30,1b,0.5095643564356436
+Enron Emails,refer,40,1b,0.5540528846153847
+Enron Emails,refer,50,1b,0.5051923076923077
+Enron Emails,refer,60,1b,0.5577401960784314
+Enron Emails,refer,70,1b,0.5259158415841585
+Enron Emails,refer,80,1b,0.521539603960396
+Enron Emails,refer,90,1b,0.5116188118811881
+Enron Emails,refer,0,2.8b,0.5
+Enron Emails,refer,10,2.8b,0.510875
+Enron Emails,refer,20,2.8b,0.5065384615384616
+Enron Emails,refer,30,2.8b,0.5095643564356436
+Enron Emails,refer,40,2.8b,0.5540528846153847
+Enron Emails,refer,50,2.8b,0.5051923076923077
+Enron Emails,refer,60,2.8b,0.5577401960784314
+Enron Emails,refer,70,2.8b,0.5259158415841585
+Enron Emails,refer,80,2.8b,0.521539603960396
+Enron Emails,refer,90,2.8b,0.5116188118811881
+Enron Emails,refer,0,6.9b,0.5
+Enron Emails,refer,10,6.9b,0.5110288461538461
+Enron Emails,refer,20,6.9b,0.5061394230769231
+Enron Emails,refer,30,6.9b,0.5094455445544555
+Enron Emails,refer,40,6.9b,0.5536201923076922
+Enron Emails,refer,50,6.9b,0.5052740384615384
+Enron Emails,refer,60,6.9b,0.5582205882352941
+Enron Emails,refer,70,6.9b,0.5257524752475248
+Enron Emails,refer,80,6.9b,0.5216980198019802
+Enron Emails,refer,90,6.9b,0.5117079207920792
+Enron Emails,refer,0,12b,0.5
+Enron Emails,refer,10,12b,0.5107644230769232
+Enron Emails,refer,20,12b,0.5064326923076923
+Enron Emails,refer,30,12b,0.5096237623762376
+Enron Emails,refer,40,12b,0.5535096153846154
+Enron Emails,refer,50,12b,0.5053942307692307
+Enron Emails,refer,60,12b,0.5579264705882353
+Enron Emails,refer,70,12b,0.5258019801980198
+Enron Emails,refer,80,12b,0.5221336633663367
+Enron Emails,refer,90,12b,0.511509900990099
+DM Mathematics,loss,0,1b,0.505479274611399
+DM Mathematics,loss,10,1b,0.5071640625
+DM Mathematics,loss,20,1b,0.5094145077720207
+DM Mathematics,loss,30,1b,0.5208575129533679
+DM Mathematics,loss,40,1b,0.5156275510204081
+DM Mathematics,loss,50,1b,0.5181871794871795
+DM Mathematics,loss,60,1b,0.5039381443298969
+DM Mathematics,loss,70,1b,0.5067435897435897
+DM Mathematics,loss,80,1b,0.5149051282051282
+DM Mathematics,loss,90,1b,0.5223756476683938
+DM Mathematics,loss,0,2.8b,0.5103989637305699
+DM Mathematics,loss,10,2.8b,0.5063098958333334
+DM Mathematics,loss,20,2.8b,0.5122823834196892
+DM Mathematics,loss,30,2.8b,0.5260207253886011
+DM Mathematics,loss,40,2.8b,0.5149744897959183
+DM Mathematics,loss,50,2.8b,0.520097435897436
+DM Mathematics,loss,60,2.8b,0.5018170103092783
+DM Mathematics,loss,70,2.8b,0.5049769230769231
+DM Mathematics,loss,80,2.8b,0.5103846153846154
+DM Mathematics,loss,90,2.8b,0.5270958549222798
+DM Mathematics,loss,0,6.9b,0.5116554404145077
+DM Mathematics,loss,10,6.9b,0.5081171875
+DM Mathematics,loss,20,6.9b,0.5136761658031088
+DM Mathematics,loss,30,6.9b,0.526038860103627
+DM Mathematics,loss,40,6.9b,0.5158928571428572
+DM Mathematics,loss,50,6.9b,0.5202589743589745
+DM Mathematics,loss,60,6.9b,0.5014896907216495
+DM Mathematics,loss,70,6.9b,0.5038205128205129
+DM Mathematics,loss,80,6.9b,0.5100230769230769
+DM Mathematics,loss,90,6.9b,0.5244896373056995
+DM Mathematics,loss,0,12b,0.5117046632124352
+DM Mathematics,loss,10,12b,0.5063776041666667
+DM Mathematics,loss,20,12b,0.5141165803108808
+DM Mathematics,loss,30,12b,0.5249015544041452
+DM Mathematics,loss,40,12b,0.517609693877551
+DM Mathematics,loss,50,12b,0.5201358974358974
+DM Mathematics,loss,60,12b,0.5011469072164948
+DM Mathematics,loss,70,12b,0.5035333333333333
+DM Mathematics,loss,80,12b,0.5100487179487179
+DM Mathematics,loss,90,12b,0.524919689119171
+DM Mathematics,prob,0,1b,0.5021761658031088
+DM Mathematics,prob,10,1b,0.5092135416666667
+DM Mathematics,prob,20,1b,0.5016217616580311
+DM Mathematics,prob,30,1b,0.530818652849741
+DM Mathematics,prob,40,1b,0.5192857142857144
+DM Mathematics,prob,50,1b,0.5185641025641026
+DM Mathematics,prob,60,1b,0.5190051546391753
+DM Mathematics,prob,70,1b,0.5002512820512821
+DM Mathematics,prob,80,1b,0.5199641025641025
+DM Mathematics,prob,90,1b,0.5106062176165803
+DM Mathematics,prob,0,2.8b,0.5096580310880829
+DM Mathematics,prob,10,2.8b,0.511015625
+DM Mathematics,prob,20,2.8b,0.5038808290155441
+DM Mathematics,prob,30,2.8b,0.5334196891191709
+DM Mathematics,prob,40,2.8b,0.5199744897959183
+DM Mathematics,prob,50,2.8b,0.5202410256410257
+DM Mathematics,prob,60,2.8b,0.5162396907216495
+DM Mathematics,prob,70,2.8b,0.5022461538461539
+DM Mathematics,prob,80,2.8b,0.5199897435897436
+DM Mathematics,prob,90,2.8b,0.5121036269430052
+DM Mathematics,prob,0,6.9b,0.513740932642487
+DM Mathematics,prob,10,6.9b,0.5116614583333333
+DM Mathematics,prob,20,6.9b,0.505720207253886
+DM Mathematics,prob,30,6.9b,0.5329222797927461
+DM Mathematics,prob,40,6.9b,0.52025
+DM Mathematics,prob,50,6.9b,0.5201230769230769
+DM Mathematics,prob,60,6.9b,0.5146030927835051
+DM Mathematics,prob,70,6.9b,0.5030974358974358
+DM Mathematics,prob,80,6.9b,0.5201692307692307
+DM Mathematics,prob,90,6.9b,0.5125181347150259
+DM Mathematics,prob,0,12b,0.510580310880829
+DM Mathematics,prob,10,12b,0.5110781249999999
+DM Mathematics,prob,20,12b,0.5076632124352332
+DM Mathematics,prob,30,12b,0.5314507772020725
+DM Mathematics,prob,40,12b,0.5212091836734694
+DM Mathematics,prob,50,12b,0.5198358974358975
+DM Mathematics,prob,60,12b,0.5147577319587628
+DM Mathematics,prob,70,12b,0.5024358974358973
+DM Mathematics,prob,80,12b,0.5208923076923077
+DM Mathematics,prob,90,12b,0.5112020725388602
+DM Mathematics,ppl,0,1b,0.505479274611399
+DM Mathematics,ppl,10,1b,0.5071640625
+DM Mathematics,ppl,20,1b,0.5094145077720207
+DM Mathematics,ppl,30,1b,0.5208575129533679
+DM Mathematics,ppl,40,1b,0.5156275510204081
+DM Mathematics,ppl,50,1b,0.5181871794871795
+DM Mathematics,ppl,60,1b,0.5039381443298969
+DM Mathematics,ppl,70,1b,0.5067435897435897
+DM Mathematics,ppl,80,1b,0.5149051282051282
+DM Mathematics,ppl,90,1b,0.5223756476683938
+DM Mathematics,ppl,0,2.8b,0.5103989637305699
+DM Mathematics,ppl,10,2.8b,0.5063098958333334
+DM Mathematics,ppl,20,2.8b,0.5122823834196892
+DM Mathematics,ppl,30,2.8b,0.5260207253886011
+DM Mathematics,ppl,40,2.8b,0.5149744897959183
+DM Mathematics,ppl,50,2.8b,0.520097435897436
+DM Mathematics,ppl,60,2.8b,0.5018170103092783
+DM Mathematics,ppl,70,2.8b,0.5049769230769231
+DM Mathematics,ppl,80,2.8b,0.5103846153846154
+DM Mathematics,ppl,90,2.8b,0.5270958549222798
+DM Mathematics,ppl,0,6.9b,0.5116554404145077
+DM Mathematics,ppl,10,6.9b,0.5081171875
+DM Mathematics,ppl,20,6.9b,0.5136761658031088
+DM Mathematics,ppl,30,6.9b,0.526038860103627
+DM Mathematics,ppl,40,6.9b,0.5158928571428572
+DM Mathematics,ppl,50,6.9b,0.5202589743589745
+DM Mathematics,ppl,60,6.9b,0.5014896907216495
+DM Mathematics,ppl,70,6.9b,0.5038205128205129
+DM Mathematics,ppl,80,6.9b,0.5100230769230769
+DM Mathematics,ppl,90,6.9b,0.5244896373056995
+DM Mathematics,ppl,0,12b,0.5117046632124352
+DM Mathematics,ppl,10,12b,0.5063776041666667
+DM Mathematics,ppl,20,12b,0.5141165803108808
+DM Mathematics,ppl,30,12b,0.5249015544041452
+DM Mathematics,ppl,40,12b,0.517609693877551
+DM Mathematics,ppl,50,12b,0.5201358974358974
+DM Mathematics,ppl,60,12b,0.5011469072164948
+DM Mathematics,ppl,70,12b,0.5035333333333333
+DM Mathematics,ppl,80,12b,0.5100487179487179
+DM Mathematics,ppl,90,12b,0.524919689119171
+DM Mathematics,mink_plus,0,1b,0.5136735751295337
+DM Mathematics,mink_plus,10,1b,0.5155989583333334
+DM Mathematics,mink_plus,20,1b,0.5280621761658031
+DM Mathematics,mink_plus,30,1b,0.5160310880829015
+DM Mathematics,mink_plus,40,1b,0.5191377551020407
+DM Mathematics,mink_plus,50,1b,0.5237435897435898
+DM Mathematics,mink_plus,60,1b,0.501860824742268
+DM Mathematics,mink_plus,70,1b,0.5270205128205128
+DM Mathematics,mink_plus,80,1b,0.5184923076923077
+DM Mathematics,mink_plus,90,1b,0.5283834196891192
+DM Mathematics,mink_plus,0,2.8b,0.5084663212435233
+DM Mathematics,mink_plus,10,2.8b,0.5173072916666667
+DM Mathematics,mink_plus,20,2.8b,0.5359326424870468
+DM Mathematics,mink_plus,30,2.8b,0.5178704663212435
+DM Mathematics,mink_plus,40,2.8b,0.5167397959183673
+DM Mathematics,mink_plus,50,2.8b,0.5507487179487179
+DM Mathematics,mink_plus,60,2.8b,0.5089123711340207
+DM Mathematics,mink_plus,70,2.8b,0.5046512820512821
+DM Mathematics,mink_plus,80,2.8b,0.529774358974359
+DM Mathematics,mink_plus,90,2.8b,0.5314145077720208
+DM Mathematics,mink_plus,0,6.9b,0.5096165803108808
+DM Mathematics,mink_plus,10,6.9b,0.5215
+DM Mathematics,mink_plus,20,6.9b,0.5385906735751296
+DM Mathematics,mink_plus,30,6.9b,0.5103419689119171
+DM Mathematics,mink_plus,40,6.9b,0.523719387755102
+DM Mathematics,mink_plus,50,6.9b,0.5456769230769232
+DM Mathematics,mink_plus,60,6.9b,0.5142113402061855
+DM Mathematics,mink_plus,70,6.9b,0.5087897435897435
+DM Mathematics,mink_plus,80,6.9b,0.5284820512820513
+DM Mathematics,mink_plus,90,6.9b,0.5264093264248705
+DM Mathematics,mink_plus,0,12b,0.5150259067357513
+DM Mathematics,mink_plus,10,12b,0.51978125
+DM Mathematics,mink_plus,20,12b,0.5379481865284973
+DM Mathematics,mink_plus,30,12b,0.5118756476683938
+DM Mathematics,mink_plus,40,12b,0.5288520408163265
+DM Mathematics,mink_plus,50,12b,0.5439743589743591
+DM Mathematics,mink_plus,60,12b,0.5095979381443299
+DM Mathematics,mink_plus,70,12b,0.5074717948717948
+DM Mathematics,mink_plus,80,12b,0.5291333333333333
+DM Mathematics,mink_plus,90,12b,0.5299948186528498
+DM Mathematics,zlib,0,1b,0.5040466321243523
+DM Mathematics,zlib,10,1b,0.5141249999999999
+DM Mathematics,zlib,20,1b,0.512461139896373
+DM Mathematics,zlib,30,1b,0.5055906735751295
+DM Mathematics,zlib,40,1b,0.5072244897959184
+DM Mathematics,zlib,50,1b,0.5202128205128205
+DM Mathematics,zlib,60,1b,0.5128144329896908
+DM Mathematics,zlib,70,1b,0.5204076923076923
+DM Mathematics,zlib,80,1b,0.5281794871794872
+DM Mathematics,zlib,90,1b,0.502800518134715
+DM Mathematics,zlib,0,2.8b,0.5035829015544041
+DM Mathematics,zlib,10,2.8b,0.5182265625
+DM Mathematics,zlib,20,2.8b,0.5162512953367876
+DM Mathematics,zlib,30,2.8b,0.517619170984456
+DM Mathematics,zlib,40,2.8b,0.5068852040816326
+DM Mathematics,zlib,50,2.8b,0.5183205128205128
+DM Mathematics,zlib,60,2.8b,0.5152577319587629
+DM Mathematics,zlib,70,2.8b,0.5225641025641026
+DM Mathematics,zlib,80,2.8b,0.5273
+DM Mathematics,zlib,90,2.8b,0.500660621761658
+DM Mathematics,zlib,0,6.9b,0.5025414507772021
+DM Mathematics,zlib,10,6.9b,0.5161901041666667
+DM Mathematics,zlib,20,6.9b,0.5186347150259067
+DM Mathematics,zlib,30,6.9b,0.5164948186528497
+DM Mathematics,zlib,40,6.9b,0.5086658163265306
+DM Mathematics,zlib,50,6.9b,0.5178410256410256
+DM Mathematics,zlib,60,6.9b,0.5148298969072165
+DM Mathematics,zlib,70,6.9b,0.5244230769230769
+DM Mathematics,zlib,80,6.9b,0.5268615384615385
+DM Mathematics,zlib,90,6.9b,0.5016036269430052
+DM Mathematics,zlib,0,12b,0.5056968911917099
+DM Mathematics,zlib,10,12b,0.5172369791666667
+DM Mathematics,zlib,20,12b,0.5194637305699482
+DM Mathematics,zlib,30,12b,0.5149663212435234
+DM Mathematics,zlib,40,12b,0.509048469387755
+DM Mathematics,zlib,50,12b,0.5174538461538463
+DM Mathematics,zlib,60,12b,0.5148453608247423
+DM Mathematics,zlib,70,12b,0.5253846153846153
+DM Mathematics,zlib,80,12b,0.5266948717948718
+DM Mathematics,zlib,90,12b,0.5010518134715025
+DM Mathematics,grad,0,1b,0.5017642487046632
+DM Mathematics,grad,10,1b,0.5072161458333333
+DM Mathematics,grad,20,1b,0.5019948186528498
+DM Mathematics,grad,30,1b,0.5014663212435233
+DM Mathematics,grad,40,1b,0.5048035714285715
+DM Mathematics,grad,50,1b,0.5174307692307692
+DM Mathematics,grad,60,1b,0.5113273195876289
+DM Mathematics,grad,70,1b,0.504951282051282
+DM Mathematics,grad,80,1b,0.5480948717948717
+DM Mathematics,grad,90,1b,0.5423497409326424
+DM Mathematics,grad,0,2.8b,0.5047461139896373
+DM Mathematics,grad,10,2.8b,0.5188541666666666
+DM Mathematics,grad,20,2.8b,0.5251191709844559
+DM Mathematics,grad,30,2.8b,0.5137823834196891
+DM Mathematics,grad,40,2.8b,0.5058188775510204
+DM Mathematics,grad,50,2.8b,0.5426641025641026
+DM Mathematics,grad,60,2.8b,0.506541237113402
+DM Mathematics,grad,70,2.8b,0.5324846153846154
+DM Mathematics,grad,80,2.8b,0.5584025641025641
+DM Mathematics,grad,90,2.8b,0.5395025906735751
+DM Mathematics,grad,0,6.9b,0.5015751295336788
+DM Mathematics,grad,10,6.9b,0.5344401041666667
+DM Mathematics,grad,20,6.9b,0.5103937823834197
+DM Mathematics,grad,30,6.9b,0.5283134715025906
+DM Mathematics,grad,40,6.9b,0.5310841836734694
+DM Mathematics,grad,50,6.9b,0.526974358974359
+DM Mathematics,grad,60,6.9b,0.515819587628866
+DM Mathematics,grad,70,6.9b,0.5338282051282052
+DM Mathematics,grad,80,6.9b,0.5761615384615384
+DM Mathematics,grad,90,6.9b,0.5621761658031088
+DM Mathematics,grad,0,12b,0.5155077720207254
+DM Mathematics,grad,10,12b,0.5520885416666667
+DM Mathematics,grad,20,12b,0.5077849740932643
+DM Mathematics,grad,30,12b,0.5085155440414507
+DM Mathematics,grad,40,12b,0.5278163265306123
+DM Mathematics,grad,50,12b,0.5349641025641025
+DM Mathematics,grad,60,12b,0.5335051546391752
+DM Mathematics,grad,70,12b,0.5497820512820514
+DM Mathematics,grad,80,12b,0.5098897435897436
+DM Mathematics,grad,90,12b,0.5471761658031088
+DM Mathematics,refer,0,1b,0.5034896373056994
+DM Mathematics,refer,10,1b,0.5057812500000001
+DM Mathematics,refer,20,1b,0.5080647668393783
+DM Mathematics,refer,30,1b,0.5202305699481865
+DM Mathematics,refer,40,1b,0.515265306122449
+DM Mathematics,refer,50,1b,0.5188461538461538
+DM Mathematics,refer,60,1b,0.5048814432989691
+DM Mathematics,refer,70,1b,0.5087923076923077
+DM Mathematics,refer,80,1b,0.5150461538461539
+DM Mathematics,refer,90,1b,0.5209974093264249
+DM Mathematics,refer,0,2.8b,0.5034896373056994
+DM Mathematics,refer,10,2.8b,0.5057812500000001
+DM Mathematics,refer,20,2.8b,0.5080647668393783
+DM Mathematics,refer,30,2.8b,0.5202305699481865
+DM Mathematics,refer,40,2.8b,0.515265306122449
+DM Mathematics,refer,50,2.8b,0.5188461538461538
+DM Mathematics,refer,60,2.8b,0.5048814432989691
+DM Mathematics,refer,70,2.8b,0.5087923076923077
+DM Mathematics,refer,80,2.8b,0.5150461538461539
+DM Mathematics,refer,90,2.8b,0.5209974093264249
+DM Mathematics,refer,0,6.9b,0.5034896373056994
+DM Mathematics,refer,10,6.9b,0.5057812500000001
+DM Mathematics,refer,20,6.9b,0.5080647668393783
+DM Mathematics,refer,30,6.9b,0.5202305699481865
+DM Mathematics,refer,40,6.9b,0.515265306122449
+DM Mathematics,refer,50,6.9b,0.5188461538461538
+DM Mathematics,refer,60,6.9b,0.5048814432989691
+DM Mathematics,refer,70,6.9b,0.5087923076923077
+DM Mathematics,refer,80,6.9b,0.5150461538461539
+DM Mathematics,refer,90,6.9b,0.5209974093264249
+DM Mathematics,refer,0,12b,0.5034896373056994
+DM Mathematics,refer,10,12b,0.5057812500000001
+DM Mathematics,refer,20,12b,0.5080647668393783
+DM Mathematics,refer,30,12b,0.5202305699481865
+DM Mathematics,refer,40,12b,0.515265306122449
+DM Mathematics,refer,50,12b,0.5188461538461538
+DM Mathematics,refer,60,12b,0.5048814432989691
+DM Mathematics,refer,70,12b,0.5087923076923077
+DM Mathematics,refer,80,12b,0.5150461538461539
+DM Mathematics,refer,90,12b,0.5209974093264249
+ArXiv,loss,0,1b,0.5226987179487179
+ArXiv,loss,10,1b,0.5001348547717843
+ArXiv,loss,20,1b,0.5004333333333333
+ArXiv,loss,30,1b,0.541466804979253
+ArXiv,loss,40,1b,0.5153360995850622
+ArXiv,loss,50,1b,0.5184194214876033
+ArXiv,loss,60,1b,0.5729876033057851
+ArXiv,loss,70,1b,0.5166541666666666
+ArXiv,loss,80,1b,0.509045643153527
+ArXiv,loss,90,1b,0.5070373443983403
+ArXiv,loss,0,2.8b,0.5252371794871795
+ArXiv,loss,10,2.8b,0.5057531120331951
+ArXiv,loss,20,2.8b,0.5039895833333333
+ArXiv,loss,30,2.8b,0.5343464730290457
+ArXiv,loss,40,2.8b,0.5253547717842324
+ArXiv,loss,50,2.8b,0.5198140495867769
+ArXiv,loss,60,2.8b,0.5769710743801653
+ArXiv,loss,70,2.8b,0.5196166666666667
+ArXiv,loss,80,2.8b,0.5128091286307054
+ArXiv,loss,90,2.8b,0.5138983402489626
+ArXiv,loss,0,6.9b,0.5290299145299145
+ArXiv,loss,10,6.9b,0.5158941908713693
+ArXiv,loss,20,6.9b,0.5076041666666666
+ArXiv,loss,30,6.9b,0.5298464730290456
+ArXiv,loss,40,6.9b,0.5276597510373444
+ArXiv,loss,50,6.9b,0.5237355371900826
+ArXiv,loss,60,6.9b,0.5824545454545454
+ArXiv,loss,70,6.9b,0.5223979166666666
+ArXiv,loss,80,6.9b,0.5170663900414938
+ArXiv,loss,90,6.9b,0.5183174273858921
+ArXiv,loss,0,12b,0.5332970085470086
+ArXiv,loss,10,12b,0.5198029045643153
+ArXiv,loss,20,12b,0.5123583333333332
+ArXiv,loss,30,12b,0.5265746887966805
+ArXiv,loss,40,12b,0.5332282157676349
+ArXiv,loss,50,12b,0.527206611570248
+ArXiv,loss,60,12b,0.5843925619834711
+ArXiv,loss,70,12b,0.5259354166666668
+ArXiv,loss,80,12b,0.5196991701244813
+ArXiv,loss,90,12b,0.5224502074688797
+ArXiv,prob,0,1b,0.525991452991453
+ArXiv,prob,10,1b,0.5107178423236515
+ArXiv,prob,20,1b,0.503275
+ArXiv,prob,30,1b,0.5368651452282157
+ArXiv,prob,40,1b,0.5209875518672199
+ArXiv,prob,50,1b,0.5033760330578512
+ArXiv,prob,60,1b,0.5846239669421488
+ArXiv,prob,70,1b,0.5192833333333333
+ArXiv,prob,80,1b,0.5158672199170125
+ArXiv,prob,90,1b,0.5138879668049793
+ArXiv,prob,0,2.8b,0.5261367521367522
+ArXiv,prob,10,2.8b,0.5017676348547718
+ArXiv,prob,20,2.8b,0.5020041666666666
+ArXiv,prob,30,2.8b,0.5284170124481328
+ArXiv,prob,40,2.8b,0.53401244813278
+ArXiv,prob,50,2.8b,0.5110454545454546
+ArXiv,prob,60,2.8b,0.5902727272727273
+ArXiv,prob,70,2.8b,0.5241375
+ArXiv,prob,80,2.8b,0.5175041493775934
+ArXiv,prob,90,2.8b,0.5219336099585062
+ArXiv,prob,0,6.9b,0.5336239316239316
+ArXiv,prob,10,6.9b,0.5138132780082987
+ArXiv,prob,20,6.9b,0.5098750000000001
+ArXiv,prob,30,6.9b,0.5209087136929461
+ArXiv,prob,40,6.9b,0.538941908713693
+ArXiv,prob,50,6.9b,0.5158347107438017
+ArXiv,prob,60,6.9b,0.5968760330578512
+ArXiv,prob,70,6.9b,0.5276541666666666
+ArXiv,prob,80,6.9b,0.5244813278008299
+ArXiv,prob,90,6.9b,0.5296846473029045
+ArXiv,prob,0,12b,0.5394529914529914
+ArXiv,prob,10,12b,0.5199792531120332
+ArXiv,prob,20,12b,0.51853125
+ArXiv,prob,30,12b,0.5184356846473029
+ArXiv,prob,40,12b,0.5475975103734441
+ArXiv,prob,50,12b,0.5212933884297521
+ArXiv,prob,60,12b,0.5996900826446281
+ArXiv,prob,70,12b,0.5334083333333333
+ArXiv,prob,80,12b,0.5307344398340249
+ArXiv,prob,90,12b,0.5364771784232365
+ArXiv,ppl,0,1b,0.5226987179487179
+ArXiv,ppl,10,1b,0.5001348547717843
+ArXiv,ppl,20,1b,0.5004333333333333
+ArXiv,ppl,30,1b,0.541466804979253
+ArXiv,ppl,40,1b,0.5153360995850622
+ArXiv,ppl,50,1b,0.5184194214876033
+ArXiv,ppl,60,1b,0.5729876033057851
+ArXiv,ppl,70,1b,0.5166541666666666
+ArXiv,ppl,80,1b,0.509045643153527
+ArXiv,ppl,90,1b,0.5070373443983403
+ArXiv,ppl,0,2.8b,0.5252371794871795
+ArXiv,ppl,10,2.8b,0.5057531120331951
+ArXiv,ppl,20,2.8b,0.5039895833333333
+ArXiv,ppl,30,2.8b,0.5343464730290457
+ArXiv,ppl,40,2.8b,0.5253547717842324
+ArXiv,ppl,50,2.8b,0.5198140495867769
+ArXiv,ppl,60,2.8b,0.5769710743801653
+ArXiv,ppl,70,2.8b,0.5196166666666667
+ArXiv,ppl,80,2.8b,0.5128091286307054
+ArXiv,ppl,90,2.8b,0.5138983402489626
+ArXiv,ppl,0,6.9b,0.5290299145299145
+ArXiv,ppl,10,6.9b,0.5158941908713693
+ArXiv,ppl,20,6.9b,0.5076041666666666
+ArXiv,ppl,30,6.9b,0.5298464730290456
+ArXiv,ppl,40,6.9b,0.5276597510373444
+ArXiv,ppl,50,6.9b,0.5237355371900826
+ArXiv,ppl,60,6.9b,0.5824545454545454
+ArXiv,ppl,70,6.9b,0.5223979166666666
+ArXiv,ppl,80,6.9b,0.5170663900414938
+ArXiv,ppl,90,6.9b,0.5183174273858921
+ArXiv,ppl,0,12b,0.5332970085470086
+ArXiv,ppl,10,12b,0.5198029045643153
+ArXiv,ppl,20,12b,0.5123583333333332
+ArXiv,ppl,30,12b,0.5265746887966805
+ArXiv,ppl,40,12b,0.5332282157676349
+ArXiv,ppl,50,12b,0.527206611570248
+ArXiv,ppl,60,12b,0.5843925619834711
+ArXiv,ppl,70,12b,0.5259354166666668
+ArXiv,ppl,80,12b,0.5196991701244813
+ArXiv,ppl,90,12b,0.5224502074688797
+ArXiv,mink_plus,0,1b,0.5377051282051283
+ArXiv,mink_plus,10,1b,0.5220331950207469
+ArXiv,mink_plus,20,1b,0.5004583333333333
+ArXiv,mink_plus,30,1b,0.5178049792531121
+ArXiv,mink_plus,40,1b,0.5144979253112033
+ArXiv,mink_plus,50,1b,0.5041280991735537
+ArXiv,mink_plus,60,1b,0.5860206611570247
+ArXiv,mink_plus,70,1b,0.5134291666666666
+ArXiv,mink_plus,80,1b,0.5052033195020746
+ArXiv,mink_plus,90,1b,0.5177178423236515
+ArXiv,mink_plus,0,2.8b,0.5368205128205128
+ArXiv,mink_plus,10,2.8b,0.511240663900415
+ArXiv,mink_plus,20,2.8b,0.5040375
+ArXiv,mink_plus,30,2.8b,0.5025767634854772
+ArXiv,mink_plus,40,2.8b,0.5426265560165976
+ArXiv,mink_plus,50,2.8b,0.5272561983471075
+ArXiv,mink_plus,60,2.8b,0.599801652892562
+ArXiv,mink_plus,70,2.8b,0.5448083333333333
+ArXiv,mink_plus,80,2.8b,0.5107178423236515
+ArXiv,mink_plus,90,2.8b,0.5399585062240664
+ArXiv,mink_plus,0,6.9b,0.5513333333333333
+ArXiv,mink_plus,10,6.9b,0.5274315352697095
+ArXiv,mink_plus,20,6.9b,0.527725
+ArXiv,mink_plus,30,6.9b,0.5159958506224066
+ArXiv,mink_plus,40,6.9b,0.5472697095435685
+ArXiv,mink_plus,50,6.9b,0.5445041322314049
+ArXiv,mink_plus,60,6.9b,0.6181239669421488
+ArXiv,mink_plus,70,6.9b,0.5576875
+ArXiv,mink_plus,80,6.9b,0.5063734439834024
+ArXiv,mink_plus,90,6.9b,0.5544896265560166
+ArXiv,mink_plus,0,12b,0.5557948717948717
+ArXiv,mink_plus,10,12b,0.5400705394190871
+ArXiv,mink_plus,20,12b,0.5378291666666667
+ArXiv,mink_plus,30,12b,0.5226514522821577
+ArXiv,mink_plus,40,12b,0.564597510373444
+ArXiv,mink_plus,50,12b,0.5498347107438016
+ArXiv,mink_plus,60,12b,0.6299380165289257
+ArXiv,mink_plus,70,12b,0.56365
+ArXiv,mink_plus,80,12b,0.5306224066390042
+ArXiv,mink_plus,90,12b,0.5768298755186723
+ArXiv,zlib,0,1b,0.5454209401709402
+ArXiv,zlib,10,1b,0.5131514522821576
+ArXiv,zlib,20,1b,0.5033729166666666
+ArXiv,zlib,30,1b,0.5161410788381743
+ArXiv,zlib,40,1b,0.5331120331950208
+ArXiv,zlib,50,1b,0.5068760330578512
+ArXiv,zlib,60,1b,0.569555785123967
+ArXiv,zlib,70,1b,0.5022104166666667
+ArXiv,zlib,80,1b,0.5188713692946059
+ArXiv,zlib,90,1b,0.523643153526971
+ArXiv,zlib,0,2.8b,0.5466602564102564
+ArXiv,zlib,10,2.8b,0.501304979253112
+ArXiv,zlib,20,2.8b,0.5038083333333333
+ArXiv,zlib,30,2.8b,0.5040145228215768
+ArXiv,zlib,40,2.8b,0.5476639004149377
+ArXiv,zlib,50,2.8b,0.5098285123966941
+ArXiv,zlib,60,2.8b,0.5777603305785124
+ArXiv,zlib,70,2.8b,0.5017750000000001
+ArXiv,zlib,80,2.8b,0.5228651452282157
+ArXiv,zlib,90,2.8b,0.5360560165975103
+ArXiv,zlib,0,6.9b,0.5491153846153847
+ArXiv,zlib,10,6.9b,0.5150103734439834
+ArXiv,zlib,20,6.9b,0.5107458333333332
+ArXiv,zlib,30,6.9b,0.5011929460580913
+ArXiv,zlib,40,6.9b,0.5494854771784232
+ArXiv,zlib,50,6.9b,0.5190867768595041
+ArXiv,zlib,60,6.9b,0.5860888429752067
+ArXiv,zlib,70,6.9b,0.50755625
+ArXiv,zlib,80,6.9b,0.5291390041493775
+ArXiv,zlib,90,6.9b,0.5429481327800829
+ArXiv,zlib,0,12b,0.5482200854700855
+ArXiv,zlib,10,12b,0.5227427385892116
+ArXiv,zlib,20,12b,0.5196437500000001
+ArXiv,zlib,30,12b,0.5056784232365146
+ArXiv,zlib,40,12b,0.5591348547717843
+ArXiv,zlib,50,12b,0.5242603305785124
+ArXiv,zlib,60,12b,0.590435950413223
+ArXiv,zlib,70,12b,0.51361875
+ArXiv,zlib,80,12b,0.5338817427385891
+ArXiv,zlib,90,12b,0.5507157676348549
+ArXiv,grad,0,1b,0.555809829059829
+ArXiv,grad,10,1b,0.5071078838174274
+ArXiv,grad,20,1b,0.5266187499999999
+ArXiv,grad,30,1b,0.511091286307054
+ArXiv,grad,40,1b,0.500792531120332
+ArXiv,grad,50,1b,0.5387851239669422
+ArXiv,grad,60,1b,0.5617727272727273
+ArXiv,grad,70,1b,0.5413666666666667
+ArXiv,grad,80,1b,0.5013589211618258
+ArXiv,grad,90,1b,0.5021120331950207
+ArXiv,grad,0,2.8b,0.5572371794871794
+ArXiv,grad,10,2.8b,0.516798755186722
+ArXiv,grad,20,2.8b,0.5509375
+ArXiv,grad,30,2.8b,0.5004896265560166
+ArXiv,grad,40,2.8b,0.5330435684647303
+ArXiv,grad,50,2.8b,0.5460247933884298
+ArXiv,grad,60,2.8b,0.5838677685950413
+ArXiv,grad,70,2.8b,0.55464375
+ArXiv,grad,80,2.8b,0.5316244813278008
+ArXiv,grad,90,2.8b,0.5371991701244814
+ArXiv,grad,0,6.9b,0.5525277777777778
+ArXiv,grad,10,6.9b,0.5188962655601659
+ArXiv,grad,20,6.9b,0.5525604166666667
+ArXiv,grad,30,6.9b,0.5088921161825726
+ArXiv,grad,40,6.9b,0.5238941908713693
+ArXiv,grad,50,6.9b,0.5464710743801653
+ArXiv,grad,60,6.9b,0.6311528925619835
+ArXiv,grad,70,6.9b,0.54325625
+ArXiv,grad,80,6.9b,0.5224336099585062
+ArXiv,grad,90,6.9b,0.511850622406639
+ArXiv,grad,0,12b,0.5346196581196581
+ArXiv,grad,10,12b,0.5088755186721992
+ArXiv,grad,20,12b,0.51434375
+ArXiv,grad,30,12b,0.5279813278008298
+ArXiv,grad,40,12b,0.5162365145228216
+ArXiv,grad,50,12b,0.5310929752066116
+ArXiv,grad,60,12b,0.5553119834710744
+ArXiv,grad,70,12b,0.5011187500000001
+ArXiv,grad,80,12b,0.5357199170124481
+ArXiv,grad,90,12b,0.5181970954356847
+ArXiv,refer,0,1b,0.5205021367521367
+ArXiv,refer,10,1b,0.5013775933609959
+ArXiv,refer,20,1b,0.503825
+ArXiv,refer,30,1b,0.5508132780082987
+ArXiv,refer,40,1b,0.5096182572614107
+ArXiv,refer,50,1b,0.5131446280991736
+ArXiv,refer,60,1b,0.5683822314049587
+ArXiv,refer,70,1b,0.5134979166666667
+ArXiv,refer,80,1b,0.5078817427385892
+ArXiv,refer,90,1b,0.5031078838174274
+ArXiv,refer,0,2.8b,0.5205021367521367
+ArXiv,refer,10,2.8b,0.5013775933609959
+ArXiv,refer,20,2.8b,0.503825
+ArXiv,refer,30,2.8b,0.5508132780082987
+ArXiv,refer,40,2.8b,0.5096182572614107
+ArXiv,refer,50,2.8b,0.5131446280991736
+ArXiv,refer,60,2.8b,0.5683822314049587
+ArXiv,refer,70,2.8b,0.5134979166666667
+ArXiv,refer,80,2.8b,0.5078817427385892
+ArXiv,refer,90,2.8b,0.5031078838174274
+ArXiv,refer,0,6.9b,0.5202991452991453
+ArXiv,refer,10,6.9b,0.5013775933609959
+ArXiv,refer,20,6.9b,0.503825
+ArXiv,refer,30,6.9b,0.5508132780082987
+ArXiv,refer,40,6.9b,0.5096182572614107
+ArXiv,refer,50,6.9b,0.5131446280991736
+ArXiv,refer,60,6.9b,0.5683822314049587
+ArXiv,refer,70,6.9b,0.5134979166666667
+ArXiv,refer,80,6.9b,0.5078817427385892
+ArXiv,refer,90,6.9b,0.5031078838174274
+ArXiv,refer,0,12b,0.52041452991453
+ArXiv,refer,10,12b,0.5013775933609959
+ArXiv,refer,20,12b,0.503825
+ArXiv,refer,30,12b,0.5508132780082987
+ArXiv,refer,40,12b,0.5096182572614107
+ArXiv,refer,50,12b,0.5131446280991736
+ArXiv,refer,60,12b,0.5683822314049587
+ArXiv,refer,70,12b,0.5134979166666667
+ArXiv,refer,80,12b,0.5078817427385892
+ArXiv,refer,90,12b,0.5031078838174274

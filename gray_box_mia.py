@@ -4,11 +4,11 @@ from transformers import BitsAndBytesConfig, AutoModelForCausalLM, AutoTokenizer
 
 def compute_gray_box_method(args):
     dataset_names, length_list = get_dataset_list(args)
-    bnb_config = BitsAndBytesConfig(
-        load_in_8bit=True,  # 开启8位量化
-        bnb_8bit_use_double_quant=True,  # 使用双重量化技术
-        bnb_8bit_compute_dtype=torch.float16  # 计算过程中使用float16
-    )
+    # bnb_config = BitsAndBytesConfig(
+    #     load_in_8bit=True,  # 开启8位量化
+    #     bnb_8bit_use_double_quant=True,  # 使用双重量化技术
+    #     bnb_8bit_compute_dtype=torch.float16  # 计算过程中使用float16
+    # )
     if args.model_size == "12b" or args.model_size == "6.9b":
     #     device_map = {
     #     "transformer.word_embeddings": args.cuda,

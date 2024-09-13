@@ -1,0 +1,1401 @@
+dataset,feature,length,model_size,auc
+Wikipedia (en),loss,0,1b,0.5206735
+Wikipedia (en),loss,100,1b,0.5132829999999999
+Wikipedia (en),loss,200,1b,0.520248
+Wikipedia (en),loss,300,1b,0.5203335
+Wikipedia (en),loss,400,1b,0.5197068421052631
+Wikipedia (en),loss,500,1b,0.5010641361256545
+Wikipedia (en),loss,600,1b,0.5022994699646643
+Wikipedia (en),loss,700,1b,0.5037132505175983
+Wikipedia (en),loss,800,1b,0.5203151260504202
+Wikipedia (en),loss,900,1b,0.5068503401360545
+Wikipedia (en),loss,0,2.8b,0.524087
+Wikipedia (en),loss,100,2.8b,0.5222795
+Wikipedia (en),loss,200,2.8b,0.5323169999999999
+Wikipedia (en),loss,300,2.8b,0.5067425
+Wikipedia (en),loss,400,2.8b,0.5371652631578948
+Wikipedia (en),loss,500,2.8b,0.5115359947643979
+Wikipedia (en),loss,600,2.8b,0.5183321554770318
+Wikipedia (en),loss,700,2.8b,0.5067225672877846
+Wikipedia (en),loss,800,2.8b,0.53193837535014
+Wikipedia (en),loss,900,2.8b,0.5061819727891157
+Wikipedia (en),loss,0,6.9b,0.52215
+Wikipedia (en),loss,100,6.9b,0.5188785
+Wikipedia (en),loss,200,6.9b,0.5295895
+Wikipedia (en),loss,300,6.9b,0.511905
+Wikipedia (en),loss,400,6.9b,0.5349652631578947
+Wikipedia (en),loss,500,6.9b,0.5141799738219895
+Wikipedia (en),loss,600,6.9b,0.5169257950530035
+Wikipedia (en),loss,700,6.9b,0.5044440993788819
+Wikipedia (en),loss,800,6.9b,0.5271344537815126
+Wikipedia (en),loss,900,6.9b,0.5038095238095239
+Wikipedia (en),loss,0,12b,0.5268315
+Wikipedia (en),loss,100,12b,0.5242865
+Wikipedia (en),loss,200,12b,0.535382
+Wikipedia (en),loss,300,12b,0.509849
+Wikipedia (en),loss,400,12b,0.5397073684210526
+Wikipedia (en),loss,500,12b,0.5164175392670157
+Wikipedia (en),loss,600,12b,0.5206598939929329
+Wikipedia (en),loss,700,12b,0.5085900621118012
+Wikipedia (en),loss,800,12b,0.5314439775910365
+Wikipedia (en),loss,900,12b,0.5078707482993197
+Wikipedia (en),prob,0,1b,0.5202994999999999
+Wikipedia (en),prob,100,1b,0.510278
+Wikipedia (en),prob,200,1b,0.52108
+Wikipedia (en),prob,300,1b,0.5174529999999999
+Wikipedia (en),prob,400,1b,0.5166505263157894
+Wikipedia (en),prob,500,1b,0.5038259162303665
+Wikipedia (en),prob,600,1b,0.5024964664310954
+Wikipedia (en),prob,700,1b,0.5097142857142858
+Wikipedia (en),prob,800,1b,0.5257044817927171
+Wikipedia (en),prob,900,1b,0.5013061224489795
+Wikipedia (en),prob,0,2.8b,0.526493
+Wikipedia (en),prob,100,2.8b,0.5253909999999999
+Wikipedia (en),prob,200,2.8b,0.5368805000000001
+Wikipedia (en),prob,300,2.8b,0.502979
+Wikipedia (en),prob,400,2.8b,0.5374115789473685
+Wikipedia (en),prob,500,2.8b,0.5179293193717277
+Wikipedia (en),prob,600,2.8b,0.5158286219081272
+Wikipedia (en),prob,700,2.8b,0.5061801242236025
+Wikipedia (en),prob,800,2.8b,0.5440336134453782
+Wikipedia (en),prob,900,2.8b,0.5149591836734694
+Wikipedia (en),prob,0,6.9b,0.5235239999999999
+Wikipedia (en),prob,100,6.9b,0.522311
+Wikipedia (en),prob,200,6.9b,0.533348
+Wikipedia (en),prob,300,6.9b,0.502542
+Wikipedia (en),prob,400,6.9b,0.5379378947368421
+Wikipedia (en),prob,500,6.9b,0.5196348167539266
+Wikipedia (en),prob,600,6.9b,0.5132791519434629
+Wikipedia (en),prob,700,6.9b,0.5050124223602485
+Wikipedia (en),prob,800,6.9b,0.5358207282913166
+Wikipedia (en),prob,900,6.9b,0.5109523809523809
+Wikipedia (en),prob,0,12b,0.53225
+Wikipedia (en),prob,100,12b,0.5289220000000001
+Wikipedia (en),prob,200,12b,0.5425605
+Wikipedia (en),prob,300,12b,0.502189
+Wikipedia (en),prob,400,12b,0.5430136842105263
+Wikipedia (en),prob,500,12b,0.5227002617801048
+Wikipedia (en),prob,600,12b,0.5199010600706713
+Wikipedia (en),prob,700,12b,0.5115217391304347
+Wikipedia (en),prob,800,12b,0.543812324929972
+Wikipedia (en),prob,900,12b,0.5188027210884354
+Wikipedia (en),ppl,0,1b,0.5206735
+Wikipedia (en),ppl,100,1b,0.5132829999999999
+Wikipedia (en),ppl,200,1b,0.520248
+Wikipedia (en),ppl,300,1b,0.5203335
+Wikipedia (en),ppl,400,1b,0.5197068421052631
+Wikipedia (en),ppl,500,1b,0.5010641361256545
+Wikipedia (en),ppl,600,1b,0.5022994699646643
+Wikipedia (en),ppl,700,1b,0.5037132505175983
+Wikipedia (en),ppl,800,1b,0.5203151260504202
+Wikipedia (en),ppl,900,1b,0.5068503401360545
+Wikipedia (en),ppl,0,2.8b,0.524087
+Wikipedia (en),ppl,100,2.8b,0.5222795
+Wikipedia (en),ppl,200,2.8b,0.5323169999999999
+Wikipedia (en),ppl,300,2.8b,0.5067425
+Wikipedia (en),ppl,400,2.8b,0.5371652631578948
+Wikipedia (en),ppl,500,2.8b,0.5115359947643979
+Wikipedia (en),ppl,600,2.8b,0.5183321554770318
+Wikipedia (en),ppl,700,2.8b,0.5067225672877846
+Wikipedia (en),ppl,800,2.8b,0.53193837535014
+Wikipedia (en),ppl,900,2.8b,0.5061819727891157
+Wikipedia (en),ppl,0,6.9b,0.52215
+Wikipedia (en),ppl,100,6.9b,0.5188785
+Wikipedia (en),ppl,200,6.9b,0.5295895
+Wikipedia (en),ppl,300,6.9b,0.511905
+Wikipedia (en),ppl,400,6.9b,0.5349652631578947
+Wikipedia (en),ppl,500,6.9b,0.5141799738219895
+Wikipedia (en),ppl,600,6.9b,0.5169257950530035
+Wikipedia (en),ppl,700,6.9b,0.5044440993788819
+Wikipedia (en),ppl,800,6.9b,0.5271344537815126
+Wikipedia (en),ppl,900,6.9b,0.5038095238095239
+Wikipedia (en),ppl,0,12b,0.5268315
+Wikipedia (en),ppl,100,12b,0.5242865
+Wikipedia (en),ppl,200,12b,0.535382
+Wikipedia (en),ppl,300,12b,0.509849
+Wikipedia (en),ppl,400,12b,0.5397073684210526
+Wikipedia (en),ppl,500,12b,0.5164175392670157
+Wikipedia (en),ppl,600,12b,0.5206598939929329
+Wikipedia (en),ppl,700,12b,0.5085900621118012
+Wikipedia (en),ppl,800,12b,0.5314439775910365
+Wikipedia (en),ppl,900,12b,0.5078707482993197
+Wikipedia (en),mink_plus,0,1b,0.519515
+Wikipedia (en),mink_plus,100,1b,0.521807
+Wikipedia (en),mink_plus,200,1b,0.5269699999999999
+Wikipedia (en),mink_plus,300,1b,0.5112410000000001
+Wikipedia (en),mink_plus,400,1b,0.5054431578947368
+Wikipedia (en),mink_plus,500,1b,0.5192395287958116
+Wikipedia (en),mink_plus,600,1b,0.5083427561837456
+Wikipedia (en),mink_plus,700,1b,0.5014741200828158
+Wikipedia (en),mink_plus,800,1b,0.5317619047619047
+Wikipedia (en),mink_plus,900,1b,0.522734693877551
+Wikipedia (en),mink_plus,0,2.8b,0.5218379999999999
+Wikipedia (en),mink_plus,100,2.8b,0.538064
+Wikipedia (en),mink_plus,200,2.8b,0.5547409999999999
+Wikipedia (en),mink_plus,300,2.8b,0.525715
+Wikipedia (en),mink_plus,400,2.8b,0.5401642105263158
+Wikipedia (en),mink_plus,500,2.8b,0.5450863874345551
+Wikipedia (en),mink_plus,600,2.8b,0.5488904593639575
+Wikipedia (en),mink_plus,700,2.8b,0.5443229813664596
+Wikipedia (en),mink_plus,800,2.8b,0.5866246498599439
+Wikipedia (en),mink_plus,900,2.8b,0.5429965986394558
+Wikipedia (en),mink_plus,0,6.9b,0.524269
+Wikipedia (en),mink_plus,100,6.9b,0.535524
+Wikipedia (en),mink_plus,200,6.9b,0.5499345
+Wikipedia (en),mink_plus,300,6.9b,0.517673
+Wikipedia (en),mink_plus,400,6.9b,0.5335984210526316
+Wikipedia (en),mink_plus,500,6.9b,0.5443678010471205
+Wikipedia (en),mink_plus,600,6.9b,0.5388445229681978
+Wikipedia (en),mink_plus,700,6.9b,0.5405734989648033
+Wikipedia (en),mink_plus,800,6.9b,0.5524733893557423
+Wikipedia (en),mink_plus,900,6.9b,0.5365136054421769
+Wikipedia (en),mink_plus,0,12b,0.532638
+Wikipedia (en),mink_plus,100,12b,0.543772
+Wikipedia (en),mink_plus,200,12b,0.5593115
+Wikipedia (en),mink_plus,300,12b,0.526462
+Wikipedia (en),mink_plus,400,12b,0.5497736842105263
+Wikipedia (en),mink_plus,500,12b,0.5491583769633508
+Wikipedia (en),mink_plus,600,12b,0.5452014134275619
+Wikipedia (en),mink_plus,700,12b,0.5505797101449275
+Wikipedia (en),mink_plus,800,12b,0.5838879551820728
+Wikipedia (en),mink_plus,900,12b,0.5442448979591837
+Wikipedia (en),zlib,0,1b,0.5099115
+Wikipedia (en),zlib,100,1b,0.5138235
+Wikipedia (en),zlib,200,1b,0.519285
+Wikipedia (en),zlib,300,1b,0.5177575
+Wikipedia (en),zlib,400,1b,0.5139236842105263
+Wikipedia (en),zlib,500,1b,0.5086812827225131
+Wikipedia (en),zlib,600,1b,0.5218250883392226
+Wikipedia (en),zlib,700,1b,0.5112712215320911
+Wikipedia (en),zlib,800,1b,0.5330280112044817
+Wikipedia (en),zlib,900,1b,0.5110034013605442
+Wikipedia (en),zlib,0,2.8b,0.5150305
+Wikipedia (en),zlib,100,2.8b,0.5228335
+Wikipedia (en),zlib,200,2.8b,0.5338395
+Wikipedia (en),zlib,300,2.8b,0.5052465
+Wikipedia (en),zlib,400,2.8b,0.5337915789473684
+Wikipedia (en),zlib,500,2.8b,0.504015052356021
+Wikipedia (en),zlib,600,2.8b,0.5364531802120142
+Wikipedia (en),zlib,700,2.8b,0.5199057971014492
+Wikipedia (en),zlib,800,2.8b,0.5419509803921568
+Wikipedia (en),zlib,900,2.8b,0.5215323129251701
+Wikipedia (en),zlib,0,6.9b,0.513387
+Wikipedia (en),zlib,100,6.9b,0.5196435
+Wikipedia (en),zlib,200,6.9b,0.5317495
+Wikipedia (en),zlib,300,6.9b,0.510297
+Wikipedia (en),zlib,400,6.9b,0.5307968421052631
+Wikipedia (en),zlib,500,6.9b,0.5062938481675392
+Wikipedia (en),zlib,600,6.9b,0.5350070671378092
+Wikipedia (en),zlib,700,6.9b,0.5181325051759835
+Wikipedia (en),zlib,800,6.9b,0.5365336134453782
+Wikipedia (en),zlib,900,6.9b,0.5186598639455783
+Wikipedia (en),zlib,0,12b,0.5179335
+Wikipedia (en),zlib,100,12b,0.525718
+Wikipedia (en),zlib,200,12b,0.5381745
+Wikipedia (en),zlib,300,12b,0.5087895
+Wikipedia (en),zlib,400,12b,0.5367636842105263
+Wikipedia (en),zlib,500,12b,0.5085170157068063
+Wikipedia (en),zlib,600,12b,0.5400768551236749
+Wikipedia (en),zlib,700,12b,0.5222981366459628
+Wikipedia (en),zlib,800,12b,0.5396624649859944
+Wikipedia (en),zlib,900,12b,0.5234744897959184
+Wikipedia (en),grad,0,1b,0.5154934999999999
+Wikipedia (en),grad,100,1b,0.5060819999999999
+Wikipedia (en),grad,200,1b,0.5169174999999999
+Wikipedia (en),grad,300,1b,0.5101964999999999
+Wikipedia (en),grad,400,1b,0.5064663157894738
+Wikipedia (en),grad,500,1b,0.507895942408377
+Wikipedia (en),grad,600,1b,0.5205936395759717
+Wikipedia (en),grad,700,1b,0.5142826086956521
+Wikipedia (en),grad,800,1b,0.540344537815126
+Wikipedia (en),grad,900,1b,0.5313690476190476
+Wikipedia (en),grad,0,2.8b,0.510687
+Wikipedia (en),grad,100,2.8b,0.5153749999999999
+Wikipedia (en),grad,200,2.8b,0.5272275
+Wikipedia (en),grad,300,2.8b,0.5351425
+Wikipedia (en),grad,400,2.8b,0.5137536842105264
+Wikipedia (en),grad,500,2.8b,0.5132048429319371
+Wikipedia (en),grad,600,2.8b,0.5385530035335689
+Wikipedia (en),grad,700,2.8b,0.532748447204969
+Wikipedia (en),grad,800,2.8b,0.5755560224089635
+Wikipedia (en),grad,900,2.8b,0.5719897959183673
+Wikipedia (en),grad,0,6.9b,0.511239
+Wikipedia (en),grad,100,6.9b,0.5171905
+Wikipedia (en),grad,200,6.9b,0.531695
+Wikipedia (en),grad,300,6.9b,0.528545
+Wikipedia (en),grad,400,6.9b,0.5166152631578947
+Wikipedia (en),grad,500,6.9b,0.5137598167539266
+Wikipedia (en),grad,600,6.9b,0.531065371024735
+Wikipedia (en),grad,700,6.9b,0.5360414078674949
+Wikipedia (en),grad,800,6.9b,0.5370350140056023
+Wikipedia (en),grad,900,6.9b,0.5482925170068027
+Wikipedia (en),grad,0,12b,0.5212895
+Wikipedia (en),grad,100,12b,0.5032935
+Wikipedia (en),grad,200,12b,0.5117815
+Wikipedia (en),grad,300,12b,0.519855
+Wikipedia (en),grad,400,12b,0.5223078947368421
+Wikipedia (en),grad,500,12b,0.5016119109947645
+Wikipedia (en),grad,600,12b,0.5182491166077738
+Wikipedia (en),grad,700,12b,0.5162836438923396
+Wikipedia (en),grad,800,12b,0.5193725490196079
+Wikipedia (en),grad,900,12b,0.5024693877551021
+Wikipedia (en),refer,0,1b,0.512648
+Wikipedia (en),refer,100,1b,0.517631
+Wikipedia (en),refer,200,1b,0.5157315
+Wikipedia (en),refer,300,1b,0.5290175
+Wikipedia (en),refer,400,1b,0.5181184210526315
+Wikipedia (en),refer,500,1b,0.5004214659685864
+Wikipedia (en),refer,600,1b,0.503606890459364
+Wikipedia (en),refer,700,1b,0.5063271221532091
+Wikipedia (en),refer,800,1b,0.5110840336134455
+Wikipedia (en),refer,900,1b,0.5149336734693877
+Wikipedia (en),refer,0,2.8b,0.5126545
+Wikipedia (en),refer,100,2.8b,0.517665
+Wikipedia (en),refer,200,2.8b,0.5157315
+Wikipedia (en),refer,300,2.8b,0.5292079999999999
+Wikipedia (en),refer,400,2.8b,0.5181184210526315
+Wikipedia (en),refer,500,2.8b,0.5004214659685864
+Wikipedia (en),refer,600,2.8b,0.503606890459364
+Wikipedia (en),refer,700,2.8b,0.5063271221532091
+Wikipedia (en),refer,800,2.8b,0.5110840336134455
+Wikipedia (en),refer,900,2.8b,0.5149336734693877
+Wikipedia (en),refer,0,6.9b,0.5128365
+Wikipedia (en),refer,100,6.9b,0.517663
+Wikipedia (en),refer,200,6.9b,0.5157095
+Wikipedia (en),refer,300,6.9b,0.5290699999999999
+Wikipedia (en),refer,400,6.9b,0.5181184210526315
+Wikipedia (en),refer,500,6.9b,0.5004214659685864
+Wikipedia (en),refer,600,6.9b,0.503606890459364
+Wikipedia (en),refer,700,6.9b,0.5064482401656315
+Wikipedia (en),refer,800,6.9b,0.5110840336134455
+Wikipedia (en),refer,900,6.9b,0.5149336734693877
+Wikipedia (en),refer,0,12b,0.5128365
+Wikipedia (en),refer,100,12b,0.517663
+Wikipedia (en),refer,200,12b,0.5157095
+Wikipedia (en),refer,300,12b,0.5290699999999999
+Wikipedia (en),refer,400,12b,0.5181184210526315
+Wikipedia (en),refer,500,12b,0.5004214659685864
+Wikipedia (en),refer,600,12b,0.503606890459364
+Wikipedia (en),refer,700,12b,0.5064482401656315
+Wikipedia (en),refer,800,12b,0.5110840336134455
+Wikipedia (en),refer,900,12b,0.5149336734693877
+StackExchange,loss,0,1b,0.504077
+StackExchange,loss,100,1b,0.5201715
+StackExchange,loss,200,1b,0.5047735
+StackExchange,loss,300,1b,0.5033455
+StackExchange,loss,400,1b,0.5126705
+StackExchange,loss,500,1b,0.5176649999999999
+StackExchange,loss,600,1b,0.5087380952380952
+StackExchange,loss,700,1b,0.5184019801980199
+StackExchange,loss,800,1b,0.5019763636363637
+StackExchange,loss,900,1b,0.5132282157676348
+StackExchange,loss,0,2.8b,0.508662
+StackExchange,loss,100,2.8b,0.5161245
+StackExchange,loss,200,2.8b,0.5003
+StackExchange,loss,300,2.8b,0.501258
+StackExchange,loss,400,2.8b,0.5091735
+StackExchange,loss,500,2.8b,0.5149905
+StackExchange,loss,600,2.8b,0.5145019841269841
+StackExchange,loss,700,2.8b,0.5221762376237623
+StackExchange,loss,800,2.8b,0.5061599999999999
+StackExchange,loss,900,2.8b,0.5151244813278008
+StackExchange,loss,0,6.9b,0.510942
+StackExchange,loss,100,6.9b,0.5161975000000001
+StackExchange,loss,200,6.9b,0.503373
+StackExchange,loss,300,6.9b,0.5037995
+StackExchange,loss,400,6.9b,0.5082715
+StackExchange,loss,500,6.9b,0.513373
+StackExchange,loss,600,6.9b,0.5162156084656084
+StackExchange,loss,700,6.9b,0.5228940594059406
+StackExchange,loss,800,6.9b,0.5078272727272728
+StackExchange,loss,900,6.9b,0.5185082987551867
+StackExchange,loss,0,12b,0.5107875
+StackExchange,loss,100,12b,0.5127155
+StackExchange,loss,200,12b,0.5045994999999999
+StackExchange,loss,300,12b,0.5066535
+StackExchange,loss,400,12b,0.5053115
+StackExchange,loss,500,12b,0.5113695
+StackExchange,loss,600,12b,0.5183253968253967
+StackExchange,loss,700,12b,0.5248336633663366
+StackExchange,loss,800,12b,0.5098854545454545
+StackExchange,loss,900,12b,0.5213485477178423
+StackExchange,prob,0,1b,0.5070140000000001
+StackExchange,prob,100,1b,0.5168014999999999
+StackExchange,prob,200,1b,0.505373
+StackExchange,prob,300,1b,0.5024365000000001
+StackExchange,prob,400,1b,0.516829
+StackExchange,prob,500,1b,0.5098214999999999
+StackExchange,prob,600,1b,0.5141719576719577
+StackExchange,prob,700,1b,0.5149485148514852
+StackExchange,prob,800,1b,0.5052181818181818
+StackExchange,prob,900,1b,0.5035020746887967
+StackExchange,prob,0,2.8b,0.512773
+StackExchange,prob,100,2.8b,0.512733
+StackExchange,prob,200,2.8b,0.5031285
+StackExchange,prob,300,2.8b,0.50573
+StackExchange,prob,400,2.8b,0.510352
+StackExchange,prob,500,2.8b,0.504336
+StackExchange,prob,600,2.8b,0.5205727513227514
+StackExchange,prob,700,2.8b,0.5207999999999999
+StackExchange,prob,800,2.8b,0.5106727272727273
+StackExchange,prob,900,2.8b,0.5110414937759337
+StackExchange,prob,0,6.9b,0.5148429999999999
+StackExchange,prob,100,6.9b,0.508964
+StackExchange,prob,200,6.9b,0.507828
+StackExchange,prob,300,6.9b,0.509585
+StackExchange,prob,400,6.9b,0.507122
+StackExchange,prob,500,6.9b,0.500961
+StackExchange,prob,600,6.9b,0.5239232804232805
+StackExchange,prob,700,6.9b,0.521380198019802
+StackExchange,prob,800,6.9b,0.5123963636363636
+StackExchange,prob,900,6.9b,0.5155103734439834
+StackExchange,prob,0,12b,0.513903
+StackExchange,prob,100,12b,0.5051655
+StackExchange,prob,200,12b,0.50788
+StackExchange,prob,300,12b,0.515415
+StackExchange,prob,400,12b,0.5022
+StackExchange,prob,500,12b,0.502723
+StackExchange,prob,600,12b,0.5273465608465608
+StackExchange,prob,700,12b,0.5257722772277228
+StackExchange,prob,800,12b,0.5140399999999999
+StackExchange,prob,900,12b,0.5186887966804979
+StackExchange,ppl,0,1b,0.504077
+StackExchange,ppl,100,1b,0.5201715
+StackExchange,ppl,200,1b,0.5047735
+StackExchange,ppl,300,1b,0.5033455
+StackExchange,ppl,400,1b,0.5126705
+StackExchange,ppl,500,1b,0.5176649999999999
+StackExchange,ppl,600,1b,0.5087380952380952
+StackExchange,ppl,700,1b,0.5184019801980199
+StackExchange,ppl,800,1b,0.5019763636363637
+StackExchange,ppl,900,1b,0.5132282157676348
+StackExchange,ppl,0,2.8b,0.508662
+StackExchange,ppl,100,2.8b,0.5161245
+StackExchange,ppl,200,2.8b,0.5003
+StackExchange,ppl,300,2.8b,0.501258
+StackExchange,ppl,400,2.8b,0.5091735
+StackExchange,ppl,500,2.8b,0.5149905
+StackExchange,ppl,600,2.8b,0.5145019841269841
+StackExchange,ppl,700,2.8b,0.5221762376237623
+StackExchange,ppl,800,2.8b,0.5061599999999999
+StackExchange,ppl,900,2.8b,0.5151244813278008
+StackExchange,ppl,0,6.9b,0.510942
+StackExchange,ppl,100,6.9b,0.5161975000000001
+StackExchange,ppl,200,6.9b,0.503373
+StackExchange,ppl,300,6.9b,0.5037995
+StackExchange,ppl,400,6.9b,0.5082715
+StackExchange,ppl,500,6.9b,0.513373
+StackExchange,ppl,600,6.9b,0.5162156084656084
+StackExchange,ppl,700,6.9b,0.5228940594059406
+StackExchange,ppl,800,6.9b,0.5078272727272728
+StackExchange,ppl,900,6.9b,0.5185082987551867
+StackExchange,ppl,0,12b,0.5107875
+StackExchange,ppl,100,12b,0.5127155
+StackExchange,ppl,200,12b,0.5045994999999999
+StackExchange,ppl,300,12b,0.5066535
+StackExchange,ppl,400,12b,0.5053115
+StackExchange,ppl,500,12b,0.5113695
+StackExchange,ppl,600,12b,0.5183253968253967
+StackExchange,ppl,700,12b,0.5248336633663366
+StackExchange,ppl,800,12b,0.5098854545454545
+StackExchange,ppl,900,12b,0.5213485477178423
+StackExchange,mink_plus,0,1b,0.507153
+StackExchange,mink_plus,100,1b,0.502752
+StackExchange,mink_plus,200,1b,0.518822
+StackExchange,mink_plus,300,1b,0.5067159999999999
+StackExchange,mink_plus,400,1b,0.5071285
+StackExchange,mink_plus,500,1b,0.502075
+StackExchange,mink_plus,600,1b,0.5316600529100529
+StackExchange,mink_plus,700,1b,0.5258871287128712
+StackExchange,mink_plus,800,1b,0.5381527272727273
+StackExchange,mink_plus,900,1b,0.5190539419087137
+StackExchange,mink_plus,0,2.8b,0.5177459999999999
+StackExchange,mink_plus,100,2.8b,0.511452
+StackExchange,mink_plus,200,2.8b,0.5002730000000001
+StackExchange,mink_plus,300,2.8b,0.521014
+StackExchange,mink_plus,400,2.8b,0.5024839999999999
+StackExchange,mink_plus,500,2.8b,0.507111
+StackExchange,mink_plus,600,2.8b,0.5401395502645503
+StackExchange,mink_plus,700,2.8b,0.5392910891089109
+StackExchange,mink_plus,800,2.8b,0.5459563636363636
+StackExchange,mink_plus,900,2.8b,0.5271410788381743
+StackExchange,mink_plus,0,6.9b,0.521992
+StackExchange,mink_plus,100,6.9b,0.519736
+StackExchange,mink_plus,200,6.9b,0.5133989999999999
+StackExchange,mink_plus,300,6.9b,0.5270645
+StackExchange,mink_plus,400,6.9b,0.51197
+StackExchange,mink_plus,500,6.9b,0.511946
+StackExchange,mink_plus,600,6.9b,0.5456071428571428
+StackExchange,mink_plus,700,6.9b,0.5439425742574258
+StackExchange,mink_plus,800,6.9b,0.5595309090909091
+StackExchange,mink_plus,900,6.9b,0.5382116182572615
+StackExchange,mink_plus,0,12b,0.518655
+StackExchange,mink_plus,100,12b,0.520726
+StackExchange,mink_plus,200,12b,0.524668
+StackExchange,mink_plus,300,12b,0.534719
+StackExchange,mink_plus,400,12b,0.5238259999999999
+StackExchange,mink_plus,500,12b,0.525158
+StackExchange,mink_plus,600,12b,0.5548518518518518
+StackExchange,mink_plus,700,12b,0.5567831683168317
+StackExchange,mink_plus,800,12b,0.5517654545454547
+StackExchange,mink_plus,900,12b,0.545954356846473
+StackExchange,zlib,0,1b,0.5047125
+StackExchange,zlib,100,1b,0.521376
+StackExchange,zlib,200,1b,0.501764
+StackExchange,zlib,300,1b,0.5156415
+StackExchange,zlib,400,1b,0.5187090000000001
+StackExchange,zlib,500,1b,0.514705
+StackExchange,zlib,600,1b,0.5011415343915344
+StackExchange,zlib,700,1b,0.5068217821782178
+StackExchange,zlib,800,1b,0.52278
+StackExchange,zlib,900,1b,0.5074004149377593
+StackExchange,zlib,0,2.8b,0.5108455
+StackExchange,zlib,100,2.8b,0.5152705
+StackExchange,zlib,200,2.8b,0.5042545
+StackExchange,zlib,300,2.8b,0.5205595
+StackExchange,zlib,400,2.8b,0.51115
+StackExchange,zlib,500,2.8b,0.5078625
+StackExchange,zlib,600,2.8b,0.5130945767195767
+StackExchange,zlib,700,2.8b,0.5149108910891089
+StackExchange,zlib,800,2.8b,0.5313909090909091
+StackExchange,zlib,900,2.8b,0.5129190871369296
+StackExchange,zlib,0,6.9b,0.5127905
+StackExchange,zlib,100,6.9b,0.5152895
+StackExchange,zlib,200,6.9b,0.5085120000000001
+StackExchange,zlib,300,6.9b,0.5240495000000001
+StackExchange,zlib,400,6.9b,0.5095375
+StackExchange,zlib,500,6.9b,0.5052685
+StackExchange,zlib,600,6.9b,0.5164966931216931
+StackExchange,zlib,700,6.9b,0.5164326732673268
+StackExchange,zlib,800,6.9b,0.5338618181818182
+StackExchange,zlib,900,6.9b,0.5204854771784233
+StackExchange,zlib,0,12b,0.5122
+StackExchange,zlib,100,12b,0.509452
+StackExchange,zlib,200,12b,0.5088345000000001
+StackExchange,zlib,300,12b,0.5290144999999999
+StackExchange,zlib,400,12b,0.5037229999999999
+StackExchange,zlib,500,12b,0.5014575
+StackExchange,zlib,600,12b,0.5204808201058201
+StackExchange,zlib,700,12b,0.5212039603960397
+StackExchange,zlib,800,12b,0.5372163636363636
+StackExchange,zlib,900,12b,0.5267448132780083
+StackExchange,grad,0,1b,0.510633
+StackExchange,grad,100,1b,0.503676
+StackExchange,grad,200,1b,0.5158404999999999
+StackExchange,grad,300,1b,0.5186660000000001
+StackExchange,grad,400,1b,0.5099889999999999
+StackExchange,grad,500,1b,0.5053725
+StackExchange,grad,600,1b,0.5018452380952381
+StackExchange,grad,700,1b,0.509258415841584
+StackExchange,grad,800,1b,0.5330854545454546
+StackExchange,grad,900,1b,0.5183755186721992
+StackExchange,grad,0,2.8b,0.52722
+StackExchange,grad,100,2.8b,0.5049655000000001
+StackExchange,grad,200,2.8b,0.5105255000000001
+StackExchange,grad,300,2.8b,0.5237955
+StackExchange,grad,400,2.8b,0.5144785
+StackExchange,grad,500,2.8b,0.5030495
+StackExchange,grad,600,2.8b,0.5133928571428572
+StackExchange,grad,700,2.8b,0.5363227722772277
+StackExchange,grad,800,2.8b,0.5267072727272728
+StackExchange,grad,900,2.8b,0.5074834024896265
+StackExchange,grad,0,6.9b,0.5175194999999999
+StackExchange,grad,100,6.9b,0.5013905
+StackExchange,grad,200,6.9b,0.5000855
+StackExchange,grad,300,6.9b,0.5363450000000001
+StackExchange,grad,400,6.9b,0.5058564999999999
+StackExchange,grad,500,6.9b,0.5174395
+StackExchange,grad,600,6.9b,0.525010582010582
+StackExchange,grad,700,6.9b,0.5312257425742575
+StackExchange,grad,800,6.9b,0.5263654545454546
+StackExchange,grad,900,6.9b,0.5176887966804979
+StackExchange,grad,0,12b,0.514375
+StackExchange,grad,100,12b,0.5099994999999999
+StackExchange,grad,200,12b,0.5089414999999999
+StackExchange,grad,300,12b,0.519612
+StackExchange,grad,400,12b,0.5119769999999999
+StackExchange,grad,500,12b,0.521735
+StackExchange,grad,600,12b,0.5001838624338625
+StackExchange,grad,700,12b,0.5280673267326732
+StackExchange,grad,800,12b,0.5157018181818182
+StackExchange,grad,900,12b,0.5202302904564315
+StackExchange,refer,0,1b,0.501082
+StackExchange,refer,100,1b,0.5224195
+StackExchange,refer,200,1b,0.5073384999999999
+StackExchange,refer,300,1b,0.5060285
+StackExchange,refer,400,1b,0.5153925
+StackExchange,refer,500,1b,0.518786
+StackExchange,refer,600,1b,0.5065826719576719
+StackExchange,refer,700,1b,0.5159950495049506
+StackExchange,refer,800,1b,0.5013018181818182
+StackExchange,refer,900,1b,0.5110414937759336
+StackExchange,refer,0,2.8b,0.501093
+StackExchange,refer,100,2.8b,0.5224385
+StackExchange,refer,200,2.8b,0.5073274999999999
+StackExchange,refer,300,2.8b,0.5061310000000001
+StackExchange,refer,400,2.8b,0.5153925
+StackExchange,refer,500,2.8b,0.518786
+StackExchange,refer,600,2.8b,0.5065826719576719
+StackExchange,refer,700,2.8b,0.5159950495049506
+StackExchange,refer,800,2.8b,0.5013018181818182
+StackExchange,refer,900,2.8b,0.5110414937759336
+StackExchange,refer,0,6.9b,0.501269
+StackExchange,refer,100,6.9b,0.5224325000000001
+StackExchange,refer,200,6.9b,0.5073304999999999
+StackExchange,refer,300,6.9b,0.506097
+StackExchange,refer,400,6.9b,0.5153805
+StackExchange,refer,500,6.9b,0.518786
+StackExchange,refer,600,6.9b,0.5065826719576719
+StackExchange,refer,700,6.9b,0.5157930693069308
+StackExchange,refer,800,6.9b,0.5013018181818182
+StackExchange,refer,900,6.9b,0.5110414937759336
+StackExchange,refer,0,12b,0.501269
+StackExchange,refer,100,12b,0.5224325000000001
+StackExchange,refer,200,12b,0.5073304999999999
+StackExchange,refer,300,12b,0.506097
+StackExchange,refer,400,12b,0.5153805
+StackExchange,refer,500,12b,0.518786
+StackExchange,refer,600,12b,0.5065826719576719
+StackExchange,refer,700,12b,0.5157930693069308
+StackExchange,refer,800,12b,0.5013018181818182
+StackExchange,refer,900,12b,0.5110414937759336
+Pile-CC,loss,0,1b,0.5210295
+Pile-CC,loss,100,1b,0.5185815
+Pile-CC,loss,200,1b,0.5134335
+Pile-CC,loss,300,1b,0.5070245
+Pile-CC,loss,400,1b,0.514386
+Pile-CC,loss,500,1b,0.519941
+Pile-CC,loss,600,1b,0.5021059999999999
+Pile-CC,loss,700,1b,0.5055155
+Pile-CC,loss,800,1b,0.5110764999999999
+Pile-CC,loss,900,1b,0.5045065
+Pile-CC,loss,0,2.8b,0.5191479999999999
+Pile-CC,loss,100,2.8b,0.5188794999999999
+Pile-CC,loss,200,2.8b,0.512232
+Pile-CC,loss,300,2.8b,0.507769
+Pile-CC,loss,400,2.8b,0.5167425
+Pile-CC,loss,500,2.8b,0.521602
+Pile-CC,loss,600,2.8b,0.5014909999999999
+Pile-CC,loss,700,2.8b,0.506521
+Pile-CC,loss,800,2.8b,0.5087765
+Pile-CC,loss,900,2.8b,0.50739
+Pile-CC,loss,0,6.9b,0.5277799999999999
+Pile-CC,loss,100,6.9b,0.5210805000000001
+Pile-CC,loss,200,6.9b,0.5173045000000001
+Pile-CC,loss,300,6.9b,0.5150170000000001
+Pile-CC,loss,400,6.9b,0.5234500000000001
+Pile-CC,loss,500,6.9b,0.531236
+Pile-CC,loss,600,6.9b,0.509037
+Pile-CC,loss,700,6.9b,0.514459
+Pile-CC,loss,800,6.9b,0.5001125
+Pile-CC,loss,900,6.9b,0.516991
+Pile-CC,loss,0,12b,0.5345755
+Pile-CC,loss,100,12b,0.5226995
+Pile-CC,loss,200,12b,0.521087
+Pile-CC,loss,300,12b,0.51675
+Pile-CC,loss,400,12b,0.525569
+Pile-CC,loss,500,12b,0.5366675
+Pile-CC,loss,600,12b,0.5136275
+Pile-CC,loss,700,12b,0.519127
+Pile-CC,loss,800,12b,0.505547
+Pile-CC,loss,900,12b,0.5207215
+Pile-CC,prob,0,1b,0.530819
+Pile-CC,prob,100,1b,0.5083780000000001
+Pile-CC,prob,200,1b,0.5205369999999999
+Pile-CC,prob,300,1b,0.5087655
+Pile-CC,prob,400,1b,0.511082
+Pile-CC,prob,500,1b,0.516016
+Pile-CC,prob,600,1b,0.504459
+Pile-CC,prob,700,1b,0.5083365
+Pile-CC,prob,800,1b,0.507525
+Pile-CC,prob,900,1b,0.506581
+Pile-CC,prob,0,2.8b,0.524518
+Pile-CC,prob,100,2.8b,0.5119205
+Pile-CC,prob,200,2.8b,0.52035
+Pile-CC,prob,300,2.8b,0.511843
+Pile-CC,prob,400,2.8b,0.5141359999999999
+Pile-CC,prob,500,2.8b,0.517134
+Pile-CC,prob,600,2.8b,0.503198
+Pile-CC,prob,700,2.8b,0.5074420000000001
+Pile-CC,prob,800,2.8b,0.502931
+Pile-CC,prob,900,2.8b,0.512929
+Pile-CC,prob,0,6.9b,0.5355465
+Pile-CC,prob,100,6.9b,0.519659
+Pile-CC,prob,200,6.9b,0.5279925
+Pile-CC,prob,300,6.9b,0.52089
+Pile-CC,prob,400,6.9b,0.5244895
+Pile-CC,prob,500,6.9b,0.5314875
+Pile-CC,prob,600,6.9b,0.5081475
+Pile-CC,prob,700,6.9b,0.521831
+Pile-CC,prob,800,6.9b,0.506126
+Pile-CC,prob,900,6.9b,0.525491
+Pile-CC,prob,0,12b,0.5434165
+Pile-CC,prob,100,12b,0.520858
+Pile-CC,prob,200,12b,0.5335529999999999
+Pile-CC,prob,300,12b,0.525527
+Pile-CC,prob,400,12b,0.527128
+Pile-CC,prob,500,12b,0.53996
+Pile-CC,prob,600,12b,0.514652
+Pile-CC,prob,700,12b,0.525157
+Pile-CC,prob,800,12b,0.515114
+Pile-CC,prob,900,12b,0.5311865
+Pile-CC,ppl,0,1b,0.5210295
+Pile-CC,ppl,100,1b,0.5185815
+Pile-CC,ppl,200,1b,0.5134335
+Pile-CC,ppl,300,1b,0.5070245
+Pile-CC,ppl,400,1b,0.514386
+Pile-CC,ppl,500,1b,0.519941
+Pile-CC,ppl,600,1b,0.5021059999999999
+Pile-CC,ppl,700,1b,0.5055155
+Pile-CC,ppl,800,1b,0.5110764999999999
+Pile-CC,ppl,900,1b,0.5045065
+Pile-CC,ppl,0,2.8b,0.5191479999999999
+Pile-CC,ppl,100,2.8b,0.5188794999999999
+Pile-CC,ppl,200,2.8b,0.512232
+Pile-CC,ppl,300,2.8b,0.507769
+Pile-CC,ppl,400,2.8b,0.5167425
+Pile-CC,ppl,500,2.8b,0.521602
+Pile-CC,ppl,600,2.8b,0.5014909999999999
+Pile-CC,ppl,700,2.8b,0.506521
+Pile-CC,ppl,800,2.8b,0.5087765
+Pile-CC,ppl,900,2.8b,0.50739
+Pile-CC,ppl,0,6.9b,0.5277799999999999
+Pile-CC,ppl,100,6.9b,0.5210805000000001
+Pile-CC,ppl,200,6.9b,0.5173045000000001
+Pile-CC,ppl,300,6.9b,0.5150170000000001
+Pile-CC,ppl,400,6.9b,0.5234500000000001
+Pile-CC,ppl,500,6.9b,0.531236
+Pile-CC,ppl,600,6.9b,0.509037
+Pile-CC,ppl,700,6.9b,0.514459
+Pile-CC,ppl,800,6.9b,0.5001125
+Pile-CC,ppl,900,6.9b,0.516991
+Pile-CC,ppl,0,12b,0.5345755
+Pile-CC,ppl,100,12b,0.5226995
+Pile-CC,ppl,200,12b,0.521087
+Pile-CC,ppl,300,12b,0.51675
+Pile-CC,ppl,400,12b,0.525569
+Pile-CC,ppl,500,12b,0.5366675
+Pile-CC,ppl,600,12b,0.5136275
+Pile-CC,ppl,700,12b,0.519127
+Pile-CC,ppl,800,12b,0.505547
+Pile-CC,ppl,900,12b,0.5207215
+Pile-CC,mink_plus,0,1b,0.53884
+Pile-CC,mink_plus,100,1b,0.5137259999999999
+Pile-CC,mink_plus,200,1b,0.528577
+Pile-CC,mink_plus,300,1b,0.500285
+Pile-CC,mink_plus,400,1b,0.527245
+Pile-CC,mink_plus,500,1b,0.5098320000000001
+Pile-CC,mink_plus,600,1b,0.51984
+Pile-CC,mink_plus,700,1b,0.5236815
+Pile-CC,mink_plus,800,1b,0.506737
+Pile-CC,mink_plus,900,1b,0.5247189999999999
+Pile-CC,mink_plus,0,2.8b,0.5213909999999999
+Pile-CC,mink_plus,100,2.8b,0.50055
+Pile-CC,mink_plus,200,2.8b,0.522579
+Pile-CC,mink_plus,300,2.8b,0.508668
+Pile-CC,mink_plus,400,2.8b,0.5311239999999999
+Pile-CC,mink_plus,500,2.8b,0.5126715000000001
+Pile-CC,mink_plus,600,2.8b,0.5304115
+Pile-CC,mink_plus,700,2.8b,0.5238555
+Pile-CC,mink_plus,800,2.8b,0.504413
+Pile-CC,mink_plus,900,2.8b,0.53861
+Pile-CC,mink_plus,0,6.9b,0.533619
+Pile-CC,mink_plus,100,6.9b,0.5207145000000001
+Pile-CC,mink_plus,200,6.9b,0.539698
+Pile-CC,mink_plus,300,6.9b,0.526343
+Pile-CC,mink_plus,400,6.9b,0.5523149999999999
+Pile-CC,mink_plus,500,6.9b,0.535089
+Pile-CC,mink_plus,600,6.9b,0.5436259999999999
+Pile-CC,mink_plus,700,6.9b,0.553878
+Pile-CC,mink_plus,800,6.9b,0.528386
+Pile-CC,mink_plus,900,6.9b,0.5670569999999999
+Pile-CC,mink_plus,0,12b,0.5553170000000001
+Pile-CC,mink_plus,100,12b,0.515916
+Pile-CC,mink_plus,200,12b,0.556657
+Pile-CC,mink_plus,300,12b,0.5352790000000001
+Pile-CC,mink_plus,400,12b,0.5552965000000001
+Pile-CC,mink_plus,500,12b,0.548954
+Pile-CC,mink_plus,600,12b,0.556317
+Pile-CC,mink_plus,700,12b,0.5636530000000001
+Pile-CC,mink_plus,800,12b,0.5414669999999999
+Pile-CC,mink_plus,900,12b,0.570773
+Pile-CC,zlib,0,1b,0.5015935
+Pile-CC,zlib,100,1b,0.522311
+Pile-CC,zlib,200,1b,0.501922
+Pile-CC,zlib,300,1b,0.5109984999999999
+Pile-CC,zlib,400,1b,0.5213355000000001
+Pile-CC,zlib,500,1b,0.525004
+Pile-CC,zlib,600,1b,0.5006625
+Pile-CC,zlib,700,1b,0.5024685
+Pile-CC,zlib,800,1b,0.5098045
+Pile-CC,zlib,900,1b,0.5182804999999999
+Pile-CC,zlib,0,2.8b,0.5012445000000001
+Pile-CC,zlib,100,2.8b,0.5229805000000001
+Pile-CC,zlib,200,2.8b,0.5019164999999999
+Pile-CC,zlib,300,2.8b,0.5124415
+Pile-CC,zlib,400,2.8b,0.5211435
+Pile-CC,zlib,500,2.8b,0.5273555
+Pile-CC,zlib,600,2.8b,0.503607
+Pile-CC,zlib,700,2.8b,0.502505
+Pile-CC,zlib,800,2.8b,0.5071995
+Pile-CC,zlib,900,2.8b,0.51993
+Pile-CC,zlib,0,6.9b,0.5070945
+Pile-CC,zlib,100,6.9b,0.5237675
+Pile-CC,zlib,200,6.9b,0.508041
+Pile-CC,zlib,300,6.9b,0.5215065
+Pile-CC,zlib,400,6.9b,0.5269995000000001
+Pile-CC,zlib,500,6.9b,0.5378075
+Pile-CC,zlib,600,6.9b,0.5132005
+Pile-CC,zlib,700,6.9b,0.5058695
+Pile-CC,zlib,800,6.9b,0.501492
+Pile-CC,zlib,900,6.9b,0.52987
+Pile-CC,zlib,0,12b,0.5124690000000001
+Pile-CC,zlib,100,12b,0.525495
+Pile-CC,zlib,200,12b,0.51141
+Pile-CC,zlib,300,12b,0.5237245
+Pile-CC,zlib,400,12b,0.5293095
+Pile-CC,zlib,500,12b,0.5434795
+Pile-CC,zlib,600,12b,0.518035
+Pile-CC,zlib,700,12b,0.511064
+Pile-CC,zlib,800,12b,0.5076575
+Pile-CC,zlib,900,12b,0.5343985
+Pile-CC,grad,0,1b,0.500811
+Pile-CC,grad,100,1b,0.518288
+Pile-CC,grad,200,1b,0.53623
+Pile-CC,grad,300,1b,0.5252049999999999
+Pile-CC,grad,400,1b,0.510894
+Pile-CC,grad,500,1b,0.5109665
+Pile-CC,grad,600,1b,0.517301
+Pile-CC,grad,700,1b,0.5080290000000001
+Pile-CC,grad,800,1b,0.511459
+Pile-CC,grad,900,1b,0.500311
+Pile-CC,grad,0,2.8b,0.5096865
+Pile-CC,grad,100,2.8b,0.526358
+Pile-CC,grad,200,2.8b,0.519908
+Pile-CC,grad,300,2.8b,0.5476615
+Pile-CC,grad,400,2.8b,0.5203565
+Pile-CC,grad,500,2.8b,0.5076975000000001
+Pile-CC,grad,600,2.8b,0.5065135
+Pile-CC,grad,700,2.8b,0.5131155
+Pile-CC,grad,800,2.8b,0.5150214999999999
+Pile-CC,grad,900,2.8b,0.505482
+Pile-CC,grad,0,6.9b,0.5017125
+Pile-CC,grad,100,6.9b,0.52656
+Pile-CC,grad,200,6.9b,0.528617
+Pile-CC,grad,300,6.9b,0.5291575000000001
+Pile-CC,grad,400,6.9b,0.5247130000000001
+Pile-CC,grad,500,6.9b,0.5054545
+Pile-CC,grad,600,6.9b,0.519267
+Pile-CC,grad,700,6.9b,0.514562
+Pile-CC,grad,800,6.9b,0.5211914999999999
+Pile-CC,grad,900,6.9b,0.5001695
+Pile-CC,grad,0,12b,0.507698
+Pile-CC,grad,100,12b,0.5236005
+Pile-CC,grad,200,12b,0.5274184999999999
+Pile-CC,grad,300,12b,0.5009214999999999
+Pile-CC,grad,400,12b,0.5146355
+Pile-CC,grad,500,12b,0.500726
+Pile-CC,grad,600,12b,0.5011939999999999
+Pile-CC,grad,700,12b,0.512074
+Pile-CC,grad,800,12b,0.5178685000000001
+Pile-CC,grad,900,12b,0.5036134999999999
+Pile-CC,refer,0,1b,0.5186695000000001
+Pile-CC,refer,100,1b,0.5152675
+Pile-CC,refer,200,1b,0.5073315
+Pile-CC,refer,300,1b,0.5034514999999999
+Pile-CC,refer,400,1b,0.5114164999999999
+Pile-CC,refer,500,1b,0.5129649999999999
+Pile-CC,refer,600,1b,0.5074894999999999
+Pile-CC,refer,700,1b,0.5035145
+Pile-CC,refer,800,1b,0.5154885
+Pile-CC,refer,900,1b,0.5000310000000001
+Pile-CC,refer,0,2.8b,0.5187805
+Pile-CC,refer,100,2.8b,0.515122
+Pile-CC,refer,200,2.8b,0.5073505
+Pile-CC,refer,300,2.8b,0.5032574999999999
+Pile-CC,refer,400,2.8b,0.511403
+Pile-CC,refer,500,2.8b,0.5129649999999999
+Pile-CC,refer,600,2.8b,0.5074894999999999
+Pile-CC,refer,700,2.8b,0.5035145
+Pile-CC,refer,800,2.8b,0.5154885
+Pile-CC,refer,900,2.8b,0.5000310000000001
+Pile-CC,refer,0,6.9b,0.5183575
+Pile-CC,refer,100,6.9b,0.5152059999999999
+Pile-CC,refer,200,6.9b,0.5074455
+Pile-CC,refer,300,6.9b,0.503344
+Pile-CC,refer,400,6.9b,0.5113445
+Pile-CC,refer,500,6.9b,0.5129824999999999
+Pile-CC,refer,600,6.9b,0.5074894999999999
+Pile-CC,refer,700,6.9b,0.503564
+Pile-CC,refer,800,6.9b,0.5154885
+Pile-CC,refer,900,6.9b,0.5000310000000001
+Pile-CC,refer,0,12b,0.5183575
+Pile-CC,refer,100,12b,0.5152059999999999
+Pile-CC,refer,200,12b,0.5074455
+Pile-CC,refer,300,12b,0.503344
+Pile-CC,refer,400,12b,0.5113445
+Pile-CC,refer,500,12b,0.5129824999999999
+Pile-CC,refer,600,12b,0.5074894999999999
+Pile-CC,refer,700,12b,0.503564
+Pile-CC,refer,800,12b,0.5154885
+Pile-CC,refer,900,12b,0.5000310000000001
+Github,loss,0,1b,0.5184219999999999
+Github,loss,100,1b,0.5267195
+Github,loss,200,1b,0.5085995
+Github,loss,300,1b,0.506338
+Github,loss,400,1b,0.5167089887640449
+Github,loss,500,1b,0.521083855799373
+Github,loss,600,1b,0.5115255681818183
+Github,loss,700,1b,0.5268732227488151
+Github,loss,800,1b,0.514280185758514
+Github,loss,900,1b,0.5211213235294118
+Github,loss,0,2.8b,0.523127
+Github,loss,100,2.8b,0.5282640000000001
+Github,loss,200,2.8b,0.5130844999999999
+Github,loss,300,2.8b,0.510702
+Github,loss,400,2.8b,0.5223224719101124
+Github,loss,500,2.8b,0.5394952978056426
+Github,loss,600,2.8b,0.5012632575757575
+Github,loss,700,2.8b,0.547877962085308
+Github,loss,800,2.8b,0.5185386996904024
+Github,loss,900,2.8b,0.5254319852941176
+Github,loss,0,6.9b,0.5239285
+Github,loss,100,6.9b,0.5317145
+Github,loss,200,6.9b,0.5117615
+Github,loss,300,6.9b,0.501006
+Github,loss,400,6.9b,0.5167904494382023
+Github,loss,500,6.9b,0.5247061128526646
+Github,loss,600,6.9b,0.5011458333333334
+Github,loss,700,6.9b,0.5354537914691944
+Github,loss,800,6.9b,0.5147538699690403
+Github,loss,900,6.9b,0.517108455882353
+Github,loss,0,12b,0.5230635
+Github,loss,100,12b,0.5325385
+Github,loss,200,12b,0.5107665
+Github,loss,300,12b,0.5003435
+Github,loss,400,12b,0.5178297752808989
+Github,loss,500,12b,0.5253855799373041
+Github,loss,600,12b,0.5029147727272727
+Github,loss,700,12b,0.5367511848341232
+Github,loss,800,12b,0.515812693498452
+Github,loss,900,12b,0.5163088235294118
+Github,prob,0,1b,0.5147079999999999
+Github,prob,100,1b,0.5277115
+Github,prob,200,1b,0.5080290000000001
+Github,prob,300,1b,0.5087575
+Github,prob,400,1b,0.5166988764044944
+Github,prob,500,1b,0.5205485893416928
+Github,prob,600,1b,0.5101856060606061
+Github,prob,700,1b,0.5273080568720379
+Github,prob,800,1b,0.512390092879257
+Github,prob,900,1b,0.5201323529411764
+Github,prob,0,2.8b,0.519358
+Github,prob,100,2.8b,0.5305195
+Github,prob,200,2.8b,0.512309
+Github,prob,300,2.8b,0.512699
+Github,prob,400,2.8b,0.5233101123595505
+Github,prob,500,2.8b,0.5396755485893417
+Github,prob,600,2.8b,0.5007282196969698
+Github,prob,700,2.8b,0.5480983412322274
+Github,prob,800,2.8b,0.5175417956656347
+Github,prob,900,2.8b,0.5248051470588235
+Github,prob,0,6.9b,0.5211635
+Github,prob,100,6.9b,0.5340805
+Github,prob,200,6.9b,0.5120389999999999
+Github,prob,300,6.9b,0.502163
+Github,prob,400,6.9b,0.51821797752809
+Github,prob,500,6.9b,0.524987460815047
+Github,prob,600,6.9b,0.5015435606060606
+Github,prob,700,6.9b,0.5357760663507108
+Github,prob,800,6.9b,0.5129814241486068
+Github,prob,900,6.9b,0.5177904411764706
+Github,prob,0,12b,0.5184415
+Github,prob,100,12b,0.5347045
+Github,prob,200,12b,0.511129
+Github,prob,300,12b,0.500078
+Github,prob,400,12b,0.5197134831460675
+Github,prob,500,12b,0.5252163009404389
+Github,prob,600,12b,0.5041988636363637
+Github,prob,700,12b,0.5388803317535545
+Github,prob,800,12b,0.5164643962848298
+Github,prob,900,12b,0.5175882352941177
+Github,ppl,0,1b,0.5184219999999999
+Github,ppl,100,1b,0.5267195
+Github,ppl,200,1b,0.5085995
+Github,ppl,300,1b,0.506338
+Github,ppl,400,1b,0.5167089887640449
+Github,ppl,500,1b,0.521083855799373
+Github,ppl,600,1b,0.5115255681818183
+Github,ppl,700,1b,0.5268732227488151
+Github,ppl,800,1b,0.514280185758514
+Github,ppl,900,1b,0.5211213235294118
+Github,ppl,0,2.8b,0.523127
+Github,ppl,100,2.8b,0.5282640000000001
+Github,ppl,200,2.8b,0.5130844999999999
+Github,ppl,300,2.8b,0.510702
+Github,ppl,400,2.8b,0.5223224719101124
+Github,ppl,500,2.8b,0.5394952978056426
+Github,ppl,600,2.8b,0.5012632575757575
+Github,ppl,700,2.8b,0.547877962085308
+Github,ppl,800,2.8b,0.5185386996904024
+Github,ppl,900,2.8b,0.5254319852941176
+Github,ppl,0,6.9b,0.5239285
+Github,ppl,100,6.9b,0.5317145
+Github,ppl,200,6.9b,0.5117615
+Github,ppl,300,6.9b,0.501006
+Github,ppl,400,6.9b,0.5167904494382023
+Github,ppl,500,6.9b,0.5247061128526646
+Github,ppl,600,6.9b,0.5011458333333334
+Github,ppl,700,6.9b,0.5354537914691944
+Github,ppl,800,6.9b,0.5147538699690403
+Github,ppl,900,6.9b,0.517108455882353
+Github,ppl,0,12b,0.5230635
+Github,ppl,100,12b,0.5325385
+Github,ppl,200,12b,0.5107665
+Github,ppl,300,12b,0.5003435
+Github,ppl,400,12b,0.5178297752808989
+Github,ppl,500,12b,0.5253855799373041
+Github,ppl,600,12b,0.5029147727272727
+Github,ppl,700,12b,0.5367511848341232
+Github,ppl,800,12b,0.515812693498452
+Github,ppl,900,12b,0.5163088235294118
+Github,mink_plus,0,1b,0.5101085000000001
+Github,mink_plus,100,1b,0.5343645
+Github,mink_plus,200,1b,0.5015649999999999
+Github,mink_plus,300,1b,0.501726
+Github,mink_plus,400,1b,0.5172865168539326
+Github,mink_plus,500,1b,0.5150517241379311
+Github,mink_plus,600,1b,0.504438446969697
+Github,mink_plus,700,1b,0.5131706161137441
+Github,mink_plus,800,1b,0.5049102167182662
+Github,mink_plus,900,1b,0.5158658088235295
+Github,mink_plus,0,2.8b,0.5163840000000001
+Github,mink_plus,100,2.8b,0.5335335
+Github,mink_plus,200,2.8b,0.513813
+Github,mink_plus,300,2.8b,0.505432
+Github,mink_plus,400,2.8b,0.5237741573033707
+Github,mink_plus,500,2.8b,0.5305485893416928
+Github,mink_plus,600,2.8b,0.5075246212121212
+Github,mink_plus,700,2.8b,0.5399905213270142
+Github,mink_plus,800,2.8b,0.5090557275541796
+Github,mink_plus,900,2.8b,0.5301764705882352
+Github,mink_plus,0,6.9b,0.5184635
+Github,mink_plus,100,6.9b,0.5439635
+Github,mink_plus,200,6.9b,0.5121024999999999
+Github,mink_plus,300,6.9b,0.512253
+Github,mink_plus,400,6.9b,0.5198247191011236
+Github,mink_plus,500,6.9b,0.5118260188087774
+Github,mink_plus,600,6.9b,0.5027897727272727
+Github,mink_plus,700,6.9b,0.5352215639810427
+Github,mink_plus,800,6.9b,0.508907120743034
+Github,mink_plus,900,6.9b,0.5244154411764705
+Github,mink_plus,0,12b,0.5229545
+Github,mink_plus,100,12b,0.5445595000000001
+Github,mink_plus,200,12b,0.51257
+Github,mink_plus,300,12b,0.514158
+Github,mink_plus,400,12b,0.523247191011236
+Github,mink_plus,500,12b,0.5123714733542319
+Github,mink_plus,600,12b,0.5089564393939393
+Github,mink_plus,700,12b,0.5418187203791469
+Github,mink_plus,800,12b,0.5162879256965944
+Github,mink_plus,900,12b,0.5333713235294117
+Github,zlib,0,1b,0.5096535
+Github,zlib,100,1b,0.5202785
+Github,zlib,200,1b,0.505443
+Github,zlib,300,1b,0.508381
+Github,zlib,400,1b,0.5155275280898877
+Github,zlib,500,1b,0.5177076802507837
+Github,zlib,600,1b,0.5033409090909091
+Github,zlib,700,1b,0.5070047393364929
+Github,zlib,800,1b,0.506173374613003
+Github,zlib,900,1b,0.5432316176470589
+Github,zlib,0,2.8b,0.5132185
+Github,zlib,100,2.8b,0.5223505
+Github,zlib,200,2.8b,0.5102575
+Github,zlib,300,2.8b,0.5117965
+Github,zlib,400,2.8b,0.5192331460674158
+Github,zlib,500,2.8b,0.53457131661442
+Github,zlib,600,2.8b,0.5103437500000001
+Github,zlib,700,2.8b,0.5343317535545024
+Github,zlib,800,2.8b,0.5078188854489164
+Github,zlib,900,2.8b,0.5427426470588235
+Github,zlib,0,6.9b,0.5144219999999999
+Github,zlib,100,6.9b,0.5261724999999999
+Github,zlib,200,6.9b,0.5079429999999999
+Github,zlib,300,6.9b,0.5028505
+Github,zlib,400,6.9b,0.5163162921348314
+Github,zlib,500,6.9b,0.5212735109717868
+Github,zlib,600,6.9b,0.5137679924242424
+Github,zlib,700,6.9b,0.5198009478672986
+Github,zlib,800,6.9b,0.5063792569659442
+Github,zlib,900,6.9b,0.537170955882353
+Github,zlib,0,12b,0.513903
+Github,zlib,100,12b,0.5270415
+Github,zlib,200,12b,0.5070439999999999
+Github,zlib,300,12b,0.502087
+Github,zlib,400,12b,0.5173179775280898
+Github,zlib,500,12b,0.5220736677115988
+Github,zlib,600,12b,0.5155056818181818
+Github,zlib,700,12b,0.5221729857819906
+Github,zlib,800,12b,0.508656346749226
+Github,zlib,900,12b,0.537420955882353
+Github,grad,0,1b,0.5073304999999999
+Github,grad,100,1b,0.5303359999999999
+Github,grad,200,1b,0.5023135
+Github,grad,300,1b,0.5016165
+Github,grad,400,1b,0.5208078651685393
+Github,grad,500,1b,0.5144318181818182
+Github,grad,600,1b,0.519346590909091
+Github,grad,700,1b,0.5203590047393365
+Github,grad,800,1b,0.5342832817337462
+Github,grad,900,1b,0.5101636029411765
+Github,grad,0,2.8b,0.5134789999999999
+Github,grad,100,2.8b,0.5225679999999999
+Github,grad,200,2.8b,0.512974
+Github,grad,300,2.8b,0.508973
+Github,grad,400,2.8b,0.5131629213483146
+Github,grad,500,2.8b,0.5007272727272728
+Github,grad,600,2.8b,0.5157357954545454
+Github,grad,700,2.8b,0.5161729857819906
+Github,grad,800,2.8b,0.5274102167182663
+Github,grad,900,2.8b,0.5478566176470587
+Github,grad,0,6.9b,0.5102420000000001
+Github,grad,100,6.9b,0.531479
+Github,grad,200,6.9b,0.5132945
+Github,grad,300,6.9b,0.508564
+Github,grad,400,6.9b,0.5301938202247191
+Github,grad,500,6.9b,0.5033557993730409
+Github,grad,600,6.9b,0.5056505681818182
+Github,grad,700,6.9b,0.529350710900474
+Github,grad,800,6.9b,0.5342430340557276
+Github,grad,900,6.9b,0.5331783088235293
+Github,grad,0,12b,0.517647
+Github,grad,100,12b,0.5348585
+Github,grad,200,12b,0.5112905000000001
+Github,grad,300,12b,0.5174335
+Github,grad,400,12b,0.5269022471910112
+Github,grad,500,12b,0.5193432601880877
+Github,grad,600,12b,0.5008409090909091
+Github,grad,700,12b,0.5373649289099526
+Github,grad,800,12b,0.5221981424148607
+Github,grad,900,12b,0.5218198529411765
+Github,refer,0,1b,0.5077915
+Github,refer,100,1b,0.5197425
+Github,refer,200,1b,0.510317
+Github,refer,300,1b,0.5007600000000001
+Github,refer,400,1b,0.5096752808988764
+Github,refer,500,1b,0.5178949843260189
+Github,refer,600,1b,0.51734375
+Github,refer,700,1b,0.5162144549763034
+Github,refer,800,1b,0.5085696594427245
+Github,refer,900,1b,0.514610294117647
+Github,refer,0,2.8b,0.5077015
+Github,refer,100,2.8b,0.5197395
+Github,refer,200,2.8b,0.510317
+Github,refer,300,2.8b,0.5007395
+Github,refer,400,2.8b,0.5096752808988764
+Github,refer,500,2.8b,0.5178949843260189
+Github,refer,600,2.8b,0.51734375
+Github,refer,700,2.8b,0.5162144549763034
+Github,refer,800,2.8b,0.5085696594427245
+Github,refer,900,2.8b,0.514610294117647
+Github,refer,0,6.9b,0.507666
+Github,refer,100,6.9b,0.5197240000000001
+Github,refer,200,6.9b,0.5103200000000001
+Github,refer,300,6.9b,0.5005595
+Github,refer,400,6.9b,0.5096752808988764
+Github,refer,500,6.9b,0.5178949843260189
+Github,refer,600,6.9b,0.51734375
+Github,refer,700,6.9b,0.5162890995260663
+Github,refer,800,6.9b,0.5085696594427245
+Github,refer,900,6.9b,0.514610294117647
+Github,refer,0,12b,0.507666
+Github,refer,100,12b,0.5197240000000001
+Github,refer,200,12b,0.5103200000000001
+Github,refer,300,12b,0.5005595
+Github,refer,400,12b,0.5096752808988764
+Github,refer,500,12b,0.5178949843260189
+Github,refer,600,12b,0.51734375
+Github,refer,700,12b,0.5162890995260663
+Github,refer,800,12b,0.5085696594427245
+Github,refer,900,12b,0.514610294117647
+FreeLaw,loss,0,1b,0.5198161337209303
+FreeLaw,loss,100,1b,0.5224935897435898
+FreeLaw,loss,200,1b,0.5552725225225225
+FreeLaw,loss,300,1b,0.5191751592356688
+FreeLaw,loss,400,1b,0.5266529850746269
+FreeLaw,loss,500,1b,0.548271186440678
+FreeLaw,loss,600,1b,0.5067542372881356
+FreeLaw,loss,700,1b,0.5224174757281553
+FreeLaw,loss,800,1b,0.5070238095238095
+FreeLaw,loss,900,1b,0.50806
+FreeLaw,loss,0,2.8b,0.5240036337209303
+FreeLaw,loss,100,2.8b,0.5214572649572649
+FreeLaw,loss,200,2.8b,0.5547004504504505
+FreeLaw,loss,300,2.8b,0.5235127388535032
+FreeLaw,loss,400,2.8b,0.5260858208955224
+FreeLaw,loss,500,2.8b,0.5541822033898305
+FreeLaw,loss,600,2.8b,0.5105042372881357
+FreeLaw,loss,700,2.8b,0.5294223300970873
+FreeLaw,loss,800,2.8b,0.5119095238095238
+FreeLaw,loss,900,2.8b,0.502795
+FreeLaw,loss,0,6.9b,0.5133364825581396
+FreeLaw,loss,100,6.9b,0.5212393162393162
+FreeLaw,loss,200,6.9b,0.5556013513513514
+FreeLaw,loss,300,6.9b,0.516140127388535
+FreeLaw,loss,400,6.9b,0.5303395522388059
+FreeLaw,loss,500,6.9b,0.5528135593220338
+FreeLaw,loss,600,6.9b,0.5126440677966102
+FreeLaw,loss,700,6.9b,0.5247669902912622
+FreeLaw,loss,800,6.9b,0.5176238095238095
+FreeLaw,loss,900,6.9b,0.5016099999999999
+FreeLaw,loss,0,12b,0.5126853197674419
+FreeLaw,loss,100,12b,0.5198504273504273
+FreeLaw,loss,200,12b,0.5566891891891892
+FreeLaw,loss,300,12b,0.5171210191082802
+FreeLaw,loss,400,12b,0.5309589552238806
+FreeLaw,loss,500,12b,0.5544025423728813
+FreeLaw,loss,600,12b,0.512135593220339
+FreeLaw,loss,700,12b,0.5275339805825242
+FreeLaw,loss,800,12b,0.5187095238095238
+FreeLaw,loss,900,12b,0.5038849999999999
+FreeLaw,prob,0,1b,0.5225748546511628
+FreeLaw,prob,100,1b,0.523405982905983
+FreeLaw,prob,200,1b,0.5531756756756756
+FreeLaw,prob,300,1b,0.5150573248407644
+FreeLaw,prob,400,1b,0.5236194029850746
+FreeLaw,prob,500,1b,0.5543050847457627
+FreeLaw,prob,600,1b,0.5057118644067796
+FreeLaw,prob,700,1b,0.5150776699029126
+FreeLaw,prob,800,1b,0.500447619047619
+FreeLaw,prob,900,1b,0.51098
+FreeLaw,prob,0,2.8b,0.525234011627907
+FreeLaw,prob,100,2.8b,0.5197820512820513
+FreeLaw,prob,200,2.8b,0.5551171171171171
+FreeLaw,prob,300,2.8b,0.5190063694267516
+FreeLaw,prob,400,2.8b,0.5204626865671642
+FreeLaw,prob,500,2.8b,0.5613983050847458
+FreeLaw,prob,600,2.8b,0.5092457627118645
+FreeLaw,prob,700,2.8b,0.5280582524271844
+FreeLaw,prob,800,2.8b,0.5118285714285714
+FreeLaw,prob,900,2.8b,0.50047
+FreeLaw,prob,0,6.9b,0.5138161337209303
+FreeLaw,prob,100,6.9b,0.5156410256410257
+FreeLaw,prob,200,6.9b,0.5547837837837838
+FreeLaw,prob,300,6.9b,0.5109044585987261
+FreeLaw,prob,400,6.9b,0.5266119402985076
+FreeLaw,prob,500,6.9b,0.5623559322033899
+FreeLaw,prob,600,6.9b,0.5107881355932202
+FreeLaw,prob,700,6.9b,0.5232135922330097
+FreeLaw,prob,800,6.9b,0.5201809523809524
+FreeLaw,prob,900,6.9b,0.50496
+FreeLaw,prob,0,12b,0.5107260174418604
+FreeLaw,prob,100,12b,0.5142735042735043
+FreeLaw,prob,200,12b,0.5560900900900901
+FreeLaw,prob,300,12b,0.5106624203821657
+FreeLaw,prob,400,12b,0.5296716417910448
+FreeLaw,prob,500,12b,0.563093220338983
+FreeLaw,prob,600,12b,0.510228813559322
+FreeLaw,prob,700,12b,0.529242718446602
+FreeLaw,prob,800,12b,0.5228571428571428
+FreeLaw,prob,900,12b,0.5124
+FreeLaw,ppl,0,1b,0.5198161337209303
+FreeLaw,ppl,100,1b,0.5224935897435898
+FreeLaw,ppl,200,1b,0.5552725225225225
+FreeLaw,ppl,300,1b,0.5191751592356688
+FreeLaw,ppl,400,1b,0.5266529850746269
+FreeLaw,ppl,500,1b,0.548271186440678
+FreeLaw,ppl,600,1b,0.5067542372881356
+FreeLaw,ppl,700,1b,0.5224174757281553
+FreeLaw,ppl,800,1b,0.5070238095238095
+FreeLaw,ppl,900,1b,0.50806
+FreeLaw,ppl,0,2.8b,0.5240036337209303
+FreeLaw,ppl,100,2.8b,0.5214572649572649
+FreeLaw,ppl,200,2.8b,0.5547004504504505
+FreeLaw,ppl,300,2.8b,0.5235127388535032
+FreeLaw,ppl,400,2.8b,0.5260858208955224
+FreeLaw,ppl,500,2.8b,0.5541822033898305
+FreeLaw,ppl,600,2.8b,0.5105042372881357
+FreeLaw,ppl,700,2.8b,0.5294223300970873
+FreeLaw,ppl,800,2.8b,0.5119095238095238
+FreeLaw,ppl,900,2.8b,0.502795
+FreeLaw,ppl,0,6.9b,0.5133364825581396
+FreeLaw,ppl,100,6.9b,0.5212393162393162
+FreeLaw,ppl,200,6.9b,0.5556013513513514
+FreeLaw,ppl,300,6.9b,0.516140127388535
+FreeLaw,ppl,400,6.9b,0.5303395522388059
+FreeLaw,ppl,500,6.9b,0.5528135593220338
+FreeLaw,ppl,600,6.9b,0.5126440677966102
+FreeLaw,ppl,700,6.9b,0.5247669902912622
+FreeLaw,ppl,800,6.9b,0.5176238095238095
+FreeLaw,ppl,900,6.9b,0.5016099999999999
+FreeLaw,ppl,0,12b,0.5126853197674419
+FreeLaw,ppl,100,12b,0.5198504273504273
+FreeLaw,ppl,200,12b,0.5566891891891892
+FreeLaw,ppl,300,12b,0.5171210191082802
+FreeLaw,ppl,400,12b,0.5309589552238806
+FreeLaw,ppl,500,12b,0.5544025423728813
+FreeLaw,ppl,600,12b,0.512135593220339
+FreeLaw,ppl,700,12b,0.5275339805825242
+FreeLaw,ppl,800,12b,0.5187095238095238
+FreeLaw,ppl,900,12b,0.5038849999999999
+FreeLaw,mink_plus,0,1b,0.5149905523255814
+FreeLaw,mink_plus,100,1b,0.5007179487179487
+FreeLaw,mink_plus,200,1b,0.5622747747747747
+FreeLaw,mink_plus,300,1b,0.5126878980891719
+FreeLaw,mink_plus,400,1b,0.5396865671641791
+FreeLaw,mink_plus,500,1b,0.5204152542372882
+FreeLaw,mink_plus,600,1b,0.504864406779661
+FreeLaw,mink_plus,700,1b,0.5138252427184467
+FreeLaw,mink_plus,800,1b,0.5412190476190476
+FreeLaw,mink_plus,900,1b,0.5028
+FreeLaw,mink_plus,0,2.8b,0.5028175872093024
+FreeLaw,mink_plus,100,2.8b,0.5067435897435897
+FreeLaw,mink_plus,200,2.8b,0.5601936936936938
+FreeLaw,mink_plus,300,2.8b,0.5113694267515924
+FreeLaw,mink_plus,400,2.8b,0.5156791044776119
+FreeLaw,mink_plus,500,2.8b,0.5494237288135593
+FreeLaw,mink_plus,600,2.8b,0.5037288135593221
+FreeLaw,mink_plus,700,2.8b,0.5216019417475728
+FreeLaw,mink_plus,800,2.8b,0.5509904761904761
+FreeLaw,mink_plus,900,2.8b,0.50508
+FreeLaw,mink_plus,0,6.9b,0.5018859011627907
+FreeLaw,mink_plus,100,6.9b,0.5066239316239316
+FreeLaw,mink_plus,200,6.9b,0.5590135135135135
+FreeLaw,mink_plus,300,6.9b,0.5136050955414013
+FreeLaw,mink_plus,400,6.9b,0.524776119402985
+FreeLaw,mink_plus,500,6.9b,0.5404152542372882
+FreeLaw,mink_plus,600,6.9b,0.5300254237288136
+FreeLaw,mink_plus,700,6.9b,0.5089029126213592
+FreeLaw,mink_plus,800,6.9b,0.5670380952380952
+FreeLaw,mink_plus,900,6.9b,0.52559
+FreeLaw,mink_plus,0,12b,0.5050719476744187
+FreeLaw,mink_plus,100,12b,0.5052777777777778
+FreeLaw,mink_plus,200,12b,0.5573963963963964
+FreeLaw,mink_plus,300,12b,0.523828025477707
+FreeLaw,mink_plus,400,12b,0.5335970149253731
+FreeLaw,mink_plus,500,12b,0.5382966101694915
+FreeLaw,mink_plus,600,12b,0.5233135593220339
+FreeLaw,mink_plus,700,12b,0.5431844660194175
+FreeLaw,mink_plus,800,12b,0.5623619047619048
+FreeLaw,mink_plus,900,12b,0.55868
+FreeLaw,zlib,0,1b,0.5053604651162791
+FreeLaw,zlib,100,1b,0.5210128205128206
+FreeLaw,zlib,200,1b,0.5560495495495494
+FreeLaw,zlib,300,1b,0.5182643312101911
+FreeLaw,zlib,400,1b,0.5177723880597016
+FreeLaw,zlib,500,1b,0.5424533898305084
+FreeLaw,zlib,600,1b,0.504478813559322
+FreeLaw,zlib,700,1b,0.5298640776699028
+FreeLaw,zlib,800,1b,0.5130047619047619
+FreeLaw,zlib,900,1b,0.51915
+FreeLaw,zlib,0,2.8b,0.5094796511627906
+FreeLaw,zlib,100,2.8b,0.51783547008547
+FreeLaw,zlib,200,2.8b,0.5554076576576576
+FreeLaw,zlib,300,2.8b,0.5219108280254777
+FreeLaw,zlib,400,2.8b,0.5175410447761194
+FreeLaw,zlib,500,2.8b,0.5482584745762713
+FreeLaw,zlib,600,2.8b,0.5078601694915255
+FreeLaw,zlib,700,2.8b,0.538878640776699
+FreeLaw,zlib,800,2.8b,0.5176238095238095
+FreeLaw,zlib,900,2.8b,0.5108900000000001
+FreeLaw,zlib,0,6.9b,0.5039360465116279
+FreeLaw,zlib,100,6.9b,0.518715811965812
+FreeLaw,zlib,200,6.9b,0.5571756756756757
+FreeLaw,zlib,300,6.9b,0.514984076433121
+FreeLaw,zlib,400,6.9b,0.5225074626865672
+FreeLaw,zlib,500,6.9b,0.5481822033898305
+FreeLaw,zlib,600,6.9b,0.5102330508474577
+FreeLaw,zlib,700,6.9b,0.534242718446602
+FreeLaw,zlib,800,6.9b,0.5232952380952381
+FreeLaw,zlib,900,6.9b,0.51047
+FreeLaw,zlib,0,12b,0.5027754360465116
+FreeLaw,zlib,100,12b,0.5173653846153846
+FreeLaw,zlib,200,12b,0.5585923423423423
+FreeLaw,zlib,300,12b,0.5155095541401274
+FreeLaw,zlib,400,12b,0.5230970149253731
+FreeLaw,zlib,500,12b,0.5490677966101696
+FreeLaw,zlib,600,12b,0.5113305084745763
+FreeLaw,zlib,700,12b,0.5381359223300971
+FreeLaw,zlib,800,12b,0.5246142857142857
+FreeLaw,zlib,900,12b,0.503315
+FreeLaw,grad,0,1b,0.5087936046511627
+FreeLaw,grad,100,1b,0.5086089743589743
+FreeLaw,grad,200,1b,0.5494436936936937
+FreeLaw,grad,300,1b,0.5406815286624205
+FreeLaw,grad,400,1b,0.5263992537313433
+FreeLaw,grad,500,1b,0.5208686440677965
+FreeLaw,grad,600,1b,0.5161525423728813
+FreeLaw,grad,700,1b,0.5413592233009709
+FreeLaw,grad,800,1b,0.5437333333333334
+FreeLaw,grad,900,1b,0.5228999999999999
+FreeLaw,grad,0,2.8b,0.5084934593023256
+FreeLaw,grad,100,2.8b,0.5083910256410256
+FreeLaw,grad,200,2.8b,0.5455698198198198
+FreeLaw,grad,300,2.8b,0.5375796178343949
+FreeLaw,grad,400,2.8b,0.526320895522388
+FreeLaw,grad,500,2.8b,0.56725
+FreeLaw,grad,600,2.8b,0.5092923728813559
+FreeLaw,grad,700,2.8b,0.5481650485436893
+FreeLaw,grad,800,2.8b,0.5762285714285714
+FreeLaw,grad,900,2.8b,0.541315
+FreeLaw,grad,0,6.9b,0.500998546511628
+FreeLaw,grad,100,6.9b,0.5105192307692308
+FreeLaw,grad,200,6.9b,0.5395427927927928
+FreeLaw,grad,300,6.9b,0.5128949044585986
+FreeLaw,grad,400,6.9b,0.5317388059701493
+FreeLaw,grad,500,6.9b,0.5729406779661017
+FreeLaw,grad,600,6.9b,0.5210466101694915
+FreeLaw,grad,700,6.9b,0.5505922330097087
+FreeLaw,grad,800,6.9b,0.5576476190476191
+FreeLaw,grad,900,6.9b,0.52845
+FreeLaw,grad,0,12b,0.5020988372093024
+FreeLaw,grad,100,12b,0.5142457264957265
+FreeLaw,grad,200,12b,0.5396238738738739
+FreeLaw,grad,300,12b,0.5054235668789808
+FreeLaw,grad,400,12b,0.508723880597015
+FreeLaw,grad,500,12b,0.5638093220338982
+FreeLaw,grad,600,12b,0.5013389830508475
+FreeLaw,grad,700,12b,0.5085825242718447
+FreeLaw,grad,800,12b,0.5081333333333333
+FreeLaw,grad,900,12b,0.50763
+FreeLaw,refer,0,1b,0.5142361918604652
+FreeLaw,refer,100,1b,0.5281880341880342
+FreeLaw,refer,200,1b,0.5512364864864865
+FreeLaw,refer,300,1b,0.5132070063694267
+FreeLaw,refer,400,1b,0.524384328358209
+FreeLaw,refer,500,1b,0.5482627118644068
+FreeLaw,refer,600,1b,0.5041271186440678
+FreeLaw,refer,700,1b,0.5154757281553398
+FreeLaw,refer,800,1b,0.5005428571428571
+FreeLaw,refer,900,1b,0.513595
+FreeLaw,refer,0,2.8b,0.5143386627906976
+FreeLaw,refer,100,2.8b,0.5281816239316239
+FreeLaw,refer,200,2.8b,0.5512364864864865
+FreeLaw,refer,300,2.8b,0.5131942675159236
+FreeLaw,refer,400,2.8b,0.524384328358209
+FreeLaw,refer,500,2.8b,0.5482627118644068
+FreeLaw,refer,600,2.8b,0.5041271186440678
+FreeLaw,refer,700,2.8b,0.5154757281553398
+FreeLaw,refer,800,2.8b,0.5005428571428571
+FreeLaw,refer,900,2.8b,0.513595
+FreeLaw,refer,0,6.9b,0.5148938953488371
+FreeLaw,refer,100,6.9b,0.5281004273504274
+FreeLaw,refer,200,6.9b,0.5512387387387387
+FreeLaw,refer,300,6.9b,0.5130541401273886
+FreeLaw,refer,400,6.9b,0.524384328358209
+FreeLaw,refer,500,6.9b,0.5482627118644068
+FreeLaw,refer,600,6.9b,0.5041271186440678
+FreeLaw,refer,700,6.9b,0.515111650485437
+FreeLaw,refer,800,6.9b,0.5005428571428571
+FreeLaw,refer,900,6.9b,0.513595
+FreeLaw,refer,0,12b,0.5148938953488371
+FreeLaw,refer,100,12b,0.5281004273504274
+FreeLaw,refer,200,12b,0.5512387387387387
+FreeLaw,refer,300,12b,0.5130541401273886
+FreeLaw,refer,400,12b,0.524384328358209
+FreeLaw,refer,500,12b,0.5482627118644068
+FreeLaw,refer,600,12b,0.5041271186440678
+FreeLaw,refer,700,12b,0.515111650485437
+FreeLaw,refer,800,12b,0.5005428571428571
+FreeLaw,refer,900,12b,0.513595
