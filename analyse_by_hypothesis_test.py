@@ -17,7 +17,7 @@ def ks_hypothesis(dict, dataset_name, split_set = ["train", "valid", "test"]):
             ks_p_value_matrix[idx1][idx2] = p_value
     return ks_statistic_matrix, ks_p_value_matrix#close to zero means the two distributions are similar
 
-
+dataset_idx = 0
 split = "absolute"
 truncated = "truncated"
 if split == "relative":
@@ -42,16 +42,16 @@ for model_size in model_sizes:
             method_list = ["loss", "prob", "ppl", "mink_plus", "zlib", "refer", "grad"]
             for idx, method_name in enumerate(method_list):
                 value_dict = pickle.load(open(
-                    f"mia_dataset_results/{dataset_name}/{split}/{truncated}/{min_len}_{model_size}_{method_name}_dict.pkl",
+                    f"mia_dataset_results_{dataset_idx}/{dataset_name}/{split}/{truncated}/{min_len}_{model_size}_{method_name}_dict.pkl",
                     "rb"))
                 if method_name == "refer":
                     residual_dict = {}
                     residual_dict[dataset_name] = {"member": [], "nonmember": []}
                     loss_dict = pickle.load(open(
-                        f"mia_dataset_results/{dataset_name}/{split}/{truncated}/{min_len}_{model_size}_loss_dict.pkl",
+                        f"mia_dataset_results_{dataset_idx}/{dataset_name}/{split}/{truncated}/{min_len}_{model_size}_loss_dict.pkl",
                         "rb"))
                     refer_dict = pickle.load(open(
-                        f"mia_dataset_results/{dataset_name}/{split}/{truncated}/{min_len}_{model_size}_refer_dict.pkl",
+                        f"mia_dataset_results_{dataset_idx}/{dataset_name}/{split}/{truncated}/{min_len}_{model_size}_refer_dict.pkl",
                         "rb"))
                     for member in member_set:
                         residual_dict[dataset_name][member] = [
@@ -68,7 +68,6 @@ for model_size in model_sizes:
 
 shared_datasets =['FreeLaw', 'Github', 'Pile-CC', 'StackExchange', 'Wikipedia (en)']
 method_list = ["loss", "prob", "ppl", "mink_plus", "zlib", "refer", "grad"]
-model_sizes = ["410m", "1b", "2.8b", "6.9b"]
 for method_name in method_list:
     for model_size in model_sizes:
         count = 0
@@ -83,16 +82,16 @@ for method_name in method_list:
             for min_len in length_list:
                 for dataset_name in shared_datasets:
                     value_dict = pickle.load(open(
-                        f"mia_dataset_results/{dataset_name}/{split}/{truncated}/{min_len}_{model_size}_{method_name}_dict.pkl",
+                        f"mia_dataset_results_{dataset_idx}/{dataset_name}/{split}/{truncated}/{min_len}_{model_size}_{method_name}_dict.pkl",
                         "rb"))
                     if method_name == "refer":
                         residual_dict = {}
                         residual_dict[dataset_name] = {"member": [], "nonmember": []}
                         loss_dict = pickle.load(open(
-                            f"mia_dataset_results/{dataset_name}/{split}/{truncated}/{min_len}_{model_size}_loss_dict.pkl",
+                            f"mia_dataset_results_{dataset_idx}/{dataset_name}/{split}/{truncated}/{min_len}_{model_size}_loss_dict.pkl",
                             "rb"))
                         refer_dict = pickle.load(open(
-                            f"mia_dataset_results/{dataset_name}/{split}/{truncated}/{min_len}_{model_size}_refer_dict.pkl",
+                            f"mia_dataset_results_{dataset_idx}/{dataset_name}/{split}/{truncated}/{min_len}_{model_size}_refer_dict.pkl",
                             "rb"))
                         for member in member_set:
                             residual_dict[dataset_name][member] = [
@@ -111,7 +110,6 @@ for method_name in method_list:
 
 shared_datasets =['FreeLaw', 'Github', 'Pile-CC', 'StackExchange', 'Wikipedia (en)']
 method_list = ["loss", "prob", "ppl", "mink_plus", "zlib", "refer", "grad"]
-model_sizes = ["410m", "1b", "2.8b", "6.9b"]
 for temp in [["relative", "truncated"], ["absolute", "truncated"], ["absolute", "untruncated"]]:
     split = temp[0]
     truncated = temp[1]
@@ -128,16 +126,16 @@ for temp in [["relative", "truncated"], ["absolute", "truncated"], ["absolute", 
             for method_name in method_list:
                 for dataset_name in shared_datasets:
                     value_dict = pickle.load(open(
-                        f"mia_dataset_results/{dataset_name}/{split}/{truncated}/{min_len}_{model_size}_{method_name}_dict.pkl",
+                        f"mia_dataset_results_{dataset_idx}/{dataset_name}/{split}/{truncated}/{min_len}_{model_size}_{method_name}_dict.pkl",
                         "rb"))
                     if method_name == "refer":
                         residual_dict = {}
                         residual_dict[dataset_name] = {"member": [], "nonmember": []}
                         loss_dict = pickle.load(open(
-                            f"mia_dataset_results/{dataset_name}/{split}/{truncated}/{min_len}_{model_size}_loss_dict.pkl",
+                            f"mia_dataset_results_{dataset_idx}/{dataset_name}/{split}/{truncated}/{min_len}_{model_size}_loss_dict.pkl",
                             "rb"))
                         refer_dict = pickle.load(open(
-                            f"mia_dataset_results/{dataset_name}/{split}/{truncated}/{min_len}_{model_size}_refer_dict.pkl",
+                            f"mia_dataset_results_{dataset_idx}/{dataset_name}/{split}/{truncated}/{min_len}_{model_size}_refer_dict.pkl",
                             "rb"))
                         for member in member_set:
                             residual_dict[dataset_name][member] = [

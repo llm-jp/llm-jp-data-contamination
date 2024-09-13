@@ -93,12 +93,7 @@ def plot_pdf_comparison_shared_model_size(datasets, model_sizes, title, bins=30,
         total_data = np.concatenate(data_by_method)
         mean_auc = total_data.mean()
         std_auc = total_data.std()
-
-        if show_hist:
-            sns.histplot(total_data, bins=bins, kde=True, label=f"{model_size}", color=color, stat='density',
-                         element='step', linewidth=1.5)
-        else:
-            sns.kdeplot(total_data, label=f"{model_size}", color=color, linewidth=2, alpha=0.7)
+        sns.kdeplot(total_data, label=f"{model_size}", color=color, linewidth=2, alpha=0.7)
 
         # 绘制均值的竖直线
         plt.axvline(mean_auc, color=color, linestyle='-', linewidth=1.5, alpha=0.7)
@@ -263,7 +258,7 @@ def plot_pdf_comparison(datasets, dataset_name, feature, title, bins=30, xmin=0.
     plt.show()
 
 
-def plot_pdf_comparison_all_methods(datasets, features, title, bins=30, xmin=0.5, xmax=1.0, show_hist=False):
+def plot_pdf_comparison_by_specified_feature(datasets, features, title, bins=30, xmin=0.5, xmax=1.0, compare_target="model_size"):
     """ 对比不同方法在所有特征上的概率密度函数 并绘制均值和方差区域 """
     plt.figure(figsize=(14, 10))
     sns.set_palette("Set2")
@@ -277,7 +272,7 @@ def plot_pdf_comparison_all_methods(datasets, features, title, bins=30, xmin=0.5
 
         # 对每个数据集（方法）进行操作
         for df in datasets:
-            df_filtered = df[df['feature'] == model_size]
+            df_filtered = df[df[compare_target] == model_size]
 
             # 获取属于特定模型大小的所有种子
             seeds = df_filtered['seed'].unique()
@@ -319,113 +314,6 @@ def plot_pdf_comparison_all_methods(datasets, features, title, bins=30, xmin=0.5
     plt.tight_layout(rect=[0, 0, 0.85, 1])
     plt.show()
 
-
-def plot_pdf_comparison_shared_datasets(datasets, dataset_labels, title, bins=30, xmin=0.5, xmax=1.0, show_hist=False):
-    """ 对比不同方法在共有数据集上的概率密度函数 并绘制均值和方差区域 """
-    plt.figure(figsize=(14, 10))
-    sns.set_palette("Set2")
-    colors = sns.color_palette("Set2", len(dataset_labels))
-
-    for j, dataset_name in enumerate(dataset_labels):
-        color = colors[j % len(colors)]
-
-        data_by_method = []
-
-        for df in datasets:
-            df_filtered = df[df['dataset'] == dataset_name]
-
-            # 获取属于特定数据集的所有种子
-            data_by_seed = [df_filtered[df_filtered['seed'] == seed]['auc'] for seed in df_filtered['seed'].unique()]
-
-            # 将所有种子的 AUC 数据汇总
-            all_data = np.concatenate(data_by_seed)
-            data_by_method.append(all_data)
-
-        # 合并所有方法的 AUC 数据，计算总的均值和方差
-        total_data = np.concatenate(data_by_method)
-        mean_auc = total_data.mean()
-        std_auc = total_data.std()
-
-        # 计算密度估计
-        x_vals = np.linspace(xmin, xmax, 500)
-        all_interp_ys = np.array([np.interp(x_vals, *sns.kdeplot(data, color=color, alpha=0.1, linewidth=0).get_lines()[
-            -1].get_data(), left=0, right=0) for data in data_by_method])
-        mean_y = all_interp_ys.mean(axis=0)
-        std_y = all_interp_ys.std(axis=0)
-
-        # 绘制总体的PDF均值
-        sns.lineplot(x=x_vals, y=mean_y, color=color, label=f"{dataset_name}", linewidth=2)
-
-        # 使用填充区域展示均值 ± 方差
-        plt.fill_between(x_vals, mean_y - std_y, mean_y + std_y, color=color, alpha=0.2)
-
-    plt.title(title, fontsize=20, weight='bold')
-    plt.xlabel("AUC", fontsize=16, weight='bold')
-    plt.ylabel("Density", fontsize=16, weight='bold')
-    plt.xticks(fontsize=14)
-    plt.yticks(fontsize=14)
-    plt.xlim(xmin, xmax)
-    plt.ylim(0, None)
-    plt.legend(title='Dataset', fontsize=12, title_fontsize='13', loc='center left', bbox_to_anchor=(1, 0.5))
-    plt.grid(True, linestyle='--', alpha=0.7)
-    plt.tight_layout(rect=[0, 0, 0.85, 1])
-    plt.show()
-
-def plot_pdf_comparison_shared_model_size(datasets, model_sizes, title, bins=30, xmin=0.5, xmax=1.0, show_hist=False):
-    """ 对比不同方法在共有模型大小上的概率密度函数，并展示均值和方差区域 """
-    plt.figure(figsize=(14, 10))
-    sns.set_palette("Set2")
-    method_labels = ["Truncated", "Relative", "Untruncated"]
-    colors = sns.color_palette("Set2", len(model_sizes))
-
-    for j, model_size in enumerate(model_sizes):
-        color = colors[j % len(colors)]
-
-        all_kde_data = []
-
-        # 对每个数据集（方法）进行操作
-        for df in datasets:
-            df_filtered = df[df['model_size'] == model_size]
-
-            # 获取属于特定模型大小的所有种子
-            seeds = df_filtered['seed'].unique()
-
-            for seed in seeds:
-                seed_filtered = df_filtered[df_filtered['seed'] == seed]
-                data = seed_filtered['auc']
-
-                # 绘制单个种子的PDF曲线，但设置透明度低一点
-                kde = sns.kdeplot(data, color=color, alpha=0.1, linewidth=0.5)
-                kde_data = kde.get_lines()[-1].get_data()
-                all_kde_data.append(kde_data)
-
-        # 准备x_vals
-        x_vals = np.linspace(xmin, xmax, 500)
-
-        # 将所有的kde_data进行插值到相同的x坐标上
-        all_interp_ys = np.array([np.interp(x_vals, kde_x, kde_y, left=0, right=0) for kde_x, kde_y in all_kde_data])
-
-        # 计算均值和标准差
-        mean_y = all_interp_ys.mean(axis=0)
-        std_y = all_interp_ys.std(axis=0)
-
-        # 绘制总体的PDF均值
-        sns.lineplot(x=x_vals, y=mean_y, color=color, label=f"{model_size}", linewidth=2)
-
-        # 使用填充区域展示均值 ± 方差
-        plt.fill_between(x_vals, mean_y - std_y, mean_y + std_y, color=color, alpha=0.2)
-
-    plt.title(title, fontsize=20, weight='bold')
-    plt.xlabel("AUC", fontsize=16, weight='bold')
-    plt.ylabel("Density", fontsize=16, weight='bold')
-    plt.xticks(fontsize=14)
-    plt.yticks(fontsize=14)
-    plt.xlim(xmin, xmax)
-    plt.ylim(0, None)
-    plt.legend(title='Model Size', fontsize=12, title_fontsize='13', loc='center left', bbox_to_anchor=(1, 0.5))
-    plt.grid(True, linestyle='--', alpha=0.7)
-    plt.tight_layout(rect=[0, 0, 0.85, 1])
-    plt.show()
 
 def plot_cdf(data, label, title, bins=30, xmin=0.5, xmax=1.0):
     """
@@ -510,19 +398,16 @@ plot_pdf_comparison(datasets, "Wikipedia (en)", "loss",
                     xmax=0.6, show_hist=False)
 
 # 对比不同方法在所有特征上的概率密度函数，并展示均值和方差
-plot_pdf_comparison_all_methods(datasets, truncated_results["feature"].unique(),
+plot_pdf_comparison_by_specified_feature(datasets, truncated_results["feature"].unique(),
                                 "Probability Density Function Comparison of Different Methods", bins=30, xmin=0.5,
-                                xmax=0.6, show_hist=False)
+                                xmax=0.6, compare_target="feature")
 
-# 对比不同方法在共有数据集上的概率密度函数，并展示均值和方差
-plot_pdf_comparison_shared_datasets(datasets, shared_datasets,
-                                    "Probability Density Function Comparison of Shared Datasets", bins=30, xmin=0.5,
-                                    xmax=0.6, show_hist=False)
-
-# 对比不同方法在共有模型大小上的概率密度函数，并展示均值和方差
-plot_pdf_comparison_shared_model_size(datasets, shared_model_sizes,
-                                      "Probability Density Function Comparison of Shared Model Sizes", bins=30,
-                                      xmin=0.5, xmax=0.6, show_hist=False)
+plot_pdf_comparison_by_specified_feature(datasets, shared_datasets,
+                                "Probability Density Function Comparison of Different Methods", bins=30, xmin=0.5,
+                                xmax=0.6, compare_target="dataset")
+plot_pdf_comparison_by_specified_feature(datasets, truncated_results["model_size"].unique(),
+                                "Probability Density Function Comparison of Different Methods", bins=30, xmin=0.5,
+                                xmax=0.6, compare_target="model_size")
 
 # 绘制特定数据集的CDF
 #plot_cdf(truncated_results[truncated_results["dataset"] == "Wikipedia (en)"]["auc"], "Truncated Wikipedia (en)",
