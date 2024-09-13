@@ -9,30 +9,15 @@ def compute_gray_box_method(args):
     #     bnb_8bit_use_double_quant=True,  # 使用双重量化技术
     #     bnb_8bit_compute_dtype=torch.float16  # 计算过程中使用float16
     # )
-    if args.model_size == "12b" or args.model_size == "6.9b":
-    #     device_map = {
-    #     "transformer.word_embeddings": args.cuda,
-    #     "transformer.word_embeddings_layernorm": args.cuda,
-    #     "lm_head": "cpu",
-    #     "transformer.h": args.cuda,
-    #     "transformer.ln_f": args.cuda,
-    # }
-        model = GPTNeoXForCausalLM.from_pretrained(
-          f"EleutherAI/pythia-{args.model_size}-deduped",
-          revision="step143000",
-          cache_dir=f"./pythia-{args.model_size}-deduped/step143000",
-          torch_dtype=torch.bfloat16,
-          #load_in_8bit=True,
-          device_map=args.cuda
-          #quantization_config=bnb_config,
-        ).eval()#.to(args.cuda)
-    else:
-        model = GPTNeoXForCausalLM.from_pretrained(
-          f"EleutherAI/pythia-{args.model_size}-deduped",
-          revision="step143000",
-          cache_dir=f"./pythia-{args.model_size}-deduped/step143000",
-          torch_dtype=torch.bfloat16
-        ).cuda(args.cuda).eval()
+    model = GPTNeoXForCausalLM.from_pretrained(
+      f"EleutherAI/pythia-{args.model_size}-deduped",
+      revision="step143000",
+      cache_dir=f"./pythia-{args.model_size}-deduped/step143000",
+      torch_dtype=torch.bfloat16,
+      #load_in_8bit=True,
+      device_map=args.cuda
+      #quantization_config=bnb_config,
+    ).eval()#.to(args.cuda)
     model = model.to_bettertransformer()
     tokenizer = AutoTokenizer.from_pretrained(
       f"EleutherAI/pythia-{args.model_size}-deduped",
