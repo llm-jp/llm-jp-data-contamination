@@ -1,7 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
-
+import numpy as np
 # 加载数据
 truncated_results = pd.read_csv("auc_results_absolute_truncated_all_length_all_model_size.csv")
 relative_results = pd.read_csv("auc_results_relative_truncated_all_length_all_model_size.csv")
@@ -104,19 +104,25 @@ def plot_pdf_comparison(datasets, dataset_name, feature, title, bins=30, xmin=0.
     plt.show()
 
 def plot_pdf_comparison_all_methods(datasets, dataset_labels, title, bins=30, xmin=0.5, xmax=1.0, show_hist=False):
-    """ 对比不同数据框（方法）的总体概率密度函数 """
+    """ 对比不同数据框（方法）的共有数据集概率密度函数 """
     plt.figure(figsize=(14, 10))
     sns.set_palette("Set2")
-    for i, (df, label) in enumerate(zip(datasets, dataset_labels)):
+
+    for dataset_name in dataset_labels:
         total_auc = pd.Series(dtype='float64')
-        common_datasets = set(df['dataset'].unique()).intersection(set(datasets[0]['dataset'].unique()), set(datasets[1]['dataset'].unique()))
-        for dataset_name in common_datasets:
-            df_filtered = df[df['dataset'] == dataset_name]
+
+        for df in datasets:
+            df_filtered = df[df['feature'] == dataset_name]
             total_auc = total_auc.append(df_filtered['auc'])
-        kde = sns.kdeplot(total_auc, label=label, linewidth=2, alpha=0.7 if show_hist else 1.0)
-        if not show_hist:
-            x, y = kde.get_lines()[-1].get_data()
-            plt.fill_between(x, 0, y, alpha=0.2)
+
+        if show_hist:
+            sns.histplot(total_auc, bins=bins, kde=True, label=dataset_name, stat='density', element='step', linewidth=1.5)
+        else:
+            kde = sns.kdeplot(total_auc, label=dataset_name, linewidth=2, alpha=0.7 if show_hist else 1.0)
+            if not show_hist:
+                x, y = kde.get_lines()[-1].get_data()
+                plt.fill_between(x, 0, y, alpha=0.2)
+
     plt.title(title, fontsize=20, weight='bold')
     plt.xlabel("AUC", fontsize=16, weight='bold')
     plt.ylabel("Density", fontsize=16, weight='bold')
@@ -129,7 +135,161 @@ def plot_pdf_comparison_all_methods(datasets, dataset_labels, title, bins=30, xm
     plt.tight_layout(rect=[0, 0, 0.85, 1])
     plt.show()
 
+
+def plot_cdf(data, label, title, bins=30, xmin=0.5, xmax=1.0):
+    """ 将数据按照CDF绘制 """
+    plt.figure(figsize=(12, 8))
+    hist, bin_edges = np.histogram(data, bins=bins, density=True)
+    cdf = np.cumsum(hist * np.diff(bin_edges))
+    sns.lineplot(x=bin_edges[1:], y=cdf, label=label)
+
+    plt.title(title, fontsize=20, weight='bold')
+    plt.xlabel("AUC", fontsize=16, weight='bold')
+    plt.ylabel("CDF", fontsize=16, weight='bold')
+    plt.xticks(fontsize=14)
+    plt.yticks(fontsize=14)
+    plt.xlim(xmin, xmax)
+    plt.ylim(0, 1)
+    plt.legend(title='Dataset Type', fontsize=12, title_fontsize='13', loc='best')
+    plt.grid(True, linestyle='--', alpha=0.7)
+    plt.tight_layout()
+    plt.show()
+
+
+def plot_cdfs(datasets, dataset_labels, title, bins=30, xmin=0.5, xmax=1.0):
+    """ 对比多个数据集的CDF """
+    plt.figure(figsize=(14, 10))
+    sns.set_palette("Set2")
+
+    for i, (df, label) in enumerate(zip(datasets, dataset_labels)):
+        total_auc = pd.Series(dtype='float64')
+        common_datasets = set(df['dataset'].unique()).intersection(set(datasets[0]['dataset'].unique()),
+                                                                   set(datasets[1]['dataset'].unique()))
+
+        for dataset_name in common_datasets:
+            df_filtered = df[df['dataset'] == dataset_name]
+            total_auc = total_auc.append(df_filtered['auc'])
+
+        hist, bin_edges = np.histogram(total_auc, bins=bins, density=True)
+        cdf = np.cumsum(hist * np.diff(bin_edges))
+        sns.lineplot(x=bin_edges[1:], y=cdf, label=label)
+
+    plt.title(title, fontsize=20, weight='bold')
+    plt.xlabel("AUC", fontsize=16, weight='bold')
+    plt.ylabel("CDF", fontsize=16, weight='bold')
+    plt.xticks(fontsize=14)
+    plt.yticks(fontsize=14)
+    plt.xlim(xmin, xmax)
+    plt.ylim(0, 1)
+    plt.legend(title='Method', fontsize=12, title_fontsize='13', loc='best')
+    plt.grid(True, linestyle='--', alpha=0.7)
+    plt.tight_layout()
+    plt.show()
 # 使用绘图函数
+def plot_pdf_comparison_shared_datasets(datasets, dataset_labels, title, bins=30, xmin=0.5, xmax=1.0, show_hist=False):
+    """ 对比不同数据框（方法）的共有数据集概率密度函数 """
+    plt.figure(figsize=(14, 10))
+    sns.set_palette("Set2")
+
+    for dataset_name in dataset_labels:
+        total_auc = pd.Series(dtype='float64')
+
+        for df in datasets:
+            df_filtered = df[df['dataset'] == dataset_name]
+            total_auc = total_auc.append(df_filtered['auc'])
+
+        if show_hist:
+            sns.histplot(total_auc, bins=bins, kde=True, label=dataset_name, stat='density', element='step', linewidth=1.5)
+        else:
+            kde = sns.kdeplot(total_auc, label=dataset_name, linewidth=2, alpha=0.7 if show_hist else 1.0)
+            if not show_hist:
+                x, y = kde.get_lines()[-1].get_data()
+                plt.fill_between(x, 0, y, alpha=0.2)
+
+    plt.title(title, fontsize=20, weight='bold')
+    plt.xlabel("AUC", fontsize=16, weight='bold')
+    plt.ylabel("Density", fontsize=16, weight='bold')
+    plt.xticks(fontsize=14)
+    plt.yticks(fontsize=14)
+    plt.xlim(xmin, xmax)
+    plt.ylim(0, None)
+    plt.legend(title='Method', fontsize=12, title_fontsize='13', loc='center left', bbox_to_anchor=(1, 0.5))
+    plt.grid(True, linestyle='--', alpha=0.7)
+    plt.tight_layout(rect=[0, 0, 0.85, 1])
+    plt.show()
+
+def plot_pdf_comparison_shared_model_size(datasets, dataset_labels, title, bins=30, xmin=0.5, xmax=1.0, show_hist=False):
+    """ 对比不同数据框（方法）的共有数据集概率密度函数 """
+    plt.figure(figsize=(14, 10))
+    sns.set_palette("Set2")
+
+    for dataset_name in dataset_labels:
+        total_auc = pd.Series(dtype='float64')
+
+        for df in datasets:
+            df_filtered = df[df['model_size'] == dataset_name]
+            total_auc = total_auc.append(df_filtered['auc'])
+
+        if show_hist:
+            sns.histplot(total_auc, bins=bins, kde=True, label=dataset_name, stat='density', element='step', linewidth=1.5)
+        else:
+            kde = sns.kdeplot(total_auc, label=dataset_name, linewidth=2, alpha=0.7 if show_hist else 1.0)
+            if not show_hist:
+                x, y = kde.get_lines()[-1].get_data()
+                plt.fill_between(x, 0, y, alpha=0.2)
+
+    plt.title(title, fontsize=20, weight='bold')
+    plt.xlabel("AUC", fontsize=16, weight='bold')
+    plt.ylabel("Density", fontsize=16, weight='bold')
+    plt.xticks(fontsize=14)
+    plt.yticks(fontsize=14)
+    plt.xlim(xmin, xmax)
+    plt.ylim(0, None)
+    plt.legend(title='Model Size', fontsize=12, title_fontsize='13', loc='center left', bbox_to_anchor=(1, 0.5))
+    plt.grid(True, linestyle='--', alpha=0.7)
+    plt.tight_layout(rect=[0, 0, 0.85, 1])
+    plt.show()
+
+def plot_pdf_comparison_by_length(datasets, dataset_labels, title, bins=30, xmin=0.5, xmax=1.0, length_values=None,
+                                  show_hist=False):
+    """ 对比不同数据框（方法）的长度概率密度函数 """
+    plt.figure(figsize=(14, 10))
+    sns.set_palette("Set2")
+
+    for i, (df, label) in enumerate(zip(datasets, dataset_labels)):
+        total_auc = pd.Series(dtype='float64')
+
+        if length_values is None:
+            lengths = df['length'].unique()
+        else:
+            lengths = length_values
+
+        for length in lengths:
+            df_filtered = df[df['length'] == length]
+            total_auc = total_auc.append(df_filtered['auc'])
+
+        if show_hist:
+            sns.histplot(total_auc, bins=bins, kde=True, label=f"{label} (length {length})", stat='density',
+                         element='step', linewidth=1.5)
+        else:
+            kde = sns.kdeplot(total_auc, label=f"{label} (length {length})", linewidth=2,
+                              alpha=0.7 if show_hist else 1.0)
+            if not show_hist:
+                x, y = kde.get_lines()[-1].get_data()
+                plt.fill_between(x, 0, y, alpha=0.2)
+
+    plt.title(title, fontsize=20, weight='bold')
+    plt.xlabel("AUC", fontsize=16, weight='bold')
+    plt.ylabel("Density", fontsize=16, weight='bold')
+    plt.xticks(fontsize=14)
+    plt.yticks(fontsize=14)
+    plt.xlim(xmin, xmax)
+    plt.ylim(0, None)
+    plt.legend(title='Method and Length', fontsize=12, title_fontsize='13', loc='center left', bbox_to_anchor=(1, 0.5))
+    plt.grid(True, linestyle='--', alpha=0.7)
+    plt.tight_layout(rect=[0, 0, 0.85, 1])
+    plt.show()
+
 datasets = [truncated_results, relative_results, untruncated_results]
 dataset_labels = ["Truncated", "Relative", "Untruncated"]
 shared_datasets = set(relative_results['dataset'].unique()) & set(truncated_results['dataset'].unique()) & set(untruncated_results['dataset'].unique())
@@ -150,4 +310,14 @@ plot_hist_by_category(truncated_results, "dataset", "Probability Density Functio
 plot_hist_by_category(untruncated_results, "dataset", "Probability Density Function of AUC for All Model Sizes", bins=30, xmin=0.5, xmax=0.6, show_hist=False)
 
 plot_pdf_comparison(datasets, "Wikipedia (en)", "loss", "Probability Density Function Comparison", bins=30, xmin=0.5, xmax=0.6, show_hist=False)
-plot_pdf_comparison_all_methods(datasets, dataset_labels, "Probability Density Function Comparison of Different Methods", bins=30, xmin=0.5, xmax=0.6, show_hist=False)
+plot_pdf_comparison_all_methods(datasets, truncated_results["feature"].unique(), "Probability Density Function Comparison of Different Methods", bins=30, xmin=0.5, xmax=0.6, show_hist=False)
+plot_pdf_comparison_shared_datasets(datasets, shared_datasets, "Probability Density Function Comparison of Shared Datasets", bins=30, xmin=0.5, xmax=0.6, show_hist=False)
+plot_pdf_comparison_shared_model_size(datasets, truncated_results["model_size"].unique(), "Probability Density Function Comparison of Shared Datasets", bins=30, xmin=0.5, xmax=0.6, show_hist=False)
+
+
+plot_cdf(truncated_results[truncated_results["dataset"] == "Wikipedia (en)"]["auc"],
+         "Truncated Wikipedia (en)",
+         "CDF of Wikipedia (en) AUC for Truncated")
+
+# 对比不同数据集的CDF
+plot_cdfs(datasets, dataset_labels, "CDF Comparison of Different Methods", bins=30, xmin=0.5, xmax=0.6)
