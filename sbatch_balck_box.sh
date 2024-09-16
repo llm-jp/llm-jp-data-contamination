@@ -4,9 +4,8 @@
 #SBATCH --gres=gpu:8
 #SBATCH --nodes=1
 #SBATCH --ntasks=8
-#SBATCH --time=72:00:00
-#SBATCH --output=UntrBlack0.log
-#SBATCH --error=UntrBlack0.err
+#SBATCH --output=UntrBlack1.log
+#SBATCH --error=UntrBlack1.err
 #SBATCH --cpus-per-task=8
 
 # 创建日志目录
@@ -50,13 +49,13 @@ srun_parallel () {
 #srun --ntasks=1 --cpus-per-task=8 --gres=gpu:1 bash -c "$(declare -f srun_parallel); srun_parallel relative 12b truncated 0 2 16" &
 #srun --ntasks=1 --cpus-per-task=8 --gres=gpu:1 bash -c "$(declare -f srun_parallel); srun_parallel relative 6.9b truncated 0 2 16" &
 
-srun --ntasks=1 --cpus-per-task=8 --gres=gpu:1 bash -c "$(declare -f srun_parallel); srun_parallel absolute 12b untruncated 0 0 8" &
-srun --ntasks=1 --cpus-per-task=8 --gres=gpu:1 bash -c "$(declare -f srun_parallel); srun_parallel absolute 6.9b untruncated 0 0 8" &
-srun --ntasks=1 --cpus-per-task=8 --gres=gpu:1 bash -c "$(declare -f srun_parallel); srun_parallel absolute 2.8b  untruncated 0 0 8" &
-srun --ntasks=1 --cpus-per-task=8 --gres=gpu:1 bash -c "$(declare -f srun_parallel); srun_parallel absolute 1b untruncated 0 0 16" &
-srun --ntasks=1 --cpus-per-task=8 --gres=gpu:1 bash -c "$(declare -f srun_parallel); srun_parallel absolute 410m untruncated 0 0 16" &
-srun --ntasks=1 --cpus-per-task=8 --gres=gpu:1 bash -c "$(declare -f srun_parallel); srun_parallel absolute 160m untruncated 0 0 16" &
-srun --ntasks=1 --cpus-per-task=8 --gres=gpu:1 bash -c "$(declare -f srun_parallel); srun_parallel relative 2.8b truncated 0 0 16" &
-srun --ntasks=1 --cpus-per-task=8 --gres=gpu:1 bash -c "$(declare -f srun_parallel); srun_parallel relative 1b truncated 0 0 16" &
+srun --ntasks=1 --cpus-per-task=8 --gres=gpu:1 bash -c "$(declare -f srun_parallel); srun_parallel absolute 12b untruncated 0 1 8" &
+srun --ntasks=1 --cpus-per-task=8 --gres=gpu:1 bash -c "$(declare -f srun_parallel); srun_parallel absolute 6.9b untruncated 0 1 8" &
+srun --ntasks=1 --cpus-per-task=8 --gres=gpu:1 bash -c "$(declare -f srun_parallel); srun_parallel absolute 2.8b  untruncated 0 1 8" &
+srun --ntasks=1 --cpus-per-task=8 --gres=gpu:1 bash -c "$(declare -f srun_parallel); srun_parallel absolute 1b untruncated 0 1 16" &
+srun --ntasks=1 --cpus-per-task=8 --gres=gpu:1 bash -c "$(declare -f srun_parallel); srun_parallel absolute 410m untruncated 0 1 16" &
+srun --ntasks=1 --cpus-per-task=8 --gres=gpu:1 bash -c "$(declare -f srun_parallel); srun_parallel absolute 160m untruncated 0 1 16" &
+srun --ntasks=1 --cpus-per-task=8 --gres=gpu:1 bash -c "$(declare -f srun_parallel); srun_parallel relative 2.8b truncated 0 1 16" &
+srun --ntasks=1 --cpus-per-task=8 --gres=gpu:1 bash -c "$(declare -f srun_parallel); srun_parallel relative 1b truncated 0 1 16" &
 # 等待所有任务结束
 wait
