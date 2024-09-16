@@ -1,12 +1,12 @@
 #!/bin/bash
-#SBATCH --job-name=33_ContBl
+#SBATCH --job-name=33_ContUB
 #SBATCH --partition=gpu-small
 #SBATCH --gres=gpu:8
 #SBATCH --nodes=1
 #SBATCH --ntasks=8
 #SBATCH --time=72:00:00
-#SBATCH --output=Black1.log
-#SBATCH --error=Black1.err
+#SBATCH --output=UntrBlack0.log
+#SBATCH --error=UntrBlack0.err
 #SBATCH --cpus-per-task=8
 
 # 创建日志目录
