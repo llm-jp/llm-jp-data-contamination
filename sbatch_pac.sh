@@ -5,8 +5,8 @@
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --time=72:00:00
-#SBATCH --output=pac160m.log
-#SBATCH --error=pac160m.err
+#SBATCH --output=pac410m.log
+#SBATCH --error=pac410m.err
 #SBATCH --cpus-per-task=8
 
 
@@ -40,10 +40,10 @@ srun_parallel () {
 }
 
 # 启动并行任务
-srun --ntasks=1 --cpus-per-task=8 --gres=gpu:8 bash -c "$(declare -f srun_parallel); srun_parallel relative 160m truncated 0 0 32" &
+srun --ntasks=1 --cpus-per-task=8 --gres=gpu:8 bash -c "$(declare -f srun_parallel); srun_parallel relative 410m truncated 0 0 32" &
 #srun --ntasks=1 --cpus-per-task=8 --gres=gpu:2 bash -c "$(declare -f srun_parallel); srun_parallel relative 410m truncated 0 1 0 2" &
 #srun --ntasks=1 --cpus-per-task=8 --gres=gpu:2 bash -c "$(declare -f srun_parallel); srun_parallel relative 2.8b  truncated 0 1 0 2" &
-#srun --ntasks=1 --cpus-per-task=8 --gres=gpu:2 bash -c "$(declare -f srun_parallel); srun_parallel relative 160m truncated 0 1 0 2" &
+#srun --ntasks=1 --cpus-per-task=8 --gres=gpu:2 bash -c "$(declare -f srun_parallel); srun_parallel relative 410m truncated 0 1 0 2" &
 
 # 等待所有任务结束
 wait
