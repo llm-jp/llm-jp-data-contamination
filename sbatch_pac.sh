@@ -5,10 +5,10 @@
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --time=72:00:00
-#SBATCH --output=pac410m.log
-#SBATCH --error=pac410m.err
+#SBATCH --output=pac2.8b.log
+#SBATCH --error=pac2.8b.err
 #SBATCH --cpus-per-task=8
-#SBATCH --mem=100G
+#SBATCH --mem=150G
 
 
 # 创建日志目录
@@ -41,7 +41,7 @@ srun_parallel () {
 }
 
 # 启动并行任务
-srun --ntasks=1 --cpus-per-task=8 --gres=gpu:1 bash -c "$(declare -f srun_parallel); srun_parallel relative 410m truncated 0 0 8" &
+srun --ntasks=1 --cpus-per-task=8 --gres=gpu:1 bash -c "$(declare -f srun_parallel); srun_parallel relative 2.8b truncated 0 0 4" &
 #srun --ntasks=1 --cpus-per-task=8 --gres=gpu:2 bash -c "$(declare -f srun_parallel); srun_parallel relative 12b truncated 0 1 0 2" &
 #srun --ntasks=1 --cpus-per-task=8 --gres=gpu:2 bash -c "$(declare -f srun_parallel); srun_parallel relative 12b  truncated 0 1 0 2" &
 #srun --ntasks=1 --cpus-per-task=8 --gres=gpu:2 bash -c "$(declare -f srun_parallel); srun_parallel relative 12b truncated 0 1 0 2" &
