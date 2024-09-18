@@ -1,8 +1,7 @@
 #!/bin/bash
 #SBATCH --job-name=33_ContRel
 #SBATCH --partition=gpu-small
-#SBATCH --gres=gpu:1
-#SBATCH --nodes=1
+#SBATCH --gpus-per-node=1
 #SBATCH --ntasks=1
 #SBATCH --time=72:00:00
 #SBATCH --output=pac2.8b.log
