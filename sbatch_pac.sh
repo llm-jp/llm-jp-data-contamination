@@ -25,7 +25,7 @@ srun_parallel () {
     local dataset_idx=$5
     local batch_size=$6
 
-    echo "Running task with model_size=$model_size, truncated=$truncated, cuda_id=$cuda_id, refer_cuda_id=$refer_cuda_id relative=$relative dataset_idx=$dataset_idx batch_size=$batch_size"
+    echo "Running task with model_size=$model_size, truncated=$truncated, cuda_id=$cuda_id, relative=$relative dataset_idx=$dataset_idx batch_size=$batch_size"
 
     python runing_both.py \
         --relative $relative \
@@ -40,7 +40,7 @@ srun_parallel () {
 }
 
 # 启动并行任务
-srun --ntasks=1 --cpus-per-task=8 --gres=gpu:1 bash -c "$(declare -f srun_parallel); srun_parallel relative 1b truncated 0 0 40" &
+srun --ntasks=1 --cpus-per-task=8 --gres=gpu:8 bash -c "$(declare -f srun_parallel); srun_parallel relative 1b truncated 0 0 40" &
 #srun --ntasks=1 --cpus-per-task=8 --gres=gpu:2 bash -c "$(declare -f srun_parallel); srun_parallel relative 410m truncated 0 1 0 2" &
 #srun --ntasks=1 --cpus-per-task=8 --gres=gpu:2 bash -c "$(declare -f srun_parallel); srun_parallel relative 2.8b  truncated 0 1 0 2" &
 #srun --ntasks=1 --cpus-per-task=8 --gres=gpu:2 bash -c "$(declare -f srun_parallel); srun_parallel relative 1b truncated 0 1 0 2" &
