@@ -6,7 +6,7 @@
 #SBATCH --time=72:00:00
 #SBATCH --output=pac2.8b.log
 #SBATCH --error=pac2.8b.err
-#SBATCH --cpus-per-task=8
+
 
 # 创建日志目录
 mkdir -p logs
