@@ -33,6 +33,8 @@ args = parser.parse_args()
 print(args)
 if args.gray == "gray":
     compute_gray_box_method(args)
-else:
+elif args.gray == "black":
     compute_black_box_mia(args)
+elif args.gray == "pac":
+    compute_eda_pac(args)
 

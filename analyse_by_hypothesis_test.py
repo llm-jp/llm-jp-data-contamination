@@ -158,9 +158,11 @@ for temp in [["relative", "truncated"], ["absolute", "truncated"], ["absolute", 
 
 shared_datasets =['FreeLaw', 'Github', 'Pile-CC', 'StackExchange', 'Wikipedia (en)']
 method_list = ["loss", "prob", "ppl", "mink_plus", "zlib", "refer", "grad"]
-model_sizes = ["1b", "2.8b", "6.9b", "12b"]
+#model_sizes = ["1b", "2.8b", "6.9b", "12b"]
+model_sizes = ["12b"]
 # 计算并打印数据集和长度之间的关系
-for temp in [["relative", "truncated"], ["absolute", "truncated"], ["absolute", "untruncated"]]:
+#["absolute", "truncated"], ["absolute", "untruncated"]
+for temp in [["relative", "truncated"]]:
     split = temp[0]
     truncated = temp[1]
     if split == "relative":

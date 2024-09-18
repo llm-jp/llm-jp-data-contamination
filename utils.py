@@ -23,7 +23,11 @@ import seaborn as sns
 import os
 from transformers import GPTNeoXForCausalLM, AutoTokenizer
 from torch.cuda.amp import autocast, GradScaler
+import random
+from random import shuffle
+from copy import deepcopy
 
+random.seed(0)
 
 def batched_data_with_indices(data_list, indices_list, batch_size):
     data_iter = iter(data_list)
@@ -184,6 +188,94 @@ def caculate_loss_instance(idx, logits, target_labels):
     # 计算每个样本的平均损失
     loss_i = loss_i.sum() / valid_mask.sum()
     return loss_i
+
+
+def random_swap(words, n):
+	new_words = words.copy()
+	for _ in range(n):
+		new_words = swap_word(new_words)
+	return new_words
+
+def swap_word(new_words):
+	random_idx_1 = random.randint(0, len(new_words)-1)
+	random_idx_2 = random_idx_1
+	counter = 0
+	while random_idx_2 == random_idx_1:
+		random_idx_2 = random.randint(0, len(new_words)-1)
+		counter += 1
+		if counter > 3:
+			return new_words
+	new_words[random_idx_1], new_words[random_idx_2] = new_words[random_idx_2], new_words[random_idx_1]
+	return new_words
+
+def eda(sentence, alpha = 0.3, num_aug = 5):
+	words = sentence.split(' ')
+	num_words = len(words)
+	augmented_sentences = []
+
+	if (alpha > 0):
+		n_rs = max(1, int(alpha*num_words))
+		for _ in range(num_aug):
+			a_words = random_swap(words, n_rs)
+			augmented_sentences.append(' '.join(a_words))
+
+	augmented_sentences = [sentence for sentence in augmented_sentences]
+	shuffle(augmented_sentences)
+	if num_aug >= 1:
+		augmented_sentences = augmented_sentences[:num_aug]
+	else:
+		keep_prob = num_aug/len(augmented_sentences)
+		augmented_sentences = [s for s in augmented_sentences if random.uniform(0, 1) < keep_prob]
+
+	return augmented_sentences
+
+def calculate_Polarized_Distance(prob_list:list, ratio_local = 0.3, ratio_far = 0.05) :
+    local_region_length = max(int(len(prob_list)*ratio_local), 1)
+    far_region_length = max(int(len(prob_list)*ratio_far), 1)
+    local_region = np.sort(prob_list)[:local_region_length]
+    far_region = np.sort(prob_list)[::-1][:far_region_length]
+    return np.mean(far_region)-np.mean(local_region)
+
+    return all_probs
+
+def eda_pac_prob_collection(prompt, model, tokenizer, args):
+    all_probs = []
+    input_ids = torch.tensor(tokenizer.encode(prompt)).unsqueeze(0)
+    input_ids = input_ids.to(args.cuda)
+    with torch.no_grad():
+        outputs = model(input_ids, labels=input_ids)
+    logits = outputs[1]
+    probabilities = torch.nn.functional.log_softmax(logits, dim=-1)
+    probs = []
+    input_ids_processed = input_ids[0][1:]
+    for i, token_id in enumerate(input_ids_processed):
+        probability = probabilities[0, i, token_id].item()
+        probs.append(probability)
+    all_probs.append(probs)
+    return all_probs
+def eda_pac_collection(model, tokenizer, dataset, dataset_name, args, min_len=50, upper_limit=10000):
+    eda_pac_collect = []
+    idx_list = []
+    cleaned_data, orig_indices = clean_dataset(dataset)
+    for idx, (data_batch, orig_indices_batch) in tqdm(
+            enumerate(batched_data_with_indices(cleaned_data, orig_indices, batch_size=args.batch_size))):
+        orig_idx = [item for item in orig_indices_batch]
+        batched_text = [item for item in data_batch]
+        all_probs = []
+        new_prompt_list = []
+        idx_list.extend(orig_idx)
+        for prompt in tqdm(batched_text):
+            newprompts = eda(prompt, alpha=0.3, num_aug=5)
+            new_prompt_list.extend(deepcopy(newprompts))
+        all_probs = eda_pac_prob_collection(prompt, model, tokenizer, args)
+        new_all_probs = eda_pac_prob_collection(new_prompt_list, model, tokenizer, args)
+        pds = [calculate_Polarized_Distance(prob_list) for prob_list in all_probs]
+        new_pds = [calculate_Polarized_Distance(prob_list) for prob_list in new_all_probs]
+        calibrated_pds = [np.mean(new_pds[i:i + 5]) for i in range(0, len(new_pds), 5)]
+        eda_pac_value = np.array(pds) - np.array(calibrated_pds)
+        eda_pac_collect.extend(eda_pac_value)
+    return eda_pac_collect, idx_list
+
 
 
 def feature_collection(model, tokenizer, dataset, args, dataset_name, min_len=50, upper_limit=10000, refer_model=None, refer_tokenizer=None):

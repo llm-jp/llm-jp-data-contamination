@@ -107,7 +107,21 @@ for dataset_idx in range(3):
                             # Add data to results list
                             for score, label in [(member_score, 'member'), (nonmember_score, 'nonmember')]:
                                 for s in score:
-                                    results.append([dataset_name, model_size, dict_name, label, s, length])
+                                    if dict_name == "loss":
+                                        saved_dict_name = "Loss"
+                                    elif dict_name == "prob":
+                                        saved_dict_name = "Min-K%"
+                                    elif dict_name == "ppl":
+                                        saved_dict_name = "Perplexity"
+                                    elif dict_name == "mink_plus":
+                                        saved_dict_name = "Min-K% ++"
+                                    elif dict_name == "zlib":
+                                        saved_dict_name = "Zlib"
+                                    elif dict_name == "grad":
+                                        saved_dict_name = "Gradient"
+                                    elif dict_name == "refer":
+                                        saved_dict_name = "Refer"
+                                    results.append([dataset_name, model_size, saved_dict_name, label, s, length])
 
             # Create DataFrame from results
             df = pd.DataFrame(results, columns=['dataset', 'model_size', 'feature', 'label', 'score', 'length'])
@@ -149,5 +163,4 @@ for dataset_idx in range(3):
 
             # Create DataFrame for AUC results
             auc_df = pd.DataFrame(auc_results, columns=['dataset', 'feature', 'length', 'model_size', 'auc'])
-
             auc_df.to_csv(f"auc_results_{split}_{truncate_status}_all_length_all_model_size_{dataset_idx}.csv", index=False)

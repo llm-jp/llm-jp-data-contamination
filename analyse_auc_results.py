@@ -12,21 +12,24 @@ untruncated_results_list = []
 for idx in dataset_idxs:
     df_truncated = pd.read_csv(f"auc_results_absolute_truncated_all_length_all_model_size_{idx}.csv")
     df_truncated['seed'] = idx  # 添加种子列
+    df_truncated["truncation"] = "Absolute Semantic Incomplete"
     truncated_results_list.append(df_truncated)
 
     df_relative = pd.read_csv(f"auc_results_relative_truncated_all_length_all_model_size_{idx}.csv")
     df_relative['seed'] = idx
+    df_relative["truncation"] = "Relative Semantic Complete"
     relative_results_list.append(df_relative)
 
     df_untruncated = pd.read_csv(f"auc_results_absolute_untruncated_all_length_all_model_size_{idx}.csv")
     df_untruncated['seed'] = idx
+    df_untruncated["truncation"] = "Absolute Semantic Complete"
     untruncated_results_list.append(df_untruncated)
 
 # 合并数据框
 truncated_results = pd.concat(truncated_results_list, ignore_index=True)
 relative_results = pd.concat(relative_results_list, ignore_index=True)
 untruncated_results = pd.concat(untruncated_results_list, ignore_index=True)
-
+concated_results = pd.concat([truncated_results, relative_results, untruncated_results], ignore_index=True)
 # 设置Seaborn样式
 sns.set(style="whitegrid")
 
@@ -309,9 +312,10 @@ def plot_pdf_comparison_by_specified_feature(datasets, features, title, bins=30,
     plt.yticks(fontsize=14)
     plt.xlim(xmin, xmax)
     plt.ylim(0, None)
-    plt.legend(title='Model Size', fontsize=12, title_fontsize='13', loc='center left', bbox_to_anchor=(1, 0.5))
+    plt.legend(title='Model Size', fontsize=12, title_fontsize='13')
     plt.grid(True, linestyle='--', alpha=0.7)
     plt.tight_layout(rect=[0, 0, 0.85, 1])
+    plt.savefig(f"figures/{compare_target}.png")
     plt.show()
 
 
@@ -393,22 +397,104 @@ plot_hist_by_category(untruncated_results, "dataset",
                       xmax=0.6, show_hist=False)
 
 # 对比特定数据集和特征在不同方法下的概率密度函数，并展示均值和方差
-plot_pdf_comparison(datasets, "Wikipedia (en)", "loss",
+plot_pdf_comparison(datasets, "Wikipedia (en)", "Loss",
                     "Probability Density Function Comparison for Wikipedia (en) - Loss Feature", bins=30, xmin=0.5,
                     xmax=0.6, show_hist=False)
 
-# 对比不同方法在所有特征上的概率密度函数，并展示均值和方差
-plot_pdf_comparison_by_specified_feature(datasets, truncated_results["feature"].unique(),
-                                "Probability Density Function Comparison of Different Methods", bins=30, xmin=0.5,
-                                xmax=0.6, compare_target="feature")
 
-plot_pdf_comparison_by_specified_feature(datasets, shared_datasets,
-                                "Probability Density Function Comparison of Different Methods", bins=30, xmin=0.5,
-                                xmax=0.6, compare_target="dataset")
-plot_pdf_comparison_by_specified_feature(datasets, truncated_results["model_size"].unique(),
-                                "Probability Density Function Comparison of Different Methods", bins=30, xmin=0.5,
-                                xmax=0.6, compare_target="model_size")
+def plot_pdf_comparison_by_specified_feature_multiplot(ax, datasets, features, title, bins=30, xmin=0.5, xmax=1.0,
+                                             compare_target="model_size"):
+    """ 对比不同方法在所有特征上的概率密度函数 并绘制均值和方差区域 """
+    sns.set_palette("Set2")
+    method_labels = ["Truncated", "Relative", "Untruncated"]
+    colors = sns.color_palette("Set2", len(features))
 
+    for j, model_size in enumerate(features):
+        color = colors[j % len(colors)]
+        all_kde_data = []
+
+        # 对每个数据集（方法）进行操作
+        for df in datasets:
+            df_filtered = df[df[compare_target] == model_size]
+
+            # 获取属于特定模型大小的所有种子
+            seeds = df_filtered['seed'].unique()
+            for seed in seeds:
+                seed_filtered = df_filtered[df_filtered['seed'] == seed]
+                data = seed_filtered['auc']
+
+                # 绘制单个种子的PDF曲线，但设置透明度低一点
+                kde = sns.kdeplot(data, color=color, alpha=0.0, linewidth=0.5, ax=ax)
+                kde_data = kde.get_lines()[-1].get_data()
+                all_kde_data.append(kde_data)
+
+        # 准备x_vals
+        x_vals = np.linspace(xmin, xmax, 500)
+
+        # 将所有的kde_data进行插值到相同的x坐标上
+        all_interp_ys = np.array([np.interp(x_vals, kde_x, kde_y, left=0, right=0) for kde_x, kde_y in all_kde_data])
+
+        # 计算均值和标准差
+        mean_y = all_interp_ys.mean(axis=0)
+        std_y = all_interp_ys.std(axis=0)
+
+        # 绘制总体的PDF均值
+        sns.lineplot(x=x_vals, y=mean_y, color=color, label=f"{model_size}", linewidth=2, ax=ax)
+
+        # 使用填充区域展示均值 ± 方差
+        ax.fill_between(x_vals, mean_y - std_y, mean_y + std_y, color=color, alpha=0.2)
+
+    ax.set_xlabel("AUC ROC Score", fontsize=12)
+    ax.set_ylabel("Probability Density", fontsize=12)
+    ax.set_xlim(xmin, xmax)
+    ax.set_ylim(0, None)
+    ax.legend(title='Model Size', fontsize=12, title_fontsize='12')
+    ax.grid(True, linestyle='--', alpha=0.7)
+
+
+# Now create the figure with subplots
+fig, axs = plt.subplots(2, 2, figsize=(15, 10))
+
+# Plotting
+plot_pdf_comparison_by_specified_feature_multiplot(axs[0, 0], [concated_results], concated_results["truncation"].unique(),
+                                         "Probability Density Function Comparison by Truncation", bins=30, xmin=0.5,
+                                         xmax=0.6, compare_target="truncation")
+
+plot_pdf_comparison_by_specified_feature_multiplot(axs[0, 1], datasets, truncated_results["model_size"].unique(),
+                                         "Probability Density Function Comparison by Model Size", bins=30, xmin=0.5,
+                                         xmax=0.6, compare_target="model_size")
+
+plot_pdf_comparison_by_specified_feature_multiplot(axs[1, 0], datasets, shared_datasets,
+                                         "Probability Density Function Comparison by Dataset", bins=30, xmin=0.5,
+                                         xmax=0.6, compare_target="dataset")
+
+plot_pdf_comparison_by_specified_feature_multiplot(axs[1, 1], datasets, truncated_results["feature"].unique(),
+                                         "Probability Density Function Comparison by Feature", bins=30, xmin=0.5,
+                                         xmax=0.6, compare_target="feature")
+
+# Adding small titles (a), (b), (c), and (d) to the subplots
+axs[0, 0].annotate('(a) Correlation Between AUC ROC Score and Split Method', xy=(0.5, -0.15), xycoords='axes fraction', ha='center', fontsize=12)
+axs[0, 1].annotate('(b) Correlation Between AUC ROC Score and Model Size', xy=(0.5, -0.15), xycoords='axes fraction', ha='center', fontsize=12)
+axs[1, 0].annotate('(c) Correlation Between AUC ROC Score and Domains', xy=(0.5, -0.15), xycoords='axes fraction', ha='center', fontsize=12)
+axs[1, 1].annotate('(d) Correlation Between AUC ROC Score and MIA Method', xy=(0.5, -0.15), xycoords='axes fraction', ha='center', fontsize=12)
+
+# Adding an overall title below the x-axis of the first subplot (spanning all subplots)
+fig.text(0.5, -0.02, 'Correlation between different factors with the MIA AUC ROC Score', ha='center', fontsize=20,)
+
+plt.tight_layout(rect=[0, 0, 1, 0.95])
+plt.savefig("figures/comparison_subplots.png", dpi=600)
+plt.show()
+
+
+plot_pdf_comparison_by_specified_feature([truncated_results],  truncated_results["length"].unique(),
+                                         "Probability Density Function Comparison by Truncation", bins=30, xmin=0.5,
+                                         xmax=0.6, compare_target="length")
+plot_pdf_comparison_by_specified_feature([untruncated_results],  untruncated_results["length"].unique(),
+                                         "Probability Density Function Comparison by Truncation", bins=30, xmin=0.5,
+                                         xmax=0.6, compare_target="length")
+plot_pdf_comparison_by_specified_feature([relative_results],  relative_results["length"].unique(),
+                                         "Probability Density Function Comparison by Truncation", bins=30, xmin=0.5,
+                                         xmax=0.6, compare_target="length")
 # 绘制特定数据集的CDF
 #plot_cdf(truncated_results[truncated_results["dataset"] == "Wikipedia (en)"]["auc"], "Truncated Wikipedia (en)",
 #         "CDF of Wikipedia (en) AUC for Truncated")
