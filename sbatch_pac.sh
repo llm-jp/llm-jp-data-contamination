@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=33_ContRel
+#SBATCH --job-name=33_ContPac
 #SBATCH --partition=gpu-small
 #SBATCH --gres=gpu:8
 #SBATCH --nodes=1
