@@ -268,7 +268,7 @@ def eda_pac_collection(model, tokenizer, dataset, dataset_name, args, min_len=50
         for prompt in tqdm(batched_text):
             newprompts = eda(prompt, alpha=0.3, num_aug=5)
             new_prompt_list.extend(deepcopy(newprompts))
-        all_probs = eda_pac_prob_collection(prompt, model, tokenizer, args)
+        all_probs = eda_pac_prob_collection(batched_text, model, tokenizer, args)
         new_all_probs = eda_pac_prob_collection(new_prompt_list, model, tokenizer, args)
         pds = [calculate_Polarized_Distance(prob_list) for prob_list in all_probs]
         new_pds = [calculate_Polarized_Distance(prob_list) for prob_list in new_all_probs]
