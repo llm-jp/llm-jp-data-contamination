@@ -273,7 +273,7 @@ def eda_pac_collection(model, tokenizer, dataset, dataset_name, args, min_len=50
         all_probs = []
         new_prompt_list = []
         idx_list.extend(orig_idx)
-        for prompt in tqdm(batched_text):
+        for prompt in batched_text:
             newprompts = eda(prompt, alpha=0.3, num_aug=5)
             new_prompt_list.extend(deepcopy(newprompts))
         all_probs = eda_pac_prob_collection(batched_text, model, tokenizer, min_len, args)
