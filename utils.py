@@ -240,18 +240,23 @@ def calculate_Polarized_Distance(prob_list:list, ratio_local = 0.3, ratio_far = 
 
 def eda_pac_prob_collection(prompt, model, tokenizer, min_len, args):
     all_probs = []
-    input_ids = tokenizer(prompt, return_tensors="pt",
+    tokenized_inputs = tokenizer(prompt,
+                                 return_tensors="pt",
                                  truncation=True,
                                  padding=True,
-                                 max_length=min_len+100 if args.relative == "absolute" else 1024)["input_ids"]
-    input_ids = input_ids.to(args.cuda)
-    with torch.no_grad():
-        outputs = model(input_ids, labels=input_ids)
+                                 max_length=min_len + 100 if args.relative == "absolute" else 1024,
+                                 )
+    tokenized_inputs = {key: val.to(args.cuda) for key, val in tokenized_inputs.items()}
+    target_labels = tokenized_inputs["input_ids"].clone().to(args.cuda)
+    target_labels[tokenized_inputs["attention_mask"] == 0] = -100
+    outputs = model(**tokenized_inputs, labels=target_labels)
     logits = outputs[1]
-    pdb.set_trace()
+    batch_logits = outputs[1]
+    batched_tokenized_inputs = tokenized_inputs
     probabilities = torch.nn.functional.log_softmax(logits, dim=-1)
     probs = []
-    input_ids_processed = input_ids[0][1:]
+
+    input_ids_processed = tokenized_inputs[0][1:]
     for i, token_id in enumerate(input_ids_processed):
         probability = probabilities[0, i, token_id].item()
         probs.append(probability)
@@ -378,24 +383,6 @@ def wasserstein_distance_caculate(dict, dataset_name,  split_set = ["train", "va
 
 def results_caculate_and_draw(dataset_name, args, df, method_list):
     split_set = ["member", "nonmember"]
-    # loss_dict = pickle.load(open(f"{args.dir}/{dataset_name}/{args.truncated}/{args.min_len}_{args.model_size}_loss_dict.pkl", "rb"))
-    # prob_dict = pickle.load(open(f"{args.dir}/{dataset_name}/{args.truncated}/{args.min_len}_{args.model_size}_prob_dict.pkl", "rb"))
-    # ppl_dict = pickle.load(open(f"{args.dir}/{dataset_name}/{args.truncated}/{args.min_len}_{args.model_size}_ppl_dict.pkl", "rb"))
-    # mink_plus_dict = pickle.load(open(f"{args.dir}/{dataset_name}/{args.truncated}/{args.min_len}_{args.model_size}_mink_plus_dict.pkl", "rb"))
-    # zlib_dict = pickle.load(open(f"{args.dir}/{dataset_name}/{args.truncated}/{args.min_len}_{args.model_size}_zlib_dict.pkl", "rb"))
-    # refer_dict = pickle.load(open(f"{args.dir}/{dataset_name}/{args.truncated}/{args.min_len}_{args.model_size}_refer_dict.pkl", "rb"))
-    # idx_list = pickle.load(
-    #     open(f"{args.dir}/{dataset_name}/{args.truncated}/{args.min_len}_{args.model_size}_idx_list.pkl", "rb"))
-    # residual_dict = {}
-    # residual_dict[dataset_name] = {"member": [], "nonmember": []}
-    # for split in split_set:
-    #     residual_dict[dataset_name][split] = [loss_dict[dataset_name][split][i] - refer_dict[dataset_name][split][i]
-    #                                           for i in range(len(loss_dict[dataset_name][split]))]
-    # grad_dict = pickle.load(open(f"{args.dir}/{dataset_name}/{args.truncated}/{args.min_len}_{args.model_size}_grad_dict.pkl", "rb"))
-    # ccd_dict = pickle.load(open(f"{args.dir}/{dataset_name}/{args.truncated}/{args.min_len}_{args.model_size}_ccd_dict.pkl", "rb"))
-    # samia_dict = pickle.load(open(f"{args.dir}/{dataset_name}/{args.truncated}/{args.min_len}_{args.model_size}_samia_dict.pkl", "rb"))
-    # all_dict = [loss_dict, prob_dict, ppl_dict, mink_plus_dict, zlib_dict, residual_dict, grad_dict, ccd_dict, samia_dict]
-    # method_list = ["loss", "prob", "ppl", "mink_plus", "zlib", "refer", "grad", "ccd", "samia"]
     os.makedirs(f"{args.save_dir}_figures/{dataset_name}/", exist_ok=True)
     for idx, method_name in enumerate(method_list):
         value_dict = pickle.load(open(f"{args.save_dir}_{args.dataset_idx}/{dataset_name}/{args.relative}/{args.truncated}/{args.min_len}_{args.model_size}_{method_name}_dict.pkl", "rb"))
