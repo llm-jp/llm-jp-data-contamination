@@ -238,10 +238,13 @@ def calculate_Polarized_Distance(prob_list:list, ratio_local = 0.3, ratio_far = 
 
     return all_probs
 
-def eda_pac_prob_collection(prompt, model, tokenizer, args):
+def eda_pac_prob_collection(prompt, model, tokenizer, min_len, args):
     all_probs = []
     pdb.set_trace()
-    input_ids = torch.tensor(tokenizer.encode(prompt)).unsqueeze(0)
+    input_ids = tokenizer(prompt, return_tensors="pt",
+                                 truncation=True,
+                                 padding=True,
+                                 max_length=min_len+100 if args.relative == "absolute" else 1024)["input_ids"]
     input_ids = input_ids.to(args.cuda)
     with torch.no_grad():
         outputs = model(input_ids, labels=input_ids)
