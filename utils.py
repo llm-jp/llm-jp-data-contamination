@@ -261,7 +261,6 @@ def eda_pac_prob_collection(prompt, model, tokenizer, min_len, args):
         for token_idx, token_id in enumerate(tokenized_inputs["input_ids"][example_idx]):
             if token_id != 0:
                 temp_probs.append(example_probability[token_idx, token_id].item())
-        pdb.set_trace()
         all_probs.append(temp_probs)
     return all_probs
 def eda_pac_collection(model, tokenizer, dataset, dataset_name, args, min_len=50, upper_limit=10000):
@@ -285,6 +284,7 @@ def eda_pac_collection(model, tokenizer, dataset, dataset_name, args, min_len=50
             new_pds = [calculate_Polarized_Distance(prob_list) for prob_list in new_all_probs[data_idx]]
             calibrated_pds = [np.mean(new_pds[i:i + 5]) for i in range(0, len(new_pds), 5)]
             eda_pac_value = np.array(pds) - np.array(calibrated_pds)
+        pdb.set_trace()
         eda_pac_collect.extend(eda_pac_value)
     return eda_pac_collect, idx_list
 
