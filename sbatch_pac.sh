@@ -5,8 +5,8 @@
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --time=72:00:00
-#SBATCH --output=pac12but.log
-#SBATCH --error=pac12but.err
+#SBATCH --output=pac12bat.log
+#SBATCH --error=pac12bat.err
 #SBATCH --cpus-per-task=8
 #SBATCH --mem=150G
 
