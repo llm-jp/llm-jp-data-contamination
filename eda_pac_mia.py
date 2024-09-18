@@ -32,12 +32,16 @@ def compute_eda_pac(args):
                 df = pd.DataFrame()
                 dataset = obtain_dataset(dataset_name, args)
                 eda_pac_dict = {}
+                idx_dict = {}
                 eda_pac_dict[dataset_name] = {"member": [], "nonmember": []}
+                idx_dict[dataset_name] = {"member": [], "nonmember": []}
                 for split in ["member", "nonmember"]:
                     eda_pac_list, idx_list = eda_pac_collection(model, tokenizer, dataset[split],dataset_name, args, min_len = args.min_len)
+                    eda_pac_dict[dataset_name][split].extend(eda_pac_list)
+                    idx_dict[dataset_name][split].extend(idx_list)
                 os.makedirs(f"{args.save_dir}_{args.dataset_idx}", exist_ok=True)
                 os.makedirs(f"{args.save_dir}_{args.dataset_idx}/{dataset_name}/{args.relative}/{args.truncated}", exist_ok=True)
-                pickle.dump(idx_list, open(f"{args.save_dir}_{args.dataset_idx}/{dataset_name}/{args.relative}/{args.truncated}/{args.min_len}_{args.model_size}_idx_list.pkl", "wb"))
+                pickle.dump(idx_dict, open(f"{args.save_dir}_{args.dataset_idx}/{dataset_name}/{args.relative}/{args.truncated}/{args.min_len}_{args.model_size}_idx_list.pkl", "wb"))
                 pickle.dump(eda_pac_dict, open(f"{args.save_dir}_{args.dataset_idx}/{dataset_name}/{args.relative}/{args.truncated}/{args.min_len}_{args.model_size}_eda_pac_dict.pkl", "wb"))
                 df = results_caculate_and_draw(dataset_name, args, df, method_list=["eda_pac"])
                 if args.same_length:
