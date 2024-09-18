@@ -256,8 +256,9 @@ def eda_pac_prob_collection(prompt, model, tokenizer, min_len, args):
     probabilities = torch.nn.functional.log_softmax(logits, dim=-1)
     probs = []
     for example_idx in range(len(prompt)):
+        example_probability = probabilities[example_idx][target_labels[example_idx] != -100]
         pdb.set_trace()
-        probability=probabilities[example_idx][target_labels[example_idx] != -100, :]
+        probability = example_probability[:, tokenized_inputs[example_idx]]
         probs.append(probability)
     all_probs.append(probs)
     return all_probs
