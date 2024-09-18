@@ -3,7 +3,7 @@ from utils import *
 from transformers import BitsAndBytesConfig, AutoModelForCausalLM, AutoTokenizer
 
 
-def compute_gray_box_method(args):
+def compute_eda_pac(args):
     dataset_names, length_list = get_dataset_list(args)
     model = GPTNeoXForCausalLM.from_pretrained(
       f"EleutherAI/pythia-{args.model_size}-deduped",

@@ -1,6 +1,7 @@
 import argparse
 from gray_box_mia import compute_gray_box_method
 from black_box_mia import compute_black_box_mia
+from eda_pac_mia import compute_eda_pac
 import random
 
 random.seed(42)
