@@ -278,13 +278,13 @@ def eda_pac_collection(model, tokenizer, dataset, dataset_name, args, min_len=50
             new_prompt_list.extend(deepcopy(newprompts))
         all_probs = eda_pac_prob_collection(batched_text, model, tokenizer, min_len, args)
         new_all_probs = eda_pac_prob_collection(new_prompt_list, model, tokenizer,min_len, args)
-        pdb.set_trace()
-        for data_idx in range(len(all_probs)):
-            pds = [calculate_Polarized_Distance(prob_list) for prob_list in all_probs[data_idx]]
-            new_pds = [calculate_Polarized_Distance(prob_list) for prob_list in new_all_probs[data_idx]]
-            calibrated_pds = [np.mean(new_pds[i:i + 5]) for i in range(0, len(new_pds), 5)]
-            eda_pac_value = np.array(pds) - np.array(calibrated_pds)
+        #for data_idx in range(len(all_probs)):
+        pds = [calculate_Polarized_Distance(prob_list) for prob_list in all_probs]
+        new_pds = [calculate_Polarized_Distance(prob_list) for prob_list in new_all_probs]
+        calibrated_pds = [np.mean(new_pds[i:i + 5]) for i in range(0, len(new_pds), 5)]
+        eda_pac_value = np.array(pds) - np.array(calibrated_pds)
         eda_pac_collect.extend(eda_pac_value)
+        pdb.set_trace()
     return eda_pac_collect, idx_list
 
 
