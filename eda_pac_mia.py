@@ -34,7 +34,7 @@ def compute_eda_pac(args):
                 eda_pac_dict = {}
                 eda_pac_dict[dataset_name] = {"member": [], "nonmember": []}
                 for split in ["member", "nonmember"]:
-                    eda_pac_list, idx_list = eda_pac_collection(model, tokenizer, dataset[split],dataset_name, args)
+                    eda_pac_list, idx_list = eda_pac_collection(model, tokenizer, dataset[split],dataset_name, args, min_len = args.min_len)
                 os.makedirs(f"{args.save_dir}_{args.dataset_idx}", exist_ok=True)
                 os.makedirs(f"{args.save_dir}_{args.dataset_idx}/{dataset_name}/{args.relative}/{args.truncated}", exist_ok=True)
                 pickle.dump(idx_list, open(f"{args.save_dir}_{args.dataset_idx}/{dataset_name}/{args.relative}/{args.truncated}/{args.min_len}_{args.model_size}_idx_list.pkl", "wb"))
