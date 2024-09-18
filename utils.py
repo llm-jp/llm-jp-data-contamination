@@ -240,7 +240,6 @@ def calculate_Polarized_Distance(prob_list:list, ratio_local = 0.3, ratio_far = 
 
 def eda_pac_prob_collection(prompt, model, tokenizer, min_len, args):
     all_probs = []
-    pdb.set_trace()
     input_ids = tokenizer(prompt, return_tensors="pt",
                                  truncation=True,
                                  padding=True,
@@ -249,6 +248,7 @@ def eda_pac_prob_collection(prompt, model, tokenizer, min_len, args):
     with torch.no_grad():
         outputs = model(input_ids, labels=input_ids)
     logits = outputs[1]
+    pdb.set_trace()
     probabilities = torch.nn.functional.log_softmax(logits, dim=-1)
     probs = []
     input_ids_processed = input_ids[0][1:]
