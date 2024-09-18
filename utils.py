@@ -254,13 +254,15 @@ def eda_pac_prob_collection(prompt, model, tokenizer, min_len, args):
     batch_logits = outputs[1]
     batched_tokenized_inputs = tokenized_inputs
     probabilities = torch.nn.functional.log_softmax(logits, dim=-1)
-    probs = []
+    all_probs = []
     for example_idx in range(len(prompt)):
         example_probability = probabilities[example_idx][target_labels[example_idx] != -100]
+        temp_probs = []
+        for token_idx, token_id in enumerate(tokenized_inputs["input_ids"][example_idx]):
+            if token_id != 0:
+                temp_probs.append(example_probability[token_idx, token_id].item())
         pdb.set_trace()
-        probability = example_probability[:, tokenized_inputs[example_idx]]
-        probs.append(probability)
-    all_probs.append(probs)
+        all_probs.append(temp_probs)
     return all_probs
 def eda_pac_collection(model, tokenizer, dataset, dataset_name, args, min_len=50, upper_limit=10000):
     eda_pac_collect = []
@@ -278,10 +280,11 @@ def eda_pac_collection(model, tokenizer, dataset, dataset_name, args, min_len=50
             new_prompt_list.extend(deepcopy(newprompts))
         all_probs = eda_pac_prob_collection(batched_text, model, tokenizer, min_len, args)
         new_all_probs = eda_pac_prob_collection(new_prompt_list, model, tokenizer,min_len, args)
-        pds = [calculate_Polarized_Distance(prob_list) for prob_list in all_probs]
-        new_pds = [calculate_Polarized_Distance(prob_list) for prob_list in new_all_probs]
-        calibrated_pds = [np.mean(new_pds[i:i + 5]) for i in range(0, len(new_pds), 5)]
-        eda_pac_value = np.array(pds) - np.array(calibrated_pds)
+        for data_idx in range(len(all_probs)):
+            pds = [calculate_Polarized_Distance(prob_list) for prob_list in all_probs[data_idx]]
+            new_pds = [calculate_Polarized_Distance(prob_list) for prob_list in new_all_probs[data_idx]]
+            calibrated_pds = [np.mean(new_pds[i:i + 5]) for i in range(0, len(new_pds), 5)]
+            eda_pac_value = np.array(pds) - np.array(calibrated_pds)
         eda_pac_collect.extend(eda_pac_value)
     return eda_pac_collect, idx_list
 
