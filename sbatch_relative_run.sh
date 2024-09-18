@@ -1,12 +1,12 @@
 #!/bin/bash
-#SBATCH --job-name=33_ContRel
+#SBATCH --job-name=33_ContPac
 #SBATCH --partition=gpu-small
 #SBATCH --gres=gpu:8
 #SBATCH --nodes=1
-#SBATCH --ntasks=4
+#SBATCH --ntasks=1
 #SBATCH --time=72:00:00
-#SBATCH --output=relative.log
-#SBATCH --error=relative.err
+#SBATCH --output=pac1b.log
+#SBATCH --error=pac1b.err
 #SBATCH --cpus-per-task=8
 
 # 创建日志目录
@@ -40,10 +40,10 @@ srun_parallel () {
 }
 
 # 启动并行任务
-srun --ntasks=1 --cpus-per-task=8 --gres=gpu:2 bash -c "$(declare -f srun_parallel); srun_parallel relative 160m truncated 0 1 0 2" &
-srun --ntasks=1 --cpus-per-task=8 --gres=gpu:2 bash -c "$(declare -f srun_parallel); srun_parallel relative 410m truncated 0 1 0 2" &
-srun --ntasks=1 --cpus-per-task=8 --gres=gpu:2 bash -c "$(declare -f srun_parallel); srun_parallel relative 2.8b  truncated 0 1 0 2" &
-srun --ntasks=1 --cpus-per-task=8 --gres=gpu:2 bash -c "$(declare -f srun_parallel); srun_parallel relative 1b truncated 0 1 0 2" &
+srun --ntasks=1 --cpus-per-task=8 --gres=gpu:2 bash -c "$(declare -f srun_parallel); srun_parallel relative 1b truncated 0 1 0 40" &
+#srun --ntasks=1 --cpus-per-task=8 --gres=gpu:2 bash -c "$(declare -f srun_parallel); srun_parallel relative 410m truncated 0 1 0 2" &
+#srun --ntasks=1 --cpus-per-task=8 --gres=gpu:2 bash -c "$(declare -f srun_parallel); srun_parallel relative 2.8b  truncated 0 1 0 2" &
+#srun --ntasks=1 --cpus-per-task=8 --gres=gpu:2 bash -c "$(declare -f srun_parallel); srun_parallel relative 1b truncated 0 1 0 2" &
 
 # 等待所有任务结束
 wait
