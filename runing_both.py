@@ -29,7 +29,7 @@ parser.add_argument("--generation_samples", type=int, default=10)
 parser.add_argument("--max_input_tokens", type=int, default=512)
 parser.add_argument("--max_new_tokens", type=int, default=128)
 parser.add_argument("--temperature", type=float, default=0.8)
-parser.add_argument("--gray", type=str, default="gray", choices=["gray", "black"])
+parser.add_argument("--gray", type=str, default="gray", choices=["gray", "black", "pac"])
 args = parser.parse_args()
 print(args)
 if args.gray == "gray":
