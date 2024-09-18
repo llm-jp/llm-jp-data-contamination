@@ -16,7 +16,8 @@ def compute_eda_pac(args):
     ).eval()#.to(args.cuda)
     model = model.to_bettertransformer()
     device = torch.device(f"cuda:{args.cuda}" if torch.cuda.is_available() else "cpu")
-    model = torch.nn.DataParallel(model, device_ids=list(range(torch.cuda.device_count())))
+    #model = torch.nn.DataParallel(model, device_ids=list(range(torch.cuda.device_count())))
+    model = model.to(device)
     model.eval()
     #model.to(device)
     tokenizer = AutoTokenizer.from_pretrained(
