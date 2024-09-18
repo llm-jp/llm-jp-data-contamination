@@ -15,9 +15,9 @@ def compute_eda_pac(args):
       #quantization_config=bnb_config,
     ).eval()#.to(args.cuda)
     model = model.to_bettertransformer()
-    device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+    device = torch.device(f"cuda:{args.cuda}" if torch.cuda.is_available() else "cpu")
     model = torch.nn.DataParallel(model, device_ids=list(range(torch.cuda.device_count())))
-    model.to(device)
+    #model.to(device)
     tokenizer = AutoTokenizer.from_pretrained(
       f"EleutherAI/pythia-{args.model_size}-deduped",
       revision="step143000",
