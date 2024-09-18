@@ -5,8 +5,8 @@
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --time=72:00:00
-#SBATCH --output=pac.log
-#SBATCH --error=pac.err
+#SBATCH --output=pac1.log
+#SBATCH --error=pac1.err
 #SBATCH --cpus-per-task=8
 
 # 创建日志目录
