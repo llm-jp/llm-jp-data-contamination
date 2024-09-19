@@ -450,6 +450,7 @@ def calculate_mink_and_mink_plus(batch_logits, batched_tokenized_inputs):
     batch_token_log_probs[mask == False] = torch.inf
     sorted_mink_plus, _ = torch.sort(batch_mink_plus)
     sorted_mink, _ = torch.sort(batch_token_log_probs)
+    pdb.set_trace()
     batch_mink_plus_avg = []
     batch_mink_avg = []
     for i, length in enumerate(token_length):
