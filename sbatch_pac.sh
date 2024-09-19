@@ -5,8 +5,8 @@
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --time=72:00:00
-#SBATCH --output=pac6.9bau.log
-#SBATCH --error=pac6.9bau.err
+#SBATCH --output=pac2.8bau.log
+#SBATCH --error=pac2.8bau.err
 #SBATCH --cpus-per-task=8
 #SBATCH --mem=150G
 
