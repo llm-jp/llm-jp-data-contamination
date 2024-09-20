@@ -5,8 +5,8 @@
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --time=72:00:00
-#SBATCH --output=RelaBlack160.log
-#SBATCH --error=RelaBlack2.err
+#SBATCH --output=RelaBlack410m.log
+#SBATCH --error=RelaBlack410m.err
 #SBATCH --cpus-per-task=8
 #SBATCH --mem=150G
 
