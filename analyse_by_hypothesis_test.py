@@ -5,6 +5,8 @@ from matplotlib import pyplot as plt
 from scipy.ndimage import gaussian_filter1d
 import statsmodels.api as sm
 from sklearn.metrics import roc_auc_score
+import pandas as pd
+from statsmodels.regression.linear_model import OLS
 
 def ks_hypothesis(dict, dataset_name, split_set = ["train", "valid", "test"]):
     ks_statistic_matrix = np.zeros((len(split_set), len(split_set)))
@@ -159,16 +161,25 @@ for temp in [["relative", "truncated"], ["absolute", "truncated"], ["absolute", 
             print(model_size)
             print(differentiable_counter/count)
 
-shared_datasets = ['FreeLaw',  'Pile-CC',  'Wikipedia (en)']
-method_list = ["mink_plus", "prob", "grad"]
-model_sizes = ["12b"]
+hared_datasets = ['FreeLaw', 'Pile-CC', 'Wikipedia (en)', 'Github', 'StackExchange']
+method_list = ['mink_plus', 'prob', 'ppl']
+model_sizes = ['12b']
+
+# 定义一个存储不同 split 结果的字典
+results_split = {'absolute_untruncated': {}, 'absolute_truncated': {}, 'relative_truncated': {}}
+
+split_conditions = [['absolute', 'untruncated'], ['absolute', 'truncated'], ['relative', 'truncated']]
 
 # 计算并打印数据集和长度之间的关系
-for temp in [["absolute", "untruncated"]]:
+for condition in split_conditions:
+    split = condition[0]
+    truncated = condition[1]
+    split_key = f'{split}_{truncated}'
+
     results = {method_name: {dataset_name: [] for dataset_name in shared_datasets} for method_name in method_list}
-    split = temp[0]
-    truncated = temp[1]
-    if split == "relative":
+    results_split[split_key] = results
+
+    if split == 'relative':
         length_list = np.arange(0, 100, 10)
     else:
         length_list = np.arange(0, 1000, 100)
@@ -187,19 +198,19 @@ for temp in [["absolute", "untruncated"]]:
                     for dataset_idx in range(3):
                         # 加载值字典
                         value_dict = pickle.load(open(
-                            f"mia_dataset_results_{dataset_idx}/{dataset_name}/{split}/{truncated}/{min_len}_{model_size}_{method_name}_dict.pkl",
-                            "rb"))
+                            f'mia_dataset_results_{dataset_idx}/{dataset_name}/{split}/{truncated}/{min_len}_{model_size}_{method_name}_dict.pkl',
+                            'rb'))
 
-                        if method_name == "refer":
-                            residual_dict = {dataset_name: {"member": [], "nonmember": []}}
+                        if method_name == 'refer':
+                            residual_dict = {dataset_name: {'member': [], 'nonmember': []}}
                             loss_dict = pickle.load(open(
-                                f"mia_dataset_results_{dataset_idx}/{dataset_name}/{split}/{truncated}/{min_len}_{model_size}_loss_dict.pkl",
-                                "rb"))
+                                f'mia_dataset_results_{dataset_idx}/{dataset_name}/{split}/{truncated}/{min_len}_{model_size}_loss_dict.pkl',
+                                'rb'))
                             refer_dict = pickle.load(open(
-                                f"mia_dataset_results_{dataset_idx}/{dataset_name}/{split}/{truncated}/{min_len}_{model_size}_refer_dict.pkl",
-                                "rb"))
+                                f'mia_dataset_results_{dataset_idx}/{dataset_name}/{split}/{truncated}/{min_len}_{model_size}_refer_dict.pkl',
+                                'rb'))
 
-                            member_set = ["member", "nonmember"]
+                            member_set = ['member', 'nonmember']
 
                             for member in member_set:
                                 residual_dict[dataset_name][member] = [
@@ -208,40 +219,41 @@ for temp in [["absolute", "untruncated"]]:
                                 ]
                             value_dict = residual_dict
 
-                        y_true += [0] * len(value_dict[dataset_name]["member"])
-                        y_true += [1] * len(value_dict[dataset_name]["nonmember"])
-                        y_scores += value_dict[dataset_name]["member"]
-                        y_scores += value_dict[dataset_name]["nonmember"]
+                        y_true += [0] * len(value_dict[dataset_name]['member'])
+                        y_true += [1] * len(value_dict[dataset_name]['nonmember'])
+                        y_scores += value_dict[dataset_name]['member']
+                        y_scores += value_dict[dataset_name]['nonmember']
 
                     auc_score = roc_auc_score(y_true, y_scores)
                     temp_score.append(auc_score)
 
                 avg_score = sum(temp_score) / len(temp_score)
                 if avg_score > 0.5:
-                    results[method_name][dataset_name].append(avg_score)
+                    results[method_name][dataset_name].append((min_len, avg_score))
                 else:
-                    results[method_name][dataset_name].append(1 - avg_score)
+                    results[method_name][dataset_name].append((min_len, 1 - avg_score))
 
-    # 绘图，每个方法一个子图
-    num_methods = len(method_list)
-    fig, axes = plt.subplots(num_methods, 1, figsize=(12, 8 * num_methods))
+# 计算每个数据集在每个方法上随着length增加的变化程度，并分开表格
+summary_tables = []
 
-    for method_idx, method_name in enumerate(method_list):
-        ax = axes[method_idx]
+for split_key, results in results_split.items():
+    summary_table = []
+
+    for method_name in method_list:
         for dataset_name in shared_datasets:
-            # 绘制散点图
-            #ax.scatter(x_vals, results[method_name][dataset_name], label=dataset_name)
+            lengths, scores = zip(*results[method_name][dataset_name])
+            X = sm.add_constant(np.array(lengths) / 100)  # 将length标准化到单位100
+            model = OLS(scores, X).fit()
+            change_rate = model.params[1] * 100  # 线性回归的斜率乘以100，即变化率
+            max_length = lengths[np.argmax(scores)]
+            max_score = max(scores)
+            summary_table.append([method_name, dataset_name, max_length, max_score, change_rate])
 
-            # 使用LOESS平滑曲线
-            smoothed = sm.nonparametric.lowess(results[method_name][dataset_name], x_vals, frac=0.3)
-            ax.plot(x_vals, [y for x, y in smoothed], label=dataset_name)
+    df = pd.DataFrame(summary_table, columns=['Method', 'Dataset', 'Max Length', 'Max ROC-AUC Score', 'Change Rate'])
+    summary_tables.append((split_key, df))
 
-        ax.set_xlabel('min_len')
-        ax.set_ylabel('ROC-AUC Score')
-        ax.set_title(f'{method_name} - ROC-AUC Score ({split} - {truncated})')
-        ax.legend(loc='best', fontsize='small')
-
-    # 优化布局和节省空间
-    plt.tight_layout(pad=1.0)
-    plt.savefig(f'results_plot_{split}_{truncated}.png', dpi=300)
-    plt.show()
+# 打印结果表格
+for split_key, df in summary_tables:
+    print(f'Results for {split_key}:')
+    print(df)
+    print('\n')

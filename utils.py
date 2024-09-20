@@ -306,7 +306,6 @@ def feature_collection(model, tokenizer, dataset, args, dataset_name, min_len=50
         orig_idx = [item for item in orig_indices_batch]
         batched_text = [item for item in data_batch]
         outputs, tokenized_inputs, target_labels = caculate_outputs(model, tokenizer, batched_text, args, device=device, min_len=min_len)
-        refer_outputs, refer_tokenized_inputs, refer_target_labels = caculate_outputs(refer_model, refer_tokenizer, batched_text, args, device=refer_device, min_len=min_len)
         batch_mink_plus_avg, batch_mink_avg = calculate_mink_and_mink_plus(outputs[1], tokenized_inputs)
         loss_value_list, ppl_value_list, zlib_value_list, grad_value_list = caculate_instance_loss_perplexity_zlib(outputs[1], target_labels, batched_text, model, tokenized_inputs, tokenizer)
         mink_plus_collect.extend(batch_mink_plus_avg)
@@ -317,13 +316,18 @@ def feature_collection(model, tokenizer, dataset, args, dataset_name, min_len=50
         grad_collect.extend(grad_value_list)
         idx_list.extend(orig_idx)
         if refer_model is not None:
+            refer_outputs, refer_tokenized_inputs, refer_target_labels = caculate_outputs(refer_model, refer_tokenizer,
+                                                                                          batched_text, args,
+                                                                                          device=refer_device,
+                                                                                          min_len=min_len)
             ref_loss, ref_logits = refer_outputs[:2]
             ref_log_probabilities = torch.nn.functional.log_softmax(ref_logits, dim=-1)
             ref_probabilities = torch.nn.functional.softmax(ref_logits, dim=-1)
             refer_loss_value_list, _, _, _ = caculate_instance_loss_perplexity_zlib(refer_outputs[1], refer_target_labels, batched_text, refer_model, refer_tokenized_inputs, refer_tokenizer)
-        ref_loss_collect.extend(refer_loss_value_list)
-    return loss_collect, mink_collect, ppl_collect, mink_plus_collect, zlib_collect, ref_loss_collect, idx_list, grad_collect
-
+            ref_loss_collect.extend(refer_loss_value_list)
+            return loss_collect, mink_collect, ppl_collect, mink_plus_collect, zlib_collect, ref_loss_collect, idx_list, grad_collect
+        else:
+            return loss_collect, mink_collect, ppl_collect, mink_plus_collect, zlib_collect, None, idx_list, grad_collect
 def calculate_mean_var(dict, dataset_name, split_set):
     for idx1, set1 in enumerate(split_set):
         values = np.array(dict[dataset_name][set1])
