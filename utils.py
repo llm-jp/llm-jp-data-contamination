@@ -44,7 +44,7 @@ def clean_dataset(dataset):
     invalid_pattern = re.compile(r'^\s*$')
 
     def is_valid(text):
-        return not invalid_pattern.match(text) and len(text) > 5
+        return not invalid_pattern.match(text) and len(text.split()) > 5
 
     cleaned_data = []
     orig_indices = []
