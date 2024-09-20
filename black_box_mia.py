@@ -182,8 +182,6 @@ def compute_black_box_mia(args):
             for set_name in ["member", "nonmember"]:
                 cleaned_data, orig_indices = clean_dataset(dataset[set_name])
                 for idx, (data_batch, orig_indices_batch) in tqdm(enumerate(batched_data_with_indices(cleaned_data, orig_indices, batch_size=args.generation_batch_size))):
-                    if idx <73:
-                        continue
                     orig_idx = [item for item in orig_indices_batch]
                     batched_text = [item for item in data_batch]
                     tokenized_inputs = tokenizer(batched_text, return_tensors="pt", truncation=True, padding=True,
@@ -191,32 +189,29 @@ def compute_black_box_mia(args):
                     tokenized_inputs = {key: val.to(device) for key, val in tokenized_inputs.items()}
                     full_decoded = [[] for _ in range(args.generation_batch_size)]
                     input_length = int(min(tokenized_inputs["attention_mask"].sum(dim=1))/2) if (tokenized_inputs["attention_mask"][0].sum() < args.max_input_tokens) else args.max_input_tokens
-                    try:
-                        for _ in tqdm(range(args.generation_samples)):
-                            if _ == 0:
-                                zero_temp_generation = model.generate(input_ids=tokenized_inputs["input_ids"][:, :input_length],
-                                                                attention_mask=tokenized_inputs["attention_mask"][:, :input_length],
-                                                             temperature=0,
-                                                             max_new_tokens=args.max_new_tokens,
-                                                            )
-                                decoded_sentences = tokenizer.batch_decode(zero_temp_generation["sequences"],
-                                                       skip_special_tokens=True)
-                                for i in range(zero_temp_generation["sequences"].shape[0]):
-                                    full_decoded[i].append(decoded_sentences[i])
-                            else:
-                                generations = model.generate(input_ids=tokenized_inputs["input_ids"][:, :input_length],
-                                                             attention_mask=tokenized_inputs["attention_mask"][:, :input_length],
-                                                         do_sample=True,
-                                                         temperature=args.temperature,
+                    for _ in tqdm(range(args.generation_samples)):
+                        if _ == 0:
+                            zero_temp_generation = model.generate(input_ids=tokenized_inputs["input_ids"][:, :input_length],
+                                                            attention_mask=tokenized_inputs["attention_mask"][:, :input_length],
+                                                         temperature=0,
                                                          max_new_tokens=args.max_new_tokens,
-                                                         top_k=50,
                                                         )
-                                decoded_sentences = tokenizer.batch_decode(generations["sequences"], skip_special_tokens=True)
-                                for i in range(zero_temp_generation["sequences"].shape[0]):
-                                    full_decoded[i].append(decoded_sentences[i])
-                                #full_decoded.append(tokenizer.batch_decode(generations["sequences"][:, input_length:], skip_special_tokens=True))
-                    except:
-                        pdb.set_trace()
+                            decoded_sentences = tokenizer.batch_decode(zero_temp_generation["sequences"],
+                                                   skip_special_tokens=True)
+                            for i in range(zero_temp_generation["sequences"].shape[0]):
+                                full_decoded[i].append(decoded_sentences[i])
+                        else:
+                            generations = model.generate(input_ids=tokenized_inputs["input_ids"][:, :input_length],
+                                                         attention_mask=tokenized_inputs["attention_mask"][:, :input_length],
+                                                     do_sample=True,
+                                                     temperature=args.temperature,
+                                                     max_new_tokens=args.max_new_tokens,
+                                                     top_k=50,
+                                                    )
+                            decoded_sentences = tokenizer.batch_decode(generations["sequences"], skip_special_tokens=True)
+                            for i in range(zero_temp_generation["sequences"].shape[0]):
+                                full_decoded[i].append(decoded_sentences[i])
+                            #full_decoded.append(tokenizer.batch_decode(generations["sequences"][:, input_length:], skip_special_tokens=True))
                     bleurt_model = bleurt_model.to(device)
                     for batch_idx in range(zero_temp_generation["sequences"].shape[0]):
                         #peak = get_peak(full_decoded[batch_idx][1:], full_decoded[batch_idx][0], 0.05)
