@@ -5,7 +5,7 @@
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --time=72:00:00
-#SBATCH --output=AbsBlack410m.log
+#SBATCH --output=AbsBlack410mIdx1.log
 #SBATCH --error=AbsaBlack410m.err
 #SBATCH --mem=150G
 
