@@ -4,8 +4,8 @@
 #SBATCH --gres=gpu:1
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
-#SBATCH --output=AbsUnBlack12bIdx2.log
-#SBATCH --error=AbsUnaBlack12bIdx2.err
+#SBATCH --output=AbsUnBlack12bIdx1.log
+#SBATCH --error=AbsUnaBlack12bIdx1.err
 #SBATCH --mem=150G
 
 
@@ -64,6 +64,6 @@ srun_parallel () {
 #srun --ntasks=1 --cpus-per-task=8 --gres=gpu:1 bash -c "$(declare -f srun_parallel); srun_parallel relative 12b truncated 0 1 8" &
 #srun --ntasks=1 --cpus-per-task=8 --gres=gpu:1 bash -c "$(declare -f srun_parallel); srun_parallel relative 160m truncated 0 1 8" &
 #srun --ntasks=1 --cpus-per-task=8 --gres=gpu:1 bash -c "$(declare -f srun_parallel); srun_parallel relative 12b truncated 0 2 8" &
-srun --ntasks=1 --gres=gpu:1 bash -c "$(declare -f srun_parallel); srun_parallel absolute 12b untruncated 0 2 2" &
+srun --ntasks=1 --gres=gpu:1 bash -c "$(declare -f srun_parallel); srun_parallel absolute 12b untruncated 0 1 2" &
 # 等待所有任务结束
 wait
