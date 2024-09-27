@@ -12,9 +12,9 @@ if dataset_name == "local_all" and relative == "absolute":
     elif truncated == "untruncated":
     # dataset_list = ['Wikipedia (en)', "USPTO Backgrounds", "StackExchange", "Pile-CC", "Github", "FreeLaw"]
         dataset_list = ['Wikipedia (en)', "StackExchange", "Pile-CC", "Github", "FreeLaw"]
-    elif dataset_name == "local_all" and relative == "relative":
-        dataset_list = ["Wikipedia (en)", "StackExchange", 'PubMed Central', "Pile-CC", "NIH ExPorter", "HackerNews",
-                    "Github", "FreeLaw", "Enron Emails", "DM Mathematics", "ArXiv"]
+elif dataset_name == "local_all" and relative == "relative":
+    dataset_list = ["Wikipedia (en)", "StackExchange", 'PubMed Central', "Pile-CC", "NIH ExPorter", "HackerNews",
+                "Github", "FreeLaw", "Enron Emails", "DM Mathematics", "ArXiv"]
 min_len_list = range(0, 1000, 100) if relative == "absolute" else range(0, 100, 10)
 for model_size in model_size_list:
     for dataset_name in dataset_list:
