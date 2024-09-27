@@ -25,5 +25,5 @@ for model_size in model_size_list:
                             f"{save_dir}_{dataset_idx}/{dataset_name}/{relative}/{truncated}/{min_len}_{model_size}_{detection_method}_dict.pkl"):
                         pass
                     else:
-                        print(f"{model_size} {dataset_name} {min_len} {detection_method} not finished")
+                        print(f"{model_size} {dataset_name} {dataset_idx} {min_len} {detection_method} not finished")
 
