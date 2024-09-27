@@ -1,4 +1,4 @@
-
+import os
 save_dir = "mia_dataset_results"
 dataset_idx_list = [0 ,1, 2]
 dataset_name = "local_all"
