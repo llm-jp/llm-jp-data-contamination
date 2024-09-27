@@ -19,7 +19,7 @@ min_len_list = range(0, 1000, 100) if relative == "absolute" else range(0, 100, 
 for dataset_name in dataset_list:
     for dataset_idx in [0, 1, 2]:
         for min_len in min_len_list:
-            for detection_method in ["loss", "ccd", "pac"]:
+            for detection_method in ["loss", "ccd", "eda_pac"]:
                 if os.path.exists(
                         f"{save_dir}_{dataset_idx}/{dataset_name}/{relative}/{truncated}/{min_len}_{model_size}_{detection_method}_dict.pkl"):
                     print("ok")
