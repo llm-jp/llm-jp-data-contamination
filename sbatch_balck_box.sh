@@ -4,8 +4,8 @@
 #SBATCH --gres=gpu:1
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
-#SBATCH --output=RelaTrBlack410mIdx2.log
-#SBATCH --error=RelaTrBlack410mIdx2.err
+#SBATCH --output=RelaTrBlack160mIdx2.log
+#SBATCH --error=RelaTrBlack160mIdx2.err
 #SBATCH --mem=150G
 
 
