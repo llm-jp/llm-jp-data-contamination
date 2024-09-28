@@ -2,9 +2,10 @@ import os
 save_dir = "mia_dataset_results"
 dataset_idx_list = [0 ,1, 2]
 dataset_name = "local_all"
-relative = "absolute"
-truncated = "untruncated"
-model_size_list = ["160m", "410m", "1b", "2.8b", "6.9b", "12b"]
+relative = "relative"
+truncated = "truncated"
+model_size_list = ["160m", "410m"]
+#["160m", "410m", "1b", "2.8b", "6.9b", "12b"]
 if dataset_name == "local_all" and relative == "absolute":
     if truncated == "truncated":
         dataset_list = ['Wikipedia (en)', "StackExchange", 'PubMed Central', "Pile-CC", "HackerNews",
