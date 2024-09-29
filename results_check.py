@@ -4,7 +4,7 @@ dataset_idx_list = [0 ,1, 2]
 dataset_name = "local_all"
 relative = "relative"
 truncated = "truncated"
-model_size_list = ["160m", "410m"]
+model_size_list = ["160m", "410m", "1b"]
 #["160m", "410m", "1b", "2.8b", "6.9b", "12b"]
 if dataset_name == "local_all" and relative == "absolute":
     if truncated == "truncated":
