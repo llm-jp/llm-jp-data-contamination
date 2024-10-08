@@ -11,6 +11,15 @@ def modify_length_option(value):
             return int(prefix)
     else:
         return int(value_str)
+def modify_group_name(value):
+    if value == 'mia_dataset_relative':
+        return 'Relative Semantic Complete'
+    elif value == 'mia_dataset_truncated':
+        return 'Absolute Semantic Incomplete'
+    elif value == 'mia_dataset_untruncated':
+        return 'Absolute Semantic Complete'
+    else:
+        return value
 corpus_similarity = pd.read_excel("0930_corpus_distance.xlsx", header=1, index_col=0)
 
 # 加载并合并数据
@@ -57,17 +66,18 @@ print(grouped_means)
 corpus_similarity_relative = grouped_means[grouped_means['group'] == 'mia_dataset_relative']
 corpus_similarity_truncated = grouped_means[grouped_means['group'] == 'mia_dataset_truncated']
 corpus_similarity_untruncated = grouped_means[grouped_means['group'] == 'mia_dataset_untruncated']
+grouped_means['group'] = grouped_means['group'].apply(modify_group_name)
 
-merged_df = pd.merge(grouped_means, concated_results, left_on='corpus', right_on='dataset')
-
+merged_df = pd.merge(grouped_means, concated_results,
+                     left_on=['corpus', 'group'],
+                     right_on=['dataset', 'truncation'])
 # 列出所有需要分析的指标
 correlation_results = {}
-indicators = ['Classifier', 'PR', 'IRPR', 'DC', 'MAUVE', 'FID', 'Chi-squared', 'Zipf',
-'t-test', 'Medoid']
+indicators = ['PR', 'DC', 'FID', 'Chi-squared', 'Zipf']
 #'Classifier', 'PR', 'IRPR', 'DC', 'MAUVE', 'FID', 'Chi-squared', 'Zipf',
 #'t-test', 'Medoid'
-#analyse_dimension = ['feature', 'model_size', 'length']
-analyse_dimension = ['model_size']
+#analyse_dimension = ['feature', 'model_size', 'length', "group']
+analyse_dimension = ['truncation']
 for (model_size), group_data in merged_df.groupby(analyse_dimension):
     # 初始化存储单元
     if (model_size) not in correlation_results:
