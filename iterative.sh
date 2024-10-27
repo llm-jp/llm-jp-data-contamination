@@ -18,8 +18,8 @@ submit_job() {
 #SBATCH --gres=gpu:1
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
-#SBATCH --output=recall2.8brelatr_${model_size}.log
-#SBATCH --error=recall2.8brelatr_${model_size}.err
+#SBATCH --output=recall${model_size}relatr.log
+#SBATCH --error=recall${model_size}relatr.err
 #SBATCH --cpus-per-task=8
 #SBATCH --mem=150G
 
