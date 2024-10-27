@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # List of model sizes to iterate over
-#model_sizes=("160m" "410m" "1b" "2.8b" "6.9b" "12b")
-model_sizes=("160m" "410m")
+model_sizes=("160m" "410m" "1b" "2.8b" "6.9b" "12b")
+#model_sizes=("160m" "410m")
 
 # Function to submit a job with a specific model size
 submit_job() {
