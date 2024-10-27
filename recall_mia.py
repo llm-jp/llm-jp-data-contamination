@@ -41,7 +41,7 @@ def compute_recall(args):
                 recall_dict[dataset_name] = {"member": [], "nonmember": []}
                 idx_dict[dataset_name] = {"member": [], "nonmember": []}
                 nonmember_prefix = dataset["nonmember"][:args.num_shots]
-                member_data_prefix =dataset["member_data"][:args.num_shots]
+                member_data_prefix =dataset["member"][:args.num_shots]
                 for split in ["member", "nonmember"]:
                     eda_pac_list, idx_list = recall_collection(model, tokenizer, dataset[split],dataset_name, nonmember_prefix, args, min_len = args.min_len)
                     recall_dict[dataset_name][split].extend(eda_pac_list)
