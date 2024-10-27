@@ -43,8 +43,8 @@ def compute_recall(args):
                 nonmember_prefix = dataset["nonmember"][:args.num_shots]
                 member_data_prefix =dataset["member"][:args.num_shots]
                 for split in ["member", "nonmember"]:
-                    eda_pac_list, idx_list = recall_collection(model, tokenizer, dataset[split],dataset_name, nonmember_prefix, args, min_len = args.min_len)
-                    recall_dict[dataset_name][split].extend(eda_pac_list)
+                    recall_list, idx_list = recall_collection(model, tokenizer, dataset[split],dataset_name, nonmember_prefix, args, min_len = args.min_len)
+                    recall_dict[dataset_name][split].extend(recall_list)
                     idx_dict[dataset_name][split].extend(idx_list)
                 os.makedirs(f"{args.save_dir}_{args.dataset_idx}", exist_ok=True)
                 os.makedirs(f"{args.save_dir}_{args.dataset_idx}/{dataset_name}/{args.relative}/{args.truncated}", exist_ok=True)
