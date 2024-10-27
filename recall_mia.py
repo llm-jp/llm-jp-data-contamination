@@ -31,7 +31,7 @@ def compute_recall(args):
         for min_len in length_list:
             args.min_len = min_len
             for dataset_name in dataset_names:
-                if os.path.exists(f"{args.save_dir}_{args.dataset_idx}/{dataset_name}/{args.relative}/{args.truncated}/{args.min_len}_{args.model_size}_eda_pac_dict.pkl"):
+                if os.path.exists(f"{args.save_dir}_{args.dataset_idx}/{dataset_name}/{args.relative}/{args.truncated}/{args.min_len}_{args.model_size}_recall_dict.pkl"):
                     print(f"{dataset_idx} {dataset_name} {args.min_len} {args.model_size} finished")
                     continue
                 df = pd.DataFrame()
