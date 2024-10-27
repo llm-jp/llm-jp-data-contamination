@@ -365,7 +365,7 @@ def recall_collection(model, tokenizer, dataset, dataset_name, prefix, args, min
     recall_collect = []
     idx_list = []
     cleaned_data, orig_indices = clean_dataset(dataset)
-    avg_length = int(np.mean([len(tokenizer.encode(ex["input"])) for ex in cleaned_data]))
+    avg_length = int(np.mean([len(tokenizer.encode(ex)) for ex in cleaned_data]))
     prefix = process_prefix(model, prefix, avg_length, tokenizer, args.pass_window, args.num_shots)
     for idx, (data_batch, orig_indices_batch) in tqdm(
             enumerate(batched_data_with_indices(cleaned_data, orig_indices, batch_size=args.batch_size))):
