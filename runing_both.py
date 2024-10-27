@@ -29,6 +29,9 @@ parser.add_argument("--load_dir", type=str, default="mia_dataset")
 #gray box mia
 parser.add_argument("--refer_model", type=str, default="True")
 parser.add_argument("--refer_cuda", type=int, default=7, help="cuda device")
+#recall mia
+parser.add_argument("--num_shots", type=int, default=12)
+parser.add_argument("--pass_window", type=bool, default=True)
 #black box mia
 parser.add_argument("--generation_batch_size", type=int, default=1)
 parser.add_argument("--generation_samples", type=int, default=10)
