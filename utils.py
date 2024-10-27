@@ -291,7 +291,7 @@ def eda_pac_collection(model, tokenizer, dataset, dataset_name, args, min_len=50
 def process_prefix(target_model, prefix, avg_length,tokenizer, pass_window, total_shots):
     if pass_window:
         return prefix
-    max_length = 2049
+    max_length = 2048
     token_counts = [len(tokenizer.encode(shot)) for shot in prefix]
     target_token_count = avg_length
     total_tokens = sum(token_counts) + target_token_count
