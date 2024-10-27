@@ -81,7 +81,7 @@ for dataset_idx in range(3):
             # 随机种子列表
             #absolute truncated
             #dataset_names = ["github", "pile_cc", "full_pile", "WikiMIA64", "WikiMIA128", "WikiMIA256", "WikiMIAall"]
-            model_sizes = ["1b", "2.8b", "6.9b", "12b"]
+            model_sizes = ["160m","410m", "1b", "2.8b", "6.9b", "12b"]
             results = []
             auc_results = []
             for model_size in model_sizes:
@@ -95,9 +95,12 @@ for dataset_idx in range(3):
                         zlib_dict = pickle.load(open(base_path + "zlib_dict.pkl", "rb"))
                         grad_dict = pickle.load(open(base_path + "grad_dict.pkl", "rb"))
                         refer_dict = pickle.load(open(base_path + "refer_dict.pkl", "rb"))
+                        ccd_dict = pickle.load(open(base_path + "ccd_dict.pkl", "rb"))
+                        eda_pac_dict = pickle.load(open(base_path + "eda_pac_dict.pkl", "rb"))
+                        samia_dict = pickle.load(open(base_path + "samia_dict.pkl", "rb"))
 
-                        dict_list = [loss_dict, prob_dict, ppl_dict, mink_plus_dict, zlib_dict, grad_dict, refer_dict]
-                        dict_names = ["loss", "prob", "ppl", "mink_plus", "zlib", "grad", "refer"]
+                        dict_list = [loss_dict, prob_dict, ppl_dict, mink_plus_dict, zlib_dict, grad_dict, refer_dict, ccd_dict, eda_pac_dict, samia_dict]
+                        dict_names = ["loss", "prob", "ppl", "mink_plus", "zlib", "grad", "refer", "ccd", "eda_pac", "samia"]
 
                         # Process scores for each dictionary
                         for dict_name, d in zip(dict_names, dict_list):
@@ -121,6 +124,12 @@ for dataset_idx in range(3):
                                         saved_dict_name = "Gradient"
                                     elif dict_name == "refer":
                                         saved_dict_name = "Refer"
+                                    elif dict_name == "ccd":
+                                        saved_dict_name = "CCD"
+                                    elif dict_name == "eda_pac":
+                                        saved_dict_name = "PAC"
+                                    elif dict_name == "samia":
+                                        saved_dict_name = "Samia"
                                     results.append([dataset_name, model_size, saved_dict_name, label, s, length])
 
             # Create DataFrame from results

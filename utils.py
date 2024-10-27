@@ -262,6 +262,7 @@ def eda_pac_prob_collection(prompt, model, tokenizer, min_len, args):
                 temp_probs.append(example_probability[token_idx, token_id].item())
         all_probs.append(temp_probs)
     return all_probs
+
 def eda_pac_collection(model, tokenizer, dataset, dataset_name, args, min_len=50, upper_limit=10000):
     eda_pac_collect = []
     idx_list = []
@@ -287,6 +288,100 @@ def eda_pac_collection(model, tokenizer, dataset, dataset_name, args, min_len=50
         #pdb.set_trace()
     return eda_pac_collect, idx_list
 
+def process_prefix(target_model, prefix, avg_length,tokenizer, pass_window, total_shots):
+    if pass_window:
+        return prefix
+    max_length = 2049
+    token_counts = [len(tokenizer.encode(shot)) for shot in prefix]
+    target_token_count = avg_length
+    total_tokens = sum(token_counts) + target_token_count
+    if total_tokens <= max_length:
+        return prefix
+    # Determine the maximum number of shots that can fit within the max_length
+    max_shots = 0
+    cumulative_tokens = target_token_count
+    for count in token_counts:
+        if cumulative_tokens + count <= max_length:
+            max_shots += 1
+            cumulative_tokens += count
+        else:
+            break
+    # Truncate the prefix to include only the maximum number of shots
+    truncated_prefix = prefix[-max_shots:]
+    total_shots = max_shots
+    return truncated_prefix
+
+
+def get_ll(sentence, model, tokenizer, device):
+    input_ids = torch.tensor(tokenizer.encode(sentence)).unsqueeze(0)
+    input_ids = input_ids.to(device)
+    with torch.no_grad():
+        outputs = model(input_ids, labels=input_ids)
+    loss, logits = outputs[:2]
+    return get_all_prob(input_ids, loss, logits)
+
+def get_conditional_ll(input_text, target_text, model, tokenizer, device):
+    input_encodings = tokenizer(input_text, return_tensors="pt")
+    target_encodings = tokenizer(target_text, return_tensors="pt")
+    concat_ids = torch.cat((input_encodings.input_ids.to(device), target_encodings.input_ids.to(device)), dim=1)
+    labels = concat_ids.clone()
+    labels[:, : input_encodings.input_ids.size(1)] = -100
+    with torch.no_grad():
+        outputs = model(concat_ids, labels=labels)
+    loss, logits = outputs[:2]
+    return get_all_prob(labels, loss, logits)
+
+def get_all_prob(input_ids, loss, logits):
+    probabilities = torch.nn.functional.log_softmax(logits, dim=-1)
+    all_prob = []
+    input_ids_processed = input_ids[0][1:]
+    for i, token_id in enumerate(input_ids_processed):
+        probability = probabilities[0, i, token_id].item()
+        all_prob.append(probability)
+    ll = -loss.item()  # log-likelihood
+    ppl = torch.exp(loss).item()
+    prob = torch.exp(-loss).item()
+    return prob, ll , ppl, all_prob, loss.item()
+
+def recall_feature_colleciton(target_data, model, tokenizer,prefix, num_shots, min_len,args):
+    all_probs = []
+    tokenized_inputs = tokenizer(target_data,
+                                 return_tensors="pt",
+                                 truncation=True,
+                                 padding=True,
+                                 max_length=min_len + 100 if args.relative == "absolute" else 1024,
+                                 )
+    tokenized_inputs = {key: val.to(args.cuda) for key, val in tokenized_inputs.items()}
+    target_labels = tokenized_inputs["input_ids"].clone().to(args.cuda)
+    target_labels[tokenized_inputs["attention_mask"] == 0] = -100
+    outputs = model(**tokenized_inputs, labels=target_labels)
+    logits = outputs[1]
+    batch_logits = outputs[1]
+    batched_tokenized_inputs = tokenized_inputs
+    probabilities = torch.nn.functional.log_softmax(logits, dim=-1)
+    return batch_logits, batched_tokenized_inputs, probabilities
+
+def recall_collection(model, tokenizer, dataset, dataset_name, prefix, args, min_len=50, num_shots=12, upper_limit=10000):
+    recall_collect = []
+    idx_list = []
+    cleaned_data, orig_indices = clean_dataset(dataset)
+    avg_length = int(np.mean([len(tokenizer.encode(ex["input"])) for ex in cleaned_data]))
+    prefix = process_prefix(model, prefix, avg_length, tokenizer, True, 12)
+    for idx, (data_batch, orig_indices_batch) in tqdm(
+            enumerate(batched_data_with_indices(cleaned_data, orig_indices, batch_size=args.batch_size))):
+        orig_idx = [item for item in orig_indices_batch]
+        batched_text = [item for item in data_batch]
+        outputs, tokenized_inputs, target_labels = caculate_outputs(model, tokenizer, batched_text, args, device=args.device,
+                                                                    min_len=min_len)
+        loss_value_list, _, _,  _ = caculate_instance_loss_perplexity_zlib(
+            outputs[1], target_labels, batched_text, model, tokenized_inputs, tokenizer)
+        prefix_batched_text = ["".join(prefix) + " " + text for text in batched_text]
+        cond_outputs, cond_tokenized_inputs, cond_target_labels = caculate_outputs(model, tokenizer, prefix_batched_text, args, device=args.device, min_len=min_len)
+        cond_loss_value_list, _, _, _ = caculate_instance_loss_perplexity_zlib(
+            cond_outputs[1], cond_target_labels, prefix_batched_text, model, cond_tokenized_inputs, tokenizer)
+        recall_collect.extend([-cond_loss_value/-loss_value for loss_value, cond_loss_value in zip(loss_value_list, cond_loss_value_list)])
+        idx_list.extend(orig_idx)
+    return recall_collect, idx_list
 
 
 def feature_collection(model, tokenizer, dataset, args, dataset_name, min_len=50, upper_limit=10000, refer_model=None, refer_tokenizer=None):

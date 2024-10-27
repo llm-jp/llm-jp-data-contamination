@@ -2,6 +2,7 @@ import argparse
 from gray_box_mia import compute_gray_box_method
 from black_box_mia import compute_black_box_mia
 from eda_pac_mia import compute_eda_pac
+from recall_mia import compute_recall
 import random
 
 random.seed(42)
@@ -42,4 +43,6 @@ elif args.gray == "black":
     compute_black_box_mia(args)
 elif args.gray == "pac":
     compute_eda_pac(args)
+elif args.gray == "recall":
+    compute_recall(args)
 
