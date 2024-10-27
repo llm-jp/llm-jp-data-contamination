@@ -23,7 +23,7 @@ parser.add_argument("--truncated", type=str, default="truncated", choices=["trun
 parser.add_argument("--same_length", action='store_false')
 parser.add_argument("--samples", type=int, default=1000)
 parser.add_argument("--dataset_idx", type=int, default=1)
-parser.add_argument("--gray", type=str, default="gray", choices=["gray", "black", "pac"])
+parser.add_argument("--gray", type=str, default="gray", choices=["gray", "black", "pac", "recall"])
 parser.add_argument("--save_dir", type=str, default="mia_dataset_results")
 parser.add_argument("--load_dir", type=str, default="mia_dataset")
 #gray box mia
