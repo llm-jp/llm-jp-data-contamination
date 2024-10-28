@@ -2,7 +2,7 @@
 
 # List of model sizes to iterate over
 #model_sizes=("160m" "410m" "1b" "2.8b" "6.9b" "12b")
-model_sizes=("1b" "2.8b" "6.9b" "12b")
+model_sizes=("160m" "410m" "1b" "2.8b" "6.9b" "12b")
 
 # Function to submit a job with a specific model size
 submit_job() {
@@ -52,7 +52,7 @@ srun_parallel () {
 }
 
 # 启动并行任务
-srun --ntasks=1 --cpus-per-task=8 --gres=gpu:1 bash -c "\$(declare -f srun_parallel); srun_parallel absolute ${model_size} truncated 0 0 2" &
+srun --ntasks=1 --cpus-per-task=8 --gres=gpu:1 bash -c "\$(declare -f srun_parallel); srun_parallel relative ${model_size} truncated 0 0 2" &
 
 # 等待所有任务结束
 wait
