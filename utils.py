@@ -375,8 +375,10 @@ def recall_collection(model, tokenizer, dataset, dataset_name, prefix, args, min
                                                                     min_len=min_len)
         loss_value_list, _, _,  _ = caculate_instance_loss_perplexity_zlib(
             outputs[1], target_labels, batched_text, model, tokenized_inputs, tokenizer)
+
         prefix_batched_text = ["".join(prefix) + " " + text for text in batched_text]
-        cond_outputs, cond_tokenized_inputs, cond_target_labels = caculate_outputs(model, tokenizer, prefix_batched_text, args, device=args.cuda, min_len=min_len)
+        cond_outputs, cond_tokenized_inputs, cond_target_labels = caculate_outputs(model, tokenizer, prefix_batched_text, args, device=args.cuda,
+                                                                                   min_len=min_len)
         cond_loss_value_list, _, _, _ = caculate_instance_loss_perplexity_zlib(
             cond_outputs[1], cond_target_labels, prefix_batched_text, model, cond_tokenized_inputs, tokenizer)
         recall_collect.extend([-cond_loss_value/-loss_value for loss_value, cond_loss_value in zip(loss_value_list, cond_loss_value_list)])
