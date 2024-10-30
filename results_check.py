@@ -21,7 +21,7 @@ for model_size in model_size_list:
     for dataset_name in dataset_list:
         for dataset_idx in [0, 1, 2]:
             for min_len in min_len_list:
-                for detection_method in ["loss", "ccd", "eda_pac"]:
+                for detection_method in ["loss", "ccd", "eda_pac", "recall"]:
                     if os.path.exists(
                             f"{save_dir}_{dataset_idx}/{dataset_name}/{relative}/{truncated}/{min_len}_{model_size}_{detection_method}_dict.pkl"):
                         pass
