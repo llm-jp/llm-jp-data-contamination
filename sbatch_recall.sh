@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH --job-name=33_Contrecall
-#SBATCH --partition=gpu-small
+#SBATCH --partition=gpu-small-lp
 #SBATCH --gres=gpu:1
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
