@@ -40,7 +40,7 @@ srun_parallel () {
 }
 
 # 启动并行任务
-srun --ntasks=1 --cpus-per-task=8 --gres=gpu:1 bash -c "$(declare -f srun_parallel); srun_parallel relative 6.9 truncated 0 0 1" &
+srun --ntasks=1 --cpus-per-task=8 --gres=gpu:1 bash -c "$(declare -f srun_parallel); srun_parallel relative 6.9b truncated 0 0 1" &
 
 
 # 等待所有任务结束
